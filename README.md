@@ -32,7 +32,7 @@ Target: [`1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ`](https://blockchair.com/bitcoin/ad
 
 ## Reproducing
 
-Requires [CUDACyclone](https://github.com/Dookoo2/Cyclone) for the secp256k1
+Requires [CUDACyclone](https://github.com/Dookoo2/CUDACyclone) for the secp256k1
 backend — clone it alongside `solver/` as `CUDACyclone-main`. Also needs the
 BIP39 English wordlist as `bip39_en.txt`:
 
