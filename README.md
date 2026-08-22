@@ -53,3 +53,13 @@ complete, untruncated, carries no titlo, matches nothing in a 68-glyph corpus,
 and does not match the artist's own hand-drawn digits. **If you have a
 higher-resolution source where it is legible, that is the most valuable file in
 this puzzle.**
+
+## Support
+
+If this saved you time, or the 24-word pre-hashing warning caught a bug in your
+own solver:
+
+- **BTC:** `bc1qtuqm6xvpkhp0zdkj0pmat94lj4kl4whqjqz7p0`
+- **ETH:** `0x7fB09415a4BDf6788949D524EE66b610A6A7fC0A`
+
+Entirely optional. The findings and the solver are public either way.
