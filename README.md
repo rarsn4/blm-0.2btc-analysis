@@ -36,7 +36,10 @@ Requires [CUDACyclone](https://github.com/Dookoo2/CUDACyclone) for the secp256k1
 backend — clone it alongside `solver/` as `CUDACyclone-main`. Also needs the
 BIP39 English wordlist as `bip39_en.txt`:
 
+    pip install mnemonic
     python3 -c "from mnemonic import Mnemonic; open('bip39_en.txt','w').write(chr(10).join(Mnemonic('english').wordlist))"
+
+Then from `solver/`:
 
     nvcc -O3 -arch=sm_89 -I CUDACyclone-main -Xptxas -v solver2.cu -o solver2
     ./solver2 --selftest                 # both canonical BIP39 addresses
