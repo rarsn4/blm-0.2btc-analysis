@@ -33,16 +33,18 @@ Target: [`1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ`](https://blockchair.com/bitcoin/ad
 ## Reproducing
 
 Requires [CUDACyclone](https://github.com/Dookoo2/CUDACyclone) for the secp256k1
-backend — clone it alongside `solver/` as `CUDACyclone-main`. Also needs the
-BIP39 English wordlist as `bip39_en.txt`:
+backend. Clone it into the repo root as `CUDACyclone-main`.
+
+Generate the BIP39 English wordlist into `solver/`:
 
     pip install mnemonic
+    cd solver
     python3 -c "from mnemonic import Mnemonic; open('bip39_en.txt','w').write(chr(10).join(Mnemonic('english').wordlist))"
 
-Then from `solver/`:
+Then build and run from `solver/`:
 
-    nvcc -O3 -arch=sm_89 -I CUDACyclone-main -Xptxas -v solver2.cu -o solver2
-    ./solver2 --selftest                 # both canonical BIP39 addresses
+    nvcc -O3 -arch=sm_89 -I ../CUDACyclone-main -Xptxas -v solver2.cu -o solver2
+    ./solver2 --selftest                        # both canonical BIP39 addresses
     ./solver2 --config ../configs/t18_pool52.conf
 
 Every stage validated against independently computed exact values. `--selftest`
