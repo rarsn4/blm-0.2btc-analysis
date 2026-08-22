@@ -54,6 +54,14 @@ and does not match the artist's own hand-drawn digits. **If you have a
 higher-resolution source where it is legible, that is the most valuable file in
 this puzzle.**
 
+## Contact
+
+Questions, corrections, or a higher-resolution source image:
+**goldenwhales699@gmail.com** — or open an issue on this repo.
+
+I can test a corrected word list or template in seconds, so if you have a
+reading I don't, it costs nothing to check.
+
 ## Support
 
 If this saved you time, or the 24-word pre-hashing warning caught a bug in your
