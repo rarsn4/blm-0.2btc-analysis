@@ -2,7 +2,11 @@
 
 **Target:** `1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ`
 **HASH160:** `ccbd031e54cde2a3189fd59bc49f731367a1779e`
-**Status:** still unsolved. This is a negative-results report.
+**Status:** the Bitcoin puzzle is **NOT solved** — the address is unspent and no
+seed has been recovered. What *is* solved is the rune cipher, except for one
+glyph. Those are different claims and this report keeps them separate.
+
+This is a negative-results report.
 
 I built a GPU search pipeline covering **both BIP39 and Electrum** and ran
 roughly **12 billion full seed derivations** against the leading hypotheses.
@@ -293,8 +297,29 @@ sweep finds it in minutes.
 
 ## 5. What would actually help
 
-1. **A higher-resolution original.** The circulating image is 1600×1200 and the
-   glyphs sit at the legibility limit.
+1. **A genuinely higher-resolution source — and specifically, better provenance.**
+   The circulating file is `n1x7g8ceaur51.png` at 1600×1200. That filename is a
+   **Reddit media ID**, so this is a Reddit-recompressed upload, not the artist's
+   original. The older repo notes "several variants acquired from several
+   sources" but only one full copy survives in it.
+
+   Concrete targets, in priority order:
+   - `i.redd.it/n1x7g8ceaur51.png` and the `preview.redd.it` endpoint at
+     `?width=2048/3000/4000` — Reddit sometimes serves larger than the post view
+   - the other two Reddit threads — each upload has its own media ID and its own
+     compression
+   - attachments on bitcointalk topic 5404767
+   - Charly Palmer (@charlylpalmer), named in the source README as the likely
+     artist
+   - `web.archive.org` for the deleted AlberTajuelo repo cited as source [7]
+
+   **Objective test for any candidate:** is it larger than 1600×1200, and does
+   the artist's signature in the bottom-right corner read `-yi-` cleanly? That
+   signature is the same physical size as X, so it is the legibility benchmark.
+
+   Note that further inference from the *current* resolution has produced no
+   quantitatively supported assignment (§7.6). Image-side progress now depends
+   on a better file, not better analysis of this one.
 2. **The word at position 21.** The clock's hour hand (10+11) is produced by the
    *same labelled mechanism* that gave `moon` (12+1) and `tower` (1+2) at high
    confidence — and it is the only hand without a word attached. Best-evidenced
@@ -446,8 +471,10 @@ Its geometry is a vertical stroke with diagonals, visually suggestive of `ж`
 (which is `х` plus a vertical bar, and `х = ⤬` here) — but X vs `х` scores
 **+0.056**, pure noise. That remains a visual impression, not a measurement.
 
-**Conclusion: X is an unresolved unique symbol, visually suggestive of `ж` but
-quantitatively unassigned.** Resolving it needs a higher-resolution source or a
+**Conclusion: X matches neither the mapped Cyrillic alphabet, nor the artist's
+own Arabic numerals, nor the remaining plausible Church-Slavonic numeral glyphs,
+and it carries no titlo. It is an unresolved unique symbol, visually suggestive
+of `ж` but quantitatively unassigned.** Resolving it needs a higher-resolution source or a
 fourth inscription, not further inference from these glyphs.
 
 ### 7.5 One note on `Сумма двух чисел`
@@ -463,6 +490,70 @@ has almost no discriminating power: **158 of 190 pairs land inside BIP39's
 0–2047 range.** Only five pairs sum to another number present in the artwork,
 and the one clearly designed relationship is `17 + 2003 = 2020` — which the
 README already explains as the gold chart's span.
+
+### 7.6 The falsification chain for X, in order
+
+Each of these is a measurement, not an argument. Every obvious explanation was
+tested and rejected:
+
+| test | result |
+|---|---|
+| truncated at the image edge? | no — cols 785–795 of 797, whitespace after |
+| matches any of 68 corpus glyphs? | no — best +0.491 vs +0.55–0.63 baseline |
+| matches the artist's hand-drawn Arabic digits? | no — all at the +0.05 noise floor |
+| carries a titlo (Church-Slavonic numeral marker)? | no — rows 0–10 above it are empty |
+| is it `л` = 30? | no — +0.377 vs +0.55 baseline |
+| any Church-Slavonic numeral that is a mapped letter? | excluded — 18 of 27 are letters X does not match |
+| the archaic numerals `ѕ ѳ і ѯ ѱ ѡ`? | no shape match established |
+| a rare modern letter `ж ц щ ъ э`? | possible, but only `ц` carries a numeral value at all |
+| does the `1865-202…?` mark share the glyph? | no — that is Arabic numerals and a literal `?` |
+| is it `ж` (= `х` plus a vertical bar, and `х = ⤬` here)? | visually suggestive; X vs `х` scores **+0.056**, pure noise |
+
+**No assignment is quantitatively supported.** The visual resemblance to `ж` is
+recorded as an observation, not a decoding.
+
+---
+
+## 8. Do not use AI upscaling on this image
+
+The obvious move when a glyph is illegible is to run the image through an AI
+upscaler. **Do not.** Generative upscalers invent detail; they do not recover it.
+
+Demonstration: the artist's signature in the bottom-right corner reads `-yi-`
+under plain LANCZOS interpolation. Run through VanceAI at 8x, the same region
+renders as a boxed `ER`. The model replaced characters it could not read with
+letterforms it found more plausible — cleanly, confidently, and wrongly.
+
+Across the rune region, 6.5% of pixels differ by more than 30 levels between
+plain interpolation and the AI output, with strokes reshaped and terminals
+sharpened. Glyph-level structure survives; the fine detail that would
+distinguish one unfamiliar mark from another is fabricated.
+
+**Any reading of X taken from an upscaled image is a reading of the upscaler's
+guess.**
+
+---
+
+## 9. Acceptance criteria
+
+So that "solved" means the same thing to everyone, and so that numerical
+coincidence is not mistaken for evidence:
+
+1. **Consistency.** A candidate plaintext must map every occurrence of each
+   glyph to the same letter. One glyph, one value — the rule that kills the
+   circulating "HELLO : FROM : THEM" reading (§7.1).
+2. **X must be independently justified.** Not inferred from the answer it
+   produces.
+3. **It must derive the address.** The mnemonic must yield HASH160
+   `ccbd031e54cde2a3189fd59bc49f731367a1779e` under a stated derivation path.
+4. **No post-hoc transformations** unless the image independently indicates
+   them. "Reduce modulo 2048 because the result was too large" is not a
+   mechanism the artwork specifies.
+5. **A numerical coincidence is not evidence** unless the image identifies both
+   the operands and the operation. Concretely: 158 of 190 pairs of the twenty
+   explicit numbers in this image sum to a value inside BIP39's 0–2047 range
+   (§7.5). Any "sum two numbers, look up the word" argument therefore has almost
+   no discriminating power and must be treated as unsupported.
 
 ---
 
