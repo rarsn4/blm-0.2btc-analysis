@@ -48,8 +48,22 @@ Then build and run from `solver/`:
     ./solver2 --config ../configs/t18_pool52.conf
 
 Every stage validated against independently computed exact values. `--selftest`
-reproduces the canonical 12-word and 24-word addresses through the full
-pipeline — if it passes, the negatives are trustworthy.
+reproduces the canonical 12-word and 24-word addresses through the full pipeline.
+
+There is also a **positive control** — a config where the answer is known but
+hidden from the solver, so it must actually *find* it rather than verify it:
+
+    ./solver2 --config ../configs/selftest_find.conf
+
+Two slots of a known mnemonic are blanked to `@FULL` (all 2048 words each).
+The solver searches 262,144 derivations and recovers `melody` and `snow`:
+
+    HIT   index 2270828
+    phrase : tiger live melody inject guitar nose route obtain ball diesel snow radar
+
+This is the test that matters. Reproducing a mnemonic you were handed proves
+little; recovering one you were not is what makes a negative result mean
+something.
 
 ## The open question
 
