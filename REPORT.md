@@ -303,7 +303,20 @@ sweep finds it in minutes.
    original. The older repo notes "several variants acquired from several
    sources" but only one full copy survives in it.
 
-   Concrete targets, in priority order:
+   **Update — this has now been checked.** `i.redd.it/n1x7g8ceaur51.png` serves
+   1600×1200, identical to the circulating file. The `preview.redd.it` endpoints
+   at 2048/3000/4096 return nothing (the post is six years old and out of cache).
+   The PNG has **no JPEG history** (8×8 block-edge ratio 0.985 / 0.910) and no
+   metadata — it is a clean first-generation upload. So 1600×1200 is all the
+   pixel data that exists publicly, and X is ~10px wide within it.
+
+   A larger file would have to come from the artist's own export. Note also that
+   the source README's attribution to Charly Palmer looks doubtful: he is an
+   acrylic fine-art painter (Time cover, John Legend album art, USPS stamps),
+   and the puzzle is a flat digital collage. The `-yi-` signature in the
+   bottom-right corner is the better lead.
+
+   Remaining targets:
    - `i.redd.it/n1x7g8ceaur51.png` and the `preview.redd.it` endpoint at
      `?width=2048/3000/4000` — Reddit sometimes serves larger than the post view
    - the other two Reddit threads — each upload has its own media ID and its own
