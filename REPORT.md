@@ -412,7 +412,29 @@ sit midway between two adjacent numerals, within ~1.5°.
 | hours | 10 and 11 | **21** | *(blank)* |
 
 The runes beneath decode to `Сумма двух чисел` — "sum of two numbers" — stating
-the mechanic outright. The `.VS.` ambigram adds a fourth: slot **12** → `vote`.
+the mechanic outright.
+
+**[MEASURED] The clock can only produce ODD slots.** Consecutive integers *n* and
+*n+1* sum to 2*n*+1, always odd; the wrap pair 12+1 = 13 is odd too. So the twelve
+adjacent pairs yield exactly {3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23} and nothing
+even, ever.
+
+This is consistent with every filled entry in the table: the clock slots (3, 13, 21)
+are odd, and every **even** slot comes from a count or a written number instead —
+`camera` at 2 (two cameras), `mask` at 4 (four masked faces), `black` at 10 ("black
+day number X"), `vote` at 12 (the mirrored `.VS.`), `rifle` at 16 (M16), `apple` at
+20 (the XX on Leopold's head).
+
+**Consequence for the unfilled slots.** Of 6, 8, 14, 15, 18, 21, 22, 23, 24:
+
+| | slots | mechanism |
+|---|---|---|
+| odd | 15, 21, 23 | clock-reachable, but only three hands exist and they are spent |
+| even | 6, 8, 14, 18, 22, 24 | **cannot** come from the clock — need a count or a number written in the artwork |
+
+That is a real narrowing: six of the nine open slots are provably outside the one
+mechanism the puzzle states outright, and the README's twenty-one sections supply no
+count or number that produces any of them. The `.VS.` ambigram adds a fourth: slot **12** → `vote`.
 
 **The clock is not mirrored.** Reading the numerals clockwise gives 8→9→10→11→
 12→1→2→3, i.e. increasing. A mirrored face would decrease. The digits merely
@@ -442,11 +464,19 @@ true at 21 or 24.
    "marks the 11". Freeing slot 11 found no candidate fits, which suggests the
    conflict runs deeper than a two-way choice. Note also that the CCTV junction
    box bears a pyramid symbol, visually linking `camera` and `pyramid`.
-4. **A genuinely larger source image.** Not a re-upload — see §2.9; the
-   circulating file is the original. It would have to come from the artist's own
-   export. The `-yi-` signature in the bottom-right corner is the legibility
-   benchmark: it is the same physical size as the unresolved glyph.
-5. **The final glyph of the right-hand inscription.** See §7.
+4. **A count or a written number producing slot 6, 8, 14, 18, 22 or 24.** Per §5
+   these cannot come from the clock, and the README's twenty-one sections supply no
+   mechanism for any of them. This is where the mechanism inventory is actually
+   incomplete.
+
+**Deprioritised, with reasons:**
+
+- **A larger source image.** Per §7.6 the final glyph is unassignable in principle
+  from this corpus — a perfect scan does not fix a missing key. And per §2.9 no
+  larger source exists anyway: `i.redd.it` serves the same 1600×1200 file,
+  md5-identical.
+- **More compute against the current template.** It is exhausted. A corrected
+  template can be tested in seconds; an uncorrected one cannot be rescued by scale.
 
 ---
 
@@ -494,6 +524,18 @@ Extended from the top-left lines (`Я надеюсь …`, `… будут пр�
 Cross-line agreement on `а д е с у и н р т ь ы б ч` — each verified in at least
 two independent inscriptions.
 
+**Reading geometry.** The right-edge inscription runs **bottom-to-top** on the master
+(x 1529–1554, y 29–1014); the same text reads left-to-right in `pictures/20_1.png`,
+which is a cleaner de-rotated render and is far more legible than anything
+extractable from the 1600×1200 master. Use it for glyph work. The clock line reads
+left-to-right, and its ink sits at luminance ~160–200 against a light background — a
+hard threshold near 120 finds nothing, so use a levels stretch rather than a contrast
+multiply.
+
+Note also that the two ciphers share some shapes with **different values**: `◇` is
+`W` in the Gravity Falls Latin cipher and `с` in the Cyrillic one. Do not
+cross-apply them.
+
 ### 7.4 The falsification chain for X
 
 The right-hand line ends `… чёрный день номер X`. Ten tests, ten negatives:
@@ -509,16 +551,60 @@ The right-hand line ends `… чёрный день номер X`. Ten tests, te
 | the archaic numerals `ѕ ѳ і ѯ ѱ ѡ`? | no shape match established |
 | a rare modern letter `ж ц щ ъ э`? | possible, but only `ц` carries a numeral value |
 | does `1865-202…?` share the glyph? | no — that is Arabic numerals and a literal `?` |
-| is it `ж` (= `х` + vertical bar, `х = ⤬`)? | visually suggestive; X vs `х` = **+0.056**, noise |
+| is it `ж`? | **refuted on arm count: 4 against 6** |
 
-Its geometry is a vertical stroke with diagonals, suggestive of `ж` — recorded
-as an observation, not a decoding.
+**A withdrawn test.** An earlier version of this table reported "X vs `х` = +0.056,
+noise" as evidence against `ж`. That test does not discriminate and is withdrawn:
+if `ж` were drawn as `х` plus an added stroke, the extra stroke changes the
+bounding-box normalisation and the overlap, so a low correlation against bare `х` is
+expected whether or not the hypothesis holds. Correlation is the wrong instrument for
+a compositional hypothesis.
+
+The valid test is structural. X has **four** arms from its crossing point; `ж` has
+**six**. That refutes it on shape, which correlation could not do.
+
+Its geometry is a vertical stroke crossed by a single diagonal, one arm up-right and
+one down-left — verified identically in the master and in `20_1.png`.
 
 **X matches neither the mapped alphabet, nor the artist's Arabic numerals, nor
 the remaining plausible Church-Slavonic numerals, and carries no titlo. It is an
 unresolved unique symbol, visually suggestive of `ж` but quantitatively
 unassigned.** It occurs exactly once in 68 glyphs, which is *why* it has never
 been read.
+
+### 7.6 [MEASURED] Linguistic exhaustion — an independent route to the same wall
+
+Reached by letter inventory rather than shape correlation, so it does not inherit
+§7.4's method.
+
+Across the three decoded plaintexts, **28 of the 33 Cyrillic letters appear**. The
+five that never do:
+
+```
+ж   ц   щ   ъ   э
+```
+
+X must be one of those — and because none of them occurs anywhere else in the corpus,
+**there is no second instance to triangulate from**. Of the five, only `ц` carries a
+Church Slavonic numeral value (900); `ж`, `щ`, `ъ` and `э` have none. So `номер X`
+resolves to a number only if the glyph is `ц`, and its shape does not support that —
+`ц` is a U with a descender.
+
+**[MEASURED]** The glyph is also **not in the Gravity Falls key at all**, checked
+against both the pyramid layout and the Wheel of Intrigue. That is expected: Russian
+needs 33 letters and the GF set supplies 26, so the author invented extras. This is
+one of them.
+
+> **Dependency.** This argument inherits the published plaintexts. The group sizes
+> were confirmed independently by ink-profile segmentation (5/11/8/2/6/4/5/1 on the
+> edge, 5/4/5 on the clock), and `е`, `с` and the doubled `м` were verified
+> glyph-by-glyph — but not all 68 glyphs were re-derived. If any word in the
+> plaintexts is wrong, the letter inventory shifts and the absent-five set with it.
+
+**[INFERRED] X is unassignable from this corpus in principle.** No key entry, one
+occurrence, and every candidate letter equally unattested. A higher-resolution scan
+renders the shape more crisply and still cannot say which letter it is. The missing
+thing is a key, not pixels.
 
 ### 7.5 `Сумма двух чисел` is the clock's caption
 
@@ -592,6 +678,28 @@ then derivation over the survivors. Fusing them runs the 4096-compression path
 in ~87% of warps with ~2 live lanes each (~6% utilization); splitting recovers
 ~16×.
 
+**Seam validation.** Chunking is where an exhaustive claim can quietly fail: an
+off-by-one dropping one candidate per join loses N−1 of 25 billion — numerically
+irrelevant, fatal to the word "exhaustive". Three instruments, all green:
+
+1. **Count invariance.** The survivor total is a pure function of the config, so
+   chunking cannot change it. `seam_count.conf` reports an identical 262,250 at seven
+   chunk sizes down to `--chunk 7` — 599,187 chunks over 4.2 M candidates. A single
+   candidate lost per join would show as a shortfall of 599,186.
+2. **Cross-binary match at production scale.** `t18_pool52` reports **5,941,047**
+   survivors at four chunkings — the same value logged by three full runs of the
+   *previous* binary. That is not self-consistency: it validates the historical runs
+   and proves the refactor did not move filter semantics.
+3. **The answer planted on a seam.** `--seam N` truncates the chunk containing N−1 to
+   end exactly at N. The known answer HITs when placed first-of-chunk and
+   last-of-chunk, at both small indices and past 2³².
+
+A note on a broken test: the obvious form — set `--chunk` equal to the hit index —
+cannot run. At 4,650,657,157 candidates and 1/16 acceptance that is 290 M survivors
+against a 33,554,432 buffer, and the run aborts on `survivor overflow` before
+reaching the seam. Chunk *size* and boundary *position* are different parameters.
+The abort is itself a validation: the guard fired rather than truncating silently.
+
 **Positive control.** Reproducing a known mnemonic proves little; the solver
 must *find* an unknown one. A config blanks two slots of a known phrase to all
 2048 words and requires recovery:
@@ -602,10 +710,15 @@ HIT   index 2270828
 phrase : tiger live melody inject guitar nose route obtain ball diesel snow radar
 ```
 
-262,144 derivations, `melody` and `snow` recovered. This is what licenses the
-negative results.
+262,144 derivations, `melody` and `snow` recovered.
 
-**Six bugs were caught by exact-value validation**, each producing plausible
+That control is single-chunk. A second, `selftest_multichunk.conf`, blanks three
+slots — 8,589,934,592 sequences, 536,870,912 derivations — and recovers the answer at
+index 4,650,657,157, which sits in chunk 10 at offset 422,798,725 with a chunk size of
+469,762,048. Nine boundaries crossed. Together with the seam instruments above, this
+is what licenses the negative results.
+
+**Eight bugs were caught by exact-value validation**, each producing plausible
 output with zero register spills and no warnings:
 
 - a SHA-256 message-schedule error yielding a 6.39% checksum rate against a true
@@ -618,6 +731,18 @@ output with zero register spills and no warnings:
   18-word and 100% of 21/24-word mnemonics are longer
 - a chunk-sizing assumption that survivor counts are exact rather than binomial
 - an incorrect canonical 24-word address recalled rather than computed
+- `BigInteger.Parse(hex, NumberStyles.HexNumber)` misparsing an **odd-length**
+  string. A curve constant written as `"0" + 64 hex chars` comes back 4 bits shifted;
+  PBKDF2 and BIP32 master stay byte-perfect against test vectors while every derived
+  address is wrong. Build curve constants from byte arrays.
+- **`show_hit` reporting the wrong derivation path.** It printed
+  `m/44'/0'/0'/0/0` unconditionally, so any config with multiple `PATH` lines —
+  `t18_pool52` has four, `t18_pathc` has eight — would have misreported which path
+  produced a hit. **This is the only member of the family that corrupts a success
+  rather than a negative:** the other seven produce a wrong "no match", this one
+  produces a wrong answer to "which path found it", on the single run that would ever
+  have mattered. It fires only on success, so nothing but a hit could have exposed
+  it. `k_derive` now records the path index alongside the hit.
 
 **If you run your own solver: validate against exact expected counts, not
 plausible-looking ones.** A 1.2% deviation is invisible to a sanity check and
