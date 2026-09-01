@@ -74,3 +74,39 @@ __device__ void secp256k1_pub_from_priv(const uint32_t priv[8], uint8_t pub[33])
     scalarMulBaseAffine(k, X, Y);
     point_to_compressed(X, Y, pub);
 }
+
+// ---------------------------------------------------------------- brainwallet
+// Serialize an affine point to a 65-byte UNCOMPRESSED public key.
+//   pub[0]     = 0x04
+//   pub[1..32] = X big-endian
+//   pub[33..64]= Y big-endian
+// 2020-era brainwallet tools frequently defaulted to uncompressed keys, and a
+// legacy 1-address is consistent with either form, so both must be tested.
+__device__ __forceinline__ void point_to_uncompressed(const uint64_t X[4],
+                                                      const uint64_t Y[4],
+                                                      uint8_t pub[65]) {
+    pub[0] = 0x04;
+#pragma unroll
+    for (int i = 0; i < 4; ++i) {
+#if LIMBS_ARE_BE
+        uint64_t xl = X[i],     yl = Y[i];
+#else
+        uint64_t xl = X[3 - i], yl = Y[3 - i];
+#endif
+#pragma unroll
+        for (int b = 0; b < 8; ++b) {
+            pub[1  + i * 8 + b] = (uint8_t)(xl >> (56 - 8 * b));
+            pub[33 + i * 8 + b] = (uint8_t)(yl >> (56 - 8 * b));
+        }
+    }
+}
+
+// One scalar multiplication, both serializations. scalarMulBaseAffine is the
+// expensive step (~384 field inversions); compressed and uncompressed differ
+// only in how the SAME point is written out, so they must not cost two mults.
+__device__ __forceinline__ void secp256k1_xy_from_priv(const uint32_t priv[8],
+                                                       uint64_t X[4], uint64_t Y[4]) {
+    uint64_t k[4];
+    priv_be32_to_le64(priv, k);
+    scalarMulBaseAffine(k, X, Y);
+}

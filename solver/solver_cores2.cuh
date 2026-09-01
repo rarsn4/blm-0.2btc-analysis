@@ -221,6 +221,71 @@ __device__ __forceinline__ void hash160_pub(const uint8_t pub[33], uint32_t out[
     uint32_t sh[8]; sha256_33b(pub,sh); ripemd160_32b(sh,out);
 }
 
+// ==================================================== multi-block SHA-256
+// The two SHA-256 routines above are fixed-size: sha256_33b is exactly one
+// block, sha256_1blk_h0 is one block and returns only h0. A brainwallet hashes
+// the WHOLE phrase -- ~114 bytes at 18 words, ~153 at 24 -- and an uncompressed
+// public key is 65 bytes. Both are multi-block. Reusing a single-block routine
+// for either is exactly the 119-byte hmac_sha512 trap in report S10: no error,
+// wrong digest, every address plausible and wrong.
+
+__device__ void sha256_compress(uint32_t s[8], const uint8_t blk[64]){
+    uint32_t W[64];
+#pragma unroll
+    for(int i=0;i<16;++i)
+        W[i]=((uint32_t)blk[i*4]<<24)|((uint32_t)blk[i*4+1]<<16)
+            |((uint32_t)blk[i*4+2]<<8)|blk[i*4+3];
+#pragma unroll
+    for(int i=16;i<64;++i) W[i]=S1(W[i-2])+W[i-7]+S0(W[i-15])+W[i-16];
+    uint32_t a=s[0],b=s[1],c=s[2],d=s[3],e=s[4],f=s[5],g=s[6],h=s[7];
+#pragma unroll
+    for(int i=0;i<64;++i){
+        uint32_t t1=h+B1(e)+((e&f)^(~e&g))+d_K256[i]+W[i];
+        uint32_t t2=B0(a)+((a&b)^(a&c)^(b&c));
+        h=g;g=f;f=e;e=d+t1;d=c;c=b;b=a;a=t1+t2;
+    }
+    s[0]+=a;s[1]+=b;s[2]+=c;s[3]+=d;s[4]+=e;s[5]+=f;s[6]+=g;s[7]+=h;
+}
+
+// SHA-256 over an arbitrary-length message. Safe for msg == out (the tail block
+// is copied before any output byte is written), which is what makes the
+// double-SHA256 variant a two-line call.
+__device__ void sha256_long(const uint8_t *msg, uint32_t len, uint8_t out[32]){
+    uint32_t s[8]={0x6a09e667u,0xbb67ae85u,0x3c6ef372u,0xa54ff53au,
+                   0x510e527fu,0x9b05688cu,0x1f83d9abu,0x5be0cd19u};
+    uint8_t blk[64];
+    uint32_t off=0;
+    while(len-off>=64u){
+        for(int i=0;i<64;++i) blk[i]=msg[off+i];
+        sha256_compress(s,blk); off+=64u;
+    }
+    uint32_t rem=len-off;
+    for(uint32_t i=0;i<64;++i) blk[i]=(i<rem)?msg[off+i]:0u;
+    blk[rem]=0x80u;
+    if(rem>=56u){ sha256_compress(s,blk); for(int i=0;i<64;++i) blk[i]=0u; }
+    uint64_t bits=(uint64_t)len*8ull;
+#pragma unroll
+    for(int i=0;i<8;++i) blk[63-i]=(uint8_t)(bits>>(8*i));
+    sha256_compress(s,blk);
+#pragma unroll
+    for(int i=0;i<8;++i){
+        out[i*4+0]=(uint8_t)(s[i]>>24); out[i*4+1]=(uint8_t)(s[i]>>16);
+        out[i*4+2]=(uint8_t)(s[i]>>8);  out[i*4+3]=(uint8_t)(s[i]);
+    }
+}
+
+// hash160 of a 65-byte uncompressed public key. SHA-256 spans two blocks here,
+// so it goes through sha256_long, not sha256_33b.
+__device__ __forceinline__ void hash160_pub65(const uint8_t pub[65], uint32_t out[5]){
+    uint8_t sh[32]; sha256_long(pub,65,sh);
+    uint32_t be[8];
+#pragma unroll
+    for(int i=0;i<8;++i)
+        be[i]=((uint32_t)sh[i*4]<<24)|((uint32_t)sh[i*4+1]<<16)
+             |((uint32_t)sh[i*4+2]<<8)|sh[i*4+3];
+    ripemd160_32b(be,out);
+}
+
 // ============================================================ PBKDF2
 
 // Salt block comes from constant memory — set per passphrase by the host.
