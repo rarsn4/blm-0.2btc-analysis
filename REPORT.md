@@ -1,4 +1,4 @@
-# 0.2 BTC Puzzle — the rune cipher solved, 24.7 billion derivations eliminated, and six defects in the shared data
+# 0.2 BTC Puzzle — the rune cipher solved, 25.2 billion derivations eliminated, and six defects in the shared data
 
 **Target:** `1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ`
 **HASH160:** `ccbd031e54cde2a3189fd59bc49f731367a1779e`
@@ -11,11 +11,31 @@ What **is** solved is the **rune cipher**, except for a single glyph. Those are
 different claims and this report keeps them separate throughout.
 
 I built a GPU search pipeline covering both BIP39 and Electrum and ran
-**24,767,853,989 full seed derivations** — 717 days of CPU at typical solver
-rates. Everything in §2 is exhaustively eliminated, not "tried and didn't find."
+**25,188,563,424 full seed derivations** — 729 days of CPU at typical solver
+rates — plus 7,939,492,344 brainwallet addresses counted separately (§2.12).
+Everything in §2.1–2.11 is exhaustively eliminated, not "tried and didn't find";
+§2.12 is a tested corpus, which is a weaker claim and is marked as such."
 
 Code, configs and every hypothesis tested:
 https://github.com/rarsn4/blm-0.2btc-analysis
+
+---
+
+## 0. Epistemic status
+
+Claims below are tagged. Do not promote a tag without new evidence.
+
+| Tag | Meaning |
+|---|---|
+| **[MEASURED]** | Re-derived from the image, the wordlist, or the chain. Reproducible. |
+| **[EXHAUSTED]** | A complete search space enumerated, empty. |
+| **[TESTED]** | A finite corpus tried, empty. **Not** an elimination of the class. |
+| **[INFERRED]** | Follows from measured facts by a stated argument. |
+| **[ASSUMED]** | Load-bearing but unproven. The soft spots. |
+
+The distinction between [EXHAUSTED] and [TESTED] is the one that matters: §2.1–2.11
+are the first, §2.12 is the second, and conflating them would be the only overclaim
+in this document.
 
 ---
 
@@ -159,7 +179,9 @@ words** — not a candidate list, the entire wordlist — across 65 passphrases 
 
 This was a live assumption underneath every other result. Now closed:
 
-- `m/44'/0'/0'/0/0` through `/19` — the full BIP44 gap limit
+- `m/44'/0'/0'/0/0` through `/35` — well past the standard BIP44 gap limit of 20.
+  Index **21** was checked specifically: the positional argument in §5 points there
+  and it sat one past the original sweep
 - change chain `m/44'/0'/0'/1/0`, `/1`
 - accounts `m/44'/0'/1'/0/0`, `m/44'/0'/2'/0/0`
 - bare BIP32 `m/0/0`, `m/0/1`, `m/0/2`, `m/0'/0/0`, `m/0'/0/1`, `m/0'/0/2`
@@ -269,20 +291,83 @@ For anyone reasoning about section numbers: **the whitepaper has 12 sections,
 not 9.** Section 11 (Calculations) exists, so `11.03.20` → Section 11 is a live
 reading. Tested; negative.
 
+### 2.12 [TESTED] Brainwallets — a class nobody had touched
+
+`priv = SHA256(phrase)` directly: no BIP39 checksum, no PBKDF2, no BIP32, no path.
+Common in 2020-era puzzles and never tested against this target.
+
+**Two corpora, both negative.**
+
+*Image text*, 22,638 keys: every text string in the image (Latin mottos, Russian
+plaintexts, BLM slogans, dates, the 13th Amendment, whitepaper fragments, the target
+address itself), casing / punctuation-stripped / whitespace-stripped variants, each
+individual word of the Russian plaintexts, all 2048 BIP39 words singly, and pairwise
+concatenations of 33 salient phrases under three joiners. Plus SHA256 and SHA256² of
+the PNG file and of the concatenated IDAT payload.
+
+*Template sequences*, 992,436,543 candidates → **7,939,492,344 addresses**: the t18
+template over a 63-word pool (the 52-word pool plus the eleven image words that are
+**not** BIP39 — `stop freedom hate white death kill war bleed shut money buy`, which
+a brainwallet permits and a mnemonic cannot). All four key variants — SHA256 and
+double-SHA256, space-joined and concatenated — each as compressed and uncompressed.
+
+> **This is [TESTED], not [EXHAUSTED].** The brainwallet class is every possible
+> string and is unbounded. The honest claim is "the phrases present in the image, plus
+> the template sequences over a 63-word pool". It is **not** filed with the GPU sweeps
+> in §3 for the same reason: a brainwallet address is ~31× cheaper than a seed
+> derivation (489,000/s against 15,600/s measured), so folding 7.9 billion of them
+> into a total headed "full seed derivations" would inflate the figure with work that
+> is not the same work.
+
+Neither corpus touches orderings outside the template. For a brainwallet, order matters
+exactly as much as for BIP39 — the same wall, and the position machinery is still what
+you would need.
+
+**Control, mandatory here.** A brainwallet has no checksum: every candidate passes the
+filter by construction, so a wrong SHA-256 produces a full run of plausible garbage and
+reports "exhausted, no match" exactly like a correct run. Nothing else in the pipeline
+would notice. 12/12 vectors pass — six variants of `correct horse battery staple`, plus
+three multi-block phrases at 124 bytes (`len%64=60`, forcing the extra pad block), 128
+bytes (`len%64=0`) and 157 bytes. The canonical vector is 28 bytes, a single block, and
+cannot reach the multi-block path an 18- or 24-word phrase needs.
+
+Note `battery` and `staple` are not BIP39 words, so the control cannot be assembled
+without an arbitrary-word table. That made the table mandatory, not optional.
+
+**Self-validation:** acceptance came out exactly 1.0 — survivors == candidates in both
+runs. With no checksum, anything less would mean the filter was silently dropping
+candidates, and this is only visible because of the cumulative survivor counter added
+during the seam work (§10).
+
 ---
 
 ## 3. Tally
 
 See the repository for per-run configs. Summary:
 
+Comparable units — a full seed derivation is PBKDF2-HMAC-SHA512 ×2048, then BIP32
+CKDpriv, then secp256k1, then hash160:
+
 | | derivations |
 |---|---|
-| BIP39 | 19,420,846,639 |
+| BIP39 | 19,841,556,074 |
 | Electrum v2 | 5,347,007,350 |
-| **TOTAL** | **24,767,853,989** |
+| **TOTAL** | **25,188,563,424** |
 
-**717 days of CPU** at the ~400 derivations/s typical of CPU solvers, completed
-in a few days of GPU time on an RTX 4070 Laptop.
+**729 days of CPU** at the ~400 derivations/s typical of CPU solvers, completed in a
+few days of GPU time on an RTX 4070 Laptop.
+
+Counted separately, because the unit is not the same:
+
+| | |
+|---|---|
+| brainwallet candidates (distinct) | 992,436,543 |
+| brainwallet addresses | 7,939,492,344 |
+
+A brainwallet address is SHA-256 once, then secp256k1 and hash160 — measured at
+489,000/s against 15,600/s for a seed derivation, ~31× cheaper. In
+seed-derivation-equivalents the brainwallet work is ~163 M, not 7.9 B. Adding the two
+columns would produce a larger number that means less.
 
 ---
 
