@@ -1,4 +1,4 @@
-# 0.2 BTC Puzzle — the rune cipher solved, 25.2 billion derivations eliminated, and six defects in the shared data
+# 0.2 BTC Puzzle — the rune cipher solved, 26.5 billion derivations eliminated, and six defects in the shared data
 
 **Target:** `1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ`
 **HASH160:** `ccbd031e54cde2a3189fd59bc49f731367a1779e`
@@ -11,7 +11,7 @@ What **is** solved is the **rune cipher**, except for a single glyph. Those are
 different claims and this report keeps them separate throughout.
 
 I built a GPU search pipeline covering both BIP39 and Electrum and ran
-**25,188,563,424 full seed derivations** — 729 days of CPU at typical solver
+**26,513,178,774 full seed derivations** — 767 days of CPU at typical solver
 rates — plus 7,939,492,344 brainwallet addresses counted separately (§2.12).
 Everything in §2.1–2.11 is exhaustively eliminated, not "tried and didn't find";
 §2.12 is a tested corpus, which is a weaker claim and is marked as such."
@@ -156,8 +156,29 @@ words** — not a candidate list, the entire wordlist — across 65 passphrases 
 ### 2.3 The 18-word template is dead in both directions
 
 - **Leave-one-out:** each of the five gaps freed to **all 2048 words** with the
-  others pooled. 300 M derivations. *No single word in the language fits any one
-  gap.*
+  others pooled. 300 M derivations.
+
+  > **[CORRECTED 2026-09-01] This is narrower than originally stated.** The
+  > configs that ran it (`t18_full{6,8,14,15,18}.conf`) drew the *other four*
+  > gaps from the old **37-word** pool and carried **no `PATH` lines**, so they
+  > ran the single default path. An audit of every config in the project found
+  > that **none combines `@FULL` with a pool ≥52 or with 4 paths.**
+  >
+  > So two regions were never tested: one gap free over all 2048 while another
+  > gap holds one of the 17 words added since (`able cause crime exist happy
+  > know neither only party peace place that they thing time any verb`), and
+  > the entire leave-one-out family on paths 2–4.
+  >
+  > This matters most for words outside **every** pool. `flag`, `banner`,
+  > `nation`, `state`, `eagle`, `field`, `glory` and `salute` are all BIP39 and
+  > none has ever been in a gap pool — they are reachable *only* through an
+  > `@FULL` sweep, and the `@FULL` sweeps were the weak ones.
+  >
+  > **[RESOLVED 2026-09-01]** Closed by `t18_loo{6,8,14,15,18}.conf`: each slot
+  > free over all 2048 words, the other four over the current 54-word pool, all
+  > four paths. 87,071,293,440 candidates, 1,331,791,148 derivations after
+  > removing the overlap between runs. All five negative. The claim is now
+  > earned at every t18 gap under the current pool and path set.
 - **Free-one-fixed:** each of the thirteen fixed words freed to all 53
   candidates. 747 M derivations. *No single wrong fixed word explains it.*
 - **Paired:** `camera` + `pyramid` — the pairing the table itself flags as
@@ -350,11 +371,16 @@ CKDpriv, then secp256k1, then hash160:
 
 | | derivations |
 |---|---|
-| BIP39 | 19,841,556,074 |
+| BIP39 | 21,166,171,424 |
 | Electrum v2 | 5,347,007,350 |
-| **TOTAL** | **25,188,563,424** |
+| **TOTAL** | **26,513,178,774** |
 
-**729 days of CPU** at the ~400 derivations/s typical of CPU solvers, completed in a
+The leave-one-out runs overlap one another in exactly the all-pool region, so
+their contribution is 5·L − 4·R = 1,331,791,148 rather than the naive
+1,360,488,960, and `t18_readme54` is dropped as subsumed. Counting the naive sum
+would double-count 28,697,812 derivations.
+
+**767 days of CPU** at the ~400 derivations/s typical of CPU solvers, completed in a
 few days of GPU time on an RTX 4070 Laptop.
 
 Counted separately, because the unit is not the same:
@@ -468,6 +494,24 @@ true at 21 or 24.
    these cannot come from the clock, and the README's twenty-one sections supply no
    mechanism for any of them. This is where the mechanism inventory is actually
    incomplete.
+
+   **[MEASURED] The flag carries 44 stars and 13 stripes.** Star count by
+   connected-component analysis inside the canton — every star located, two
+   clipped at the fold, visually verified against the detection. Stripe pattern
+   `KRTKRTKRTKRTK`: 13, canonical. The flag's only anomaly is the star deficit.
+
+   **50 − 44 = 6**, and 6 is an open even slot. That is a deficit in a
+   deliberately-drawn flag, the same kind of count as "four masked faces", and it
+   needs no invented operation. (Digit-summing 44 → 8 was proposed and is
+   withdrawn: the artwork nowhere identifies digit-summing as an operation, which
+   acceptance criterion 5 forbids.)
+
+   **[TESTED] The flag reading is negative.** `flag`, `banner`, `nation`, `state`,
+   `eagle`, `field`, `glory` and `salute` are all BIP39 and none has ever been in a
+   gap pool, so only an `@FULL` sweep could reach them — and until 2026-09-01 the
+   `@FULL` sweep at slot 6 was the weak one (§2.3). `t18_loo6.conf` swept slot 6
+   over all 2048 words with the current pool and all four paths. Empty. The chain
+   was coherent and it is closed.
 
 **Deprioritised, with reasons:**
 
