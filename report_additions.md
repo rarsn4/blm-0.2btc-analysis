@@ -160,6 +160,26 @@ campaign, and the method that produced it was wrong independently of that.
 > is not inside `trust21`(69), and `trustonly`'s pool is disjoint from every
 > other. Taking `min()` there would overstate intersections and so understate the
 > union — wrong in the flattering direction.
+>
+> **This supersedes the hand-derived `5·L − 4·R` subsumption note** previously
+> carried in this section for the t18 leave-one-out family. That formula was
+> correct for that one family and does not generalise; `tally2.py` computes the
+> same quantity for every family without a closed form. One method, stated once.
+>
+> **One tranche is knowingly excluded.** Three runs on 14 August used an earlier
+> CPU solver (`template_solve.py`, 16 workers) in `~/Downloads/puz2/files/` with
+> **no config file at all** — the template lived in the Python. Two completed and
+> exhausted without a match, ~98.6 M derivations between them, 0.068% of the
+> ledger. They are not rows and cannot be: the logs print `37 candidates` per slot
+> but not *which* 37, and the pool file they were given no longer exists. Without
+> the pool there is no set, and hand-entering a guessed one would be exactly the
+> maintained-tally failure this section exists to end. **A run with no config is a
+> run with no provenance, whatever its log says** — so it is stated here and
+> counted nowhere.
+>
+> Those three were invisible to a config-based audit by construction. They were
+> found by inventorying *logs* instead, which is the dual check and the only one
+> that can see a run whose config never existed.
 
 ---
 
@@ -178,7 +198,7 @@ image. Four entries fail a base rate. The inference goes with them.
 > |---|---|
 > | the deleted *"a trusted"* | the artwork has five letter-level typos in ~250 words. One dropped word-pair is unremarkable at that rate, and the phrase surviving twice elsewhere is exactly what a single accidental omission looks like — not evidence against accident. |
 > | the unreadable glyph | not the author's absence, ours. Russian needs 33 letters; the Gravity Falls key supplies 26; the author invented the rest and we lack the key. Filing it as withholding assumes an intent nothing supports. |
-> | *"1865 − 202…?"* | reads naturally as an open-ended range — abolition to the present and counting. §12 criterion 4 forbids assigning a cryptographic function to punctuation that already has a plain meaning. |
+> | *"1865 − 202…?"* | reads naturally as an open-ended range — abolition to the present and counting. §9 criterion 4 forbids assigning a cryptographic function to punctuation that already has a plain meaning. |
 > | the star and course deficits | two deviations across five resolved canonical-count checks is the ordinary yield of hand-drawing. They also **disagree**: 50 − 44 = 6 lands on an open slot, but 13 − 12 = 1 lands on `subject`, which is assigned, freed and eliminated. A real mechanism works twice. |
 >
 > **[MEASURED] One entry survives: the third clock hand.**
@@ -306,11 +326,21 @@ Append to the existing eight.
 >    explicit list of declared runs rather than a glob. Containment, not a fix.
 >
 >    The audit that cleared it was also too narrow: it covered 239 configs in two
->    directories, when there are **837 `.conf` files under the home directory, 667
->    of them puzzle configs**. Re-run across all 667 — no pool or slot word is
->    neither BIP39 nor `EXTRA`, and all eight `EXTRA`-declaring configs are
+>    directories. A correct enumeration of the home directory finds **767 `.conf`
+>    files, 735 of them puzzle configs**. Re-run across all 735 — no pool or slot
+>    word is neither BIP39 nor `EXTRA`, and all eight `EXTRA`-declaring configs are
 >    `scheme=brainwallet`. The conclusion survived; the evidence for it had been a
 >    third of what it should have been.
+>
+>    The *widened* audit was itself wrong first, in the same family. It reported
+>    837 files and 667 puzzle configs, because it split `find` output on bare
+>    whitespace rather than newlines — shredding every path containing a space into
+>    fragments that failed to open and were swallowed by a bare `except: continue`.
+>    That **inflated** the file count while **dropping 70 real configs**, all of
+>    them under `~/Downloads/real (copy)/`. The discrepancy only surfaced because a
+>    later run with a *narrower* content filter returned *more* configs, which is
+>    impossible. Two audits of the same tree, and the one that agreed with
+>    expectations went unchecked.
 > 13. **The fix for bug 12 introduced a collision, by relying on the containment
 >    it had just rejected.** Exempting `EXTRA` words meant giving them indices
 >    above the wordlist, and the first version enumerated each config's *own* list:
@@ -458,6 +488,6 @@ Append to the existing list.
 >    entry is precisely how `breathe`, `trusted`, `stop` and the other eleven
 >    entered circulation, and both reviewers did it inside the section documenting
 >    it. That costs nothing to do and nothing prompts you to check it, which is why
->    it is a better worked example than any of the eleven bugs.
+>    it is a better worked example than any of the thirteen bugs.
 >
 >    Reproduce with `slogan_lines.py` in the project root (needs `mnemonic` only).
