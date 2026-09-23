@@ -34,10 +34,15 @@ Runs listed under EVIDENCED have logs in this directory; those under ASSERTED
 were reported complete before this ledger existed and are included on that word
 alone. They are reported separately for exactly that reason.
 """
-import re, sys
+import re, sys, os
 from itertools import product
 
-WL = [w.strip() for w in open('bip39_en.txt')]
+# Directory holding the .conf files and bip39_en.txt. Defaults to the
+# script's own directory so the published copy runs standalone; override
+# with argv[1] to point at another config set.
+DIR = sys.argv[1] if len(sys.argv) > 1 else os.path.dirname(os.path.abspath(__file__))
+
+WL = [w.strip() for w in open(os.path.join(DIR, 'bip39_en.txt'))]
 IDX = {w: i for i, w in enumerate(WL)}
 ALL = frozenset(range(2048))
 NSLOT = 21
@@ -115,7 +120,7 @@ T24 = 918_330_048 + 2_700_250_214
 def load(names):
     got = {}
     for n in names:
-        b = parse(n + '.conf')
+        b = parse(os.path.join(DIR, n + '.conf'))
         if b: got[n] = b
         else: print(f"  (skipped {n}: not a parseable 21-word config)", file=sys.stderr)
     return got

@@ -1,8 +1,15 @@
 #!/usr/bin/env python3
 """Regression tests for tally2.py's box algebra. Run before adding rows."""
-import importlib.util, sys
-spec=importlib.util.spec_from_file_location("t","tally2.py"); m=importlib.util.module_from_spec(spec)
-sys.argv=['x']; spec.loader.exec_module(m)
+import importlib.util, sys, os
+# tally2.py reads bip39_en.txt from argv[1] (default: its own directory), so the
+# loader must hand it a directory that actually has one. `configs` in the
+# published repo, the working directory in the solver tree.
+HERE=os.path.dirname(os.path.abspath(__file__))
+CFG=next((d for d in (os.path.join(HERE,'configs'), HERE)
+          if os.path.exists(os.path.join(d,'bip39_en.txt'))), HERE)
+spec=importlib.util.spec_from_file_location("t",os.path.join(HERE,"tally2.py"))
+m=importlib.util.module_from_spec(spec)
+sys.argv=['x',CFG]; spec.loader.exec_module(m)
 
 def box(**dims):
     b={s:frozenset({0}) for s in range(1,22)}
