@@ -200,7 +200,13 @@ if __name__ == '__main__':
     print(f"  union {ue:>22,} candidates   {ue//CHECKSUM:>18,} derivations")
     print(f"\n+ ASSERTED runs ({len(A)}) — reported complete, no log here")
     print(f"  union {ua:>22,} candidates   {ua//CHECKSUM:>18,} derivations")
-    print(f"  marginal contribution of the asserted runs: {(ua-ue)//CHECKSUM:,} derivations")
+    # Derive the marginal from the two REPORTED totals, not from the candidate
+    # difference. Each total is floored independently, so (ua-ue)//128 and
+    # (ua//128)-(ue//128) differ by one -- both defensible in isolation, but this
+    # script prints both totals, so the marginal it quotes must be their
+    # difference or the three numbers on the page do not reconcile.
+    print(f"  marginal contribution of the asserted runs: "
+          f"{ua//CHECKSUM - ue//CHECKSUM:,} derivations")
     print(f"\n  naive sum {naive:>18,} candidates")
     print(f"  double-counted {naive-ua:>14,}  ({(naive-ua)/naive:.2%})")
     print(f"  disjoint boxes: {ne} evidenced, {na} combined")
