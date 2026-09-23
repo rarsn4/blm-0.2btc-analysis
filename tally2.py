@@ -44,6 +44,17 @@ DIR = sys.argv[1] if len(sys.argv) > 1 else os.path.dirname(os.path.abspath(__fi
 
 WL = [w.strip() for w in open(os.path.join(DIR, 'bip39_en.txt'))]
 IDX = {w: i for i, w in enumerate(WL)}
+# INDEX CONVENTION. This script is 0-based: IDX maps abandon->0 ... zoo->2047.
+# The repo README and slogan_lines.py are 1-based (black#184, matter#1099).
+# Nothing crosses between them today -- the ledger emits only set sizes, never
+# an index -- but the mismatch is one refactor from being a live bug, and it is
+# the same class as the 1-based/0-based error already in the bug list. The
+# assertion below is what makes EXTRA's base safe: if IDX were 1-based, the
+# first EXTRA word would take index 2048, which IS zoo, and would silently
+# alias it in every set operation.
+assert min(IDX.values()) == 0 and max(IDX.values()) == len(IDX) - 1, \
+    "IDX must be 0-based and dense; EXTRA indexing is based on len(IDX)"
+
 ALL = frozenset(range(2048))
 
 # One registry for every non-BIP39 EXTRA word seen in any config, assigned above
@@ -55,10 +66,13 @@ def extra_index(w):
     EXTRA_IDX[w] = len(IDX) + len(EXTRA_IDX)
     return EXTRA_IDX[w]
 
-def rebase_extra():
-    """Re-assign EXTRA indices in sorted order, so the mapping does not depend
-    on which config happened to be parsed first."""
-    for i, w in enumerate(sorted(EXTRA_IDX)): EXTRA_IDX[w] = len(IDX) + i
+# Deliberately NOT re-based into sorted order. Indices are assigned first-seen,
+# so the integers depend on parse order -- which is harmless, because every
+# figure this script reports is a set SIZE, and sizes are invariant under
+# relabeling. A rebase function existed here briefly and was dead code that
+# lied: its docstring promised sorted order nothing applied, and calling it
+# after any parse would have corrupted results, since frozensets already built
+# keep the old integers while the registry hands out new ones.
 NSLOT = 21
 
 class NotBIP39(Exception):
