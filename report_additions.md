@@ -168,9 +168,9 @@ campaign, and the method that produced it was wrong independently of that.
 >
 > **One tranche is knowingly excluded.** Three runs on 14 August used an earlier
 > CPU solver (`template_solve.py`, 16 workers) in `~/Downloads/puz2/files/` with
-> **no config file at all** — the template lived in the Python. Two completed and
-> exhausted without a match, ~98.6 M derivations between them, 0.068% of the
-> ledger. They are not rows and cannot be: the logs print `37 candidates` per slot
+> **no config file at all** — the template lived in the Python. All three
+> completed and exhausted without a match — **138,707,999 derivations**, 0.096% of
+> the ledger. They are not rows and cannot be: the logs print `37 candidates` per slot
 > but not *which* 37, and the pool file they were given no longer exists. Without
 > the pool there is no set, and hand-entering a guessed one would be exactly the
 > maintained-tally failure this section exists to end. **A run with no config is a
@@ -268,6 +268,14 @@ image. Four entries fail a base rate. The inference goes with them.
 
 ### The EC rewrite
 
+Inserted after the two-kernel paragraph (line 723), before **Seam validation**.
+It opens by dating the rate table above it, which is pre-rewrite.
+
+> **The rate table above predates this rewrite.** Every figure in it was measured
+> on the affine pipeline; the combined 125 k/s is now roughly 3× that. The table
+> is retained as measured rather than re-scaled, because a scaled number is not a
+> measured one — it will be replaced when the suite is re-run end to end.
+>
 > The pipeline is **~3× faster** since replacing affine double-and-add with
 > **Jacobian coordinates**: ~384 modular inversions per scalar multiplication
 > down to one, at the final conversion back to affine. Measured 6.5× on the
@@ -372,17 +380,32 @@ Append to the existing eight.
 
 ### Five rules
 
-Append to the existing list.
+§10 has no rules list to append to — this is a NEW subsection, inserted after the
+closing "validate against exact expected counts" advice (line 793) and before the
+`---` at 795. patch5.py adds the heading.
 
-> - **A number that arrives in the reassuring direction is the one to check
->   twice.** `$?` after a pipeline or a command substitution belongs to the last
->   thing that ran, not the thing under test. Twice in one day it reported success
->   where there was failure — a solver that had refused a poisoned config, and a
->   test suite with two failures in it. Both times the wrong number said *fine*.
->   Nobody re-runs a passing check, which is exactly why a passing check is where
->   a broken harness hides. Every verdict in this project that arrived pre-agreed
->   — the stemmed base rate, the agreeing tallies, the zero exit codes — was wrong
->   or unfounded.
+> - **A number that lands where you expected is the one to check twice.** Four
+>   instances in a single day, each a measurement that agreed with its author and
+>   so was never re-run:
+>
+>   - `$?` after a pipeline or command substitution belongs to the last thing that
+>     ran, not the thing under test. It twice reported success where there was
+>     failure — a solver that had correctly refused a poisoned config, and a test
+>     suite carrying two failures.
+>   - An audit split `find` output on bare whitespace instead of newlines,
+>     inflating the file count while silently dropping 70 configs. It surfaced only
+>     because a later run with a *narrower* filter returned *more*.
+>   - A test proposed to prove a run never happened — `grep -c 'chunks'` — counts
+>     **lines**, and the progress writer emits `\r`. It returned 1, which would
+>     have confirmed the hypothesis it was designed to test. The run had in fact
+>     completed all 37 chunks. Counting records instead of lines reversed the
+>     conclusion and moved the excluded tranche from 98.6 M to 138.7 M.
+>
+>   The common shape is not carelessness; it is that **nobody re-runs a check that
+>   agrees with them.** A passing check is where a broken harness hides. Every
+>   verdict in this project that arrived pre-agreed — the stemmed base rate, the
+>   two agreeing tallies, the zero exit codes, the shredded audit — was wrong or
+>   unfounded.
 
 > - **A single source of truth kept in two places is a running sum by another
 >   name.** The ledger existed as two copies — the published tree and the working

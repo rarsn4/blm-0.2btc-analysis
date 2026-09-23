@@ -48,15 +48,24 @@ SEC = {
     'sec9':  (684, 705),        # criterion 7 appended at the end
 }
 
-# §10 spans 706-800 but its sub-structure was never dumped. Fill these from
-# --inspect, then re-run. They are deliberately None so the script cannot
-# silently guess where a bug list ends.
+# §10 spans 706-800. Filled from --inspect against 5fee94d.
+#   706  ## 10. Method
+#   710-718  rate table (PRE-rewrite; the EC block says so)
+#   720-723  two-kernel paragraph        <- EC rewrite goes after this
+#   725-745  seam validation
+#   747-763  positive controls
+#   765      "**Eight bugs were caught..."
+#   768-789  the eight bullets           <- bugs 9-13 go after 789
+#   791-793  closing advice              <- the rules subsection goes after 793
+#   795      ---
+#   797-800  envoi
 SEC10 = {
-    'bug_count_line':  765,     # the prose line reading "Eight bugs"
-    'bug_list_end':    None,    # last line of bullet 8
-    'rules_list_end':  None,    # last line of the final existing rule
-    'ec_insert_after': None,    # where the EC-rewrite paragraph belongs
+    'bug_count_line':     765,
+    'bug_list_end':       789,
+    'rules_insert_after': 793,
+    'ec_insert_after':    723,
 }
+RULES_HEADING = '**Five rules, each learned by getting it wrong first:**'
 
 # ---------------------------------------------------------------- figures
 # Fill from `python3 tally2.py configs` once free4/16/12/19 land.
@@ -184,14 +193,16 @@ def build(lines, blocks):
             die('line {} does not contain "Eight" — the bug-count anchor moved.\n'
                 '  found: {!r}'.format(n, lines[n - 1]))
         edits.append((n, n, [lines[n - 1].replace('Eight', 'Thirteen')]))
-        for key, sub in (('rules_list_end', 'Five rules'),
-                         ('bug_list_end',   'Bugs 9 through 13'),
-                         ('ec_insert_after','The EC rewrite')):
+        # §10 has no existing rules list, so the rules arrive with a heading.
+        for key, sub, head in (
+                ('rules_insert_after', 'Five rules',          [RULES_HEADING, '']),
+                ('bug_list_end',       'Bugs 9 through 13',   []),
+                ('ec_insert_after',    'The EC rewrite',      [])):
             b = blocks.get('10/' + sub)
             if not b:
                 die('could not find the "{}" sub-block in the draft'.format(sub))
             at = SEC10[key]
-            edits.append((at + 1, at, [''] + b))
+            edits.append((at + 1, at, [''] + head + b))
 
     # bottom-up so earlier indices stay valid
     for start, end, repl in sorted(edits, key=lambda e: -e[0]):
