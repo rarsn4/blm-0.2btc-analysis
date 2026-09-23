@@ -47,6 +47,16 @@ IDX = {w: i for i, w in enumerate(WL)}
 ALL = frozenset(range(2048))
 NSLOT = 21
 
+class NotBIP39(Exception):
+    """A pool or slot word that is neither in the wordlist nor declared EXTRA.
+
+    The solver refuses such a config outright and exits 1, so no run can have
+    used one. This parser used to drop the word silently, which would make a
+    pool look SMALLER than its config declares and understate the ledger with no
+    symptom. A ledger that reads configs must fail on whatever the solver would
+    refuse, or the two disagree about what a run actually covered.
+    """
+
 def parse(path):
     """config -> {slot: frozenset(word indices)}; None if not a 21-word config."""
     words, pool, extra = {}, [], []
@@ -56,14 +66,19 @@ def parse(path):
         if t[0] == 'WORDS' and int(t[1]) != NSLOT: return None
         if t[0] == 'POOL': pool += t[1:]
         elif t[0] == 'SLOT': words[int(t[1])] = t[2]
-    P = frozenset(IDX[w] for w in pool if w in IDX)
+    unk = sorted({w for w in pool if w not in IDX})
+    if unk: raise NotBIP39(f"{path}: POOL words not in wordlist: {' '.join(unk)}")
+    P = frozenset(IDX[w] for w in pool)
     box = {}
     for s in range(1, NSLOT + 1):
         v = words.get(s)
         if v is None: return None
         if v == '@POOL':   box[s] = P
         elif v == '@FULL': box[s] = ALL
-        else:              box[s] = frozenset(IDX[w] for w in v.split('|') if w in IDX)
+        else:
+            vs=v.split('|'); u=sorted({w for w in vs if w not in IDX})
+            if u: raise NotBIP39(f"{path}: SLOT {s} words not in wordlist: {' '.join(u)}")
+            box[s] = frozenset(IDX[w] for w in vs)
         if not box[s]: return None
     return box
 
@@ -120,7 +135,11 @@ T24 = 918_330_048 + 2_700_250_214
 def load(names):
     got = {}
     for n in names:
-        b = parse(os.path.join(DIR, n + '.conf'))
+        try:
+            b = parse(os.path.join(DIR, n + '.conf'))
+        except NotBIP39 as e:
+            print(f"  REFUSED: {e}\n  The solver would refuse this too (exit 1); no run used it.",
+                  file=sys.stderr); sys.exit(2)
         if b: got[n] = b
         else: print(f"  (skipped {n}: not a parseable 21-word config)", file=sys.stderr)
     return got
