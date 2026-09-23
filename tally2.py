@@ -45,6 +45,20 @@ DIR = sys.argv[1] if len(sys.argv) > 1 else os.path.dirname(os.path.abspath(__fi
 WL = [w.strip() for w in open(os.path.join(DIR, 'bip39_en.txt'))]
 IDX = {w: i for i, w in enumerate(WL)}
 ALL = frozenset(range(2048))
+
+# One registry for every non-BIP39 EXTRA word seen in any config, assigned above
+# the wordlist in deterministic sorted order. Same word -> same integer in every
+# config that declares it, which is what the solver does.
+EXTRA_IDX = {}
+def extra_index(w):
+    if w in IDX or w in EXTRA_IDX: return EXTRA_IDX.get(w, IDX.get(w))
+    EXTRA_IDX[w] = len(IDX) + len(EXTRA_IDX)
+    return EXTRA_IDX[w]
+
+def rebase_extra():
+    """Re-assign EXTRA indices in sorted order, so the mapping does not depend
+    on which config happened to be parsed first."""
+    for i, w in enumerate(sorted(EXTRA_IDX)): EXTRA_IDX[w] = len(IDX) + i
 NSLOT = 21
 
 class NotBIP39(Exception):
@@ -67,14 +81,21 @@ def parse(path):
         if t[0] == 'POOL': pool += t[1:]
         elif t[0] == 'EXTRA': extra += t[1:]
         elif t[0] == 'SLOT': words[int(t[1])] = t[2]
-    # EXTRA declares non-BIP39 words that a brainwallet config may legally use --
+    # EXTRA declares non-BIP39 words a brainwallet config may legally use --
     # SHA-256 does not care what the string is. The solver gives them indices
-    # past 2047; mirror that here so the ledger accepts exactly what the solver
+    # past the wordlist; mirror that so the ledger accepts what the solver
     # accepts. Refusing them would trade a silent undercount for a hard stop on
-    # valid input, which is the worse failure of the two.
-    LOC = dict(IDX)
-    for i, w in enumerate(dict.fromkeys(extra)):
-        LOC.setdefault(w, 2048 + i)
+    # valid input, the worse of the two.
+    #
+    # The index MUST be global, not per-config. An earlier version enumerated
+    # each config's own EXTRA list, so `stop` in one config and `battery` in
+    # another both became 2048 -- and this script exists to intersect sets
+    # ACROSS configs, so a union over two EXTRA-declaring rows was arithmetic on
+    # words with nothing in common. It could not fire while no brainwallet
+    # config was a declared row, but that is the same accidental containment
+    # already rejected once, introduced by the very fix that enables such rows.
+    for w in extra: extra_index(w)
+    LOC = {**IDX, **EXTRA_IDX}
     unk = sorted({w for w in pool if w not in LOC})
     if unk: raise NotBIP39(f"{path}: POOL words neither BIP39 nor EXTRA: {' '.join(unk)}")
     P = frozenset(LOC[w] for w in pool)
