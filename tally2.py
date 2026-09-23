@@ -65,10 +65,19 @@ def parse(path):
         if not t or t[0].startswith('#'): continue
         if t[0] == 'WORDS' and int(t[1]) != NSLOT: return None
         if t[0] == 'POOL': pool += t[1:]
+        elif t[0] == 'EXTRA': extra += t[1:]
         elif t[0] == 'SLOT': words[int(t[1])] = t[2]
-    unk = sorted({w for w in pool if w not in IDX})
-    if unk: raise NotBIP39(f"{path}: POOL words not in wordlist: {' '.join(unk)}")
-    P = frozenset(IDX[w] for w in pool)
+    # EXTRA declares non-BIP39 words that a brainwallet config may legally use --
+    # SHA-256 does not care what the string is. The solver gives them indices
+    # past 2047; mirror that here so the ledger accepts exactly what the solver
+    # accepts. Refusing them would trade a silent undercount for a hard stop on
+    # valid input, which is the worse failure of the two.
+    LOC = dict(IDX)
+    for i, w in enumerate(dict.fromkeys(extra)):
+        LOC.setdefault(w, 2048 + i)
+    unk = sorted({w for w in pool if w not in LOC})
+    if unk: raise NotBIP39(f"{path}: POOL words neither BIP39 nor EXTRA: {' '.join(unk)}")
+    P = frozenset(LOC[w] for w in pool)
     box = {}
     for s in range(1, NSLOT + 1):
         v = words.get(s)
@@ -76,9 +85,9 @@ def parse(path):
         if v == '@POOL':   box[s] = P
         elif v == '@FULL': box[s] = ALL
         else:
-            vs=v.split('|'); u=sorted({w for w in vs if w not in IDX})
-            if u: raise NotBIP39(f"{path}: SLOT {s} words not in wordlist: {' '.join(u)}")
-            box[s] = frozenset(IDX[w] for w in vs)
+            vs=v.split('|'); u=sorted({w for w in vs if w not in LOC})
+            if u: raise NotBIP39(f"{path}: SLOT {s} words neither BIP39 nor EXTRA: {' '.join(u)}")
+            box[s] = frozenset(LOC[w] for w in vs)
         if not box[s]: return None
     return box
 

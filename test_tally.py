@@ -62,5 +62,59 @@ X=box(s1={0,1,2}); Y=box(s1={1,2,3}); Z=box(s1={2,3,4})
 u1,_=m.union_volume([X,Y,Z]); u2,_=m.union_volume([Z,Y,X])
 chk("union invariant under run order", (u1,u2), (5,5))
 
+# ---- parser: what it must refuse, and what it must NOT refuse ----------
+import tempfile, textwrap
+def mkcfg(body):
+    f=tempfile.NamedTemporaryFile('w',suffix='.conf',delete=False,dir=CFG)
+    f.write(textwrap.dedent(body)); f.close(); return f.name
+
+SLOTS21="\n".join("SLOT %d abandon"%i for i in range(1,22))
+
+# 8. A non-BIP39 word with no EXTRA must be refused -- the solver exits 1 on
+#    exactly this, so the ledger must not quietly shrink the pool instead.
+p=mkcfg(f"""
+    WORDS 21
+    TARGET 1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ
+    {SLOTS21.replace('SLOT 6 abandon','SLOT 6 @POOL')}
+    POOL able accuse stop freedom
+    """)
+try:
+    m.parse(p); chk("non-BIP39 pool word is REFUSED", "accepted", "raised NotBIP39")
+except m.NotBIP39: chk("non-BIP39 pool word is REFUSED", "raised NotBIP39", "raised NotBIP39")
+os.unlink(p)
+
+# 9. The same words ARE legal when declared EXTRA. A brainwallet phrase need not
+#    be BIP39 at all; refusing these would be a hard stop on valid input, which
+#    is worse than the undercount it replaced.
+p=mkcfg(f"""
+    SCHEME brainwallet
+    WORDS 21
+    TARGET 1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ
+    EXTRA stop freedom
+    {SLOTS21.replace('SLOT 6 abandon','SLOT 6 @POOL')}
+    POOL able accuse stop freedom
+    """)
+try:
+    b=m.parse(p)
+    chk("EXTRA-declared non-BIP39 word is ACCEPTED", len(b[6]) if b else None, 4)
+except m.NotBIP39 as e:
+    chk("EXTRA-declared non-BIP39 word is ACCEPTED", "refused: %s"%e, 4)
+os.unlink(p)
+
+# 10. EXTRA declared AFTER the line that uses it must still resolve -- configs
+#     are not required to order their keys.
+p=mkcfg(f"""
+    SCHEME brainwallet
+    WORDS 21
+    TARGET 1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ
+    {SLOTS21.replace('SLOT 6 abandon','SLOT 6 @POOL')}
+    POOL able stop
+    EXTRA stop
+    """)
+try:
+    b=m.parse(p); chk("EXTRA declared after use still resolves", len(b[6]) if b else None, 2)
+except m.NotBIP39 as e: chk("EXTRA declared after use still resolves", "refused", 2)
+os.unlink(p)
+
 print("\n{}".format("ALL PASS" if not fails else "*** {} FAILURE(S) ***".format(fails)))
 sys.exit(1 if fails else 0)
