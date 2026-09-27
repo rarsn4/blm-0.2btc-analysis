@@ -1,3 +1,7 @@
+> **SUPERSEDED — see `REPORT.md`.** Kept as a record of what the agents were
+> briefed on. Figures here predate the free-one-fixed campaign; the current total
+> is 190,701,305,838 derivations and the bug count is fifteen.
+
 # 0.2 BTC Puzzle — briefing for the collaborating agent
 
 **Written 2026-09-01. Supersedes the 2026-08-31 handoff.**
