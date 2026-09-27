@@ -90,6 +90,8 @@ Script: `t2_cov.py`
 >
 > That is one mark in 25 checkable words, or one in 13 under the strict rule. No word in the text is boxed or circled (checked by inspection).
 >
+> `subject` is BIP39 **#1728** and is the template's **assigned** word for slot 1. It is in neither pool. The underline is therefore not a new candidate: it is the first physical, in-image corroboration of any template assignment in this project.
+>
 > **Why `subject` is a drawn underline and not spray-paint halo.** The table gives column means per row (paper ~140, handwriting 90–125, spray 55–75):
 >
 > | columns | y901 | **y902** | y903 | y904 |
@@ -163,6 +165,29 @@ Script: `census_crops.py` regenerates every view the census was judged from and 
 > **Why this is not an omission.** *Rerum cognoscere causas* is a standard motto in its own right; the London School of Economics uses it, for one. Its base rate makes it unfit as evidence of a deliberate deletion alongside "a trusted". It changes no search, since no Latin word is in BIP39.
 
 Script: `seal_ring.py` (also writes `seal_ring_strip.png`)
+
+---
+
+## G — [MEASURED] Slot 20: the ink cannot decide between `apple` and `second`
+
+> **Neither word is in the image.** The letter census (§D) found no `apple`, `second`, `2nd` or `II` in any display lettering. Slot 20 has no glyph group, so there is nothing to resolve. (Slot 20 is an *assigned* slot with a two-way list, as §2.13 says; it is not one of the six gaps.)
+>
+> **The README disagrees with itself.**
+> - Table row 20 gives `apple` with an empty description, and there is **no derivation of `apple` anywhere in the README**.
+> - §19 derives `second` in two steps. The number comes from the "XX" on Leopold's head, read as 20. The word comes from the external fact that Leopold II was the second King of the Belgians. The enumeration rule excludes that kind of lookup.
+>
+> **The two physical features §19 rests on, measured:**
+>
+> | feature | what the ink holds | what is a reading |
+> |---|---|---|
+> | wreath plaque below the bust (frame x1380–1402, y692–710) | two matched strokes, each 2 px wide and ~7 px tall (y697/698–703), each flanked by light columns (139–158); a third, darker stroke runs to y707 and merges into a full-height shaded block, so it is shading | that the pair is the numeral `II`: with no serifs at 7 px, the ink cannot tell `II` from two hatching strokes |
+> | the X marks on the hooded head | two fully resolved X marks, the clean one 17×34 px, darkest pixel 60 on a 195 background, at eye height, **20 px apart = 1.18× the mark's width** | that `XX` is the numeral 20. In the artist's SHIT lettering, gaps run 0.05–0.24× the wider neighbouring letter (S–H: 3 px between 30- and 33-px letters). The marks are spaced like eyes (the crossed-out-eyes convention) rather than like a written numeral. That rests on one reference word, so it is indicative, not decisive. |
+>
+> **Verdict: the ambiguity lies entirely in the reading and the provenance, not in the ink.** The ink is clear, and it contains neither candidate. It cannot collapse slot 20 to one word. What separates the two candidates is provenance alone: `second` has a stated derivation (resting on an external lookup), and `apple` has none.
+>
+> **What this means for §2.13.** The runs with `second` pinned covered their branch *for `second`*. The `apple` half of each is open, except in the run that freed slot 20 to all 56 candidates. Suggested wording, which is true whichever word is right and costs no GPU time: *"slot 20 pinned to `second`, the only candidate with a stated derivation; `apple` (a README table entry with no derivation) is covered only by the run that freed slot 20."*
+
+Script: `slot20.py`
 
 ---
 

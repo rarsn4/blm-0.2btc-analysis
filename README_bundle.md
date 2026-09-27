@@ -26,8 +26,9 @@ They need numpy and Pillow. `slogan_lines.py` also needs `mnemonic`.
 | `t3_census.py` | §C | `python t3_census.py` | The `subject` profile against its controls, and the per-word census. |
 | `census_crops.py` | §D | `python census_crops.py` | Regenerates the 26 views the letter-substitution census was judged from, into `./census_crops/`. |
 | `seal_ring.py` | §E | `python seal_ring.py` | Seal ring fit, unwrap, word blocks and both failed instruments. It writes `seal_ring_strip.png`. |
+| `slot20.py` | §G | `python slot20.py` | Wreath plaque stroke extents; X-mark geometry and spacing against the artist's SHIT lettering. |
 | `slogan_lines.py` | §9 | `python slogan_lines.py` | Unchanged; sha256 `9d4f903b…99ee1e`, as previously recorded. |
-| `report_additions_image_pass.md` | — | — | Text for REPORT.md, sections A–F. |
+| `report_additions_image_pass.md` | — | — | Text for REPORT.md, sections A–G. |
 | `expected_output/` | — | — | Reference stdout for each script, plus `seal_ring_strip.png`. |
 
 ## Verification
@@ -41,7 +42,7 @@ Every script was run on Windows from a directory containing only these files, wi
 To compare on Linux:
 
 ```
-for s in t4_ctrl t2_cov t3_lines t3_census seal_ring slogan_lines census_crops; do
+for s in t4_ctrl t2_cov t3_lines t3_census seal_ring slot20 slogan_lines census_crops; do
   python $s.py | diff - expected_output/$s.txt && echo "$s OK"
 done
 ```
@@ -52,7 +53,7 @@ The reference `.txt` files use LF line endings. Compare `seal_ring_strip.png` by
 
 ## Provenance
 
-Seven of the scripts consolidate code that existed only in a scratchpad on the Windows machine. A few numbers in the 27 Sep reply were produced by one-off inline code and are now reproduced here. Two of them changed when re-measured properly:
+Most of these scripts consolidate code that existed only in a scratchpad on the Windows machine. `slot20.py` was written on 28 Sep for the slot-20 question. A few numbers in the 27 Sep reply were produced by one-off inline code and are now reproduced here. Two of them changed when re-measured properly:
 
 - The BLM-card circle is **17.5 px** across (fitted), not "about 20".
 - The STOP emblem at that size keeps **74** dark pixels, not "about 100".
