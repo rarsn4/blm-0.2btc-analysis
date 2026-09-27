@@ -168,6 +168,7 @@ def union_volume(boxes):
 EVIDENCED = ['t21_readme54','t21_loo21','t21_loo6','t21_loo8','t21_loo14','t21_loo15',
              't21_loo18','t21_free1_p1','t21_free2_p1','t21_free5_p1','t21_free7_p1',
              't21_free9_p1','t21_free10_p1','t21_free11_p1','t21_free17_p1','t21_free20_p1',
+             't21_free4_p1','t21_free16_p1','t21_free12_p1','t21_free19_p1',
              't21_swap114','t21_written']
 ASSERTED  = ['t21_pool52','t21_pool52_rev','t21_pool40','t21_idx','t21_pathd','t21_pathe',
              't21_trust21','t21_trust21b','t21_bnw18','t21_bnw18b','t21_trustonly','t21']

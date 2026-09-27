@@ -32,22 +32,69 @@ Insert after §2.12 (brainwallets), before §3.
 > | 2 | 18% |
 > | 3–4 | 46% |
 >
-> **Roughly 78 billion derivations went into the 1.8% branch.** That is not a
-> criticism of the work — the branch had to be closed, and closing it is what
-> turned "at least one gap word is outside the pool" from a conjecture into a
-> deduction. But stating it plainly is what makes the next decision legible.
+> **Roughly 78 billion derivations went into the 1.8% branch**, against
+> **138,502,824,811** into the 8.3% branch once free-one-fixed was run. That is
+> not a criticism of the work — the branch had to be closed, and closing it is
+> what turns a conjecture into a deduction. But stating it plainly is what makes
+> the next decision legible.
+>
+> **[EXHAUSTED] The deduction, stated at full strength.** Let *a* be the number of
+> assigned words that are wrong and *g* the number of gap words outside the
+> 54-word pool. The completed runs exclude:
+>
+> ```
+> a = 0, g = 0                          t21_readme54
+> a = 0, g = 1                          t21_loo_k, six ways
+> a = 1, g = 0  (13 slots, 55 cands)    free-one-fixed
+> ```
+>
+> So **a + g ≥ 2** — the answer departs from the README's reading in at least two
+> places. One hole remains: `a = 1` at slot 3 (`tower`) or 13 (`moon`), which were
+> deliberately never freed, or a replacement outside the 55.
+>
+> This is stronger than the earlier statement that "at least one gap word is
+> outside the pool," which was true but understated: the six leave-one-out runs
+> already swept each gap across the entire dictionary, so the single-surprise case
+> was closed six ways over.
 >
 > **Method.** Each run frees one assigned slot to the 54-word README pool plus
 > that slot's own table word (55 candidates; 56 at slot 20, which carries both
 > `apple` and `second`), with the six gaps over the full pool, `second` pinned at
 > slot 20, on the primary path `m/44'/0'/0'/0/0`.
 >
-> Staging by path rather than running all four is worth 1.18× overhead against a
-> break-even at q > 22.8%, measured: shared PBKDF2 cost 1.843 s, per-path cost
-> 2.077 s. For a legacy address under BIP44, q is comfortably above that.
+> Staging by path rather than running all four costs **1.565× overhead** against a
+> break-even at **q > 63.4%**, where *q* is the chance the answer sits on path 1.
+> Those figures are from production — `P = 6.209 µs` shared, `X = 1.195 µs` per
+> path, derived from `T4/T1 = 1.484` (see §10) — and they **supersede an earlier
+> 1.18× and 22.8% taken from a microbenchmark.** The decision still goes the same
+> way for a legacy address under BIP44, where `m/44'/0'/0'/0/0` is the dominant
+> convention, but it is a much closer call than the original figures implied and
+> should not be described as comfortable.
 >
-> **Results — thirteen slots freed, all negative.** Each ~22 h, every survivor
-> count within 2σ of its binomial expectation.
+> The 89 h quoted below for stage 2 reconciles with these numbers to 2%
+> (`3 × (P+3X) × 10,654,063,447 = 87.0 h`), which is what confirms it as a real
+> figure rather than a projection.
+>
+> **Results — thirteen slots freed, all negative.** Each run **21.910 h ± 0.32%**
+> (six back-to-back runs, measured from checkpoint mtimes), **284.8 h / 11.9 days**
+> for the campaign. Every survivor count is within 1.1σ of its exact binomial
+> expectation of **10,654,063,447** (σ = 102,815).
+>
+> The last four to land were the self-naming slots, run together:
+>
+> | run | freed | survivors | deviation |
+> |---|---|---|---|
+> | `free4` | `mask`@4 | 10,654,138,418 | +0.73σ |
+> | `free16` | `rifle`@16 | 10,653,972,836 | −0.88σ |
+> | `free12` | `vote`@12 | 10,654,012,263 | −0.50σ |
+> | `free19` | `glove`@19 | 10,654,167,169 | +1.01σ |
+>
+> **[MEASURED] What these four do not establish.** Each asks *"is this word wrong,
+> and is its replacement among the 55?"* A negative is equally consistent with the
+> word being **right** and with it being **wrong while the right word sits outside
+> those 55**. The two do not separate, so four negatives return the status quo and
+> say nothing about whether the self-naming mechanism is reliable. Only a hit would
+> have been informative — and a hit would have solved the puzzle outright.
 >
 > | slot | word | why it was weak |
 > |---|---|---|
@@ -139,15 +186,40 @@ campaign, and the method that produced it was wrong independently of that.
 > `python3 tally2.py configs`.
 >
 > ```
-> t21 campaign, evidenced runs      [FIGURE] derivations
-> + twelve older asserted runs      [FIGURE]
-> grand total with pre-t21          ~[FIGURE] billion, ~[FIGURE] CPU-days
+> t21 campaign, 22 evidenced runs     [FIGURE] derivations
+> + the twelve older asserted runs    [FIGURE]
+>     marginal of the twelve          [FIGURE]
+>     at 400 derivations/s            [FIGURE] CPU-days
 > ```
 >
-> **The third significant figure on the grand total is not claimable.** The
-> pre-t21 constant was itself a running sum, and whether it counted the older t21
-> runs naively or with overlap already removed is unknown. State it as
-> approximately.
+> **What "derivations" means here, exactly.** A 21-word mnemonic carries seven
+> checksum bits, so one sequence in 128 is valid and the ledger reports
+> `⌊candidates / 128⌋`. **That is a convention, not a count.** The true number of
+> checksum-valid mnemonics inside a given template is a determinate integer that
+> nobody has enumerated, and per-run survivor counts scatter binomially around
+> `N/128` — which is why every run is z-tested against that expectation rather
+> than required to equal it.
+>
+> The convention has a rounding choice inside it, and the choice is visible:
+> `⌊(A−B)/128⌋` and `⌊A/128⌋ − ⌊B/128⌋` differ by one on the current figures
+> (3,609,899,906 against 3,609,899,907). Both are defensible in isolation. The
+> ledger prints the two totals, so the marginal it quotes **must** be the
+> difference of the two printed figures or the three numbers on the page do not
+> reconcile. Floor once, at the point of reporting, and derive every difference
+> from the reported values.
+>
+> **No single grand total is quoted, and that is deliberate.** The previously
+> published figure (26,513,178,774) was a running sum that already included the
+> twelve older t21 runs, and whether it counted them at naive size or with overlap
+> removed is unrecorded. Subtracting them to isolate a pre-t21 residual therefore
+> rests on an assumption nobody can check — the residual is somewhere between
+> roughly zero and the whole 26.5 billion.
+>
+> The t21 figure above **is** computed, and every digit reproduces from
+> `tally2.py configs`. Adding an unverifiable constant to it would make the sum
+> less trustworthy than either part. Where one number is needed, **"over 190
+> billion derivations eliminated"** is a floor that is computed, in preference to
+> an estimate that is not.
 >
 > **EVIDENCED versus ASSERTED is deliberate.** Runs with logs present in the
 > working tree are separated from runs included on report alone. A config is not
@@ -278,9 +350,32 @@ It opens by dating the rate table above it, which is pre-rewrite.
 >
 > The pipeline is **~3× faster** since replacing affine double-and-add with
 > **Jacobian coordinates**: ~384 modular inversions per scalar multiplication
-> down to one, at the final conversion back to affine. Measured 6.5× on the
-> multiply and 2.96–3.05× end-to-end, with the EC share isolated at **81.8%** by
-> timing a 1-path config against a 4-path one.
+> down to one, at the final conversion back to affine. **Measured 2.956×
+> end-to-end** on a 4-path config (10.08 s → 3.41 s).
+>
+> **Every rate below is stated with the conditions that produced it**, because
+> this project lost an evening to figures whose unit, path count and thermal state
+> were unrecorded:
+>
+> | quantity | value | conditions |
+> |---|---|---|
+> | pipeline throughput | **135,074 derivations/s** | 22 production runs, sd 0.32%, 1 path |
+> | 4-path / 1-path cost | **T4/T1 = 1.484** | `loo` (4-path) against `free` (1-path), both post-Jacobian |
+> | shared / per-path split | P = 6.209 µs, X = 1.195 µs | per derivation, from the above |
+> | `BIP32 + secp256k1` row | 925 k/s | **per derivation, single path** — not per scalar multiplication |
+> | scalar-mult speedup | **5.50× production** | 6.5× is the isolated-kernel figure; production wins |
+> | EC share, 4 paths | **43.5% [MEASURED]** post-Jacobian | from P and X directly |
+> | EC share, 4 paths | ~81% **[INFERRED]** pre-Jacobian | from a contended A/B, assuming both arms were slowed equally |
+> | hardware state | 1605 MHz SM — **51.7% of the card's 3105 MHz max** | 88 °C sustained, 59.7 W of 80 W, `SW Thermal Slowdown` active |
+>
+> The last row is the reproducibility item. **An unthrottled card should be roughly
+> twice as fast**; without that line a reader benchmarking their own solver
+> concludes ours is broken.
+>
+> The two EC-share figures describe **different binaries**, and pairing the
+> post-Jacobian cost ratio with the pre-Jacobian share produces an Amdahl
+> impossibility. That mistake was made and caught here; the labels exist to stop
+> it recurring.
 >
 > All three scalar multiplications in the derivation are **fixed-base** — the
 > hardened BIP32 steps need no public key, and the rest multiply the generator —
@@ -377,6 +472,19 @@ Append to the existing eight.
 >
 >    All three tests written for bug 12 parse a **single** config and so could not
 >    see this. Two cross-config cases were added and mutation-tested.
+> 14. **The log filter destroyed the record of work that did happen.** The queue
+>    script piped solver stdout through `grep -vE "^ +[0-9]+\.[0-9]{2}%"` to keep
+>    logs readable, which strips every per-chunk progress line. `t21_free4.log` is
+>    108 bytes of header. When a question arose about how much a set of benchmarks
+>    had cost a running sweep, the data that would have answered it retrospectively
+>    — for free, exactly — had been discarded by design.
+>
+>    Not a solver defect. The same family as bug 9 and `show_hit`: **tooling that
+>    loses the evidence rather than the work.** It cost nothing only because
+>    checkpoint mtimes survived independently, which was luck. Replaced by an
+>    external poller recording `(epoch, value)` on every checkpoint change — and
+>    that poller's first output turned out to contain the whole campaign's run
+>    durations, which is where the 21.910 h ± 0.32% figure came from.
 
 ### Five rules
 
@@ -384,9 +492,9 @@ Append to the existing eight.
 closing "validate against exact expected counts" advice (line 793) and before the
 `---` at 795. patch5.py adds the heading.
 
-> - **A number that lands where you expected is the one to check twice.** Four
->   instances in a single day, each a measurement that agreed with its author and
->   so was never re-run:
+> - **A number that lands where you expected is the one to check twice.** **Five**
+>   instances in a single day, each a figure that agreed with its author and so was
+>   never re-run:
 >
 >   - `$?` after a pipeline or command substitution belongs to the last thing that
 >     ran, not the thing under test. It twice reported success where there was
@@ -400,6 +508,10 @@ closing "validate against exact expected counts" advice (line 793) and before th
 >     have confirmed the hypothesis it was designed to test. The run had in fact
 >     completed all 37 chunks. Counting records instead of lines reversed the
 >     conclusion and moved the excluded tranche from 98.6 M to 138.7 M.
+>   - Three consecutive progress reports of `~40%`, `~41%`, `~44%` on a run that
+>     elapsed time placed at **70–72%**. They incremented smoothly, which is what a
+>     number carried forward and nudged looks like, and the ETA riding on them was
+>     six hours out. The next measured reading was 71.1%.
 >
 >   The common shape is not carelessness; it is that **nobody re-runs a check that
 >   agrees with them.** A passing check is where a broken harness hides. Every
@@ -422,13 +534,25 @@ closing "validate against exact expected counts" advice (line 793) and before th
 >   The one that survived did so because it had an independent measurement behind
 >   it, not because it looked more like a signature.
 
-> - **A reported elapsed time is a measurement, not a recollection.** Three of
->   this project's wrong numbers have been timings: a cold chunk reported as a
->   sustained rate, a model quoted where a measurement was available, and an
->   elapsed time never taken. Survivor counts are z-tested against an exact
->   expectation on every run; timings get quoted from memory. Same project, two
->   standards — and it is the unexamined one that keeps failing. A figure passed
->   between collaborators should carry the command that produced it.
+> - **A reported elapsed time is a measurement, not a recollection.** **Seven** of
+>   this project's wrong numbers have been timings or rates:
+>
+>   ```
+>   a cold chunk reported as a sustained rate
+>   a model quoted where a measurement was available
+>   an elapsed time never taken
+>   a fabricated progress reading (40.8%, invented, with a future timestamp)
+>   three consecutive status lines ~30 points below what elapsed time allowed
+>   an ETA carried forward for six hours without recomputation
+>   microbenchmark staging figures (1.18x, q > 22.8%) quoted as measured
+>   ```
+>
+>   Survivor counts are z-tested against an exact expectation on every run;
+>   timings get quoted from memory. Same project, two standards — and it is the
+>   unexamined one that keeps failing. **A figure passed between collaborators
+>   carries the command that produced it, or it is not reported.** Stated as a
+>   producer's duty it failed repeatedly; it holds only when the consumer refuses
+>   to compute on a number that arrives as prose.
 > - **Agreement between two methods validates only the paths both take — so when
 >   two checks agree, compare the intermediate values, not just the verdicts.**
 >   Two independent tally implementations agreed to the candidate while sitting on

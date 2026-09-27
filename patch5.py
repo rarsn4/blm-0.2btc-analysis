@@ -70,11 +70,11 @@ RULES_HEADING = '**Five rules, each learned by getting it wrong first:**'
 # ---------------------------------------------------------------- figures
 # Fill from `python3 tally2.py configs` once free4/16/12/19 land.
 FIGS = {
-    'evidenced':   None,   # e.g. '145,249,993,119'
-    'asserted':    None,
-    'grand_total': None,   # e.g. '~170 billion'
-    'cpu_days':    None,
-    'headline':    None,   # what replaces "26.5 billion" on line 1
+    'evidenced': '187,091,405,931',   # 22 evidenced runs
+    'combined':  '190,701,305,838',   # + the twelve asserted
+    'marginal':    '3,609,899,907',   # difference of the two printed figures
+    'cpu_days':            '5,518',   # at 400 derivations/s
+    'headline':  'over 190 billion',  # replaces "26.5 billion" on line 1
 }
 
 
@@ -168,6 +168,19 @@ def build(lines, blocks):
     hdr = lines[SEC['sec3'][0] - 1]
     edits.append((SEC['sec3'][0], SEC['sec3'][1], [hdr, ''] + body))
 
+    # --- line 1 and line 14: the headline figure --------------------------
+    if '26.5 billion' not in lines[0]:
+        die('line 1 no longer contains "26.5 billion" — headline anchor moved.\n'
+            '  found: {!r}'.format(lines[0]))
+    edits.append((1, 1, [lines[0].replace('26.5 billion', FIGS['headline'])]))
+    if '26,513,178,774' not in lines[13]:
+        die('line 14 no longer contains "26,513,178,774" — anchor moved.\n'
+            '  found: {!r}'.format(lines[13]))
+    l14 = lines[13].replace('26,513,178,774', FIGS['combined'])
+    if '767 days of CPU' in l14:
+        l14 = l14.replace('767 days of CPU', FIGS['cpu_days'] + ' days of CPU')
+    edits.append((14, 14, [l14]))
+
     # --- §2.13 and §2.14: insert before §3 ------------------------------
     ins = []
     for k, title in (('2.13', '### §2.13 — [EXHAUSTED] Free-one-fixed at 21 words: '
@@ -217,7 +230,7 @@ def fill_figures(body):
             'Run `python3 tally2.py configs` once free4/16/12/19 have landed and\n'
             'set FIGS at the top of this script. Refusing to write placeholders.'
             .format(', '.join(sorted(missing))))
-    order = ['evidenced', 'asserted', 'grand_total', 'cpu_days']
+    order = ['evidenced', 'combined', 'marginal', 'cpu_days']
     it = iter(order)
     outl = []
     for l in body:
