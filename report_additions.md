@@ -696,10 +696,19 @@ closing "validate against exact expected counts" advice (line 793) and before th
 >
 >    Note which way the out-of-sample row cuts. It has the **highest** expectation,
 >    so 2 sits furthest below it and `P(≤2)` falls to **0.115** — leading with the
->    clean estimate makes the observation look *more* notable, not less. It is still
->    roughly 1 in 9, so the conclusion stands under the least favourable corpus
->    available, which is the only version of the conclusion worth stating. **There
->    is nothing here in either direction.**
+>    clean estimate makes the observation look *more* notable, not less.
+>
+>    **And note which tail that is.** `P(≤2) = 0.115` is a **lower**-tail result:
+>    `P(≥2) = 0.979`, and the mode is **4**. The original claim was that a wordless
+>    line is notable, which requires wordlessness in *excess*. The artwork contains
+>    **fewer** wordless lines than chance, not more — so 0.115 cannot support the
+>    claim it was raised against, in any corpus, and a reader who sees "1 in 9"
+>    without the direction could conclude the opposite.
+>
+>    That makes the conservative corpus choice unambiguously right rather than
+>    merely cautious: it is the row least favourable to the null, the null survives
+>    it anyway, and the residual deviation points away from the finding. **There is
+>    nothing here in either direction.**
 >
 >    **What the example is for.** Two reviewers ran the same control independently
 >    and both reached the right verdict from a wrong premise. It surfaced only when
