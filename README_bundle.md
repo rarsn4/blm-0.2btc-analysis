@@ -26,7 +26,7 @@ They need numpy and Pillow. `slogan_lines.py` also needs `mnemonic`.
 | `t3_census.py` | §C | `python t3_census.py` | The `subject` profile against its controls, and the per-word census. |
 | `census_crops.py` | §D | `python census_crops.py` | Regenerates the 26 views the letter-substitution census was judged from, into `./census_crops/`. |
 | `seal_ring.py` | §E | `python seal_ring.py` | Seal ring fit, unwrap, word blocks and both failed instruments. It writes `seal_ring_strip.png`. |
-| `slot20.py` | §G | `python slot20.py` | Wreath plaque stroke extents; X-mark geometry and spacing against the artist's SHIT lettering. |
+| `slot20.py` | §G | `python slot20.py` | Wreath plaque stroke extents; X-mark geometry swept over thresholds; spacing against 7 verified sets of the artist's lettering and numerals. It writes `slot20_segmentation.png` so the glyph boxes can be re-checked. |
 | `slogan_lines.py` | §9 | `python slogan_lines.py` | Unchanged; sha256 `9d4f903b…99ee1e`, as previously recorded. |
 | `report_additions_image_pass.md` | — | — | Text for REPORT.md, sections A–G. |
 | `expected_output/` | — | — | Reference stdout for each script, plus `seal_ring_strip.png`. |

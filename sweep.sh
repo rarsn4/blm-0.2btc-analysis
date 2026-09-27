@@ -23,7 +23,7 @@ while IFS= read -r f; do
   cf=$(printf '%s\n' "$t" | grep -om1 '\--config [A-Za-z0-9_.-]\+\.conf' | awk '{print $2}')
   cf=${cf:-unknown.conf}
   pf=$(find "$ROOT" -name "progress_${cf%.conf}.txt" 2>/dev/null | head -1)
-  ck=$( [ -n "$pf" ] && tr -dc '0-9' < "$pf" || echo 0 )
+  ck=$( [ -n "$pf" ] && awk '{print $NF}' < "$pf" || echo 0 )
   pct=$(awk -v a="$ck" -v b="$sp" 'BEGIN{printf "%.2f", b?100*a/b:0}')
   h=$(printf '%s\n' "$t" | grep -iE "$HIT" | grep -viE "$NOISE" | head -1)
   m=no; [ -n "$h" ] && { m=YES; any=1; }

@@ -1,26 +1,6 @@
 1. WREATH PLAQUE (outer frame x1380/x1402, y692/y709-710)
    column means over the panel rows y697-706 (panel light ~150-160):
-     x1381  151.7
-     x1382  126.2
-     x1383  110.8
-     x1384  158.0
-     x1385  153.8
-     x1386  120.5
-     x1387  111.5
-     x1388  154.5
-     x1389  126.9
-     x1390  115.8
-     x1391  139.5
-     x1392   90.0
-     x1393   62.8
-     x1394  102.6
-     x1395  108.1
-     x1396  115.7
-     x1397  106.4
-     x1398   77.0
-     x1399   99.0
-     x1400  144.9
-     x1401   92.0
+   x1381 152  x1382 126  x1383 111  x1384 158  x1385 154  x1386 120  x1387 112  x1388 154  x1389 127  x1390 116  x1391 140  x1392 90  x1393 63  x1394 103  x1395 108  x1396 116  x1397 106  x1398 77  x1399 99  x1400 145  x1401 92
    vertical extent of each stroke column (value < 135), panel rows y696-708:
      x1386  y697-703  min  92
      x1387  y697-703  min  73
@@ -31,12 +11,31 @@
      x1395  y696-708  min 103
      x1398  y696-708  min  71
 
-2. X MARKS ON THE HEAD
-   mark x1358-1374 y443-476  17 x 34 px  134 ink px  darkest 60  (background 195)
-   mark x1395-1424 y444-473  30 x 30 px  132 ink px  darkest 86  (background 195)
-   gap between marks 20 px = 1.18 x the left mark's width (17 px; the right mark touches the head outline, so only the left width is clean)
+2. X MARKS ON THE HEAD (window x1345-1425 y430-490)
+   background (90th pct) 195; darkest hood shading between the marks 126 -> thresholds >= ~126 would bridge the marks through shadow, so the sweep stops at 120
+   ink<90  left x1358-1374 y443-476  right x1395-1424 y444-473  heights 34, 30  closest-ink gap 21  gap/mean height 0.656
+   ink<100  left x1358-1375 y443-476  right x1395-1424 y444-473  heights 34, 30  closest-ink gap 21  gap/mean height 0.656
+   ink<110  left x1357-1375 y443-476  right x1395-1424 y443-473  heights 34, 31  closest-ink gap 20  gap/mean height 0.615
+   ink<120  left x1357-1375 y442-477  right x1395-1424 y443-473  heights 36, 31  closest-ink gap 20  gap/mean height 0.597
+   conservative value (smallest over the sweep): 0.597
+   (the right mark's upper arm meets the head outline; its left side, which sets the gap, is clear)
 
-3. REFERENCE: letter gaps in the artist's SHIT lettering (spray < 80, full letter height)
-   SHIT rows y903-990: letter widths [30, 33, 8, 39]  gaps [3, 8, 2]
-   gap / narrower letter ['0.10', '1.00', '0.25']   gap / wider letter ['0.09', '0.24', '0.05']
-   X marks: gap / left mark (17 px) = 1.18; the marks are the same shape, so there is no narrower/wider distinction to make
+3. REFERENCE: within-word gap / height in the artist's own hand
+   FUCK                   rejected: 3 glyphs for 4 characters
+   THIS                   rejected: 5 glyphs for 4 characters
+   SHIT                   SH 2/72=0.030  HI 9/70=0.128  IT 2/71=0.028
+   BLACK                  rejected: 4 glyphs for 5 characters
+   LIVES                  LI 4/20=0.205  IV 5/20=0.256  VE 2/20=0.105  ES 4/22=0.186
+   MATTER                 MA 4/22=0.182  AT 5/22=0.242  TT 4/22=0.182  TE 4/22=0.186  ER 5/20=0.250
+   NO JUSTICE NO PEACE    rejected on inspection: the I of JUSTICE is unsegmented; the count matches only through a split elsewhere
+   END POLICE BRUTALITY   rejected: 19 glyphs for 18 characters
+   STOP KILLING US        ST 7/31=0.228  TO 5/30=0.164  OP 3/29=0.090  KI 2/28=0.073  IL 6/26=0.231  LL 5/26=0.189  LI 4/28=0.145  IN 8/28=0.291  NG 6/28=0.204  US 6/30=0.193
+   NOT ONE MORE           NO 4/18=0.229  OT 3/16=0.163  ON 5/18=0.270  NE 2/18=0.108  MO 2/16=0.121  OR 3/16=0.182  RE 1/16=0.075
+   11.03.20               11 1/16=0.065  03 3/16=0.194  20 1/15=0.082
+   05.25.20               rejected: 4 glyphs for 6 characters
+   .VS.                   VS 6/33=0.182
+
+4. RESULT
+   reference pairs n=33 (within-word, verified sets): median 0.182, 95th pct 0.262, max 0.291
+   X marks 0.597 = 2.1x the reference maximum, 3.3x its median
+   wrote slot20_segmentation.png (every reference set, with its glyph boxes)

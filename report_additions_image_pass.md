@@ -181,11 +181,33 @@ Script: `seal_ring.py` (also writes `seal_ring_strip.png`)
 > | feature | what the ink holds | what is a reading |
 > |---|---|---|
 > | wreath plaque below the bust (frame x1380–1402, y692–710) | two matched strokes, each 2 px wide and ~7 px tall (y697/698–703), each flanked by light columns (139–158); a third, darker stroke runs to y707 and merges into a full-height shaded block, so it is shading | that the pair is the numeral `II`: with no serifs at 7 px, the ink cannot tell `II` from two hatching strokes |
-> | the X marks on the hooded head | two fully resolved X marks, the clean one 17×34 px, darkest pixel 60 on a 195 background, at eye height, **20 px apart = 1.18× the mark's width** | that `XX` is the numeral 20. In the artist's SHIT lettering, gaps run 0.05–0.24× the wider neighbouring letter (S–H: 3 px between 30- and 33-px letters). The marks are spaced like eyes (the crossed-out-eyes convention) rather than like a written numeral. That rests on one reference word, so it is indicative, not decisive. |
+> | the X marks on the hooded head | two fully resolved X marks at eye height, 34–36 and 30–31 px tall, darkest pixels 60 and 86 on a 195 background. Closest-ink gap 20–21 px. **Gap ÷ height 0.597–0.656**, stable over thresholds 90–120. (Hood shading between the marks reaches 126, so higher thresholds would bridge them.) | that `XX` is the numeral 20 (see the spacing test below) |
 >
-> **Verdict: the ambiguity lies entirely in the reading and the provenance, not in the ink.** The ink is clear, and it contains neither candidate. It cannot collapse slot 20 to one word. What separates the two candidates is provenance alone: `second` has a stated derivation (resting on an external lookup), and `apple` has none.
+> **[MEASURED] Spacing test.** How widely does the artist space adjacent letters and numerals within a word?
 >
-> **What this means for §2.13.** The runs with `second` pinned covered their branch *for `second`*. The `apple` half of each is open, except in the run that freed slot 20 to all 56 candidates. Suggested wording, which is true whichever word is right and costs no GPU time: *"slot 20 pinned to `second`, the only candidate with a stated derivation; `apple` (a README table entry with no derivation) is covered only by the run that freed slot 20."*
+> **Method:**
+> - A glyph is a connected ink component. Fragments under 40% of the median height are dropped, judged by height, never by gap.
+> - Gap = the clear pixels between the closest ink of two neighbours. This measures slanted and rotated text the same way as upright text.
+> - Height = the glyph's full ink extent across its line of text, taken over its whole span along the line. This matters for the spray letters, which break where the paint is lighter.
+> - A set is used only if segmentation yields exactly the known character count **and** the boxes in `slot20_segmentation.png` show one glyph per box.
+> - Both checks proved necessary. FUCK and THIS once matched their counts by coincidence: a merged pair plus a sliver of the pedestal edge. NO JUSTICE NO PEACE matches its count but leaves the I of JUSTICE unsegmented.
+>
+> **Sets used:** 7 (SHIT, LIVES, MATTER, STOP KILLING US, NOT ONE MORE, 11.03.20, .VS.), giving **33 within-word pairs**. Rejected: FUCK, THIS, BLACK, END POLICE BRUTALITY and 05.25.20 on count; NO JUSTICE NO PEACE on inspection.
+>
+> | reference | widest gap ÷ height | X marks (0.597, conservative) as a multiple |
+> |---|---|---|
+> | SHIT, at measured cap heights 70–72 px: SH 0.030, HI 0.128, IT 0.028 | 0.128 | 4.7× |
+> | the artist's numerals, 11.03.20 (3 pairs) | 0.194 | 3.1× |
+> | all 33 pairs: median 0.182 | — | 3.3× the median |
+> | all 33 pairs: widest, IN of KILLING (marker capitals) | 0.291 | **2.1×** |
+>
+> **No letter or numeral pair in the artist's hand is spaced as widely as the X marks: 0 of 33.** Reading `XX` as the numeral 20 therefore requires a spacing the artist uses nowhere else. The crossed-out-eyes reading is supported by complete separation. The margin is 2.1× over the single widest pair, 3.1× over the artist's own numerals, and 4.7× over SHIT.
+>
+> An earlier figure of 6.8× divided by the 87-px search band instead of measured cap heights and used SHIT alone as the reference. It is superseded.
+>
+> **Verdict: the ambiguity lies entirely in the reading and the provenance, not in the ink.** The ink is clear, and it contains neither candidate. It cannot collapse slot 20 to one word.
+>
+> **What this means for §2.13.** The table and §19 disagree, and §19's derivation rests on a lookup the enumeration rule excludes. So there is **no README value at slot 20**, *a* is undefined there, and every §2.13 branch claim is stated per reading: slot 20 = `second`, and slot 20 = `apple`. The spacing result also weakens §19's own step from "XX" to the number 20.
 
 Script: `slot20.py`
 
@@ -193,7 +215,7 @@ Script: `slot20.py`
 
 ## F — Readings withdrawn during this pass (calibration record)
 
-> Of 8 first reads taken from upscaled or curved views, **1 survived** re-examination at native resolution.
+> Of 9 first reads or first measurements, **1 survived** re-examination at native resolution.
 >
 > | first read | outcome |
 > |---|---|
@@ -204,6 +226,7 @@ Script: `slot20.py`
 > | `wich` for "which" | indeterminate: the ascender band lies under the frame stripe |
 > | `Section 1.` underlined | indeterminate |
 > | `FELIX` on the seal ring | it is `RERUM` |
+> | SHIT letter spacing, first measurement: "no difference from the X marks" | the T was cropped below its crossbar and measured as an 8-px stem. With full letters, every letter gap is narrower than the X gap (§G). |
 > | `subject` underlined | **survived** (§C) |
 >
 > **Rule:** nothing enters the record from an upscaled view until it has survived a native-pixel re-measurement, with a control.
