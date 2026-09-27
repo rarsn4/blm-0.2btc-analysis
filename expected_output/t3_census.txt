@@ -1,0 +1,48 @@
+PART 1 -- column-mean value per row (paper ~140, handwriting ~90-125, spray ~55-75)
+                                      896  897  898  899  900  901  902  903  904  905  906  907  908
+subject 'su' + I/T gap  x1401-1413    122  122  121  120  116  122  106  131  112   96   84   78   78
+subject 'bject' over T  x1414-1452     94  103  114  116  117  132  105  109   80   74   73   73   72
+I/T gap only (no spray) x1410-1413    123  124  122  118  116  118  104  139  129  113   95   85   86
+CONTROL 'place' over H  x1384-1394    105  109  112  113  107  113  119  103   91   84   80   78   78
+CONTROL 'any'   over S  x1340-1358    120  109  105  106   99   97   95   87   75   70   70   73   75
+CONTROL 'to' no spray   x1455-1466    115  125  128  122  123  138  149  150  149  149  149  146  141
+
+PART 2 -- census, 34 tokens
+word           x-span      spray  status            detector runs in band
+Section        1350-1415     35%  HEADING-indet     y821 x1356-1366 CLEAN; 
+1.             1420-1436     36%  HEADING-indet     y822 x1421-1431 SPRAY-ADJ; 
+Neither        1318-1365     17%  VISIBLE-unmarked  
+slavery        1368-1412     32%  VISIBLE-unmarked  
+nor            1420-1462     27%  VISIBLE-unmarked  
+involuntary    1318-1395      5%  VISIBLE-unmarked  
+servitude,     1400-1475      0%  VISIBLE-unmarked  
+except         1318-1360     60%  OBSCURED          
+as             1368-1383      0%  VISIBLE-unmarked  
+a              1388-1395     71%  OBSCURED          
+punishment     1400-1465     43%  OBSCURED          
+for            1318-1334      0%  VISIBLE-unmarked  
+crime          1338-1370     34%  VISIBLE-unmarked  
+whereof        1375-1432     28%  VISIBLE-unmarked  
+the            1440-1465      0%  VISIBLE-unmarked  
+party          1318-1342     29%  VISIBLE-unmarked  
+shall          1350-1378     65%  OBSCURED          
+have           1385-1415     53%  OBSCURED          
+been           1425-1462     40%  VISIBLE-unmarked  
+duly           1318-1342     25%  VISIBLE-unmarked  
+convicted,     1348-1395     31%  VISIBLE-unmarked  
+shall          1400-1432     27%  VISIBLE-unmarked  
+exist          1440-1472     26%  VISIBLE-unmarked  
+within         1318-1350     20%  VISIBLE-unmarked  
+the            1355-1376     13%  VISIBLE-unmarked  
+United         1382-1420     14%  VISIBLE-unmarked  
+States,        1425-1478     44%  OBSCURED          
+or             1318-1332      0%  VISIBLE-unmarked  
+any            1338-1362     44%  OBSCURED          
+place          1368-1398      8%  VISIBLE-unmarked  
+subject        1402-1453     12%  MARKED            y902 x1401-1423 CLEAN; y902 x1421-1432 SPRAY-ADJ; y902 x1425-1452 SPRAY-ADJ; y902 x1444-1454 CLEAN; y904 x1443-1452 SPRAY-ADJ; 
+to             1458-1472      0%  VISIBLE-unmarked  
+their          1318-1346     38%  VISIBLE-unmarked  
+jurisdiction.  1350-1442     33%  VISIBLE-unmarked  
+
+TOTAL 34 tokens: MARKED 1, VISIBLE-unmarked 24, OBSCURED 7, HEADING-indet 2
+STRICT (band spray < 25%): 13 body words checkable, 1 marked

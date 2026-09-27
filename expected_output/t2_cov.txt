@@ -1,0 +1,10 @@
+circle fit: centre (263.5, 760.5)  radius 8.75  -> diameter 17.5 px  (ring 52 levels darker than its neighbours)
+card background (95th pct) 222 ; pen value from BLM capitals 29
+interior mark extent (darker than bg - 25% of pen depth, r < R-2): 13 x 10 px
+interior mark  darkest  76  peak coverage 0.76 px  pixels past half-pen darkness: 17
+ring           darkest 118  peak coverage 0.54 px  pixels past half-pen darkness: 2
+BLM capitals   pixels past half-pen darkness: 135  (legible control, same card)
+rune glyph     darkest   0  (resolved control; strokes 3-4 px)
+
+STOP emblem 65x71 px box-averaged to 18 px: interior pixels < 90: 74
+card mark, same interior radius:               pixels < 90: 4

@@ -1,0 +1,30 @@
+1. SEGMENTATION -- glyph groups between separators, top of column first
+   y  40-52     1 glyphs   expected X            OK
+   y  64-141    5 glyphs   expected номер        OK
+   y 154-239    4 glyphs   expected день         OK
+   y 253-389    6 glyphs   expected чёрный       OK
+   y 402-443    2 glyphs   expected на           OK
+   y 458-633    8 glyphs   expected биткоины     OK
+   y 646-899   11 glyphs   expected зашифрованы  OK
+   y 917-978    3 glyphs   expected -            
+
+2. TERMINAL GLYPH at native resolution
+   ink bbox y40-52 x1535-1554 = 13 x 20 px, 96 ink px
+   background 248, darkest 0 -> contrast 248 levels
+   clear rows above (to border, y35): 4   below (to separator, y58): 5
+   ink in titlo band y36-39: 0 px
+
+3. TEMPLATE CALIBRATION on the 36 labelled cells of the same column
+   same-letter pairs n=31  median 0.60  min 0.31
+   diff-letter pairs n=599  median 0.32  95th 0.48  max 0.71
+   terminal glyph best IoU: 0.46 as drawn, 0.46 over 8 orientations; top: й y253 0.46, е y202 0.43, о y114 0.43
+
+4. WHERE THAT SCORE SITS
+   pairwise : <= 6.5% of same-letter pairs; >= the 93.5th pct of diff-letter pairs
+   best-match, H0 letter absent from column: n=36 median 0.49 range 0.42-0.71  P(<=obs) 31%
+   best-match, H1 letter repeats in column : n=23 median 0.69 range 0.48-0.73  P(<=obs) 0%
+   (H1 entries are not independent: a letter with two instances contributes twice)
+
+5. CONTROL -- same masks, letters assigned in the WRONG reading direction
+   correct : same median 0.60  diff median 0.32
+   reversed: same median 0.31  diff median 0.33

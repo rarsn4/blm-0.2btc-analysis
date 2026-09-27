@@ -1,0 +1,23 @@
+element (examined glyph by glyph)                    letters  drawn as object
+STOP (Liberty)                                             4  O -> clenched fist   [e01_0.png]
+FIND THE SEED PHRASE                                      17  -   [e02_0.png, e02_1.png]
+IN THE THIS PICTURE                                       16  -   [e03_0.png]
+WELCOME TO THE / BRAVE / NEW WORLD                        25  -   [e04_0.png, e04_1.png, e04_2.png, e04_3.png]
+BLACK LIVES MATTER ... NOT ONE MORE                       73  -   [e05_0.png, e05_1.png]
+I can't BREATHE                                           12  -   [e06_0.png]
+BLM (card)                                                 3  -   [e07_0.png]
+FUCK THIS SHIT                                            12  - (the I of SHIT is written)   [e08_0.png]
+.VS.                                                       2  -   [e09_0.png]
+Seal ring + scroll                                        37  -   [e10_0.png, e10_1.png]
+Clock hands TOWER, MOON                                    9  -   [e11_0.png]
+Address (letters of 34 chars)                             31  -   [e12_0.png, e12_1.png]
+ONLY real BITCOIN                                         15  -   [e13_0.png]
+PAY FOR THE FUTURE. / THIS IS THE FIRST PREDICTION.       39  -   [e14_0.png]
+Esse quam niger es, sic dixit caccobus ollae              36  -   [e15_0.png]
+TOTAL                                                    331  1
+
+screened as blocks only:
+   bottom caption (whitepaper, cursive)                 ~115 letters   [s01_0.png]
+   13th Amendment copy                                  ~179 letters   [s02_0.png]
+   pyramid base FIAT JUSTITIA ET PEREAT MUNDUS            26 letters   [s03_0.png]
+   vial CVD19                                              3 letters   [s04_0.png]
