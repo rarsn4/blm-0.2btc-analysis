@@ -44,9 +44,23 @@ EXPECT_COMMIT = '5fee94d'
 SEC = {
     'insert_after_2_12': 364,   # §2.13 and §2.14 go in here, before §3 at 365
     'sec3':  (365, 399),        # replaced entirely
-    'sec8':  (667, 683),        # replaced entirely
+    'insert_7_7':        666,   # NEW subsection 7.7, after §7.5, before §8 at 667
     'sec9':  (684, 705),        # criterion 7 appended at the end
 }
+SEC_7_7_HEADING = '### 7.7 [RETRACTED] The "marked and withheld" reading'
+
+# NOTE ON WHY THERE IS NO 'sec8' ENTRY.
+# An earlier version of this script replaced REPORT.md lines 667-683 -- section 8,
+# "Do not use AI upscaling on this image" -- with the marked-and-withheld
+# retraction, preserving section 8's heading. That destroyed section 8's real
+# content and put the retraction under a heading it contradicts.
+#
+# The cause: the pattern was assembled in a working document where it was section
+# 8, and three parties discussed it as "REPORT.md section 8" for four days without
+# anyone reading what section 8 contained. The identity assertion below verifies
+# WHICH FILE is being edited; the anchor assertions verify WHAT TEXT is replaced;
+# neither can verify that a section number means what you think it means. Only
+# reading the section does that.
 
 # §10 spans 706-800. Filled from --inspect against 5fee94d.
 #   706  ## 10. Method
@@ -153,12 +167,17 @@ def build(lines, blocks):
         die('could not find the §9 block in report_additions.md')
     edits.append((SEC['sec9'][1] + 1, SEC['sec9'][1], [''] + body))
 
-    # --- §8: replace entirely ------------------------------------------
-    body = blocks.get('8')
+    # --- §7.7: NEW subsection, inserted before §8 (which is untouched) ---
+    body = blocks.get('7.7')
     if not body:
-        die('could not find the §8 block in report_additions.md')
-    hdr = lines[SEC['sec8'][0] - 1]
-    edits.append((SEC['sec8'][0], SEC['sec8'][1], [hdr, ''] + body))
+        die('could not find the §7.7 block in report_additions.md')
+    at = SEC['insert_7_7']
+    if not lines[at].startswith('## 8.'):
+        die('line {} is not the start of section 8 -- the structure moved.\n'
+            '  found: {!r}\n'
+            '  refusing to insert 7.7 somewhere it does not belong.'
+            .format(at + 1, lines[at]))
+    edits.append((at + 1, at, ['', SEC_7_7_HEADING, ''] + body + ['']))
 
     # --- §3: replace entirely ------------------------------------------
     body = blocks.get('3')

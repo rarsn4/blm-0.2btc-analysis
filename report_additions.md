@@ -255,16 +255,31 @@ campaign, and the method that produced it was wrong independently of that.
 
 ---
 
-## §8 — Replace the section entirely
+## §7.7 — NEW subsection, inserted after §7.5 and before §8
 
-The section claimed a pattern — the author marks a thing and withholds it — across
-five entries, and inferred from it that the seed words come from outside the
-image. Four entries fail a base rate. The inference goes with them.
+**There is no "pattern" section in REPORT.md.** The five observations were made
+separately, in §1.4, §2.7, §5, §6 and §7.4, and only later read together as a
+deliberate authorial signature. That reading is what is retracted, so it needs a
+place of its own rather than an edit to any one of them.
 
-> **[RETRACTED] The "marked and withheld" pattern.**
+Inserted as `### 7.7` at line 666, immediately before `## 8. Do not use AI
+upscaling on this image`, which is **untouched**.
+
+> Five observations in this document were at one point read together as a
+> deliberate pattern — the author marks a thing and then withholds it — and an
+> inference was drawn from that pattern: that the seed words come from outside the
+> image and the artwork supplies only the ordering.
 >
-> Four of the five entries do not survive a base rate, and the rule that removes
-> them is now §10's:
+> | where | observation |
+> |---|---|
+> | §1.4 | the phrase **"a trusted"** deleted from the whitepaper micro-text |
+> | §2.7, §5 | the **blank clock hand** at the 21st position |
+> | §6 | the flag's **star deficit**, 50 − 44 = 6 |
+> | §7.3 | the **unreadable final glyph** |
+> | §7.4 | **"1865 − 202…?"** |
+>
+> Four of the five do not survive a base rate, and the rule that removes them is
+> now §10's:
 >
 > | entry | why it fails |
 > |---|---|
@@ -327,12 +342,28 @@ image. Four entries fail a base rate. The inference goes with them.
 > conservative. **State it as order 10⁻², not 10⁻³.** That is still the strongest
 > number in the section, and it no longer overstates.
 >
-> **[RETRACTED] What the section used to conclude.** From the pattern, §8 inferred
-> that the seed words come from outside the image and the artwork supplies only
-> the ordering. With one entry left, that inference has no basis and is dropped
-> rather than downgraded. It was the most defeatist claim in the document and the
-> least supported — it told every reader the answer is not findable in the
-> artwork, on the strength of four observations that turned out to be base rate.
+> **[RETRACTED] The inference the pattern carried.** That the seed words come from
+> outside the image and the artwork supplies only the ordering. With one entry
+> left, it has no basis and is dropped rather than downgraded. It was the most
+> defeatist claim in the document and the least supported — it told every reader
+> the answer is not findable in the artwork, on the strength of four observations
+> that turned out to be base rate.
+>
+> **The four retracted entries remain in place where they were made.** Each is a
+> correct observation about the artwork; what is withdrawn is reading them as a
+> system. §1.4's deleted phrase is still a real deletion and `trust`@21 was still
+> tested on the strength of it. This subsection retracts the pattern, not the
+> facts.
+>
+> **A note on how this error was found and on one it concealed.** The pattern was
+> assembled in a working document, not here, and for four days it was discussed as
+> though it were a section of this report — "§8" — by three parties, none of whom
+> looked at what §8 actually contains. The first patch written from that belief
+> replaced §8's real content with this retraction, keeping §8's heading, and an
+> anchor-checked script applied it faithfully because the line numbers were right
+> and the identity behind them was assumed. **A hash verifies which file; an anchor
+> verifies what text you are editing; neither verifies that the section is the one
+> you think it is.**
 
 ---
 
