@@ -12,11 +12,12 @@
 >   "§8" was discussed for four days as though it were a section of `REPORT.md`,
 >   whose §8 was consequently overwritten. See `REPORT.md` §10, bug 15.
 > - **The bug count** — `REPORT.md` §10 now lists fifteen.
-> - **The derivation total, 78,273,080,964** — not wrong, superseded. This file
->   predates the free-one-fixed campaign, so every t21 run it counted was a *gap*
->   sweep: the branch in which all assigned words are correct. It is the figure
->   `REPORT.md` §2.13 cites as "roughly 78 billion went into the 1.8% branch".
->   The current total across all branches is **190,701,305,838**.
+> - **The derivation total, 78,273,080,964** — superseded. It is this file's own
+>   whole-project figure as of 11 September, covering every legal template length,
+>   Electrum v2, 65 passphrases and t18 free-one-fixed work, as §4's own sentence
+>   says. It is **not** a branch figure, and an earlier draft of `REPORT.md` §2.13
+>   borrowed it as one. The current project total is **190,701,305,838**; the t21
+>   branch in which all assigned words are correct is **50,457,931,465**, computed.
 > - **The 31× brainwallet-to-seed cost ratio** (489,000/s against 15,600/s) — both
 >   figures are pre-Jacobian, and no uncontended re-measurement exists. Treat the
 >   ratio as unquantified; the exclusion argument in `REPORT.md` §2.12 does not
@@ -139,7 +140,7 @@ on any list.
 
 ## 4. [EXHAUSTED] What the search has closed
 
-**78,273,080,964 *(the a=0 branch only; current total 190,701,305,838)* full seed derivations. 2,265 CPU-days.** BIP39 and Electrum v2,
+**78,273,080,964 *(whole-project total as of 11 Sep; current total 190,701,305,838)* full seed derivations. 2,265 CPU-days.** BIP39 and Electrum v2,
 four paths, indices 0–35, every legal template length, pools from 37 to 80
 words, template reversal, position offsets, 65 passphrases, leave-one-out over
 the entire 2048-word dictionary at every gap, free-one-fixed across all 13 fixed

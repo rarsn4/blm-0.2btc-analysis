@@ -32,11 +32,24 @@ Insert after §2.12 (brainwallets), before §3.
 > | 2 | 18% |
 > | 3–4 | 46% |
 >
-> **Roughly 78 billion derivations went into the 1.8% branch**, against
-> **138,502,824,811** into the 8.3% branch once free-one-fixed was run. That is
-> not a criticism of the work — the branch had to be closed, and closing it is
-> what turns a conjecture into a deduction. But stating it plainly is what makes
-> the next decision legible.
+> **The spend by branch, computed from the ledger rather than estimated:**
+>
+> | branch | probability | derivations | per point of probability |
+> |---|---|---|---|
+> | a = 0, gap sweeps only (7 rows) | 1.8% | **50,457,931,465** | 28.0 B |
+> | a = 1, free-one-fixed (13 rows) | 8.3% | **136,372,012,128** | 16.4 B |
+>
+> So the least likely branch received **1.71× more compute per point of
+> probability** than the next one. That is real, and it is much milder than it
+> looked while an uncomputed "roughly 78 billion" was attached to the 1.8% branch —
+> that figure was 1.55× too large *and* the wrong quantity, being the whole
+> project's total as of 11 September across every template length, Electrum,
+> passphrases and t18 free-one-fixed work. It was borrowed from a status snapshot
+> and relabelled as a branch figure without being computed.
+>
+> None of this is a criticism of the work — the branch had to be closed, and
+> closing it is what turns a conjecture into a deduction. But stating it from the
+> ledger rather than from a recollection is what makes the next decision legible.
 >
 > **[EXHAUSTED] The deduction, stated at full strength.** Let *a* be the number of
 > assigned words that are wrong and *g* the number of gap words outside the

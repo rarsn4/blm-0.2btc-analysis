@@ -33,11 +33,12 @@ So STATUS.md is NOT rewritten. It gets a header marking it superseded, and its
 three contradicting claims are retagged in place so the withdrawal is visible
 where the claim is made. The bodies stay.
 
-Note that STATUS.md's 78,273,080,964 is not simply stale. It predates the
-free-one-fixed campaign, so every t21 run it counted was a gap sweep -- the
-branch where all assigned words are correct. It is the figure REPORT.md 2.13
-cites as "roughly 78 billion went into the 1.8% branch", and it is correct as
-that. The header says so rather than crossing it out.
+STATUS.md's 78,273,080,964 is its own whole-project figure as of 11 September --
+every template length, Electrum, passphrases, t18 free-one-fixed -- as section 4's
+text states. An earlier version of this script annotated it as "the a=0 branch
+only", which was wrong: the annotation was written without reading the section it
+annotated, which is the same failure that overwrote REPORT.md section 8. The
+measured a=0 branch figure is 50,457,931,465. The header says so rather than crossing it out.
 """
 
 import sys, os, re
@@ -96,11 +97,12 @@ STATUS_HEADER = """> **SUPERSEDED SNAPSHOT — do not cite figures from this fil
 >   "§8" was discussed for four days as though it were a section of `REPORT.md`,
 >   whose §8 was consequently overwritten. See `REPORT.md` §10, bug 15.
 > - **The bug count** — `REPORT.md` §10 now lists fifteen.
-> - **The derivation total, 78,273,080,964** — not wrong, superseded. This file
->   predates the free-one-fixed campaign, so every t21 run it counted was a *gap*
->   sweep: the branch in which all assigned words are correct. It is the figure
->   `REPORT.md` §2.13 cites as "roughly 78 billion went into the 1.8% branch".
->   The current total across all branches is **190,701,305,838**.
+> - **The derivation total, 78,273,080,964** — superseded. It is this file's own
+>   whole-project figure as of 11 September, covering every legal template length,
+>   Electrum v2, 65 passphrases and t18 free-one-fixed work, as §4's own sentence
+>   says. It is **not** a branch figure, and an earlier draft of `REPORT.md` §2.13
+>   borrowed it as one. The current project total is **190,701,305,838**; the t21
+>   branch in which all assigned words are correct is **50,457,931,465**, computed.
 > - **The 31× brainwallet-to-seed cost ratio** (489,000/s against 15,600/s) — both
 >   figures are pre-Jacobian, and no uncontended re-measurement exists. Treat the
 >   ratio as unquantified; the exclusion argument in `REPORT.md` §2.12 does not
@@ -112,7 +114,8 @@ edit('STATUS.md', [
     ('bugcount',  r'\bTen bugs\b',
                   'Ten bugs *(superseded: REPORT.md §10 lists fifteen)*'),
     ('total',     r'78,273,080,964',
-                  '78,273,080,964 *(the a=0 branch only; current total 190,701,305,838)*'),
+                  '78,273,080,964 *(whole-project total as of 11 Sep; '
+                  'current total 190,701,305,838)*'),
 ], header=STATUS_HEADER)
 
 # ---------------------------------------------------------------- report
