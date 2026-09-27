@@ -1050,17 +1050,29 @@ So that "solved" means the same thing to everyone:
    the test **toward** declaring signal — and it still does not. The last row is
    the clean out-of-sample estimate and is the least favourable of all.
 
-   Taking the seven lines as independent at p = 0.314, the exact distribution of
-   the wordless-line count is:
+   The expectation alone understates the case. Taking the seven lines as
+   independent, the exact distribution of the wordless-line count gives a
+   one-sided probability for the observed 2 under each corpus:
 
    ```
-   0: 0.007   1: 0.062   2: 0.199   3: 0.317   4: 0.266   5: 0.119   6: 0.027   7: 0.002
-   P(exactly 2) = 0.199        P(<= 2) = 0.268
+   corpus                                 p      E     P(=2)   P(<=2)
+   slogan block alone                  0.438   2.32    0.340    0.576
+   headline only                       0.390   2.65    0.298    0.457
+   headline + amendment                0.348   2.97    0.247    0.351
+   headline + amendment + whitepaper   0.314   3.25    0.199    0.269
+   amendment + whitepaper only         0.237   3.96    0.094    0.115   <- clean
    ```
 
-   **Three is the modal outcome and two is the second most likely.** The
-   observation is not merely "below expectation" — it is an ordinary draw, at
-   p = 0.27 one-sided. There is nothing here in either direction.
+   **Quote the range, not a row: p = 0.12 to 0.58 one-sided.** Under the corpus
+   most often cited (0.314) three is the modal outcome and two the second most
+   likely, so the observation is an ordinary draw at p = 0.27.
+
+   Note which way the out-of-sample row cuts. It has the **highest** expectation,
+   so 2 sits furthest below it and `P(≤2)` falls to **0.115** — leading with the
+   clean estimate makes the observation look *more* notable, not less. It is still
+   roughly 1 in 9, so the conclusion stands under the least favourable corpus
+   available, which is the only version of the conclusion worth stating. **There
+   is nothing here in either direction.**
 
    **What the example is for.** Two reviewers ran the same control independently
    and both reached the right verdict from a wrong premise. It surfaced only when
