@@ -224,15 +224,26 @@ def build(lines, blocks):
         if 'Eight' not in lines[n - 1]:
             die('line {} does not contain "Eight" — the bug-count anchor moved.\n'
                 '  found: {!r}'.format(n, lines[n - 1]))
-        edits.append((n, n, [lines[n - 1].replace('Eight', 'Thirteen')]))
+        edits.append((n, n, [lines[n - 1].replace('Eight', 'Fifteen')]))
         # §10 has no existing rules list, so the rules arrive with a heading.
+        def sub_block(prefix):
+            """Resolve a §10 sub-block by heading PREFIX, not exact text.
+
+            An earlier version keyed on the literal 'Bugs 9 through 13'. Renaming
+            the draft's heading when a bug was added broke the lookup, and the
+            script aborted rather than writing a partial -- correct, but avoidable.
+            A prefix match survives the count changing."""
+            hits = [k for k in blocks if k.startswith('10/' + prefix)]
+            if len(hits) != 1:
+                die('expected exactly one §10 sub-block starting "{}", found {}: {}'
+                    .format(prefix, len(hits), sorted(hits)))
+            return blocks[hits[0]]
+
         for key, sub, head in (
-                ('rules_insert_after', 'Five rules',          [RULES_HEADING, '']),
-                ('bug_list_end',       'Bugs 9 through 13',   []),
-                ('ec_insert_after',    'The EC rewrite',      [])):
-            b = blocks.get('10/' + sub)
-            if not b:
-                die('could not find the "{}" sub-block in the draft'.format(sub))
+                ('rules_insert_after', 'Five rules',   [RULES_HEADING, '']),
+                ('bug_list_end',       'Bugs',         []),
+                ('ec_insert_after',    'The EC rewrite', [])):
+            b = sub_block(sub)
             at = SEC10[key]
             edits.append((at + 1, at, [''] + head + b))
 

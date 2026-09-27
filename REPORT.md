@@ -1183,7 +1183,7 @@ index 4,650,657,157, which sits in chunk 10 at offset 422,798,725 with a chunk s
 469,762,048. Nine boundaries crossed. Together with the seam instruments above, this
 is what licenses the negative results.
 
-**Thirteen bugs were caught by exact-value validation**, each producing plausible
+**Fifteen bugs were caught by exact-value validation**, each producing plausible
 output with zero register spills and no warnings:
 
 - a SHA-256 message-schedule error yielding a 6.39% checksum rate against a true
@@ -1296,6 +1296,24 @@ output with zero register spills and no warnings:
    external poller recording `(epoch, value)` on every checkpoint change — and
    that poller's first output turned out to contain the whole campaign's run
    durations, which is where the 21.910 h ± 0.32% figure came from.
+15. **Two commits claimed work they did not contain.** Publishing this report
+   took four commits to land three changes. `d30d8d3` applied the additions but
+   substituted the wrong section (see §7.7). `9e7ef0d` and `d534547` each carried
+   a message describing the section-8 restoration and **one line of
+   `.gitignore`** — because they were staged with `git add -u <pathspec>`, which
+   git reads as *"update only that pathspec"* rather than *"update everything,
+   and also this"*. `1aad6fe` finally carried the content.
+
+   Same family as bug 9, bug 14 and `show_hit`: **the record said the work
+   happened and the artifact did not change.** Both bad commits reported
+   `1 file changed, 1 insertion(+)` and neither was read. The check that catches
+   it is three lines and confirms the artifact rather than the message:
+
+   ```
+   git show HEAD:REPORT.md | wc -l
+   git show HEAD:REPORT.md | grep -c '\[FIGURE\]'
+   git show --stat HEAD | tail -3
+   ```
 
 **If you run your own solver: validate against exact expected counts, not
 plausible-looking ones.** A 1.2% deviation is invisible to a sanity check and
