@@ -1,3 +1,27 @@
+> **SUPERSEDED SNAPSHOT — do not cite figures from this file.**
+>
+> This is a working status document, dated, kept as a record of what was believed
+> at the time. `REPORT.md` is authoritative. Three claims below have since been
+> withdrawn or overtaken, and each is retagged in place rather than rewritten,
+> because what was believed when is itself part of the record:
+>
+> - **Section 8, "the pattern worth naming"** — retracted. Four of its five
+>   entries fail a base rate; only the blank clock hand survives, and on measured
+>   hand placement rather than on an absence. See `REPORT.md` §7.7. This section
+>   is also the direct cause of a publishing error: it was numbered 8 here, and
+>   "§8" was discussed for four days as though it were a section of `REPORT.md`,
+>   whose §8 was consequently overwritten. See `REPORT.md` §10, bug 15.
+> - **The bug count** — `REPORT.md` §10 now lists fifteen.
+> - **The derivation total, 78,273,080,964** — not wrong, superseded. This file
+>   predates the free-one-fixed campaign, so every t21 run it counted was a *gap*
+>   sweep: the branch in which all assigned words are correct. It is the figure
+>   `REPORT.md` §2.13 cites as "roughly 78 billion went into the 1.8% branch".
+>   The current total across all branches is **190,701,305,838**.
+> - **The 31× brainwallet-to-seed cost ratio** (489,000/s against 15,600/s) — both
+>   figures are pre-Jacobian, and no uncontended re-measurement exists. Treat the
+>   ratio as unquantified; the exclusion argument in `REPORT.md` §2.12 does not
+>   depend on its value.
+
 # 0.2 BTC Puzzle — full status
 
 **11 September 2026.** For both collaborating agents. Supersedes all earlier
@@ -115,7 +139,7 @@ on any list.
 
 ## 4. [EXHAUSTED] What the search has closed
 
-**78,273,080,964 full seed derivations. 2,265 CPU-days.** BIP39 and Electrum v2,
+**78,273,080,964 *(the a=0 branch only; current total 190,701,305,838)* full seed derivations. 2,265 CPU-days.** BIP39 and Electrum v2,
 four paths, indices 0–35, every legal template length, pools from 37 to 80
 words, template reversal, position offsets, 65 passphrases, leave-one-out over
 the entire 2048-word dictionary at every gap, free-one-fixed across all 13 fixed
@@ -273,7 +297,7 @@ exactly as it does.
 
 ---
 
-## 8. [MEASURED] The pattern worth naming
+## 8. [RETRACTED — see REPORT.md §7.7] The pattern worth naming
 
 The author systematically **marks a thing and withholds it**:
 
@@ -308,7 +332,7 @@ multi-chunk (`selftest_multichunk`, crossing nine boundaries).
 `--chunk 7` (599,187 chunks); production count reproduced against a **previous
 binary**; the answer found planted first-of-chunk and last-of-chunk.
 
-### Ten bugs, every one producing plausible output with no error or warning
+### Ten bugs *(superseded: REPORT.md §10 lists fifteen)*, every one producing plausible output with no error or warning
 
 1. SHA-256 schedule error — 6.39% checksum rate against a true 6.25%
 2. 24-word HMAC key pre-hashing omitted (RFC 2104)

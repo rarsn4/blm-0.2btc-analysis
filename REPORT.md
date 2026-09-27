@@ -362,7 +362,7 @@ during the seam work (§10).
 
 ---
 
-### §2.13 — [EXHAUSTED] Free-one-fixed at 21 words: the branch that was never run
+### 2.13 [EXHAUSTED] Free-one-fixed at 21 words: the branch that was never run
 
 Every t21 sweep before September freed a **gap** — slots 6, 8, 14, 15, 18, 21.
 Not one freed an **assigned** slot. An audit of all twenty t21 configs confirmed
@@ -482,7 +482,7 @@ of total probability, against 1.4% for the six remaining slots at path 1 — fou
 times worse per hour, and the lowest-value run on the board. The argument that
 justified staging by path is the same one that rules out revisiting those paths.
 
-### §2.14 — [EXHAUSTED] Two hypotheses the source document itself named
+### 2.14 [EXHAUSTED] Two hypotheses the source document itself named
 
 The README hedges exactly twice, and both hedges have now been tested.
 

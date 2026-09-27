@@ -14,8 +14,8 @@ Target: [`1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ`](https://blockchair.com/bitcoin/ad
 
   `Сумма двух чисел  =  ◇⏶ᛗᛗ△ : ⇧⧗⏶⤬ : ⊤Ψ◇⫽ᛉ`
 
-- **25,188,563,424 seed derivations eliminated** across BIP39 *and* Electrum —
-  729 CPU-days at typical solver rates. Electrum had never been tested by
+- **190,701,305,838 seed derivations eliminated** across BIP39 *and* Electrum —
+  5,518 CPU-days at typical solver rates. Electrum had never been tested by
   anyone; lengths 13/14/16/17 are illegal under BIP39 and were unreachable.
 
 - **Four defects in the community candidate data**, including that `breathe`

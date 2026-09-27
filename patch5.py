@@ -202,9 +202,9 @@ def build(lines, blocks):
 
     # --- §2.13 and §2.14: insert before §3 ------------------------------
     ins = []
-    for k, title in (('2.13', '### §2.13 — [EXHAUSTED] Free-one-fixed at 21 words: '
+    for k, title in (('2.13', '### 2.13 [EXHAUSTED] Free-one-fixed at 21 words: '
                               'the branch that was never run'),
-                     ('2.14', '### §2.14 — [EXHAUSTED] Two hypotheses the source '
+                     ('2.14', '### 2.14 [EXHAUSTED] Two hypotheses the source '
                               'document itself named')):
         b = blocks.get(k)
         if not b:
