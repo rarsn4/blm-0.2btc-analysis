@@ -55,6 +55,11 @@ __constant__ int      d_brain;      // 0 = mnemonic scheme, 1 = brainwallet
 __constant__ int      d_brainKD;    // bit0 SHA256          bit1 double-SHA256
 __constant__ int      d_brainSp;    // bit0 joined w/ space bit1 joined w/o
 __constant__ int      d_brainPub;   // bit0 compressed      bit1 uncompressed
+                                    // bit2 hybrid
+// SHA-256 is case-sensitive and the artwork is in capitals, so casing is a real
+// axis, not a cosmetic one. Default is bit0 alone (as-written lowercase), and the
+// run header prints it, so no run can be silently lowercase again.
+__constant__ int      d_brainCase;  // bit0 lower  bit1 upper  bit2 title
 __constant__ uint8_t  d_mode[MAXSLOT];
 __constant__ uint16_t d_lit[MAXSLOT];
 __constant__ uint16_t d_list[MAXSLOT][MAXLIST];
@@ -108,17 +113,26 @@ __device__ __forceinline__ bool checksum_ok(const uint16_t *bip){
 // Build the phrase from resolved word indices. sep=1 inserts single spaces
 // (BIP39/Electrum require it); sep=0 concatenates, which some brainwallet
 // tools did and which is therefore a variant worth sweeping.
-__device__ __forceinline__ uint32_t build_phrase(const uint16_t *bip, uint8_t *mn, int sep){
+// cs: 0 verbatim (the wordlist is lowercase ASCII), 1 UPPER, 2 Title. Casing is
+// applied here rather than over the finished buffer because Title needs word
+// boundaries, and a concatenated phrase (sep=0) has none left to find.
+__device__ __forceinline__ uint32_t build_phrase(const uint16_t *bip, uint8_t *mn,
+                                                 int sep, int cs){
     uint32_t ml=0;
     for (int i = 0; i < d_slots; ++i) {
         uint16_t w=bip[i]; uint16_t off=g_off[w]; uint8_t L=g_len[w];
-        for (int j = 0; j < L; ++j) mn[ml++] = (uint8_t)g_chars[off+j];
+        for (int j = 0; j < L; ++j) {
+            uint8_t c = (uint8_t)g_chars[off+j];
+            if (cs == 1 || (cs == 2 && j == 0))
+                c = (c >= 'a' && c <= 'z') ? (uint8_t)(c - 32) : c;
+            mn[ml++] = c;
+        }
         if (sep && i < d_slots-1) mn[ml++] = ' ';
     }
     return ml;
 }
 __device__ __forceinline__ uint32_t build_mnemonic(const uint16_t *bip, uint8_t *mn){
-    return build_phrase(bip, mn, 1);
+    return build_phrase(bip, mn, 1, 0);   // mnemonics are lowercase by spec
 }
 
 // Electrum v2 validity: HMAC-SHA512("Seed version", mnemonic) hex prefix.
@@ -172,9 +186,11 @@ __global__ void k_derive(const uint64_t *__restrict__ gis, uint32_t count,
     // which variant matched, because unlike a BIP32 path the host cannot
     // re-derive it without repeating the EC work.
     if (d_brain) {
+      for (int cs = 0; cs < 3; ++cs) {
+        if (!(d_brainCase & (1<<cs))) continue;
         for (int sp = 0; sp < 2; ++sp) {
             if (!(d_brainSp & (1<<sp))) continue;
-            uint32_t pl = build_phrase(bip, mn, sp==0 ? 1 : 0);
+            uint32_t pl = build_phrase(bip, mn, sp==0 ? 1 : 0, cs);
             for (int kd = 0; kd < 2; ++kd) {
                 if (!(d_brainKD & (1<<kd))) continue;
                 uint8_t priv[32];
@@ -199,8 +215,9 @@ __global__ void k_derive(const uint64_t *__restrict__ gis, uint32_t count,
                                         hash160_pub65(pub,h); }
                     if (h[0]==d_target[0]&&h[1]==d_target[1]&&h[2]==d_target[2]
                         &&h[3]==d_target[3]&&h[4]==d_target[4]) {
-                        // pc now needs two bits, so sp and kd shift up one.
-                        uint64_t var = (uint64_t)((sp<<3)|(kd<<2)|pc);
+                        // Layout: pc bits0-1, kd bit2, sp bit3, cs bits4-5.
+                        // Kernel and selftest must move together -- see §10.
+                        uint64_t var = (uint64_t)((cs<<4)|(sp<<3)|(kd<<2)|pc);
                         if (atomicCAS((unsigned long long*)&hit[0],
                                       0xFFFFFFFFFFFFFFFFULL,
                                       (unsigned long long)gis[t])
@@ -210,11 +227,13 @@ __global__ void k_derive(const uint64_t *__restrict__ gis, uint32_t count,
                 }
             }
         }
+      }
         return;
     }
 
     // ------------------------------------------------------- BIP39 / Electrum
-    uint32_t ml = build_phrase(bip, mn, 1);
+    // BIP39 mnemonics are lowercase by specification; casing is brainwallet-only.
+    uint32_t ml = build_phrase(bip, mn, 1, 0);
     uint32_t shi[8], slo[8];
     bip39_seed(mn, ml, shi, slo);
     uint8_t seed[64];

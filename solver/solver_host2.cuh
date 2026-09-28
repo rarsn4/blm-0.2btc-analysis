@@ -65,10 +65,12 @@ struct Cfg {
     int  brainKD=1;                // bit0 SHA256, bit1 double-SHA256
     int  brainSp=1;                // bit0 space-joined, bit1 concatenated
     int  brainPub=7;               // bit0 compressed, bit1 uncompressed, bit2 hybrid
+    int  brainCase=1;              // bit0 lower, bit1 upper, bit2 title
 };
 static const char* BRAIN_KD[2]={"sha256","double-sha256"};
 static const char* BRAIN_SP[2]={"space-joined","concatenated"};
 static const char* BRAIN_PUB[3]={"compressed","uncompressed","hybrid"};
+static const char* BRAIN_CASE[3]={"lower","upper","title"};
 
 // Parse tokens like "sha256 dsha256" into a bitmask over names[2].
 static int parse_bits(const char*key,const char*a0,const char*a1,int&mask){
@@ -107,7 +109,7 @@ static bool parse_cfg(const char*path,Cfg&cf){
     // in a POOL line was rejected purely because of line order.
     std::vector<std::pair<int,std::string>> raw;
     std::vector<std::string> raw_pool, raw_extra;
-    bool have_kd=false, have_sp=false, have_pub=false;
+    bool have_kd=false, have_sp=false, have_pub=false, have_case=false;
     while(fgets(line,sizeof line,f)){
         char*p=line; while(*p==' '||*p=='\t')++p;
         if(*p=='#'||*p=='\n'||*p=='\r'||!*p) continue;
@@ -125,6 +127,7 @@ static bool parse_cfg(const char*path,Cfg&cf){
         else if(key=="BRAINHASH"){ if(!parse_bits("BRAINHASH","sha256","dsha256",cf.brainKD)){fclose(f);return false;} have_kd=true; }
         else if(key=="BRAINSPACE"){ if(!parse_bits("BRAINSPACE","yes","no",cf.brainSp)){fclose(f);return false;} have_sp=true; }
         else if(key=="BRAINPUB"){ if(!parse_bits3("BRAINPUB","compressed","uncompressed","hybrid",cf.brainPub)){fclose(f);return false;} have_pub=true; }
+        else if(key=="CASE"){ if(!parse_bits3("CASE","lower","upper","title",cf.brainCase)){fclose(f);return false;} have_case=true; }
         else if(key=="EXTRA"){ char*t; while((t=strtok(NULL," \t\r\n"))) raw_extra.push_back(t); }
         else if(key=="POOL"){ char*t; while((t=strtok(NULL," \t\r\n"))) raw_pool.push_back(t); }
         else if(key=="PATH"){ char*v=strtok(NULL," \t\r\n");
@@ -135,14 +138,14 @@ static bool parse_cfg(const char*path,Cfg&cf){
         else fprintf(stderr,"warning: unknown key '%s'\n",key.c_str());
     }
     fclose(f);
-    (void)have_kd; (void)have_sp; (void)have_pub;
+    (void)have_kd; (void)have_sp; (void)have_pub; (void)have_case;
 
     if(cf.brain && cf.electrum){ fprintf(stderr,"SCHEME cannot be both\n"); return false; }
     if(!cf.brain && !raw_extra.empty()){
         fprintf(stderr,"EXTRA words require SCHEME brainwallet -- a non-BIP39 word\n"
                        "cannot be encoded in the 11 bits the checksum needs.\n"); return false; }
-    if(!cf.brain && (have_kd||have_sp||have_pub)){
-        fprintf(stderr,"BRAINHASH/BRAINSPACE/BRAINPUB require SCHEME brainwallet\n"); return false; }
+    if(!cf.brain && (have_kd||have_sp||have_pub||have_case)){
+        fprintf(stderr,"BRAINHASH/BRAINSPACE/BRAINPUB/CASE require SCHEME brainwallet\n"); return false; }
     if(cf.brain && !cf.paths.empty())
         fprintf(stderr,"warning: PATH ignored -- a brainwallet has no derivation path\n");
 
@@ -275,6 +278,7 @@ static void upload_cfg(const Cfg&cf){
     CK(cudaMemcpyToSymbol(d_brainKD,&cf.brainKD,sizeof(int)));
     CK(cudaMemcpyToSymbol(d_brainSp,&cf.brainSp,sizeof(int)));
     CK(cudaMemcpyToSymbol(d_brainPub,&cf.brainPub,sizeof(int)));
+    CK(cudaMemcpyToSymbol(d_brainCase,&cf.brainCase,sizeof(int)));
 
     uint32_t tg[5]={0};
     if(!cf.h160.empty()){
@@ -330,9 +334,11 @@ static void show_hit(const Cfg&cf,uint64_t gi,const std::string&pass,uint64_t in
     for(int i=0;i<cf.words;++i) printf("%s%s",WL[bip[i]].c_str(),i<cf.words-1?" ":"\n");
     if(cf.brain){
         int sp=(int)((info>>3)&1), kd=(int)((info>>2)&1), pb=(int)(info&3);
+        int cs=(int)((info>>4)&3);
         printf("scheme     : brainwallet\n");
         printf("key        : %s of the %s phrase\n",BRAIN_KD[kd],BRAIN_SP[sp]);
         printf("pubkey     : %s\n",BRAIN_PUB[pb]);
+        printf("case       : %s\n",cs<3?BRAIN_CASE[cs]:"(unknown)");
         printf("passphrase : (n/a -- brainwallets take no passphrase)\n");
     } else {
         printf("passphrase : %s\n",pass.empty()?"(none)":pass.c_str());
@@ -393,38 +399,50 @@ static int selftest(){
 // The uncompressed cases additionally push a 65-byte message through
 // sha256_long inside hash160_pub65.
 static int selftest_brain(){
-    struct T{const char*phrase;const char*addr;int kd;int sp;int pub;const char*why;};
+    struct T{const char*phrase;const char*addr;int kd;int sp;int pub;int cs;const char*why;};
     static const T ts[]={
-      {"correct horse battery staple","1C7zdTfnkzmr13HfA2vNm5SJYRK6nEKyq8",0,0,0,"canonical, compressed"},
-      {"correct horse battery staple","1JwSSubhmg6iPtRjtyqhUYYH7bZg3Lfy1T",0,0,1,"canonical, uncompressed"},
-      {"correct horse battery staple","1A95ZB1auLEAXVYorh9wrtzzHpduBUC3oC",1,0,0,"double-SHA256, compressed"},
-      {"correct horse battery staple","1MBJcCMAGTjir6xQi3cFYxySCAdAaxUQsU",1,0,1,"double-SHA256, uncompressed"},
-      {"correct horse battery staple","1aZamxMGppDGiZahCUoBqUGVRU94JBehf",0,1,0,"no spaces, compressed"},
-      {"correct horse battery staple","1KqAv2r2iebeEhkoKonksJwwPczwBjLMXC",0,1,1,"no spaces, uncompressed"},
+      {"correct horse battery staple","1C7zdTfnkzmr13HfA2vNm5SJYRK6nEKyq8",0,0,0,0,"canonical, compressed"},
+      {"correct horse battery staple","1JwSSubhmg6iPtRjtyqhUYYH7bZg3Lfy1T",0,0,1,0,"canonical, uncompressed"},
+      {"correct horse battery staple","1A95ZB1auLEAXVYorh9wrtzzHpduBUC3oC",1,0,0,0,"double-SHA256, compressed"},
+      {"correct horse battery staple","1MBJcCMAGTjir6xQi3cFYxySCAdAaxUQsU",1,0,1,0,"double-SHA256, uncompressed"},
+      {"correct horse battery staple","1aZamxMGppDGiZahCUoBqUGVRU94JBehf",0,1,0,0,"no spaces, compressed"},
+      {"correct horse battery staple","1KqAv2r2iebeEhkoKonksJwwPczwBjLMXC",0,1,1,0,"no spaces, uncompressed"},
       {"mechanic verify candy business ozone tomorrow museum sheriff random argue unaware remove figure desk wolf bullet hurry nasty",
-       "1H3JMSyEq2woEYLn9u1kG32HJjkQbVNwSw",0,0,0,"124 B, len%64=60 -> extra pad block"},
+       "1H3JMSyEq2woEYLn9u1kG32HJjkQbVNwSw",0,0,0,0,"124 B, len%64=60 -> extra pad block"},
       {"mechanic verify candy business ozone tomorrow museum sheriff random argue unaware remove figure desk wolf bullet hurry nasty",
-       "1Lc5bPdxAZzR5mm5S3swMmcxB83FtKgvLi",0,0,1,"124 B, uncompressed"},
+       "1Lc5bPdxAZzR5mm5S3swMmcxB83FtKgvLi",0,0,1,0,"124 B, uncompressed"},
       {"ritual daughter garment casino plastic tank grocery apple inflict electric student slender tribe blood behind bag marine message",
-       "1DzFSoymTdd2eP5FFCeRG7y69nbbh18ZjW",0,0,0,"128 B, len%64=0 -> exact blocks"},
+       "1DzFSoymTdd2eP5FFCeRG7y69nbbh18ZjW",0,0,0,0,"128 B, len%64=0 -> exact blocks"},
       {"ritual daughter garment casino plastic tank grocery apple inflict electric student slender tribe blood behind bag marine message",
-       "1BTCdnvSFPL48HaTKqaev6Z2FSANo9Keq8",0,0,1,"128 B, uncompressed"},
+       "1BTCdnvSFPL48HaTKqaev6Z2FSANo9Keq8",0,0,1,0,"128 B, uncompressed"},
       {"banner cricket leopard dinner alone task junior before nasty delay ordinary rapid fever diet bus maximum clip uphold episode throw disorder drive north south",
-       "1HVQmcDk3u9RdwbrjNvLRgftYzwAh2fzX9",0,0,0,"157 B, 24 words, 3 blocks"},
+       "1HVQmcDk3u9RdwbrjNvLRgftYzwAh2fzX9",0,0,0,0,"157 B, 24 words, 3 blocks"},
       {"banner cricket leopard dinner alone task junior before nasty delay ordinary rapid fever diet bus maximum clip uphold episode throw disorder drive north south",
-       "1863f84WJ7fDDWB4XgNWuZqg7uHCNgaSzw",0,0,1,"157 B, uncompressed"},
+       "1863f84WJ7fDDWB4XgNWuZqg7uHCNgaSzw",0,0,1,0,"157 B, uncompressed"},
       // Hybrid (SEC1 2.3.3, 0x06/0x07). Addresses computed by an independent
       // Python implementation, not read back from this solver, so a shared
       // bug in point_to_hybrid could not make these agree.
-      {"correct horse battery staple","1MhkDnhvCtve9VxCdUTkVBvDpGoSJTwQXg",0,0,2,"canonical, hybrid"},
-      {"correct horse battery staple","15sP7kxJwRT3LxSBFe4YkfjhHqebhHyCBG",1,0,2,"double-SHA256, hybrid"},
-      {"correct horse battery staple","1MpprUXkYVyNMDmhmfxdSF7FCWJkoPJXKW",0,1,2,"no spaces, hybrid"},
+      {"correct horse battery staple","1MhkDnhvCtve9VxCdUTkVBvDpGoSJTwQXg",0,0,2,0,"canonical, hybrid"},
+      {"correct horse battery staple","15sP7kxJwRT3LxSBFe4YkfjhHqebhHyCBG",1,0,2,0,"double-SHA256, hybrid"},
+      {"correct horse battery staple","1MpprUXkYVyNMDmhmfxdSF7FCWJkoPJXKW",0,1,2,0,"no spaces, hybrid"},
+      // Casing. SHA-256 is case-sensitive and the source artwork is in capitals,
+      // so this axis is load-bearing. Addresses computed in Python first; the
+      // no-spaces rows matter most, because Title needs word boundaries and a
+      // concatenated phrase has none left to find after the fact.
+      {"correct horse battery staple","1KMod2w8p39Z13Q1e578j2pXM5yMqChdaS",0,0,0,1,"upper, compressed"},
+      {"correct horse battery staple","1HspjgVYL7dyLGcHpjhfKJqT13dJLznBSD",0,0,1,1,"upper, uncompressed"},
+      {"correct horse battery staple","1P48T6giJsVBg9bDXqrvNtr4vkVf2rs7yA",0,1,0,1,"upper, no spaces, compressed"},
+      {"correct horse battery staple","18SKVnbBEQ7D7tJddEovLyWX7xy8yVbSxA",0,1,1,1,"upper, no spaces, uncompressed"},
+      {"correct horse battery staple","13xJSW3VWUN6BNVD6XYNG5QQC5Qj38MuUk",0,0,0,2,"title, compressed"},
+      {"correct horse battery staple","1CjNYZgrJcXaccmTYsewPmgE7scEFUbJ4M",0,0,1,2,"title, uncompressed"},
+      {"correct horse battery staple","1Hafrf3mH1PrZTuxThioRkjRFMzuV2ab1n",0,1,0,2,"title, no spaces, compressed"},
+      {"correct horse battery staple","1DmZzQ65sL5BcpGzBKp3j7EdRHK9WtQmmx",0,1,1,2,"title, no spaces, uncompressed"},
       {"mechanic verify candy business ozone tomorrow museum sheriff random argue unaware remove figure desk wolf bullet hurry nasty",
-       "15guFAR4gdx43dsjyR8ptUHnZQXuScmGtu",0,0,2,"124 B, hybrid"},
+       "15guFAR4gdx43dsjyR8ptUHnZQXuScmGtu",0,0,2,0,"124 B, hybrid"},
       {"ritual daughter garment casino plastic tank grocery apple inflict electric student slender tribe blood behind bag marine message",
-       "19mnmsw4CCAd4ijBHM5gztZUoXpXANWEoo",0,0,2,"128 B, hybrid"},
+       "19mnmsw4CCAd4ijBHM5gztZUoXpXANWEoo",0,0,2,0,"128 B, hybrid"},
       {"banner cricket leopard dinner alone task junior before nasty delay ordinary rapid fever diet bus maximum clip uphold episode throw disorder drive north south",
-       "1G9PKJS2kfzv8TCpLmqEpCh8sq77X2gq7M",0,0,2,"157 B, hybrid"}};
+       "1G9PKJS2kfzv8TCpLmqEpCh8sq77X2gq7M",0,0,2,0,"157 B, hybrid"}};
     const int NT=(int)(sizeof ts/sizeof ts[0]);
     int fail=0;
     uint64_t *d_hit,*d_gis;
@@ -433,6 +451,7 @@ static int selftest_brain(){
     for(int t=0;t<NT;++t){
         Cfg cf; cf.brain=true; cf.target=ts[t].addr;
         cf.brainKD=1<<ts[t].kd; cf.brainSp=1<<ts[t].sp; cf.brainPub=1<<ts[t].pub;
+        cf.brainCase=1<<ts[t].cs;
         std::vector<std::string> ws;
         { std::string s(ts[t].phrase); size_t p=0;
           while(p<=s.size()){ size_t e=s.find(' ',p); if(e==std::string::npos) e=s.size();
@@ -457,7 +476,7 @@ static int selftest_brain(){
     // higher. This line and the kernel's `var` must move together: when they
     // did not, cases 1-2 and 7-12 still passed because sp=kd=0 makes both
     // layouts agree, and only the four kd=1/sp=1 cases failed.
-    uint64_t want=(uint64_t)((ts[t].sp<<3)|(ts[t].kd<<2)|ts[t].pub);
+    uint64_t want=(uint64_t)((ts[t].cs<<4)|(ts[t].sp<<3)|(ts[t].kd<<2)|ts[t].pub);
         if(ok && hv[1]!=want){ ok=false;
             fprintf(stderr,"  variant misreported: got %llu want %llu\n",
                     (unsigned long long)hv[1],(unsigned long long)want); }
@@ -469,8 +488,8 @@ static int selftest_brain(){
     printf("\n%s\n",fail
         ?"*** BRAINWALLET SELFTEST FAILED -- a negative from this mode would be meaningless. ***"
         :"BRAINWALLET SELFTEST PASS -- single/multi-block SHA-256, double-SHA256,\n"
-         "  space and no-space joins, compressed / uncompressed / hybrid keys\n"
-         "  all verified.");
+         "  space and no-space joins, compressed / uncompressed / hybrid keys,\n"
+         "  and lower / UPPER / Title casing all verified.");
     return fail;
 }
 
@@ -537,13 +556,18 @@ int main(int argc,char**argv){
     }
     int gaps=0; for(int i=0;i<cf.words;++i) if(cf.slots[i].mode!=M_LIT) ++gaps;
     if(cf.brain){
-        int nvar=__builtin_popcount(cf.brainKD)*__builtin_popcount(cf.brainSp);
+        int nvar=__builtin_popcount(cf.brainKD)*__builtin_popcount(cf.brainSp)
+                *__builtin_popcount(cf.brainCase);
         int npub=__builtin_popcount(cf.brainPub);
         printf("scheme=BRAINWALLET  words=%d  gaps=%d  pool=%zu  filter=NONE (accept all)\n",
                cf.words,gaps,cf.pool.size());
         printf("  key      : "); for(int i=0;i<2;++i) if(cf.brainKD&(1<<i)) printf("%s ",BRAIN_KD[i]);
         printf("\n  join     : "); for(int i=0;i<2;++i) if(cf.brainSp&(1<<i)) printf("%s ",BRAIN_SP[i]);
         printf("\n  pubkey   : "); for(int i=0;i<3;++i) if(cf.brainPub&(1<<i)) printf("%s ",BRAIN_PUB[i]);
+        // Printed unconditionally. A run that covers only lowercase must say so
+        // on its own first screen, because SHA-256 is case-sensitive and the
+        // source artwork is in capitals.
+        printf("\n  case     : "); for(int i=0;i<3;++i) if(cf.brainCase&(1<<i)) printf("%s ",BRAIN_CASE[i]);
         printf("\n  %d scalar mult%s per candidate, %d hash160 each\n",
                nvar,nvar==1?"":"s",npub);
         if(WL.size()>N_BIP39)
