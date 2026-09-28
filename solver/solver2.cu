@@ -189,15 +189,18 @@ __global__ void k_derive(const uint64_t *__restrict__ gis, uint32_t count,
                         |((uint32_t)priv[i*4+2]<<8)|priv[i*4+3];
                 uint64_t X[4], Y[4];
                 secp256k1_xy_from_priv(k, X, Y);       // the one expensive step
-                for (int pc = 0; pc < 2; ++pc) {
+                for (int pc = 0; pc < 3; ++pc) {
                     if (!(d_brainPub & (1<<pc))) continue;
-                    if (pc == 0) { uint8_t pub[33]; point_to_compressed(X,Y,pub);
-                                   hash160_pub(pub,h); }
-                    else         { uint8_t pub[65]; point_to_uncompressed(X,Y,pub);
-                                   hash160_pub65(pub,h); }
+                    if      (pc == 0) { uint8_t pub[33]; point_to_compressed(X,Y,pub);
+                                        hash160_pub(pub,h); }
+                    else if (pc == 1) { uint8_t pub[65]; point_to_uncompressed(X,Y,pub);
+                                        hash160_pub65(pub,h); }
+                    else              { uint8_t pub[65]; point_to_hybrid(X,Y,pub);
+                                        hash160_pub65(pub,h); }
                     if (h[0]==d_target[0]&&h[1]==d_target[1]&&h[2]==d_target[2]
                         &&h[3]==d_target[3]&&h[4]==d_target[4]) {
-                        uint64_t var = (uint64_t)((sp<<2)|(kd<<1)|pc);
+                        // pc now needs two bits, so sp and kd shift up one.
+                        uint64_t var = (uint64_t)((sp<<3)|(kd<<2)|pc);
                         if (atomicCAS((unsigned long long*)&hit[0],
                                       0xFFFFFFFFFFFFFFFFULL,
                                       (unsigned long long)gis[t])
@@ -223,16 +226,20 @@ __global__ void k_derive(const uint64_t *__restrict__ gis, uint32_t count,
         seed[i*8+6]=(uint8_t)(slo[i]>>8);  seed[i*8+7]=(uint8_t)(slo[i]);
     }
     for (int p = 0; p < d_nPath; ++p) {
-        derive_multi(seed, p, h);
-        if (h[0]==d_target[0]&&h[1]==d_target[1]&&h[2]==d_target[2]
-            &&h[3]==d_target[3]&&h[4]==d_target[4]) {
-            // hit[1] = the PATH INDEX. show_hit used to print m/44'/0'/0'/0/0
-            // unconditionally, which is wrong for every config with >1 PATH.
-            if (atomicCAS((unsigned long long*)&hit[0],
-                          0xFFFFFFFFFFFFFFFFULL,
-                          (unsigned long long)gis[t])
-                == 0xFFFFFFFFFFFFFFFFULL) hit[1] = (uint64_t)p;
-            return;
+        uint32_t h3[3][5];
+        derive_multi3(seed, p, h3);
+        for (int e = 0; e < 3; ++e) {
+            if (h3[e][0]==d_target[0]&&h3[e][1]==d_target[1]&&h3[e][2]==d_target[2]
+                &&h3[e][3]==d_target[3]&&h3[e][4]==d_target[4]) {
+                // hit[1] = path index << 2 | encoding. It used to be the bare
+                // path index; show_hit before that printed m/44'/0'/0'/0/0
+                // unconditionally, wrong for every config with >1 PATH.
+                if (atomicCAS((unsigned long long*)&hit[0],
+                              0xFFFFFFFFFFFFFFFFULL,
+                              (unsigned long long)gis[t])
+                    == 0xFFFFFFFFFFFFFFFFULL) hit[1] = ((uint64_t)p<<2)|(uint64_t)e;
+                return;
+            }
         }
     }
 }

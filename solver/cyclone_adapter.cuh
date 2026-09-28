@@ -20,6 +20,7 @@
 #pragma once
 #include <cstdint>
 #include "CUDAMath.h"
+#include "ec_jacobian.cuh"   // Jacobian fixed-base mult; see EC_USE_JACOBIAN below
 
 // If the six vectors all fail with garbage — including k=1 — flip this to 1.
 // Cyclone's constants are named SECP_GX_LE, so little-endian limb order
@@ -68,10 +69,26 @@ __device__ __forceinline__ void point_to_compressed(const uint64_t X[4],
 
 // The stage-3 interface. Drop-in replacement for the stub in stage3.cu /
 // scalarmult_test.cu — delete the stub there and #include this instead.
+// EC_USE_JACOBIAN=1 selects the Jacobian fixed-base multiplier (one modular
+// inversion per multiplication instead of ~384). It is differential-tested
+// bit-identical against scalarMulBaseAffine over 122,880 random scalars plus
+// k = 1, 2, 3 and n-1 (ec_jacobian_test.cu). Set to 0 to fall back to the
+// original affine routine, which stays in the build as the oracle.
+#ifndef EC_USE_JACOBIAN
+#define EC_USE_JACOBIAN 1
+#endif
+__device__ __forceinline__ void ec_mul_base(const uint64_t k[4], uint64_t X[4], uint64_t Y[4]) {
+#if EC_USE_JACOBIAN
+    scalarMulBaseJacobian(k, X, Y);
+#else
+    scalarMulBaseAffine(k, X, Y);
+#endif
+}
+
 __device__ void secp256k1_pub_from_priv(const uint32_t priv[8], uint8_t pub[33]) {
     uint64_t k[4], X[4], Y[4];
     priv_be32_to_le64(priv, k);
-    scalarMulBaseAffine(k, X, Y);
+    ec_mul_base(k, X, Y);
     point_to_compressed(X, Y, pub);
 }
 
@@ -104,9 +121,26 @@ __device__ __forceinline__ void point_to_uncompressed(const uint64_t X[4],
 // One scalar multiplication, both serializations. scalarMulBaseAffine is the
 // expensive step (~384 field inversions); compressed and uncompressed differ
 // only in how the SAME point is written out, so they must not cost two mults.
+// SEC1 2.3.3 hybrid form: 65 bytes carrying X and Y exactly as the
+// uncompressed form does, but with the y parity also folded into the lead byte
+// (0x06 even, 0x07 odd). Built by overwriting the prefix that
+// point_to_uncompressed just wrote, so the limb order is the one that routine
+// was already verified to produce rather than a second transcription of it.
+__device__ __forceinline__ void point_to_hybrid(const uint64_t X[4],
+                                                const uint64_t Y[4],
+                                                uint8_t pub[65]) {
+#if LIMBS_ARE_BE
+    const uint64_t y_ls = Y[3];
+#else
+    const uint64_t y_ls = Y[0];
+#endif
+    point_to_uncompressed(X, Y, pub);
+    pub[0] = (uint8_t)(0x06u | (uint32_t)(y_ls & 1ULL));
+}
+
 __device__ __forceinline__ void secp256k1_xy_from_priv(const uint32_t priv[8],
                                                        uint64_t X[4], uint64_t Y[4]) {
     uint64_t k[4];
     priv_be32_to_le64(priv, k);
-    scalarMulBaseAffine(k, X, Y);
+    ec_mul_base(k, X, Y);
 }

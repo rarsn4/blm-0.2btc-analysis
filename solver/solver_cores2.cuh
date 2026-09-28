@@ -486,11 +486,10 @@ __constant__ uint32_t d_path[8][6];
 __constant__ uint8_t  d_pathLen[8];
 __constant__ int      d_nPath;
 
-__device__ void derive_multi(const uint8_t seed[64],int p,uint32_t h160[5]){
+__device__ void derive_multi_key(const uint8_t seed[64],int p,uint32_t k[8]){
     const uint8_t BSEED[12]={'B','i','t','c','o','i','n',' ','s','e','e','d'};
     uint8_t I[64];
     hmac_sha512(BSEED,12,seed,64,I);
-    uint32_t k[8];
 #pragma unroll
     for(int i=0;i<8;++i)
         k[i]=((uint32_t)I[i*4]<<24)|((uint32_t)I[i*4+1]<<16)|((uint32_t)I[i*4+2]<<8)|I[i*4+3];
@@ -523,9 +522,30 @@ __device__ void derive_multi(const uint8_t seed[64],int p,uint32_t h160[5]){
         addmod_n(k,il,k);
         for(int i=0;i<32;++i) cc[i]=I[32+i];
     }
+}
+
+__device__ void derive_multi(const uint8_t seed[64],int p,uint32_t h160[5]){
+    uint32_t k[8]; derive_multi_key(seed,p,k);
     uint8_t pub[33];
     secp256k1_pub_from_priv(k,pub);
     hash160_pub(pub,h160);
+}
+
+// All three SEC1 encodings of the same leaf public key, each hashed:
+//   h3[0] compressed   33 B  0x02 / 0x03
+//   h3[1] uncompressed 65 B  0x04
+//   h3[2] hybrid       65 B  0x06 / 0x07
+// One EC multiply feeds all three -- y is already in hand for the parity byte
+// -- so the added cost is two SHA-256 + RIPEMD-160 against PBKDF2's 4096
+// SHA-512 compressions. This is unconditional on purpose: making it a config
+// option means the next kernel variant silently drops back to compressed-only.
+__device__ void derive_multi3(const uint8_t seed[64],int p,uint32_t h3[3][5]){
+    uint32_t k[8]; derive_multi_key(seed,p,k);
+    uint64_t X[4],Y[4];
+    secp256k1_xy_from_priv(k,X,Y);
+    uint8_t c[33]; point_to_compressed(X,Y,c);   hash160_pub(c,h3[0]);
+    uint8_t u[65]; point_to_uncompressed(X,Y,u); hash160_pub65(u,h3[1]);
+    uint8_t y[65]; point_to_hybrid(X,Y,y);       hash160_pub65(y,h3[2]);
 }
 
 __device__ void derive_bip44_h160(const uint8_t seed[64],uint32_t h160[5]){

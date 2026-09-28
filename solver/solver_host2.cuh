@@ -64,11 +64,11 @@ struct Cfg {
     bool brain=false;              // SCHEME brainwallet
     int  brainKD=1;                // bit0 SHA256, bit1 double-SHA256
     int  brainSp=1;                // bit0 space-joined, bit1 concatenated
-    int  brainPub=3;               // bit0 compressed, bit1 uncompressed
+    int  brainPub=7;               // bit0 compressed, bit1 uncompressed, bit2 hybrid
 };
 static const char* BRAIN_KD[2]={"sha256","double-sha256"};
 static const char* BRAIN_SP[2]={"space-joined","concatenated"};
-static const char* BRAIN_PUB[2]={"compressed","uncompressed"};
+static const char* BRAIN_PUB[3]={"compressed","uncompressed","hybrid"};
 
 // Parse tokens like "sha256 dsha256" into a bitmask over names[2].
 static int parse_bits(const char*key,const char*a0,const char*a1,int&mask){
@@ -78,6 +78,21 @@ static int parse_bits(const char*key,const char*a0,const char*a1,int&mask){
         else if(!strcmp(t,a1)) mask|=2;
         else if(!strcmp(t,"both")) mask|=3;
         else { fprintf(stderr,"%s: expected %s|%s|both, got '%s'\n",key,a0,a1,t); return 0; }
+    }
+    if(!mask){ fprintf(stderr,"%s: no value\n",key); return 0; }
+    return 1;
+}
+
+// Same, over three names. BRAINPUB needs it; the two-name form stays for the
+// other keys rather than churning them.
+static int parse_bits3(const char*key,const char*a0,const char*a1,const char*a2,int&mask){
+    mask=0; char*t;
+    while((t=strtok(NULL," \t\r\n"))){
+        if(!strcmp(t,a0)) mask|=1;
+        else if(!strcmp(t,a1)) mask|=2;
+        else if(!strcmp(t,a2)) mask|=4;
+        else if(!strcmp(t,"all")||!strcmp(t,"both")) mask|=7;
+        else { fprintf(stderr,"%s: expected %s|%s|%s|all, got '%s'\n",key,a0,a1,a2,t); return 0; }
     }
     if(!mask){ fprintf(stderr,"%s: no value\n",key); return 0; }
     return 1;
@@ -109,7 +124,7 @@ static bool parse_cfg(const char*path,Cfg&cf){
                        fclose(f); return false; } } }
         else if(key=="BRAINHASH"){ if(!parse_bits("BRAINHASH","sha256","dsha256",cf.brainKD)){fclose(f);return false;} have_kd=true; }
         else if(key=="BRAINSPACE"){ if(!parse_bits("BRAINSPACE","yes","no",cf.brainSp)){fclose(f);return false;} have_sp=true; }
-        else if(key=="BRAINPUB"){ if(!parse_bits("BRAINPUB","compressed","uncompressed",cf.brainPub)){fclose(f);return false;} have_pub=true; }
+        else if(key=="BRAINPUB"){ if(!parse_bits3("BRAINPUB","compressed","uncompressed","hybrid",cf.brainPub)){fclose(f);return false;} have_pub=true; }
         else if(key=="EXTRA"){ char*t; while((t=strtok(NULL," \t\r\n"))) raw_extra.push_back(t); }
         else if(key=="POOL"){ char*t; while((t=strtok(NULL," \t\r\n"))) raw_pool.push_back(t); }
         else if(key=="PATH"){ char*v=strtok(NULL," \t\r\n");
@@ -314,7 +329,7 @@ static void show_hit(const Cfg&cf,uint64_t gi,const std::string&pass,uint64_t in
     printf("phrase     : ");
     for(int i=0;i<cf.words;++i) printf("%s%s",WL[bip[i]].c_str(),i<cf.words-1?" ":"\n");
     if(cf.brain){
-        int sp=(int)((info>>2)&1), kd=(int)((info>>1)&1), pb=(int)(info&1);
+        int sp=(int)((info>>3)&1), kd=(int)((info>>2)&1), pb=(int)(info&3);
         printf("scheme     : brainwallet\n");
         printf("key        : %s of the %s phrase\n",BRAIN_KD[kd],BRAIN_SP[sp]);
         printf("pubkey     : %s\n",BRAIN_PUB[pb]);
@@ -323,8 +338,10 @@ static void show_hit(const Cfg&cf,uint64_t gi,const std::string&pass,uint64_t in
         printf("passphrase : %s\n",pass.empty()?"(none)":pass.c_str());
         // Was hardcoded to m/44'/0'/0'/0/0, which misreported every hit under a
         // config with more than one PATH line. hit[1] carries the real index.
+        uint64_t pi=info>>2; int enc=(int)(info&3);
         printf("path       : %s\n",
-               info<cf.paths.size()?cf.paths[(size_t)info].c_str():"(unknown)");
+               pi<cf.paths.size()?cf.paths[(size_t)pi].c_str():"(unknown)");
+        printf("pubkey     : %s\n",enc<3?BRAIN_PUB[enc]:"(unknown)");
     }
     printf("======================================================================\n");
     printf("\nVerify OFFLINE, networking disabled. Do not paste this anywhere.\n");
@@ -395,7 +412,19 @@ static int selftest_brain(){
       {"banner cricket leopard dinner alone task junior before nasty delay ordinary rapid fever diet bus maximum clip uphold episode throw disorder drive north south",
        "1HVQmcDk3u9RdwbrjNvLRgftYzwAh2fzX9",0,0,0,"157 B, 24 words, 3 blocks"},
       {"banner cricket leopard dinner alone task junior before nasty delay ordinary rapid fever diet bus maximum clip uphold episode throw disorder drive north south",
-       "1863f84WJ7fDDWB4XgNWuZqg7uHCNgaSzw",0,0,1,"157 B, uncompressed"}};
+       "1863f84WJ7fDDWB4XgNWuZqg7uHCNgaSzw",0,0,1,"157 B, uncompressed"},
+      // Hybrid (SEC1 2.3.3, 0x06/0x07). Addresses computed by an independent
+      // Python implementation, not read back from this solver, so a shared
+      // bug in point_to_hybrid could not make these agree.
+      {"correct horse battery staple","1MhkDnhvCtve9VxCdUTkVBvDpGoSJTwQXg",0,0,2,"canonical, hybrid"},
+      {"correct horse battery staple","15sP7kxJwRT3LxSBFe4YkfjhHqebhHyCBG",1,0,2,"double-SHA256, hybrid"},
+      {"correct horse battery staple","1MpprUXkYVyNMDmhmfxdSF7FCWJkoPJXKW",0,1,2,"no spaces, hybrid"},
+      {"mechanic verify candy business ozone tomorrow museum sheriff random argue unaware remove figure desk wolf bullet hurry nasty",
+       "15guFAR4gdx43dsjyR8ptUHnZQXuScmGtu",0,0,2,"124 B, hybrid"},
+      {"ritual daughter garment casino plastic tank grocery apple inflict electric student slender tribe blood behind bag marine message",
+       "19mnmsw4CCAd4ijBHM5gztZUoXpXANWEoo",0,0,2,"128 B, hybrid"},
+      {"banner cricket leopard dinner alone task junior before nasty delay ordinary rapid fever diet bus maximum clip uphold episode throw disorder drive north south",
+       "1G9PKJS2kfzv8TCpLmqEpCh8sq77X2gq7M",0,0,2,"157 B, hybrid"}};
     const int NT=(int)(sizeof ts/sizeof ts[0]);
     int fail=0;
     uint64_t *d_hit,*d_gis;
@@ -424,7 +453,11 @@ static int selftest_brain(){
         CK(cudaGetLastError()); CK(cudaDeviceSynchronize());
         uint64_t hv[2]; CK(cudaMemcpy(hv,d_hit,16,cudaMemcpyDeviceToHost));
         bool ok = (hv[0]==0);
-        uint64_t want=(uint64_t)((ts[t].sp<<2)|(ts[t].kd<<1)|ts[t].pub);
+        // pc occupies two bits now that hybrid exists, so sp and kd sit one
+    // higher. This line and the kernel's `var` must move together: when they
+    // did not, cases 1-2 and 7-12 still passed because sp=kd=0 makes both
+    // layouts agree, and only the four kd=1/sp=1 cases failed.
+    uint64_t want=(uint64_t)((ts[t].sp<<3)|(ts[t].kd<<2)|ts[t].pub);
         if(ok && hv[1]!=want){ ok=false;
             fprintf(stderr,"  variant misreported: got %llu want %llu\n",
                     (unsigned long long)hv[1],(unsigned long long)want); }
@@ -436,15 +469,25 @@ static int selftest_brain(){
     printf("\n%s\n",fail
         ?"*** BRAINWALLET SELFTEST FAILED -- a negative from this mode would be meaningless. ***"
         :"BRAINWALLET SELFTEST PASS -- single/multi-block SHA-256, double-SHA256,\n"
-         "  space and no-space joins, compressed and uncompressed keys all verified.");
+         "  space and no-space joins, compressed / uncompressed / hybrid keys\n"
+         "  all verified.");
     return fail;
 }
 
 int main(int argc,char**argv){
+    // Yield the host thread while waiting on the device instead of spinning.
+    // CUDA's default sync is a busy-wait, which held one core at 99.9% for the
+    // entire run -- 15.85 CPU-hours on a 15.8-hour sweep, doing no work. On a
+    // thermally-bound laptop that is heat competing with the GPU for the same
+    // fans: measured CPU package 95 C against the GPU's 88 C, with the GPU
+    // throttled to 1605 of 3105 MHz. Chunk boundaries are ~225 s apart, so the
+    // microseconds of added wake latency are invisible. Cannot affect results.
+    cudaSetDeviceFlags(cudaDeviceScheduleBlockingSync);
     const char*cfg=nullptr,*pwf=nullptr,*wlf="bip39_en.txt"; uint64_t resume=0;
     bool st=false, stb=false;
     // --chunk / --seam exist for the seam controls, see seam_and_brain_patch.md.
     uint64_t chunk_override=0, seam=0; bool have_seam=false, count_only=false;
+    const char*progf=nullptr;
     for(int i=1;i<argc;++i){
         if(!strcmp(argv[i],"--config")&&i+1<argc) cfg=argv[++i];
         else if(!strcmp(argv[i],"--passphrases")&&i+1<argc) pwf=argv[++i];
@@ -453,6 +496,7 @@ int main(int argc,char**argv){
         else if(!strcmp(argv[i],"--chunk")&&i+1<argc) chunk_override=strtoull(argv[++i],nullptr,10);
         else if(!strcmp(argv[i],"--seam")&&i+1<argc){ seam=strtoull(argv[++i],nullptr,10); have_seam=true; }
         else if(!strcmp(argv[i],"--count-only")) count_only=true;
+        else if(!strcmp(argv[i],"--progress")&&i+1<argc) progf=argv[++i];
         else if(!strcmp(argv[i],"--selftest")) st=true;
         else if(!strcmp(argv[i],"--selftest-brain")) stb=true;
         else { fprintf(stderr,"unknown arg %s\n",argv[i]); return 1; }
@@ -465,6 +509,21 @@ int main(int argc,char**argv){
         "usage: %s --config F [--passphrases F] [--resume N] [--chunk N] [--seam N]\n"
         "                  [--count-only]\n"
         "       %s --selftest | --selftest-brain\n",argv[0],argv[0]); return 1; }
+
+    // The checkpoint path used to be the fixed string "progress2.txt", shared by
+    // every invocation. Any second solver2 run -- a benchmark, a selftest, a
+    // config check -- silently overwrote a multi-day sweep's resume point. A
+    // crash after that would resume from the wrong index and skip candidates
+    // with no symptom, voiding the exhaustiveness the whole project rests on.
+    // Default it per-config so concurrent runs cannot collide.
+    char progbuf[512];
+    if(!progf){
+        const char*b=strrchr(cfg,'/'); b=b?b+1:cfg;
+        snprintf(progbuf,sizeof progbuf,"progress_%s.txt",b);
+        char*dot=strstr(progbuf,".conf.txt"); if(dot) strcpy(dot,".txt");
+        progf=progbuf;
+    }
+    printf("checkpoint     : %s\n",progf);
 
     Cfg cf; if(!parse_cfg(cfg,cf)) return 1;
     upload_wl();                       // EXTRA words may have been appended
@@ -484,7 +543,7 @@ int main(int argc,char**argv){
                cf.words,gaps,cf.pool.size());
         printf("  key      : "); for(int i=0;i<2;++i) if(cf.brainKD&(1<<i)) printf("%s ",BRAIN_KD[i]);
         printf("\n  join     : "); for(int i=0;i<2;++i) if(cf.brainSp&(1<<i)) printf("%s ",BRAIN_SP[i]);
-        printf("\n  pubkey   : "); for(int i=0;i<2;++i) if(cf.brainPub&(1<<i)) printf("%s ",BRAIN_PUB[i]);
+        printf("\n  pubkey   : "); for(int i=0;i<3;++i) if(cf.brainPub&(1<<i)) printf("%s ",BRAIN_PUB[i]);
         printf("\n  %d scalar mult%s per candidate, %d hash160 each\n",
                nvar,nvar==1?"":"s",npub);
         if(WL.size()>N_BIP39)
@@ -582,7 +641,7 @@ int main(int argc,char**argv){
                        (unsigned long long)done,(unsigned long long)cf.total,
                        (unsigned long long)total_surv,done/(el>0?el:1));
                 fflush(stdout);
-                FILE*ck=fopen("progress2.txt","w");
+                FILE*ck=fopen(progf,"w");
                 if(ck){ fprintf(ck,"%zu %llu\n",p,(unsigned long long)done); fclose(ck); }
             }
         }
