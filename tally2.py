@@ -179,8 +179,15 @@ EVIDENCED = ['t21_readme54','t21_loo21','t21_loo6','t21_loo8','t21_loo14','t21_l
 ASSERTED  = ['t21_pool52','t21_pool52_rev','t21_pool40','t21_idx','t21_pathd','t21_pathe',
              't21_trust21','t21_trust21b','t21_bnw18','t21_bnw18b','t21_trustonly','t21']
 CHECKSUM = 128
+CHECKSUM_24 = 256
 # 24-word tails: a different template entirely (24 slots, 8 checksum bits),
 # so they cannot intersect any 21-word box. Carried as a constant.
+#
+# These are CANDIDATES, and 24 words carry EIGHT checksum bits, so they convert
+# at 1/256, not the 1/128 a 21-word phrase uses. An earlier version added T24
+# into the candidate union and divided the whole sum by CHECKSUM, crediting the
+# 24-word work at double its true derivation count. The two templates have
+# different checksum widths and cannot share a divisor.
 T24 = 918_330_048 + 2_700_250_214
 
 def load(names):
@@ -198,24 +205,27 @@ def load(names):
 if __name__ == '__main__':
     E = load(EVIDENCED)
     A = load(ASSERTED)
-    ue, ne = union_volume(list(E.values()))
-    ue += T24
-    ua, na = union_volume(list(E.values()) + list(A.values()))
-    ua += T24
+    # Convert each template at its OWN checksum width, then add. The candidate
+    # totals may be summed freely; the derivation totals may not.
+    ue21, ne = union_volume(list(E.values()))
+    ua21, na = union_volume(list(E.values()) + list(A.values()))
+    ue, ua = ue21 + T24, ua21 + T24
+    ue_d = ue21 // CHECKSUM + T24 // CHECKSUM_24
+    ua_d = ua21 // CHECKSUM + T24 // CHECKSUM_24
     naive = sum(vol(b) for b in list(E.values()) + list(A.values()))
     print(f"\nEVIDENCED runs ({len(E)}) — logs present in this directory")
-    print(f"  union {ue:>22,} candidates   {ue//CHECKSUM:>18,} derivations")
+    print(f"  union {ue:>22,} candidates   {ue_d:>18,} derivations")
     print(f"\n+ ASSERTED runs ({len(A)}) — reported complete, no log here")
-    print(f"  union {ua:>22,} candidates   {ua//CHECKSUM:>18,} derivations")
+    print(f"  union {ua:>22,} candidates   {ua_d:>18,} derivations")
     # Derive the marginal from the two REPORTED totals, not from the candidate
     # difference. Each total is floored independently, so (ua-ue)//128 and
     # (ua//128)-(ue//128) differ by one -- both defensible in isolation, but this
     # script prints both totals, so the marginal it quotes must be their
     # difference or the three numbers on the page do not reconcile.
     print(f"  marginal contribution of the asserted runs: "
-          f"{ua//CHECKSUM - ue//CHECKSUM:,} derivations")
+          f"{ua_d - ue_d:,} derivations")
     print(f"\n  naive sum {naive:>18,} candidates")
     print(f"  double-counted {naive-ua:>14,}  ({(naive-ua)/naive:.2%})")
     print(f"  disjoint boxes: {ne} evidenced, {na} combined")
-    print(f"\n  CPU-days at 400/s: {ue//CHECKSUM/400/86400:,.0f} evidenced, "
-          f"{ua//CHECKSUM/400/86400:,.0f} combined")
+    print(f"\n  CPU-days at 400/s: {ue_d/400/86400:,.0f} evidenced, "
+          f"{ua_d/400/86400:,.0f} combined")

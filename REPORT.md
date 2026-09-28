@@ -11,7 +11,7 @@ What **is** solved is the **rune cipher**, except for a single glyph. Those are
 different claims and this report keeps them separate throughout.
 
 I built a GPU search pipeline covering both BIP39 and Electrum and ran
-**191,282,100,350 full seed derivations** — 5,535 days of CPU at typical solver
+**191,267,965,271 full seed derivations** — 5,534 days of CPU at typical solver
 rates — plus 7,939,492,344 brainwallet addresses counted separately (§2.12).
 §2.1–2.11, §2.13 and §2.14 are exhaustively eliminated, not "tried and didn't
 find". §2.12 and §2.15 are tested corpora — a weaker claim, and tagged as such
@@ -490,6 +490,23 @@ So **a + g ≥ 2** — the answer departs from the README's reading in at least 
 places. One hole remains: `a = 1` at slot 3 (`tower`) or 13 (`moon`), which were
 deliberately never freed, or a replacement outside the 55.
 
+> **This deduction is conditional on the phrase being 21 words, and that is not
+> established.** Every run in the table above is a 21-word template, so *a* and
+> *g* are defined only over that template. §5 narrows the length to **21 or 24**
+> and does not settle between them — the clock's hour hand proves slot 21
+> *exists*, which makes 21 a lower bound, not the value. The README's own table
+> runs to 24 rows with 21 through 24 blank, so it does not commit to 21 either.
+>
+> If the phrase is 24 words, `a + g ≥ 2` says nothing, because the quantities it
+> counts are not defined over that template. And the 24-word branch is
+> effectively untested: the tails carried in §3 come to 3,618,580,262 candidates,
+> 14,135,079 derivations, against a space of 2048²⁴. That is not a search, it is
+> a rounding error.
+>
+> Read it as: **if the phrase is 21 words, the answer departs from the README in
+> at least two places.** The conditional was missing from every earlier statement
+> of it, including §4's.
+
 This is stronger than the earlier statement that "at least one gap word is
 outside the pool," which was true but understated: the six leave-one-out runs
 already swept each gap across the entire dictionary, so the single-surprise case
@@ -668,9 +685,9 @@ box disjointification with real set intersections. Run it as
 `python3 tally2.py configs`.
 
 ```
-t21 campaign, 29 evidenced runs     191,282,100,350 derivations
-+ the twelve older asserted runs    194,890,996,719
-    marginal of the twelve          3,608,896,369
+t21 campaign, 29 evidenced runs     191,267,965,271 derivations
++ the twelve older asserted runs    194,876,861,639
+    marginal of the twelve          3,608,896,368
     at 400 derivations/s            5,639 CPU-days
 ```
 
@@ -744,13 +761,25 @@ nobody has enumerated, and per-run survivor counts scatter binomially around
 `N/128` — which is why every run is z-tested against that expectation rather
 than required to equal it.
 
-The convention has a rounding choice inside it, and the choice is visible:
-`⌊(A−B)/128⌋` and `⌊A/128⌋ − ⌊B/128⌋` differ by one on the current figures
-(3,608,896,368 against 3,608,896,369). Both are defensible in isolation. The
-ledger prints the two totals, so the marginal it quotes **must** be the
-difference of the two printed figures or the three numbers on the page do not
-reconcile. Floor once, at the point of reporting, and derive every difference
-from the reported values.
+The convention has a rounding choice inside it. `⌊(A−B)/128⌋` and
+`⌊A/128⌋ − ⌊B/128⌋` can differ by one, and on an earlier set of figures they did.
+They agree on the current ones, for a reason worth recording: the 24-word tails
+are now converted at their own checksum width and added *after* flooring,
+identically to both totals, so they cancel out of the difference. The rule holds
+whether or not it bites — the ledger prints the two totals, so the marginal it
+quotes **must** be the difference of the two printed figures or the three numbers
+on the page do not reconcile. Floor once, at the point of reporting, and derive
+every difference from the reported values.
+
+**The two templates cannot share a divisor.** A 21-word phrase carries seven
+checksum bits and converts at 1/128; a 24-word phrase carries eight and converts
+at 1/256. An earlier `tally2.py` added the 24-word candidate tails into the
+21-word candidate union and divided the whole sum by 128, crediting that work at
+**double** its true derivation count: 28,270,158 where 14,135,079 is correct. The
+headline was overstated by 14,135,079 derivations, 0.0074%. Numerically trivial,
+and structurally the same error as any other — a conversion applied to a
+population it does not describe. Each template now converts at its own width
+before the totals are added.
 
 **No single grand total is quoted, and that is deliberate.** The previously
 published figure (26,513,178,774) was a running sum that already included the
@@ -765,8 +794,8 @@ less trustworthy than either part. Where one number is needed, **"over 191
 billion derivations eliminated"** is a floor that is computed, in preference to
 an estimate that is not.
 
-**The headline quotes the evidenced figure, not the combined one.** 191,282,100,350
-is the union of the 29 runs whose logs are in this tree; 194,890,996,719 adds the
+**The headline quotes the evidenced figure, not the combined one.** 191,267,965,271
+is the union of the 29 runs whose logs are in this tree; 194,876,861,639 adds the
 twelve older runs carried on report alone. The larger number is not wrong, but it
 inherits the weaker warrant of its weakest component, and a headline that needs a
 footnote about which runs have logs is worse than a smaller headline that needs
