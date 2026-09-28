@@ -347,13 +347,62 @@ capitals, so **no capitalised template sequence has been tested.** The solver no
 takes `CASE lower | upper | title | all`, defaulting to `lower` and printing the
 setting in the run header, so no future run can be silently lowercase.
 
-The *image-text* corpus is a different matter, and an honest gap. Its
-description above claims casing variants, and the claim cannot be checked: no
-generator script and no key list for those 22,638 keys survives in this tree, and
-no log records them. The figure rests on the report's own prose. It is left as
-written rather than amended in either direction, and flagged here as the one
-number in §2.12 that is not reproducible from what is published. Everything else
-in this section reproduces from a config and a log.
+The *image-text* corpus had no surviving generator, key list or log, so its
+22,638 was reproducible from nothing but the sentence describing it. It now has
+one: `brain_image_corpus.py` rebuilds it from the sources that do survive —
+`slogan_lines.py`'s transcription, §7's decoded Russian, §1.4's micro-text, the
+Latin from `census_crops.py` and the seal ring, the dates, the target address,
+the BIP39 wordlist, and the PNG and IDAT digests — and derives the whole corpus
+in seconds.
+
+**The corpus that was actually run is the maximal reading: 29,408 distinct key
+strings, 176,448 addresses, no match, 3.4 seconds.** Every flag below is
+monotone — setting one only ever adds strings — so the all-True reading is the
+*union* of all 64 readings the description admits. That matters for what the
+negative covers: not one defensible interpretation of §2.12's sentence with the
+rest bounded, but every corpus that sentence could denote. The committed key
+list makes it auditable string by string. (The narrower best-justified reading
+gives 9,974 strings and 59,844 addresses, also no match.)
+
+**The description underdetermines its own corpus, and by how much is now
+measured.** §2.12's sentence leaves at least six binary choices open — whether
+punctuation-stripped and whitespace-stripped forms are both included, whether
+Title case counts as a casing, whether the pairwise concatenations themselves
+get the variant treatment, whether the 2048 BIP39 words get casing, whether the
+whole-document concatenations are in. Enumerating all 64 readings gives totals
+from **5,589 to 29,408**, a 5.3× spread. 22,638 sits inside that band. No
+reading reproduces it exactly; the nearest is 21,646, off by −992.
+
+A second discrepancy is left standing rather than resolved. §2.12 says **33**
+salient phrases; the natural list from the surviving sources is **34**. An
+earlier version of this script sliced the list to `[:33]`, which enforced the
+reported figure — and then the resulting `33 × 32 × 3 = 3,168` was briefly
+written up as *agreement* with §2.12. It was an artefact of the slice. The slice
+is gone, the count is 34, and the one-item gap is informative in a way the
+truncation destroyed: it points either at which phrase the original excluded or
+at a different counting convention.
+
+That is the claim this section carries: the sentence is underdetermined, **not**
+that the figure is doubtful. The distinction matters and the evidence supports
+only the first.
+
+**Why the search stopped at six flags.** Not gap density — each reading is a
+specific integer and even 512 of them would not reliably land on 22,638 exactly.
+The reason is simpler and harder to argue with: **six binary flags are 64
+predictions for one observation.** A model that over-parameterised cannot be
+confirmed by matching that observation at all, whatever the spacing works out
+to. What more flags would actually buy is a *near* miss close enough to round
+into agreement, which is worse than a clean gap because it reads as a result.
+The band is reported instead.
+
+One correction worth recording, because the first attempt got it wrong. The
+Latin was initially reported as having no surviving source, on a grep for
+`novus|ordo|seclorum|annuit|coeptis`. The artwork's Latin is not the Great Seal
+mottos: it is `Esse quam niger es, sic dixit caccobus ollae` in the element
+census, `FIAT JUSTITIA ET PEREAT MUNDUS` on the pyramid base, and
+`RERUM · COGNOSCERE · CAUSAS` mirror-written on the seal ring. A pattern built
+from the expected answer found nothing and was briefly taken as evidence of
+absence.
 
 > **This is [TESTED], not [EXHAUSTED].** The brainwallet class is every possible
 > string and is unbounded. The honest claim is "the phrases present in the image, plus
@@ -370,10 +419,13 @@ you would need.
 **Control, mandatory here.** A brainwallet has no checksum: every candidate passes the
 filter by construction, so a wrong SHA-256 produces a full run of plausible garbage and
 reports "exhausted, no match" exactly like a correct run. Nothing else in the pipeline
-would notice. 12/12 vectors pass — six variants of `correct horse battery staple`, plus
-three multi-block phrases at 124 bytes (`len%64=60`, forcing the extra pad block), 128
-bytes (`len%64=0`) and 157 bytes. The canonical vector is 28 bytes, a single block, and
-cannot reach the multi-block path an 18- or 24-word phrase needs.
+would notice. 26/26 vectors pass — `correct horse battery staple` under both hashes,
+both joins and all three pubkey encodings, plus UPPER and Title casing in spaced and
+concatenated form, plus three multi-block phrases at 124 bytes (`len%64=60`, forcing
+the extra pad block), 128 bytes (`len%64=0`) and 157 bytes. The canonical vector is 28
+bytes, a single block, and cannot reach the multi-block path an 18- or 24-word phrase
+needs. Every expected address was computed by an independent Python implementation
+before being used, so a shared bug could not make the two agree.
 
 Note `battery` and `staple` are not BIP39 words, so the control cannot be assembled
 without an arbitrary-word table. That made the table mandatory, not optional.
