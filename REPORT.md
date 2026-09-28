@@ -587,6 +587,59 @@ question mark was the only documentary candidate left.
 **Row 2:** *"Two cameras. Maybe could be 'twin' word?"* Tested by freeing
 slot 2 to 55 candidates including `twin`. Negative.
 
+### 2.15 [TESTED] Letter substitution: one in 331
+
+Does the artwork encode words by drawing objects in place of letters? If it did
+at any rate, the substituted letters would be a channel — and the channel would
+have to be read before the template could be trusted.
+
+**331 letters were examined glyph by glyph** at ×2–×8 nearest-neighbour, across
+every element large enough for a letter-sized object to be identifiable: the
+title words, the `FIND THE SEED PHRASE` watermark, the five slogans, the hoodie
+text, the BLM card, `FUCK THIS SHIT`, `.VS.`, the seal ring and scroll, the
+clock-hand words, the address, the plinth, the ghost text beside the address,
+and the Latin line at bottom right. Text of ~5–8 px was screened as blocks only:
+the bottom caption, the amendment copy, the pyramid base, the vial label and the
+micrography. A letter counts only if a depicted object occupies its place in the
+word — outlined, textured, micrography-filled and mirror-written letterforms all
+count as written.
+
+**Result: exactly one.** The O of `STOP` is a clenched fist. `SHIT` is fully
+lettered — the I is written, not an object — and all ten of the artist's digits
+are written.
+
+**One substitution in 331 letters is a one-off, not a system**, and the single
+instance is inert besides: neither `stop` nor `fist` is a BIP39 word, so even
+reading it yields nothing placeable.
+
+**Why this is `[TESTED]` and not `[EXHAUSTED]`.** The 331 letters examined at
+letter level are roughly **half** the artwork's text. The screened regions —
+~115 letters of bottom caption, ~179 of amendment copy, 26 on the pyramid base,
+3 on the vial, plus the `BRAVE` micrography — come to at least 323 more, so this
+census covers 331 of ≥654, about **51%**, at best. Half the letters were never
+examined at letter level, which is a finite corpus tried and empty: §0's
+definition of `[TESTED]`, not of `[EXHAUSTED]`.
+
+The screening rationale is sound on its own terms — at 5–8 px an object standing
+in for a letter could not be identified as an object, so it could not function as
+a readable channel for anyone, including the intended reader. That is why the
+unexamined residue is unlikely to hold anything. But it is an argument about
+**detectability**, not about the hypothesis being false there, and it cannot
+carry the tag. An earlier version of this section was filed `[EXHAUSTED]` on the
+ground that the census is complete over its stated scope — a justification that
+would promote every `[TESTED]` result in this document, since each is complete
+over whatever scope it states.
+
+The conclusion survives the weaker tag unchanged: one in 331 is a one-off rather
+than a system, and `stop` and `fist` being absent from BIP39 closes the reading
+at the other end regardless of how much of the artwork the census reached.
+
+The judgment is visual and cannot be computed. `census_crops.py` regenerates
+every view it was made from and prints the table, so it can be re-judged rather
+than taken on trust.
+
+---
+
 **[INFERRED] From this point, every remaining hypothesis is one we construct,
 not one the document offers.** That is a different epistemic footing from
 everything preceding it, and the distinction is worth preserving: earlier
@@ -865,12 +918,47 @@ true at 21 or 24.
    over all 2048 words with the current pool and all four paths. Empty. The chain
    was coherent and it is closed.
 
+5. **[MEASURED] A larger source image, for one specific reading: the circled
+   mark on the BLM card.** This is the only place in the artwork where the file's
+   resolution genuinely blocks a reading, and the claim is measured rather than
+   asserted.
+
+   The circle was fitted as the ring darker than both its inner and outer
+   neighbours: centre (263.5, 760.5), **diameter 17.5 px**, interior mark 13×10 px.
+   A stroke narrower than one pixel never reaches the pen's full darkness, so
+   (background − darkest) ÷ (background − pen) estimates the widest stroke. With
+   background 222 and pen 29, both taken from the BLM capitals on the same card:
+
+   | feature | darkest pixel | peak stroke coverage | px past half-pen |
+   |---|---|---|---|
+   | interior mark | 76 | **0.76 px** | 17 |
+   | ring | 118 | **0.54 px** | 2 |
+   | BLM capitals, same card (legible control) | 29 | full | 135 |
+   | rune glyph (resolved control) | 0 | full | — |
+
+   Both strokes are **sub-pixel**. Strokes that narrow merge, so a junction and a
+   near-miss render identically and the mark's topology cannot be recovered from
+   this file at all.
+
+   **It is not the STOP fist drawn small.** That emblem box-averaged down to 18 px
+   keeps **74** pixels below 90; the card mark has **4**. At this size a
+   line-drawn fist, a circled A and similar shapes are indistinguishable.
+
+   Sub-pixel strokes are what a larger working file produces when downsampled, so
+   such an original probably exists — which is the reason to want one.
+
 **Deprioritised, with reasons:**
 
-- **A larger source image.** Per §7.6 the final glyph is unassignable in principle
-  from this corpus — a perfect scan does not fix a missing key. And per §2.9 no
-  larger source exists anyway: `i.redd.it` serves the same 1600×1200 file,
-  md5-identical.
+- **A larger source image, for the rune glyph.** The glyph is not pixel-blocked:
+  §7.4 measures it at 13×20 px, 96 ink pixels, strokes 3–4 px wide, 248 levels
+  of contrast, 4 clear rows to the border above it and 5 to the separator below,
+  and no ink in the titlo band — complete, untruncated, carrying no numeral mark. Its shape is
+  fully resolved and a better scan renders the same two strokes. What is missing
+  is a **key** — the author invented glyphs beyond the 26 Gravity Falls supplies,
+  and X occurs once, so there is no second instance to triangulate from. Per §2.9
+  no larger source is served anyway: `i.redd.it` returns the same 1600×1200 file,
+  md5-identical. The circled mark above is a separate case and the only real one:
+  **a higher-resolution source can unblock one reading, not two.**
 - **More compute against the current template.** It is exhausted. A corrected
   template can be tested in seconds; an uncorrected one cannot be rescued by scale.
 
@@ -1266,6 +1354,69 @@ So that "solved" means the same thing to everyone:
    it is a better worked example than any of the thirteen bugs.
 
    Reproduce with `slogan_lines.py` in the project root (needs `mnemonic` only).
+**[MEASURED] One underline in 25 checkable words, and it lands on an assigned
+word.** The hand-copied 13th Amendment was censused across 34 tokens — 32 body
+words plus the heading `Section 1.` A word counts as *marked* only if the
+thin-line detector finds a run covering ≥50% of it with at least one clean run;
+*obscured* if spray paint covers ≥40% of its underline band.
+
+| status | count |
+|---|---|
+| underlined | **1** (`subject`) |
+| visible, unmarked | 24 (12 under a strict 25% spray rule) |
+| obscured, uncheckable | 7 |
+| heading `Section 1.` | indeterminate |
+
+`subject` is BIP39 **#1728** and the template's **assigned** word for slot 1. It
+is in no pool, so the underline proposes no new candidate — **it is the first
+physical, in-image corroboration of any template assignment in this project.**
+Every other assignment rests on the README alone.
+
+**State the base rate in the same breath.** Of the amendment's 32 body words,
+exactly **one** is an assigned template word (`subject`) and six more are gap-pool
+words — nowhere near the half a first guess suggests. But the denominator here is
+the 25 *checkable* words, and one of those six (`any`) is in the obscured seven,
+so among the checkable words there are **six** template-relevant words, not
+seven: `subject`, `crime`, `exist`, `neither`, `party`, `place`. A single mark
+placed at random among the 25 hits *the assigned word* with probability
+**1/25 = 4.0%**, and hits *any* template-relevant word with probability
+**6/25 = 24%**.
+
+4% is low enough to be worth recording and nowhere near low enough to lean on.
+This is corroboration, not proof, and §9 criterion 5 applies to it as much as to
+anything else — the more so because the underline was one of nine first reads in
+this pass and the only one that survived, which is exactly the position from
+which a surviving observation looks more significant than it is.
+
+The mark is a drawn line, not spray halo: it has a paper-level row directly
+beneath it and runs on across a letter gap with no spray underneath, where the
+two control words on the same line darken steadily into the spray with no
+separate line. Detector positive control passes on the `subject` line itself;
+the known false-positive mode — a flat baseline where rounded letter bottoms
+touch, as at y842 under `servitude` — is distinguished by the absence of a
+lighter row between line and letters. Scripts: `t3_lines.py`, `t3_census.py`.
+
+**Calibration: of 9 first reads in the image pass, 1 survived.**
+
+| first read | outcome |
+|---|---|
+| `-IGHT` on the BLM card | not text: flat row profile, 35 levels of contrast against 193 for the BLM capitals |
+| `SHT`, missing its I | `SHIT` is complete |
+| `except` underlined | spray edge; the word is uncheckable |
+| `DAY FOR THE FUTURE` | it reads `PAY`, so `day` stays translation-only |
+| `wich` for "which" | indeterminate: the ascender band lies under the frame stripe |
+| `Section 1.` underlined | indeterminate |
+| `FELIX` on the seal ring | it is `RERUM` |
+| SHIT letter spacing, first measurement | the T was cropped below its crossbar and measured as an 8-px stem; with full letters every letter gap is narrower than the X gap |
+| `subject` underlined | **survived** |
+
+**An 8-in-9 withdrawal rate is the number to keep in view when reading any
+single image observation in this report, including the one that survived.** The
+rule it produced: nothing enters the record from an upscaled view until it has
+survived a native-pixel re-measurement, with a control.
+
+---
+
 ## 10. Method
 
 Custom CUDA pipeline, RTX 4070 Laptop (sm_89):
@@ -1606,6 +1757,12 @@ fatal to correctness.
 ---
 
 *Published so these paths are not re-walked. If you have a word for slot 21,
-evidence placing 22–24, a resolution of slot 11, a genuinely larger source
-image, or a legible view of the final rune glyph — that is worth more than any
-amount of GPU. A corrected template can be tested in seconds.*
+evidence placing 22–24, a resolution of slot 11, a **key** to the glyphs the
+author invented beyond the Gravity Falls 26, or a genuinely larger source image
+— that is worth more than any amount of GPU. A corrected template can be tested
+in seconds.*
+
+*Note what is no longer asked for: a legible view of the final rune glyph. It is
+already legible. §7.4 resolves its shape completely and §6 explains why pixels
+were never the obstacle there — the circled mark on the BLM card is the one
+reading in the artwork that a larger file would actually unblock.*
