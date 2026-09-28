@@ -1,4 +1,4 @@
-# 0.2 BTC Puzzle — the rune cipher solved, over 190 billion derivations eliminated, and six defects in the shared data
+# 0.2 BTC Puzzle — the rune cipher solved, over 191 billion derivations eliminated, and six defects in the shared data
 
 **Target:** `1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ`
 **HASH160:** `ccbd031e54cde2a3189fd59bc49f731367a1779e`
@@ -11,7 +11,7 @@ What **is** solved is the **rune cipher**, except for a single glyph. Those are
 different claims and this report keeps them separate throughout.
 
 I built a GPU search pipeline covering both BIP39 and Electrum and ran
-**190,701,305,838 full seed derivations** — 5,518 days of CPU at typical solver
+**191,282,100,350 full seed derivations** — 5,535 days of CPU at typical solver
 rates — plus 7,939,492,344 brainwallet addresses counted separately (§2.12).
 Everything in §2.1–2.11 is exhaustively eliminated, not "tried and didn't find";
 §2.12 is a tested corpus, which is a weaker claim and is marked as such."
@@ -332,6 +332,29 @@ template over a 63-word pool (the 52-word pool plus the eleven image words that 
 a brainwallet permits and a mnemonic cannot). All four key variants — SHA256 and
 double-SHA256, space-joined and concatenated — each as compressed and uncompressed.
 
+Two scope limits on that corpus, both narrow and both stated rather than
+implied. It ran at **t18**, not t21 — this section makes no claim about the
+21-word template. And it predates hybrid-key support, so it covers compressed
+and uncompressed only; the kernel now hashes all three, but the 7.94 B figure
+above was measured before that.
+
+**Casing, which applies to the two corpora differently.** The *template* corpus
+is **lowercase only**, verified: every `SLOT`, `POOL` and `EXTRA` word in
+`brain_t18_pool63.conf` is lowercase, the BIP39 wordlist is lowercase, and the
+phrase builder emitted those bytes verbatim — at the time of that run it had no
+casing parameter to pass. SHA-256 is case-sensitive and the artwork is in
+capitals, so **no capitalised template sequence has been tested.** The solver now
+takes `CASE lower | upper | title | all`, defaulting to `lower` and printing the
+setting in the run header, so no future run can be silently lowercase.
+
+The *image-text* corpus is a different matter, and an honest gap. Its
+description above claims casing variants, and the claim cannot be checked: no
+generator script and no key list for those 22,638 keys survives in this tree, and
+no log records them. The figure rests on the report's own prose. It is left as
+written rather than amended in either direction, and flagged here as the one
+number in §2.12 that is not reproducible from what is published. Everything else
+in this section reproduces from a config and a log.
+
 > **This is [TESTED], not [EXHAUSTED].** The brainwallet class is every possible
 > string and is unbounded. The honest claim is "the phrases present in the image, plus
 > the template sequences over a 63-word pool". It is **not** filed with the GPU sweeps
@@ -539,11 +562,73 @@ box disjointification with real set intersections. Run it as
 `python3 tally2.py configs`.
 
 ```
-t21 campaign, 22 evidenced runs     187,091,405,931 derivations
-+ the twelve older asserted runs    190,701,305,838
-    marginal of the twelve          3,609,899,907
-    at 400 derivations/s            5,518 CPU-days
+t21 campaign, 29 evidenced runs     191,282,100,350 derivations
++ the twelve older asserted runs    194,890,996,719
+    marginal of the twelve          3,608,896,369
+    at 400 derivations/s            5,639 CPU-days
 ```
+
+**The seven runs added on 27–28 September are why the union matters.** Six were
+the black-relocation sweep and one a pool expansion. Added as boxes they
+contribute **4,190,694,419** derivations; added as a sum they would contribute
+5,105,437,240. The 914,742,821 difference is entirely `t21_pool75`; the six black
+runs overlap nothing and contribute their full 387,420,489 each. An addition would
+have overstated the total by 0.48% and there would have been nothing in the
+arithmetic to reveal it.
+
+**Where pool-75's overlap actually comes from.** Containment of the earlier
+pool-54 box is the obvious mechanism and it is not the main one. Marginal
+coverage of pool-75's 2,780,914,306, taken from the box definitions:
+
+```
+t21_readme54     387,420,489   cumulative   387,420,489   13.93%
+t21_loo21        150,663,523                538,084,012   19.35%
+t21_loo6          75,331,761                613,415,774
+t21_loo8          75,331,761                688,747,536
+t21_loo14         75,331,761                764,079,297
+t21_loo15         75,331,761                839,411,059
+t21_loo18         75,331,761                914,742,821   32.89%
+```
+
+`t21_readme54` — the pool-54 run pool-75 strictly contains — accounts for
+387,420,489, or 13.93%. The remaining **527,322,332 (18.96%)** is the six
+leave-one-out runs, which each swept a gap over all 2048 words and so reach
+into pool-75 wherever the rest of the template agrees. The fourteen
+free-one-fixed boxes, `t21_swap114` and `t21_written` add **nothing** beyond
+what the leave-one-out family already covers.
+
+`t21_loo21` contributes exactly twice the marginal of each of the other five,
+and the reason is in the configs, not in any symmetry: `t21_loo21`, `t21_readme54`
+and `t21_pool75` all take `SLOT 20 apple|second`, while `t21_loo6/8/14/15/18`
+pin `SLOT 20 second`. Two words against one, at one slot, is a factor of two in
+the intersection. A uniformity assumption across the six would have been wrong
+by that factor — which is why these are computed from the box definitions.
+
+**All three public-key encodings are hashed, so the address-representation
+question is closed.** Every derived key is serialised three ways and each is
+hashed and compared: compressed (33 B, `0x02`/`0x03`), uncompressed (65 B,
+`0x04`) and hybrid (65 B, `0x06`/`0x07`, SEC1 2.3.3). One EC multiply feeds all
+three — y is already in hand for the parity byte — so the cost is two extra
+SHA-256 + RIPEMD-160 per key. `1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ` carries
+version byte `0x00`, so it is P2PKH: neither P2SH-wrapped segwit nor bech32 can
+be the target. With all three encodings covered, this is **exhausted without
+qualification** — not "over the encodings wallets happen to produce".
+
+Three permanent regression configs pin it: `selftest_find.conf`,
+`selftest_uncomp.conf` and `selftest_hybrid.conf` are the same phrase at the
+same path with the same private key, differing only in serialisation, so any
+future miss isolates exactly one code path. All three recover index 2270828.
+
+**The runs before this change were compressed-only, and are not being re-run.**
+Measured, not assumed: the pre-patch binary was kept and run against the
+uncompressed address of a known phrase, and it exhausted without finding it. So
+the 191.3 B carries one scope line — *compressed-pubkey P2PKH* — and that is
+sufficient, because BIP32 wallets emit compressed leaf keys at every path
+including `m/0/0` and `m/0'/0/0`, while the 2013-era software that produced
+uncompressed keys (Electrum v1 old seeds, brainwallets, pre-0.6 Core) never used
+BIP32 paths at all. The two populations do not intersect. Everything from here
+covers all three regardless, because conditioning the check on that argument
+would let the next kernel variant drop back to compressed-only in silence.
 
 **What "derivations" means here, exactly.** A 21-word mnemonic carries seven
 checksum bits, so one sequence in 128 is valid and the ledger reports
@@ -555,7 +640,7 @@ than required to equal it.
 
 The convention has a rounding choice inside it, and the choice is visible:
 `⌊(A−B)/128⌋` and `⌊A/128⌋ − ⌊B/128⌋` differ by one on the current figures
-(3,609,899,906 against 3,609,899,907). Both are defensible in isolation. The
+(3,608,896,368 against 3,608,896,369). Both are defensible in isolation. The
 ledger prints the two totals, so the marginal it quotes **must** be the
 difference of the two printed figures or the three numbers on the page do not
 reconcile. Floor once, at the point of reporting, and derive every difference
@@ -570,9 +655,16 @@ roughly zero and the whole 26.5 billion.
 
 The t21 figure above **is** computed, and every digit reproduces from
 `tally2.py configs`. Adding an unverifiable constant to it would make the sum
-less trustworthy than either part. Where one number is needed, **"over 190
+less trustworthy than either part. Where one number is needed, **"over 191
 billion derivations eliminated"** is a floor that is computed, in preference to
 an estimate that is not.
+
+**The headline quotes the evidenced figure, not the combined one.** 191,282,100,350
+is the union of the 29 runs whose logs are in this tree; 194,890,996,719 adds the
+twelve older runs carried on report alone. The larger number is not wrong, but it
+inherits the weaker warrant of its weakest component, and a headline that needs a
+footnote about which runs have logs is worse than a smaller headline that needs
+none. The previous headline had the same dependency and did not disclose it.
 
 **EVIDENCED versus ASSERTED is deliberate.** Runs with logs present in the
 working tree are separated from runs included on report alone. A config is not
@@ -819,10 +911,13 @@ Its geometry is a vertical stroke crossed by a single diagonal, one arm up-right
 one down-left — verified identically in the master and in `20_1.png`.
 
 **X matches neither the mapped alphabet, nor the artist's Arabic numerals, nor
-the remaining plausible Church-Slavonic numerals, and carries no titlo. It is an
-unresolved unique symbol, visually suggestive of `ж` but quantitatively
-unassigned.** It occurs exactly once in 68 glyphs, which is *why* it has never
-been read.
+the remaining plausible Church-Slavonic numerals, and carries no titlo. It is a
+hapax — shape fully resolved, meaning unassigned.** The distinction matters and
+the earlier wording blurred it: the geometry is *not* in doubt. It is a vertical
+stroke crossed by a single diagonal, four arms from the crossing point, verified
+identically in the master and in `20_1.png`. What is unassigned is which
+character that shape denotes. It occurs exactly once in 68 glyphs, which is
+*why* it has never been read.
 
 ### 7.6 [MEASURED] Linguistic exhaustion — an independent route to the same wall
 
@@ -951,6 +1046,18 @@ all three coincident, two coincident, all three 120° apart, symmetric about an
 axis. Dividing across four such alternatives gives ~1 in 130, and four is
 conservative. **State it as order 10⁻², not 10⁻³.** That is still the strongest
 number in the section, and it no longer overstates.
+
+**The same discipline applied to a coincidence in the survivor counts.** In the
+six-run black sweep of 27–28 September, `t21_black8` came in at exactly
+**+20,301** survivors against the `N/128` expectation and `t21_black21` at
+exactly **−20,301** — the same magnitude, opposite signs. Across the 15 pairs
+available from six runs, an exact magnitude match is of order 1 in 4,600. That
+is noticeable and it is not evidence: no mechanism connects the two runs, they
+differ only in where `black` sits, and 1 in 4,600 is the *unconditional* figure
+before any correction for the many other coincidences that would equally have
+been flagged. Noted and dismissed. It is recorded here rather than omitted
+because a reader checking the six counts will find it, and should find it
+already accounted for.
 
 **[RETRACTED] The inference the pattern carried.** That the seed words come from
 outside the image and the artwork supplies only the ordering. With one entry
@@ -1230,6 +1337,8 @@ output with zero register spills and no warnings:
   18-word and 100% of 21/24-word mnemonics are longer
 - a chunk-sizing assumption that survivor counts are exact rather than binomial
 - an incorrect canonical 24-word address recalled rather than computed
+- a widened bit field in the hit record that eight of twelve control cases were
+  structurally unable to see (below)
 - `BigInteger.Parse(hex, NumberStyles.HexNumber)` misparsing an **odd-length**
   string. A curve constant written as `"0" + 64 hex chars` comes back 4 bits shifted;
   PBKDF2 and BIP32 master stay byte-perfect against test vectors while every derived
@@ -1348,6 +1457,22 @@ output with zero register spills and no warnings:
    git show HEAD:REPORT.md | grep -c '\[FIGURE\]'
    git show --stat HEAD | tail -3
    ```
+
+**A partial pass is not a pass.** Adding hybrid public keys widened the pubkey
+index in `hit[1]` from one bit to two, which moved the `sp` and `kd` fields up by
+one. The kernel was updated; the selftest's expected-value computation was not.
+Twelve cases ran and **eight passed** — every case with `sp = 0` and `kd = 0`,
+because at zero the two bit layouts are numerically identical. The suite looked
+two-thirds healthy while the field it was checking had moved underneath it, and
+the four failures were exactly the cases where the layouts disagree.
+
+Two things made it recoverable. The pre-patch binary had been kept, so
+`--selftest-brain` on it returned 12/12 and localised the change to the patch
+rather than the hardware or the vectors. And the failure pattern was itself
+diagnostic: a fault that spares every case sharing a particular parameter value
+is pointing at that parameter. What would *not* have worked is reading "8/12" as
+mostly-working. A control suite reports on the code as it was when the suite was
+written; when the two drift, the suite's silence is not evidence.
 
 **If you run your own solver: validate against exact expected counts, not
 plausible-looking ones.** A 1.2% deviation is invisible to a sanity check and

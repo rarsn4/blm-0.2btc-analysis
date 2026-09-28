@@ -552,7 +552,9 @@ Append to the existing eight.
 
 §10 has no rules list to append to — this is a NEW subsection, inserted after the
 closing "validate against exact expected counts" advice (line 793) and before the
-`---` at 795. patch5.py adds the heading.
+`---` at 795. patch5.py added the heading; that script is retired (it pinned an
+800-line REPORT.md at 5fee94d and aborted once the file grew past it, which is the
+assertion working as intended).
 
 > - **A number that lands where you expected is the one to check twice.** **Five**
 >   instances in a single day, each a figure that agreed with its author and so was
