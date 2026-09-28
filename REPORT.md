@@ -13,8 +13,9 @@ different claims and this report keeps them separate throughout.
 I built a GPU search pipeline covering both BIP39 and Electrum and ran
 **191,282,100,350 full seed derivations** — 5,535 days of CPU at typical solver
 rates — plus 7,939,492,344 brainwallet addresses counted separately (§2.12).
-Everything in §2.1–2.11 is exhaustively eliminated, not "tried and didn't find";
-§2.12 is a tested corpus, which is a weaker claim and is marked as such."
+§2.1–2.11, §2.13 and §2.14 are exhaustively eliminated, not "tried and didn't
+find". §2.12 and §2.15 are tested corpora — a weaker claim, and tagged as such
+in their own headings.
 
 Code, configs and every hypothesis tested:
 https://github.com/rarsn4/blm-0.2btc-analysis
