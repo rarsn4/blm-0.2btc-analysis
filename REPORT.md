@@ -542,9 +542,18 @@ deliberately never freed, or a replacement outside the 55.
 > six, and keeps slot 20's two readings:
 >
 > ```
-> 54⁹ × 2 / 256 = 30,502,389,939,948 derivations
->                 7,579 days = 20.7 years at 11,925,000 cand/s
+> candidates   54⁹ × 2       = 7,808,611,824,626,688
+> derivations  ÷ 256         =    30,502,389,939,948
+> wall time    ÷ 11,925,000 cand/s = 7,579 days = 20.7 years
 > ```
+>
+> **The wall time is costed from the CANDIDATE count, not the derivation
+> count, and the distinction is a factor of two.** Every rate elsewhere in this
+> report is a 21-word rate, where 128 candidates yield one derivation; a
+> 24-word template yields one per 256. Taking 30,502,389,939,948 derivations
+> and dividing by a derivations-per-day figure from §3 applies a /128 rate to a
+> /256 count and halves the answer. The solver enumerates candidates and the
+> clock runs on candidates, so candidates are what the hours are computed from.
 >
 > **That floor is 159× the entire 21-word campaign to date.** The assumption it
 > rests on is named rather than buried: it presumes slot 24's word is *in the
@@ -806,9 +815,18 @@ asks who first said it. Together they close the loop.
 | `breathe`; `subject` "underlined" | u/Accomplished_Weird36 | 2021-02-02 |
 
 privatekeys.pw copies Minase's list, which is itself tagged "(source reddit)".
-The posting account was created 3 min 48 s before the post, carries one post
-with no text, never edited it, and wrote none of the 273 archived thread
-comments. The only author text in existence is the title "Bitcoin puzzle
+
+**The post, so an outsider can check this rather than take it.** Reddit
+submission [`j79zvj`](https://www.reddit.com/comments/j79zvj), titled "Bitcoin
+puzzle (2000$)", posted by **u/stsh_n** on **2020-10-08 09:25 UTC** to the
+account's own profile, carrying the image
+[`i.redd.it/n1x7g8ceaur51.png`](https://i.redd.it/n1x7g8ceaur51.png) — which is
+byte-identical to this project's working file, md5
+`7710323461a924987eb35c77055e59f6`. The account was created **3 min 48 s**
+before the post, carries that one post, has no text body, was never edited, and
+wrote **none** of the 273 archived thread comments. Claims about what the author
+did and did not say are checkable against those two identifiers; without them
+the claim is unfalsifiable, which is what it was until now. The only author text in existence is the title "Bitcoin puzzle
 (2000$)" and the artwork, which says **SEED PHRASE**, not passphrase. Nothing
 from the author covers word count, wallet or language.
 
@@ -1332,9 +1350,13 @@ Cross-line agreement on `а д е с у и н р т ь ы б ч` — each verifi
 two independent inscriptions.
 
 **Reading geometry.** The right-edge inscription runs **bottom-to-top** on the master
-(x 1529–1554, y 29–1014); the same text reads left-to-right in `pictures/20_1.png`,
-which is a cleaner de-rotated render and is far more legible than anything
-extractable from the 1600×1200 master. Use it for glyph work. The clock line reads
+(x 1529–1554, y 29–1014); the same text reads left-to-right in
+[`pictures/20_1.png`](https://github.com/HomelessPhD/BLM_0.2BTC/blob/master/pictures/20_1.png)
+— **a file in HomelessPhD's repository, not this one** — a 797×45 de-rotated
+render (md5 `24640d4a4020a1ac86d4d690a54b8e0f`) far more legible than anything
+extractable from the 1600×1200 master. It is cited rather than copied here
+because it is someone else's artefact; the md5 lets you confirm you have the
+same file. Use it for glyph work. The clock line reads
 left-to-right, and its ink sits at luminance ~160–200 against a light background — a
 hard threshold near 120 finds nothing, so use a levels stretch rather than a contrast
 multiply.
@@ -1371,14 +1393,14 @@ The valid test is structural. X has **four** arms from its crossing point; `ж` 
 **six**. That refutes it on shape, which correlation could not do.
 
 Its geometry is a vertical stroke crossed by a single diagonal, one arm up-right and
-one down-left — verified identically in the master and in `20_1.png`.
+one down-left — verified identically in the master and in `20_1.png` (§7.3).
 
 **X matches neither the mapped alphabet, nor the artist's Arabic numerals, nor
 the remaining plausible Church-Slavonic numerals, and carries no titlo. It is a
 hapax — shape fully resolved, meaning unassigned.** The distinction matters and
 the earlier wording blurred it: the geometry is *not* in doubt. It is a vertical
 stroke crossed by a single diagonal, four arms from the crossing point, verified
-identically in the master and in `20_1.png`. What is unassigned is which
+identically in the master and in `20_1.png` (§7.3). What is unassigned is which
 character that shape denotes. It occurs exactly once in 68 glyphs, which is
 *why* it has never been read.
 
