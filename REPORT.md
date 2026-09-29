@@ -735,15 +735,17 @@ difference has never been tabulated.
 | 5 | `police` | depicted | "line five" — a convention used nowhere else in the table |
 | 12 | `vote` | association only | the `.VS.` ambigram |
 | 17 | `gold` | inferred from the chart | inferred from the chart |
-| 11 | `pyramid` | depicted | contested: pyramid 5+6 against the Space Needle. Freeing slot 11 found no candidate fits at all, which suggests the conflict runs deeper than a two-way choice |
-| 10 | `black` | the rune line `чёрный день номер X` | the same line, via `номер X` — a glyph §7.4 shows is unreadable |
+| 11 | `pyramid` | depicted | **worse than contested.** The stated conflict is pyramid 5+6 against the Space Needle, but freeing slot 11 found **no candidate fits at all** (§6) — so the problem is not choosing between two words, it is that neither is right |
+| 10 | `black` | the rune line `чёрный день номер X`, written as running prose with **no mark of any kind** — unlike `subject`, `tower` and `moon`, the three other ink-supported words, each of which carries a positional marker (n=3, suggestive not conclusive) | the same line, via `номер X` — a glyph §7.4 shows is unreadable |
 | 20 | `apple` | README table row, **empty description** | none: §2.16 finds no README value to be right about, and weakens `XX` → 20 |
 
 **Three of fifteen are written in the artwork.** Six rest on counting things.
-Three on association or inference. One is contested. Two rest on nothing that
-survives inspection — slot 20 by §2.16 above, and slot 10 on a glyph that §7.4
-establishes cannot be read by anyone, which §2.13 already called "load-bearing
-since 2020 on nothing but a glyph nobody can read".
+Three on association or inference. One — slot 11 — is not merely contested
+between two readings but has been tested and fits neither. Two rest on nothing
+that survives inspection: slot 20 by §2.16 above, and slot 10 on a glyph that
+§7.4 establishes cannot be read by anyone, which §2.13 already called
+"load-bearing since 2020 on nothing but a glyph nobody can read" — and which
+the ink measurement below now detaches at the other end too.
 
 **The parity split is not a coincidence, and it has not been written down.** §5
 proves the clock — the one mechanism the artwork captions — yields odd slots and
@@ -780,18 +782,47 @@ the template resting on an unstated mechanism is the half that would take a year
 and a half to check**, and the branch that would matter most — slot 10, whose
 support is a glyph nobody can read — is ninety-nine days on its own.
 
-> **One claim is held out of the table.** A reading has been proposed in which
-> `на чёрный день` is the ordinary Russian idiom "for a rainy day" rather than a
-> literal "black day", which would dissolve slot 10's derivation entirely —
-> `чёрный` would be part of a fixed phrase naming nothing, and `номер X` would
-> lose its anchor. The idiom is real and the reading is plausible. It is not
-> entered above because **no measurement or census supporting it exists in this
-> tree**: every record here, including §7.4 and §7.5, translates the line
-> literally. Recorded as pending rather than adopted, on the §2.12 principle —
-> a claim whose support cannot be found is not promoted by being repeated. What
-> would settle it is a segmentation showing whether the line runs on as prose
-> past `день`, which is the same instrument §7.2 used for the monoalphabetic
-> test.
+**[MEASURED] The ink treats `на чёрный день` as ordinary running prose.**
+`idiom_ink.py` segments the right-edge column and measures whether `чёрный день`
+is set apart from its neighbours in any way the ink can express:
+
+- **Not by size or weight.** Across glyph height, glyph width, ink pixels per
+  glyph and ink darkness, every z-score for `чёрный` and `день` is within
+  **±0.76** of the column mean.
+- **Not by separation.** The column has **seven** separators, all the same
+  three-dot glyph at x ≈ 1534 / 1542 / 1551, sitting at *every* adjacent word
+  boundary — `чёрный | день` included, treated exactly like every other pair.
+  The clear rows flanking them (6/4 and 6/2) sit inside the column's own 2–9
+  range. No punctuation marks the comma the plaintext would need.
+- **Not by annotation.** There is no ink beside any word in the column. The one
+  non-zero reading, 80 px beside `номер`, is the CCTV camera's body.
+
+The only word that *is* distinguished is `номер X`, and in the opposite
+direction: three of its four comparable letters are 21–36% shorter than the same
+letters elsewhere in the column (`н` 15 against 19–22, `о` 12 against 16–18, `р`
+14 against 20–22, while `е` at 17 is one row *taller*), its letter gaps are 1–2
+rows against a column median of 3.5, and the separator before `X` has the
+tightest dot spread in the column at 12.7 px against 15.0–18.4. These are the
+last words before the frame, so this is the signature of **running out of room**,
+not of emphasis.
+
+The other two inscriptions use the same system: five separators for five
+within-line word boundaries top-left, two for two on the clock, all three-dot,
+none grouping words. Per-word size there varies by *line*, not by word.
+
+> **The limit, which the measurement states itself.** The ink encodes words and
+> nothing above them, so it would look identical if `чёрный` *were* being named.
+> This cannot supply positive support for the idiom reading. What it establishes
+> is that **nothing in the ink supports the naming reading** — and under §9's
+> simplicity criterion, running prose makes the idiom the simpler reading.
+>
+> Under it the rune supplies neither half of slot 10's row: `чёрный` is part of
+> a fixed phrase naming nothing, and `номер X` is an identifier. `black` is
+> still written in BLACK LIVES MATTER, but that assigns it no slot.
+
+Verified independently before being entered: bundle sha256 `dc4da37f…7b05a`,
+31 of 31 manifest entries OK, and a local re-run of `idiom_ink.py` is
+byte-identical to the bundled `expected_output/idiom_ink.txt`.
 
 ---
 

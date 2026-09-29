@@ -1,0 +1,50 @@
+1. SEPARATORS (top to bottom), with the clear rows on each side
+   between (reading order) rows       dots  dot x-centres            gap above / below
+   номер | X              y58-60    3     [np.float64(1538.3), np.float64(1545.1), np.float64(1551.0)] 5 / 3
+   день | номер           y147-150   3     [np.float64(1534.7), np.float64(1542.5), np.float64(1551.9)] 5 / 3
+   чёрный | день          y246-248   3     [np.float64(1534.0), np.float64(1542.2), np.float64(1550.5)] 6 / 4
+   на | чёрный            y396-399   3     [np.float64(1535.1), np.float64(1543.0), np.float64(1551.0)] 6 / 2
+   биткоины | на          y448-452   3     [np.float64(1533.4), np.float64(1542.0), np.float64(1549.9)] 4 / 5
+   зашифрованы | биткоины y637-641   3     [np.float64(1534.0), np.float64(1541.4), np.float64(1549.0)] 3 / 4
+   ? | зашифрованы        y909-911   3     [np.float64(1531.9), np.float64(1541.0), np.float64(1550.3)] 9 / 5
+
+2. WORDS: glyph size, darkness, spacing (reading order is bottom-to-top)
+   word         glyphs   mean h   mean w ink/glyph  ink mean letter gaps (rows)
+   X                 1     13.0     20.0      96.0      14.9 []
+   номер             5     14.6     20.4     153.6      17.4 [2, 1, 1, 1]
+   день              4     19.0     21.0     149.8      19.7 [4, 2, 4]
+   чёрный            6     19.8     20.8     180.3      19.8 [5, 4, 4, 3, 2]
+   на                2     20.0     21.0     173.5      22.0 [2]
+   биткоины          8     18.4     22.2     178.8      19.8 [6, 3, 4, 4, 5, 3, 4]
+   зашифрованы      11     20.0     21.2     186.8      19.3 [5, 3, 4, 2, 3, 3, 2, 4, 4, 4]
+   all within-word letter gaps: median 3.5, range 1-6
+   z-score of mean glyph height  чёрный +0.76  день +0.44  (others X -1.83, номер -1.22, на +0.82, биткоины +0.21, зашифрованы +0.82)
+   z-score of mean glyph width   чёрный -0.18  день +0.07  (others X -1.46, номер -0.85, на +0.07, биткоины +1.99, зашифрованы +0.35)
+   z-score of ink px per glyph   чёрный +0.71  день -0.35  (others X -2.20, номер -0.21, на +0.47, биткоины +0.65, зашифрованы +0.93)
+   z-score of ink darkness       чёрный +0.38  день +0.33  (others X -1.95, номер -0.78, на +1.46, биткоины +0.42, зашифрованы +0.15)
+
+3. INK BESIDE THE COLUMN next to each word (x1508-1525, left of the glyphs; pixels < 150)
+   X            y40-52    side ink   0 px over 13 rows
+   номер        y64-141   side ink  80 px over 78 rows
+   день         y154-239   side ink   0 px over 86 rows
+   чёрный       y253-389   side ink   0 px over 137 rows
+   на           y402-443   side ink   0 px over 42 rows
+   биткоины     y458-633   side ink   0 px over 176 rows
+   зашифрованы  y646-899   side ink   0 px over 254 rows
+   (the only non-zero entry, beside 'номер', is the CCTV camera's body at x1470-1515)
+
+4. CONTROL for 'номер': the same letter inside it vs elsewhere in the column (glyph height, rows)
+   н  in номер [15]   elsewhere 19 (день), 22 (чёрный), 20 (на), 21 (биткоины), 22 (зашифрованы)
+   о  in номер [12]   elsewhere 18 (биткоины), 16 (зашифрованы)
+   м  in номер [15]   elsewhere none
+   е  in номер [17]   elsewhere 16 (день)
+   р  in номер [14]   elsewhere 20 (чёрный), 22 (зашифрованы)
+
+5. THE OTHER TWO INSCRIPTIONS: separators, and per-word glyph height / darkness
+   top-left 1 3 separators for 3 word boundaries: x219-220 (3 dots, h14), x336-337 (3 dots, h10), x381-383 (3 dots, h11)
+   top-left 2 1 separators for 1 word boundaries: x259-261 (3 dots, h10)
+   top-left 3 1 separators for 1 word boundaries: x262-264 (3 dots, h11)
+   clock      2 separators for 2 word boundaries: x339-340 (3 dots, h11), x401-402 (3 dots, h10)
+   top-left: Я h15.0 (z+1.1) ink154 (z+0.6); надеюсь h15.1 (z+1.2) ink156 (z+1.1); что h13.0 (z-0.3) ink156 (z+1.0); сюда h15.3 (z+1.4) ink156 (z+0.9); будут h12.8 (z-0.5) ink152 (z-0.3); присылать h12.1 (z-1.0) ink151 (z-0.4); много h11.8 (z-1.3) ink149 (z-1.1); биткоинов h12.7 (z-0.6) ink147 (z-1.7)
+   clock: сумма h12.8 (z+1.2) ink193 (z-0.9); двух h12.0 (z+0.1) ink195 (z+1.4); чисел h11.0 (z-1.3) ink194 (z-0.5)
+   (top-left variation follows the LINE: line 1 ~15 px, lines 2-3 ~12-13 px)
