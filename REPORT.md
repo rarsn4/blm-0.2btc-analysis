@@ -747,6 +747,34 @@ that survives inspection: slot 20 by §2.16 above, and slot 10 on a glyph that
 "load-bearing since 2020 on nothing but a glyph nobody can read" — and which
 the ink measurement below now detaches at the other end too.
 
+**[MEASURED] Who first claimed each word — no assigned word traces to the
+author.** The table above asks what holds a word up in the artwork. This one
+asks who first said it. Together they close the loop.
+
+| hint | first posted by | date |
+|---|---|---|
+| `moon`, `tower`, `real`, `subject` | u/boriserd | 2020-10-12 |
+| `Tuesday` | u/hmm_dimasiki | 2021-01-10 |
+| `food` | u/meserit | 2021-01-31 |
+| `breathe`; `subject` "underlined" | u/Accomplished_Weird36 | 2021-02-02 |
+
+privatekeys.pw copies Minase's list, which is itself tagged "(source reddit)".
+The posting account was created 3 min 48 s before the post, carries one post
+with no text, never edited it, and wrote none of the 273 archived thread
+comments. The only author text in existence is the title "Bitcoin puzzle
+(2000$)" and the artwork, which says **SEED PHRASE**, not passphrase. Nothing
+from the author covers word count, wallet or language.
+
+**Community attribution is not community invention, and the two tables are the
+only place in this report where both facts about a word sit together.**
+`subject` was *claimed* by a Reddit user in October 2020 **and** is
+*independently underlined in the ink* (§9) — those are different kinds of fact
+and the underline does not become weaker for having been noticed by a
+commenter. What the pairing does establish is that every assigned word entered
+circulation through a reader, not a source: there is no authorial statement
+behind any of the fifteen, and the ink independently supports only three of
+them.
+
 **The parity split is not a coincidence, and it has not been written down.** §5
 proves the clock — the one mechanism the artwork captions — yields odd slots and
 nothing else. §5 already draws the consequence for the *open* even slots: they
@@ -1924,6 +1952,24 @@ changed a conclusion, which is exactly why the pattern is worth naming — each
 survived because it was *roughly* right, and roughly right is how a table's
 authority gets transferred to a sentence that has not earned it. When writing
 prose over a table, re-read the table.
+
+**The same rule one level up: a decision drifts from the message that set it.**
+The note above is about a sentence drifting from its table. The identical
+failure happens to decisions, and in the same place — the closing line of a
+status report, which is the sentence least likely to be re-read by either
+party. A settled decision restated from memory in a sign-off is not a record of
+the decision; the message that set it is. Re-read that message, not the last
+report that mentioned it.
+
+This entry is deliberately stated as a rule without an instance. The case that
+prompted it is disputed: one party's record has "let lowercase finish, then
+STOP", the other's has "SEQUENCING confirmed: upper, then title … queue CASE
+upper when pool65 lands", and neither can produce the other's message. That is
+itself the more useful observation — when a decision is carried in prose across
+a boundary rather than committed to a file, there is no artefact to check, and
+both sides can be reporting honestly. The fix is not more care in sign-offs. It
+is that a decision which governs machine time should exist as a config, a
+script, or a line in this document, where it can be diffed.
 
 **A partial pass is not a pass.** Adding hybrid public keys widened the pubkey
 index in `hit[1]` from one bit to two, which moved the `sp` and `kd` fields up by

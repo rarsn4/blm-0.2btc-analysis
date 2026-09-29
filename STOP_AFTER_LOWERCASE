@@ -1,0 +1,10 @@
+Decision, 2026-09-29: the GPU stops after brain_t21_pool65 (lowercase) and
+stays idle. CASE upper and CASE title are NOT to be queued.
+
+Reason: the only text the author ever produced says FIND THE SEED PHRASE, and
+the remaining casings cost roughly a day each for the least likely readings of
+a scheme that authorial text argues against.
+
+This file exists because the decision drifted twice across message boundaries
+while it lived only in prose. It is now an artefact that can be diffed. Delete
+it deliberately, not by forgetting it.
