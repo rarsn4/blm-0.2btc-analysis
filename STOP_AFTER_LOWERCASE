@@ -8,3 +8,19 @@ a scheme that authorial text argues against.
 This file exists because the decision drifted twice across message boundaries
 while it lived only in prose. It is now an artefact that can be diffed. Delete
 it deliberately, not by forgetting it.
+
+---
+
+2026-09-29 12:53:44 UTC — GPU RESTARTED, and the scope of this file restated.
+
+IN FORCE, unchanged: no CASE upper, no CASE title, on the BRAINWALLET branch.
+That decision stands and nothing below weakens it.
+
+NOT covered by it, and now running: t21_free3 and t21_free13 on the SEED
+branch, by explicit request. These close the first half of §2.13's remaining
+a=1 hole — slot 3 (`tower`) and slot 13 (`moon`), the two assigned slots
+free-one-fixed never freed.
+
+Recorded here rather than left implicit so the next reader does not find an
+idle-GPU instruction beside a busy GPU and have to guess which is stale.
+Neither is: they govern different branches.
