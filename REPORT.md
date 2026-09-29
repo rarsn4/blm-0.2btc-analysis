@@ -1081,6 +1081,38 @@ would not need the clock at all.** An author who built an elaborate
 position-marking system did so because order cannot be searched — which is only
 true at 21 or 24.
 
+**[MEASURED] What the wallets of May 2020 emitted by default.** Of the 13
+wallets in the [walletsrecovery.org snapshot of
+2020-05-29](https://github.com/nvk/walletsrecovery.org/blob/80436a2b98/README.md)
+whose *only* Bitcoin path is legacy, 11 could be determined — 9 from source at
+the last commit on or before 2020-05-10, 2 from vendor documentation. **All 11
+default to 12 words. None defaults to 15, 18, 21 or 24.** Two were not
+determinable: KeepKey Client has no pre-May-2020 repository, and Luxstack could
+not be found. Every figure is pinned to a file and line in `wallet_defaults.md`.
+
+> **[SCOPE] This supports no prior over phrase length, and the point is worth
+> being blunt about.** The population is defined by being legacy-**only**, which
+> excludes every multi-path wallet — that is, every 24-word hardware wallet, and
+> iancoleman's tool, which defaulted to legacy and **15** words while offering 21
+> and 24, and which is not among the 13. "Zero of these produce 21 or 24 by
+> default" is true *because the population was built by removing the wallets that
+> do.* The snapshot lists supported paths only, with no defaults column, so the
+> multi-path wallets could not be read from it at all.
+>
+> What the measurement supports is one conditional on a branch nobody has
+> established: **if the seed came from a legacy-only wallet at its defaults, it
+> is 12 words.**
+
+**And the 12-word branch is a package, not a footnote.** If the clock is a
+position machine, the phrase is ≥ 21 and the author made a non-default choice —
+a longer length than the tool offered by default, or a legacy account on a wallet
+whose default is something else. If the clock is *not* a position machine, then
+the mechanism, the slot numbers, the template and all 191 billion derivations in
+§3 were aimed at a structure that does not exist. **The template and the 12-word
+prior cannot both be kept.** Anyone reaching for 12 on the strength of the
+wallet defaults is discarding §5, §2.13 and §3 in the same motion, and should say
+so.
+
 ---
 
 ## 6. What would actually help
@@ -1553,6 +1585,28 @@ So that "solved" means the same thing to everyone:
    it is a better worked example than any of the thirteen bugs.
 
    Reproduce with `slogan_lines.py` in the project root (needs `mnemonic` only).
+**The chronology rule deletes what was unknowable, not what is late.** Content
+that postdates the funding transaction can still *encode* a word — a later
+drawing can depict something the author already had in mind — so **no assignment
+is falsified merely by being dated after 2020-05-10**. What the rule kills is
+narrower and sharper: justifications of the form "the author chose W *because of*
+E" where E postdates the seed, and any candidate passphrase containing a fact
+nobody could have known on the funding date.
+
+| date or fact | knowable on 2020-05-10? | verdict |
+|---|---|---|
+| `05.25.20` | no | delete |
+| gold above $1,800 | no — first exceeded in July 2020 | delete |
+| the June 2020 Leopold defacement | no | delete |
+| `11.03.20` | **yes** — the election date is fixed by statute, and the Trump–Biden match-up was set in April 2020 | keep |
+| "Tuesday" | yes | keep |
+| "I can't breathe", "No justice no peace" | **yes** — slogans from 2013–14 | keep |
+
+An earlier form of this rule deleted every post-May-10 date, which over-deletes:
+it would have discarded `11.03.20` and both slogans, none of which required
+foreknowledge of anything. The corrected rule has not been applied to the
+project's passphrase list, which is not in this tree.
+
 **[MEASURED] One underline in 25 checkable words, and it lands on an assigned
 word.** The hand-copied 13th Amendment was censused across 34 tokens — 32 body
 words plus the heading `Section 1.` A word counts as *marked* only if the
@@ -1859,6 +1913,17 @@ output with zero register spills and no warnings:
    git show HEAD:REPORT.md | grep -c '\[FIGURE\]'
    git show --stat HEAD | tail -3
    ```
+
+**A summary is not a measurement, and the number to quote is the one in the
+table.** Three times this week a prose sentence has drifted from figures sitting
+directly above it in the same document: a glyph's "clean 4-px margin on every
+side" where the measurement was 4 clear rows above and 5 below; "номер's letters
+are 25–35% shorter" where three of four are and the fourth is a row taller; and
+a dot-spread range given as 15.9–18.4 where the measured minimum is 15.0. None
+changed a conclusion, which is exactly why the pattern is worth naming — each
+survived because it was *roughly* right, and roughly right is how a table's
+authority gets transferred to a sentence that has not earned it. When writing
+prose over a table, re-read the table.
 
 **A partial pass is not a pass.** Adding hybrid public keys widened the pubkey
 index in `hit[1]` from one bit to two, which moved the `sp` and `kd` fields up by
