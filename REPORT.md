@@ -505,6 +505,26 @@ deliberately never freed, or a replacement outside the 55.
 > 14,135,079 derivations, against a space of 2048²⁴. That is not a search, it is
 > a rounding error.
 >
+> **[UNCOSTED] and the floor is worth stating, because figures for this branch
+> have been circulating in prose without ever entering the record.** A grep of
+> this repository for them returns nothing: they have no home here and never
+> did, which is the §10 failure exactly — a number crossing an agent boundary in
+> conversation and acquiring authority by repetition. So, computed here and
+> pinned: the *cheapest* 24-word variant of the current template adds slots 22,
+> 23 and 24 as gaps over the same 54-word pool, giving nine gaps rather than
+> six, and keeps slot 20's two readings:
+>
+> ```
+> 54⁹ × 2 / 256 = 30,502,389,939,948 derivations
+>                 7,579 days = 20.7 years at 11,925,000 cand/s
+> ```
+>
+> **That floor is 159× the entire 21-word campaign to date.** The assumption it
+> rests on is named rather than buried: it presumes slot 24's word is *in the
+> pool*. Anything outside the pool at any of the three new slots multiplies it
+> again, and the clock cannot reach 22 or 24 at all (§5), so there is no
+> mechanism proposing words for them. The figure is a floor and a loose one.
+>
 > Read it as: **if the phrase is 21 words, the answer departs from the README in
 > at least two places.** The conditional was missing from every earlier statement
 > of it, including §4's.
@@ -1145,16 +1165,33 @@ so.
 
 ## 6. What would actually help
 
-1. **A word for slot 21.** The hour hand is produced by the same labelled
+1. **A key to the glyphs the author invented beyond the Gravity Falls 26** —
+   which is also the shortest path to slot 10, and the two are the same request.
+   This was previously filed as two separate asks and it is one.
+
+   §2.17 records that `black`@10 is the only assigned slot with **zero
+   derivation**: it rests entirely on `номер X`, and §7.4 establishes that X has
+   no key entry, occurs exactly once, and is therefore unassignable in principle
+   from this corpus — a better scan renders the same two strokes. Meanwhile §9's
+   ink measurement finds the column distinguishes **`номер X`** — compressed
+   letters, 1–2 row gaps, the tightest separator in the column — and does **not**
+   distinguish `чёрный день`, which it treats as ordinary running prose.
+
+   So the one word with no slot derivation depends on the one glyph with no
+   reading, and the ink points at the *number* rather than the colour. Resolving
+   X does not merely read a glyph; it settles or kills slot 10. Nothing else on
+   this list has that property.
+
+2. **A word for slot 21.** The hour hand is produced by the same labelled
    mechanism that gave `moon` (12+1) and `tower` (1+2) at high confidence, and
    it is the only hand with no word on it. Checked at four contrast settings —
    it is a plain wedge, not faint writing.
-2. **Anything placing 22, 23, 24.** These have no evidence at all.
-3. **Resolving slot 11.** `pyramid` (5+6 in the pyramid) versus the Space Needle
+3. **Anything placing 22, 23, 24.** These have no evidence at all.
+4. **Resolving slot 11.** `pyramid` (5+6 in the pyramid) versus the Space Needle
    "marks the 11". Freeing slot 11 found no candidate fits, which suggests the
    conflict runs deeper than a two-way choice. Note also that the CCTV junction
    box bears a pyramid symbol, visually linking `camera` and `pyramid`.
-4. **A count or a written number producing slot 6, 8, 14, 18, 22 or 24.** Per §5
+5. **A count or a written number producing slot 6, 8, 14, 18, 22 or 24.** Per §5
    these cannot come from the clock, and the README's twenty-one sections supply no
    mechanism for any of them. This is where the mechanism inventory is actually
    incomplete.
@@ -1177,7 +1214,7 @@ so.
    over all 2048 words with the current pool and all four paths. Empty. The chain
    was coherent and it is closed.
 
-5. **[MEASURED] A larger source image, for one specific reading: the circled
+6. **[MEASURED] A larger source image, for one specific reading: the circled
    mark on the BLM card.** This is the only place in the artwork where the file's
    resolution genuinely blocks a reading, and the claim is measured rather than
    asserted.
