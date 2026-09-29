@@ -335,9 +335,36 @@ template over a 63-word pool (the 52-word pool plus the eleven image words that 
 a brainwallet permits and a mnemonic cannot). All four key variants — SHA256 and
 double-SHA256, space-joined and concatenated — each as compressed and uncompressed.
 
-Two scope limits on that corpus, both narrow and both stated rather than
-implied. It ran at **t18**, not t21 — this section makes no claim about the
-21-word template. And it predates hybrid-key support, so it covers compressed
+**[TESTED] The 21-word template, lowercase, 2026-09-29.** The t18 gap above is
+now partly filled. `brain_t21_pool65.conf` ran the **t21** template over a
+65-word pool — the template's own 54-word pool plus the eleven non-BIP39 image
+words; 54 + 11 = 65, not the 63 of the t18 run, because the t21 pool is larger.
+
+```
+space        150,837,781,250 candidates   (65^6 x 2, six @POOL slots + slot 20's two words)
+survivors    150,837,781,250              acceptance EXACTLY 1.0
+addresses    452,513,343,750              (x3: compressed, uncompressed, hybrid)
+result       exhausted, no match          exit 2
+wall         16.23 h, 2,582,308 cand/s
+```
+
+**Acceptance is the load-bearing number.** A brainwallet has no checksum, so
+every candidate must pass the filter by construction; survivors equalled
+candidates on every checkpoint line and at the total. Anything below 1.0 would
+mean work was being silently dropped, and the negative would be void.
+
+Two narrowings, both deliberate, both stated in the config header so no reader
+infers parity with the t18 figure. **Casing: lowercase only** — the artwork is
+in capitals and SHA-256 is case-sensitive, so the capitalised reading is
+untested here. **Key variants: `sha256` + space-joined only**, which is 3
+addresses per candidate against the 12 of an `_all` run, because `BRAINPUB` is
+three serialisations of one EC multiply while `BRAINHASH` and `BRAINSPACE` each
+produce a different private key. So this covers **one quarter** of the
+key-variant space the t18 figure covered, on the canonical variant.
+
+Two scope limits remain on the **t18** corpus, both narrow and both stated
+rather than implied. It ran at t18, not t21 — and the t21 run above does not
+inherit its key-variant coverage. And it predates hybrid-key support, so it covers compressed
 and uncompressed only; the kernel now hashes all three, but the 7.94 B figure
 above was measured before that.
 
