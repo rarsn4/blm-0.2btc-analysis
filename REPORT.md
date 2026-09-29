@@ -15,7 +15,9 @@ I built a GPU search pipeline covering both BIP39 and Electrum and ran
 rates — plus 7,939,492,344 brainwallet addresses counted separately (§2.12).
 §2.1–2.11, §2.13 and §2.14 are exhaustively eliminated, not "tried and didn't
 find". §2.12 and §2.15 are tested corpora — a weaker claim, and tagged as such
-in their own headings.
+in their own headings. §2.16 and §2.17 are measurements of the template itself
+rather than eliminations within it, and §2.17 is the one to read first if you
+are deciding whether any of this is worth continuing.
 
 Code, configs and every hypothesis tested:
 https://github.com/rarsn4/blm-0.2btc-analysis
@@ -658,6 +660,141 @@ than taken on trust.
 
 ---
 
+### 2.16 [MEASURED] Slot 20: the ink cannot decide between `apple` and `second`
+
+**Neither word is in the image.** The letter census (§2.15) found no `apple`,
+`second`, `2nd` or `II` in any display lettering. Slot 20 has no glyph group, so
+there is nothing to resolve in the ink. It is an *assigned* slot carrying a
+two-way list, not one of the six gaps.
+
+**The README disagrees with itself.** Table row 20 gives `apple` with an **empty
+description** and no derivation anywhere in the document. §19 instead derives
+`second`, in two steps: the number from the `XX` on Leopold's head read as 20,
+and the word from the external fact that Leopold II was the second King of the
+Belgians — a lookup the enumeration rule excludes.
+
+**[MEASURED] The spacing test.** How widely does the artist space adjacent
+characters *within* a word? A glyph is a connected ink component; fragments under
+40% of median height are dropped, judged by height and never by gap; gap is the
+clear pixels between the closest ink of two neighbours, which measures rotated
+text the same way as upright. A set is used only where segmentation yields
+exactly the known character count **and** one glyph per box on inspection — both
+checks proved necessary, since FUCK and THIS matched their counts by coincidence
+(a merged pair plus a sliver of pedestal edge).
+
+Seven sets qualified — SHIT, LIVES, MATTER, STOP KILLING US, NOT ONE MORE,
+11.03.20, .VS. — giving **33 within-word pairs**:
+
+| reference | widest gap ÷ height | X marks (0.597, conservative) as a multiple |
+|---|---|---|
+| SHIT at measured cap heights 70–72 px | 0.128 | 4.7× |
+| the artist's own numerals, 11.03.20 | 0.194 | 3.1× |
+| all 33 pairs, median 0.182 | — | 3.3× |
+| all 33 pairs, widest: IN of KILLING | 0.291 | **2.1×** |
+
+**No letter or numeral pair in the artist's hand is spaced as widely as the X
+marks — 0 of 33.** Reading `XX` as the numeral 20 therefore requires a spacing
+used nowhere else in the artwork, while the crossed-out-eyes reading is supported
+by complete separation. The margin is 2.1× over the single widest pair in the
+whole corpus, 3.1× over the artist's own numerals.
+
+**Verdict, stated no more strongly than the measurement supports.** The ambiguity
+is in the reading and the provenance, not in the ink: the ink is clear and
+contains neither candidate, so it cannot collapse slot 20 to one word. What the
+spacing does is *weaken* §19's step from `XX` to the number 20. It does not
+formally refute it and this section does not claim to — the distinction matters,
+because a refutation would close slot 20 and a weakening only reopens it.
+
+**Consequence for §2.13.** The README table and §19 disagree, and §19's
+derivation rests on an excluded lookup. So there is **no README value at slot 20**
+to be right or wrong about, *a* is undefined there, and every §2.13 branch claim
+must be stated per reading: slot 20 = `second`, and slot 20 = `apple`.
+
+An earlier figure of 6.8× divided by the 87-px search band rather than measured
+cap heights, and used SHIT alone as the reference. It is superseded by the table
+above. Script: `slot20.py`.
+
+---
+
+### 2.17 [MEASURED] What holds the template up, word by word
+
+Fifteen slots are assigned. They are not assigned equally well, and the
+difference has never been tabulated.
+
+| slot | word | what supports the WORD | what supports the SLOT |
+|---|---|---|---|
+| 1 | `subject` | **written** in the Amendment copy, and carries the census's one underline (§9) | Section 1 numbering |
+| 3 | `tower` | **written** on the minute hand | clock 1+2, under a caption that says to add two numbers |
+| 13 | `moon` | **written** on the second hand | clock 12+1, same caption |
+| 2 | `camera` | depicted | a count of cameras |
+| 4 | `mask` | depicted | a count of masked faces |
+| 7 | `liberty` | depicted | a count of crown points |
+| 9 | `eye` | depicted | pyramid 4+5 |
+| 16 | `rifle` | depicted | the 16 of M16 |
+| 19 | `glove` | depicted | the 19 of CVD19 |
+| 5 | `police` | depicted | "line five" — a convention used nowhere else in the table |
+| 12 | `vote` | association only | the `.VS.` ambigram |
+| 17 | `gold` | inferred from the chart | inferred from the chart |
+| 11 | `pyramid` | depicted | contested: pyramid 5+6 against the Space Needle. Freeing slot 11 found no candidate fits at all, which suggests the conflict runs deeper than a two-way choice |
+| 10 | `black` | the rune line `чёрный день номер X` | the same line, via `номер X` — a glyph §7.4 shows is unreadable |
+| 20 | `apple` | README table row, **empty description** | none: §2.16 finds no README value to be right about, and weakens `XX` → 20 |
+
+**Three of fifteen are written in the artwork.** Six rest on counting things.
+Three on association or inference. One is contested. Two rest on nothing that
+survives inspection — slot 20 by §2.16 above, and slot 10 on a glyph that §7.4
+establishes cannot be read by anyone, which §2.13 already called "load-bearing
+since 2020 on nothing but a glyph nobody can read".
+
+**The parity split is not a coincidence, and it has not been written down.** §5
+proves the clock — the one mechanism the artwork captions — yields odd slots and
+nothing else. §5 already draws the consequence for the *open* even slots: they
+need a count or a written number, and the source document supplies neither. The
+same holds for the **filled** even slots:
+
+```
+odd  slots  1 3 5 7 9 11 13 17 19    ink-supported: subject, tower, moon
+even slots  2 4 10 12 16 20          ink-supported: NONE
+```
+
+Slots 2, 4, 10, 12, 16 and 20 are assigned entirely on counts that someone
+noticed and nobody validated. **No word at an even slot is written in the
+artwork.**
+
+**And that half is the half that cannot be afforded.** Free-one-fixed covered 13
+of 15 slots over 55 candidates each — 55/2048, **2.7% of the dictionary**.
+Testing one assigned slot against the whole dictionary means 2048 × 54⁶ × 2
+candidates, because freeing an assigned slot leaves six gaps pooled rather than
+five:
+
+| | derivations | wall time |
+|---|---|---|
+| one slot, 55 candidates (what was done) | 21,308,126,895 | 2.6 days |
+| one slot, full dictionary (what would settle it) | 793,437,161,472 | **98.6 days** |
+| all six even slots, full dictionary | — | **1.6 years** |
+
+Wall times at **11,925,000 candidates/s**, the mean of the five hot-started
+black runs of 27–28 September (§3); they scale inversely with any future rate.
+
+So the project's boundary is not compute in general. It is this: **the half of
+the template resting on an unstated mechanism is the half that would take a year
+and a half to check**, and the branch that would matter most — slot 10, whose
+support is a glyph nobody can read — is ninety-nine days on its own.
+
+> **One claim is held out of the table.** A reading has been proposed in which
+> `на чёрный день` is the ordinary Russian idiom "for a rainy day" rather than a
+> literal "black day", which would dissolve slot 10's derivation entirely —
+> `чёрный` would be part of a fixed phrase naming nothing, and `номер X` would
+> lose its anchor. The idiom is real and the reading is plausible. It is not
+> entered above because **no measurement or census supporting it exists in this
+> tree**: every record here, including §7.4 and §7.5, translates the line
+> literally. Recorded as pending rather than adopted, on the §2.12 principle —
+> a claim whose support cannot be found is not promoted by being repeated. What
+> would settle it is a segmentation showing whether the line runs on as prose
+> past `день`, which is the same instrument §7.2 used for the monoalphabetic
+> test.
+
+---
+
 **[INFERRED] From this point, every remaining hypothesis is one we construct,
 not one the document offers.** That is a different epistemic footing from
 everything preceding it, and the distinction is worth preserving: earlier
@@ -884,7 +1021,8 @@ This is consistent with every filled entry in the table: the clock slots (3, 13,
 are odd, and every **even** slot comes from a count or a written number instead —
 `camera` at 2 (two cameras), `mask` at 4 (four masked faces), `black` at 10 ("black
 day number X"), `vote` at 12 (the mirrored `.VS.`), `rifle` at 16 (M16), `apple` at
-20 (the XX on Leopold's head).
+20 (the XX on Leopold's head — but see §2.16, which measures that XX and finds
+it spaced more widely than any letter or numeral pair in the artist's hand).
 
 **Consequence for the unfilled slots.** Of 6, 8, 14, 15, 18, 21, 22, 23, 24:
 
