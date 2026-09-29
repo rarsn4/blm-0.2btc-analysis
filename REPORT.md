@@ -1953,23 +1953,26 @@ survived because it was *roughly* right, and roughly right is how a table's
 authority gets transferred to a sentence that has not earned it. When writing
 prose over a table, re-read the table.
 
-**The same rule one level up: a decision drifts from the message that set it.**
-The note above is about a sentence drifting from its table. The identical
-failure happens to decisions, and in the same place — the closing line of a
-status report, which is the sentence least likely to be re-read by either
-party. A settled decision restated from memory in a sign-off is not a record of
-the decision; the message that set it is. Re-read that message, not the last
-report that mentioned it.
+**The same rule one level up: a decision is only as durable as the message that
+changes it is prominent.** The note above is about a sentence drifting from its
+table. The identical failure happens to decisions.
 
-This entry is deliberately stated as a rule without an instance. The case that
-prompted it is disputed: one party's record has "let lowercase finish, then
-STOP", the other's has "SEQUENCING confirmed: upper, then title … queue CASE
-upper when pool65 lands", and neither can produce the other's message. That is
-itself the more useful observation — when a decision is carried in prose across
-a boundary rather than committed to a file, there is no artefact to check, and
-both sides can be reporting honestly. The fix is not more care in sign-offs. It
-is that a decision which governs machine time should exist as a config, a
-script, or a line in this document, where it can be diffed.
+The failure in this project was **not** a sign-off restating a stale decision.
+It was a **reversal issued as an aside** inside a message about something else,
+while the original instruction had been given with a cost table and an argument.
+The party carrying the older instruction was reading the record correctly. A
+decision overturned in passing, three sections into a message whose headline is
+a different topic, is exactly as un-re-readable as a closing line — and it is
+worse, because the person who carried the superseded course did nothing wrong
+and can be told they drifted.
+
+Neither party could produce the other's message, because they communicate only
+through a relay and neither holds the other's transcript. That is the structural
+fact, and it is why the fix is not care in wording: **a decision governing
+machine time must exist as a config, a script, or a line in this document, where
+it can be diffed by both.** In this case it became
+[`STOP_AFTER_LOWERCASE`](STOP_AFTER_LOWERCASE), which is the only part of the
+episode that will still be working in a month.
 
 **A partial pass is not a pass.** Adding hybrid public keys widened the pubkey
 index in `hit[1]` from one bit to two, which moved the `sp` and `kd` fields up by
