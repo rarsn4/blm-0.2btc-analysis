@@ -1,0 +1,148 @@
+0. RIFLE: the only mark on the receiver, x816-825 y695-702: darkest 220 on background 246 (26 levels) -> no legible number; 'rifle 16' rests on identifying the model by shape
+   nearest point of cameras      to the clock centre: 1084 px (dial numerals sit at ~180 px)
+   nearest point of masked faces to the clock centre:  607 px (dial numerals sit at ~180 px)
+   nearest point of subject      to the clock centre:  933 px (dial numerals sit at ~180 px)
+   nearest point of rifle        to the clock centre:  236 px (dial numerals sit at ~180 px)
+
+== R1  count of a depicted object = slot (all counts)
+   slot  1 <- clock x1; cloth x1; coin x1; flag x1; glove x1; gun x1; liberty x1; pyramid x1; rifle x1; space x1; tower x1; uniform x1; weapon x1; woman x1
+   slot  2 <- camera x2; lens x2; suit x2
+   slot  4 <- mask x4
+   slot  5 <- finger x5
+   slot 12 <- course x12
+   collisions: slot 1 x14 (clock x1; cloth x1; coin x1; flag x1; glove x1; gun x1; liberty x1; pyramid x1; rifle x1; space x1; tower x1; uniform x1; weapon x1; woman x1) | slot 2 x3 (camera x2; lens x2; suit x2)
+   overlaps with non-clock template slots (information only): slot 1 (subject), slot 2 (camera), slot 4 (mask), slot 5 (police), slot 12 (vote)
+   calibration: 2 of 4 ['camera', 'mask']
+   VERDICT: FAILS
+
+== R1b count of a REPEATED object (count >= 2) = slot
+   slot  2 <- camera x2; lens x2; suit x2
+   slot  4 <- mask x4
+   slot  5 <- finger x5
+   slot 12 <- course x12
+   collisions: slot 2 x3 (camera x2; lens x2; suit x2)
+   overlaps with non-clock template slots (information only): slot 2 (camera), slot 4 (mask), slot 5 (police), slot 12 (vote)
+   calibration: 2 of 4 ['camera', 'mask']
+   note: slot 2 keeps camera, lens and suit; restricting to whole objects (dropping lens) still leaves camera and suit
+   VERDICT: FAILS
+
+== R2  a number written in ink = slot of that element
+   slot  1 <- amendment heading 'Section 1.'; address digits 1KfZ...EV75...; clock dial numerals
+   slot  2 <- clock dial numerals
+   slot  3 <- date under .VS. 11.03.20; clock dial numerals
+   slot  4 <- clock dial numerals
+   slot  5 <- hoodie date 05.25.20; address digits 1KfZ...EV75...; clock dial numerals
+   slot  6 <- clock dial numerals
+   slot  7 <- address digits 1KfZ...EV75...; clock dial numerals
+   slot  8 <- clock dial numerals
+   slot  9 <- clock dial numerals
+   slot 10 <- clock dial numerals
+   slot 11 <- date under .VS. 11.03.20; clock dial numerals
+   slot 12 <- clock dial numerals
+   slot 19 <- vial label CVD19
+   slot 20 <- hoodie date 05.25.20; date under .VS. 11.03.20
+   collisions: slot 1 x3 (amendment heading 'Section 1.'; address digits 1KfZ...EV75...; clock dial numerals) | slot 3 x2 (date under .VS. 11.03.20; clock dial numerals) | slot 3 is clock-owned (tower) | slot 5 x3 (hoodie date 05.25.20; address digits 1KfZ...EV75...; clock dial numerals) | slot 7 x2 (address digits 1KfZ...EV75...; clock dial numerals) | slot 9 is clock-owned (eye) | slot 11 x2 (date under .VS. 11.03.20; clock dial numerals) | slot 11 is clock-owned (pyramid) | slot 20 x2 (hoodie date 05.25.20; date under .VS. 11.03.20)
+   overlaps with non-clock template slots (information only): slot 1 (subject), slot 2 (camera), slot 4 (mask), slot 5 (police), slot 7 (liberty), slot 10 (black), slot 12 (vote), slot 19 (glove)
+   calibration: 1 of 4 ['subject']
+   note: camera, mask carry no number; rifle has no legible number
+   VERDICT: FAILS
+
+== R2b a number labelling an object (dates, dial, address, axis excluded)
+   slot  1 <- amendment heading 'Section 1.'
+   slot 19 <- vial label CVD19
+   collisions: none
+   overlaps with non-clock template slots (information only): slot 1 (subject), slot 19 (glove)
+   calibration: 1 of 4 ['subject']
+   note: reproduces glove 19 too, which is outside the calibration set
+   VERDICT: FAILS
+
+== R3  the parts of a written date = slots
+   slot  3 <- date under .VS. 11.03.20
+   slot  5 <- hoodie date 05.25.20
+   slot 11 <- date under .VS. 11.03.20
+   slot 20 <- hoodie date 05.25.20; date under .VS. 11.03.20
+   collisions: slot 3 is clock-owned (tower) | slot 11 is clock-owned (pyramid) | slot 20 x2 (hoodie date 05.25.20; date under .VS. 11.03.20)
+   overlaps with non-clock template slots (information only): slot 5 (police)
+   calibration: 0 of 4 []
+   VERDICT: FAILS
+
+== R4  line number within any multi-line text = slot
+   slot  1 <- slogans line 1; amendment line 1; title line 1; watermark line 1; graffiti line 1; top-left runes line 1; ghost text line 1
+   slot  2 <- slogans line 2; amendment line 2; title line 2; watermark line 2; graffiti line 2; top-left runes line 2; ghost text line 2
+   slot  3 <- slogans line 3; amendment line 3; title line 3; watermark line 3; graffiti line 3; top-left runes line 3
+   slot  4 <- slogans line 4; amendment line 4; watermark line 4
+   slot  5 <- slogans line 5; amendment line 5; watermark line 5
+   slot  6 <- slogans line 6; amendment line 6
+   slot  7 <- slogans line 7; amendment line 7
+   slot  8 <- amendment line 8
+   slot  9 <- amendment line 9
+   slot 10 <- amendment line 10
+   collisions: slot 1 x7 (slogans line 1; amendment line 1; title line 1; watermark line 1; graffiti line 1; top-left runes line 1; ghost text line 1) | slot 2 x7 (slogans line 2; amendment line 2; title line 2; watermark line 2; graffiti line 2; top-left runes line 2; ghost text line 2) | slot 3 x6 (slogans line 3; amendment line 3; title line 3; watermark line 3; graffiti line 3; top-left runes line 3) | slot 3 is clock-owned (tower) | slot 4 x3 (slogans line 4; amendment line 4; watermark line 4) | slot 5 x3 (slogans line 5; amendment line 5; watermark line 5) | slot 6 x2 (slogans line 6; amendment line 6) | slot 7 x2 (slogans line 7; amendment line 7) | slot 9 is clock-owned (eye)
+   overlaps with non-clock template slots (information only): slot 1 (subject), slot 2 (camera), slot 4 (mask), slot 5 (police), slot 7 (liberty), slot 10 (black)
+   calibration: 0 of 4 []
+   note: 'subject' is on amendment line 9, so this rule puts it at 9, not 1; police 5 is outside the calibration set
+   VERDICT: FAILS
+
+== R4b line number within the slogan block only
+   slot  1 <- slogan line 1: BLACK
+   slot  2 <- slogan line 2: LIVES
+   slot  3 <- slogan line 3: MATTER
+   slot  4 <- slogan line 4: NO JUSTICE NO PEACE
+   slot  5 <- slogan line 5 word END; slogan line 5 word POLICE
+   slot  6 <- slogan line 6: STOP KILLING US
+   slot  7 <- slogan line 7 word ONE; slogan line 7 word MORE
+   collisions: slot 3 is clock-owned (tower) | slot 5 x2 (slogan line 5 word END; slogan line 5 word POLICE) | slot 7 x2 (slogan line 7 word ONE; slogan line 7 word MORE)
+   overlaps with non-clock template slots (information only): slot 1 (subject), slot 2 (camera), slot 4 (mask), slot 5 (police), slot 7 (liberty)
+   calibration: 0 of 4 []
+   note: lines 2 and 6 hold no BIP39 word; lines 5 and 7 hold two each
+   VERDICT: FAILS
+
+== R5  a transformation (vertical flip) turns lettering into a numeral
+   slot 12 <- .VS. flipped vertically reads 12
+   collisions: none
+   overlaps with non-clock template slots (information only): slot 12 (vote)
+   calibration: 0 of 4 []
+   note: the other mirror-written texts (seal ring, pyramid base, TOWER/MOON) contain no numerals
+   VERDICT: FAILS
+
+== R6  count of an object's sub-parts = slot
+   slot  1 <- lenses per CCTV camera -> camera (one lens each)
+   slot  5 <- fingers of a hand -> hand (enumeration: finger 5)
+   slot  7 <- Liberty's crown spikes -> liberty (5 measured, 7 inferred)
+   slot  8 <- buttons on the bust's coat -> (coat: not BIP39) (8 measured)
+   slot 12 <- brick courses of the pyramid -> pyramid (enumeration: course 12); numerals of the clock dial -> clock (12-hour dial)
+   collisions: slot 12 x2 (brick courses of the pyramid -> pyramid (enumeration: course 12); numerals of the clock dial -> clock (12-hour dial))
+   overlaps with non-clock template slots (information only): slot 1 (subject), slot 5 (police), slot 7 (liberty), slot 12 (vote)
+   calibration: 0 of 4 []
+   note: pyramid would hold slot 12 here and slot 11 by the clock: one word, two slots
+   VERDICT: FAILS
+
+== R7  the single clock numeral nearest an element (not a sum)
+   collisions: none
+   overlaps with non-clock template slots (information only): none
+   calibration: 0 of 4 []
+   note: reaches only slots 1-12 and only elements near the dial; every calibration element is 236-1084 px from the centre
+   VERDICT: FAILS
+
+== R9  a number word in the rune plaintexts = slot
+   slot  2 <- clock caption 'сумма ДВУХ чисел' (two)
+   collisions: none
+   overlaps with non-clock template slots (information only): slot 2 (camera)
+   calibration: 0 of 4 []
+   note: 'номер X' gives no number (X is a hapax with no numeral reading); 'много' (many) is not a number; the caption's 'two' describes the clock's own sums
+   VERDICT: FAILS
+
+== R8  R1b OR R2b (count if repeated, else a labelling number)
+   slot  1 <- amendment heading 'Section 1.'
+   slot  2 <- camera x2; lens x2; suit x2
+   slot  4 <- mask x4
+   slot  5 <- finger x5
+   slot 12 <- course x12
+   slot 19 <- vial label CVD19
+   collisions: slot 2 x3 (camera x2; lens x2; suit x2)
+   overlaps with non-clock template slots (information only): slot 1 (subject), slot 2 (camera), slot 4 (mask), slot 5 (police), slot 12 (vote), slot 19 (glove)
+   calibration: 3 of 4 ['camera', 'mask', 'subject']
+   note: two rules joined after seeing the template; inherits R1b's slot-2 collision
+   VERDICT: FAILS
+
+SUMMARY: 0 of 12 rules pass

@@ -1,0 +1,51 @@
+pre-registration verified: r10_elements.json sha256 3634036d4e0d785b2f2efbe5cb34c6a2ca69528f73a316c16c9d31c0e2b49b88
+hub (473.75, 940.00)  theta12 162.30 deg  grid every 15 deg; chance P(offset <= t) = t / 7.5
+
+PER-ELEMENT OFFSETS, set A (angular half-width = half the angle the box subtends at the hub)
+   id   element                                                  dist   theta   offset   halfwid nearest
+   E01  masked person 1 (glasses)                                 837  112.68     4.62       8.9 between 1 and 2
+   E02  masked person 2 (woman)                                   749  104.48     2.18       5.3 on numeral 2
+   E03  masked person 3 (backpack)                                749   96.69     5.61       7.2 on numeral 2
+   E04  masked person 4                                           760   88.59     1.29       4.4 between 2 and 3
+   E05  vial hand                                                 739  119.25     1.95       7.8 between 1 and 2
+   E06  US flag                                                   541  113.25     4.05      16.5 between 1 and 2
+   E07  STOP fist emblem                                          581  129.46     2.84       4.7 on numeral 1
+   E08  Statue of Liberty                                         310  153.12     5.82       nan between 12 and 1
+   E09  book stack under the statue                               333 -153.72     1.02      16.6 between 10 and 11
+   E10  plinth text ONLY real BITCOIN                             325 -159.10     6.40       5.2 between 10 and 11
+   E11  ghost text PAY FOR THE FUTURE / THIS IS THE FIRST PR      385 -178.88     3.82       nan between 11 and 12
+   E12  Great Seal disc                                           173   -2.32     0.38       nan between 5 and 6
+   E13  pyramid                                                   173    5.80     6.50      60.2 on numeral 5
+   E14  pyramid eye capstone                                      204   29.80     2.50      12.1 between 4 and 5
+   E15  rifle                                                     405   37.70     4.60      22.8 on numeral 4
+   E16  title block WELCOME TO THE / BRAVE / NEW WORLD            483   54.72     2.58      38.8 between 3 and 4
+   E17  watermark FIND THE SEED PHRASE IN THE THIS PICTURE        759   72.25     0.05      17.9 on numeral 3
+   E18  overlay 'Order and stability'                             922   67.09     5.21       9.5 on numeral 3
+   E19  George Floyd portrait                                     853   49.98     7.32      11.9 between 3 and 4
+   E20  slogan block                                             1023   43.78     1.48      11.5 on numeral 4
+   E21  CCTV camera 1                                            1197   42.91     0.61       4.4 on numeral 4
+   E22  CCTV camera 2                                            1317   39.56     2.74       1.9 on numeral 4
+   E23  Space Needle                                              797   27.25     0.05      17.5 between 4 and 5
+   E24  Leopold II bust                                          1070   23.12     4.18       6.0 between 4 and 5
+   E25  pedestal panel: amendment + FUCK THIS SHIT                923    2.64     5.34       8.1 between 5 and 6
+   E26  Trump                                                     473  -10.48     7.22      18.6 on numeral 6
+   E27  Biden                                                     728   -6.90     4.20      12.2 between 5 and 6
+   E28  caption line (whitepaper)                                 224  -73.17     4.53      68.2 on numeral 8
+
+COUNTS AGAINST BOTH NULLS
+   set                                  N   within 0.5 deg: obs / exp / p(rot) / p(hub) within 1.0 deg: same        
+   A  whole objects, all 28            28    3 /  1.9 / 0.2839 / 0.2837     4 /  3.7 / 0.4969 / 0.5083 
+   B  whole objects, seal excluded     25    2 /  1.7 / 0.5065 / 0.5003     3 /  3.3 / 0.7041 / 0.6614 
+   C  face level, all 28               28    4 /  1.9 / 0.1278 / 0.1093     7 /  3.7 / 0.1316 / 0.0680 
+   D  face level, seal excluded        25    3 /  1.7 / 0.2420 / 0.2331     6 /  3.3 / 0.1275 / 0.1028 
+
+PILOT'S FIVE NAMED ITEMS (side check, not evidence)
+   pyramid eye            centre (651.0, 838.5)  theta 29.80  offset 2.50 deg  between 4 and 5
+   Leopold XX eyes        centre (1391.0, 459.5)  theta 27.65  offset 0.35 deg  between 4 and 5
+   Trump face             centre (938.5, 961.0)  theta -2.59  offset 0.11 deg  between 5 and 6
+   gloved vial            centre (158.5, 257.5)  theta 114.79  offset 2.51 deg  between 1 and 2
+   FIND THE SEED PHRASE   centre (705.0, 217.5)  theta 72.25  offset 0.05 deg  on numeral 3
+
+DECISION (pre-stated rule, primary set A): NOT SIGNIFICANT
+-> the clock governs the hands and the seal only; the non-clock half of the phrase has no
+   recoverable layout rule in this image. Stop.

@@ -1,10 +1,12 @@
-# REPORT.md additions — image pass, drafted 28 Sep
+# REPORT.md additions — image pass, drafted 28 Sep, extended 29 Sep
 
-Section numbering and placement are yours. Section A amends existing text: §6 item 5, which calls a legible view of the final glyph "worth more than any amount of GPU". Everything else is new.
+Section numbering and placement are yours. Two sections amend existing text; everything else is new.
+- **A** amends §6 item 5, which calls a legible view of the final glyph "worth more than any amount of GPU".
+- **H** amends §2.17: `rifle @16` moves from the counted class to "no in-image derivation".
 
 Every number below comes from a script in this bundle. To reproduce:
 
-- Put `0.2-btc-puzzle.png` in the project root, or set `BLM_IMAGE`. Every script checks md5 `7710323461a924987eb35c77055e59f6` and refuses any other file.
+- The puzzle image ships in the bundle as `0.2-btc-puzzle.png`: md5 `7710323461a924987eb35c77055e59f6`, sha256 `d0b04378f75d63997b8034ec2ef1bdd108178e4546de78237bd35abf4189a782`. It is byte-identical to the original poster's upload at `https://i.redd.it/n1x7g8ceaur51.png`. Every script checks the md5 and refuses any other file.
 - Install numpy and Pillow. `slogan_lines.py` also needs `mnemonic`.
 - Reference outputs are in `expected_output/`.
 - Verified from a clean directory on Python 3.12.10, numpy 2.5.3 and Pillow 12.3.0.
@@ -210,6 +212,65 @@ Script: `seal_ring.py` (also writes `seal_ring_strip.png`)
 > **What this means for §2.13.** The table and §19 disagree, and §19's derivation rests on a lookup the enumeration rule excludes. So there is **no README value at slot 20**, *a* is undefined there, and every §2.13 branch claim is stated per reading: slot 20 = `second`, and slot 20 = `apple`. The spacing result also weakens §19's own step from "XX" to the number 20.
 
 Script: `slot20.py`
+
+---
+
+## H — [MEASURED] No even-slot rule exists in this image; rifle 16 has no in-image derivation
+
+**Amends §2.17.** Move `rifle @16` out of the counted class and into **"no in-image derivation"**, beside `black @10`.
+
+> **The rule hunt.** Twelve candidate numbering rules were each applied to the whole picture:
+> - counts of depicted objects (all objects, or repeated ones only)
+> - numbers written in ink (all of them, or only those labelling an object)
+> - the parts of written dates
+> - line numbers (in every multi-line text, or the slogans only)
+> - a vertical flip that turns lettering into a numeral
+> - counts of an object's sub-parts
+> - the single dial numeral nearest an element
+> - number words in the rune plaintexts
+> - one disjunction of two of the above
+>
+> **The pass criterion:** a rule must fill each slot at most once, and reproduce at least two of camera 2, mask 4, rifle 16 and subject 1. The inputs were fixed first: the pre-registered depicted-object counts, the census's list of written numbers, and the measured multi-line texts.
+>
+> **Result: 0 of 12 rules pass.**
+> - **Counting** is the only rule family that reaches camera 2 and mask 4, and it fails on its own output: **slot 2 holds camera, lens and suit**, which are all BIP39 words and all counted 2.
+> - **Numbers labelling an object** form the one collision-free rule, but that rule reproduces only subject 1 (and glove 19, which is outside the calibration set).
+> - **The disjunction** reaches 3 of 4 calibration words, but it was joined after seeing the template, and the script's output says so.
+>
+> **Rifle 16.**
+> - The rifle's only mark is on its receiver: **7×7 px at 26 levels** of contrast (darkest pixel 220 on a background of 246). It is illegible.
+> - No count of 16 exists anywhere in the picture.
+> - The 16 therefore comes from identifying the model as an M16 **by its shape**, which is outside knowledge.
+> - So **two assigned slots rest on nothing the picture states: rifle @16 and black @10.**
+>
+> Taken together, the template's non-clock slots need at least three unrelated mechanisms: counts for 2 and 4, labelling numbers for 1 and 19, and a flip for 12. Slot 16 needs outside identification on top of that.
+
+Script: `even_slot_rules.py`
+
+---
+
+## I — [MEASURED] The artwork is not laid out on the clock dial (R10)
+
+> **Pre-registration.**
+> - `r10_elements.json`, sha256 `3634036d4e0d785b2f2efbe5cb34c6a2ca69528f73a316c16c9d31c0e2b49b88`, fixed before any angle was computed.
+> - It holds 28 whole-object elements, each an object or text block carrying a word from the enumeration.
+> - Hub (473.75, 940.0), θ12 = 162.30°, and a grid of 24 directions every 15°.
+> - Nulls: rotating θ12, and a random hub inside the frame, with 10,000 draws each.
+> - Decision rule, stated in code before running: p < 0.05 under **both** nulls, on the primary set.
+>
+> **Result: NOT SIGNIFICANT.**
+> - The primary set has **3 of 28** elements within 0.5° (1.9 expected), p 0.28 / 0.28.
+> - At 1.0° it has **4 of 28** (3.7 expected), p 0.50 / 0.51.
+>
+> The clock governs the hands and the seal only. The non-clock half of the phrase has no layout rule this image can recover.
+>
+> **Erratum** (`r10_erratum.md`).
+> - E24's boxes were shifted about 60–90 px right, because a grid line was misread. The pre-registration file is left as it was.
+> - **Post hoc**, with the boxes corrected: the primary set is unchanged. The face-level set becomes 5 of 28 (p 0.069 / 0.032) and 8 of 28 (p 0.119 / 0.024). That still fails the both-nulls rule. Across 8 comparisons it would also need p < 0.00625.
+>
+> **Set C is closed** (`STOP_R10_SET_C.md`).
+
+Scripts: `r10_layout.py` + `r10_elements.json`; `r10_erratum_check.py`
 
 ---
 

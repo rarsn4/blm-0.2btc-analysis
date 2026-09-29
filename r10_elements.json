@@ -1,0 +1,49 @@
+{
+  "_note": "R10 pre-registration. Fixed BEFORE any angle was computed; sha256 recorded at creation. Boxes [x0, y0, x1, y1] in native pixels of 0.2-btc-puzzle.png (md5 7710323461a924987eb35c77055e59f6), read off 20-px grid views with no hub or rays drawn. Element rule: one element per placed object or text block carrying at least one word flagged in enumeration_result.py; sub-parts collapse into their parent (finger, glove -> vial hand; lens, wire -> camera; spike, arm -> statue; course, brick -> pyramid; cloth, uniform -> Leopold bust; micrography words -> title block). Excluded: clock dial and hands (on the grid by construction); torch and pole (disproven by crop); box and shadow (no locatable instance); everything carrying no flagged word (runes, Latin line, address, BLM card, .VS./date, question mark, wreath, scroll, ring text, hoodie text, COVID graffiti, gold chart, China map, 1865 text).",
+  "hub": [473.75, 940.0],
+  "theta12_deg": 162.30,
+  "frame": [42, 32, 1560, 1165],
+  "seal_group": ["E12", "E13", "E14"],
+  "elements": {
+    "E01": {"name": "masked person 1 (glasses)", "words": "mask face head eye man people", "box": [62, 45, 240, 290]},
+    "E02": {"name": "masked person 2 (woman)", "words": "mask face woman people", "box": [238, 130, 335, 300]},
+    "E03": {"name": "masked person 3 (backpack)", "words": "mask face man people", "box": [305, 88, 468, 305]},
+    "E04": {"name": "masked person 4", "words": "mask face people", "box": [440, 95, 545, 265]},
+    "E05": {"name": "vial hand", "words": "glove finger hand", "box": [45, 210, 180, 380]},
+    "E06": {"name": "US flag", "words": "flag", "box": [140, 320, 380, 565]},
+    "E07": {"name": "STOP fist emblem", "words": "hand", "box": [72, 456, 137, 527]},
+    "E08": {"name": "Statue of Liberty", "words": "liberty woman spike arm face head", "box": [95, 555, 300, 1045]},
+    "E09": {"name": "book stack under the statue", "words": "book", "box": [60, 1040, 290, 1135]},
+    "E10": {"name": "plinth text ONLY real BITCOIN", "words": "only real", "box": [110, 1048, 230, 1064]},
+    "E11": {"name": "ghost text PAY FOR THE FUTURE / THIS IS THE FIRST PREDICTION", "words": "future first this", "box": [76, 865, 102, 1030]},
+    "E12": {"name": "Great Seal disc", "words": "coin", "box": [453.75, 754.5, 838.75, 1139.5]},
+    "E13": {"name": "pyramid", "words": "pyramid course brick", "box": [540, 805, 752, 1040]},
+    "E14": {"name": "pyramid eye capstone", "words": "eye", "box": [620, 806, 682, 871]},
+    "E15": {"name": "rifle", "words": "rifle gun weapon", "box": [600, 645, 988, 740]},
+    "E16": {"name": "title block WELCOME TO THE / BRAVE / NEW WORLD", "words": "welcome brave world + micrography", "box": [430, 400, 1075, 692]},
+    "E17": {"name": "watermark FIND THE SEED PHRASE IN THE THIS PICTURE", "words": "find seed phrase this picture", "box": [515, 25, 895, 410]},
+    "E18": {"name": "overlay 'Order and stability'", "words": "order", "box": [670, 80, 995, 102]},
+    "E19": {"name": "George Floyd portrait", "words": "man face head eye neck shoulder", "box": [905, 148, 1140, 425]},
+    "E20": {"name": "slogan block", "words": "black matter peace end police one more", "box": [1114, 40, 1310, 425]},
+    "E21": {"name": "CCTV camera 1", "words": "camera lens wire", "box": [1288, 58, 1413, 192]},
+    "E22": {"name": "CCTV camera 2", "words": "camera lens wire", "box": [1462, 67, 1517, 135]},
+    "E23": {"name": "Space Needle", "words": "space tower", "box": [1060, 355, 1305, 795]},
+    "E24": {"name": "Leopold II bust", "words": "head eye cloth uniform shoulder neck", "box": [1395, 425, 1520, 615]},
+    "E25": {"name": "pedestal panel: amendment + FUCK THIS SHIT", "words": "section neither crime party have exist any place subject this", "box": [1296, 780, 1496, 1015]},
+    "E26": {"name": "Trump", "words": "suit man face head eye", "box": [855, 892, 1022, 1160]},
+    "E27": {"name": "Biden", "words": "suit man face head eye", "box": [1075, 895, 1318, 1160]},
+    "E28": {"name": "caption line (whitepaper)", "words": "they that time + others", "box": [32, 1140, 1045, 1168]}
+  },
+  "face_level_substitutions": {
+    "E01": [118, 50, 185, 138], "E02": [253, 138, 310, 200], "E03": [382, 90, 445, 165], "E04": [470, 95, 525, 165],
+    "E08": [157, 602, 207, 648], "E19": [985, 148, 1112, 300], "E24": [1418, 425, 1484, 512],
+    "E26": [855, 892, 1022, 1030], "E27": [1075, 895, 1213, 1030]
+  },
+  "pilot_named_items_side_check": {
+    "pyramid eye": [620, 806, 682, 871],
+    "Leopold XX eyes": [1358, 443, 1424, 476],
+    "Trump face": [855, 892, 1022, 1030],
+    "gloved vial": [145, 225, 172, 290],
+    "FIND THE SEED PHRASE": [515, 25, 895, 410]
+  }
+}
