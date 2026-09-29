@@ -1,0 +1,11 @@
+1. HOODIE DATE (x988-1072, y366-388)
+   ink (<80) px 611, ink median 43, darkest 8; background median 121 -> contrast 78 levels
+   ink column runs: [(992, 1017), (1020, 1041), (1044, 1046), (1048, 1069)]  (reads 05.25.20 on inspection)
+
+2. GOLD CHART
+   gridline rows (x330-380, depth > 10): [249, 274, 300, 323, 349, 373, 397]
+   median spacing 24.5 px per gridline step
+   top gridline (labelled ..800, i.e. 1800 behind the axis bar): y249
+   drawn 2011 peak : x240 y248
+   drawn final peak: x454 y228  -> 20 px above the 2011 peak = 0.8 gridline steps
+   with 1800 at y249 and $200 per step: 2011 peak ~$1808, final peak ~$1971

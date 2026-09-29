@@ -1613,6 +1613,35 @@ So that "solved" means the same thing to everyone:
    it is a better worked example than any of the thirteen bugs.
 
    Reproduce with `slogan_lines.py` in the project root (needs `mnemonic` only).
+**[MEASURED] The chronology anchor, which the rule below is keyed to.** A rule
+about what was knowable on 2020-05-10 is unusable without saying what that date
+is, and the report has not said.
+
+- **The address was funded 2020-05-10 08:01:46 UTC, in block 629754**, by tx
+  `fcee21d4…d043`. It has five incoming transactions and no spends; the 0.2 BTC
+  is the first, and the four later deposits (2023–25) came from third parties.
+  *(From the mempool.space API via `chronology.py`; this is the one figure here
+  not re-derived offline in this tree.)*
+- **The artwork's gold chart postdates the funding by at least two months.** Its
+  drawn 2011 peak sits at x240 y248 and its final peak at x454 y228 — **20 px
+  higher**, or 0.8 gridline steps. With the chart's own $1,800 line at y249 and
+  $200 per step, that reads as a 2011 peak of **~$1,808** and a series ending at
+  **~$1,971**. Gold first exceeded its 2011 high in **July 2020**, so the
+  artwork's content dates to July 2020 or later.
+- **The `05.25.20` in the artwork is unambiguous**, not a reading: x992–1069,
+  y370–388, ink median 43 against a background of 121, **78 levels of
+  contrast**, with column runs separating every digit.
+- **First posted 2020-10-08 09:25 UTC**, and our working file is byte-identical
+  to that original (md5 `7710323…`). No version predates it.
+
+**Consequence, and this is the premise the deletion table runs on.** The words,
+the order, the passphrase and the scheme were all fixed **five months before the
+artwork was posted** and at least two months before it could have been drawn.
+Later content can **encode** the secret; it cannot **source** it.
+
+Image measurements reproduce from `chronology.py`, whose output is
+byte-identical to `expected_output/chronology.txt` on a local re-run.
+
 **The chronology rule deletes what was unknowable, not what is late.** Content
 that postdates the funding transaction can still *encode* a word — a later
 drawing can depict something the author already had in mind — so **no assignment
