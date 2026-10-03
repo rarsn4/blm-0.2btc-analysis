@@ -1,0 +1,8 @@
+# Never commit a found key, progress state or logs
+FOUND_KEYS.txt
+*.db
+*.db-wal
+*.db-shm
+*.log
+STOP
+__pycache__/
