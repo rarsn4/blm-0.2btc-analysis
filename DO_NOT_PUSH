@@ -1,0 +1,19 @@
+Decision, 2026-10-04: DO NOT PUSH TO GITHUB.
+
+Reason given: publishing the current state may hand a solver the remaining
+work. The next runs (Tarot joint configs, the a=1 second half) narrow the
+search in ways that are more useful to someone else than to us once public.
+
+IN FORCE:
+  - no `git push`, no PR, no release, no gist, no paste of REPORT.md content
+    to any external service
+  - local commits are FINE and should continue -- history is the working
+    record and costs nothing
+
+NOT COVERED: this says nothing about the GPU. Seed sweeps continue.
+See STOP_AFTER_LOWERCASE for the brainwallet-casing decision, still in force.
+
+ALREADY PUBLIC as of this decision, and not retractable by not-pushing:
+  origin/main = bd4d74f
+
+Delete this file deliberately, not by forgetting it.
