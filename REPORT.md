@@ -564,6 +564,26 @@ deliberately never freed, or a replacement outside the 55.
 > Read it as: **if the phrase is 21 words, the answer departs from the README in
 > at least two places.** The conditional was missing from every earlier statement
 > of it, including §4's.
+>
+> **And a second conditional, which is easy to drop and changes what is left to
+> do.** Closing slots 3 and 13 does not make `a + g ≥ 2` unconditional. It makes
+> it unconditional **only inside the 55-candidate universe** — the 54-word README
+> pool plus each slot's own table word. Outside that universe `a = 1` stays open
+> at *every* assigned slot, not merely at 3 and 13, because no free-one-fixed run
+> ever offered a slot a word from outside the pool.
+>
+> That is not a remote possibility. All **34** distinctive words of the Tarot
+> word-source hypothesis are BIP39 **and all 34 are outside the 54-word pool** —
+> `wheel fortune clock cycle judge trumpet balance scale law legal equal flip
+> mirror neck man hope flag gold coin two woman stable uniform hood isolate fall
+> crash destroy brave choice face one more real`. Zero overlap, verified against
+> the pool. Not one has ever been tested at a filled slot. (`hand` *is* in the
+> pool and is excluded from that list; `brave` and `gold` are not.)
+>
+> So free3 and free13 close the hole's **first** half — wrong word, replacement
+> inside the pool. The Tarot configs attack its **second** — wrong word,
+> replacement outside the pool. They are complements, not duplicates, and a
+> reader who takes the stronger claim will stop looking one branch early.
 
 This is stronger than the earlier statement that "at least one gap word is
 outside the pool," which was true but understated: the six leave-one-out runs
@@ -839,6 +859,23 @@ commenter. What the pairing does establish is that every assigned word entered
 circulation through a reader, not a source: there is no authorial statement
 behind any of the fifteen, and the ink independently supports only three of
 them.
+
+**[MEASURED] Being written in the artwork has never once supplied a slot
+number.** The artwork's text contains **21 BIP39 words** — `black brave can end
+find first future matter more one only order peace phrase picture police real
+seed this welcome world`, from the transcription of record in
+`slogan_lines.py`. The template assigns exactly **two** of them, `black` and
+`police`, and neither draws its *slot* from being written: `black`@10 comes from
+the rune line and `police`@5 from "line five". The other nineteen hold no slot
+at all.
+
+Conversely the three words that *are* positional labels — `subject` in the
+Amendment copy, `tower` and `moon` on the clock hands — get their slots from
+Section-1 numbering and clock sums, not from the writing either. **In both
+directions the ink supplies words and the mechanism supplies numbers, and the
+two have never met.** `food` is worth naming for the same reason: it is a BIP39
+word, it is in the 54-word gap pool, and it is not a template slot word at all —
+a community hint (§above) rather than an assignment.
 
 **The parity split is not a coincidence, and it has not been written down.** §5
 proves the clock — the one mechanism the artwork captions — yields odd slots and
@@ -1335,9 +1372,12 @@ the glyph group sizes on the right-hand line match `здесь(5) зашифро
 ### 7.3 The alphabet
 
 ```
-Сумма двух чисел  =  ◇⏶ᛗᛗ△ : ⇧⧗⏶⤬ : ⊤Ψ◇⫽ᛉ
+Сумма двух чисел  =  ◇⏶ᛗᛗ△ : ⇧⧗⏶⤬ : ⊤Ψ◇⫻ᛉ
 
-С=◇  у=⏶  м=ᛗ  а=△     д=⇧  в=⧗  х=⤬     ч=⊤  и=Ψ  е=⫽  л=ᛉ
+С=◇  у=⏶  м=ᛗ  а=△     д=⇧  в=⧗  х=⤬     ч=⊤  и=Ψ  е=⫻  л=ᛉ
+
+(`е` is drawn with **three** parallel strokes, not two. An earlier version of
+this table had `⫽`; the glyph is `⫻`, measured across all four occurrences.)
 ```
 
 Extended from the top-left lines (`Я надеюсь …`, `… будут присылать …`):
@@ -1394,6 +1434,45 @@ The valid test is structural. X has **four** arms from its crossing point; `ж` 
 
 Its geometry is a vertical stroke crossed by a single diagonal, one arm up-right and
 one down-left — verified identically in the master and in `20_1.png` (§7.3).
+
+**[MEASURED] Elder Futhark, tested and also failing.** §7.4 previously tested X
+only against Cyrillic, the artist's Arabic digits and Church Slavonic numerals.
+Measured on the master at x1530–1560, y38–55 (ink < 110, 92-px component,
+rotated to the reading frame, skeletonized): **2 strokes, 4 endpoints, one
+crossing; stave 18 px; crossing at 56% of stave height; arms up 9.5 / down 7.5 /
+upper-right 4.7 / lower-left 6.1; the diagonal rises to the RIGHT (`/`), 56° from
+the stave.**
+
+That is structurally **naudiz-like** — ᚾ is two strokes, four arms, a
+near-central crossing — **but mirrored**: standard ᚾ falls to the right.
+
+**The mirroring is not house style, and the discriminator settles it.** The
+obvious defence was that this author mirrors glyphs anyway, citing the seal
+ring's mirror-written Latin. That defence fails. The cipher's only asymmetric
+glyph, `е`, was measured in **all four** of its occurrences:
+
+| word | stroke angles |
+|---|---|
+| `надеюсь` | 50 / 50 / 49 |
+| `чисел` | 43 / 45 |
+| `номер` | 75 |
+| `день` | 51 / 43 / 45 |
+
+**All `/`.** One orientation everywhere — across the horizontal top-left lines
+*and* the rotated right-edge column. Inside the cipher this author does **not**
+mirror glyphs; the seal ring is a whole Latin inscription mirrored, which is a
+different practice. So a mirrored ᚾ is an anomaly *within* the cipher, not a
+habit of it.
+
+That measurement carries a bonus: `е` matching across both frames **confirms the
+rotation** applied to X, so the `/` direction of its diagonal is real and not a
+rotation artefact.
+
+> **Recorded as NOT READ.** Structurally naudiz-like (2 strokes, 4 arms,
+> near-central crossing) but in mirrored orientation, which the cipher's own
+> asymmetric glyph shows the author does not otherwise use. Shape-ambiguous with
+> Latin `ł`, which has no semantic candidate at the end of a Russian
+> `номер ___`. **NOT READ.**
 
 **X matches neither the mapped alphabet, nor the artist's Arabic numerals, nor
 the remaining plausible Church-Slavonic numerals, and carries no titlo. It is a
@@ -2056,6 +2135,20 @@ output with zero register spills and no warnings:
    git show HEAD:REPORT.md | grep -c '\[FIGURE\]'
    git show --stat HEAD | tail -3
    ```
+
+**Tight intervals inside one window say nothing about where the window sits.**
+Five consecutive chunk-boundary intervals of `t21_free3` gave 10,119,149 cand/s
+with only 4.4% internal spread — read as a warmed, representative rate and
+reported as a 15% shortfall needing a mechanism. The finished run came in at
+11,030,969 end-to-end, 0.925× budget. The window had understated it by 9% by
+sitting in a slow stretch, and its internal tightness was evidence of nothing
+except that the stretch was uniformly slow.
+
+This is the **inverse** of the lagged-checkpoint error two entries down: that
+one divided a lagged count by unlagged time and understated; this one read
+internal consistency as representativeness. Same family, opposite direction.
+Both are cured the same way — by the finished number, which is why a projection
+should be labelled as a floor or a bound and never as the figure.
 
 **A summary is not a measurement, and the number to quote is the one in the
 table.** Three times this week a prose sentence has drifted from figures sitting
