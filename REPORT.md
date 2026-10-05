@@ -1,4 +1,4 @@
-# 0.2 BTC Puzzle — the rune cipher solved, over 191 billion derivations eliminated, and six defects in the shared data
+# 0.2 BTC Puzzle — the rune cipher solved, over 233 billion derivations eliminated, and six defects in the shared data
 
 **Target:** `1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ`
 **HASH160:** `ccbd031e54cde2a3189fd59bc49f731367a1779e`
@@ -11,7 +11,7 @@ What **is** solved is the **rune cipher**, except for a single glyph. Those are
 different claims and this report keeps them separate throughout.
 
 I built a GPU search pipeline covering both BIP39 and Electrum and ran
-**191,267,965,271 full seed derivations** — 5,534 days of CPU at typical solver
+**233,109,378,083 full seed derivations** — 6,745 days of CPU at typical solver
 rates — plus 7,939,492,344 brainwallet addresses counted separately (§2.12).
 §2.1–2.11, §2.13 and §2.14 are exhaustively eliminated, not "tried and didn't
 find". §2.12 and §2.15 are tested corpora — a weaker claim, and tagged as such
@@ -519,6 +519,26 @@ So **a + g ≥ 2** — the answer departs from the README's reading in at least 
 places. One hole remains: `a = 1` at slot 3 (`tower`) or 13 (`moon`), which were
 deliberately never freed, or a replacement outside the 55.
 
+**[EXHAUSTED] The hole's first half is now closed.** The two assigned slots
+free-one-fixed never freed have been swept, each over the 54-word pool plus its
+own table word, with `SLOT 20 apple|second` and all four campaign paths:
+
+| run | survivors | vs 21,308,126,895 ± 145,402 | wall | result |
+|---|---|---|---|---|
+| `t21_free3` (`tower`) | 21,308,015,749 | **−0.764 σ** | 68.7 h | exhausted, no match |
+| `t21_free13` (`moon`) | 21,308,200,613 | **+0.507 σ** | 67.4 h | exhausted, no match |
+
+Both bands were published before either run started and both landed well
+inside, so these are clean negatives rather than broken runs. Together they add
+**41,841,412,812** derivations to the ledger — not the 42,616,253,790 the two
+box volumes sum to, because each overlaps `t21_readme54` by exactly
+**387,420,489**, one 55th of its own box: the single combination in which the
+freed slot takes back its own table word, at which point the box *is* the
+README reading.
+
+So `a + g ≥ 2` is no longer conditional on slots 3 and 13 being untested. It is
+conditional only on the universe, which is the next paragraph.
+
 > **This deduction is conditional on the phrase being 21 words, and that is not
 > established.** Every run in the table above is a 21-word template, so *a* and
 > *g* are defined only over that template. §5 narrows the length to **21 or 24**
@@ -983,10 +1003,10 @@ box disjointification with real set intersections. Run it as
 `python3 tally2.py configs`.
 
 ```
-t21 campaign, 29 evidenced runs     191,267,965,271 derivations
-+ the twelve older asserted runs    194,876,861,639
+t21 campaign, 31 evidenced runs     233,109,378,083 derivations
++ the twelve older asserted runs    236,718,274,451
     marginal of the twelve          3,608,896,368
-    at 400 derivations/s            5,639 CPU-days
+    at 400 derivations/s            6,849 CPU-days
 ```
 
 **The seven runs added on 27–28 September are why the union matters.** Six were
@@ -1088,12 +1108,12 @@ roughly zero and the whole 26.5 billion.
 
 The t21 figure above **is** computed, and every digit reproduces from
 `tally2.py configs`. Adding an unverifiable constant to it would make the sum
-less trustworthy than either part. Where one number is needed, **"over 191
+less trustworthy than either part. Where one number is needed, **"over 233
 billion derivations eliminated"** is a floor that is computed, in preference to
 an estimate that is not.
 
-**The headline quotes the evidenced figure, not the combined one.** 191,267,965,271
-is the union of the 29 runs whose logs are in this tree; 194,876,861,639 adds the
+**The headline quotes the evidenced figure, not the combined one.** 233,109,378,083
+is the union of the 31 runs whose logs are in this tree; 236,718,274,451 adds the
 twelve older runs carried on report alone. The larger number is not wrong, but it
 inherits the weaker warrant of its weakest component, and a headline that needs a
 footnote about which runs have logs is worse than a smaller headline that needs
