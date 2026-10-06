@@ -1,4 +1,4 @@
-# 0.2 BTC Puzzle — the rune cipher solved, over 237 billion derivations eliminated, and six defects in the shared data
+# 0.2 BTC Puzzle — the rune cipher solved, over 238 billion derivations eliminated, and six defects in the shared data
 
 **Target:** `1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ`
 **HASH160:** `ccbd031e54cde2a3189fd59bc49f731367a1779e`
@@ -11,7 +11,7 @@ What **is** solved is the **rune cipher**, except for a single glyph. Those are
 different claims and this report keeps them separate throughout.
 
 I built a GPU search pipeline covering both BIP39 and Electrum and ran
-**237,177,293,218 full seed derivations** — 6,863 days of CPU at typical solver
+**238,145,844,440 full seed derivations** — 6,891 days of CPU at typical solver
 rates — plus 7,939,492,344 brainwallet addresses counted separately (§2.12).
 §2.1–2.11, §2.13 and §2.14 are exhaustively eliminated, not "tried and didn't
 find". §2.12 and §2.15 are tested corpora — a weaker claim, and tagged as such
@@ -1011,9 +1011,52 @@ slot 10 = `time` was already reachable by any run that swept that slot. The
 brief's claim that all 34 distinctive Tarot words lie outside the pool holds for
 its own 34-word list; this config's slot-10 list is not a subset of it.
 
-`[TESTED]`, not `[EXHAUSTED]`. This is a constructed hypothesis about the
-artwork's numbering, not a statement the author made, and the Major Arcana
-reading is one of several that would fit the two marks.
+**The second joint config, and the only link with authorial text behind it.**
+`t21_tarot_j17x19` tested Star (XVII) × Sun (XIX): `hope` at 17 against the
+author's own runes reading `Я надеюсь` — *I hope* — with `gold` free to move to
+19, since the Sun is gold in alchemy. Every other card-to-word link in the
+hypothesis is a reader's construction; this one is not.
+
+```
+slot 17   gold | hope | flag        slot 19   glove | gold
+space     148,769,467,776 candidates   (6 combinations x 54^6)
+survivors 1,162,271,630   vs 1,162,261,467 +/- 33,959   =  +0.299 sigma
+wall      3.73 h   11,080,699 cand/s
+result    exhausted, no match
+```
+
+It adds **968,551,222** derivations, not its full 1,162,261,467: one of the six
+combinations is slot 17 `gold` × slot 19 `glove`, which **is** the README
+reading, so a sixth of the box sits inside `t21_readme54`. Predicted from the
+config before the run and confirmed at exactly 1/6 by the ledger. This is a
+different overlap mechanism from `j10x20`'s — that one came from a pool word in
+the candidate list, this one from the config necessarily containing the template
+reading it varies around.
+
+Two limits this config does **not** cover, since the brief pinned them. `SLOT 20`
+is fixed to `second`, so if slot 20 is `apple` *and* 17 or 19 is wrong, the run
+misses — §2.16 having established there is no README value at slot 20 to be
+right about, that is a real gap, and the free-one-fixed runs used `apple|second`
+precisely to avoid it.
+
+**Why these two negatives are worth more than their size.** The branch was tested
+at its **strongest point first**. Slots 10 and 20 are the two weakest rows in
+§2.17 — one with no slot derivation at all, one with no README value — and they
+carry the artwork's only two Roman-numeral marks, which is the whole mechanism
+the hypothesis proposes. `j10x20` was also the first config in this project able
+to find a **two-word** fault, which is what §2.13's deduction requires. It
+returned −0.26 σ and empty. `j17x19`, the one link with the author's own writing
+behind it, returned +0.30 σ and empty.
+
+What remains of the branch is weaker cases at higher cost: `j12x16` is ~24 h, and
+the eleven single-slot configs total ~30 h and can only find a one-word fault
+outside the 55-candidate universe. A hypothesis that fails at its strongest
+configuration is not refuted, but the order in which it was tested is what makes
+these two negatives informative rather than merely two more rows.
+
+`[TESTED]`, not `[EXHAUSTED]`. These are constructed hypotheses about the
+artwork's numbering, not statements the author made, and the Major Arcana
+reading is one of several that would fit two Roman-numeral marks.
 
 ---
 
@@ -1044,10 +1087,10 @@ box disjointification with real set intersections. Run it as
 `python3 tally2.py configs`.
 
 ```
-t21 campaign, 32 evidenced runs     237,177,293,218 derivations
-+ the twelve older asserted runs    240,786,189,586
+t21 campaign, 33 evidenced runs     238,145,844,440 derivations
++ the twelve older asserted runs    241,754,740,808
     marginal of the twelve          3,608,896,368
-    at 400 derivations/s            6,967 CPU-days
+    at 400 derivations/s            6,995 CPU-days
 ```
 
 **The seven runs added on 27–28 September are why the union matters.** Six were
@@ -1149,12 +1192,12 @@ roughly zero and the whole 26.5 billion.
 
 The t21 figure above **is** computed, and every digit reproduces from
 `tally2.py configs`. Adding an unverifiable constant to it would make the sum
-less trustworthy than either part. Where one number is needed, **"over 237
+less trustworthy than either part. Where one number is needed, **"over 238
 billion derivations eliminated"** is a floor that is computed, in preference to
 an estimate that is not.
 
-**The headline quotes the evidenced figure, not the combined one.** 237,177,293,218
-is the union of the 32 runs whose logs are in this tree; 240,786,189,586 adds the
+**The headline quotes the evidenced figure, not the combined one.** 238,145,844,440
+is the union of the 33 runs whose logs are in this tree; 241,754,740,808 adds the
 twelve older runs carried on report alone. The larger number is not wrong, but it
 inherits the weaker warrant of its weakest component, and a headline that needs a
 footnote about which runs have logs is worse than a smaller headline that needs
@@ -2196,6 +2239,20 @@ output with zero register spills and no warnings:
    git show HEAD:REPORT.md | grep -c '\[FIGURE\]'
    git show --stat HEAD | tail -3
    ```
+
+**A verified list is only verified over the words actually in it.** A 34-word
+Tarot candidate list was checked against the 54-word pool and found disjoint —
+correctly, for those 34 words. The claim was then carried as coverage of the
+*configs*, and the configs were built from a different list: `t21_tarot_j10x20`
+includes `time` at slot 10, `time` is a pool word, and an eighth of that box was
+consequently already searched. The verification and the artefact it was claimed
+about were not the same object.
+
+The same list had earlier omitted `gold`. Two omissions, but only the second cost
+coverage, and the difference is instructive: a word missing from an enumeration
+is a gap in a list, while a word missing from a list used to assert something
+about a *config* is a false claim about work. Check the artefact that will run,
+not the list that informed it.
 
 **Tight intervals inside one window say nothing about where the window sits.**
 Five consecutive chunk-boundary intervals of `t21_free3` gave 10,119,149 cand/s

@@ -178,8 +178,8 @@ EVIDENCED = ['t21_readme54','t21_loo21','t21_loo6','t21_loo8','t21_loo14','t21_l
              't21_black15','t21_black18','t21_black21',
              # 2026-10: the two assigned slots free-one-fixed never freed.
              't21_free3','t21_free13',
-             # 2026-10-06: first config able to hit under a=2.
-             't21_tarot_j10x20']
+             # 2026-10-06: first configs able to hit under a=2.
+             't21_tarot_j10x20','t21_tarot_j17x19']
 ASSERTED  = ['t21_pool52','t21_pool52_rev','t21_pool40','t21_idx','t21_pathd','t21_pathe',
              't21_trust21','t21_trust21b','t21_bnw18','t21_bnw18b','t21_trustonly','t21']
 CHECKSUM = 128
