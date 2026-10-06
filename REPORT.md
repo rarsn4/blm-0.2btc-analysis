@@ -2284,6 +2284,33 @@ output with zero register spills and no warnings:
    git show --stat HEAD | tail -3
    ```
 
+**A figure taken from the record carries its factors with it, and they must be
+re-derived before it is used.** Twice now a number already in this document has
+been applied to a question it did not answer, and both times the error was in
+what its factors *meant* rather than in its arithmetic:
+
+- The 24-word floor. `30,502,389,939,948` is a **derivation** count at a /256
+  checksum; it was divided by a **candidates**-per-second rate taken from
+  21-word runs at /128. Out by exactly **2×** — 3,789 days reported against
+  7,579.
+- Stage 2. `3 × (P+3X) × 10,654,063,447 = 87.0 h` was read as *three paths*
+  when the `3 ×` is a **slot count** — the declining text says "paths 2–4 on
+  three slots". Out by **4.3×**: the thirteen-slot figure is 377 h, not 89. That
+  turned the cheapest-looking remaining branch into the most expensive, from
+  about 264 hours per percentage point of probability against the 89/0.33
+  the three-slot figure implies.
+
+Both were caught the same way: by recomputing from the box definitions instead
+of adopting the number. Neither would have been caught by checking the
+arithmetic, because the arithmetic was right in both cases.
+
+**That is the argument for keeping the formula visible beside the figure.**
+`3 × (P+3X) × 10,654,063,447` is re-derivable and was re-derived; `89 h` alone
+would have been believed. Where this document states a cost, it states the
+expression that produces it, and that is not decoration — it is the only thing
+that makes a misreading recoverable by a later reader who was not there when
+the number was computed.
+
 **A verified list is only verified over the words actually in it.** A 34-word
 Tarot candidate list was checked against the 54-word pool and found disjoint —
 correctly, for those 34 words. The claim was then carried as coverage of the
