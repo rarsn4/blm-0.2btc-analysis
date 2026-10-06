@@ -1,4 +1,4 @@
-# 0.2 BTC Puzzle — the rune cipher solved, over 233 billion derivations eliminated, and six defects in the shared data
+# 0.2 BTC Puzzle — the rune cipher solved, over 237 billion derivations eliminated, and six defects in the shared data
 
 **Target:** `1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ`
 **HASH160:** `ccbd031e54cde2a3189fd59bc49f731367a1779e`
@@ -11,12 +11,13 @@ What **is** solved is the **rune cipher**, except for a single glyph. Those are
 different claims and this report keeps them separate throughout.
 
 I built a GPU search pipeline covering both BIP39 and Electrum and ran
-**233,109,378,083 full seed derivations** — 6,745 days of CPU at typical solver
+**237,177,293,218 full seed derivations** — 6,863 days of CPU at typical solver
 rates — plus 7,939,492,344 brainwallet addresses counted separately (§2.12).
 §2.1–2.11, §2.13 and §2.14 are exhaustively eliminated, not "tried and didn't
 find". §2.12 and §2.15 are tested corpora — a weaker claim, and tagged as such
 in their own headings. §2.16 and §2.17 are measurements of the template itself
-rather than eliminations within it, and §2.17 is the one to read first if you
+rather than eliminations within it, and §2.18 is a tested hypothesis about its
+numbering, and §2.17 is the one to read first if you
 are deciding whether any of this is worth continuing.
 
 Code, configs and every hypothesis tested:
@@ -976,6 +977,46 @@ byte-identical to the bundled `expected_output/idiom_ink.txt`.
 
 ---
 
+### 2.18 [TESTED] Tarot word-source: the two Roman-numeral slots, jointly
+
+Read each Major Arcana number as a slot: card **X** (Wheel of Fortune) at slot
+10, card **XX** (Judgement) at slot 20. Those are the artwork's only two
+Roman-numeral marks, and §2.17 ranks them the two weakest rows in the table —
+slot 10 with no slot derivation at all, slot 20 with no README value to be right
+about (§2.16).
+
+`t21_tarot_j10x20` ran both jointly, which matters: the single-slot configs can
+only hit under `a = 1`, and §2.13's deduction says the answer must have at least
+two faults. **This is the first config in the project able to hit under
+`a = 2`.**
+
+```
+slot 10   black | wheel | fortune | time | clock | cycle
+slot 20   second | apple | judge | trumpet
+space     595,077,871,104 candidates   (24 combinations x 54^6)
+survivors 4,649,028,117   vs 4,649,045,868 +/- 67,917   =  -0.261 sigma
+wall      14.28 h   11,572,212 cand/s   (0.970x the black-run mean)
+result    exhausted, no match
+```
+
+Band published before the run; the count landed at −0.26 σ and acceptance at
+1/128.0005. A clean negative.
+
+**What it does and does not close.** It adds **4,067,915,134** derivations to the
+ledger, not its full 4,649,045,868: the box overlaps earlier work by
+**581,130,734**, exactly one eighth, three of its twenty-four slot combinations
+having been reached before. One cause is visible in the config and worth
+recording — `time` is a **54-word pool word**, the only one of these ten, so
+slot 10 = `time` was already reachable by any run that swept that slot. The
+brief's claim that all 34 distinctive Tarot words lie outside the pool holds for
+its own 34-word list; this config's slot-10 list is not a subset of it.
+
+`[TESTED]`, not `[EXHAUSTED]`. This is a constructed hypothesis about the
+artwork's numbering, not a statement the author made, and the Major Arcana
+reading is one of several that would fit the two marks.
+
+---
+
 **[INFERRED] From this point, every remaining hypothesis is one we construct,
 not one the document offers.** That is a different epistemic footing from
 everything preceding it, and the distinction is worth preserving: earlier
@@ -1003,10 +1044,10 @@ box disjointification with real set intersections. Run it as
 `python3 tally2.py configs`.
 
 ```
-t21 campaign, 31 evidenced runs     233,109,378,083 derivations
-+ the twelve older asserted runs    236,718,274,451
+t21 campaign, 32 evidenced runs     237,177,293,218 derivations
++ the twelve older asserted runs    240,786,189,586
     marginal of the twelve          3,608,896,368
-    at 400 derivations/s            6,849 CPU-days
+    at 400 derivations/s            6,967 CPU-days
 ```
 
 **The seven runs added on 27–28 September are why the union matters.** Six were
@@ -1108,12 +1149,12 @@ roughly zero and the whole 26.5 billion.
 
 The t21 figure above **is** computed, and every digit reproduces from
 `tally2.py configs`. Adding an unverifiable constant to it would make the sum
-less trustworthy than either part. Where one number is needed, **"over 233
+less trustworthy than either part. Where one number is needed, **"over 237
 billion derivations eliminated"** is a floor that is computed, in preference to
 an estimate that is not.
 
-**The headline quotes the evidenced figure, not the combined one.** 233,109,378,083
-is the union of the 31 runs whose logs are in this tree; 236,718,274,451 adds the
+**The headline quotes the evidenced figure, not the combined one.** 237,177,293,218
+is the union of the 32 runs whose logs are in this tree; 240,786,189,586 adds the
 twelve older runs carried on report alone. The larger number is not wrong, but it
 inherits the weaker warrant of its weakest component, and a headline that needs a
 footnote about which runs have logs is worse than a smaller headline that needs
