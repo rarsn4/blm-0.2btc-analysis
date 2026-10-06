@@ -629,11 +629,30 @@ slot 20, on the primary path `m/44'/0'/0'/0/0`.
 >             free3, free13, tarot_j10x20, tarot_j17x19
 > ```
 >
-> That matters for the deduction below. Its `a = 1, g = 0 (13 slots, 55 cands)`
-> row **is the one-path set**, so the `a = 1` branch is closed on path 1 for
-> thirteen slots and on all four paths for only two — slots 3 and 13, run in
-> October. Stage 2, the other three paths for those thirteen, was costed at 89 h
-> and never queued.
+> **This is a condition on the deduction, not a footnote to it.** The deduction
+> below has three legs. `t21_readme54` and the six leave-one-out runs ran **four
+> paths**. The third leg — `a = 1, g = 0 (13 slots, 55 cands) free-one-fixed` —
+> **is the one-path set.** So:
+>
+> **On paths 2–4, a single wrong word is still open at thirteen of the fifteen
+> assigned slots.** Slots 3 and 13 are the only assigned slots closed on all four
+> paths, and only since October 2026.
+>
+> Every joint `a = 2` config in §2.18 — `j10x20`, `j17x19`, `ink10x20` — was
+> chosen on the understanding that `a = 1` was closed. It is closed **on path 1**.
+> The report flagged the risk when it adopted staging (break-even `q > 63.4%`,
+> "should not be described as comfortable") and then the qualifier did not reach
+> the conclusion. If `q` is 80%, a fifth of the probability mass sits on paths
+> never searched at those thirteen slots.
+>
+> **The remaining cost, re-derived rather than carried forward.** The 89 h figure
+> in §2.13 below is for **three slots**, not thirteen — the `3 ×` in
+> `3 × (P+3X) × 10,654,063,447` is a slot count, and the text declining it says
+> "paths 2–4 on three slots". Per slot at `P+3X = 9.794 µs` over 10,654,063,447
+> derivations is **29.0 h**, so all thirteen is **377 h ≈ 15.7 days**; at the
+> 11,080,699 cand/s measured on `j17x19`, scaled to three paths, **396 h ≈ 16.5
+> days**. Closing the `a = 1` branch across all four paths is a two-week job, not
+> an 89-hour one.
 >
 > The ledger's figures are unaffected, because its unit is the checksum-valid
 > candidate rather than the derivation performed, and that convention is applied
@@ -857,7 +876,7 @@ difference has never been tabulated.
 | 5 | `police` | depicted | "line five" — a convention used nowhere else in the table |
 | 12 | `vote` | association only | the `.VS.` ambigram |
 | 17 | `gold` | inferred from the chart | inferred from the chart |
-| 11 | `pyramid` | depicted | **worse than contested.** The stated conflict is pyramid 5+6 against the Space Needle, but freeing slot 11 found **no candidate fits at all** (§6) — so the problem is not choosing between two words, it is that neither is right |
+| 11 | `pyramid` | depicted | **worse than contested.** The stated conflict is pyramid 5+6 against the Space Needle, but freeing slot 11 found **no candidate fits at all** — *on path 1 only*, over 55 candidates that include `space` but **not** `eye` or `tower`, with slot 20 pinned to `second` (§2.13's path-coverage note). So the problem is not choosing between two words; it is that neither of the two tested is right, and the object's other BIP39 names were never tried |
 | 10 | `black` | the rune line `чёрный день номер X`, written as running prose with **no mark of any kind** — unlike `subject`, `tower` and `moon`, the three other ink-supported words, each of which carries a positional marker (n=3, suggestive not conclusive) | the same line, via `номер X` — a glyph §7.4 shows is unreadable |
 | 20 | `apple` | README table row, **empty description** | none: §2.16 finds no README value to be right about, and weakens `XX` → 20 |
 
