@@ -616,6 +616,31 @@ that slot's own table word (55 candidates; 56 at slot 20, which carries both
 `apple` and `second`), with the six gaps over the full pool, `second` pinned at
 slot 20, on the primary path `m/44'/0'/0'/0/0`.
 
+> **[SCOPE] Thirteen of these runs covered ONE path, and the ledger cannot see
+> that.** `tally2.py` never reads `PATH` — it unions word-boxes, so a one-path
+> run and a four-path run over the same words are credited identically. Of the
+> 33 evidenced runs, **13 ran one path and 20 ran four**, and the 13 are exactly
+> the `free*_p1` free-one-fixed set:
+>
+> ```
+> one path  : free1 free2 free4 free5 free7 free9 free10 free11
+>             free12 free16 free17 free19 free20
+> four paths: readme54, the six loo, swap114, written, pool75, the six black,
+>             free3, free13, tarot_j10x20, tarot_j17x19
+> ```
+>
+> That matters for the deduction below. Its `a = 1, g = 0 (13 slots, 55 cands)`
+> row **is the one-path set**, so the `a = 1` branch is closed on path 1 for
+> thirteen slots and on all four paths for only two — slots 3 and 13, run in
+> October. Stage 2, the other three paths for those thirteen, was costed at 89 h
+> and never queued.
+>
+> The ledger's figures are unaffected, because its unit is the checksum-valid
+> candidate rather than the derivation performed, and that convention is applied
+> uniformly. What is affected is the word *exhausted*: a one-path run does not
+> exhaust its box over the path set, and §2.17's slot-11 row saying "freeing slot
+> 11 found no candidate fits at all" is a path-1 result.
+
 Staging by path rather than running all four costs **1.565× overhead** against a
 break-even at **q > 63.4%**, where *q* is the chance the answer sits on path 1.
 Those figures are from production — `P = 6.209 µs` shared, `X = 1.195 µs` per
