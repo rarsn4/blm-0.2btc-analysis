@@ -1291,11 +1291,80 @@ BIP32 paths at all. The two populations do not intersect. Everything from here
 covers all three regardless, because conditioning the check on that argument
 would let the next kernel variant drop back to compressed-only in silence.
 
+**[MEASURED] One run is checkable by an exact identity, not a band — and it
+holds.** `t21_loo21` sweeps slot 21 over all 2048 words. A 21-word phrase carries
+seven checksum bits, so for any fixed 20-word prefix exactly **16** of the 2048
+last words are valid, and they sit **one per 128-block**: word 21's four entropy
+bits are the *high* bits of its index. Survivors must therefore equal
+`candidates / 128` **exactly, with remainder zero**. There is no band, and any
+nonzero delta would be a counting or checksum defect rather than a fluctuation.
+
+```
+space               1,880,739,938,304        /128 = 14,693,280,768  remainder 0
+counted segment     1,489,897,914,368        /128 = 11,639,827,456  remainder 0
+logged survivors                                    11,639,827,456
+delta                                                            0
+```
+
+**Exact.** This is a stronger validation of the pipeline than any band has given:
+an exact structural identity confirmed on a production run, not a tolerance.
+
+**But it covers 79.2% of the run, not all of it, and the reason is worth
+recording.** `t21_loo21` was started on the affine binary on 3 September, killed
+at 20:25:57 on the 4th, and **resumed on the Jacobian binary** ten seconds later
+from its checkpoint. The cumulative survivor counter restarts on resume, so the
+logged 11,639,827,456 is the count from the resume point onward. The affine
+segment's own total was never printed — that log ends mid-run. The resume index
+recovers exactly: `1,880,739,938,304 − 11,639,827,456 × 128 = 390,842,023,936`,
+which is **exactly 104 chunks** of 3,758,096,384. So the identity is confirmed on
+every candidate the Jacobian binary counted and is simply unrecorded for the
+first 104 chunks. Not wrong — uncounted.
+
+**[MEASURED] Bands on slot-21 pool sweeps are 1.65% too wide, and the structure
+is known rather than assumed.** The binomial band treats each pool word as
+independently valid with `p = 1/128`. It is not independent: exactly one word per
+128-block is valid, so the count is a sum of **16 independent Bernoullis**, block
+*j* contributing `k_j/128` where `k_j` is how many of the 54 pool words fall in
+block *j*. Measured from the wordlist:
+
+```
+k = [4, 1, 1, 3, 1, 4, 3, 1, 5, 6, 10, 1, 1, 3, 6, 4]     sum 54
+
+variance   binomial 0.418579   hypergeometric 0.407741   stratified 0.404907
+sigma      ratio to binomial:  0.9870 (1.30%)            0.9835 (1.65%)
+```
+
+The hypergeometric form knows the valid set has fixed size 16; the stratified
+form knows **where** they are, and is the correct one. Rescaled, the project's
+widest deviation of 1.489σ becomes **1.514σ**, and `P(all 37 inside)` falls from
+0.0044 to 0.0058 — which does not change the conclusion below.
+
+**The correction applies only to runs that sweep slot 21 over a pool.** A run
+with slot 21 **pinned** gets none, and a run with slot 21 `@FULL` gets the exact
+identity instead. Of the six black runs, five sweep slot 21 over the pool and
+`t21_black21` pins `black` there, so it keeps the binomial band.
+
+Applying it to the six, which is the only place in this project with repeated
+draws from one box shape:
+
+```
+black6  -0.819   black8  +1.053   black14 -0.009
+black15 -1.188   black18 +0.509   black21 -1.035  (uncorrected)
+
+mean z -0.2484    Var(z) 0.8305    95% CI from 5 df  [0.324, 4.996]
+```
+
+`Var(z) = 0.83` against an expected 1.0, and **1.0 sits inside the interval** —
+but the interval spans a factor of fifteen, because six draws carry almost no
+power to test a variance. The runs are not suspiciously tight; the sample is too
+small to say they are anything.
+
 **[SCOPE] "No anomaly across 37 runs" is not 37 clean draws, and the
 consistency is weaker evidence than the count suggests.** The widest deviation
 across all 37 runs is **1.489 σ**. If those were 37 *independent* draws,
-`P(|Z| < 1.489) = 0.8635`, so `P(all 37 inside) = 0.0044` and about **five** runs
-should have fallen outside. **Zero did.**
+`P(|Z| < 1.514) = 0.8700` after the stratified rescaling above, so
+`P(all 37 inside) = 0.0058` and about **five** runs should have fallen outside.
+**Zero did.**
 
 The explanation is almost certainly not that the pipeline is unusually accurate.
 It is that **the boxes overlap by design** — this section's whole purpose is
