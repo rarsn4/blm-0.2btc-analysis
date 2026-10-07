@@ -11,7 +11,7 @@ What **is** solved is the **rune cipher**, except for a single glyph. Those are
 different claims and this report keeps them separate throughout.
 
 I built a GPU search pipeline covering both BIP39 and Electrum and ran
-**243,569,731,286 full seed derivations** — 7,048 days of CPU at typical solver
+**243,641,342,961 full seed derivations** — 7,050 days of CPU at typical solver
 rates — plus 7,939,492,344 brainwallet addresses counted separately (§2.12).
 §2.1–2.11, §2.13 and §2.14 are exhaustively eliminated, not "tried and didn't
 find". §2.12 and §2.15 are tested corpora — a weaker claim, and tagged as such
@@ -1138,9 +1138,37 @@ stood on the restaurant's name alone. One limit remains: `eye` is assigned at
 slot 9, so a true *eye-moves-to-11* hypothesis is `a = 2` and this did not cover
 it.
 
-**The boundary, stated plainly.** Thirty-five runs, **243,569,731,286**
-derivations, about **7,048 CPU-days**, and no anomaly anywhere — every survivor
-count inside 1.5σ of its band, most inside 1.0.
+**[TESTED] Two cells no previous run had entered.** Both cheap, both closing
+holes left by earlier configs' pinned slots rather than proposing new readings.
+
+```
+t21_amend1415    slots 14+15 = the 19 BIP39 words of the 14th/15th Amendments
+                 6,139,206,432 candidates, slot 20 apple|second, four paths
+                 survivors 47,972,096  vs 47,962,550 +/- 6,898  =  +1.384 sigma
+                 9.03 min, exhausted, no match
+
+t21_flag6_apple  slot 6 = flag|banner|nation|state|eagle|field|glory|salute
+                 3,673,320,192 candidates, slot 20 apple, four paths
+                 survivors 28,697,967  vs 28,697,814 +/- 5,336  =  +0.029 sigma
+                 5.67 min, exhausted, no match
+```
+
+`flag6_apple` has **zero** overlap with anything already run, and the reason is
+instructive: `t21_loo6` swept slot 6 over all 2048 words but **pinned slot 20 to
+`second`**, so flag-words at 6 crossed with `apple` at 20 was unreachable. The
+pinned slot that §2.16 argues against left a real hole, and this is it closed.
+
+`amend1415` enters a cell neither `loo14` nor `loo15` could: each swept its own
+slot with the other in the pool, so non-pool words at **both simultaneously** had
+never been placed. Its overlap was predicted before launch at 76/722 = 10.53% and
+measured at exactly **76.00/722**. Two of the nineteen amendment words — `life`
+and `power` — are 54-pool words, which is why the figure is 76/722 and not
+72/722.
+
+**The boundary, stated plainly.** Thirty-seven runs, **243,641,342,961**
+derivations, about **7,050 CPU-days**, and no anomaly anywhere — every survivor
+count inside 1.5σ of its band, most inside 1.0, with the correlation caveat in
+§3 that stops that being read as 37 independent confirmations.
 
 - The Tarot branch was tested at its two strongest points: the only two
   Roman-numeral slots jointly, and the only card-to-word link with authorial
@@ -1195,10 +1223,10 @@ box disjointification with real set intersections. Run it as
 `python3 tally2.py configs`.
 
 ```
-t21 campaign, 35 evidenced runs     243,569,731,286 derivations
-+ the twelve older asserted runs    247,178,627,654
+t21 campaign, 37 evidenced runs     243,641,342,961 derivations
++ the twelve older asserted runs    247,249,325,377
     marginal of the twelve          3,608,896,368
-    at 400 derivations/s            7,152 CPU-days
+    at 400 derivations/s            7,154 CPU-days
 ```
 
 **The seven runs added on 27–28 September are why the union matters.** Six were
@@ -1263,6 +1291,27 @@ BIP32 paths at all. The two populations do not intersect. Everything from here
 covers all three regardless, because conditioning the check on that argument
 would let the next kernel variant drop back to compressed-only in silence.
 
+**[SCOPE] "No anomaly across 37 runs" is not 37 clean draws, and the
+consistency is weaker evidence than the count suggests.** The widest deviation
+across all 37 runs is **1.489 σ**. If those were 37 *independent* draws,
+`P(|Z| < 1.489) = 0.8635`, so `P(all 37 inside) = 0.0044` and about **five** runs
+should have fallen outside. **Zero did.**
+
+The explanation is almost certainly not that the pipeline is unusually accurate.
+It is that **the boxes overlap by design** — this section's whole purpose is
+computing a union because they do — so the survivor counts are positively
+correlated and the effective number of independent draws is far below 35. A
+candidate counted in `readme54` and again in a `loo` run is not two samples of
+anything.
+
+What the bands still do, and it is the thing they were built for: a broken run
+blows past 3 σ regardless of correlation, and that is how the `_ModInv`
+limb-count bug and the 24-word HMAC omission were caught. Each individual run's
+band remains a valid check on that run. What does **not** follow is treating 37
+in-band results as 37 independent confirmations of the template — the collective
+evidence is weaker than the row count implies, and a reader should not read the
+tidiness as significance.
+
 **What "derivations" means here, exactly.** A 21-word mnemonic carries seven
 checksum bits, so one sequence in 128 is valid and the ledger reports
 `⌊candidates / 128⌋`. **That is a convention, not a count.** The true number of
@@ -1304,8 +1353,8 @@ less trustworthy than either part. Where one number is needed, **"over 243
 billion derivations eliminated"** is a floor that is computed, in preference to
 an estimate that is not.
 
-**The headline quotes the evidenced figure, not the combined one.** 243,569,731,286
-is the union of the 35 runs whose logs are in this tree; 247,178,627,654 adds the
+**The headline quotes the evidenced figure, not the combined one.** 243,641,342,961
+is the union of the 37 runs whose logs are in this tree; 247,249,325,377 adds the
 twelve older runs carried on report alone. The larger number is not wrong, but it
 inherits the weaker warrant of its weakest component, and a headline that needs a
 footnote about which runs have logs is worse than a smaller headline that needs
