@@ -1,4 +1,4 @@
-# 0.2 BTC Puzzle — the rune cipher solved, over 238 billion derivations eliminated, and six defects in the shared data
+# 0.2 BTC Puzzle — the rune cipher solved, over 243 billion derivations eliminated, and six defects in the shared data
 
 **Target:** `1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ`
 **HASH160:** `ccbd031e54cde2a3189fd59bc49f731367a1779e`
@@ -11,7 +11,7 @@ What **is** solved is the **rune cipher**, except for a single glyph. Those are
 different claims and this report keeps them separate throughout.
 
 I built a GPU search pipeline covering both BIP39 and Electrum and ran
-**238,145,844,440 full seed derivations** — 6,891 days of CPU at typical solver
+**243,569,731,286 full seed derivations** — 7,048 days of CPU at typical solver
 rates — plus 7,939,492,344 brainwallet addresses counted separately (§2.12).
 §2.1–2.11, §2.13 and §2.14 are exhaustively eliminated, not "tried and didn't
 find". §2.12 and §2.15 are tested corpora — a weaker claim, and tagged as such
@@ -1098,9 +1098,73 @@ outside the 55-candidate universe. A hypothesis that fails at its strongest
 configuration is not refuted, but the order in which it was tested is what makes
 these two negatives informative rather than merely two more rows.
 
+**[TESTED] The author's own ink at the two worst slots.** §2.17 measures that 21
+BIP39 words are written in the artwork, that the template assigns two of them,
+and that neither draws its slot *number* from being written. Seven of the
+nineteen written-but-unslotted words are 54-pool words and so were already
+reachable at gap slots. The remaining **twelve** had never been testable at a
+filled slot: `brave can end find matter more one phrase picture real seed this`.
+
+```
+t21_ink10x20   slot 10  black + the twelve      slot 20  apple|second
+               644,667,693,696 candidates
+               survivors 5,036,361,073  vs 5,036,466,357 +/- 70,690  =  -1.489 sigma
+               15.66 h, exhausted, no match
+```
+
+This is the author's ink rather than a reader's construction, and it is the
+experiment §2.17's own measurement points at — the ink supplies words, the
+mechanism supplies numbers, and this asked whether the ink supplies the word at
+a slot whose number comes from elsewhere. It does not.
+
+**[TESTED] Slot 11 under the Space Needle's own names.** Slot 11 is the one slot
+§2.17 reports as fitting *nothing*. The Space Needle's original 1962 revolving
+restaurant was "the Eye of the Needle"; `eye` is BIP39, `needle` is not. The run
+that produced "no candidate fits at all" offered 55 words containing `space` but
+**not** `eye` or `tower`, with slot 20 pinned and on **path 1 only** — so the
+object's two other BIP39 names had never been tried there.
+
+```
+t21_needle11   slot 11  pyramid|eye|tower       slot 20  apple|second
+               148,769,467,776 candidates, four paths
+               survivors 1,162,265,233  vs 1,162,261,467 +/- 33,959  =  +0.111 sigma
+               3.71 h, exhausted, no match
+```
+
+The supporting claim that the 1962 restaurant rotated once per hour, matching the
+minute hand that carries `TOWER`, is **unresolved** — sources disagree and the
+1962 figure could not be reached — and was not offered as evidence. The lead
+stood on the restaurant's name alone. One limit remains: `eye` is assigned at
+slot 9, so a true *eye-moves-to-11* hypothesis is `a = 2` and this did not cover
+it.
+
+**The boundary, stated plainly.** Thirty-five runs, **243,569,731,286**
+derivations, about **7,048 CPU-days**, and no anomaly anywhere — every survivor
+count inside 1.5σ of its band, most inside 1.0.
+
+- The Tarot branch was tested at its two strongest points: the only two
+  Roman-numeral slots jointly, and the only card-to-word link with authorial
+  text behind it. Both empty.
+- The author's own ink at the two worst-supported slots. Empty.
+- Slot 11 under the names of the object it supposedly depicts. Empty.
+- **Every remaining compute branch costs more per unit of probability than
+  anything already run.** Stage 2 across thirteen slots is 377 h for ~1.4% —
+  about 264 hours per percentage point. `j12x16` is ~26 h for a case weaker than
+  two that already returned empty. The eleven single-slot configs can only find a
+  one-word fault inside a universe already swept on path 1.
+
+What is left is not a compute problem, and the evidence has pointed this way for
+a week:
+
+| open question | status |
+|---|---|
+| glyph **X** | measured; Cyrillic, Arabic, Church Slavonic **and Elder Futhark** all eliminated. Still unread. A key is missing, not pixels (§7.4). |
+| **slot 11** | fits nothing. Not contested between two readings — nothing tested fits. |
+| **slot 21** | the hour hand names a slot and leaves it empty (§5). |
+| **even slots** | 0 of 12 ink-supported, pre-registered and measured (§2.17). |
+
 `[TESTED]`, not `[EXHAUSTED]`. These are constructed hypotheses about the
-artwork's numbering, not statements the author made, and the Major Arcana
-reading is one of several that would fit two Roman-numeral marks.
+artwork's numbering and word sources, not statements the author made.
 
 ---
 
@@ -1131,10 +1195,10 @@ box disjointification with real set intersections. Run it as
 `python3 tally2.py configs`.
 
 ```
-t21 campaign, 33 evidenced runs     238,145,844,440 derivations
-+ the twelve older asserted runs    241,754,740,808
+t21 campaign, 35 evidenced runs     243,569,731,286 derivations
++ the twelve older asserted runs    247,178,627,654
     marginal of the twelve          3,608,896,368
-    at 400 derivations/s            6,995 CPU-days
+    at 400 derivations/s            7,152 CPU-days
 ```
 
 **The seven runs added on 27–28 September are why the union matters.** Six were
@@ -1236,12 +1300,12 @@ roughly zero and the whole 26.5 billion.
 
 The t21 figure above **is** computed, and every digit reproduces from
 `tally2.py configs`. Adding an unverifiable constant to it would make the sum
-less trustworthy than either part. Where one number is needed, **"over 238
+less trustworthy than either part. Where one number is needed, **"over 243
 billion derivations eliminated"** is a floor that is computed, in preference to
 an estimate that is not.
 
-**The headline quotes the evidenced figure, not the combined one.** 238,145,844,440
-is the union of the 33 runs whose logs are in this tree; 241,754,740,808 adds the
+**The headline quotes the evidenced figure, not the combined one.** 243,569,731,286
+is the union of the 35 runs whose logs are in this tree; 247,178,627,654 adds the
 twelve older runs carried on report alone. The larger number is not wrong, but it
 inherits the weaker warrant of its weakest component, and a headline that needs a
 footnote about which runs have logs is worse than a smaller headline that needs
