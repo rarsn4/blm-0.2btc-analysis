@@ -1320,8 +1320,8 @@ which is **exactly 104 chunks** of 3,758,096,384. So the identity is confirmed o
 every candidate the Jacobian binary counted and is simply unrecorded for the
 first 104 chunks. Not wrong — uncounted.
 
-**[MEASURED] Bands on slot-21 pool sweeps are 1.65% too wide, and the structure
-is known rather than assumed.** The binomial band treats each pool word as
+**[MEASURED] Bands on slot-21 pool sweeps are 1.67% too wide (σ 1.65%
+narrower), and the structure is known rather than assumed.** The binomial band treats each pool word as
 independently valid with `p = 1/128`. It is not independent: exactly one word per
 128-block is valid, so the count is a sum of **16 independent Bernoullis**, block
 *j* contributing `k_j/128` where `k_j` is how many of the 54 pool words fall in
@@ -1331,8 +1331,20 @@ block *j*. Measured from the wordlist:
 k = [4, 1, 1, 3, 1, 4, 3, 1, 5, 6, 10, 1, 1, 3, 6, 4]     sum 54
 
 variance   binomial 0.418579   hypergeometric 0.407741   stratified 0.404907
-sigma      ratio to binomial:  0.9870 (1.30%)            0.9835 (1.65%)
+sigma      ratio to binomial:  0.986962                  0.983533
 ```
+
+**Both 1.65% and 1.67% are correct, and they are the same quantity read from
+opposite ends** — stated here so nobody "corrects" one into the other later. With
+`r = σ_strat/σ_binom = 0.983533`:
+
+```
+sigma is NARROWER by   1 - r     = 1.65%
+bands are TOO WIDE by  1/r - 1   = 1.67%
+```
+
+A z-score computed with the binomial σ is 1.67% smaller than it should be; the σ
+itself is 1.65% larger than it should be. Not a disagreement, a direction.
 
 The hypergeometric form knows the valid set has fixed size 16; the stratified
 form knows **where** they are, and is the correct one. Rescaled, the project's
