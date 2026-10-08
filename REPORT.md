@@ -1197,7 +1197,7 @@ artwork's numbering and word sources, not statements the author made.
 
 ---
 
-### 2.19 [EXHAUSTED] One gap slot over the whole dictionary, every gap in turn
+### 2.19 [EXHAUSTED, slot 20 = `second`] One gap slot over the whole dictionary, every gap in turn
 
 The largest single block of work in this project had one line of credit in §2.13
 and no section of its own. Read across the six configs, `@FULL` rotates through
@@ -1218,9 +1218,20 @@ outside the pool, at any of the six positions, over the entire 2048-word list.
 | **sum** | | **6,582,589,784,064** | **51,426,482,688** | |
 | **union** | | 6,458,615,227,584 | **50,457,931,465** | |
 
-The sum and the union differ by 968,551,222 derivations, which is the family's
-internal overlap — every pair shares the sub-box where both freed slots happen to
-take pool words.
+**The union has a closed form, so it is checkable by hand rather than on trust.**
+Every intersection of two or more of the six boxes is the *same* set: all six gaps
+in-pool with slot 20 = `second`, which is `54⁶ = 24,794,911,296`. A point outside
+that set lies in at most one box. So the inclusion–exclusion collapses to
+
+```
+union = sum - 5 x 54^6
+      = 6,582,589,784,064 - 123,974,556,480
+      = 6,458,615,227,584      <- matches tally2.py to the candidate
+```
+
+and the difference is exactly `5.0 × 54⁶`. This is the sharper form of "every
+pair shares a sub-box": it is not only pairs, it is every higher intersection
+too, all collapsing to one set.
 
 **Marginal contribution to the campaign: 49,258,867,709 derivations, 20.2% of the
 243,641,342,961 headline.** A fifth of everything this project has computed, and
@@ -1229,11 +1240,23 @@ it was recorded as a single table row.
 **The conditionals, stated the way §2.13 states its own.** This is `[EXHAUSTED]`
 over its box and the box has four walls:
 
-1. **Slot 20 is pinned.** Five of the six take `SLOT 20 second`; only `t21_loo21`
-   carries `apple|second`. So for slots 6, 8, 14, 15 and 18 the sweep covers the
-   `second` reading only — and §2.16 established there is no README value at slot
-   20 to be right about. `t21_flag6_apple` closed one cell of that gap at slot 6;
-   the others are open.
+1. **Slot 20 is pinned, and this is in the heading because it halves the claim.**
+   Five of the six take `SLOT 20 second`; only `t21_loo21` carries
+   `apple|second`. So:
+
+   | slot 20 reading | `a = 0, g = 1` closed at |
+   |---|---|
+   | `second` | slots 6, 8, 14, 15, 18, 21 — **all six** |
+   | `apple` | **slot 21 only** |
+
+   §2.16 established there is no README value at slot 20 to be right about, so the
+   two readings are **equally live**. The strongest structural claim in the
+   campaign therefore covered half the space its original heading implied.
+   `t21_flag6_apple` nibbled one cell at slot 6 — eight words, not 2048 — and the
+   rest was open.
+
+   **This is how the family went unbanked for two months**: a true statement filed
+   under a heading that implied more. The tag now names the reading.
 2. **The other five gaps are assumed in-pool.** Each run frees one gap to 2048
    and leaves the rest on the 54-word pool. Two gap words outside the pool
    simultaneously is `g = 2` and is not covered here.
@@ -1243,6 +1266,25 @@ over its box and the box has four walls:
    (`m/44'/0'/0'/0/0`, `m/0'/0/0`, `m/0/0`, `m/44'/0'/0'/0/1`) — unlike the
    thirteen `free*_p1` runs, which ran one. So unlike §2.13's third leg, this one
    carries no path caveat: there is no staging unevenness across the six.
+
+**[SCOPE] The `apple` half is being closed now.** Five mirror runs —
+`t21_loo6/8/14/15/18_apple`, exact copies of their parents with `SLOT 20 apple`
+and nothing else changed (verified by diff: one line, line 50, in each) — started
+2026-10-08.
+
+```
+7,346,640,384 derivations each, 36,733,201,920 gross
+marginal to the campaign union  35,354,776,826   = 14.5% of the headline
+21.9 h per run at 11,925,000 cand/s   109.5 h for five   ~7.6 h per point
+24.2 h per run at 10,800,000 cand/s   120.9 h for five   ~8.3 h per point
+```
+
+For comparison, stage 2 — rejected as the worst value on the table — is **264
+hours per point**. This is roughly **35× better**, and it is the lowest-risk
+branch available because it is not a new hypothesis: it is the exact mirror of
+work already paid for, so it inherits that work's prior rather than needing one
+argued for it. **The slot-20 ambiguity is in the template, not something we
+invented.**
 
 **Why this is worth more than it was credited.** A coverage statement says what
 is ruled out. `a = 0, g = 1` being closed at every gap on all four paths is the
@@ -2620,6 +2662,24 @@ would have been believed. Where this document states a cost, it states the
 expression that produces it, and that is not decoration — it is the only thing
 that makes a misreading recoverable by a later reader who was not there when
 the number was computed.
+
+**When a model depends on which slot holds a property, read the config line,
+never the volume.** A distinct failure mode from the four numerical errors above,
+and it cost more: not a wrong calculation of the right object, but a **right
+calculation whose object was never opened.**
+
+The leave-one-out boxes factor as `2048 × 54⁵`. From that factorisation it was
+concluded that the 2048 sat at slot 21 — the one slot where the checksum makes
+the survivor count deterministic — and an exact-identity test was built on it,
+complete with a prefix table, a residual column, five "failing" runs and a
+GPU instruction to re-run three of them against a 16.8M-candidate coverage gap.
+Every number in it was arithmetically correct. The box did not exist: `@FULL`
+sits at slot 6 in `t21_loo6`, at slot 8 in `t21_loo8`, and so on, with slot 21
+on the 54-word pool in all five. The run *name* says which slot is free.
+
+Nothing in the volume could have revealed it, because `2048 × 54⁵` is identical
+whichever slot holds the 2048. Checking the arithmetic — which was done, and
+passed — could not catch it either. What caught it was `grep '^SLOT' config`.
 
 **A verified list is only verified over the words actually in it.** A 34-word
 Tarot candidate list was checked against the 54-word pool and found disjoint —
