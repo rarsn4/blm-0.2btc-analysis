@@ -1279,35 +1279,61 @@ marginal to the campaign union  35,354,776,826   = 14.5% of the headline
 24.2 h per run at 10,800,000 cand/s   120.9 h for five   ~8.3 h per point
 ```
 
-**The 14.5% is attributable, not asserted.** The closed form for five mirrors
-less their own mutual overlap and `loo21`'s apple half gives 35,764,650,697;
-measured is 35,354,776,826, a gap of **409,873,871**. Resolved by leave-one-out —
-dropping each evidenced run in turn and seeing which move the marginal — rather
-than by argument:
+**The 14.5% is attributable, not asserted — and the attribution is tested in
+candidates, where the box algebra is exact.** Derivation counts are
+`candidates / 128` and they floor, so two correct quantities can differ by one
+and an identity can appear to hold when it has only been checked to a rounding
+step. Nothing below is divided until the last line.
 
-| dropped run | marginal becomes | moves by |
-|---|---|---|
-| `t21_pool75` | 35,731,435,635 | **+376,658,809** |
-| `t21_flag6_apple` | 35,383,474,640 | +28,697,814 |
-| `t21_amend1415` | 35,359,294,074 | +4,517,248 |
-| | | **+409,873,871 — the gap exactly** |
+```
+closed form, 5B - 5 x 54^6      4,577,875,289,280 candidates
+marginal m0, full EVIDENCED      4,525,411,433,760
+gap to explain                      52,463,855,520
+```
+
+Resolved by leave-one-out — dropping each evidenced run in turn and seeing which
+move the marginal — rather than by argument:
+
+| dropped run | moves the marginal by (candidates) |
+|---|---|
+| `t21_pool75` | **48,212,327,520** |
+| `t21_flag6_apple` | 3,673,320,192 |
+| `t21_amend1415` | 578,207,808 |
+| **sum** | **52,463,855,520 — the gap, exactly** |
+
+`t21_pool75`'s term has an independent closed form that matches to the
+candidate: `5 × (75 × 54⁵) − 5 × 54⁶ = 48,212,327,520`. `t21_flag6_apple`'s move
+is its **entire** 3,673,320,192 candidates, because it is a strict subset of
+`t21_loo6_apple`.
+
+Only three runs move it. In derivations the gap is `52,463,855,520 / 128 =
+409,873,871.25`, and that fractional quarter is what made an earlier draft of
+this section quote the `pool75` term as both 376,658,808 and 376,658,809 in the
+same page — two floors of one number, asserted to be equal.
 
 **The table is provably complete, which is why three numbers adding up can be
 taken at face value here.** A sum of individual leave-one-out moves is *not* in
 general the joint move — if the three overlaps touched each other, each run's
 unique contribution would be smaller than its share of the union, so
-`Σ unique < |union|` and `m₀ + Σ` would **undershoot** the closed form. It lands
-on it exactly:
+`Σ unique < |union|` and `m₀ + Σ` would **undershoot** the closed form. In
+candidates it lands on it exactly:
 
 ```
-m0 + sum of moves  = 35,354,776,826 + 409,873,871 = 35,764,650,697
-closed form, 5B - 5 x 54^6                        = 35,764,650,697
+m0 + sum of moves = 4,525,411,433,760 + 52,463,855,520 = 4,577,875,289,280
+closed form, 5B - 5 x 54^6                             = 4,577,875,289,280
 ```
 
-That proves two things at once: the three overlaps are **pairwise disjoint**, and
-**no fourth run touches the mirror space at all** — a run whose overlap sat
-inside `pool75`'s would have shrunk `pool75`'s unique part and broken the
-identity. The decomposition is closed, not merely consistent.
+**An exact identity on integers, with no tolerance.** That proves two things at
+once: the three overlaps are **pairwise disjoint**, and **no fourth run touches
+the mirror space at all** — a run whose overlap sat inside `pool75`'s would have
+shrunk `pool75`'s unique part and broken the identity.
+
+An earlier draft ran this test in derivations, where it read 35,764,650,697
+against 35,764,650,697.5 and was described as landing "exactly." That was a match
+of **floors**, and it proved only "no overlap larger than about 128 candidates"
+rather than no overlap. The conclusion survived — the smallest structurally
+possible overlap here is vastly larger than 128 candidates — but the claim of
+exactness did not. In candidates it is now what it was said to be.
 
 `t21_pool75` is the main term: a 75-word pool at the gaps intersects each mirror
 in `75 × 54⁵` rather than `54⁶`. `t21_flag6_apple`'s move is its **entire
@@ -1323,9 +1349,9 @@ measurement, so it cannot be their difference. And a closed form offered for the
 `pool75` term was short by exactly that same term:
 
 ```
-5p - 5 x 54^6 =   376,658,808   <- correct; matches the measurement
-5p - 1 x 54^6 = 1,151,499,786   <- what was computed
-difference        774,840,978   = 4 x 54^6 / 128
+in candidates:   5p - 5 x 54^6 =  48,212,327,520   <- correct, matches exactly
+                 5p - 1 x 54^6 = 147,391,972,704   <- what was computed
+                 difference        99,179,645,184   = 4 x 54^6
 ```
 
 The missing piece is `4 × 54⁶`, the inter-box term — dropped from a formula
@@ -2688,6 +2714,23 @@ output with zero register spills and no warnings:
    git show HEAD:REPORT.md | grep -c '\[FIGURE\]'
    git show --stat HEAD | tail -3
    ```
+
+**Test an identity in the unit where it is exact. Divide last.** Derivation
+counts are `candidates / 128` and they floor, so two correct quantities can
+differ by one, and a true identity can appear to hold when it has only been
+checked to a rounding step. The box algebra is exact in candidates; the campaign
+is *measured* in derivations. Use derivations for cost and coverage, and
+candidates for any identity.
+
+This is the fifth instance of the rule below and it occurred inside the
+correction of the fourth: the `pool75` term was quoted as 376,658,808 in one
+paragraph and 376,658,809 four paragraphs above, with the text asserting they
+were the same figure. Both are floors of 376,658,808.75. The disjointness proof
+built on them compared 35,764,650,697 with 35,764,650,697.5 and called it exact.
+Restated in candidates, both are integers and the identity is real.
+
+Same failure shape as the four below — a figure arrived at correctly and then
+compared against something that had been transformed.
 
 **Whenever two or more boxes are combined, the inter-box term is part of the
 answer.** This project has one recurring error, not four, and `tally2.py` exists
