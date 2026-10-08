@@ -1292,18 +1292,45 @@ than by argument:
 | `t21_amend1415` | 35,359,294,074 | +4,517,248 |
 | | | **+409,873,871 — the gap exactly** |
 
-Only three runs move it, their moves sum to the gap with nothing residual, and
+**The table is provably complete, which is why three numbers adding up can be
+taken at face value here.** A sum of individual leave-one-out moves is *not* in
+general the joint move — if the three overlaps touched each other, each run's
+unique contribution would be smaller than its share of the union, so
+`Σ unique < |union|` and `m₀ + Σ` would **undershoot** the closed form. It lands
+on it exactly:
+
+```
+m0 + sum of moves  = 35,354,776,826 + 409,873,871 = 35,764,650,697
+closed form, 5B - 5 x 54^6                        = 35,764,650,697
+```
+
+That proves two things at once: the three overlaps are **pairwise disjoint**, and
+**no fourth run touches the mirror space at all** — a run whose overlap sat
+inside `pool75`'s would have shrunk `pool75`'s unique part and broken the
+identity. The decomposition is closed, not merely consistent.
+
 `t21_pool75` is the main term: a 75-word pool at the gaps intersects each mirror
 in `75 × 54⁵` rather than `54⁶`. `t21_flag6_apple`'s move is its **entire
 volume**, because it is a strict subset of `t21_loo6_apple` — identical in every
 slot but 6, where its eight flag words sit inside the mirror's full 2048. So that
 run is wholly re-covered by this one.
 
-An earlier draft attributed the gap to the five mirrors overlapping *each other*.
-That is wrong: the inter-box term appears in both the estimate and the
-measurement and therefore cannot be their difference. It was a plausible
-explanation offered without being checked, which is the failure §10 records twice
-over.
+Two errors were made in explaining this gap, and both are the same error.
+
+An earlier draft attributed it to the five mirrors overlapping *each other*. That
+cannot be right: the inter-box term appears in **both** the estimate and the
+measurement, so it cannot be their difference. And a closed form offered for the
+`pool75` term was short by exactly that same term:
+
+```
+5p - 5 x 54^6 =   376,658,808   <- correct; matches the measurement
+5p - 1 x 54^6 = 1,151,499,786   <- what was computed
+difference        774,840,978   = 4 x 54^6 / 128
+```
+
+The missing piece is `4 × 54⁶`, the inter-box term — dropped from a formula
+within the hour of being dropped from the prose, in a correction of that same
+prose. §10 files both under one rule rather than as two anecdotes.
 
 For comparison, stage 2 — rejected as the worst value on the table — is **264
 hours per point**. This is roughly **35× better**, and it is the lowest-risk
@@ -2661,6 +2688,24 @@ output with zero register spills and no warnings:
    git show HEAD:REPORT.md | grep -c '\[FIGURE\]'
    git show --stat HEAD | tail -3
    ```
+
+**Whenever two or more boxes are combined, the inter-box term is part of the
+answer.** This project has one recurring error, not four, and `tally2.py` exists
+because it produced the headline figure. A figure derived from box volumes is not
+finished until the overlap term appears in it **explicitly — in the formula, not
+in the reasoning around it.**
+
+| instance | what was omitted |
+|---|---|
+| the **192,196,843,171** headline | summed the boxes instead of unioning them. This is why `tally2.py` exists. |
+| the amendment overlap at **14.96%** | summed 76 + 32 when 16 of the 32 rows were already inside the 76 |
+| "the five mirrors **overlap each other**" | cited a term present in *both* numbers, so it could not be their difference |
+| the `pool75` **closed form** | dropped `4 × 54⁶`, the inter-box term — inside a correction of the instance above it |
+
+Four instances, two from each side of the review, and the fourth occurred inside
+the explanation of the third within the same hour. The pattern is more useful
+than any of the four stories: a reader who has seen it once will catch the fifth,
+and a reader given four unrelated anecdotes will not.
 
 **A figure taken from the record carries its factors with it, and they must be
 re-derived before it is used.** Twice now a number already in this document has
