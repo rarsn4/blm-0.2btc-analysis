@@ -1371,12 +1371,64 @@ but the interval spans a factor of fifteen, because six draws carry almost no
 power to test a variance. The runs are not suspiciously tight; the sample is too
 small to say they are anything.
 
-**[SCOPE] "No anomaly across 37 runs" is not 37 clean draws, and the
-consistency is weaker evidence than the count suggests.** The widest deviation
-across all 37 runs is **1.489 σ**. If those were 37 *independent* draws,
-`P(|Z| < 1.514) = 0.8700` after the stratified rescaling above, so
-`P(all 37 inside) = 0.0058` and about **five** runs should have fallen outside.
-**Zero did.**
+**[RETRACTED] The underdispersion result.** This section previously stated that
+the widest deviation across all 37 runs is 1.489 σ, that
+`P(all 37 inside) = 0.0058` after rescaling, and that about five runs should
+have fallen outside with zero observed. **That is withdrawn, not corrected.**
+
+It was never a measurement. It was a claim about 37 runs supported by a subset of
+them: no complete 37-row table of z-scores exists anywhere in this document, and
+the `loo` runs' survivor counts appear in it nowhere at all. A statistic computed
+over a population that was never fully measured is the same class of error as the
+192,196,843,171 headline — an addition presented as a union.
+
+**The run that exposed it.** `t21_loo6` was resumed mid-space, and the harness
+restarts the cumulative survivor counter on resume, so its logged count covers
+only the final segment while its expectation was computed over the whole box.
+Scored against the full box it is −12,034 σ; scored against the segment it
+actually counted it is **+1.802 σ** — larger than the 1.489 the retracted claim
+rested on. It did not hide inside a band. **It was never scored**, which is a
+hiding place the audit had not considered.
+
+```
+t21_loo_rest.log:3   "t21_loo6  (resume from 131533373440)"
+resume index         131,533,373,440 = 35.000 chunks of 3,758,096,384   WHOLE
+counted segment      808,836,595,712   expectation 6,319,035,904
+logged survivors                                   6,319,176,204
+z vs segment                                              +1.802
+```
+
+**The segment boundary is confirmed by the z, not assumed by it.** One chunk of
+boundary error shifts the expected survivor count by `3,758,096,384 / 128 =
+29,360,128`, against a σ of 77,883 at this run's scale — **377 σ per chunk**. At
+±1 chunk the z would be −375.2 or +378.8. One *candidate* of error moves it by
+0.00002. So an ordinary z is only possible at exactly the right boundary: the
+same logic as `t21_loo21`'s 104-chunk alignment, where an arbitrary kill point
+would not land on a chunk and an arbitrary boundary would not yield a sane z.
+This is self-verification, not a caveat.
+
+The five `loo` runs scored for the first time, with the box at 940,369,969,152
+candidates (2048 × 54⁵, slot 20 pinned to `second`):
+
+| run | resume | segment expectation | survivors | z |
+|---|---|---|---|---|
+| `t21_loo6` | 35.000 chunks | 6,319,035,904 | 6,319,176,204 | **+1.802** |
+| `t21_loo8` | — | 7,346,640,384 | 7,346,621,056 | −0.230 |
+| `t21_loo14` | — | 7,346,640,384 | 7,346,616,393 | −0.286 |
+| `t21_loo15` | — | 7,346,640,384 | 7,346,676,192 | +0.426 |
+| `t21_loo18` | — | 7,346,640,384 | 7,346,552,717 | −1.044 |
+
+**No replacement P-value is given here, and that is deliberate.** `0.0641` — the
+figure that follows from substituting 1.802 for 1.489 — would be as provisional
+as `0.0058` was, because it scores six of the seven runs in this family and
+leaves the rest of the campaign's z's uncomputed. Replacing one unmeasured number
+with another is not the correction. The dispersion statement is **withdrawn
+pending a complete 37-run z table**, computed once, from 37 actual values.
+
+**[SCOPE] What survives of the original point.** The boxes do overlap by design,
+so whatever the completed table shows, the counts are positively correlated and
+the effective number of independent draws is far below 37. That part did not
+depend on the retracted arithmetic.
 
 The explanation is almost certainly not that the pipeline is unusually accurate.
 It is that **the boxes overlap by design** — this section's whole purpose is
