@@ -1279,6 +1279,32 @@ marginal to the campaign union  35,354,776,826   = 14.5% of the headline
 24.2 h per run at 10,800,000 cand/s   120.9 h for five   ~8.3 h per point
 ```
 
+**The 14.5% is attributable, not asserted.** The closed form for five mirrors
+less their own mutual overlap and `loo21`'s apple half gives 35,764,650,697;
+measured is 35,354,776,826, a gap of **409,873,871**. Resolved by leave-one-out —
+dropping each evidenced run in turn and seeing which move the marginal — rather
+than by argument:
+
+| dropped run | marginal becomes | moves by |
+|---|---|---|
+| `t21_pool75` | 35,731,435,635 | **+376,658,809** |
+| `t21_flag6_apple` | 35,383,474,640 | +28,697,814 |
+| `t21_amend1415` | 35,359,294,074 | +4,517,248 |
+| | | **+409,873,871 — the gap exactly** |
+
+Only three runs move it, their moves sum to the gap with nothing residual, and
+`t21_pool75` is the main term: a 75-word pool at the gaps intersects each mirror
+in `75 × 54⁵` rather than `54⁶`. `t21_flag6_apple`'s move is its **entire
+volume**, because it is a strict subset of `t21_loo6_apple` — identical in every
+slot but 6, where its eight flag words sit inside the mirror's full 2048. So that
+run is wholly re-covered by this one.
+
+An earlier draft attributed the gap to the five mirrors overlapping *each other*.
+That is wrong: the inter-box term appears in both the estimate and the
+measurement and therefore cannot be their difference. It was a plausible
+explanation offered without being checked, which is the failure §10 records twice
+over.
+
 For comparison, stage 2 — rejected as the worst value on the table — is **264
 hours per point**. This is roughly **35× better**, and it is the lowest-risk
 branch available because it is not a new hypothesis: it is the exact mirror of
@@ -2662,6 +2688,22 @@ would have been believed. Where this document states a cost, it states the
 expression that produces it, and that is not decoration — it is the only thing
 that makes a misreading recoverable by a later reader who was not there when
 the number was computed.
+
+**A config enters `EVIDENCED` when its run completes and its survivor count
+lands inside its band — not when its file exists.** The five `*_apple` mirrors
+were written into `configs/` and started on 2026-10-08, and their boxes were
+passed to `union_volume` to compute a marginal while they were still running. Had
+they been added to the `EVIDENCED` literal instead — by a glob, or by someone
+computing that marginal and not reverting — the headline would have silently
+gained 35 billion derivations that had not been computed.
+
+It did not happen: `tally2.py` has no directory scan, `EVIDENCED` and `ASSERTED`
+are explicit literal lists, and the only `apple` entry is `t21_flag6_apple`,
+whose run finished. But the hazard is structural rather than hypothetical, and it
+is the same class as the two errors above — a true-looking thing admitted on the
+strength of its appearance rather than its verification. The admission test is
+the band: 7,346,640,384 ± 83,971 for a mirror, checked after the run, never
+before.
 
 **When a model depends on which slot holds a property, read the config line,
 never the volume.** A distinct failure mode from the four numerical errors above,
