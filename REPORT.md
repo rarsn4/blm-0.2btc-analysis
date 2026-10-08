@@ -16,8 +16,9 @@ rates — plus 7,939,492,344 brainwallet addresses counted separately (§2.12).
 §2.1–2.11, §2.13 and §2.14 are exhaustively eliminated, not "tried and didn't
 find". §2.12 and §2.15 are tested corpora — a weaker claim, and tagged as such
 in their own headings. §2.16 and §2.17 are measurements of the template itself
-rather than eliminations within it, and §2.18 is a tested hypothesis about its
-numbering, and §2.17 is the one to read first if you
+rather than eliminations within it, §2.18 is a tested hypothesis about its
+numbering, and §2.19 banks the leave-one-out family — a fifth of all the compute,
+previously credited in one table row, and §2.17 is the one to read first if you
 are deciding whether any of this is worth continuing.
 
 Code, configs and every hypothesis tested:
@@ -1196,6 +1197,61 @@ artwork's numbering and word sources, not statements the author made.
 
 ---
 
+### 2.19 [EXHAUSTED] One gap slot over the whole dictionary, every gap in turn
+
+The largest single block of work in this project had one line of credit in §2.13
+and no section of its own. Read across the six configs, `@FULL` rotates through
+the gap set — **slots 6, 8, 14, 15, 18, 21, one per run, each exactly once** —
+with the other five gaps on the 54-word pool. That is not six scattered runs. It
+is a complete single-free-slot sweep of the gap set, and it closes
+**`a = 0, g = 1` for every gap**: no assignment wrong, exactly one gap word
+outside the pool, at any of the six positions, over the entire 2048-word list.
+
+| run | `@FULL` at | candidates | derivations | paths |
+|---|---|---|---|---|
+| `t21_loo6` | slot 6 | 940,369,969,152 | 7,346,640,384 | 4 |
+| `t21_loo8` | slot 8 | 940,369,969,152 | 7,346,640,384 | 4 |
+| `t21_loo14` | slot 14 | 940,369,969,152 | 7,346,640,384 | 4 |
+| `t21_loo15` | slot 15 | 940,369,969,152 | 7,346,640,384 | 4 |
+| `t21_loo18` | slot 18 | 940,369,969,152 | 7,346,640,384 | 4 |
+| `t21_loo21` | slot 21 | 1,880,739,938,304 | 14,693,280,768 | 4 |
+| **sum** | | **6,582,589,784,064** | **51,426,482,688** | |
+| **union** | | 6,458,615,227,584 | **50,457,931,465** | |
+
+The sum and the union differ by 968,551,222 derivations, which is the family's
+internal overlap — every pair shares the sub-box where both freed slots happen to
+take pool words.
+
+**Marginal contribution to the campaign: 49,258,867,709 derivations, 20.2% of the
+243,641,342,961 headline.** A fifth of everything this project has computed, and
+it was recorded as a single table row.
+
+**The conditionals, stated the way §2.13 states its own.** This is `[EXHAUSTED]`
+over its box and the box has four walls:
+
+1. **Slot 20 is pinned.** Five of the six take `SLOT 20 second`; only `t21_loo21`
+   carries `apple|second`. So for slots 6, 8, 14, 15 and 18 the sweep covers the
+   `second` reading only — and §2.16 established there is no README value at slot
+   20 to be right about. `t21_flag6_apple` closed one cell of that gap at slot 6;
+   the others are open.
+2. **The other five gaps are assumed in-pool.** Each run frees one gap to 2048
+   and leaves the rest on the 54-word pool. Two gap words outside the pool
+   simultaneously is `g = 2` and is not covered here.
+3. **All assignments are assumed correct.** `a = 0` is the premise, not a result.
+   The `a ≥ 1` branches are §2.13's.
+4. **Path coverage is uniform and complete.** All six ran **four paths**
+   (`m/44'/0'/0'/0/0`, `m/0'/0/0`, `m/0/0`, `m/44'/0'/0'/0/1`) — unlike the
+   thirteen `free*_p1` runs, which ran one. So unlike §2.13's third leg, this one
+   carries no path caveat: there is no staging unevenness across the six.
+
+**Why this is worth more than it was credited.** A coverage statement says what
+is ruled out. `a = 0, g = 1` being closed at every gap on all four paths is the
+strongest single structural claim in the campaign, and it is what makes the
+`a ≥ 1` work in §2.13 and the joint `a = 2` configs in §2.18 the right next
+places to look rather than arbitrary ones.
+
+---
+
 **[INFERRED] From this point, every remaining hypothesis is one we construct,
 not one the document offers.** That is a different epistemic footing from
 everything preceding it, and the distinction is worth preserving: earlier
@@ -1424,6 +1480,14 @@ as `0.0058` was, because it scores six of the seven runs in this family and
 leaves the rest of the campaign's z's uncomputed. Replacing one unmeasured number
 with another is not the correction. The dispersion statement is **withdrawn
 pending a complete 37-run z table**, computed once, from 37 actual values.
+
+**A miscount cannot have swallowed a hit.** The survivor counter is a progress
+statistic: it records how many candidates passed the checksum filter. A HIT is a
+`hash160` comparison inside the kernel, and it never passes through that counter.
+So every defect discussed above — the resume reset, the unscored runs, the
+retracted dispersion figure — is a bookkeeping fault and not a search fault. What
+a counting error *can* hide is a coverage gap, which is why the chunk-alignment
+checks matter and the arithmetic does not.
 
 **[SCOPE] What survives of the original point.** The boxes do overlap by design,
 so whatever the completed table shows, the counts are positively correlated and
