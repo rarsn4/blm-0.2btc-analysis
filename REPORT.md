@@ -1166,10 +1166,12 @@ measured at exactly **76.00/722**. Two of the nineteen amendment words — `life
 and `power` — are 54-pool words, which is why the figure is 76/722 and not
 72/722.
 
-**The boundary, stated plainly.** Thirty-seven runs, **243,641,342,961**
-derivations, about **7,050 CPU-days**, and no anomaly anywhere — every survivor
-count inside 1.5σ of its band, most inside 1.0, with the correlation caveat in
-§3 that stops that being read as 37 independent confirmations.
+**The boundary as it stood when this section was written.** Thirty-seven runs,
+243,641,342,961 derivations, about 7,050 CPU-days, and no anomaly anywhere —
+every survivor count inside 1.5σ of its band, most inside 1.0, with §3's
+correlation caveat against reading that as 37 independent confirmations. §2.19's
+mirror campaign has since taken the ledger past it; this paragraph records the
+state at which the *compute-branch* argument was made, not the current total.
 
 - The Tarot branch was tested at its two strongest points: the only two
   Roman-numeral slots jointly, and the only card-to-word link with authorial
@@ -1233,9 +1235,12 @@ and the difference is exactly `5.0 × 54⁶`. This is the sharper form of "every
 pair shares a sub-box": it is not only pairs, it is every higher intersection
 too, all collapsing to one set.
 
-**Marginal contribution to the campaign: 49,258,867,709 derivations, 20.2% of the
-243,641,342,961 headline.** A fifth of everything this project has computed, and
-it was recorded as a single table row.
+**Marginal contribution to the campaign: 49,258,867,709 derivations** — 20.2% of
+the 243,641,342,961 headline when this section was written, **19.6%** of the
+250,690,243,525 it stands at now. The marginal itself is unchanged, because the
+mirrors take `SLOT 20 apple` and are therefore disjoint from these six; only the
+denominator grew. Either way: a fifth of everything this project has computed,
+recorded until now as a single table row.
 
 **The conditionals, stated the way §2.13 states its own.** This is `[EXHAUSTED]`
 over its box and the box has four walls:
