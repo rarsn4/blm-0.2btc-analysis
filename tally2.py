@@ -182,7 +182,11 @@ EVIDENCED = ['t21_readme54','t21_loo21','t21_loo6','t21_loo8','t21_loo14','t21_l
              't21_tarot_j10x20','t21_tarot_j17x19',
              # 2026-10-07
              't21_ink10x20','t21_needle11',
-             't21_amend1415','t21_flag6_apple']
+             't21_amend1415','t21_flag6_apple',
+             # 2026-10-09: first of the five slot-20=apple mirrors. Admitted on
+             # completion with survivors +0.682 sigma, per section 10's rule --
+             # not when the file appeared.
+             't21_loo6_apple']
 ASSERTED  = ['t21_pool52','t21_pool52_rev','t21_pool40','t21_idx','t21_pathd','t21_pathe',
              't21_trust21','t21_trust21b','t21_bnw18','t21_bnw18b','t21_trustonly','t21']
 CHECKSUM = 128
