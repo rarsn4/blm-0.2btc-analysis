@@ -14,9 +14,9 @@ Target: [`1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ`](https://blockchair.com/bitcoin/ad
 
   `Сумма двух чисел  =  ◇⏶ᛗᛗ△ : ⇧⧗⏶⤬ : ⊤Ψ◇⫽ᛉ`
 
-- **250,690,243,525 seed derivations eliminated** across BIP39 *and* Electrum —
-  7,254 CPU-days at typical solver rates, every digit of it backed by a log in
-  the tree. (254,211,400,501 including twelve older runs carried on report
+- **264,843,181,656 seed derivations eliminated** across BIP39 *and* Electrum —
+  7,663 CPU-days at typical solver rates, every digit of it backed by a log in
+  the tree. (268,190,916,240 including twelve older runs carried on report
   alone; §3 separates the two.) This is the **21-word** template; §2.13 states
   the conditional that goes with it. Electrum had never been tested by
   anyone; lengths 13/14/16/17 are illegal under BIP39 and were unreachable.
