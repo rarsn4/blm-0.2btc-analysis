@@ -11,7 +11,7 @@ What **is** solved is the **rune cipher**, except for a single glyph. Those are
 different claims and this report keeps them separate throughout.
 
 I built a GPU search pipeline covering both BIP39 and Electrum and ran
-**271,918,467,676 full seed derivations** — 7,868 days of CPU at typical solver
+**271,918,521,409 full seed derivations** — 7,868 days of CPU at typical solver
 rates — plus 7,939,492,344 brainwallet addresses counted separately (§2.12).
 §2.1–2.11, §2.13 and §2.14 are exhaustively eliminated, not "tried and didn't
 find". §2.12 and §2.15 are tested corpora — a weaker claim, and tagged as such
@@ -1429,10 +1429,10 @@ box disjointification with real set intersections. Run it as
 `python3 tally2.py configs`.
 
 ```
-t21 campaign, 41 evidenced runs     271,918,467,676 derivations
-+ the twelve older asserted runs    275,266,202,260
+t21 campaign, 41 evidenced runs     271,918,521,409 derivations
++ the twelve older asserted runs    275,179,659,042
     marginal of the twelve          3,608,896,368
-    at 400 derivations/s            7,965 CPU-days
+    at 400 derivations/s            7,962 CPU-days
 ```
 
 **The seven runs added on 27–28 September are why the union matters.** Six were
@@ -1700,8 +1700,8 @@ less trustworthy than either part. Where one number is needed, **"over 271
 billion derivations eliminated"** is a floor that is computed, in preference to
 an estimate that is not.
 
-**The headline quotes the evidenced figure, not the combined one.** 271,918,467,676
-is the union of the 41 runs whose logs are in this tree; 275,266,202,260 adds the
+**The headline quotes the evidenced figure, not the combined one.** 271,918,521,409
+is the union of the 41 runs whose logs are in this tree; 275,179,659,042 adds the
 twelve older runs carried on report alone. The larger number is not wrong, but it
 inherits the weaker warrant of its weakest component, and a headline that needs a
 footnote about which runs have logs is worse than a smaller headline that needs
