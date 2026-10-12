@@ -1,4 +1,4 @@
-# 0.2 BTC Puzzle — the rune cipher solved, over 264 billion derivations eliminated, and six defects in the shared data
+# 0.2 BTC Puzzle — the rune cipher solved, over 271 billion derivations eliminated, and six defects in the shared data
 
 **Target:** `1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ`
 **HASH160:** `ccbd031e54cde2a3189fd59bc49f731367a1779e`
@@ -11,7 +11,7 @@ What **is** solved is the **rune cipher**, except for a single glyph. Those are
 different claims and this report keeps them separate throughout.
 
 I built a GPU search pipeline covering both BIP39 and Electrum and ran
-**264,843,181,656 full seed derivations** — 7,663 days of CPU at typical solver
+**271,918,467,676 full seed derivations** — 7,868 days of CPU at typical solver
 rates — plus 7,939,492,344 brainwallet addresses counted separately (§2.12).
 §2.1–2.11, §2.13 and §2.14 are exhaustively eliminated, not "tried and didn't
 find". §2.12 and §2.15 are tested corpora — a weaker claim, and tagged as such
@@ -1274,7 +1274,7 @@ over its box and the box has four walls:
    thirteen `free*_p1` runs, which ran one. So unlike §2.13's third leg, this one
    carries no path caveat: there is no staging unevenness across the six.
 
-**[TESTED] Three mirrors landed, all negative.** Band for every one:
+**[TESTED] Four mirrors landed, all negative.** Band for every one:
 7,346,640,384 ± 83,971, stratified because slot 21 is `@POOL`.
 
 | run | survivors | Δ | σ | wall | rate |
@@ -1282,6 +1282,7 @@ over its box and the box has four walls:
 | `t21_loo6_apple` | 7,346,697,647 | +57,263 | **+0.682** | 23.17 h | 11,275,419 |
 | `t21_loo8_apple` | 7,346,560,690 | −79,694 | **−0.949** | 22.52 h | 11,598,194 |
 | `t21_loo14_apple` | 7,346,605,249 | −35,135 | **−0.418** | 23.38 h | 11,172,403 |
+| `t21_loo15_apple` | 7,346,589,918 | −50,466 | **−0.601** | 23.38 h | 11,174,261 |
 
 Each admitted to `EVIDENCED` **on completion and on landing inside its band** —
 §10's rule, not when its file appeared. Marginals: 7,048,900,563 /
@@ -1289,11 +1290,13 @@ Each admitted to `EVIDENCED` **on completion and on landing inside its band** �
 three because `t21_flag6_apple`'s 3,673,320,192 candidates sat strictly inside
 it.
 
-**So `a = 0, g = 1` is now closed for *both* slot-20 readings at slots 6, 8 and
-14** — three of the six gaps. Slot 21 was already closed on both by `t21_loo21`.
-Slots 15 and 18 are the two outstanding, and both are running.
+**So `a = 0, g = 1` is now closed for *both* slot-20 readings at slots 6, 8, 14,
+15 and 21** — five of the six gaps. Slot 21 came with `t21_loo21`, which carried
+`apple|second` from the start. **Slot 18 is the last one**, running now and
+finishing ~13 Oct 12:54 UTC, at which point the gap set is closed both ways
+end to end.
 
-**[SCOPE] Two mirrors still running.** Five mirror runs —
+**[SCOPE] One mirror still running.** Five mirror runs —
 `t21_loo6/8/14/15/18_apple`, exact copies of their parents with `SLOT 20 apple`
 and nothing else changed (verified by diff: one line, line 50, in each) — started
 2026-10-08.
@@ -1426,10 +1429,10 @@ box disjointification with real set intersections. Run it as
 `python3 tally2.py configs`.
 
 ```
-t21 campaign, 40 evidenced runs     264,843,181,656 derivations
-+ the twelve older asserted runs    268,190,916,240
+t21 campaign, 41 evidenced runs     271,918,467,676 derivations
++ the twelve older asserted runs    275,266,202,260
     marginal of the twelve          3,608,896,368
-    at 400 derivations/s            7,760 CPU-days
+    at 400 derivations/s            7,965 CPU-days
 ```
 
 **The seven runs added on 27–28 September are why the union matters.** Six were
@@ -1693,12 +1696,12 @@ roughly zero and the whole 26.5 billion.
 
 The t21 figure above **is** computed, and every digit reproduces from
 `tally2.py configs`. Adding an unverifiable constant to it would make the sum
-less trustworthy than either part. Where one number is needed, **"over 264
+less trustworthy than either part. Where one number is needed, **"over 271
 billion derivations eliminated"** is a floor that is computed, in preference to
 an estimate that is not.
 
-**The headline quotes the evidenced figure, not the combined one.** 264,843,181,656
-is the union of the 40 runs whose logs are in this tree; 268,190,916,240 adds the
+**The headline quotes the evidenced figure, not the combined one.** 271,918,467,676
+is the union of the 41 runs whose logs are in this tree; 275,266,202,260 adds the
 twelve older runs carried on report alone. The larger number is not wrong, but it
 inherits the weaker warrant of its weakest component, and a headline that needs a
 footnote about which runs have logs is worse than a smaller headline that needs
