@@ -1235,12 +1235,14 @@ and the difference is exactly `5.0 × 54⁶`. This is the sharper form of "every
 pair shares a sub-box": it is not only pairs, it is every higher intersection
 too, all collapsing to one set.
 
-**Marginal contribution to the campaign: 49,258,867,709 derivations** — 20.2% of
-the 243,641,342,961 headline when this section was written, **19.6%** of the
-250,690,243,525 it stands at now. The marginal itself is unchanged, because the
-mirrors take `SLOT 20 apple` and are therefore disjoint from these six; only the
-denominator grew. Either way: a fifth of everything this project has computed,
-recorded until now as a single table row.
+**Marginal contribution to the campaign: 49,258,867,709 derivations.** That
+figure is stable and is the one to quote: the `apple` mirrors take `SLOT 20
+apple` and are therefore disjoint from these six boxes, so nothing the mirror
+campaign adds can erode it. What does move is the *fraction*, because the mirrors
+grow the denominator — 20.2% of the 243,641,342,961 headline when this section
+was written, 18.6% of the 264,843,181,656 it stands at now, and lower again when
+the last two mirrors land. Either way it is close to a fifth of everything this
+project has computed, recorded until now as a single table row.
 
 **The conditionals, stated the way §2.13 states its own.** This is `[EXHAUSTED]`
 over its box and the box has four walls:
