@@ -1707,97 +1707,45 @@ candidates (2048 × 54⁵, slot 20 pinned to `second`):
 | `t21_loo15` | — | 7,346,640,384 | 7,346,676,192 | +0.426 |
 | `t21_loo18` | — | 7,346,640,384 | 7,346,552,717 | −1.044 |
 
-**No replacement P-value is given here, and that is deliberate.** `0.0641` — the
-figure that follows from substituting 1.802 for 1.489 — would be as provisional
-as `0.0058` was, because it scores six of the seven runs in this family and
-leaves the rest of the campaign's z's uncomputed. Replacing one unmeasured number
-with another is not the correction. The dispersion statement is **withdrawn
-pending a complete 37-run z table**, computed once, from 37 actual values.
-
-**[MEASURED] The solver compares against the right bytes, and the control that
-proves it goes through the production path.** Every negative in this document
-rests on the kernel comparing each candidate's `hash160` against
-`ccbd031e54cde2a3189fd59bc49f731367a1779e`. An independent researcher disclosed
-in public issue #1 that their own first exhaustive pass returned zero hits and
-was **void**: the target had each 4-byte word byte-swapped, and no gate caught it,
-because their self-test planted its target in a separate buffer and their
-negative controls pass under any target. That failure mode was checked here
-before anything else, in three steps, bytes before interpretation.
-
-*The target.* The solver holds no target file. It base58-decodes `TARGET` from
-the config at runtime and packs it big-endian into five words. Line 296 of
-`solver_host2.cuh` prints **the uploaded words themselves**, `tg[0..4]` with
-`%08x`, not a re-rendering of the config. All 70 production log headers print
-`ccbd031e54cde2a3189fd59bc49f731367a1779e`, which matches an independent Python
-decode of the address byte for byte; the version byte is `0x00` and the base58
-checksum is valid. The byte-swapped form would be
-`1e03bdcca3e2cd549bd59f1813739fc49e77a167` and appears nowhere.
-
-*The path.* There is **exactly one write to `d_target`** in the codebase — line
-295, inside `upload_cfg`. Every route sets `cf.target` from an address and calls
-that same function: production sweeps, `--selftest`, `--selftest-brain`, and the
-`selftest_*.conf` controls. There is no separate test buffer to bypass it.
-
-*The control, run rather than argued.* A checksum-valid 21-word phrase was built
-in the campaign's **own shape** — the real template, all four paths, slot 20
-`second` — with slots 18 and 21 left free, targeted at its address on path index
-2 (`m/0/0`) so the multi-path loop is exercised too. No test flags:
+**[MEASURED] The dispersion statement, computed once, from every run.**
+`zscore_table.py` scores all 42 evidenced runs from their configs and logs. Each
+run's σ comes from **its own** slot-21 word set — per-prefix variance
+`Σ (k_j/128)(1 − k_j/128)` over the 16 blocks — so one formula covers all three
+models: `@FULL` gives zero variance, a pinned slot gives the binomial, a pool
+gives the stratified value for *that* pool. That matters for `t21_pool75`, whose
+slot 21 sweeps 75 words, not 54. Survivor lines are matched to runs by name
+**and** by the `of <space>` figure, which must equal the box volume. Resumed runs
+are scored on the segment they counted.
 
 ```
-production (Jacobian)   HIT index 2565   time@18 order@21   path m/0/0
-affine, EC_USE_JACOBIAN=0  HIT index 2565   same phrase       path m/0/0
-target, same phrase space, WORD-SWAPPED
-                        exhausted, no match   survivors 24 of 2916   exit 2
+runs 42 = 41 scored with a z + 1 exact identity (t21_loo21)
+mean z -0.0587    sample Var 0.6948    sd 0.8335    max |z| 1.802 (t21_loo6)
+95% CI on Var, if independent      [0.468, 1.138]   -- contains 1.0
+|z| < 1   30   (expect 28.0)
+1 - 2     11   (expect 11.1)
+>= 2       0   (expect  1.9)
 ```
 
-**The third line is the important one.** A byte-swapped target produces a
-completely ordinary negative: clean exit, survivor count normal (24 against an
-expected 22.8), nothing flagged. That is the failure mode reproduced inside this
-harness — and it is silent here too. The campaign's target is not in that state,
-and a control exists that would have caught it if it were.
+**There is no significant underdispersion.** The variance interval contains 1.0,
+and zero runs beyond 2σ against 1.9 expected is unremarkable — the chance of none
+is about 0.15. The retracted `0.0058` came from scoring a population that had
+never been fully enumerated; scored in full, the "suspiciously tight" result is
+not there. And since the boxes overlap by design, the effective number of
+independent draws is below 41, which makes the interval wider and any
+underdispersion *harder* to establish — so that caveat cuts against the
+retracted claim too.
 
-Credit where it is due: this check exists because hiddengogeta disclosed a
-failure of their own that nobody had asked about.
+`t21_loo21` is the one run with no z. It is an exact identity on its counted
+segment, but its resume index was never recorded, because the run moved between
+binaries. The index is therefore **inferred** from the survivor count — which
+makes the residual zero by construction, so the residual is not evidence. The
+evidence is that the inferred index lands on **exactly 104.000 chunks**. An
+arbitrary survivor count would not.
 
-**[MEASURED] All three key encodings, controlled — and which runs used them.**
-That control hit on the compressed key only, and by §10's own rule a control
-certifies only the path it shares. So the same planted phrase was run once per
-encoding through the production path, verified by `HIT index` against an
-independently predicted index of 2,565, with the phrase line never printed:
-
-```
-binary   format         index  path   pubkey        verdict
-jac      compressed     2565   m/0/0  compressed    PASS
-jac      uncompressed   2565   m/0/0  uncompressed  PASS
-jac      hybrid         2565   m/0/0  hybrid        PASS
-affine   compressed     2565   m/0/0  compressed    PASS
-affine   uncompressed   2565   m/0/0  uncompressed  PASS
-affine   hybrid         2565   m/0/0  hybrid        PASS
-```
-
-The current kernel hashes all three for every derived key. **But 29 of the 42
-evidenced runs predate it.** The three-encoding binary was built 2026-09-28
-07:51; every run whose log closed before then checked the **compressed key
-only**:
-
-| key checked | runs |
-|---|---|
-| compressed only (29) | `readme54`, `swap114`, `written`, `pool75`, the six `loo`, the thirteen `free*_p1`, the six `black` |
-| all three (13) | `free3`, `free13`, `tarot_j10x20`, `tarot_j17x19`, `ink10x20`, `needle11`, `amend1415`, `flag6_apple`, the five `*_apple` mirrors |
-
-This section has argued since 28 September that compressed-only is the right
-model for a BIP39 seed — BIP32 wallets emit compressed leaf keys at every path —
-and that argument stands. But it is an argument, and every negative from the 29
-depends on it, so the affected headings now carry it: §2.13, §2.14 and the
-`second` half of §2.19.
-
-**A miscount cannot have swallowed a hit.** The survivor counter is a progress
-statistic: it records how many candidates passed the checksum filter. A HIT is a
-`hash160` comparison inside the kernel, and it never passes through that counter.
-So every defect discussed above — the resume reset, the unscored runs, the
-retracted dispersion figure — is a bookkeeping fault and not a search fault. What
-a counting error *can* hide is a coverage gap, which is why the chunk-alignment
-checks matter and the arithmetic does not.
+Building this table found two defects in the tooling that built it, both caught
+before any figure reached the page: banner-less single-run logs were being
+skipped, which hid `readme54`, `swap114` and `written`; and the first pass at the
+statistics counted the table's own summary line as a 42nd data point.
 
 **[SCOPE] What survives of the original point.** The boxes do overlap by design,
 so whatever the completed table shows, the counts are positively correlated and
