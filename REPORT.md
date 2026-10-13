@@ -261,9 +261,12 @@ BIP39 and had never been searchable by anyone.
 > All in band, all on the current binary, so all three key encodings were
 > checked. `el21` (235,298,000,000 candidates, band 976,578,613.3 ± 31,185) is
 > running. **`el22` is held**: it is `70⁷ × 2 = 16,470,860,000,000` candidates,
-> about 8.5 days at the measured Electrum rate — not the 31 hours a `54⁷`
+> about **10 days** at `el21`'s measured 19.0M cand/s — not the 31 hours a `54⁷`
 > estimate gave, because the `el*` configs use a **70-word** pool, not the BIP39
-> 54-word one.
+> 54-word one. An earlier version of this note said 8.5 days, from `el18`'s
+> 22.5M; that figure came from a run under one chunk with no boundary deltas,
+> and it overstated the rate for longer phrases. 22-word phrases are longer
+> HMAC-SHA512 inputs again, so ten days is itself a floor.
 >
 > **The Electrum route was certified first.** A valid Electrum v2 *standard*
 > seed (HMAC `"Seed version"` prefix `0x01`) was planted in `el21`'s own shape —
