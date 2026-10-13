@@ -244,7 +244,44 @@ Eliminated: **12, 13, 14, 16, 17, 18 and 21 words**, four paths, plus 65
 passphrases and the all-slots-vary sweep. Lengths 13/14/16/17 are illegal under
 BIP39 and had never been searchable by anyone.
 
-> **[SCOPE] None of these Electrum runs has a surviving log, and the list does
+> **[MEASURED, 2026-10-13] Re-run with logs; six of the claimed lengths now
+> evidenced.** The originals had no log anywhere on the machine, so they were
+> re-run, cheapest first, into `electrum_rerun.log`, each scored against a band
+> stated before it ran:
+>
+> | run | candidates | survivors | expected | z | result |
+> |---|---|---|---|---|---|
+> | `el12` | 4,900 | 16 | 20.3 | −0.96 | negative |
+> | `el13` | 4,900 | 17 | 20.3 | −0.74 | negative |
+> | `el14` | 343,000 | 1,379 | 1,423.6 | −1.18 | negative |
+> | `el16` | 24,010,000 | 99,509 | 99,650.9 | −0.45 | negative |
+> | `el17` | 24,010,000 | 99,869 | 99,650.9 | +0.69 | negative |
+> | `el18` | 1,680,700,000 | 6,974,876 | 6,975,561.5 | −0.26 | negative |
+>
+> All in band, all on the current binary, so all three key encodings were
+> checked. `el21` (235,298,000,000 candidates, band 976,578,613.3 ± 31,185) is
+> running. **`el22` is held**: it is `70⁷ × 2 = 16,470,860,000,000` candidates,
+> about 8.5 days at the measured Electrum rate — not the 31 hours a `54⁷`
+> estimate gave, because the `el*` configs use a **70-word** pool, not the BIP39
+> 54-word one.
+>
+> **The Electrum route was certified first.** A valid Electrum v2 *standard*
+> seed (HMAC `"Seed version"` prefix `0x01`) was planted in `el21`'s own shape —
+> four paths, 70-word pool, two gaps free — and chosen to be an **invalid**
+> BIP39 mnemonic, so a hit could only come through the Electrum route. Both
+> binaries recovered it at the predicted index on `m/0/0`; the word-swapped
+> target went silently negative on both.
+>
+> **Every band above uses the kernel's acceptance, not the host's.** The kernel
+> accepts first byte `0x01` (1/256) or `0x10` with a zero high nibble next
+> (1/4096): **17/4096 = 1/240.94**. The host's printout and its rate estimate
+> divide by **171**, which overstates expected survivors **1.409×**. Measured on
+> `el16`'s 24,010,000 candidates: 99,509 survivors, acceptance **1/241.28** —
+> −0.45σ from 17/4096 and **−109σ** from 1/171. Its third use, chunk sizing, errs
+> safe: it under-fills chunks rather than overflowing them. Read against the
+> printout, `el18` would have looked like a −1,013σ shortfall.
+
+> **[SCOPE] The original Electrum runs had no surviving log, and the list did
 > not include 22.** Configs exist for `el12`, `el13`, `el14`, `el16`, `el17`,
 > `el18`, `el21` and `el22`. A search of this tree and of the whole machine finds
 > **no log for any of them** and no line reading `scheme=ELECTRUM` anywhere. None
@@ -509,7 +546,7 @@ during the seam work (§10).
 
 ---
 
-### 2.13 [EXHAUSTED] Free-one-fixed at 21 words: the branch that was never run
+### 2.13 [EXHAUSTED, compressed key; 13 of 15 slots path 1 only] Free-one-fixed at 21 words: the branch that was never run
 
 Every t21 sweep before September freed a **gap** — slots 6, 8, 14, 15, 18, 21.
 Not one freed an **assigned** slot. An audit of all twenty t21 configs confirmed
@@ -772,7 +809,7 @@ of total probability, against 1.4% for the six remaining slots at path 1 — fou
 times worse per hour, and the lowest-value run on the board. The argument that
 justified staging by path is the same one that rules out revisiting those paths.
 
-### 2.14 [EXHAUSTED] Two hypotheses the source document itself named
+### 2.14 [EXHAUSTED, compressed key] Two hypotheses the source document itself named
 
 The README hedges exactly twice, and both hedges have now been tested.
 
@@ -1239,7 +1276,7 @@ artwork's numbering and word sources, not statements the author made.
 
 ---
 
-### 2.19 [EXHAUSTED, slot 20 = `second`] One gap slot over the whole dictionary, every gap in turn
+### 2.19 [EXHAUSTED, both slot-20 readings; `second` on compressed key only] One gap slot over the whole dictionary, every gap in turn
 
 The largest single block of work in this project had one line of credit in §2.13
 and no section of its own. Read across the six configs, `@FULL` rotates through
@@ -1721,6 +1758,38 @@ and a control exists that would have caught it if it were.
 
 Credit where it is due: this check exists because hiddengogeta disclosed a
 failure of their own that nobody had asked about.
+
+**[MEASURED] All three key encodings, controlled — and which runs used them.**
+That control hit on the compressed key only, and by §10's own rule a control
+certifies only the path it shares. So the same planted phrase was run once per
+encoding through the production path, verified by `HIT index` against an
+independently predicted index of 2,565, with the phrase line never printed:
+
+```
+binary   format         index  path   pubkey        verdict
+jac      compressed     2565   m/0/0  compressed    PASS
+jac      uncompressed   2565   m/0/0  uncompressed  PASS
+jac      hybrid         2565   m/0/0  hybrid        PASS
+affine   compressed     2565   m/0/0  compressed    PASS
+affine   uncompressed   2565   m/0/0  uncompressed  PASS
+affine   hybrid         2565   m/0/0  hybrid        PASS
+```
+
+The current kernel hashes all three for every derived key. **But 29 of the 42
+evidenced runs predate it.** The three-encoding binary was built 2026-09-28
+07:51; every run whose log closed before then checked the **compressed key
+only**:
+
+| key checked | runs |
+|---|---|
+| compressed only (29) | `readme54`, `swap114`, `written`, `pool75`, the six `loo`, the thirteen `free*_p1`, the six `black` |
+| all three (13) | `free3`, `free13`, `tarot_j10x20`, `tarot_j17x19`, `ink10x20`, `needle11`, `amend1415`, `flag6_apple`, the five `*_apple` mirrors |
+
+This section has argued since 28 September that compressed-only is the right
+model for a BIP39 seed — BIP32 wallets emit compressed leaf keys at every path —
+and that argument stands. But it is an argument, and every negative from the 29
+depends on it, so the affected headings now carry it: §2.13, §2.14 and the
+`second` half of §2.19.
 
 **A miscount cannot have swallowed a hit.** The survivor counter is a progress
 statistic: it records how many candidates passed the checksum filter. A HIT is a
@@ -2950,6 +3019,16 @@ reports about itself.** The only test that distinguishes them is a planted
 *positive* through the production code path, and the only place it can be
 trusted is the one write to `d_target`. A control is worth exactly as much as the
 path it shares with the thing it controls.
+
+**Read the code, not its printout.** The host computes Electrum's expected
+survivor count as `total/171`. The kernel's `electrum_ok` accepts first byte
+`0x01` or `0x10` with a zero high nibble next — **17/4096 = 1/240.94**. The two
+differ by 1.409×. Measured on 24,010,000 candidates, acceptance was 1/241.28:
+−0.45σ from the kernel's figure, −109σ from the printout's. A band built from the
+printout would have reported every honest Electrum run as a catastrophic
+shortfall, and the natural "fix" would have been to distrust the solver rather
+than the constant. The printout is a second, unchecked implementation of the
+thing it describes; the kernel is the thing.
 
 **A verified list is only verified over the words actually in it.** A 34-word
 Tarot candidate list was checked against the 54-word pool and found disjoint —

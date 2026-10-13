@@ -1,0 +1,85 @@
+Tue 13 Oct 18:34:07 UTC  START el12
+checkpoint     : progress_el12.txt
+target hash160 : ccbd031e54cde2a3189fd59bc49f731367a1779e
+paths          : m/0'/0 m/0'/0/0 m/0/0 m/44'/0'/0'/0/0 
+scheme=ELECTRUM v2  words=12  gaps=2  pool=70  filter=HMAC prefix 01/100
+space=4900  expected derivations=28
+passphrases=1
+
+[1/1] (none)
+  100.00%  4900/4900  survivors 16  7174231/s
+  exhausted, no match  (survivors 16 of 4900)
+
+all passphrases exhausted, no match.
+exit=2 Tue 13 Oct 18:34:08 UTC  END el12  wall=0.23s
+Tue 13 Oct 18:34:08 UTC  START el13
+checkpoint     : progress_el13.txt
+target hash160 : ccbd031e54cde2a3189fd59bc49f731367a1779e
+paths          : m/0'/0 m/0'/0/0 m/0/0 m/44'/0'/0'/0/0 
+scheme=ELECTRUM v2  words=13  gaps=2  pool=70  filter=HMAC prefix 01/100
+space=4900  expected derivations=28
+passphrases=1
+
+[1/1] (none)
+  100.00%  4900/4900  survivors 17  6079404/s
+  exhausted, no match  (survivors 17 of 4900)
+
+all passphrases exhausted, no match.
+exit=2 Tue 13 Oct 18:34:08 UTC  END el13  wall=0.22s
+Tue 13 Oct 18:34:08 UTC  START el14
+checkpoint     : progress_el14.txt
+target hash160 : ccbd031e54cde2a3189fd59bc49f731367a1779e
+paths          : m/0'/0 m/0'/0/0 m/0/0 m/44'/0'/0'/0/0 
+scheme=ELECTRUM v2  words=14  gaps=3  pool=70  filter=HMAC prefix 01/100
+space=343000  expected derivations=2005
+passphrases=1
+
+[1/1] (none)
+  100.00%  343000/343000  survivors 1379  176531137/s
+  exhausted, no match  (survivors 1379 of 343000)
+
+all passphrases exhausted, no match.
+exit=2 Tue 13 Oct 18:34:08 UTC  END el14  wall=0.23s
+Tue 13 Oct 18:34:08 UTC  START el16
+checkpoint     : progress_el16.txt
+target hash160 : ccbd031e54cde2a3189fd59bc49f731367a1779e
+paths          : m/0'/0 m/0'/0/0 m/0/0 m/44'/0'/0'/0/0 
+scheme=ELECTRUM v2  words=16  gaps=4  pool=70  filter=HMAC prefix 01/100
+space=24010000  expected derivations=140409
+passphrases=1
+
+[1/1] (none)
+  100.00%  24010000/24010000  survivors 99509  3473668981/s
+  exhausted, no match  (survivors 99509 of 24010000)
+
+all passphrases exhausted, no match.
+exit=2 Tue 13 Oct 18:34:09 UTC  END el16  wall=1.22s
+Tue 13 Oct 18:34:09 UTC  START el17
+checkpoint     : progress_el17.txt
+target hash160 : ccbd031e54cde2a3189fd59bc49f731367a1779e
+paths          : m/0'/0 m/0'/0/0 m/0/0 m/44'/0'/0'/0/0 
+scheme=ELECTRUM v2  words=17  gaps=4  pool=70  filter=HMAC prefix 01/100
+space=24010000  expected derivations=140409
+passphrases=1
+
+[1/1] (none)
+  100.00%  24010000/24010000  survivors 99869  2490147272/s
+  exhausted, no match  (survivors 99869 of 24010000)
+
+all passphrases exhausted, no match.
+exit=2 Tue 13 Oct 18:34:11 UTC  END el17  wall=1.33s
+Tue 13 Oct 18:34:11 UTC  START el18
+checkpoint     : progress_el18.txt
+target hash160 : ccbd031e54cde2a3189fd59bc49f731367a1779e
+paths          : m/0'/0 m/0'/0/0 m/0/0 m/44'/0'/0'/0/0 
+scheme=ELECTRUM v2  words=18  gaps=5  pool=70  filter=HMAC prefix 01/100
+space=1680700000  expected derivations=9828654
+passphrases=1
+
+[1/1] (none)
+  100.00%  1680700000/1680700000  survivors 6974876  6083673588/s
+  exhausted, no match  (survivors 6974876 of 1680700000)
+
+all passphrases exhausted, no match.
+exit=2 Tue 13 Oct 18:35:25 UTC  END el18  wall=74.78s
+Tue 13 Oct 18:35:55 UTC  START el21
