@@ -1517,9 +1517,17 @@ box disjointification with real set intersections. Run it as
 ```
 t21 campaign, 42 evidenced runs     278,996,119,787 derivations
 + the twelve older asserted runs    282,171,117,443
-    marginal of the twelve          3,608,896,368
+    marginal of the twelve          3,174,997,656
     at 400 derivations/s            8,165 CPU-days
 ```
+
+*[Corrected 13 October.]* The marginal line read 3,608,896,368 from 28 September,
+when the ledger held 29 runs, until 13 October. The two totals above it were
+updated at every admission and it was not, so for two weeks the block broke the
+rule stated later in this section: the marginal must equal the difference of the
+two printed totals. It is now `282,171,117,443 − 278,996,119,787 = 3,174,997,656`,
+which is also what `tally2.py` prints. It shrinks as newer evidenced runs
+re-cover the twelve asserted ones.
 
 **The seven runs added on 27–28 September are why the union matters.** Six were
 the black-relocation sweep and one a pool expansion. Added as boxes they
@@ -2137,8 +2145,8 @@ not be found. Every figure is pinned to a file and line in `wallet_defaults.md`.
 position machine, the phrase is ≥ 21 and the author made a non-default choice —
 a longer length than the tool offered by default, or a legacy account on a wallet
 whose default is something else. If the clock is *not* a position machine, then
-the mechanism, the slot numbers, the template and all 191 billion derivations in
-§3 were aimed at a structure that does not exist. **The template and the 12-word
+the mechanism, the slot numbers, the template and all 279 billion derivations in
+§3 (191 billion when this paragraph was written) were aimed at a structure that does not exist. **The template and the 12-word
 prior cannot both be kept.** Anyone reaching for 12 on the strength of the
 wallet defaults is discarding §5, §2.13 and §3 in the same motion, and should say
 so.
