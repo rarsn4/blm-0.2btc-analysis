@@ -1729,18 +1729,30 @@ mean z -0.0587    sample Var 0.6948    sd 0.8335    max |z| 1.802 (t21_loo6)
 >= 2       0   (expect  1.9)
 ```
 
-**The honest reading is mild, borderline underdispersion — much weaker than the
-retracted figure, and not nothing.** Three statistics, side by side, because
-which one is quoted changes the impression:
+**The honest reading: mild underdispersion that does not survive having looked
+three ways.** Three statistics, side by side, because which one is quoted changes
+the impression. The first is the like-for-like replacement for the retracted
+`0.0058`. All three were computed **from one correlated simulation** —
+`dispersion_mc.py`, 10⁵ draws from the 41×41 correlation matrix built from box
+intersections — so they sit on the same footing rather than mixing an
+independence assumption with a rescaled χ²:
 
 ```
-IF independent:
-P(all 41 inside 1.802)        0.048   <- the SAME statistic as the retracted 0.0058
-P(sample Var <= 0.695)        0.072
-P(none of 41 beyond 2 sigma)  0.148
+                                 correlated sim     (independent, for reference)
+P(all 41 inside 1.802)           0.052 +/- 0.001    0.048
+P(sample Var <= 0.695)           0.089 +/- 0.001    0.072
+P(none of 41 beyond 2 sigma)     0.155 +/- 0.001    0.148
+P(at least one of the three)     0.191 +/- 0.001    <- familywise
 ```
 
-So p ≈ 0.05–0.15 depending on the statistic. An earlier draft of this paragraph
+The simulation checks itself: its mean sample variance is 0.9780, against the
+analytic `1 − ρ̄ = 0.9777`.
+
+**Three statistics were examined, so the smallest p is not the headline.** Looked
+at three ways, the chance that at least one is this extreme under the stated σ
+models is about **0.19**. That is not significant. The 0.052 is what one of three
+looks produced, and quoting it alone would be selecting the most striking of
+several tests after seeing them. An earlier draft of this paragraph
 computed the 0.048 and then wrote "there is no significant underdispersion"
 without printing it — leaving out the one number that sat near 5%, which is the
 same motivated reasoning §10 records when the option that preserved the stronger
@@ -1765,8 +1777,11 @@ largest pair                0.5774  readme54 x needle11
 The largest pair is a closed-form check: `readme54` sits inside `needle11` with the
 same slot-21 set and a third of the prefixes, so ρ must be `1/√3 = 0.5774` — and
 is. **Overlap accounts for about 7% of the shortfall from 1.0.** It does not
-explain the 0.695. The rest is unexplained, at a level that a 41-run sample makes
-borderline rather than established.
+explain the 0.695 — but once three looks are accounted for, there is little left
+that needs explaining.
+
+**This thread is closed.** The result is not significant, and dispersion could
+not have mattered to the search either way.
 
 **What this does and does not touch.** Dispersion tests the σ *models* — whether
 the stratified variance correctly describes how survivor counts scatter. It
