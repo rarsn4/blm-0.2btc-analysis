@@ -1279,7 +1279,7 @@ artwork's numbering and word sources, not statements the author made.
 
 ---
 
-### 2.19 [EXHAUSTED, both slot-20 readings; `second` half 99.2% compressed-key only] One gap slot over the whole dictionary, every gap in turn
+### 2.19 [EXHAUSTED, both slot-20 readings; compressed-key only except apple at slots 6/8/14/15/18] One gap slot over the whole dictionary, every gap in turn
 
 The largest single block of work in this project had one line of credit in §2.13
 and no section of its own. Read across the six configs, `@FULL` rotates through
@@ -1780,6 +1780,22 @@ is. **Overlap accounts for about 7% of the shortfall from 1.0.** It does not
 explain the 0.695 — but once three looks are accounted for, there is little left
 that needs explaining.
 
+**[MEASURED] Effective number of independent runs.** The same ρ̄ sizes a claim
+made later in this section ("What survives of the original point") without
+measuring it. For the mean of 41 standardised scores, `Var(z̄) = (1 + 40ρ̄)/41`
+exactly — the off-diagonal sum is `41 × 40 × ρ̄` whatever the individual pairs —
+so the runs are worth
+
+```
+n_eff = 41 / (1 + 40 x 0.0223) = 21.7      independent runs, for a mean
+```
+
+41 in-band results are about 22 independent confirmations of the template, not
+41. For the **variance** the same overlap costs far less: `E[s²] = 1 − ρ̄ =
+0.978`, which is why it accounts for only `(1 − 0.978)/(1 − 0.695) = 7.3%` of the
+shortfall. Overlap matters for how much the run count proves, and hardly at all
+for how tight the runs look.
+
 **This thread is closed.** The result is not significant, and dispersion could
 not have mattered to the search either way.
 
@@ -1885,7 +1901,7 @@ for one, sits entirely inside `needle11` — so the caveat applies only to what 
 | all 29 pre-patch runs | 24,480,490,264,651 | 24,357,314,995,435 | 99.50% |
 | §2.13, the 13 `free*_p1` | 17,455,617,552,384 | 17,381,232,818,496 | 99.57% |
 | §2.14, `swap114` + `free2_p1` | 1,413,309,943,872 | 1,388,515,032,576 | 98.25% |
-| §2.19 `second` half, the six `loo` | 6,458,615,227,584 | 6,408,447,197,184 | 99.22% |
+| §2.19, the six `loo` (`second` at slots 6–18, both readings at 21) | 6,458,615,227,584 | 6,408,447,197,184 | 99.22% |
 
 **68.21% of the whole 42-run union has been checked with the compressed key
 only.** The overall figure cross-checks exactly against `|U₄₂| − |U₁₃|`. Closing
@@ -1906,13 +1922,21 @@ retracted dispersion figure — is a bookkeeping fault and not a search fault. W
 a counting error *can* hide is a coverage gap, which is why the chunk-alignment
 checks matter and the arithmetic does not.
 
-**[SCOPE] What survives of the original point.** The boxes do overlap by design,
-so whatever the completed table shows, the counts are positively correlated and
-the effective number of independent draws is far below 37. That part did not
-depend on the retracted arithmetic.
+**[SUPERSEDED] What survives of the original point — now measured; see
+"Effective number of independent runs" under the dispersion statement above.**
+This paragraph read: *"The boxes do overlap by design, so whatever the completed
+table shows, the counts are positively correlated and the effective number of
+independent draws is far below 37. That part did not depend on the retracted
+arithmetic."* The direction was right; the size was asserted. Measured from the
+box intersections by `rho_bar.py`: mean pairwise ρ̄ = 0.0223, effective number of
+independent runs for a mean `41 / (1 + 40ρ̄) = 21.7`, and overlap accounts for
+7.3% of the variance shortfall — not for the shortfall. The two paragraphs below
+make the same unmeasured claim at 35 and 37 runs. They are kept as written and
+marked where the measurement contradicts them.
 
-The explanation is almost certainly not that the pipeline is unusually accurate.
-It is that **the boxes overlap by design** — this section's whole purpose is
+*[SUPERSEDED — measured: overlap accounts for 7.3% of the shortfall, see the
+dispersion statement above.]* The explanation is almost certainly not that the
+pipeline is unusually accurate. It is that **the boxes overlap by design** — this section's whole purpose is
 computing a union because they do — so the survivor counts are positively
 correlated and the effective number of independent draws is far below 35. A
 candidate counted in `readme54` and again in a `loo` run is not two samples of
@@ -1924,7 +1948,8 @@ limb-count bug and the 24-word HMAC omission were caught. Each individual run's
 band remains a valid check on that run. What does **not** follow is treating 37
 in-band results as 37 independent confirmations of the template — the collective
 evidence is weaker than the row count implies, and a reader should not read the
-tidiness as significance.
+tidiness as significance. *[Measured since: 41 scored runs are worth about 21.7
+independent ones for a mean.]*
 
 **What "derivations" means here, exactly.** A 21-word mnemonic carries seven
 checksum bits, so one sequence in 128 is valid and the ledger reports
