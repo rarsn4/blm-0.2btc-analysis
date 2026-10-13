@@ -549,7 +549,7 @@ during the seam work (§10).
 
 ---
 
-### 2.13 [EXHAUSTED, compressed key; 13 of 15 slots path 1 only] Free-one-fixed at 21 words: the branch that was never run
+### 2.13 [EXHAUSTED; 99.6% of its space compressed-key only; 13 of 15 slots path 1 only] Free-one-fixed at 21 words: the branch that was never run
 
 Every t21 sweep before September freed a **gap** — slots 6, 8, 14, 15, 18, 21.
 Not one freed an **assigned** slot. An audit of all twenty t21 configs confirmed
@@ -812,7 +812,7 @@ of total probability, against 1.4% for the six remaining slots at path 1 — fou
 times worse per hour, and the lowest-value run on the board. The argument that
 justified staging by path is the same one that rules out revisiting those paths.
 
-### 2.14 [EXHAUSTED, compressed key] Two hypotheses the source document itself named
+### 2.14 [EXHAUSTED; 98.3% of its space compressed-key only] Two hypotheses the source document itself named
 
 The README hedges exactly twice, and both hedges have now been tested.
 
@@ -1279,7 +1279,7 @@ artwork's numbering and word sources, not statements the author made.
 
 ---
 
-### 2.19 [EXHAUSTED, both slot-20 readings; `second` on compressed key only] One gap slot over the whole dictionary, every gap in turn
+### 2.19 [EXHAUSTED, both slot-20 readings; `second` half 99.2% compressed-key only] One gap slot over the whole dictionary, every gap in turn
 
 The largest single block of work in this project had one line of credit in §2.13
 and no section of its own. Read across the six configs, `@FULL` rotates through
@@ -1799,6 +1799,112 @@ Building this table found two defects in the tooling that built it, both caught
 before any figure reached the page: banner-less single-run logs were being
 skipped, which hid `readme54`, `swap114` and `written`; and the first pass at the
 statistics counted the table's own summary line as a 42nd data point.
+
+**[MEASURED] The solver compares against the right bytes, and the control that
+proves it goes through the production path.** Every negative in this document
+rests on the kernel comparing each candidate's `hash160` against
+`ccbd031e54cde2a3189fd59bc49f731367a1779e`. An independent researcher disclosed
+in public issue #1 that their own first exhaustive pass returned zero hits and
+was **void**: the target had each 4-byte word byte-swapped, and no gate caught it,
+because their self-test planted its target in a separate buffer and their
+negative controls pass under any target. That failure mode was checked here
+before anything else, in three steps, bytes before interpretation.
+
+*The target.* The solver holds no target file. It base58-decodes `TARGET` from
+the config at runtime and packs it big-endian into five words. Line 296 of
+`solver_host2.cuh` prints **the uploaded words themselves**, `tg[0..4]` with
+`%08x`, not a re-rendering of the config. All 70 production log headers print
+`ccbd031e54cde2a3189fd59bc49f731367a1779e`, which matches an independent Python
+decode of the address byte for byte; the version byte is `0x00` and the base58
+checksum is valid. The byte-swapped form would be
+`1e03bdcca3e2cd549bd59f1813739fc49e77a167` and appears nowhere.
+
+*The path.* There is **exactly one write to `d_target`** in the codebase — line
+295, inside `upload_cfg`. Every route sets `cf.target` from an address and calls
+that same function: production sweeps, `--selftest`, `--selftest-brain`, and the
+`selftest_*.conf` controls. There is no separate test buffer to bypass it.
+
+*The control, run rather than argued.* A checksum-valid 21-word phrase was built
+in the campaign's **own shape** — the real template, all four paths, slot 20
+`second` — with slots 18 and 21 left free, targeted at its address on path index
+2 (`m/0/0`) so the multi-path loop is exercised too. No test flags:
+
+```
+production (Jacobian)   HIT index 2565   time@18 order@21   path m/0/0
+affine, EC_USE_JACOBIAN=0  HIT index 2565   same phrase       path m/0/0
+target, same phrase space, WORD-SWAPPED
+                        exhausted, no match   survivors 24 of 2916   exit 2
+```
+
+**The third line is the important one.** A byte-swapped target produces a
+completely ordinary negative: clean exit, survivor count normal (24 against an
+expected 22.8), nothing flagged. That is the failure mode reproduced inside this
+harness — and it is silent here too. The campaign's target is not in that state,
+and a control exists that would have caught it if it were.
+
+Credit where it is due: this check exists because hiddengogeta disclosed a
+failure of their own that nobody had asked about.
+
+**[MEASURED] All three key encodings, controlled — and which runs used them.**
+That control hit on the compressed key only, and by §10's own rule a control
+certifies only the path it shares. So the same planted phrase was run once per
+encoding through the production path, verified by `HIT index` against an
+independently predicted index of 2,565, with the phrase line never printed:
+
+```
+binary   format         index  path   pubkey        verdict
+jac      compressed     2565   m/0/0  compressed    PASS
+jac      uncompressed   2565   m/0/0  uncompressed  PASS
+jac      hybrid         2565   m/0/0  hybrid        PASS
+affine   compressed     2565   m/0/0  compressed    PASS
+affine   uncompressed   2565   m/0/0  uncompressed  PASS
+affine   hybrid         2565   m/0/0  hybrid        PASS
+```
+
+The current kernel hashes all three for every derived key. **But 29 of the 42
+evidenced runs predate it.** The three-encoding binary was built 2026-09-28
+07:51; every run whose log closed before then checked the **compressed key
+only**:
+
+| key checked | runs |
+|---|---|
+| compressed only (29) | `readme54`, `swap114`, `written`, `pool75`, the six `loo`, the thirteen `free*_p1`, the six `black` |
+| all three (13) | `free3`, `free13`, `tarot_j10x20`, `tarot_j17x19`, `ink10x20`, `needle11`, `amend1415`, `flag6_apple`, the five `*_apple` mirrors |
+
+This section has argued since 28 September that compressed-only is the right
+model for a BIP39 seed — BIP32 wallets emit compressed leaf keys at every path —
+and that argument stands. But it is an argument, and every negative from the 29
+depends on it, so the affected headings carry a **number** rather than a blanket
+caveat. Some of the 29's space has since been re-covered by the 13 — `readme54`,
+for one, sits entirely inside `needle11` — so the caveat applies only to what the
+13 did not reach. In candidates, compressed-only = `|U(S) \ U₁₃| = |U(S ∪ U₁₃)| −
+|U₁₃|`:
+
+| scope | its union | checked compressed-key only | share |
+|---|---|---|---|
+| all 29 pre-patch runs | 24,480,490,264,651 | 24,357,314,995,435 | 99.50% |
+| §2.13, the 13 `free*_p1` | 17,455,617,552,384 | 17,381,232,818,496 | 99.57% |
+| §2.14, `swap114` + `free2_p1` | 1,413,309,943,872 | 1,388,515,032,576 | 98.25% |
+| §2.19 `second` half, the six `loo` | 6,458,615,227,584 | 6,408,447,197,184 | 99.22% |
+
+**68.21% of the whole 42-run union has been checked with the compressed key
+only.** The overall figure cross-checks exactly against `|U₄₂| − |U₁₃|`. Closing
+the caveat would cost about 25 GPU-days, for a key format BIP32 wallets do not
+produce, and is not planned.
+
+The first pass at this table grouped `swap114` with `written` for §2.14, from the
+run list rather than the section text. §2.14's second row is in fact *"freeing
+slot 2 to 55 candidates including `twin`"* — `t21_free2_p1`. The wrong grouping
+gave 115,253,293,465, about twelve times too small: the object was inferred
+instead of read.
+
+**A miscount cannot have swallowed a hit.** The survivor counter is a progress
+statistic: it records how many candidates passed the checksum filter. A HIT is a
+`hash160` comparison inside the kernel, and it never passes through that counter.
+So every defect discussed above — the resume reset, the unscored runs, the
+retracted dispersion figure — is a bookkeeping fault and not a search fault. What
+a counting error *can* hide is a coverage gap, which is why the chunk-alignment
+checks matter and the arithmetic does not.
 
 **[SCOPE] What survives of the original point.** The boxes do overlap by design,
 so whatever the completed table shows, the counts are positively correlated and
@@ -3020,6 +3126,30 @@ reports about itself.** The only test that distinguishes them is a planted
 *positive* through the production code path, and the only place it can be
 trusted is the one write to `d_target`. A control is worth exactly as much as the
 path it shares with the thing it controls.
+
+**Never edit by slicing between two distant anchors.** On 2026-10-13 one
+paragraph of §3 was replaced with `s[:i] + new + s[j:]`, where `i` and `j` were
+two headings 92 lines apart. The intent was to replace the paragraph at `i`.
+Everything between them went with it: the **target-bytes verification** — the
+check an outside researcher's disclosure prompted, and the strongest statement
+in this document — its swapped-target control, the key-format controls with
+their 29-against-13 table, and the line establishing that a miscount cannot
+swallow a hit. The commit message described only the paragraph it meant to
+replace.
+
+The loss went unnoticed for three further commits. It surfaced only because a
+later edit anchored on a sentence inside the deleted region and failed to find
+it — the edit's own assertion caught what review had not. Restored verbatim from
+`1cfc3a3`, after confirming that none of the four headings already existed, so
+nothing was duplicated, and that the one paragraph that *was* meant to go stayed
+gone.
+
+Two rules came out of it. Replace exact text, never a span between anchors,
+because an exact-match replacement fails loudly when the target is not where it
+is expected, while a slice succeeds silently on whatever lies in the gap. And
+diff the set of section headings across every commit, which is cheap and found
+this immediately once it was run: a heading that vanishes without being
+replaced is a deletion nobody intended.
 
 **Read the code, not its printout.** The host computes Electrum's expected
 survivor count as `total/171`, a constant that entered with the original Electrum
