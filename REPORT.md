@@ -1726,14 +1726,49 @@ mean z -0.0587    sample Var 0.6948    sd 0.8335    max |z| 1.802 (t21_loo6)
 >= 2       0   (expect  1.9)
 ```
 
-**There is no significant underdispersion.** The variance interval contains 1.0,
-and zero runs beyond 2σ against 1.9 expected is unremarkable — the chance of none
-is about 0.15. The retracted `0.0058` came from scoring a population that had
-never been fully enumerated; scored in full, the "suspiciously tight" result is
-not there. And since the boxes overlap by design, the effective number of
-independent draws is below 41, which makes the interval wider and any
-underdispersion *harder* to establish — so that caveat cuts against the
-retracted claim too.
+**The honest reading is mild, borderline underdispersion — much weaker than the
+retracted figure, and not nothing.** Three statistics, side by side, because
+which one is quoted changes the impression:
+
+```
+IF independent:
+P(all 41 inside 1.802)        0.048   <- the SAME statistic as the retracted 0.0058
+P(sample Var <= 0.695)        0.072
+P(none of 41 beyond 2 sigma)  0.148
+```
+
+So p ≈ 0.05–0.15 depending on the statistic. An earlier draft of this paragraph
+computed the 0.048 and then wrote "there is no significant underdispersion"
+without printing it — leaving out the one number that sat near 5%, which is the
+same motivated reasoning §10 records when the option that preserved the stronger
+claim was preferred for that reason.
+
+**Overlap pushes the variance down, and was measured rather than argued.** That
+same draft said the overlap made underdispersion "harder to establish". It points
+the other way. For standardised scores with mean pairwise correlation ρ̄,
+`E[s²] = 1 − ρ̄`, so positively correlated runs produce a sample variance *below*
+1 and overlap is a candidate **explanation**. `rho_bar.py` computes it from the
+box intersections: survivor counts co-vary only through their shared sub-box, so
+`Cov(N_A, N_B) = Var(N_{A∩B})`, each variance from that box's own slot-21 set.
+
+```
+41 runs, 820 pairs, 434 with any overlap
+mean pairwise rho          0.0223
+E[s^2] = 1 - rho_bar        0.978
+P(s^2 <= 0.695), adjusted   0.086
+largest pair                0.5774  readme54 x needle11
+```
+
+The largest pair is a closed-form check: `readme54` sits inside `needle11` with the
+same slot-21 set and a third of the prefixes, so ρ must be `1/√3 = 0.5774` — and
+is. **Overlap accounts for about 7% of the shortfall from 1.0.** It does not
+explain the 0.695. The rest is unexplained, at a level that a 41-run sample makes
+borderline rather than established.
+
+**What this does and does not touch.** Dispersion tests the σ *models* — whether
+the stratified variance correctly describes how survivor counts scatter. It
+cannot hide a hit, because the survivor counter is not the hit path: a hit is a
+`hash160` comparison inside the kernel and never passes through it.
 
 `t21_loo21` is the one run with no z. It is an exact identity on its counted
 segment, but its resume index was never recorded, because the run moved between
@@ -2969,7 +3004,10 @@ trusted is the one write to `d_target`. A control is worth exactly as much as th
 path it shares with the thing it controls.
 
 **Read the code, not its printout.** The host computes Electrum's expected
-survivor count as `total/171`. The kernel's `electrum_ok` accepts first byte
+survivor count as `total/171`, a constant that entered with the original Electrum
+patch: `electrum_patch.md` line 12 reads *"~1/256 per prefix, ~1/171 for both."*
+That rationale is inconsistent with its own number — two prefixes at 1/256 each
+would give 1/128, not 1/171. The kernel's `electrum_ok` accepts first byte
 `0x01` or `0x10` with a zero high nibble next — **17/4096 = 1/240.94**. The two
 differ by 1.409×. Measured on 24,010,000 candidates, acceptance was 1/241.28:
 −0.45σ from the kernel's figure, −109σ from the printout's. A band built from the
