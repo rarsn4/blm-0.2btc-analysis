@@ -244,6 +244,20 @@ Eliminated: **12, 13, 14, 16, 17, 18 and 21 words**, four paths, plus 65
 passphrases and the all-slots-vary sweep. Lengths 13/14/16/17 are illegal under
 BIP39 and had never been searchable by anyone.
 
+> **[SCOPE] None of these Electrum runs has a surviving log, and the list does
+> not include 22.** Configs exist for `el12`, `el13`, `el14`, `el16`, `el17`,
+> `el18`, `el21` and `el22`. A search of this tree and of the whole machine finds
+> **no log for any of them** and no line reading `scheme=ELECTRUM` anywhere. None
+> is in the `EVIDENCED` ledger. So the eliminations above rest on this
+> paragraph's prose alone — the same status the image-text brainwallet corpus had
+> before it was rebuilt — and should be read as asserted, not evidenced.
+>
+> `el22.conf` exists and was never run, which is why 22 is absent from the list.
+> Electrum v2 accepts any length, so a list that reads as an enumeration implies
+> a completeness it does not have: **15, 19, 20, 22, 23 and 24 are open under
+> Electrum.** Same disease as §2.19's heading — a true list that implies more
+> than it covers. Raised by an outside reader in public issue #1.
+
 ### 2.7 The all-slots-vary sweep — both schemes
 
 The strongest structural test in the project. All 13 fixed words varied
@@ -316,6 +330,32 @@ Both die at the vocabulary stage, before any algorithm needs implementing.
 For anyone reasoning about section numbers: **the whitepaper has 12 sections,
 not 9.** Section 11 (Calculations) exists, so `11.03.20` → Section 11 is a live
 reading. Tested; negative.
+
+**[TESTED, externally] The 24-word whitepaper-sentence family.** Four configs —
+`wp_fixed`, `wp_fixed2`, `wp_pool8`, `wp_pool10` — were written into this
+repository and **never run by this project**: no log, no checkpoint. An outside
+researcher, hiddengogeta, ran three of them independently on an Arc B580 and
+reported in public issue #1. Their figures reproduce here exactly, and all three
+pass the 24-word checksum-ratio test at /256:
+
+```
+wp_pool10   37^5 x 2 x 9^4 = 909,931,403,754 candidates
+            survivors 3,554,484,286 vs 3,554,419,545.9   z = +1.09
+wp_fixed    survivors 541,520   vs (37^5 x 2)/256        z = -0.31
+wp_fixed2   survivors 541,662   same space               z = -0.12
+```
+
+The fourth, `wp_pool8`, is covered without a run: it is a **strict subset** of
+`wp_pool10` slot by slot — each of slots 21–24 frees over seven content words
+that all appear among `wp_pool10`'s nine. So the whole family is closed, by an
+external run whose arithmetic was checked here rather than taken on trust. It is
+**not** added to this project's ledger, because its logs are not in this tree;
+it is recorded as an independent result.
+
+Their note that this family was "openable on your hardware in seconds" was wrong
+by about five orders of magnitude — at this rig's 11,925,000 cand/s,
+`wp_pool10` alone is 21.2 h. Irrelevant now that it is done, but their cost model
+for this hardware should not be relied on.
 
 ### 2.12 [TESTED] Brainwallets — a class nobody had touched
 
@@ -1637,6 +1677,51 @@ leaves the rest of the campaign's z's uncomputed. Replacing one unmeasured numbe
 with another is not the correction. The dispersion statement is **withdrawn
 pending a complete 37-run z table**, computed once, from 37 actual values.
 
+**[MEASURED] The solver compares against the right bytes, and the control that
+proves it goes through the production path.** Every negative in this document
+rests on the kernel comparing each candidate's `hash160` against
+`ccbd031e54cde2a3189fd59bc49f731367a1779e`. An independent researcher disclosed
+in public issue #1 that their own first exhaustive pass returned zero hits and
+was **void**: the target had each 4-byte word byte-swapped, and no gate caught it,
+because their self-test planted its target in a separate buffer and their
+negative controls pass under any target. That failure mode was checked here
+before anything else, in three steps, bytes before interpretation.
+
+*The target.* The solver holds no target file. It base58-decodes `TARGET` from
+the config at runtime and packs it big-endian into five words. Line 296 of
+`solver_host2.cuh` prints **the uploaded words themselves**, `tg[0..4]` with
+`%08x`, not a re-rendering of the config. All 70 production log headers print
+`ccbd031e54cde2a3189fd59bc49f731367a1779e`, which matches an independent Python
+decode of the address byte for byte; the version byte is `0x00` and the base58
+checksum is valid. The byte-swapped form would be
+`1e03bdcca3e2cd549bd59f1813739fc49e77a167` and appears nowhere.
+
+*The path.* There is **exactly one write to `d_target`** in the codebase — line
+295, inside `upload_cfg`. Every route sets `cf.target` from an address and calls
+that same function: production sweeps, `--selftest`, `--selftest-brain`, and the
+`selftest_*.conf` controls. There is no separate test buffer to bypass it.
+
+*The control, run rather than argued.* A checksum-valid 21-word phrase was built
+in the campaign's **own shape** — the real template, all four paths, slot 20
+`second` — with slots 18 and 21 left free, targeted at its address on path index
+2 (`m/0/0`) so the multi-path loop is exercised too. No test flags:
+
+```
+production (Jacobian)   HIT index 2565   time@18 order@21   path m/0/0
+affine, EC_USE_JACOBIAN=0  HIT index 2565   same phrase       path m/0/0
+target, same phrase space, WORD-SWAPPED
+                        exhausted, no match   survivors 24 of 2916   exit 2
+```
+
+**The third line is the important one.** A byte-swapped target produces a
+completely ordinary negative: clean exit, survivor count normal (24 against an
+expected 22.8), nothing flagged. That is the failure mode reproduced inside this
+harness — and it is silent here too. The campaign's target is not in that state,
+and a control exists that would have caught it if it were.
+
+Credit where it is due: this check exists because hiddengogeta disclosed a
+failure of their own that nobody had asked about.
+
 **A miscount cannot have swallowed a hit.** The survivor counter is a progress
 statistic: it records how many candidates passed the checksum filter. A HIT is a
 `hash160` comparison inside the kernel, and it never passes through that counter.
@@ -2081,6 +2166,15 @@ habit of it.
 That measurement carries a bonus: `е` matching across both frames **confirms the
 rotation** applied to X, so the `/` direction of its diagonal is real and not a
 rotation artefact.
+
+**[TESTED, externally] A correlation null, and it is cleaner than it looks.**
+hiddengogeta's independent template-matching of X against 104 reference
+components reported a best match of **+0.399** against a 95th percentile of
++0.342, and read that as "low". It is stronger than that: with 104 independent
+components, `0.95¹⁰⁴ = 0.0048`, so the maximum is expected to exceed the 95th
+percentile **99.5% of the time** under pure noise. +0.399 is exactly what noise
+produces. That makes it a clean null rather than a marginal one, and it agrees
+with the structural result above.
 
 > **Recorded as NOT READ.** Structurally naudiz-like (2 strokes, 4 arms,
 > near-central crossing) but in mirrored orientation, which the cipher's own
@@ -2845,6 +2939,17 @@ on the 54-word pool in all five. The run *name* says which slot is free.
 Nothing in the volume could have revealed it, because `2048 × 54⁵` is identical
 whichever slot holds the 2048. Checking the arithmetic — which was done, and
 passed — could not catch it either. What caught it was `grep '^SLOT' config`.
+
+**A negative control that passes under any target certifies nothing.** An
+outside researcher's void run, disclosed in public issue #1, made this concrete:
+their target was byte-swapped, their self-test planted its own target in a
+separate buffer, and every gate they had passed regardless. Checked here, the
+same corruption produces a clean `exhausted, no match` with a normal survivor
+count and exit 2 — **indistinguishable from a real negative by anything the run
+reports about itself.** The only test that distinguishes them is a planted
+*positive* through the production code path, and the only place it can be
+trusted is the one write to `d_target`. A control is worth exactly as much as the
+path it shares with the thing it controls.
 
 **A verified list is only verified over the words actually in it.** A 34-word
 Tarot candidate list was checked against the 54-word pool and found disjoint —
