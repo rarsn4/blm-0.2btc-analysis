@@ -244,8 +244,8 @@ Eliminated: **12, 13, 14, 16, 17, 18 and 21 words**, four paths, plus 65
 passphrases and the all-slots-vary sweep. Lengths 13/14/16/17 are illegal under
 BIP39 and had never been searchable by anyone.
 
-> **[MEASURED, 2026-10-13] Re-run with logs; six of the claimed lengths now
-> evidenced.** The originals had no log anywhere on the machine, so they were
+> **[MEASURED, 2026-10-13] Re-run with logs; all seven claimed lengths now
+> evidenced, on the empty passphrase only.** The originals had no log anywhere on the machine, so they were
 > re-run, cheapest first, into `electrum_rerun.log`, each scored against a band
 > stated before it ran:
 >
@@ -257,16 +257,27 @@ BIP39 and had never been searchable by anyone.
 > | `el16` | 24,010,000 | 99,509 | 99,650.9 | −0.45 | negative |
 > | `el17` | 24,010,000 | 99,869 | 99,650.9 | +0.69 | negative |
 > | `el18` | 1,680,700,000 | 6,974,876 | 6,975,561.5 | −0.26 | negative |
+> | `el21` | 235,298,000,000 | 976,558,172 | 976,578,613.3 | −0.66 | negative |
 >
 > All in band, all on the current binary, so all three key encodings were
-> checked. `el21` (235,298,000,000 candidates, band 976,578,613.3 ± 31,185) is
-> running. **`el22` is held**: it is `70⁷ × 2 = 16,470,860,000,000` candidates,
-> about **10 days** at `el21`'s measured 19.0M cand/s — not the 31 hours a `54⁷`
-> estimate gave, because the `el*` configs use a **70-word** pool, not the BIP39
-> 54-word one. An earlier version of this note said 8.5 days, from `el18`'s
-> 22.5M; that figure came from a run under one chunk with no boundary deltas,
-> and it overstated the rate for longer phrases. 22-word phrases are longer
-> HMAC-SHA512 inputs again, so ten days is itself a floor.
+> checked. `el21` was scored against a band stated before it finished,
+> 976,578,613.3 ± 31,185. It completed on 13 October at 22:12:30 UTC after
+> 12,994 s in one segment from index 0, never resumed, with 976,558,172
+> survivors: 20,441 short, **z −0.66**.
+>
+> **The re-runs used the empty passphrase only.** No `el*` config carries a
+> passphrase line, and all seven logs print `passphrases=1`. The original list's
+> "65 passphrases and the all-slots-vary sweep" therefore still have no log.
+>
+> **`el22` is held**: it is `70⁷ × 2 = 16,470,860,000,000` candidates. At
+> `el21`'s whole-run rate, 235,298,000,000 over 12,994 s = 18.1M cand/s, that is
+> **10.5 days**. At the 17.3M of `el21`'s last 100 minutes, after the GPU began
+> throttling at 85 °C, it is 11.0 days. It is not the 31 hours a `54⁷` estimate
+> gave, because the `el*` configs use a **70-word** pool, not the BIP39 54-word
+> one. Earlier versions of this note said 8.5 days, from `el18`'s 22.5M, a run
+> under one chunk with no boundary deltas; and then 10 days, from `el21`'s
+> first-hour deltas of 19.0M, measured before the throttling. 22-word phrases are
+> longer HMAC-SHA512 inputs again, so both figures are floors.
 >
 > **The Electrum route was certified first.** A valid Electrum v2 *standard*
 > seed (HMAC `"Seed version"` prefix `0x01`) was planted in `el21`'s own shape —
@@ -285,7 +296,9 @@ BIP39 and had never been searchable by anyone.
 > printout, `el18` would have looked like a −1,013σ shortfall.
 
 > **[SCOPE] The original Electrum runs had no surviving log, and the list did
-> not include 22.** Configs exist for `el12`, `el13`, `el14`, `el16`, `el17`,
+> not include 22.** *[Partly superseded 13 October: the seven lengths are now
+> evidenced by the re-runs above, on the empty passphrase only. The 65
+> passphrases and the all-slots-vary sweep still rest on prose.]* Configs exist for `el12`, `el13`, `el14`, `el16`, `el17`,
 > `el18`, `el21` and `el22`. A search of this tree and of the whole machine finds
 > **no log for any of them** and no line reading `scheme=ELECTRUM` anywhere. None
 > is in the `EVIDENCED` ledger. So the eliminations above rest on this
