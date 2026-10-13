@@ -187,7 +187,7 @@ EVIDENCED = ['t21_readme54','t21_loo21','t21_loo6','t21_loo8','t21_loo14','t21_l
              # completion with survivors +0.682 sigma, per section 10's rule --
              # not when the file appeared.
              't21_loo6_apple','t21_loo8_apple','t21_loo14_apple',
-             't21_loo15_apple']
+             't21_loo15_apple','t21_loo18_apple']
 ASSERTED  = ['t21_pool52','t21_pool52_rev','t21_pool40','t21_idx','t21_pathd','t21_pathe',
              't21_trust21','t21_trust21b','t21_bnw18','t21_bnw18b','t21_trustonly','t21']
 CHECKSUM = 128
