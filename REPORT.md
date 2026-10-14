@@ -279,6 +279,14 @@ BIP39 and had never been searchable by anyone.
 > first-hour deltas of 19.0M, measured before the throttling. 22-word phrases are
 > longer HMAC-SHA512 inputs again, so both figures are floors.
 >
+> *[14 Oct 2026] `el22` released by the owner and started. Band stated before
+> launch, from the config: 16,470,860,000,000 candidates × 17/4096 =
+> **68,360,502,929.7 ± 260,915** survivors. It is scored only after it completes,
+> and admitted only if it lands in band. If it is interrupted, the survivor counter
+> restarts on resume, so each segment is scored against its own expectation from a
+> chunk-aligned resume index. A HIT here falls under the HIT rule in
+> `DO_NOT_PUSH`.]*
+>
 > **The Electrum route was certified first.** A valid Electrum v2 *standard*
 > seed (HMAC `"Seed version"` prefix `0x01`) was planted in `el21`'s own shape —
 > four paths, 70-word pool, two gaps free — and chosen to be an **invalid**
