@@ -310,6 +310,15 @@ BIP39 and had never been searchable by anyone.
 > a completeness it does not have: **15, 19, 20, 22, 23 and 24 are open under
 > Electrum.** Same disease as §2.19's heading — a true list that implies more
 > than it covers. Raised by an outside reader in public issue #1.
+>
+> *[13 Oct 2026] Mohammed posted a short reply on public issue #1 (21:08 UTC):
+> thanks for the void-run disclosure; their `wp_*` figures reproduce; `el22`
+> never run; Electrum lengths re-run with logs. The reply also said the
+> target-byte check and the production-path planted test had passed, and that the
+> re-run lengths were "all negative". That went out 64 minutes before `el21`
+> finished (22:12:30 UTC); `el21` then landed negative and in band, z −0.66. Those
+> results are all it disclosed: no report text, configs, ledger figures or
+> planned runs.]*
 
 ### 2.7 The all-slots-vary sweep — both schemes
 
