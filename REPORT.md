@@ -2322,6 +2322,33 @@ left-to-right, and its ink sits at luminance ~160–200 against a light backgrou
 hard threshold near 120 finds nothing, so use a levels stretch rather than a contrast
 multiply.
 
+**[MEASURED, 2026-10-14] The master is the file attached to the author's post.**
+Re-downloaded from [`i.redd.it/n1x7g8ceaur51.png`](https://i.redd.it/n1x7g8ceaur51.png),
+the image on submission `j79zvj` (§2.17), and compared with this project's
+`0.2-btc-puzzle.png` by full sha256 and a byte comparison, not by md5 alone:
+
+```
+sha256 (both)         d0b04378f75d63997b8034ec2ef1bdd108178e4546de78237bd35abf4189a782
+md5 (both)            7710323461a924987eb35c77055e59f6
+bytes (both)          2,383,395
+pixels (both)         1600 x 1200, RGBA
+cmp                   no differing byte
+HTTP Last-Modified    Thu, 08 Oct 2020 09:25:31 GMT   (post: 2020-10-08 09:25 UTC)
+HTTP ETag             "7710323461a924987eb35c77055e59f6"   = the file's md5
+```
+
+Every pixel measured in this section therefore comes from the file Reddit has
+served since the minute of posting, with no re-encoding anywhere between Reddit
+and this project.
+
+**[SCOPE] It does not show two further things.** First, that Reddit stored the
+bytes exactly as the author uploaded them: nothing outside Reddit can measure
+that. Second, that no larger copy exists anywhere in public. The only evidence on
+size is §2.9's, which is narrower: Reddit serves nothing larger
+(`preview.redd.it` at 2048/3000/4096 returned nothing). Reddit's post metadata,
+which would record the source dimensions, refused the request (HTTP 403) and was
+not read. Per §7.6, a larger copy would not resolve X anyway.
+
 Note also that the two ciphers share some shapes with **different values**: `◇` is
 `W` in the Gravity Falls Latin cipher and `с` in the Cyrillic one. Do not
 cross-apply them.
