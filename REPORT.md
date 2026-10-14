@@ -350,7 +350,12 @@ Both die at the vocabulary stage, before any algorithm needs implementing.
 - **No hidden layer.** The PNG is RGBA; alpha is fully opaque, zero non-opaque
   pixels.
 - **No JPEG history.** 8×8 block-edge ratio 0.985 / 0.910 — never compressed.
-- **No metadata.** Chunks are `IHDR`, `sBIT`, `IDAT` only.
+- **No metadata.** Chunks are `IHDR`, `sRGB`, `sBIT`, 291 × `IDAT`, `IEND`: no
+  text, time, EXIF or physical-size chunk. *[Corrected 2026-10-14: this line
+  listed `IHDR`, `sBIT`, `IDAT` only and omitted `sRGB`, a one-byte colour-space
+  flag (rendering intent 0, perceptual) that carries no metadata. Measured with
+  `pngcheck` 3.0.2 and an independent Python chunk parser, which agree: every
+  CRC valid, zero bytes after `IEND`.]*
 - **No larger source exists.** `i.redd.it/n1x7g8ceaur51.png` serves 1600×1200,
   md5 `7710323461a924987eb35c77055e59f6`, byte-identical to the circulating
   copy. `preview.redd.it` at 2048/3000/4096 returns nothing.
