@@ -1,0 +1,34 @@
+id  role            fill  cover  mask depth  nbrs brighter  max  FAR  status   name
+S1  subject          222  94.3%   192   191   128       18  226    0  SHOWS    tablet faint marks below the circle
+O1  overlay-s9       222 100.0%  1529   104   301        1  223    0  SHOWS    ONLY real BITCOIN (plinth band)
+O2  overlay-s9       198   4.6%     0           0        0         0  SKIPPED  PAY FOR THE FUTURE. / THIS IS THE FIRST PREDICTION. (s9 "ghost text beside the address")
+O3  overlay-s9       217  19.2%     0           0        0         0  SKIPPED  clock-hand word TOWER
+O4  overlay-s9       218  16.7%     0           0        0         0  SKIPPED  clock-hand word MOON
+O5  overlay-s9       223   7.1%     0           0        0         0  SKIPPED  FIND THE SEED PHRASE watermark ("SEED")
+O6  overlay-s9       239  23.8%     0           0        0         0  SKIPPED  IN THE THIS PICTURE
+O7  overlay-s9       241  17.3%     0           0        0         0  SKIPPED  Latin line, Esse quam niger es ...
+N1  overlay-numeral  203  18.3%     0           0        0         0  SKIPPED  clock numeral "2"
+N2  overlay-numeral  216  22.3%     0           0        0         0  SKIPPED  clock numeral "1"
+N3  overlay-numeral  216  28.1%     0           0        0         0  SKIPPED  clock numeral "12"
+N4  overlay-numeral  225  25.2%     0           0        0         0  SKIPPED  clock numeral "10"
+A1  additional       195  15.6%     0           0        0         0  SKIPPED  rune line, top left, 1st
+A2  additional       186  16.6%     0           0        0         0  SKIPPED  rune line, top left, 2nd
+A3  additional       179   9.2%     0           0        0         0  SKIPPED  rune line, top left, 3rd
+A4  additional       238  33.2%     0           0        0         0  SKIPPED  rune line, clock caption
+A5  additional       206  15.1%     0           0        0         0  SKIPPED  rune line, mid right
+A6  additional       206  12.3%     0           0        0         0  SKIPPED  Order and stability (yellow script)
+A7  additional       142   2.5%     0           0        0         0  SKIPPED  13th Amendment copy (judged drawn, dark grey)
+A8  additional       238  21.5%     0           0        0         0  SKIPPED  bottom caption (judged drawn, dark)
+C1  control          222  99.2%   791   221   324        0         0  NONE     BLM capitals + underline (tablet)
+C2  control          222 100.0%   433   146   234        1  223    0  SHOWS    circle, ring + interior (tablet)
+C3  control          222  91.8%  1058   155   164        0         0  NONE     statue robe line art
+C4  control          222  99.3%  1100   124   190        0         0  NONE     statue robe line art
+C5  control          222 100.0%   767   120   187        0         0  NONE     statue robe line art
+C6  control          222 100.0%   518   183   211        0         0  NONE     plinth band top-edge line (same band as O1)
+
+ROUND 2
+ineligible decision-set items (count against nothing): O2 PAY FOR THE FUTURE. / THIS IS THE FIRST PREDICTION. (s9 "ghost text beside the address") [SKIPPED], O3 clock-hand word TOWER [SKIPPED], O4 clock-hand word MOON [SKIPPED], O5 FIND THE SEED PHRASE watermark ("SEED") [SKIPPED], O6 IN THE THIS PICTURE [SKIPPED], O7 Latin line, Esse quam niger es ... [SKIPPED], N1 clock numeral "2" [SKIPPED], N2 clock numeral "1" [SKIPPED], N3 clock numeral "12" [SKIPPED], N4 clock numeral "10" [SKIPPED]
+eligible decision-set items: O1 [SHOWS]
+eligible controls: C1 [NONE], C2 [SHOWS], C3 [NONE], C4 [NONE], C5 [NONE], C6 [NONE]
+subject: SHOWS
+DECISION: cannot be decided at this resolution (fewer than 3 eligible overlay items)

@@ -2319,6 +2319,63 @@ so.
    measured these pixels cannot be checked. Script: `tablet_measure.py`, output in
    `circled_check/tablet_measure.out`.
 
+   **[MEASURED] Whether the faint marks share a rendering signature with the
+   image's faint overlay texts: cannot be decided at this resolution.** The census
+   was registered before it ran (`circled_check/overlay_census_plan_r2.tsv`,
+   commit 2838769). It covered every faint overlay text that §9's census lists,
+   four faint clock numerals, and six controls of ink on a flat fill, all by one
+   method:
+
+   - background: the mode of the pixels above the window's median;
+   - marks: pixels at least 4 levels below the background;
+   - eligible: only if the background value covers at least 50% of the pixels
+     more than 2 px from any mark. Eligibility was fixed by flatness alone,
+     before any brighter-pixel count.
+
+   The claim needed three things: the faint marks showing brighter neighbours,
+   at least three eligible overlay items all showing them, and no eligible
+   control showing them.
+
+   | item | role | background | flat share | result |
+   |---|---|---|---|---|
+   | tablet faint marks | subject | 222 | 94.3% | brighter 18 of 128, max 226 |
+   | `ONLY real BITCOIN` | overlay | 222 | 100.0% | brighter 1 of 301, max 223 (see below) |
+   | `PAY FOR THE FUTURE.` / `THIS IS THE FIRST PREDICTION.` | overlay | 198 | 4.6% | not eligible |
+   | clock-hand word `TOWER` | overlay | 217 | 19.2% | not eligible |
+   | clock-hand word `MOON` | overlay | 218 | 16.7% | not eligible |
+   | `FIND THE SEED PHRASE` watermark | overlay | 223 | 7.1% | not eligible |
+   | `IN THE THIS PICTURE` | overlay | 239 | 23.8% | not eligible |
+   | Latin line | overlay | 241 | 17.3% | not eligible |
+   | four faint clock numerals | overlay | 203–225 | 18.3–28.1% | not eligible |
+   | rune lines (5), `Order and stability`, Amendment copy, bottom caption | outside the rule | 142–238 | 2.5–33.2% | not eligible |
+   | BLM capitals and underline | control | 222 | 99.2% | brighter 0 of 324 |
+   | circle, ring and interior | control | 222 | 100.0% | brighter 1 of 234, max 223 (see below) |
+   | statue robe line art, three windows | control | 222 | 91.8–100% | brighter 0 of 164, 190, 187 |
+   | plinth band top-edge line | control | 222 | 100.0% | brighter 0 of 211 |
+
+   **One overlay item was eligible, against the three required.** The other ten
+   fail on flatness alone. The clock face, the watermark and the ghost text beside
+   the address all sit on textured backgrounds, so there is no flat fill against
+   which to call a pixel "brighter". **This thread is closed.** The faint marks
+   stay as recorded above: measured, and unread.
+
+   **Two eligible rows do not measure what their names say,** and they should not
+   be read as evidence either way:
+   - `ONLY real BITCOIN` qualified only through a 74-px strip at 222 along the
+     window's top row. The band itself is 209, so the band and its text were
+     counted as marks together.
+   - The circle control's one brighter pixel, (269, 773), sits on the window's
+     bottom edge beside two faint-mark pixels. It is one of the 18 above; the
+     circle contributes none.
+
+   The rule set no minimum size for the area away from the marks, and the circle
+   window qualified on 9 px of it.
+
+   A first round, plan e915ab5, skipped all 27 items. Its flatness rule measured
+   how much of each window was text. It was replaced, not tuned: round 1 computed
+   no brighter-pixel count for any item. Scripts: `overlay_census.py --round 2`,
+   with the post-hoc check in `circled_check/overlay_census_r2_diag.py`.
+
    **[INFERRED] A larger original may exist.** Sub-pixel strokes are what a larger
    working file produces when downsampled, which is the reason to want one.
    *[Tagged 14 October. This read "such an original probably exists", untagged.]*
