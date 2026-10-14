@@ -78,3 +78,15 @@ Amended, 2026-10-14 (el22 running):
   Allowed matches: README.md:64-65 and the REPORT.md pair carrying the 2270828
   self-test (3097-3098 at 6dcfdac). Anything else stops the push. The old
   '^HIT index' pattern misses the solver's real output, "HIT   index".
+
+---
+RE-IMPOSED, 2026-10-14 ~18:10 UTC. The owner asked for today's push to be
+removed. GitHub main was force-pushed back to 2df932a (with lease on 073834d),
+removing the 49 commits pushed today (2df757a, 073834d). Every commit remains in
+this local repository. The lift above is withdrawn: DO NOT PUSH, as on
+2026-10-04, until the owner says otherwise. The HIT rule stays in force.
+
+Not erased by the force-push: GitHub keeps serving the removed commits to
+anyone who has their hashes until its garbage collection, the public events
+feed lists the push, and anyone who fetched between 17:33 and 18:10 UTC
+(at least the reviewing collaborator, at 2df757a) has a copy.
