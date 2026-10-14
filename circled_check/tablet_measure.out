@@ -1,0 +1,56 @@
+=== A. faint strokes below the circle ===
+face core (>= 3 px from any pixel < 190): 257 px; mode luminance 222 held by 143 px (56%)
+core pixels below 222: 94; above 222: 12
+levels stretch on the face core: 211 -> 0, 222 -> 255 (each level = 23.0 stretched)
+  depth >=  2 levels (stretched value <= 209.0):  4 components,  83 px, sizes [63, 15, 4, 1]
+  depth >=  4 levels (stretched value <= 163.0):  3 components,  62 px, sizes [49, 12, 1]
+  depth >=  6 levels (stretched value <= 117.0):  3 components,  52 px, sizes [36, 10, 6]
+  depth >=  8 levels (stretched value <=  71.0):  5 components,  34 px, sizes [16, 9, 3, 3, 3]
+  depth >= 10 levels (stretched value <=  25.0):  5 components,   7 px, sizes [2, 2, 1, 1, 1]
+  depth >= 12 levels (stretched value <= -21.0):  0 components,   0 px, sizes []
+
+at depth >= 4: 3 components, 62 px, union bbox x 256..268, y 773..799; depth max 11, mean 7.9 levels; luminance min 211
+  comp  1: 12 px  bbox x 265..268 y 773..778  lum min 211  depth max 11  axis  76 deg  elong  1.8
+  comp  2: 49 px  bbox x 256..266 y 780..799  lum min 211  depth max 11  axis  61 deg  elong  2.8
+  comp  3:  1 px  bbox x 260..260 y 794..794  lum min 217  depth max  5  axis  -
+core pixels brighter than 222: 12, of which 8-adjacent to a darker-than-222 pixel: 12; max 226
+
+shading reference, tablet left edge (rows 772..800): first column reaching >= 218, ramp width, monotonic?
+  ramp 150 -> 218 width: median 6 px (range 0..11); start column 248..252; monotonic in 19 of 29 rows
+  ramp gradient ~11 levels/px, contiguous with the edge
+
+valley test (darker than a pixel within 2 steps on BOTH sides, by >= 2 levels, in some direction):
+  faint-mark pixels (core, depth >= 4): 48 of 62 are valleys
+  left-edge ramp pixels (rows 772..800, 150..218): 0 of 158 are valleys
+  over the whole face incl. the 2-px edge zone: 2 valley components at depth >= 4, sizes [44, 14]; touching an edge pixel (< 190): 0
+  their union bbox: x 257..269, y 773..795
+
+fill flatness: core pixels not within 1 px of any below-222 pixel: 78, of which exactly 222: 78
+overshoot (> 222) among 1-px neighbours: faint marks 18/120, left-edge ramp 0/91, BLM capitals 0/229
+per channel, fill R G B = 191 235 233; darkest mark pixel per channel 181 224 222; depth 10 11 11
+min(R,G,B): fill 191, darkest mark 181, depth 10
+hand edge (first pixel < 190 from the left, rows 772..805): x = -0.578 y + 722.3; axis 60 deg (same convention as the mark axes)
+
+reference ink, BLM capitals (x255..299, y722..741): luminance min 1, depth below 222 up to 221 levels, max stroke width 10 px
+
+=== B. skeleton structure: glyph X (control) and the circle interior ===
+X window x1530..1560 y38..55, ink < 110: main component 92 px (§7.4 records 92)
+X  @110: ink px 92, skeleton px 26, endpoints 4, junctions 1 degrees [4]; strokes 2 (arms paired through the crossing); angle between strokes 56 deg; arm lengths [9.5, 7.6, 6.0, 4.8]
+circle interior: disc r < 6.55 px about (263.5, 760.5); darkest pixel 76; pixels < 110: 7, < 90: 4
+interior @110: ink px 4, skeleton px 2, endpoints 2, junctions 0 degrees []; no single 4-way crossing
+
+threshold sweep (same method at each threshold):
+  t= 90  X        components  2  main px  90  endpoints 4  junctions 1 degrees [4]  axis  79 deg elong  2.1
+  t= 90  interior components  2  main px   2  endpoints 2  junctions 0 degrees []  axis   -
+  t=110  X        components  2  main px  92  endpoints 4  junctions 1 degrees [4]  axis  79 deg elong  2.2
+  t=110  interior components  2  main px   4  endpoints 2  junctions 0 degrees []  axis  72 deg elong  2.4
+  t=125  X        components  2  main px  96  endpoints 4  junctions 1 degrees [4]  axis  79 deg elong  2.2
+  t=125  interior components  2  main px  10  endpoints 2  junctions 0 degrees []  axis  99 deg elong  1.8
+  t=140  X        components  2  main px  98  endpoints 4  junctions 1 degrees [4]  axis  79 deg elong  2.2
+  t=140  interior components  2  main px  17  endpoints 3  junctions 1 degrees [2]  axis 104 deg elong  1.7
+  t=155  X        components  2  main px 103  endpoints 4  junctions 1 degrees [4]  axis  77 deg elong  2.1
+  t=155  interior components  1  main px  45  endpoints 3  junctions 2 degrees [4, 3]  axis 151 deg elong  2.1
+  t=170  X        components  2  main px 105  endpoints 4  junctions 1 degrees [4]  axis  77 deg elong  2.1
+  t=170  interior components  1  main px  52  endpoints 4  junctions 2 degrees [2, 3]  axis 148 deg elong  2.0
+  t=185  X        components  2  main px 109  endpoints 4  junctions 1 degrees [4]  axis  76 deg elong  2.0
+  t=185  interior components  1  main px  63  endpoints 3  junctions 1 degrees [3]  axis 152 deg elong  2.1
