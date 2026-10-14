@@ -90,3 +90,13 @@ Not erased by the force-push: GitHub keeps serving the removed commits to
 anyone who has their hashes until its garbage collection, the public events
 feed lists the push, and anyone who fetched between 17:33 and 18:10 UTC
 (at least the reviewing collaborator, at 2df757a) has a copy.
+
+---
+PARTLY LIFTED, 2026-10-14 ~18:25 UTC. The owner had the finished work put back
+on GitHub (main = 073834d again, normal push): the report through Tarot (§2.18),
+the five apple mirrors (§2.19), Electrum el12-el21. Owner's rule: finished work
+can be public; the search that is running now cannot.
+  - Commits after 073834d (el22 started, its band, the log rules, these notes)
+    stay LOCAL. Do not push main as it stands; anything published later must
+    exclude the running search until the owner says otherwise.
+  - The HIT rule stays in force.
