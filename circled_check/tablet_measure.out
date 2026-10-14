@@ -54,3 +54,11 @@ threshold sweep (same method at each threshold):
   t=170  interior components  1  main px  52  endpoints 4  junctions 2 degrees [2, 3]  axis 148 deg elong  2.0
   t=185  X        components  2  main px 109  endpoints 4  junctions 1 degrees [4]  axis  76 deg elong  2.0
   t=185  interior components  1  main px  63  endpoints 3  junctions 1 degrees [3]  axis 152 deg elong  2.1
+
+=== C. pixels within 2 px of a dark feature that are brighter than the 222 fill ===
+  BLM capitals + underline (x256..292 y721..750) feature px   559  within 2 px   538  > 222:   0
+  circle, ring + interior (r <= 10.5)          feature px   215  within 2 px   115  > 222:   0
+  faint marks (<= 218, tablet face core)       feature px    63  within 2 px   193  > 222:  18  max 226
+  robe line art A (x116..239 y640..759, < 180) feature px  7313  within 2 px  3716  > 222:   0
+  robe line art B (x116..239 y760..899, < 180) feature px  5637  within 2 px  3224  > 222:   0
+  census, pixels > 222: tablet window 18 (within 2 px of a faint mark: 18); robe A 0; robe B 0

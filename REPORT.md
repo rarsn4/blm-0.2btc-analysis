@@ -2248,8 +2248,76 @@ so.
    keeps **74** pixels below 90; the card mark has **4**. At this size a
    line-drawn fist, a circled A and similar shapes are indistinguishable.
 
-   Sub-pixel strokes are what a larger working file produces when downsampled, so
-   such an original probably exists — which is the reason to want one.
+   **[TESTED] Against glyph X: cannot be compared at this resolution.** X was
+   re-measured first, as the control, exactly as §7.4 measures it (ink < 110, main
+   component, skeletonized): 92 px, 4 endpoints, one 4-way crossing, 2 strokes at
+   56°, arms 9.5 / 7.6 / 6.0 / 4.8 against §7.4's 9.5 / 7.5 / 6.1 / 4.7. It keeps
+   that structure at every cutoff from 90 to 185. The circle's interior (disc of
+   radius 6.55 px about the centre, darkest pixel 76, 7 px below 110), by the same
+   method:
+
+   ```
+   ink cutoff       90   110   125   140   155   170   185
+   main component    2     4    10    17    45    52    63   px
+   endpoints         2     2     2     3     3     4     3
+   junctions         0     0     0     1     2     2     1
+   ```
+
+   At X's own cutoff the interior is a 4-px blob with no crossing, and its
+   structure changes at every cutoff. That is not evidence that it differs from X.
+   X is drawn at full pen darkness; the interior is sub-pixel, so its skeleton
+   follows the cutoff rather than the drawing. **The test can neither confirm nor
+   exclude that the circle contains X.** Verified independently on a separate copy
+   of the master with the same SHA-256: X 92 px, darkest 0; interior darkest 76,
+   7 px below 110.
+
+   **[MEASURED] The faint marks below the circle.** The tablet face is a flat fill.
+   Below the circle, all 78 face pixels that are at least 3 px from the tablet's
+   edge and not next to a mark are exactly 222. Against that fill:
+
+   - **Extent and depth.** Pixels at least 4 levels below the fill span x 256–268,
+     y 773–799. The darkest is 211, so they are **at most 11 levels** below the
+     fill (R/G/B 10 / 11 / 11). The BLM capitals on the same card reach 221.
+   - **Components after a levels stretch** (211 → 0, 222 → 255) depend on the cut:
+     4 / 3 / 3 / 5 / 5 / 0 at depth ≥ 2 / 4 / 6 / 8 / 10 / 12 levels. At ≥ 4 there
+     are three, of 49, 12 and 1 px; the two larger lie along 61° and 76°. **The 61°
+     axis is parallel to the hand's edge (60°).**
+   - **Not the tablet's shading.** 48 of the 62 mark pixels are darker than a
+     pixel on both sides of them. The only shading on the face, a ramp 6 px wide
+     along the tablet's left edge and joined to it, has 0 of 158 such pixels.
+
+   **[MEASURED] They are the only feature on the tablet that comes out brighter
+   than the fill beside it.** Pixels within 2 px of a dark feature that exceed 222:
+
+   | feature | dark px | px within 2 px | brighter than 222 |
+   |---|---|---|---|
+   | BLM capitals and underline | 559 | 538 | **0** |
+   | circle, ring and interior | 215 | 115 | **0** |
+   | statue robe line art, x 116–239 y 640–759 | 7,313 | 3,716 | **0** |
+   | statue robe line art, x 116–239 y 760–899 | 5,637 | 3,224 | **0** |
+   | faint marks | 63 | 193 | **18**, max 226 |
+
+   All 18 pixels above 222 in the tablet window lie within 2 px of a faint mark;
+   the two robe windows contain none at all. An independent count on a separate
+   copy, with different masks, gave 0/143, 0/114, 0/1,423, 0/448 and 6/92: the
+   same pattern. **[INFERRED]** Overshoot beside an edge is what resampling with a
+   ringing kernel leaves, so the faint marks went through a step that the drawing
+   they sit on did not: they were produced differently from it.
+
+   Nothing here reads them. §9's calibration table records this element's first
+   read, `-IGHT`, at 35 levels of contrast; the depth measured here is at most 11,
+   in luminance and in every channel. §9 recorded no coordinates, so whether it
+   measured these pixels cannot be checked. Script: `tablet_measure.py`, output in
+   `circled_check/tablet_measure.out`.
+
+   **[INFERRED] A larger original may exist.** Sub-pixel strokes are what a larger
+   working file produces when downsampled, which is the reason to want one.
+   *[Tagged 14 October. This read "such an original probably exists", untagged.]*
+   There is an alternative this file cannot exclude: a thin anti-aliased pen drawn
+   directly at 1600×1200 gives sub-pixel strokes too. The circle shows no
+   overshoot, the same as the statue's line art. That fits drawing at this size,
+   and it equally fits a larger original downsampled with a filter that does not
+   ring, so it does not decide between them. The hope stands; it is not a finding.
 
 **Deprioritised, with reasons:**
 
@@ -2837,7 +2905,7 @@ lighter row between line and letters. Scripts: `t3_lines.py`, `t3_census.py`.
 
 | first read | outcome |
 |---|---|
-| `-IGHT` on the BLM card | not text: flat row profile, 35 levels of contrast against 193 for the BLM capitals |
+| `-IGHT` on the BLM card | not text: flat row profile, 35 levels of contrast against 193 for the BLM capitals. *[14 October: re-measured at most 11 levels below the fill, in luminance and every channel; no coordinates were recorded here, so the 35 cannot be checked. See §6 item 6.]* |
 | `SHT`, missing its I | `SHIT` is complete |
 | `except` underlined | spray edge; the word is uncheckable |
 | `DAY FOR THE FUTURE` | it reads `PAY`, so `day` stays translation-only |

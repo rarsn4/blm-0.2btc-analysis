@@ -228,3 +228,30 @@ for t in (90, 110, 125, 140, 155, 170, 185):
             ax = 'axis   -'
         print(f'  t={t:3d}  {nm_:8s} components {ncomp:2d}  main px {int(msk.sum()):3d}  endpoints {ne}  '
               f'junctions {len(juncs)} degrees {[d for _, d, _ in juncs]}  {ax}')
+
+# ---------------------------------------------------------------- C. overshoot above the fill
+print('\n=== C. pixels within 2 px of a dark feature that are brighter than the 222 fill ===')
+FILL = 222
+Lr = np.round(L)
+yy3, xx3 = np.mgrid[0:L.shape[0], 0:L.shape[1]]
+def box3(a, b, c_, d): return (xx3 >= a) & (xx3 <= c_) & (yy3 >= b) & (yy3 <= d)
+def over(name, mask, region):
+    nb = ndi.binary_dilation(mask, EIGHT, iterations=2) & ~mask & region
+    o = nb & (Lr > FILL)
+    print(f'  {name:44s} feature px {int(mask.sum()):5d}  within 2 px {int(nb.sum()):5d}  > {FILL}: {int(o.sum()):3d}'
+          + (f'  max {int(Lr[o].max())}' if o.any() else ''))
+T3 = box3(246, 706, 311, 809)
+over('BLM capitals + underline (x256..292 y721..750)', box3(256, 721, 292, 750) & (Lr < 200), T3)
+disc3 = (xx3 - CX) ** 2 + (yy3 - CY) ** 2 <= 10.5 ** 2
+over('circle, ring + interior (r <= 10.5)', disc3 & (Lr < 200), T3 & disc3)
+win3 = box3(248, 772, 279, 807)
+lab3, _ = ndi.label(win3 & (Lr >= 200), EIGHT)
+face3 = lab3 == (np.bincount(lab3[win3].ravel())[1:].argmax() + 1)
+core3 = face3 & ~ndi.binary_dilation(win3 & (Lr < 190), EIGHT, iterations=2)
+over('faint marks (<= 218, tablet face core)', core3 & (Lr <= 218), face3)
+for nm_, bx in (('robe line art A (x116..239 y640..759, < 180)', (116, 640, 239, 759)),
+                ('robe line art B (x116..239 y760..899, < 180)', (116, 760, 239, 899))):
+    R3 = box3(*bx); over(nm_, R3 & (Lr < 180), R3)
+print(f'  census, pixels > {FILL}: tablet window {int((T3 & (Lr > FILL)).sum())} '
+      f'(within 2 px of a faint mark: {int((T3 & (Lr > FILL) & ndi.binary_dilation(core3 & (Lr <= 218), EIGHT, iterations=2)).sum())}); '
+      f'robe A {int((box3(116, 640, 239, 759) & (Lr > FILL)).sum())}; robe B {int((box3(116, 760, 239, 899) & (Lr > FILL)).sum())}')
