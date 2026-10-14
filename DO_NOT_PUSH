@@ -24,3 +24,19 @@ working conversation and confirmed it when asked, with the reason above stated
 back to them. Pushed as a fast-forward of main from 2df932a; no force. This
 re-publishes bd4d74f, which had been removed from GitHub after 4 October.
 The solver repository has no remote and was not pushed.
+
+IN FORCE after the lift, 2026-10-14:
+
+  HIT RULE. If the solver ever reports `HIT index` for the real target,
+  hash160 ccbd031e54cde2a3189fd59bc49f731367a1779e: no git push, no commit
+  containing the HIT line, no issue comment, no paste anywhere, until the
+  owner has moved the funds to a wallet whose key was generated fresh and
+  offline. The configs are public, so a HIT index line plus its config is
+  enough for anyone to rebuild the phrase. Never run show_hit; verify only
+  after the funds are moved, on the affine binary and on an independent
+  BIP32 implementation (blm-verify protocol). Self-test hits on planted
+  phrases target other addresses and are not covered by this rule.
+
+  SOLVER FOLDER. ~/Downloads/Brainwallet/files(6) stays private: it has no
+  remote. Before it is ever published, review it file by file (it holds
+  pw.txt, note.txt and other working files).
