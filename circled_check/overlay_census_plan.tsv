@@ -1,0 +1,48 @@
+# Brighter-pixel census across faint overlay texts. Written and committed BEFORE any item was measured (2026-10-14).
+# Windows are master pixels, inclusive. Chosen from gridded views only; no census statistic was computed when choosing them.
+#
+# METHOD (one method, every item; implemented in overlay_census.py)
+#   L       = round(0.299 R + 0.587 G + 0.114 B)
+#   fill    = mode of L over the window. Eligible only if the mode covers >= 50% of the window; otherwise SKIPPED, reported.
+#   clipped = fill >= 250: a neighbour cannot exceed the fill by much, so the item cannot show the signature -> EXCLUDED, reported.
+#   mask    = window pixels with L <= fill - 4 (the dark marks). Empty mask -> NO DARK MARKS, reported.
+#   nbrs    = pixels within 2 px of the mask (8-connected dilation x2), not in the mask, inside the window.
+#   result  = count and max of nbrs with L >= fill + 1, out of len(nbrs). Also reported: depth = fill - min(L in mask), and
+#             FAR = window pixels with L >= fill + 1 farther than 2 px from any mask pixel.
+#   shows   = count > 0 and FAR == 0.  count > 0 with FAR > 0 -> INDETERMINATE (the fill itself exceeds the mode).
+#
+# DECISION RULE (fixed in advance)
+#   Decision set = roles overlay-s9 and overlay-numeral. Write "the tablet marks share the rendering signature of the faint
+#   overlay texts" only if the subject shows it, EVERY decision-set item is eligible and shows it, and NO eligible control shows
+#   it. A skipped, excluded or indeterminate decision-set item counts as not shown. Anything else is reported as mixed.
+#   Items with role additional are measured and reported but are outside the rule (faint text that the s9 census does not list,
+#   or s9 elements judged by eye to be drawn rather than overlaid).
+#   No reading of what any item says.
+#
+# id	role	name	x0	y0	x1	y1	source
+S1	subject	tablet faint marks below the circle	256	772	270	797	REPORT §6 item 6; tablet_measure.py
+O1	overlay-s9	ONLY real BITCOIN (plinth band)	93	1050	228	1063	census_crops.py "ONLY real BITCOIN"
+O2	overlay-s9	PAY FOR THE FUTURE. / THIS IS THE FIRST PREDICTION. (s9 "ghost text beside the address")	74	815	104	1030	census_crops.py
+O3	overlay-s9	clock-hand word TOWER	405	825	445	862	census_crops.py "Clock hands TOWER, MOON"
+O4	overlay-s9	clock-hand word MOON	352	850	392	882	census_crops.py "Clock hands TOWER, MOON"
+O5	overlay-s9	FIND THE SEED PHRASE watermark ("SEED")	560	190	860	300	census_crops.py "FIND THE SEED PHRASE"
+O6	overlay-s9	IN THE THIS PICTURE	515	365	770	398	census_crops.py "IN THE THIS PICTURE"
+O7	overlay-s9	Latin line, Esse quam niger es ...	1030	1161	1490	1185	census_crops.py "Esse quam ..."
+N1	overlay-numeral	clock numeral "2"	425	738	455	772	gridded view of the clock
+N2	overlay-numeral	clock numeral "1"	335	795	352	818	gridded view of the clock
+N3	overlay-numeral	clock numeral "12"	278	868	322	912	gridded view of the clock
+N4	overlay-numeral	clock numeral "10"	315	1055	345	1095	gridded view of the clock
+A1	additional	rune line, top left, 1st	165	40	425	60	REPORT §7.3 (not in the s9 census)
+A2	additional	rune line, top left, 2nd	165	61	365	80	REPORT §7.3 (not in the s9 census)
+A3	additional	rune line, top left, 3rd	165	82	355	100	REPORT §7.3 (not in the s9 census)
+A4	additional	rune line, clock caption	262	1023	462	1042	REPORT §7.5 (not in the s9 census)
+A5	additional	rune line, mid right	840	826	1010	856	gridded view (not in the s9 census)
+A6	additional	Order and stability (yellow script)	640	68	1000	110	gridded view (not in the s9 census)
+A7	additional	13th Amendment copy (judged drawn, dark grey)	1305	815	1450	905	census_crops.py SCREENED
+A8	additional	bottom caption (judged drawn, dark)	35	1148	1040	1168	census_crops.py SCREENED
+C1	control	BLM capitals + underline (tablet)	256	719	294	750	REPORT §6 item 6
+C2	control	circle, ring + interior (tablet)	251	748	276	773	REPORT §6 item 6
+C3	control	statue robe line art	158	800	188	840	gridded view of the robe
+C4	control	statue robe line art	192	850	226	890	gridded view of the robe
+C5	control	statue robe line art	140	1005	175	1040	gridded view of the robe
+C6	control	plinth band top-edge line (same band as O1)	120	1042	200	1051	gridded view of the plinth
