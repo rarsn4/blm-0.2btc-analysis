@@ -40,3 +40,32 @@ IN FORCE after the lift, 2026-10-14:
   SOLVER FOLDER. ~/Downloads/Brainwallet/files(6) stays private: it has no
   remote. Before it is ever published, review it file by file (it holds
   pw.txt, note.txt and other working files).
+
+Amended, 2026-10-14 (el22 running):
+
+  HIT RULE, full form. If a HIT for 1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ
+  appears, nothing is pushed, posted, copied or printed until Mohammed has
+  moved the funds. Never run show_hit. A "HIT index" line plus its public
+  config gives anyone the phrase.
+
+  THE LOG HOLDS THE PHRASE. The solver calls show_hit automatically on a hit
+  (solver_host2.cuh:654, binary solver2_jac contains the format strings) and
+  prints "phrase : <words>" to stdout, which run_el*.sh appends to
+  electrum_rerun.log. So, for el22 and every later run:
+    - never cat/tail/less/head electrum_rerun.log, never paste it into chat;
+    - progress comes only from progress_el22.txt, free313_boundaries.tsv and
+      free313_thermal.tsv;
+    - the only allowed reads of the log are
+        grep -c -E '^HIT[[:space:]]+index' electrum_rerun.log
+        grep -E '^exit=' electrum_rerun.log
+    - the solver exits on its first hit, so an END line well before ~25 Oct
+      may mean a hit: report ONLY the count to Mohammed, and stop;
+    - never copy electrum_rerun.log into configs/ again unless Mohammed says
+      so and the HIT count is 0. (The copy already in configs/ holds el12-el18
+      only: 0 HIT lines, six exit=2.)
+
+  PRE-PUSH CHECK, the only pattern:
+    git grep -n -E '^\s*HIT[[:space:]]+index|^\s*phrase[[:space:]]*:'
+  Allowed matches: README.md:64-65 and the REPORT.md pair carrying the 2270828
+  self-test (3097-3098 at 6dcfdac). Anything else stops the push. The old
+  '^HIT index' pattern misses the solver's real output, "HIT   index".
