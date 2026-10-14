@@ -1,0 +1,53 @@
+# Brighter-pixel census, ROUND 2. Registered and committed BEFORE running (2026-10-14). Round 1 (plan e915ab5, run 02103bf)
+# skipped all 27 items: its flatness rule measured text density. Same items, same windows; three changes, marked [R2].
+#
+# METHOD (implemented in overlay_census.py --round 2)
+#   L        = round(0.299 R + 0.587 G + 0.114 B)
+#   [R2] fill = mode of L over the window pixels ABOVE the window's median (if none is above it, i.e. the median equals the
+#              window maximum, the pixels at or above it). Lowest value on ties. Dark text on a light fill -> the background.
+#   EXCLUDED = fill >= 250 (overshoot clipped).
+#   mask     = window pixels with L <= fill - 4. Empty -> NO-MARKS, ineligible.
+#   far      = window pixels more than 2 px from any mask pixel (outside the 8-connected dilation x2 of the mask).
+#   [R2] eligible = the fill value covers >= 50% of `far`. Empty far or < 50% -> SKIPPED.
+#            Eligibility (EXCLUDED / NO-MARKS / SKIPPED) is decided from flatness alone, before and independently of the
+#            brighter-pixel count below.
+#   nbrs     = pixels within 2 px of the mask, not in the mask, inside the window.
+#   bright   = nbrs with L >= fill + 1 (count, max).   FAR = far pixels with L >= fill + 1.
+#   status   = SHOWS if bright > 0 and FAR == 0;  INDETERMINATE if bright > 0 and FAR > 0;  NONE if bright == 0.
+#
+# [R2] DECISION RULE
+#   Decision set = the ELIGIBLE items with role overlay-s9 or overlay-numeral. Ineligible items are listed by name and count
+#   against nothing.
+#   Write "the tablet marks share the rendering signature of the faint overlay texts" only if: the subject is eligible and
+#   SHOWS; at least 3 decision-set items are eligible and every one of them SHOWS (INDETERMINATE or NONE does not count as
+#   showing); and no eligible control SHOWS or is INDETERMINATE.
+#   Fewer than 3 eligible overlay items -> record "cannot be decided at this resolution" with the eligibility table, and close
+#   the thread: no round 3. Otherwise, if the conditions are not all met -> record as mixed, with the table.
+#   Role additional: measured and reported, outside the rule. No reading of what any item says.
+#
+S1	subject	tablet faint marks below the circle	256	772	270	797	REPORT §6 item 6; tablet_measure.py
+O1	overlay-s9	ONLY real BITCOIN (plinth band)	93	1050	228	1063	census_crops.py "ONLY real BITCOIN"
+O2	overlay-s9	PAY FOR THE FUTURE. / THIS IS THE FIRST PREDICTION. (s9 "ghost text beside the address")	74	815	104	1030	census_crops.py
+O3	overlay-s9	clock-hand word TOWER	405	825	445	862	census_crops.py "Clock hands TOWER, MOON"
+O4	overlay-s9	clock-hand word MOON	352	850	392	882	census_crops.py "Clock hands TOWER, MOON"
+O5	overlay-s9	FIND THE SEED PHRASE watermark ("SEED")	560	190	860	300	census_crops.py "FIND THE SEED PHRASE"
+O6	overlay-s9	IN THE THIS PICTURE	515	365	770	398	census_crops.py "IN THE THIS PICTURE"
+O7	overlay-s9	Latin line, Esse quam niger es ...	1030	1161	1490	1185	census_crops.py "Esse quam ..."
+N1	overlay-numeral	clock numeral "2"	425	738	455	772	gridded view of the clock
+N2	overlay-numeral	clock numeral "1"	335	795	352	818	gridded view of the clock
+N3	overlay-numeral	clock numeral "12"	278	868	322	912	gridded view of the clock
+N4	overlay-numeral	clock numeral "10"	315	1055	345	1095	gridded view of the clock
+A1	additional	rune line, top left, 1st	165	40	425	60	REPORT §7.3 (not in the s9 census)
+A2	additional	rune line, top left, 2nd	165	61	365	80	REPORT §7.3 (not in the s9 census)
+A3	additional	rune line, top left, 3rd	165	82	355	100	REPORT §7.3 (not in the s9 census)
+A4	additional	rune line, clock caption	262	1023	462	1042	REPORT §7.5 (not in the s9 census)
+A5	additional	rune line, mid right	840	826	1010	856	gridded view (not in the s9 census)
+A6	additional	Order and stability (yellow script)	640	68	1000	110	gridded view (not in the s9 census)
+A7	additional	13th Amendment copy (judged drawn, dark grey)	1305	815	1450	905	census_crops.py SCREENED
+A8	additional	bottom caption (judged drawn, dark)	35	1148	1040	1168	census_crops.py SCREENED
+C1	control	BLM capitals + underline (tablet)	256	719	294	750	REPORT §6 item 6
+C2	control	circle, ring + interior (tablet)	251	748	276	773	REPORT §6 item 6
+C3	control	statue robe line art	158	800	188	840	gridded view of the robe
+C4	control	statue robe line art	192	850	226	890	gridded view of the robe
+C5	control	statue robe line art	140	1005	175	1040	gridded view of the robe
+C6	control	plinth band top-edge line (same band as O1)	120	1042	200	1051	gridded view of the plinth
