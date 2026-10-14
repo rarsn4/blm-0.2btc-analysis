@@ -17,3 +17,10 @@ ALREADY PUBLIC as of this decision, and not retractable by not-pushing:
   origin/main = bd4d74f
 
 Delete this file deliberately, not by forgetting it.
+
+---
+Lifted, 2026-10-14: the owner instructed a push of this repository in the
+working conversation and confirmed it when asked, with the reason above stated
+back to them. Pushed as a fast-forward of main from 2df932a; no force. This
+re-publishes bd4d74f, which had been removed from GitHub after 4 October.
+The solver repository has no remote and was not pushed.
