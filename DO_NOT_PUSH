@@ -36,6 +36,15 @@ IN FORCE after the lift, 2026-10-14:
   after the funds are moved, on the affine binary and on an independent
   BIP32 implementation (blm-verify protocol). Self-test hits on planted
   phrases target other addresses and are not covered by this rule.
+  - The solver prints the phrase itself on a hit: show_hit is called
+    automatically and writes "phrase : ..." to stdout, which goes into
+    electrum_rerun.log. After a hit that log is secret; read it only with
+    grep -c.
+  - Electrum hits (el21, el22) must be verified with an Electrum v2
+    implementation: the "Seed version" HMAC check, and the seed from PBKDF2
+    with salt "electrum" (+ passphrase). A BIP39 tool (salt "mnemonic") gives a
+    different seed and a false negative. Key derivation from that seed is
+    Electrum's own (BIP32 paths m/0/0 standard, m/0'/0/0 segwit).
 
   SOLVER FOLDER. ~/Downloads/Brainwallet/files(6) stays private: it has no
   remote. Before it is ever published, review it file by file (it holds
