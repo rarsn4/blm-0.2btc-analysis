@@ -1,0 +1,32 @@
+id  role            fill  cover  mask depth  nbrs brighter  max  FAR  status   name
+S1  subject          222  35.6%     0           0        0         0  SKIPPED  tablet faint marks below the circle
+O1  overlay-s9       209  28.8%     0           0        0         0  SKIPPED  ONLY real BITCOIN (plinth band)
+O2  overlay-s9       197   5.6%     0           0        0         0  SKIPPED  PAY FOR THE FUTURE. / THIS IS THE FIRST PREDICTION. (s9 "ghost text beside the address")
+O3  overlay-s9       217  10.3%     0           0        0         0  SKIPPED  clock-hand word TOWER
+O4  overlay-s9       218  11.9%     0           0        0         0  SKIPPED  clock-hand word MOON
+O5  overlay-s9       223   4.3%     0           0        0         0  SKIPPED  FIND THE SEED PHRASE watermark ("SEED")
+O6  overlay-s9       239   9.9%     0           0        0         0  SKIPPED  IN THE THIS PICTURE
+O7  overlay-s9       241   5.1%     0           0        0         0  SKIPPED  Latin line, Esse quam niger es ...
+N1  overlay-numeral  203  10.6%     0           0        0         0  SKIPPED  clock numeral "2"
+N2  overlay-numeral  215  18.1%     0           0        0         0  SKIPPED  clock numeral "1"
+N3  overlay-numeral  216  14.1%     0           0        0         0  SKIPPED  clock numeral "12"
+N4  overlay-numeral  225  16.7%     0           0        0         0  SKIPPED  clock numeral "10"
+A1  additional       195   7.9%     0           0        0         0  SKIPPED  rune line, top left, 1st
+A2  additional       186   9.8%     0           0        0         0  SKIPPED  rune line, top left, 2nd
+A3  additional       179   6.0%     0           0        0         0  SKIPPED  rune line, top left, 3rd
+A4  additional       238  19.0%     0           0        0         0  SKIPPED  rune line, clock caption
+A5  additional       190   3.5%     0           0        0         0  SKIPPED  rune line, mid right
+A6  additional       206   6.5%     0           0        0         0  SKIPPED  Order and stability (yellow script)
+A7  additional        71   6.1%     0           0        0         0  SKIPPED  13th Amendment copy (judged drawn, dark grey)
+A8  additional       238   5.7%     0           0        0         0  SKIPPED  bottom caption (judged drawn, dark)
+C1  control          222  30.0%     0           0        0         0  SKIPPED  BLM capitals + underline (tablet)
+C2  control          222  24.6%     0           0        0         0  SKIPPED  circle, ring + interior (tablet)
+C3  control          222  10.3%     0           0        0         0  SKIPPED  statue robe line art
+C4  control          222  16.4%     0           0        0         0  SKIPPED  statue robe line art
+C5  control          222  33.9%     0           0        0         0  SKIPPED  statue robe line art
+C6  control          222  35.9%     0           0        0         0  SKIPPED  plinth band top-edge line (same band as O1)
+
+subject shows: False
+decision set: 11 items; shows 0; none 0; skipped 11; excluded 0; no-marks 0; indeterminate 0
+controls: 6 items; eligible 0; showing 0
+DECISION: MIXED
