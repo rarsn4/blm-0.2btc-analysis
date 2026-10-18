@@ -956,9 +956,13 @@ has not been compared with the drawing pixel by pixel here.
   So README §19's step (Leopold II, `XX` = 20 → `second`) loses its basis twice:
   the bust is not Leopold, and the `XX` is a vandal's mark, not the artist's
   numeral. **Slot 20 has no supported word.** It has been tested over the 54-pool
-  plus `apple` and `second` on four paths (`t21_free20`), never over all 2048
-  words: that would be 50,779,978,334,208 candidates, about 51–53 days at the
-  measured 11.0–11.6M cand/s.
+  plus `apple` and `second` on **one path only**, `m/44'/0'/0'/0/0`
+  (`t21_free20_p1`, in the ledger). The four-path config `t21_free20` exists but
+  has never run. It has never been tested over all 2048 words. With the six gaps
+  open on the 54-pool, that would be 50,779,978,334,208 candidates, about 51–53
+  days at the measured 11.0–11.6M cand/s (about 49 at 12M). **Run it only with a
+  defended fixed prefix.** *[Corrected 18 Oct: an earlier version of this line
+  said four paths, taken from the config's name; the run log shows path 1 only.]*
 - *Reported from the press photo, not re-measured here:* the artist left the name
   panel blank, replaced the inscription with the 13th Amendment §1 (with `subject`
   underlined, §9), and added the `BREATHE` neck band. The wreath plaque is blank
@@ -1573,6 +1577,30 @@ not one the document offers.** That is a different epistemic footing from
 everything preceding it, and the distinction is worth preserving: earlier
 negatives eliminated readings someone could point at; later ones eliminate
 readings we invented.
+
+**[EXHAUSTED, conditional on the template's other words] Ideas already covered by
+completed runs.** Each is covered only with the run's other slots as they were:
+the fixed words fixed, and the gaps on the 54-pool. "Pre-patch" means compressed
+key only (§3).
+
+| idea | slot | covered by (evidenced) | words at that slot | paths | slot-20 reading | key formats |
+|---|---|---|---|---|---|---|
+| `food` | 11 | `t21_free11_p1` | 54-pool + `pyramid` (55) | **path 1 only** | `second` only | compressed (pre-patch) |
+| `absent`, `air`, `airport` | 6 | `t21_loo6`; `t21_loo6_apple` | all 2048 | 4 | `second`; `apple` | compressed; all three |
+| `alarm`, `album` | 21 | `t21_loo21` | all 2048, so all 16 checksum-valid finals per prefix | 4 | both | compressed (pre-patch) |
+| `black` | 10 | the template itself (`t21_readme54` and every run that keeps it) | `black` | 4 | both | all three, via the post-patch runs |
+| `black` | 21 | `t21_black21` | `black` | 4 | both | compressed (pre-patch) |
+
+The `food@11` row was first proposed as `t21_free11` on four paths. The evidenced
+run is `t21_free11_p1`, path 1 only; the four-path config has never run, so
+`food@11` is open on paths 2–4 and under `apple`.
+
+**[ASSUMED] Speculative date arithmetic: untested, no position evidence, not
+queued.**
+- `battle` / `beach` from 2020 − 1865 = 155, word #155 counted 1-based / 0-based.
+- `dose` / `double` from `05.25` = 525, the same two ways.
+
+Neither has any evidence placing it at a slot.
 
 ## 3. Tally
 
@@ -2479,11 +2507,17 @@ so.
    section E.
 
    **[INFERRED] Hypothesis, no run: "шт".** If the faint group reads `SHT`, it may
-   be Russian `шт` ("pieces"), and with the README's `XX` it would read "20
-   pieces". The `XX` would then be the unreadable circle. If so, it fits 20 words in
-   the image plus a calculated 21st checksum word (the blank clock hand). The
-   current template already covers that case: `t21_loo21` swept slot 21 over all
-   2048 words under both slot-20 readings, with the other gaps on the 54-pool.
+   be Russian `шт` ("pieces"); with the README's `XX` it would read "20 pieces".
+   It is a reading, not a template: not a 20-word Electrum template, and nothing is
+   queued on it.
+
+   **Separately, arithmetic:** if the image holds 20 words, a 21st word completes
+   the phrase, and for any 20-word prefix exactly **16** of the 2048 words are
+   checksum-valid finals, one in each block of 128. `t21_loo21` swept slot 21 over
+   all 2048 words under both slot-20 readings, with the other gaps on the 54-pool,
+   so all 16 are covered for those prefixes (compressed key only, §3).
+   *[Reworded 18 Oct: the first version joined the hypothesis, the blank clock
+   hand and this arithmetic in one sentence.]*
 
    **[MEASURED] A possible wristwatch on the third masked person** (bag strap),
    window x 336–365, y 238–269. A closed loop appears only at loose cutoffs
