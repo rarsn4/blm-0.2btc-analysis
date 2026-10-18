@@ -1,0 +1,38 @@
+check, t21_readme54: stratified sigma / binomial = 0.983533 (REPORT: 0.983533)
+
+t21_slot1_line  [bip39, 21 words, 4 paths]
+  candidates   247,949,112,960
+  band         1,937,102,445.0 +/- 43,118.4  (stratified, 0.983533 x binomial)
+  wall time    5.94 - 6.26 h at 11.0-11.6M cand/s
+  new vs the 42-run union (paths not modelled): 173,564,379,072 = 70.00%
+  overlap with t21_free1_p1: 74,384,733,888 candidates = 30.00%, on 1 shared path(s) ["m/44'/0'/0'/0/0"]
+  overlap with t21_readme54: 0 candidates = 0.00%, on 4 shared path(s) ["m/0'/0/0", 'm/0/0', "m/44'/0'/0'/0/0", "m/44'/0'/0'/0/1"]
+
+t21_rev54  [bip39, 21 words, 4 paths]
+  candidates   49,589,822,592
+  band         387,420,489.0 +/- 19,606.0  (stratified, 1.000000 x binomial)
+  wall time    1.19 - 1.25 h at 11.0-11.6M cand/s
+  new vs the 42-run union (paths not modelled): 49,589,822,592 = 100.00%
+  overlap with t21_pool52_rev: 39,541,219,328 candidates = 79.74%, on 4 shared path(s) ["m/0'/0/0", 'm/0/0', "m/44'/0'/0'/0/0", "m/44'/0'/0'/0/1"]
+
+el21_rev  [electrum, 21 words, 4 paths]
+  candidates   235,298,000,000
+  band         976,578,613.3 +/- 31,185.3  (binomial)
+  wall time    3.53 - 3.62 h at 18.1-18.5M cand/s
+  overlap with el21: 0 candidates = 0.00%, on 4 shared path(s) ["m/0'/0", "m/0'/0/0", 'm/0/0', "m/44'/0'/0'/0/0"]
+
+t21_pool58  [bip39, 21 words, 4 paths]
+  candidates   76,137,385,088
+  band         594,823,321.0 +/- 23,874.4  (stratified, 0.982746 x binomial)
+  wall time    1.82 - 1.92 h at 11.0-11.6M cand/s
+  new vs the 42-run union (paths not modelled): 4,507,641,344 = 5.92%
+  overlap with t21_readme54: 49,589,822,592 candidates = 65.13%, on 4 shared path(s) ["m/0'/0/0", 'm/0/0', "m/44'/0'/0'/0/0", "m/44'/0'/0'/0/1"]
+
+t21_alt3  [bip39, 21 words, 4 paths]
+  candidates   396,718,580,736
+  band         3,099,363,912.0 +/- 54,540.9  (stratified, 0.983533 x binomial)
+  wall time    9.50 - 10.02 h at 11.0-11.6M cand/s
+  new vs the 42-run union (paths not modelled): 347,128,758,144 = 87.50%
+  overlap with t21_readme54: 49,589,822,592 candidates = 12.50%, on 4 shared path(s) ["m/0'/0/0", 'm/0/0', "m/44'/0'/0'/0/0", "m/44'/0'/0'/0/1"]
+
+queue total: 22.0 - 23.1 h of GPU time
