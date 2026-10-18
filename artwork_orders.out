@@ -1,0 +1,135 @@
+row-major            distinct orders  4608   BIP39 checksum pass  50   Electrum seed-version pass  24
+column-major         distinct orders  4608   BIP39 checksum pass  29   Electrum seed-version pass  19
+blocks by top edge   distinct orders     4   BIP39 checksum pass   1   Electrum seed-version pass   0
+blocks by left edge  distinct orders     2   BIP39 checksum pass   0   Electrum seed-version pass   0
+
+total distinct orders checked: 9222; derived: 123; matches against the target: 0
+  derived, no match (Electrum, row-major): find order peace more black matter seed one police phrase can end picture this welcome brave world future first real only
+  derived, no match (BIP39, row-major): find order peace more black matter seed one police phrase this can picture end welcome brave world future first real only
+  derived, no match (BIP39, row-major): find order peace more black one seed matter phrase police end can this picture welcome brave world future first only real
+  derived, no match (BIP39, row-major): find order peace more black one seed matter phrase police end this can picture welcome brave world future first real only
+  derived, no match (BIP39, row-major): find order peace more black one seed matter phrase police this end picture can welcome brave world future first real only
+  derived, no match (BIP39, row-major): find order peace more black one seed matter police phrase end picture this can welcome brave world future first real only
+  derived, no match (BIP39, row-major): find order peace more black seed matter one phrase police picture can this end welcome brave world future first real only
+  derived, no match (Electrum, row-major): find order peace more black seed matter one police phrase can this end picture welcome brave world future first only real
+  derived, no match (Electrum, row-major): find order peace more black seed matter one police phrase this end picture can welcome brave world future first real only
+  derived, no match (Electrum, row-major): find order peace more black seed one matter phrase police can picture end this welcome brave world future first real only
+  derived, no match (BIP39, row-major): find order peace more matter black one seed phrase police end picture can this welcome brave world future first only real
+  derived, no match (BIP39, row-major): find order peace more matter black one seed police phrase can end picture this welcome brave world future first only real
+  derived, no match (Electrum, row-major): find order peace more matter black one seed police phrase this picture can end welcome brave world future first real only
+  derived, no match (BIP39, row-major): find order peace more matter black seed one phrase police picture this end can welcome brave world future first only real
+  derived, no match (BIP39, row-major): find order peace more matter black seed one police phrase end can this picture welcome brave world future first only real
+  derived, no match (Electrum, row-major): find order peace more matter one black seed phrase police can this end picture welcome brave world future first only real
+  derived, no match (BIP39, row-major): find order peace more matter one black seed police phrase end picture this can welcome brave world future first only real
+  derived, no match (BIP39, row-major): find order peace more matter one seed black phrase police end can this picture welcome brave world future first real only
+  derived, no match (BIP39, row-major): find order peace more one black matter seed phrase police this can picture end welcome brave world future first real only
+  derived, no match (Electrum, row-major): find order peace more one black matter seed police phrase end picture this can welcome brave world future first real only
+  derived, no match (BIP39, row-major): find order peace more one black seed matter phrase police end can picture this welcome brave world future first only real
+  derived, no match (BIP39, row-major): find order peace more one black seed matter phrase police picture this end can welcome brave world future first real only
+  derived, no match (BIP39, row-major): find order peace more one black seed matter phrase police this end can picture welcome brave world future first real only
+  derived, no match (BIP39, row-major): find order peace more one black seed matter police phrase can this end picture welcome brave world future first real only
+  derived, no match (Electrum, row-major): find order peace more one seed black matter phrase police can picture this end welcome brave world future first real only
+  derived, no match (Electrum, row-major): find order peace more one seed black matter phrase police end can this picture welcome brave world future first real only
+  derived, no match (BIP39, row-major): find order peace more one seed black matter phrase police end this picture can welcome brave world future first only real
+  derived, no match (Electrum, row-major): find order peace more one seed black matter phrase police this can end picture welcome brave world future first only real
+  derived, no match (Electrum, row-major): find order peace more one seed matter black police phrase can end picture this welcome brave world future first only real
+  derived, no match (BIP39, row-major): find order peace more seed black matter one phrase police end can this picture welcome brave world future first only real
+  derived, no match (BIP39, row-major): find order peace more seed black matter one phrase police end this picture can welcome brave world future first real only
+  derived, no match (BIP39, row-major): find order peace more seed black matter one phrase police this picture end can welcome brave world future first real only
+  derived, no match (Electrum, row-major): find order peace more seed black matter one police phrase this picture can end welcome brave world future first real only
+  derived, no match (BIP39, row-major): find order peace more seed black one matter phrase police can end this picture welcome brave world future first only real
+  derived, no match (BIP39, row-major): find order peace more seed black one matter phrase police can picture end this welcome brave world future first real only
+  derived, no match (BIP39, row-major): find order peace more seed matter black one police phrase can this end picture welcome brave world future first only real
+  derived, no match (BIP39, row-major): find order peace more seed matter one black phrase police end picture this can welcome brave world future first real only
+  derived, no match (Electrum, row-major): find order peace more seed one matter black phrase police picture can end this welcome brave world future first real only
+  derived, no match (BIP39, row-major): order find peace more black matter one seed phrase police picture can this end welcome brave world future first real only
+  derived, no match (BIP39, row-major): order find peace more black matter one seed police phrase this can picture end welcome brave world future first only real
+  derived, no match (BIP39, row-major): order find peace more black matter seed one phrase police picture can this end welcome brave world future first only real
+  derived, no match (Electrum, row-major): order find peace more black matter seed one police phrase this end can picture welcome brave world future first only real
+  derived, no match (BIP39, row-major): order find peace more black one matter seed phrase police picture end this can welcome brave world future first real only
+  derived, no match (Electrum, row-major): order find peace more black one seed matter phrase police picture this end can welcome brave world future first real only
+  derived, no match (BIP39, row-major): order find peace more black one seed matter police phrase can end this picture welcome brave world future first real only
+  derived, no match (Electrum, row-major): order find peace more black one seed matter police phrase end picture can this welcome brave world future first real only
+  derived, no match (BIP39, row-major): order find peace more black one seed matter police phrase picture can end this welcome brave world future first only real
+  derived, no match (BIP39, row-major): order find peace more black one seed matter police phrase this can picture end welcome brave world future first real only
+  derived, no match (Electrum, row-major): order find peace more black seed one matter phrase police picture this can end welcome brave world future first only real
+  derived, no match (BIP39, row-major): order find peace more matter black one seed phrase police this end can picture welcome brave world future first real only
+  derived, no match (BIP39, row-major): order find peace more matter one black seed phrase police can end this picture welcome brave world future first only real
+  derived, no match (BIP39, row-major): order find peace more matter one black seed phrase police this can picture end welcome brave world future first real only
+  derived, no match (BIP39, row-major): order find peace more matter seed black one police phrase can this end picture welcome brave world future first real only
+  derived, no match (BIP39, row-major): order find peace more matter seed black one police phrase picture can this end welcome brave world future first real only
+  derived, no match (BIP39, row-major): order find peace more matter seed one black phrase police can picture this end welcome brave world future first only real
+  derived, no match (BIP39, row-major): order find peace more matter seed one black phrase police end picture can this welcome brave world future first only real
+  derived, no match (BIP39, row-major): order find peace more matter seed one black phrase police picture this can end welcome brave world future first only real
+  derived, no match (BIP39, row-major): order find peace more matter seed one black phrase police this can picture end welcome brave world future first only real
+  derived, no match (BIP39, row-major): order find peace more matter seed one black police phrase end this picture can welcome brave world future first real only
+  derived, no match (BIP39, row-major): order find peace more matter seed one black police phrase this end can picture welcome brave world future first real only
+  derived, no match (Electrum, row-major): order find peace more one black seed matter phrase police end picture this can welcome brave world future first real only
+  derived, no match (BIP39, row-major): order find peace more one black seed matter phrase police end this can picture welcome brave world future first real only
+  derived, no match (BIP39, row-major): order find peace more one black seed matter police phrase end picture this can welcome brave world future first only real
+  derived, no match (BIP39, row-major): order find peace more one matter black seed phrase police end this can picture welcome brave world future first only real
+  derived, no match (Electrum, row-major): order find peace more one matter seed black phrase police end can picture this welcome brave world future first real only
+  derived, no match (BIP39, row-major): order find peace more one seed black matter police phrase can this end picture welcome brave world future first only real
+  derived, no match (BIP39, row-major): order find peace more one seed black matter police phrase this can end picture welcome brave world future first only real
+  derived, no match (Electrum, row-major): order find peace more seed black matter one phrase police end this picture can welcome brave world future first real only
+  derived, no match (BIP39, row-major): order find peace more seed black matter one phrase police this end can picture welcome brave world future first real only
+  derived, no match (Electrum, row-major): order find peace more seed black matter one police phrase end picture can this welcome brave world future first only real
+  derived, no match (Electrum, row-major): order find peace more seed one black matter police phrase can this picture end welcome brave world future first only real
+  derived, no match (Electrum, row-major): order find peace more seed one black matter police phrase end can picture this welcome brave world future first only real
+  derived, no match (BIP39, row-major): order find peace more seed one black matter police phrase this can end picture welcome brave world future first real only
+  derived, no match (Electrum, row-major): order find peace more seed one matter black police phrase picture this end can welcome brave world future first real only
+  derived, no match (Electrum, column-major): first future only this real order find seed phrase brave welcome picture world can black matter peace police end one more
+  derived, no match (BIP39, column-major): first future only this real phrase order find seed brave welcome picture world can black matter peace police end more one
+  derived, no match (BIP39, column-major): first future only this real seed phrase order find welcome brave picture world can black matter peace end police one more
+  derived, no match (Electrum, column-major): first only future this real phrase seed order find brave welcome picture world can black matter peace end police more one
+  derived, no match (BIP39, column-major): first only future this real seed phrase order find welcome brave picture world can black matter peace end police more one
+  derived, no match (BIP39, column-major): first only this future real find seed order phrase welcome brave picture world can black matter peace end police more one
+  derived, no match (BIP39, column-major): first only this future real find seed phrase order welcome brave picture world can black matter peace police end more one
+  derived, no match (BIP39, column-major): first this future only real find seed phrase order welcome brave picture world can black matter peace end police more one
+  derived, no match (Electrum, column-major): first this future only real order find seed phrase brave welcome picture world can black matter peace police end more one
+  derived, no match (Electrum, column-major): first this future only real phrase find seed order brave welcome picture world can black matter peace police end more one
+  derived, no match (Electrum, column-major): first this only future real find phrase seed order welcome brave picture world can black matter peace police end one more
+  derived, no match (Electrum, column-major): first this only future real seed phrase order find welcome brave picture world can black matter peace end police one more
+  derived, no match (BIP39, column-major): future first only this real phrase order find seed brave welcome picture world can black matter peace police end more one
+  derived, no match (BIP39, column-major): future first only this real seed order find phrase welcome brave picture world can black matter peace police end more one
+  derived, no match (BIP39, column-major): future first this only real phrase order find seed brave welcome picture world can black matter peace police end more one
+  derived, no match (Electrum, column-major): future first this only real seed order find phrase brave welcome picture world can black matter peace police end more one
+  derived, no match (BIP39, column-major): future only first this real find order seed phrase welcome brave picture world can black matter peace police end more one
+  derived, no match (BIP39, column-major): future only first this real order seed find phrase welcome brave picture world can black matter peace police end more one
+  derived, no match (BIP39, column-major): future only first this real phrase order seed find welcome brave picture world can black matter peace police end more one
+  derived, no match (BIP39, column-major): future only this first real seed order phrase find brave welcome picture world can black matter peace end police more one
+  derived, no match (BIP39, column-major): future this first only real order phrase seed find brave welcome picture world can black matter peace police end one more
+  derived, no match (BIP39, column-major): future this first only real order seed find phrase brave welcome picture world can black matter peace police end more one
+  derived, no match (BIP39, column-major): future this first only real phrase find order seed brave welcome picture world can black matter peace police end one more
+  derived, no match (Electrum, column-major): future this first only real phrase find seed order brave welcome picture world can black matter peace police end more one
+  derived, no match (Electrum, column-major): future this only first real find phrase order seed welcome brave picture world can black matter peace police end one more
+  derived, no match (BIP39, column-major): only first future this real find order seed phrase brave welcome picture world can black matter peace police end one more
+  derived, no match (Electrum, column-major): only first future this real seed order phrase find welcome brave picture world can black matter peace end police one more
+  derived, no match (Electrum, column-major): only future first this real find phrase order seed brave welcome picture world can black matter peace police end more one
+  derived, no match (BIP39, column-major): only future this first real phrase seed find order brave welcome picture world can black matter peace end police one more
+  derived, no match (BIP39, column-major): only this future first real find order phrase seed brave welcome picture world can black matter peace police end one more
+  derived, no match (BIP39, column-major): only this future first real order find seed phrase welcome brave picture world can black matter peace end police one more
+  derived, no match (Electrum, column-major): only this future first real order phrase find seed brave welcome picture world can black matter peace police end more one
+  derived, no match (Electrum, column-major): only this future first real phrase order find seed brave welcome picture world can black matter peace police end more one
+  derived, no match (BIP39, column-major): only this future first real seed phrase order find brave welcome picture world can black matter peace end police more one
+  derived, no match (BIP39, column-major): only this future first real seed phrase order find welcome brave picture world can black matter peace police end more one
+  derived, no match (BIP39, column-major): this first future only real order find phrase seed welcome brave picture world can black matter peace end police one more
+  derived, no match (BIP39, column-major): this first future only real order find seed phrase brave welcome picture world can black matter peace end police more one
+  derived, no match (BIP39, column-major): this first future only real seed find order phrase welcome brave picture world can black matter peace end police one more
+  derived, no match (Electrum, column-major): this future first only real find order seed phrase brave welcome picture world can black matter peace end police one more
+  derived, no match (BIP39, column-major): this future first only real order seed phrase find brave welcome picture world can black matter peace end police one more
+  derived, no match (BIP39, column-major): this future only first real order seed find phrase brave welcome picture world can black matter peace police end more one
+  derived, no match (Electrum, column-major): this future only first real order seed find phrase welcome brave picture world can black matter peace police end more one
+  derived, no match (Electrum, column-major): this future only first real seed order find phrase welcome brave picture world can black matter peace end police more one
+  derived, no match (BIP39, column-major): this only first future real order find seed phrase welcome brave picture world can black matter peace police end more one
+  derived, no match (BIP39, column-major): this only first future real phrase seed order find brave welcome picture world can black matter peace police end more one
+  derived, no match (Electrum, column-major): this only first future real seed find order phrase brave welcome picture world can black matter peace police end one more
+  derived, no match (Electrum, column-major): this only future first real phrase order seed find welcome brave picture world can black matter peace end police more one
+  derived, no match (Electrum, column-major): this only future first real seed phrase find order brave welcome picture world can black matter peace police end one more
+  derived, no match (BIP39, blocks by top edge): find seed phrase this picture order black matter peace end police one more welcome brave world can future first only real
+
+unpermuted base orders (all failed both checks unless listed above as derived):
+  row-major   : order find peace more seed black matter one phrase police this picture end can welcome brave world future first only real
+  column-major: future first this only real phrase order seed find welcome brave picture world can black matter peace police end more one
+  blocks, top : find seed phrase this picture order black matter peace end police one more can welcome brave world future first only real
+  blocks, left: future this first only real welcome brave world find seed phrase picture order can black matter peace end police one more

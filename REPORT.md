@@ -196,6 +196,16 @@ words** — not a candidate list, the entire wordlist — across 65 passphrases 
 - Position offsets −1 and +1
 - 65 passphrases from the image text, including `Сумма двух чисел`, all
   `BREATHE` casings, BLM slogans, dates, and the target address itself
+- **[TESTED, 18 Oct] The 21 distinct BIP39 words written in the artwork, in
+  reading order.** The words are `black brave can end find first future matter
+  more one only order peace phrase picture police real seed this welcome world`,
+  at word centres read from gridded views. That gives 9,222 distinct orders:
+  row-major and column-major with every near-tie (< 25 px) permuted, and block by
+  block with blocks taken by top edge and by left edge. 80 pass the BIP39
+  checksum and 43 the Electrum seed-version check (chance predicts 72 and 38).
+  All 123 were derived on their four paths, compressed and uncompressed, with an
+  empty passphrase: **no match.** Script: `artwork_orders.py`, which uses
+  `verify_hit.py`.
 - The gold-chart y-axis values as BIP39 indices — `1800 1600 1400 1200 1000 800
   600 400 200` → `thought side puzzle nominee language glue enough cradle body`
   (1-based, all nine correct), tested both as an exclusive gap pool and merged
