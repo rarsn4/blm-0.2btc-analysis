@@ -111,3 +111,12 @@ against `pictures/11_1.png`; it needs the 26 symbols segmented off the reference
 sheet and run through the harness in §2 before it carries that tag. The harness
 now exists and is calibrated, so this is a short job — but it has not been done,
 and the tag should read [VISUAL] until it is.
+
+*[Updated 18 Oct 2026.] See REPORT §7.6, which now carries this item. Two things are
+recorded there: "not in the Gravity Falls key at all", tagged [MEASURED] but still
+the visual comparison against the pyramid layout and the Wheel of Intrigue
+described here; and hiddengogeta's independent template match of X, best +0.399
+against 104 reference components, a clean null (§7.6). The report does not say
+whether those 104 components include the 26 Gravity Falls symbols. So the
+26-symbol harness run itself has still not been done by this project, and §7.6's
+tag on the visual check remains the open point raised above.*

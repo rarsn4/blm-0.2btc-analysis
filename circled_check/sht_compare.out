@@ -1,0 +1,36 @@
+first faint glyph, ink map 9x7 (rows top->bottom):
+   0.0 0.0 0.0 0.0 0.2 0.3 0.5
+   0.0 0.0 0.0 0.2 0.4 0.3 0.6
+   0.0 0.0 0.1 0.3 0.4 0.2 0.5
+   0.0 0.0 0.3 0.4 0.3 0.1 0.4
+   0.0 0.2 0.5 0.3 0.2 0.1 0.3
+   0.2 0.5 0.5 0.3 0.1 0.1 0.2
+   0.4 0.6 0.4 0.2 0.1 0.1 0.1
+   0.7 0.4 0.2 0.1 0.0 0.2 0.1
+   0.4 0.1 0.1 0.0 0.0 0.2 0.1
+
+correlation with each reference letter:
+   S (STOP)           -0.087
+   S (SHIT, spray)    +0.043
+   S (LIVES)          -0.094
+   G (KILLING)        -0.200
+   T (STOP)           -0.101
+
+yardstick, references against each other at 9x7:
+   S (STOP)           vs S (SHIT, spray)    -0.030
+   S (STOP)           vs S (LIVES)          +0.156
+   S (STOP)           vs G (KILLING)        -0.037
+   S (STOP)           vs T (STOP)           -0.073
+   S (SHIT, spray)    vs S (LIVES)          +0.100
+   S (SHIT, spray)    vs G (KILLING)        -0.004
+   S (SHIT, spray)    vs T (STOP)           +0.006
+   S (LIVES)          vs G (KILLING)        +0.143
+   S (LIVES)          vs T (STOP)           +0.253
+   G (KILLING)        vs T (STOP)           +0.237
+
+stability: first glyph box shifted by one pixel, correlation with S (STOP) / G (KILLING):
+   shift (+1.0,+0.0): -0.077 / -0.153
+   shift (-1.0,+0.0): +0.083 / -0.132
+   shift (+0.0,+1.0): +0.022 / -0.177
+   shift (+0.0,-1.0): -0.069 / +0.206
+   shift (+0.5,+0.5): -0.042 / -0.333

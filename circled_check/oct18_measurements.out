@@ -1,0 +1,68 @@
+=== A. possible wristwatch loop, window x336..365 y238..269 ===
+median 173, darkest 83
+ink < 130: enclosed holes 0
+ink < 140: enclosed holes 2
+   1 px at x348..348 y248..248 (interior mean 141), enclosing ink x347..350 y245..250
+   2 px at x357..357 y254..255 (interior mean 144), enclosing ink x355..359 y251..257
+ink < 150: enclosed holes 2
+   4 px at x346..347 y241..242 (interior mean 160), enclosing ink x344..350 y238..245
+   8 px at x349..354 y250..251 (interior mean 156), enclosing ink x347..357 y247..254
+ink < 160: enclosed holes 5
+   1 px at x346..346 y241..241 (interior mean 168), enclosing ink x344..349 y238..244
+   28 px at x343..348 y248..255 (interior mean 173), enclosing ink x341..351 y245..258
+   1 px at x350..350 y250..250 (interior mean 160), enclosing ink x347..353 y247..253
+   40 px at x345..354 y255..260 (interior mean 173), enclosing ink x343..357 y252..263
+   12 px at x353..357 y259..263 (interior mean 167), enclosing ink x350..360 y256..266
+ink < 170: enclosed holes 4
+   1 px at x345..345 y248..248 (interior mean 177), enclosing ink x342..348 y245..251
+   15 px at x344..347 y250..254 (interior mean 179), enclosing ink x341..350 y247..257
+   29 px at x347..353 y255..259 (interior mean 176), enclosing ink x344..356 y252..262
+   6 px at x354..357 y260..262 (interior mean 172), enclosing ink x351..360 y257..265
+
+=== B. thin vertical dark segments: monument stone vs the wreath plaque ===
+monument x1262..1494 y640..1044, excluding spray, inscription, wreath: 13 segments (median width <= 3 px, height >= 6 px, height >= 2x width, >= 12 levels darker than the stone beside)
+   x1282..1309 y913..1013  length 101  width 2  contrast 43
+   x1300..1302 y685..723  length 39  width 1  contrast 70
+   x1306..1311 y730..809  length 80  width 1  contrast 54
+   x1316..1318 y654..682  length 29  width 2  contrast 52
+   x1321..1323 y648..653  length 6  width 1  contrast 58
+   x1332..1332 y640..648  length 9  width 1  contrast 60
+   x1345..1347 y640..648  length 9  width 2  contrast 38
+   x1448..1449 y735..746  length 12  width 2  contrast 49
+   x1458..1459 y893..901  length 9  width 1  contrast 23
+   x1458..1462 y840..852  length 13  width 2  contrast 25
+   x1465..1467 y651..682  length 32  width 2  contrast 53
+   x1474..1494 y731..1002  length 272  width 2  contrast 44
+   x1479..1484 y684..728  length 45  width 2  contrast 47
+wreath plaque x1376..1405 y690..713: 7 segments (median width <= 3 px, height >= 6 px, height >= 2x width, >= 12 levels darker than the stone beside)
+   x1378..1380 y693..706  length 14  width 2  contrast 36
+   x1383..1384 y702..709  length 8  width 1  contrast 58
+   x1386..1387 y697..703  length 7  width 2  contrast 41
+   x1392..1395 y697..709  length 13  width 2  contrast 33
+   x1397..1398 y695..701  length 7  width 1  contrast 25
+   x1398..1399 y703..708  length 6  width 1  contrast 24
+   x1398..1403 y690..707  length 18  width 2  contrast 31
+
+=== C. tablet outline (darkest-pixel trace), axes, feature positions ===
+top outline     42 pts   162.9 deg  rms 1.39 px
+left outline    81 pts    83.4 deg  rms 2.67 px
+right outline   16 pts    80.0 deg  rms 0.78 px
+BLM underline   32 pts   157.5 deg  rms 2.03 px
+corners TL (255.6,703.6)  TR (306.8,715.7)  BL (244.7,818.6) [bottom hidden: line through the last visible row, parallel to top]  BR (295.9,830.7) [inferred]
+BLM letters            (270.4,729.1) -> along 0.19, across 0.33
+circle centre          (263.5,760.5) -> along 0.47, across 0.25
+faint marks centroid   (261.9,788.3) -> along 0.71, across 0.27
+faint marks top        (262.0,773.0) -> along 0.58, across 0.25
+faint marks bottom     (258.0,799.0) -> along 0.81, across 0.22
+
+=== D. artist marks ===
+top-left, inside the border: background 188, darkest 165 (depth 23); 25 px >= 15 below, at x50..65 y40..78
+bottom-right box: panel 93..113, glyph pixels < 92: 247 at x1530..1561 y1130..1152, darkest 24
+
+=== E. faint tablet marks along their line (G channel, ink = G <= fill - 4 on the face core) ===
+faint marks: x250..275 y768..803; core 264 px; G fill 235; ink 63 px
+   line 62.1 deg; extent 28.1 x 7.6 px; profile 2 1 1 1 1 2 1 5 3 3 4 4 5 2 4 1 2 2 4 2 0 0 1 3 3 3 1 1 1
+   group 1: steps 0..19 (20 px), 9 px tall, 50 px, x256..266 y780..799
+   group 2: steps 22..28 (7 px), 4 px tall, 13 px, x265..268 y773..778
+control: blank tablet face right of BLM: x272..295 y731..743; core 52 px; G fill 235; ink 0 px
+   no glyphs

@@ -930,6 +930,41 @@ description** and no derivation anywhere in the document. §19 instead derives
 and the word from the external fact that Leopold II was the second King of the
 Belgians — a lookup the enumeration rule excludes.
 
+**[MEASURED, external sources] The hooded bust is not Leopold II. It is the Charles
+Didier Dreux monument,** S. Jefferson Davis Pkwy at Canal St, New Orleans. The
+reviewing collaborator identified it from a press photo of its vandalism. Checked
+here against the reports: the bust was found on Tuesday **1 May 2018** wearing a
+white hood with red X's over the eyes, with "F— this sh—" spray-painted on the base
+([The Advocate](https://www.theadvocate.com/new_orleans/news/report-new-orleans-confederate-monument-again-vandalized-covered-with-white-hood/article_d1e27e62-4d6f-11e8-9bdb-d75a49fd49b8.html),
+whose article id is a version-1 UUID decoding to 2018-05-01 18:45 UTC;
+[WBRZ](https://www.wbrz.com/news/monument-to-confederate-officer-defaced-in-new-orleans);
+[WWL-TV](https://wwltv.com/article/news/crime/monument-to-confederate-officer-defaced-in-mid-city/289-547667411)).
+The hood, the red X's and the base slogan match the drawing. The press photo itself
+has not been compared with the drawing pixel by pixel here.
+
+- **[INFERRED]** The X marks were painted by the vandals and copied by the artist.
+  So README §19's step (Leopold II, `XX` = 20 → `second`) loses its basis twice:
+  the bust is not Leopold, and the `XX` is a vandal's mark, not the artist's
+  numeral. **Slot 20 has no supported word.** It has been tested over the 54-pool
+  plus `apple` and `second` on four paths (`t21_free20`), never over all 2048
+  words: that would be 50,779,978,334,208 candidates, about 51–53 days at the
+  measured 11.0–11.6M cand/s.
+- *Reported from the press photo, not re-measured here:* the artist left the name
+  panel blank, replaced the inscription with the 13th Amendment §1 (with `subject`
+  underlined, §9), and added the `BREATHE` neck band. The wreath plaque is blank
+  in the photo, so its strokes are the artist's own: shading or an added `II`.
+
+**[MEASURED] The plaque strokes have no counterpart on the monument's other flat
+stone.** One detector for thin vertical dark segments (median width ≤ 3 px, ≥ 6 px
+tall, ≥ 12 levels darker than the stone beside them) was run over the plinth cap to
+the base step, x 1262–1494, y 640–1044, excluding the spray, the inscription and
+the wreath. It finds 13 segments: 10 are outlines of the cap, plinth and base, 1 is
+a wreath leaf, and 2 are letters at the inscription's edge. **None is a short
+isolated stroke on open stone.** On the plaque, x 1376–1405, y 690–713, the same
+detector finds the plaque's frame edges and 2–3 interior strokes at x 1383–1395,
+y 697–709: 7–13 px long, 1–2 px wide, 33–58 levels of contrast. Script:
+`circled_check/oct18_measurements.py`, section B.
+
 **[MEASURED] The spacing test.** How widely does the artist space adjacent
 characters *within* a word? A glyph is a connected ink component; fragments under
 40% of median height are dropped, judged by height and never by gap; gap is the
@@ -2384,6 +2419,72 @@ so.
    no brighter-pixel count for any item. Scripts: `overlay_census.py --round 2`,
    with the post-hoc check in `circled_check/overlay_census_r2_diag.py`.
 
+   **[MEASURED] Where the faint marks sit on the tablet.** The tablet's dark
+   outline was traced, taking the darkest pixel per column or row in guided bands.
+   Its edges are straight lines with 0.8–2.7 px rms residual:
+
+   | line | direction (0° = horizontal, 90° = vertical, y up) |
+   |---|---|
+   | tablet long axis (left outline; right outline) | **83.4°**; 80.0° |
+   | tablet short axis (top outline) | **162.9°** |
+   | BLM underline | **157.5°**, within 5° of the short axis |
+   | faint marks (per component; all pixels) | 61° / 76°; **65.9°** |
+   | hand edge | 60° |
+
+   In tablet coordinates (along the long axis from the top, across from the left
+   edge; the bottom edge is hidden under the sleeve, so "along" is approximate):
+   BLM at 0.19 along / 0.33 across, the circle at 0.47 / 0.25, the faint marks from
+   0.58 to 0.81 along at 0.22–0.27 across. **The faint marks are not a third line
+   parallel to BLM:** they run about 90° from BLM's direction. They lie 1–16° from
+   the hand edge and 6–21° from the tablet's long axis. They are not the hand's
+   shadow either: they are separate dips in a flat fill, and none touches an edge
+   pixel (above).
+
+   **[MEASURED] Their structure along that line.** Ink is taken in the G channel
+   (fill 235, ink ≤ 231, face core only), with the text line at 62.1°. That gives
+   63 px over 28 × 8 px, in **two groups split by an empty 2-px gap**: 20 px long and
+   9 px tall at x 256–266, y 780–799, then 7 px long and 4 px tall at x 265–268,
+   y 773–778. The ink profile along the line reads
+   `2 1 1 1 1 2 1 5 3 3 4 4 5 2 4 1 2 2 4 2 0 0 1 3 3 3 1 1 1`. The first group has
+   internal dips at steps 6 and 15, consistent with two or three glyphs, but
+   nothing separates them cleanly. The same pipeline on blank tablet face
+   (x 272–295, y 731–743) finds 0 ink. Three questions stay **undetermined at this
+   resolution**:
+   - **The glyph count.** Two groups are certain; three glyphs is not shown.
+   - **An I between H and T.** The 2-px gap holds no ink, but an I merged into the
+     group before it cannot be excluded.
+   - **A letter before the first.** The 6 px between the first glyph and the
+     tablet's left outline are the edge's shading ramp, which this test cannot
+     tell from a mark.
+
+   **S or G cannot be decided at this resolution.** The first glyph, sampled on
+   the line's own axes as a 9 × 7 ink map, was correlated with the artist's own
+   letters at the same size: S from STOP, SHIT (spray) and LIVES, G from KILLING
+   (none of SHIT, STOP, LIVES or BLACK has a G), and T from STOP as a non-candidate.
+   The scores are S −0.087 / +0.043 / −0.094, G −0.200 and T −0.101. **The
+   yardstick shows the method has no power here:** the artist's three S's correlate
+   with each other at −0.030 to +0.156, and with G at −0.037 to +0.143. Shifting
+   the faint glyph's box by one pixel moves its G score from −0.333 to +0.206.
+   Script: `sht_compare.py`; segmentation in `circled_check/oct18_measurements.py`,
+   section E.
+
+   **[INFERRED] Hypothesis, no run: "шт".** If the faint group reads `SHT`, it may
+   be Russian `шт` ("pieces"), and with the README's `XX` it would read "20
+   pieces". The `XX` would then be the unreadable circle. If so, it fits 20 words in
+   the image plus a calculated 21st checksum word (the blank clock hand). The
+   current template already covers that case: `t21_loo21` swept slot 21 over all
+   2048 words under both slot-20 readings, with the other gaps on the 54-pool.
+
+   **[MEASURED] A possible wristwatch on the third masked person** (bag strap),
+   window x 336–365, y 238–269. A closed loop appears only at loose cutoffs
+   (ink < 160–170), outlined by ink at x 341–351, y 245–258, about 10–11 × 11–14 px.
+   Its interior is 15–28 px at background level (173–179 against a window median
+   of 173), with nothing dark inside: no hands. At ink < 150 or darker the loop is
+   open, and the enclosed regions move between cutoffs. It may equally be a strap
+   ring. No time can be read, and no larger copy of the image has been found
+   (§7.3). If it hints at "time", that word is already in the 54-word gap pool.
+   Script: `circled_check/oct18_measurements.py`, section A.
+
    **[INFERRED] A larger original may exist.** Sub-pixel strokes are what a larger
    working file produces when downsampled, which is the reason to want one.
    *[Tagged 14 October. This read "such an original probably exists", untagged.]*
@@ -2495,6 +2596,13 @@ size is §2.9's, which is narrower: Reddit serves nothing larger
 (`preview.redd.it` at 2048/3000/4096 returned nothing). Reddit's post metadata,
 which would record the source dimensions, refused the request (HTTP 403) and was
 not read. Per §7.6, a larger copy would not resolve X anyway.
+
+**[TESTED] Reverse image search, Yandex Images, 16 Oct 2026, run by Mohammed.**
+`statue_native.png` returned no copy of the puzzle and no exact source, only
+general Statue of Liberty clip art. The closest was ru.ac-illust.com "Free Vectors
+statue of liberty", 453 × 750, not yet compared. `card_x6_nearest.png` returned no
+matches, only unrelated cartoons. Google Lens, TinEye, Bing and Shutterstock
+94143832 are still to do.
 
 Note also that the two ciphers share some shapes with **different values**: `◇` is
 `W` in the Gravity Falls Latin cipher and `с` in the Cyrillic one. Do not
@@ -2759,6 +2867,19 @@ interpolation. Run through VanceAI at 8×, the same region renders as a boxed
 `ER`. The model **replaced** characters it could not read with letterforms it
 found more plausible — cleanly, confidently, and wrongly.
 
+**[MEASURED] Two artist marks, recorded as leads for finding a larger copy.**
+- **Top-left border, inside the black frame:** a faint glyph group at x 50–65,
+  y 40–78, at most 23 levels below its background (188). Rotated 90° clockwise it
+  shows six glyphs over an underline, consistent with the reading `CHaRLy`.
+- **Bottom-right box:** two glyphs inside a small frame, flanked by dashes, at
+  about x 1532–1556, y 1136–1151. The glyph pixels are 72–91 against a panel of
+  93–113. Read `-yi-` above under LANCZOS, and like `-JR-` by the reviewer; at
+  native pixels the first glyph is not resolved between J, H and I.
+
+Neither name is in the 65-passphrase list (`pw2.txt`): `CHaRLy`, `Charly`,
+`charly`, `CHARLY` and `JR` all count 0. Script:
+`circled_check/oct18_measurements.py`, section D.
+
 Across the rune region, 6.5% of pixels differ by more than 30 levels from a
 plain interpolation, with strokes reshaped and terminals sharpened.
 
@@ -2923,7 +3044,7 @@ nobody could have known on the funding date.
 |---|---|---|
 | `05.25.20` | no | delete |
 | gold above $1,800 | no — first exceeded in July 2020 | delete |
-| the June 2020 Leopold defacement | no | delete |
+| the June 2020 Leopold defacement | no | delete *[superseded 18 Oct: the bust is the Dreux monument and the depicted vandalism is of 1 May 2018 (§2.16), knowable on 2020-05-10, so: **keep**]* |
 | `11.03.20` | **yes** — the election date is fixed by statute, and the Trump–Biden match-up was set in April 2020 | keep |
 | "Tuesday" | yes | keep |
 | "I can't breathe", "No justice no peace" | **yes** — slogans from 2013–14 | keep |
@@ -2979,8 +3100,8 @@ lighter row between line and letters. Scripts: `t3_lines.py`, `t3_census.py`.
 
 | first read | outcome |
 |---|---|
-| `-IGHT` on the BLM card | not text: flat row profile, 35 levels of contrast against 193 for the BLM capitals. *[14 October: re-measured at most 11 levels below the fill, in luminance and every channel; no coordinates were recorded here, so the 35 cannot be checked. See §6 item 6.]* |
-| `SHT`, missing its I | `SHIT` is complete |
+| `-IGHT` on the BLM card | not text: flat row profile, 35 levels of contrast against 193 for the BLM capitals. *[14 October: re-measured at most 11 levels below the fill, in luminance and every channel; no coordinates were recorded here, so the 35 cannot be checked. See §6 item 6.]* *[18 Oct: "not text" withdrawn. The marks are structured dips in two groups along a 62° line (§6 item 6); whether they are text is undetermined at this resolution.]* |
+| `SHT`, missing its I | `SHIT` is complete *[this row is the pedestal's spray-painted SHIT, not the faint tablet marks, and says nothing about them]* |
 | `except` underlined | spray edge; the word is uncheckable |
 | `DAY FOR THE FUTURE` | it reads `PAY`, so `day` stays translation-only |
 | `wich` for "which" | indeterminate: the ascender band lies under the frame stripe |

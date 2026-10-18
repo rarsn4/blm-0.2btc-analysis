@@ -4,6 +4,14 @@ Target: [`1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ`](https://blockchair.com/bitcoin/ad
 
 **[Full writeup → REPORT.md](REPORT.md)**
 
+> **Not ruled out**
+> - **24-word phrases.** Only partial 24-word tails have been run.
+> - **Electrum at 15, 19, 20, 23 and 24 words.** 22 is in progress (39.66%,
+>   paused 18 Oct 2026).
+> - **Any passphrase outside the 65 tested.**
+> - **Two or more assigned words wrong at once.** The free-one-fixed runs (§2.13)
+>   close only the one-wrong-word case.
+
 ## Headlines
 
 - **The rune cipher is solved.** It is monoalphabetic substitution over
