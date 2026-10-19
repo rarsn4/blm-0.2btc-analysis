@@ -105,9 +105,9 @@ def el_ok(m):
 
 def task(args):
     """one slice: first open slot fixed to one value. Returns (candidates, survivors, derivations, real matches, planted hits)"""
-    name, first_val, target = args
+    name, fixed, target = args                                   # fixed: values for the first len(fixed) open slots
     d = conf(name); sets = list(d['sets']); open_i = [i for i, s in enumerate(sets) if len(s) > 1]
-    sets[open_i[0]] = [first_val]
+    for j, v in enumerate(fixed): sets[open_i[j]] = [v]
     elec = d['scheme'] == 'electrum'; pps = PP_EL if elec else PP_BIP39
     cand = surv = der = real = planted = 0
     for ws in itertools.product(*sets):
@@ -122,13 +122,27 @@ def task(args):
             if target is not None: planted += sum(h == target for h in hs)
     return cand, surv, der, real, planted
 
-def run(name, target=None, only=None):
+def _keyed(args):
+    return args[1], task(args)
+
+def run(name, target=None, only=None, k=1, ckpt=None):
+    """k = number of leading open slots fixed per task; ckpt = file of finished tasks, for stop/resume"""
     d = conf(name); open_i = [i for i, s in enumerate(d['sets']) if len(s) > 1]
     firsts = d['sets'][open_i[0]] if only is None else only
-    t0 = time.time(); tot = [0, 0, 0, 0, 0]
+    keys = [tuple(t) for t in itertools.product(firsts, *[d['sets'][open_i[j]] for j in range(1, k)])]
+    t0 = time.time(); tot = [0, 0, 0, 0, 0]; done = set()
+    if ckpt and os.path.exists(ckpt):
+        for line in open(ckpt):
+            f = line.rstrip('\n').split('\t'); key = tuple(f[:k]); done.add(key)
+            tot = [a + int(b) for a, b in zip(tot, f[k:k + 5])]
+        if tot[3]: print(f'{name}: checkpoint already records a real-target match. HIT rule: stopping.'); sys.exit(3)
+        print(f'{name}: resuming, {len(done)} of {len(keys)} tasks already done', flush=True)
+    todo = [key for key in keys if key not in done]
     with Pool(NW) as pool:
-        for r in pool.imap_unordered(task, [(name, v, target) for v in firsts]):
+        for key, r in pool.imap_unordered(_keyed, [(name, key, target) for key in todo]):
             tot = [a + b for a, b in zip(tot, r)]
+            if ckpt and r[3] == 0:                                   # HIT rule: a match row (it would hold two words) is never written
+                with open(ckpt, 'a') as fh: fh.write('\t'.join(list(key) + [str(x) for x in r]) + '\n')
             if tot[3]:
                 pool.terminate()
                 print(f'{name}: MATCH COUNT AGAINST THE REAL TARGET: {tot[3]}. Stopping. HIT rule: nothing else is printed.'); sys.exit(3)
@@ -164,7 +178,9 @@ elif MODE == 'small52':
     for n in ('el12', 'el13', 'el14', 'el16', 'el17'): run(n)
 elif MODE == 'el18n':
     print(f'passphrases: {len(PP_EL)} (52 normalized pw2.txt forms + memo, charly, jr)', flush=True)
-    run('el18')
+    run('el18', k=2, ckpt=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'passphrase_cpu_el18n.ckpt'))
+elif MODE == 'ckpttest':                                         # resume check: el14 in two-slot tasks with a checkpoint
+    run('el14', k=2, ckpt=sys.argv[4])
 elif MODE == 'small':
     for n in ('t12full_mp', 'el12', 'el13', 'el14', 'el16', 'el17'): run(n)
 elif MODE == 'el18':
