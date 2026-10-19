@@ -6,6 +6,13 @@ usage: nice python3 -I passphrase_cpu.py SOLVER_DIR small|el18|control [workers]
   small   : t12full_mp (BIP39, 8 passphrases) and el12 el13 el14 el16 el17 (Electrum, 9 passphrases)
   el18    : el18 (Electrum, 9 passphrases)
   control : planted positive controls through this same code path (targets computed by verify_hit.py)
+  control52 : planted control on an Electrum-normalized pw2.txt form (the non-ASCII one), el12
+  small52   : el12 el13 el14 el16 el17 with the 52 Electrum-normalized forms of pw2.txt
+  el18n     : el18 with those 52 forms plus memo, charly, jr (55), for 6 workers at nice 19
+
+Electrum normalization is electrum/mnemonic.py normalize_text: NFKD, lowercase, combining marks removed,
+whitespace collapsed, spaces between CJK characters removed. The forms are fed as-is (the solver does not
+normalize), and the passphrase list is never printed.
 
 Passphrases. BIP39 is case-sensitive: memo Memo MEMO CHaRLy Charly charly CHARLY JR (8). Real Electrum
 lowercases the passphrase (normalize_text) while the solver does not, so Electrum gets those 8 as written
@@ -24,6 +31,19 @@ WL = [w.strip() for w in open(os.path.join(SOLVER, 'bip39_en.txt'))]; IDX = {w: 
 REAL = bytes.fromhex('ccbd031e54cde2a3189fd59bc49f731367a1779e')
 PP_BIP39 = ['memo', 'Memo', 'MEMO', 'CHaRLy', 'Charly', 'charly', 'CHARLY', 'JR']
 PP_EL = PP_BIP39 + ['jr']
+
+import string
+_CJK = [(0x4E00, 0x9FFF), (0x3400, 0x4DBF), (0x20000, 0x2A6DF), (0x2A700, 0x2B73F), (0x2B740, 0x2B81F), (0x2B820, 0x2CEAF),
+        (0xF900, 0xFAFF), (0x2F800, 0x2FA1F), (0x3190, 0x319F), (0x2E80, 0x2EFF), (0x2F00, 0x2FDF), (0x3000, 0x303F),
+        (0x31C0, 0x31EF), (0x3040, 0x309F), (0x30A0, 0x30FF), (0x31F0, 0x31FF), (0x3200, 0x32FF), (0xFF00, 0xFFEF),
+        (0x1100, 0x11FF), (0x3130, 0x318F), (0xAC00, 0xD7AF), (0xA960, 0xA97F), (0xD7B0, 0xD7FF)]
+def normalize_text(t):
+    t = unicodedata.normalize('NFKD', t).lower(); t = ''.join(c for c in t if not unicodedata.combining(c)); t = ' '.join(t.split())
+    cj = lambda c: any(a <= ord(c) <= b for a, b in _CJK)
+    return ''.join(t[i] for i in range(len(t)) if not (t[i] in string.whitespace and 0 < i < len(t) - 1 and cj(t[i-1]) and cj(t[i+1])))
+PW2_NORM = sorted({normalize_text(l.rstrip('\n')) for l in open(os.path.join(SOLVER, 'pw2.txt'), encoding='utf-8')})
+if MODE in ('control52', 'small52'): PP_EL = PW2_NORM
+if MODE == 'el18n': PP_EL = sorted(set(PW2_NORM) | {'memo', 'charly', 'jr'})
 N = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141
 CURVE = ec.SECP256K1()
 SV = hmac.new(b'Seed version', digestmod=hashlib.sha512)
@@ -113,7 +133,7 @@ def run(name, target=None, only=None):
                 pool.terminate()
                 print(f'{name}: MATCH COUNT AGAINST THE REAL TARGET: {tot[3]}. Stopping. HIT rule: nothing else is printed.'); sys.exit(3)
     print(f'{name:11s} [{d["scheme"]}] candidates {tot[0]:,}  survivors {tot[1]:,}  derivations {tot[2]:,}  '
-          f'real-target matches {tot[3]}' + (f'  planted hits {tot[4]}' if target is not None else '') + f'  ({time.time() - t0:.0f} s)')
+          f'real-target matches {tot[3]}' + (f'  planted hits {tot[4]}' if target is not None else '') + f'  ({time.time() - t0:.0f} s)', flush=True)
     return tot
 
 if MODE == 'control':
@@ -130,6 +150,21 @@ if MODE == 'control':
     k, _ = V.derive(seed, "m/0'/0/0"); tgt = V.hash160(V.pub_compressed(k))
     print('control 2 (Electrum, planted with passphrase JR on m/0\'/0/0, target from verify_hit.py):')
     r = run('el12', target=tgt); print('  PASS' if r[4] == 1 else '  FAIL')
+elif MODE == 'control52':
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import verify_hit as V
+    print(f'Electrum-normalized pw2.txt forms: {len(PW2_NORM)} (memo/charly/jr among them: {sum(x in PW2_NORM for x in ("memo", "charly", "jr"))})', flush=True)
+    form = next(x for x in PW2_NORM if any(ord(c) > 127 for c in x))
+    d = conf('el12'); ws = [w for w in itertools.product(*d['sets']) if el_ok(' '.join(w))][3]
+    seed = hashlib.pbkdf2_hmac('sha512', ' '.join(ws).encode(), b'electrum' + form.encode('utf-8'), 2048, 64)
+    k, _ = V.derive(seed, 'm/0/0'); tgt = V.hash160(V.pub_compressed(k))
+    print('control 3 (Electrum, planted with the normalized non-ASCII pw2.txt form on m/0/0, target from verify_hit.py):', flush=True)
+    r = run('el12', target=tgt); print('  PASS' if r[4] == 1 else '  FAIL', flush=True)
+elif MODE == 'small52':
+    print(f'passphrases: {len(PP_EL)} Electrum-normalized pw2.txt forms', flush=True)
+    for n in ('el12', 'el13', 'el14', 'el16', 'el17'): run(n)
+elif MODE == 'el18n':
+    print(f'passphrases: {len(PP_EL)} (52 normalized pw2.txt forms + memo, charly, jr)', flush=True)
+    run('el18')
 elif MODE == 'small':
     for n in ('t12full_mp', 'el12', 'el13', 'el14', 'el16', 'el17'): run(n)
 elif MODE == 'el18':

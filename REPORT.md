@@ -279,6 +279,20 @@ BIP39 and had never been searchable by anyone.
 > passphrase line, and all seven logs print `passphrases=1`. The original list's
 > "65 passphrases and the all-slots-vary sweep" therefore still have no log.
 >
+> **[MEASURED, 19 Oct] No logged Electrum passphrase run exists.** All eight
+> logged Electrum runs (el12–el18, el21, el22) print `passphrases=1`. The only
+> trace of one is a shell-history command, `./solver2 --config el18.conf
+> --passphrases pw2.txt   # ~38 min`, on the old `solver2` binary, with no output
+> log; its "~38 min" does not fit today's el18. A further gap: real Electrum
+> normalizes the passphrase before PBKDF2 (`normalize_text`: NFKD, lowercase,
+> accents removed, whitespace collapsed), and the solver uses it as written. Under
+> that normalization `pw2.txt`'s 65 entries **collapse to 52 forms**, and **31
+> entries, uppercase-only, were never tried lowercase**, which is how real
+> Electrum would use them. el12 has been run with all 52 forms (inside the planted
+> control, 0 matches); el13, el14, el16, el17 and el18 are now being run on the
+> CPU (`passphrase_cpu.py`; el18 with the 52 plus `memo`, `charly`, `jr`).
+> **el21 with these forms is open:** about 7.7 days of GPU for all 52.
+>
 > **`el22` is held**: it is `70⁷ × 2 = 16,470,860,000,000` candidates. At
 > `el21`'s whole-run rate, 235,298,000,000 over 12,994 s = 18.1M cand/s, that is
 > **10.5 days**. At the 17.3M of `el21`'s last 100 minutes, after the GPU began

@@ -1,0 +1,4 @@
+Electrum-normalized pw2.txt forms: 52 (memo/charly/jr among them: 0)
+control 3 (Electrum, planted with the normalized non-ASCII pw2.txt form on m/0/0, target from verify_hit.py):
+el12        [electrum] candidates 4,900  survivors 16  derivations 832  real-target matches 0  planted hits 1  (4 s)
+  PASS
