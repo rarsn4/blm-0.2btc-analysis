@@ -1,0 +1,6 @@
+control 1 (BIP39, planted with passphrase Charly on m/0/0, target from verify_hit.py):
+t12full_mp  [bip39] candidates 2,048  survivors 137  derivations 1,096  real-target matches 0  planted hits 1  (5 s)
+  PASS
+control 2 (Electrum, planted with passphrase JR on m/0'/0/0, target from verify_hit.py):
+el12        [electrum] candidates 4,900  survivors 16  derivations 144  real-target matches 0  planted hits 1  (0 s)
+  PASS
