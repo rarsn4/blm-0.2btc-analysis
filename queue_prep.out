@@ -35,4 +35,13 @@ t21_alt3  [bip39, 21 words, 4 paths]
   new vs the 42-run union (paths not modelled): 347,128,758,144 = 87.50%
   overlap with t21_readme54: 49,589,822,592 candidates = 12.50%, on 4 shared path(s) ["m/0'/0/0", 'm/0/0', "m/44'/0'/0'/0/0", "m/44'/0'/0'/0/1"]
 
-queue total: 22.0 - 23.1 h of GPU time
+t21_food11  [bip39, 21 words, 4 paths]
+  candidates   148,769,467,776
+  band         1,162,261,467.0 +/- 33,399.3  (stratified, 0.983533 x binomial)
+  wall time    3.56 - 3.76 h at 11.0-11.6M cand/s
+  new vs the 42-run union (paths not modelled): 49,589,822,592 = 33.33%
+  overlap with t21_readme54: 49,589,822,592 candidates = 33.33%, on 4 shared path(s) ["m/0'/0/0", 'm/0/0', "m/44'/0'/0'/0/0", "m/44'/0'/0'/0/1"]
+  overlap with t21_free11_p1: 74,384,733,888 candidates = 50.00%, on 1 shared path(s) ["m/44'/0'/0'/0/0"]
+  overlap with t21_needle11: 49,589,822,592 candidates = 33.33%, on 4 shared path(s) ["m/0'/0/0", 'm/0/0', "m/44'/0'/0'/0/0", "m/44'/0'/0'/0/1"]
+
+queue total: 25.5 - 26.8 h of GPU time

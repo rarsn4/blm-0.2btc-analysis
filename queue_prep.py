@@ -56,7 +56,8 @@ check = conf('t21_readme54'); mu, s, sb = band(check)
 print(f'check, t21_readme54: stratified sigma / binomial = {s / sb:.6f} (REPORT: 0.983533)\n')
 
 QUEUE = [('t21_slot1_line', ['t21_free1_p1', 't21_readme54']), ('t21_rev54', ['t21_pool52_rev']),
-         ('el21_rev', ['el21']), ('t21_pool58', ['t21_readme54']), ('t21_alt3', ['t21_readme54'])]
+         ('el21_rev', ['el21']), ('t21_pool58', ['t21_readme54']), ('t21_alt3', ['t21_readme54']),
+         ('t21_food11', ['t21_readme54', 't21_free11_p1', 't21_needle11'])]
 tot_lo = tot_hi = 0
 for name, refs in QUEUE:
     d = conf(name); mu, s, sb = band(d); lo, hi = RATE[d['scheme']]

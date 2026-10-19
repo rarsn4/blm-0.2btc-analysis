@@ -1,4 +1,8 @@
-# Queue: runs prepared to start after el22 (none started)
+# Queue: prepared runs
+
+*[19 Oct 2026] The owner moved the queue forward: it runs NOW, while el22 is paused at 39.66%, in the order
+t21_rev54 -> t21_pool58 -> t21_food11 -> el21_rev -> t21_slot1_line -> t21_alt3, then el22 resumes.
+The queue stops on any exit code other than 2. Log: queue_oct19.log, read only with the two HIT-rule greps.*
 
 Owner decides "after el22" or "now". Figures from `queue_prep.py` (output in `queue_prep.out`),
 rates measured from free313_boundaries.tsv: BIP39 21-word 11.0-11.6M cand/s, Electrum 18.1-18.5M.
@@ -11,8 +15,9 @@ A run is scored only on completion and admitted to EVIDENCED only if in band.
 | 3 | el21_rev | 235,298,000,000 | 976,578,613.3 ± 31,185 | (Electrum; 0 overlap with el21) | 3.5-3.6 h |
 | 4 | t21_pool58 | 76,137,385,088 | 594,823,321.0 ± 23,874 | 5.9% | 1.8-1.9 h |
 | 5 | t21_alt3 | 396,718,580,736 | 3,099,363,912.0 ± 54,541 | 87.5% | 9.5-10.0 h |
+| 6 | t21_food11 | 148,769,467,776 | 1,162,261,467.0 ± 33,399 | see below | 3.6-3.8 h |
 
-Total about 22-23 h of GPU time.
+Total about 25.5-26.8 h of GPU time.
 
 Overlaps, stated:
 - t21_slot1_line vs t21_free1_p1: first/future/predict at slot 1 = 74,384,733,888 candidates (30%),
@@ -25,3 +30,7 @@ Overlaps, stated:
   still processes the full box.
 - t21_alt3 vs t21_readme54: 1/8 = 49,589,822,592.
 - el21_rev vs el21: 0 (slot 1 of el21_rev is the 70-pool, which does not contain `subject`).
+- t21_food11 (SLOT 11 pyramid|food|space): the `pyramid` third (49,589,822,592) is t21_readme54, done on
+  4 paths. food/space at 11 were covered only by t21_free11_p1: path 1, slot 20 = `second`, compressed key
+  only. New: food/space under `second` on paths 2-4, and food/space under `apple` on all 4 paths.
+  (tally2's "33% new" ignores paths.) t21_needle11 has pyramid|eye|tower at 11, so it adds nothing here.
