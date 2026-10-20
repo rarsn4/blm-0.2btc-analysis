@@ -268,6 +268,7 @@ BIP39 and had never been searchable by anyone.
 > | `el17` | 24,010,000 | 99,869 | 99,650.9 | +0.69 | negative |
 > | `el18` | 1,680,700,000 | 6,974,876 | 6,975,561.5 | −0.26 | negative |
 > | `el21` | 235,298,000,000 | 976,558,172 | 976,578,613.3 | −0.66 | negative |
+> | `el21_rev` (slot order reversed, 20 Oct) | 235,298,000,000 | 976,591,446 | 976,578,613.3 | +0.41 | negative |
 >
 > All in band, all on the current binary, so all three key encodings were
 > checked. `el21` was scored against a band stated before it finished,
@@ -310,6 +311,14 @@ BIP39 and had never been searchable by anyone.
 > restarts on resume, so each segment is scored against its own expectation from a
 > chunk-aligned resume index. A HIT here falls under the HIT rule in
 > `DO_NOT_PUSH`.]*
+>
+> *[20 Oct 2026] `el22` was stopped by the owner on 18 Oct at checkpoint
+> 6,531,571,515,392, which is 1,738 whole chunks (39.66%), while a queue of six
+> runs used the GPU. It resumed on 20 Oct at 10:45:17 UTC from that index. Band for
+> the resumed segment, stated before it completes: 9,939,288,484,608 candidates ×
+> 17/4096 = **41,251,929,745.7 ± 202,684**. The first segment's survivor count is
+> in the log, which the HIT rule restricts to two count-only reads, so it is not
+> scored. That costs no coverage.]*
 >
 > **The Electrum route was certified first.** A valid Electrum v2 *standard*
 > seed (HMAC `"Seed version"` prefix `0x01`) was planted in `el21`'s own shape —
@@ -1615,6 +1624,36 @@ queued.**
 - `dose` / `double` from `05.25` = 525, the same two ways.
 
 Neither has any evidence placing it at a slot.
+
+**[MEASURED] The queue of 19–20 Oct 2026, run while `el22` was paused.** Six runs,
+each with its band committed before the queue started (`QUEUE_after_el22.md`).
+Each run's survivors were taken automatically from its own log, and only after
+`exit=2`. There are 0 HIT lines across all six logs, and 0 GPU thermal pauses over
+the whole queue (peak 89 °C).
+
+| run | candidates | survivors | band | z |
+|---|---|---|---|---|
+| `t21_rev54` | 49,589,822,592 | 387,420,823 | 387,420,489.0 ± 19,606 | +0.017 |
+| `t21_pool58` | 76,137,385,088 | 594,824,477 | 594,823,321.0 ± 23,874 | +0.048 |
+| `t21_food11` | 148,769,467,776 | 1,162,260,604 | 1,162,261,467.0 ± 33,399 | −0.026 |
+| `el21_rev` (Electrum, §2.6) | 235,298,000,000 | 976,591,446 | 976,578,613.3 ± 31,185 | +0.411 |
+| `t21_slot1_line` | 247,949,112,960 | 1,936,982,003 | 1,937,102,445.0 ± 43,118 | **−2.793** |
+| `t21_alt3` | 396,718,580,736 | 3,099,279,830 | 3,099,363,912.0 ± 54,541 | −1.542 |
+
+All six are negative and in band. `t21_slot1_line`'s −2.79 is the largest deviation in
+the campaign (the previous largest was +1.802, `t21_loo6`):
+- **It is not a coverage gap.** The log confirms the full space was processed, and
+  one skipped chunk would cost about 29 million survivors, roughly 680σ; the
+  shortfall is 120,442.
+- **As chance it is unremarkable across the campaign.** Its two-sided p is about
+  0.005, and across about 48 scored runs the chance of at least one this far out
+  is about 22%.
+
+`food@11`, `space@11`, the reversed template on the 54-pool, and the alternates
+`person`, `real` and `rain` are now covered on four paths under both slot-20
+readings. **Not yet admitted to `tally2.py`'s EVIDENCED list:** admitting the five
+BIP39 runs would move the headline from 278,996,119,787 to 283,874,091,848
+evidenced derivations (combined 286,738,325,903), and waits on the owner.
 
 ## 3. Tally
 
