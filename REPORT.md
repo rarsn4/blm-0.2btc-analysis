@@ -2762,7 +2762,8 @@ glyph, `е`, was measured in **all four** of its occurrences:
 *and* the rotated right-edge column. Inside the cipher this author does **not**
 mirror glyphs; the seal ring is a whole Latin inscription mirrored, which is a
 different practice. So a mirrored ᚾ is an anomaly *within* the cipher, not a
-habit of it.
+habit of it. *[Superseded 24 Oct: the `/` form is the Younger Futhark rune ᛅ, a
+different rune, not a mirrored ᚾ. See the end of this section.]*
 
 That measurement carries a bonus: `е` matching across both frames **confirms the
 rotation** applied to X, so the `/` direction of its diagonal is real and not a
@@ -2782,6 +2783,34 @@ with the structural result above.
 > asymmetric glyph shows the author does not otherwise use. Shape-ambiguous with
 > Latin `ł`, which has no semantic candidate at the end of a Russian
 > `номер ___`. **NOT READ.**
+> *[24 Oct: shape now matched to the Younger Futhark rune ᛅ, and read as 10,
+> [INFERRED]. See below.]*
+
+**[MEASURED, 24 Oct] X has the shape of the Younger Futhark rune ᛅ** (U+16C5,
+long-branch *ár*). ᛅ is one vertical stave crossed by one diagonal rising to the
+right (`/`), which is exactly the measurement above: 2 strokes, 4 arms, one
+crossing, diagonal `/`. ᚾ (naudiz, *nauðr*) is the same with `\`. The Elder Futhark
+test above could not find it, because the Elder Futhark has no ᛅ. So the "mirrored
+naudiz" is a different rune, not an anomaly. Checked here with
+`rune_x_check.py`:
+- **Structure,** by the same skeleton method on X and on runes rendered in FreeMono:
+  X has 4 endpoints and a `/` diagonal; ᛅ has 4 endpoints and `/`; ᚾ has 4 endpoints
+  and `\`.
+- **The correlation harness** of `glyphX_measurement.md` §2 (ink box stretched to
+  32 × 32, z-scored), recalibrated on the right-edge column's own letters: same
+  letter +0.588, different +0.069, 95th percentile +0.377. Against all 31 distinct
+  Younger and Elder Futhark runes, X ranks **ᛅ first at +0.611**, then ᚼ at
+  +0.508 and ᚾ at +0.359. Font glyphs are not hand-drawn, so the rank carries more
+  weight than the score.
+
+**[INFERRED] The reading.** ᛅ is rune 10 of the 16-rune Younger Futhark,
+ᚠᚢᚦᚬᚱᚴ ᚼᚾᛁᛅᛋ ᛏᛒᛘᛚᛦ. The right-hand line `здесь зашифрованы биткоины на чёрный
+день номер X` would then read "here are encrypted bitcoins for a black (rainy) day,
+number 10". That gives word 10 a position from the author's own text, where §2.17
+found none: `black` (чёрный) or `rain` (the idiom's rainy day). It reads one glyph
+through a second alphabet's order, and that step is the inference. No new run is
+needed: `black`@10 is in every template, and `rain`@10 ran in `t21_alt3` (§2, the
+queue of 19–20 Oct, negative). Credit: suggested by Gemini, checked here.
 
 **X matches neither the mapped alphabet, nor the artist's Arabic numerals, nor
 the remaining plausible Church-Slavonic numerals, and carries no titlo. It is a

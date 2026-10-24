@@ -1,0 +1,18 @@
+1. STRUCTURE (endpoints, junctions, diagonal direction, diagonal angle from horizontal)
+   X, master x1526..1556 y40..52, ink<130, reading frame: endpoints 4, junctions 1, diagonal / at 41 deg
+   ᛅ U+16C5 long-branch ar (Younger)  FreeMono: endpoints 4, junctions 2, diagonal / at 52 deg
+   ᚾ U+16BE naudiz/naudr              FreeMono: endpoints 4, junctions 2, diagonal \ at 51 deg
+
+2. HARNESS (bbox -> 32x32, z-scored, Pearson)
+   calibration on the right-edge column: same letter n=31 mean +0.588 sd 0.123; different n=635 mean +0.069 sd 0.175, 95th pct +0.377
+   (glyphX_measurement.md section 2, whole inscription: same +0.689, different +0.085, boundary about +0.45)
+   X against 31 distinct runes (Younger + Elder Futhark) rendered in FreeMono; top 6:
+      ᛅ  U+16C5  +0.611
+      ᚼ  U+16BC  +0.508
+      ᚾ  U+16BE  +0.359
+      ᚬ  U+16AC  +0.350
+      ᛇ  U+16C7  +0.319
+      ᛏ  U+16CF  +0.299
+   ᛅ U+16C5: +0.611, rank 1 of 31
+   ᚾ U+16BE: +0.359, rank 3 of 31
+   Font glyphs are not hand-drawn: a score is read against the calibration above, and rank matters more than size.

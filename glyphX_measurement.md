@@ -120,3 +120,16 @@ against 104 reference components, a clean null (§7.6). The report does not say
 whether those 104 components include the 26 Gravity Falls symbols. So the
 26-symbol harness run itself has still not been done by this project, and §7.6's
 tag on the visual check remains the open point raised above.*
+
+## 7. Younger Futhark ᛅ (24 Oct 2026)
+
+**[MEASURED]** X has the shape of ᛅ (U+16C5, long-branch *ár*): a stave crossed by one
+diagonal rising to the right (`/`). ᚾ is the same with `\`. The Elder Futhark has
+no ᛅ, which is why the Elder test failed. `rune_x_check.py` measures X and the
+FreeMono runes by one skeleton method (X: 4 endpoints, `/`; ᛅ: 4, `/`; ᚾ: 4, `\`).
+It then runs the §2 harness, recalibrated on the right-edge column (same +0.588,
+different +0.069, 95th percentile +0.377), against all 31 distinct Younger and
+Elder Futhark runes: **ᛅ ranks first at +0.611**, ᚼ second at +0.508, ᚾ third at
++0.359. **[INFERRED]** ᛅ is rune 10 of the Younger Futhark, so `номер X` would be
+"number 10". See REPORT §7.4. Credit: suggested by Gemini, checked here.
+
