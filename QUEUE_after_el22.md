@@ -34,3 +34,20 @@ Overlaps, stated:
   4 paths. food/space at 11 were covered only by t21_free11_p1: path 1, slot 20 = `second`, compressed key
   only. New: food/space under `second` on paths 2-4, and food/space under `apple` on all 4 paths.
   (tally2's "33% new" ignores paths.) t21_needle11 has pyramid|eye|tower at 11, so it adds nothing here.
+
+## Queue of 24 Oct 2026 (el22 stopped for it, then resumed)
+
+Owner's order: t21_free20, then t21_readme54 with the BREATHE-type passphrases from pw2.txt
+(8 entries, any casing; the list itself is not printed), then el22 resumes. Bands and identity
+checks, stated before launch:
+
+| run | candidates | band | identity check | GPU time |
+|---|---|---|---|---|
+| t21_free20 (slot 20 over 56 words, 4 paths) | 1,388,515,032,576 | 10,847,773,692.0 ± 102,037 | must equal t21_free20_p1's logged 10,847,704,031 (same box; survivors do not depend on paths) | 33-38 h |
+| t21_readme54 x 8 passphrases | 8 x 49,589,822,592 | 387,420,489.0 ± 19,283 per pass | every pass must equal t21_readme54's logged 387,425,296 (the BIP39 checksum ignores the passphrase; the counter resets per pass) | about 8 x 72-80 min |
+
+Overlap: t21_free20 is 100% inside t21_free20_p1's box, but that ran on m/44'/0'/0'/0/0 only and
+compressed key only; paths 2-4 are new for 54 of the 56 words, and all three key formats are new on
+path 1. The apple|second slice (3.57%) is t21_readme54. The 65 pw2.txt passphrases had run only on
+the t12/t18 templates; the 8 BREATHE-type entries are new on t21.
+

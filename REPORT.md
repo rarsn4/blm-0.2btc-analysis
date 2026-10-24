@@ -1002,6 +1002,17 @@ detector finds the plaque's frame edges and 2–3 interior strokes at x 1383–1
 y 697–709: 7–13 px long, 1–2 px wide, 33–58 levels of contrast. Script:
 `circled_check/oct18_measurements.py`, section B.
 
+**[INFERRED, 24 Oct] Where `apple` probably came from.** The clock's first rune word
+◇⏶ᛗᛗ△ is `Сумма` (§7.3): five glyphs with the 3rd equal to the 4th. Read as five
+Latin letters, it has the same pattern as `ELPPA`, which is `APPLE` backwards
+(E-L-P-P-A, 3rd = 4th). README row 20 gives `apple` with an empty description, and
+this pattern match is its most likely source. Only the letter pattern matches; no
+key maps these glyphs to E, L, P and A (◇ is W in the Gravity Falls Latin key,
+§7.3). The cipher is solved as Russian (§7), so `apple` has no basis, just as
+`second` has none (the Dreux finding above). **Word 20 is unsupported under both
+readings.** It is now being run over the 54-pool plus both words on all four paths
+(`t21_free20`), which until now had run on path 1 only (`t21_free20_p1`).
+
 **[MEASURED] The spacing test.** How widely does the artist space adjacent
 characters *within* a word? A glyph is a connected ink component; fragments under
 40% of median height are dropped, judged by height and never by gap; gap is the
