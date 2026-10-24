@@ -1,0 +1,6 @@
+t12full_mp  [bip39] candidates 4,194,304  survivors 261,335  derivations 2,090,680  real-target matches 0  (2049 s)
+el12        [electrum] candidates 4,900  survivors 16  derivations 144  real-target matches 0  (0 s)
+el13        [electrum] candidates 4,900  survivors 17  derivations 153  real-target matches 0  (0 s)
+el14        [electrum] candidates 343,000  survivors 1,379  derivations 12,411  real-target matches 0  (14 s)
+el16        [electrum] candidates 24,010,000  survivors 99,509  derivations 895,581  real-target matches 0  (938 s)
+el17        [electrum] candidates 24,010,000  survivors 99,869  derivations 898,821  real-target matches 0  (934 s)

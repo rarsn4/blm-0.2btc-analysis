@@ -294,6 +294,21 @@ BIP39 and had never been searchable by anyone.
 > CPU (`passphrase_cpu.py`; el18 with the 52 plus `memo`, `charly`, `jr`).
 > **el21 with these forms is open:** about 7.7 days of GPU for all 52.
 >
+> *[25 Oct] The CPU passphrase runs are complete, with **0 real-target matches** in
+> every run. Each run's survivor count equals the GPU solver's own count for that
+> config:*
+> - *The 8 new passphrases (`memo`, `Memo`, `MEMO`, `CHaRLy`, `Charly`, `charly`,
+>   `CHARLY`, `JR`) on `t12full_mp` (BIP39, 2,090,680 derivations), and as 9 (the
+>   8 plus `jr`) on el12–el17.*
+> - *The 52 normalized forms on el12–el17.*
+> - *el18 with 55 forms (the 52 plus `memo`, `charly`, `jr`): 383,618,180
+>   derivations over 6,974,876 survivors, every one of 4,900 tasks exactly once.*
+>
+> *There were three planted controls through the same code (BIP39 `Charly`,
+> Electrum `JR`, and the normalized non-ASCII form), each found exactly once.
+> Scripts: `passphrase_cpu.py`, `cpu_manager_oct19.sh`; outputs
+> `passphrase_cpu_*.out`. el21 with these forms remains open.*
+>
 > **`el22` is held**: it is `70⁷ × 2 = 16,470,860,000,000` candidates. At
 > `el21`'s whole-run rate, 235,298,000,000 over 12,994 s = 18.1M cand/s, that is
 > **10.5 days**. At the 17.3M of `el21`'s last 100 minutes, after the GPU began

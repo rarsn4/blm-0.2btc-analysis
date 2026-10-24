@@ -1,0 +1,6 @@
+passphrases: 52 Electrum-normalized pw2.txt forms
+el12        [electrum] candidates 4,900  survivors 16  derivations 832  real-target matches 0  (1 s)
+el13        [electrum] candidates 4,900  survivors 17  derivations 884  real-target matches 0  (1 s)
+el14        [electrum] candidates 343,000  survivors 1,379  derivations 71,708  real-target matches 0  (77 s)
+el16        [electrum] candidates 24,010,000  survivors 99,509  derivations 5,174,468  real-target matches 0  (4868 s)
+el17        [electrum] candidates 24,010,000  survivors 99,869  derivations 5,193,188  real-target matches 0  (4860 s)

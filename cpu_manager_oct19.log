@@ -1,0 +1,4 @@
+2026-10-19T07:33:00Z small set done; small52 starts (12 workers, nice 19)
+2026-10-19T10:16:28Z small52 done; el18n starts under the thermal rule
+2026-10-19T10:16:28Z el18n started: 6 workers, pid 431842, stage 0
+2026-10-24T23:26:59Z el18n ended, exit 0
