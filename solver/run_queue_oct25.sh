@@ -12,7 +12,7 @@ if pgrep -x solver2_jac > /dev/null; then echo "a solver is already running: not
 setsid ./thermal_guard_queue.sh $$ > /dev/null 2>&1 < /dev/null &
 setsid systemd-inhibit --what=sleep:idle:handle-lid-switch --why="queue oct25" tail --pid=$$ -f /dev/null > /dev/null 2>&1 < /dev/null &
 [ -f $SC ] || printf 'config\tpass\texit\tsurvivors\tspace\n' > $SC
-for spec in "t21_readme54|black_pw.txt" "t21_pool56|"; do
+for spec in "t21_readme54|black_pw.txt" "t21_pool57|" "t21_silent4|"; do
   c=${spec%%|*}; pw=${spec#*|}
   date -u "+%a %d %b %H:%M:%S UTC  START $c${pw:+ (passphrases from $pw)}" >> $LOG
   s=$(date +%s.%N)
