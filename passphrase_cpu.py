@@ -9,6 +9,8 @@ usage: nice python3 -I passphrase_cpu.py SOLVER_DIR small|el18|control [workers]
   control52 : planted control on an Electrum-normalized pw2.txt form (the non-ASCII one), el12
   small52   : el12 el13 el14 el16 el17 with the 52 Electrum-normalized forms of pw2.txt
   el18n     : el18 with those 52 forms plus memo, charly, jr (55), for 6 workers at nice 19
+  custom    : passphrases read from argv[4] (BIP39 as written, Electrum normalized), on t12full_mp and el12-el17,
+              after one planted control of each kind on that same list; the list itself is never printed
 
 Electrum normalization is electrum/mnemonic.py normalize_text: NFKD, lowercase, combining marks removed,
 whitespace collapsed, spaces between CJK characters removed. The forms are fed as-is (the solver does not
@@ -44,6 +46,9 @@ def normalize_text(t):
 PW2_NORM = sorted({normalize_text(l.rstrip('\n')) for l in open(os.path.join(SOLVER, 'pw2.txt'), encoding='utf-8')})
 if MODE in ('control52', 'small52'): PP_EL = PW2_NORM
 if MODE == 'el18n': PP_EL = sorted(set(PW2_NORM) | {'memo', 'charly', 'jr'})
+if MODE == 'custom':                                              # passphrases from a file: BIP39 as written, Electrum normalized
+    _L = [l.rstrip('\n') for l in open(sys.argv[4], encoding='utf-8') if l.strip()]
+    PP_BIP39 = _L; PP_EL = sorted({normalize_text(x) for x in _L})
 N = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141
 CURVE = ec.SECP256K1()
 SV = hmac.new(b'Seed version', digestmod=hashlib.sha512)
@@ -181,6 +186,19 @@ elif MODE == 'el18n':
     run('el18', k=2, ckpt=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'passphrase_cpu_el18n.ckpt'))
 elif MODE == 'ckpttest':                                         # resume check: el14 in two-slot tasks with a checkpoint
     run('el14', k=2, ckpt=sys.argv[4])
+elif MODE == 'custom':
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import verify_hit as V
+    print(f'passphrases: {len(PP_BIP39)} BIP39 as written, {len(PP_EL)} Electrum-normalized', flush=True)
+    d = conf('t12full_mp'); sets = list(d['sets']); o = [i for i, x in enumerate(sets) if len(x) > 1]; sets[o[0]] = ['abandon']
+    ws = next(w for k, w in enumerate(itertools.product(*sets)) if bip39_ok(w) and k > 500)
+    k, _ = V.derive(V.mnemonic_to_seed(' '.join(ws), PP_BIP39[-1]), "m/44'/0'/0'/0/1"); tgt = V.hash160(V.pub_compressed(k))
+    r = run('t12full_mp', target=tgt, only=['abandon']); print('  control (BIP39, last list entry):', 'PASS' if r[4] == 1 else 'FAIL', flush=True)
+    d = conf('el12'); ws = [w for w in itertools.product(*d['sets']) if el_ok(' '.join(w))][5]
+    seed = hashlib.pbkdf2_hmac('sha512', ' '.join(ws).encode(), b'electrum' + PP_EL[0].encode('utf-8'), 2048, 64)
+    k, _ = V.derive(seed, "m/0'/0"); tgt = V.hash160(V.pub_compressed(k))
+    r = run('el12', target=tgt); print('  control (Electrum, first normalized form):', 'PASS' if r[4] == 1 else 'FAIL', flush=True)
+    if r[4] == 1:
+        for n in ('t12full_mp', 'el13', 'el14', 'el16', 'el17'): run(n)
 elif MODE == 'small':
     for n in ('t12full_mp', 'el12', 'el13', 'el14', 'el16', 'el17'): run(n)
 elif MODE == 'el18':
