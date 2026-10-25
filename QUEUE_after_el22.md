@@ -77,3 +77,17 @@ Overlap: 49,589,822,592 is t21_readme54; the 11,019,960,576 with exactly one new
 one gap are inside the loo runs; truly new: a new word in two or more gaps, 1,072,175,744 (closed form
 and tally2 agree). t21_pool55b's 55,361,281,250 candidates are all inside t21_pool56, so t21_pool55b
 is not run separately (it would repeat 1.4 h); its committed band above stays on record, unused.
+
+### 25 Oct, later: `silent` added (a private lead, [ASSUMED], no position evidence)
+
+| run | candidates | band | GPU time |
+|---|---|---|---|
+| t21_pool57 (t21_readme54 + `black`, `air`, `silent` in the gap pool, 57 words) | 68,592,894,498 | 535,881,988.3 ± 22,680 (stratified, 0.983564) | 1.6-1.7 h |
+| t21_silent4 (t21_readme54 with SLOT 4 silent) | 49,589,822,592 | 387,420,489.0 ± 19,283 (stratified, 0.983533) | 1.2 h |
+| t21_readme54 passphrases: `silent` added to black_pw.txt (now 10 entries) | 10 x 49,589,822,592 | per pass as above | +1.2 h |
+
+t21_pool57: readme54 part 49,589,822,592; exactly one new word in one gap 16,529,940,864 (inside the loo
+runs); truly new 2,473,131,042 (two or more of the three new words in the gaps; closed form and tally2
+agree). It contains all of t21_pool56, which is therefore not run separately.
+t21_silent4: no overlap with t21_readme54, t21_free4_p1 or t21_alt3 (t21_alt3 already ran on 20 Oct
+with SLOT 4 mask|person, so `silent` at 4 gets its own run); entirely new against the 42-run union.
