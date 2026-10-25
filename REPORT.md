@@ -2727,6 +2727,37 @@ statue of liberty", 453 × 750, not yet compared. `card_x6_nearest.png` returned
 matches, only unrelated cartoons. Google Lens, TinEye, Bing and Shutterstock
 94143832 are still to do.
 
+**[TESTED] File forensics on the master** (sha256 `d0b04378…a782`), 25 Oct 2026,
+re-run here:
+
+| check | result |
+|---|---|
+| exiftool | no EXIF, comments or text chunks; no tags beyond the PNG header fields |
+| chunks | `IHDR`, `sRGB`, `sBIT`, 291 × `IDAT`, `IEND`; pngcheck OK; **0 bytes after `IEND`** |
+| binwalk | two hits: the PNG header itself, and the image's own compressed stream at the start of the IDAT data. Nothing else; neither is hidden data. |
+| IDAT | one zlib stream of 2,379,829 bytes, decompressing to exactly 1200 × (1600 × 4 + 1) = **7,681,200** bytes, with **0** bytes left over |
+| alpha | 255 everywhere |
+| zsteg `-a` | 135 lines name a file type and 40 printable runs of 24+ characters occur. The types are libmagic's usual false matches on random bits (OpenPGP keys, ADCP, cpio, MPEG ADTS, compacted data). The runs are not text: 6–64 distinct characters each, no 4-letter-or-longer BIP39 word in any. An unrelated control PNG gives the same kind of matches (22 in 57 lines). Output: `circled_check/zsteg_master_all.txt`. |
+| steghide / stegseek | do not apply to PNG |
+
+**No file-level steganography was found.**
+
+**[MEASURED] A circulating copy, sha256 `c167c072…a5bd` (2,397,988 bytes), is an
+annotated working copy, not the original and not a plain re-encode.** One is in
+this tree's download folder. Compared with the master:
+- **28,830 pixels differ, all in text areas, in 10 regions:** the top-left rune
+  lines, "Order and stability", the "PAY FOR … PREDICTION" ghost text, the seal
+  and pyramid lettering, the Latin line, and the bottom-right signature box.
+- **Typed text has been pasted over the artwork there,** for example a typed Latin
+  transliteration over a top-left rune line, and a typed "PREDICTION" over the
+  ghost text.
+- **Its chunks are `IHDR`, `sBIT`, 293 × `IDAT`, `IEND`, with no `sRGB`:** the list
+  §2.9 first recorded. That early line was probably read from this copy.
+- **The areas this report measures are pixel-identical in both copies:** the
+  tablet, the circle, the faint marks, glyph X, the right-edge rune column, the
+  clock caption and the top-left signature.
+- **This report's scripts read the master.**
+
 Note also that the two ciphers share some shapes with **different values**: `◇` is
 `W` in the Gravity Falls Latin cipher and `с` in the Cyrillic one. Do not
 cross-apply them.
