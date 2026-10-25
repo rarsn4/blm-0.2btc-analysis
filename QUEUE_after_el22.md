@@ -66,3 +66,14 @@ six gaps are inside the loo runs (each gap over all 2048 words, the rest on the 
 those were compressed-key only, so this run adds the other two formats there). Truly new: phrases with
 `black` in two or more gaps, 261,478,370 (0.47%), confirmed by tally2 against the 42-run union.
 el22 is held (HOLD_EL22) until this queue ends, then resumed by it.
+
+### 25 Oct, later: t21_pool56 replaces t21_pool55b
+
+| run | candidates | band | GPU time |
+|---|---|---|---|
+| t21_pool56 (t21_readme54 + `black` and `air` in the gap pool, 56 words) | 61,681,958,912 | 481,890,304.0 ± 21,503 (stratified, 0.983411) | 1.5-1.6 h |
+
+Overlap: 49,589,822,592 is t21_readme54; the 11,019,960,576 with exactly one new word (black or air) in
+one gap are inside the loo runs; truly new: a new word in two or more gaps, 1,072,175,744 (closed form
+and tally2 agree). t21_pool55b's 55,361,281,250 candidates are all inside t21_pool56, so t21_pool55b
+is not run separately (it would repeat 1.4 h); its committed band above stays on record, unused.
