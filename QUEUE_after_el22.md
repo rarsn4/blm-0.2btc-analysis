@@ -51,3 +51,18 @@ compressed key only; paths 2-4 are new for 54 of the 56 words, and all three key
 path 1. The apple|second slice (3.57%) is t21_readme54. The 65 pw2.txt passphrases had run only on
 the t12/t18 templates; the 8 BREATHE-type entries are new on t21.
 
+
+## Queue of 25 Oct 2026: two "black" tests, after the 24 Oct queue, before el22 resumes
+
+Bands and identity checks, stated before launch:
+
+| run | candidates | band | identity check | GPU time |
+|---|---|---|---|---|
+| t21_readme54 x 9 "black" passphrases (black_pw.txt: black, Black, BLACK, the three casings of "black lives matter", blacklivesmatter, BLM, blm; 4 already in pw2.txt but never run on t21) | 9 x 49,589,822,592 | 387,420,489.0 ± 19,283 per pass | every pass must equal t21_readme54's logged 387,425,296 | about 9 x 72-75 min |
+| t21_pool55b (t21_readme54 + `black` in the gap pool, 55 words) | 55,361,281,250 | 432,510,009.8 ± 20,378 (stratified, 0.983689) | — | 1.3-1.4 h |
+
+t21_pool55b overlap: 49,589,822,592 is t21_readme54; the 5,509,980,288 with exactly one `black` among the
+six gaps are inside the loo runs (each gap over all 2048 words, the rest on the 54-pool; under `second`
+those were compressed-key only, so this run adds the other two formats there). Truly new: phrases with
+`black` in two or more gaps, 261,478,370 (0.47%), confirmed by tally2 against the 42-run union.
+el22 is held (HOLD_EL22) until this queue ends, then resumed by it.
