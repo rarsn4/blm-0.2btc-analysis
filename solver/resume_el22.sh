@@ -6,6 +6,7 @@
 # overwrite the checkpoint. HIT rule: reads electrum_rerun.log only with grep -c / grep '^exit='.
 cd ~/Downloads/Brainwallet/files\(6\) || exit 1
 DRY=0; [ "$1" = "--dry-run" ] && DRY=1
+if [ -e HOLD_EL22 ]; then echo "el22 is on hold (HOLD_EL22: $(head -1 HOLD_EL22)); not resuming. Remove HOLD_EL22 to allow it."; exit 0; fi
 N=16470860000000; CHUNK=3758096384
 pid=$(ps -eo pid,args | awk '$2 ~ /solver2_jac$/ && $3=="--config" && $4=="el22.conf"{print $1}')
 [ -n "$pid" ] && { echo "el22 is already running (pid $pid). Nothing to resume."; [ $DRY = 1 ] || exit 1; }
