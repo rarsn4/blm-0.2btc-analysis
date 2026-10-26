@@ -126,3 +126,14 @@ Tuesday: not in pw2.txt in any casing (count 0); not a BIP39 word, so passphrase
 None of the 68 t21 configs allowed black at slot 1 (black has been tested at slot 10, in all six gaps via the loo
 runs and t21_pool55b/56/57, and as a passphrase). Overlap with t21_readme54, t21_free1_p1, t21_swap114 and
 t21_title1: 0; entirely new against the 42-run union.
+
+### 26 Oct, later: t21_glass (t21_colour's band was already committed, so it stays as it is)
+
+| run | candidates | band | GPU time |
+|---|---|---|---|
+| t21_glass (t21_readme54 + glass doctor in the gap pool, 56 words) | 61,681,958,912 | 481,890,304.0 ± 21,506 (stratified, 0.983554) | 1.5-1.6 h |
+
+Source: the first of the four masked people (top left) wears glasses; a weak lead with no number. glass and doctor
+are BIP39 and in none of the 69 t21 configs (pool or slot list) nor in any passphrase list. Overlap: readme54 part
+49,589,822,592; exactly one new word in one gap 11,019,960,576 (inside the loo runs); truly new 1,072,175,744
+(closed form and tally2 agree).
