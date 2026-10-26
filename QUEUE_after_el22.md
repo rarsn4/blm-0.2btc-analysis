@@ -104,3 +104,15 @@ that set, `about` and `account`, are only in t21_idx's 80-word pool, and t21_idx
 have no evidenced coverage.
 Overlap: readme54 part 49,589,822,592; exactly one new word in one gap 55,099,802,880 (inside the loo runs); truly
 new 32,749,328,000 (closed form and tally2 agree). Held by HOLD_EL22_IDX2 until it ends.
+
+### 26 Oct, later: three more runs in the 26 Oct queue (after t21_idx2)
+
+| run | candidates | band | GPU time |
+|---|---|---|---|
+| t21_colour (t21_readme54 + blue green yellow in the gap pool, 57 words) | 68,592,894,498 | 535,881,988.3 ± 22,673 (stratified, 0.983283) | 1.6-1.8 h |
+| t21_title1 (SLOT 1 welcome\|brave\|world; subject removed) | 148,769,467,776 | 1,162,261,467.0 ± 33,399 (stratified, 0.983533) | 3.6-3.9 h |
+| t21_readme54 x 2 passphrases (Tuesday, tuesday) | 2 x 49,589,822,592 | 387,420,489.0 ± 19,283 per pass; each pass must equal 387,425,296 | 2.4-2.6 h |
+
+blue, green and yellow are BIP39 (red and white are not; black is in t21_pool57); none is in the pool or a slot list of any of the 66 t21 configs. t21_colour truly new: 2,473,131,042 (two or more colour words in the gaps; closed form and tally2 agree).
+t21_title1 overlap: t21_free1_p1 has welcome and world at slot 1 under `second`, 49,589,822,592 (33.3%), on m/44'/0'/0'/0/0 only; t21_swap114 0 (it has subject at slot 14); t21_readme54 0. brave at slot 1 is new on every path.
+Tuesday: not in pw2.txt in any casing (count 0); not a BIP39 word, so passphrase only; also run on the CPU (t12full_mp, el12-el17).
