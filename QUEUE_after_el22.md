@@ -116,3 +116,13 @@ new 32,749,328,000 (closed form and tally2 agree). Held by HOLD_EL22_IDX2 until 
 blue, green and yellow are BIP39 (red and white are not; black is in t21_pool57); none is in the pool or a slot list of any of the 66 t21 configs. t21_colour truly new: 2,473,131,042 (two or more colour words in the gaps; closed form and tally2 agree).
 t21_title1 overlap: t21_free1_p1 has welcome and world at slot 1 under `second`, 49,589,822,592 (33.3%), on m/44'/0'/0'/0/0 only; t21_swap114 0 (it has subject at slot 14); t21_readme54 0. brave at slot 1 is new on every path.
 Tuesday: not in pw2.txt in any casing (count 0); not a BIP39 word, so passphrase only; also run on the CPU (t12full_mp, el12-el17).
+
+### 26 Oct, later: t21_black1 (t21_title1's band was already committed, so it stays as it is)
+
+| run | candidates | band | GPU time |
+|---|---|---|---|
+| t21_black1 (t21_readme54 with SLOT 1 black, subject removed; black stays at slot 10) | 49,589,822,592 | 387,420,489.0 ± 19,283 (stratified, 0.983533) | 1.2-1.3 h |
+
+None of the 68 t21 configs allowed black at slot 1 (black has been tested at slot 10, in all six gaps via the loo
+runs and t21_pool55b/56/57, and as a passphrase). Overlap with t21_readme54, t21_free1_p1, t21_swap114 and
+t21_title1: 0; entirely new against the 42-run union.
