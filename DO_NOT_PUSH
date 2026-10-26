@@ -79,7 +79,12 @@ Amended, 2026-10-14 (el22 running):
   self-test pair for index 2270828, i.e. the "HIT   index 2270828" line and the
   "phrase : tiger live melody ..." line directly after it, in README.md and in
   REPORT.md. Any other match, or any HIT index other than 2270828, blocks the
-  push. ./pre_push_check.sh applies this rule and prints PASS or BLOCK (exit 0/1).
+  push. ./pre_push_check.sh applies this rule and prints PASS or BLOCK (exit 0/1)
+  over everything a push would send: the tree and the message of every commit in
+  origin/main..HEAD, plus the current tracked files. A line committed and later
+  deleted still blocks. If origin/main cannot be resolved it blocks; it never
+  falls back to the current tree alone. Run `git fetch` first so origin/main is
+  current. The script prints commit, file and line only, never a match's text.
   The old '^HIT index' pattern misses the solver's real output, "HIT   index".
   [26 Oct: this replaced "README.md:64-65 and REPORT.md 3097-3098 at 6dcfdac";
   line numbers drift with every edit, and the README pair was already at 72-73.]
