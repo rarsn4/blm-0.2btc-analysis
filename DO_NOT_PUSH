@@ -89,6 +89,24 @@ Amended, 2026-10-14 (el22 running):
   [26 Oct: this replaced "README.md:64-65 and REPORT.md 3097-3098 at 6dcfdac";
   line numbers drift with every edit, and the README pair was already at 72-73.]
 
+  Two more checks in pre_push_check.sh, over the same scope (26 Oct):
+    - Private deny-list: if ~/blm-private/never_publish.txt exists (mode 600,
+      outside the repo), a case-insensitive match of any of its lines blocks.
+      The script and this file name only the path, never the entries.
+    - Phrase guard: 12 or more consecutive BIP39 words block, in any format.
+      Runs continue across line breaks. Exempt: lines starting with POOL or SLOT
+      in configs/*.conf, the wordlist itself, and the 2270828 self-test phrase
+      line. On 26 Oct it flags 656 runs on the real repo (275 in the current
+      files, 381 in older versions of the same files), all from word lists,
+      pools, config comments and generated outputs. So it BLOCKs until the owner
+      decides any further exemption.
+
+  HOW TO PUSH, when the owner says so in the current conversation:
+    1. git fetch
+    2. ./pre_push_check.sh must print PASS
+    3. git push origin main
+  Never --all, --tags or --mirror, and never another refspec.
+
 ---
 RE-IMPOSED, 2026-10-14 ~18:10 UTC. The owner asked for today's push to be
 removed. GitHub main was force-pushed back to 2df932a (with lease on 073834d),
