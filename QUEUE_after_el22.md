@@ -91,3 +91,16 @@ runs); truly new 2,473,131,042 (two or more of the three new words in the gaps; 
 agree). It contains all of t21_pool56, which is therefore not run separately.
 t21_silent4: no overlap with t21_readme54, t21_free4_p1 or t21_alt3 (t21_alt3 already ran on 20 Oct
 with SLOT 4 mask|person, so `silent` at 4 gets its own run); entirely new against the 42-run union.
+
+## Queue of 26 Oct 2026: t21_idx2, after the 25 Oct queue, before el22 resumes
+
+| run | candidates | band | GPU time |
+|---|---|---|---|
+| t21_idx2 (t21_readme54 + 10 index words in the gap pool, 64 words: abandon ability above absent absorb abstract absurd abuse access accident) | 137,438,953,472 | 1,073,741,824.0 ± 31,839 (stratified, 0.975462) | 3.3-3.5 h |
+
+The 10 words are BIP39 numbers 1-12 (clock, buttons, X = 10, VS = 12, 11), counted from 0 and from 1, minus `able`
+(already in the pool). None is in any earlier t21 pool (t21_idx, readme54, pool57, free20). The other two words of
+that set, `about` and `account`, are only in t21_idx's 80-word pool, and t21_idx is ASSERTED (no log), so they
+have no evidenced coverage.
+Overlap: readme54 part 49,589,822,592; exactly one new word in one gap 55,099,802,880 (inside the loo runs); truly
+new 32,749,328,000 (closed form and tally2 agree). Held by HOLD_EL22_IDX2 until it ends.
