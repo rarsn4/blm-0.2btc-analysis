@@ -2742,15 +2742,31 @@ re-run here:
 
 **No file-level steganography was found.**
 
-**[MEASURED] A circulating copy, sha256 `c167c072…a5bd` (2,397,988 bytes), is an
-annotated working copy, not the original and not a plain re-encode.** One is in
+**[MEASURED] A circulating copy, sha256 `c167c072…a5bd` (2,397,988 bytes), is a
+machine image-translation overlay** (Google Lens / Translate style), **not the
+original and not a plain re-encode.** *[Corrected 26 Oct: first recorded here as a
+hand-annotated working copy.]* One is in
 this tree's download folder. Compared with the master:
 - **28,830 pixels differ, all in text areas, in 10 regions:** the top-left rune
   lines, "Order and stability", the "PAY FOR … PREDICTION" ghost text, the seal
   and pyramid lettering, the Latin line, and the bottom-right signature box.
-- **Typed text has been pasted over the artwork there,** for example a typed Latin
-  transliteration over a top-left rune line, and a typed "PREDICTION" over the
-  ghost text.
+- **In each region the artwork's text is replaced by machine-translated text,**
+  checked region by region against the master:
+
+  | region | master | overlay prints |
+  |---|---|---|
+  | Latin line | *Esse quam niger es, sic dixit caccobus ollae* | "To be as black as you are, that's what the shit pot said." |
+  | pyramid-base motto (mirrored) | *FIAT JUSTITIA ET PEREAT MUNDUS* | "LIVL WELLY EL DENEYL SHPIROG" |
+  | seal ribbon | UBI BENE IBI PATRIA | "BULBI" |
+  | seal-ring motto | mirrored arc lettering | "COGMO2SELF SLG J2" |
+  | yellow script | "…stabili…" | "poles" |
+  | clock numeral 9 | the numeral | "of" |
+  | top-left rune line | runes | "0\|Chatro yen" |
+  | bottom-right box | two framed glyphs | "-yi-" |
+  | ghost text | faint "…PREDICTION" | a typed "PREDICTION" (the word is faintly present in the master, so that reading stands) |
+
+  These strings are the overlay's output, not text in the artwork, and none was
+  used as a candidate anywhere in this report.
 - **Its chunks are `IHDR`, `sBIT`, 293 × `IDAT`, `IEND`, with no `sRGB`:** the list
   §2.9 first recorded. That early line was probably read from this copy.
 - **The areas this report measures are pixel-identical in both copies:** the
@@ -3046,7 +3062,9 @@ you think it is.**
 Generative upscalers invent detail; they do not recover it.
 
 The artist's signature in the bottom-right reads `-yi-` under plain LANCZOS
-interpolation. Run through VanceAI at 8×, the same region renders as a boxed
+interpolation. *[26 Oct: the c167c072 translation overlay (§7.3) prints "-yi-" over this
+box, so this reading was probably taken from that copy. On the master the box
+holds two framed glyphs that are not resolved; see the artist marks below.]* Run through VanceAI at 8×, the same region renders as a boxed
 `ER`. The model **replaced** characters it could not read with letterforms it
 found more plausible — cleanly, confidently, and wrongly.
 

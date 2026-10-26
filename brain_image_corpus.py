@@ -125,11 +125,17 @@ def bip39_words():
             return [w.strip() for w in open(p) if w.strip()]
     raise SystemExit("bip39_en.txt not found")
 
+MASTER_SHA256 = "d0b04378f75d63997b8034ec2ef1bdd108178e4546de78237bd35abf4189a782"
+
 def png_bytes():
+    """The master only. A copy with any other sha256 (re-encoded, overlaid) is refused, never hashed."""
     for p in (os.path.expanduser("~/Downloads/Brainwallet/files(6)/imges/0.2-btc-puzzle.png"),
-              os.path.expanduser("~/Downloads/0.2-btc-puzzle.png")):
+              os.path.join(os.path.dirname(os.path.abspath(__file__)), "0.2-btc-puzzle.png")):
         if os.path.exists(p):
-            return p, open(p, "rb").read()
+            raw = open(p, "rb").read()
+            if hashlib.sha256(raw).hexdigest() != MASTER_SHA256:
+                raise SystemExit("%s is not the master (sha256 %s): refused" % (p, hashlib.sha256(raw).hexdigest()))
+            return p, raw
     return None, None
 
 def idat_payload(raw):
