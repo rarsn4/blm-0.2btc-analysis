@@ -137,3 +137,16 @@ Source: the first of the four masked people (top left) wears glasses; a weak lea
 are BIP39 and in none of the 69 t21 configs (pool or slot list) nor in any passphrase list. Overlap: readme54 part
 49,589,822,592; exactly one new word in one gap 11,019,960,576 (inside the loo runs); truly new 1,072,175,744
 (closed form and tally2 agree).
+
+### 26 Oct, later: t21_food1 and t21_food7 (t21_title1's band was already committed, so it stays as it is)
+
+| run | candidates | band | GPU time |
+|---|---|---|---|
+| t21_food1 (t21_readme54 with SLOT 1 food, subject removed) | 49,589,822,592 | 387,420,489.0 ± 19,283 (stratified, 0.983533) | 1.2-1.3 h |
+| t21_food7 (t21_readme54 with SLOT 7 food, liberty removed) | 49,589,822,592 | 387,420,489.0 ± 19,283 (stratified, 0.983533) | 1.2-1.3 h |
+
+Source (reviewer's reading, not re-measured here): "FOOD" written sideways at the bottom of the Space Needle's inner
+column, under 6 dark marks: 1st from the bottom, 7th from the top. In the forward template food was possible at
+slot 1 or 7 only in t21_free1_p1 / t21_free7_p1 (path 1, slot 20 = second): overlap 24,794,911,296 (50%) each, on
+m/44'/0'/0'/0/0 only. The reversed templates (t21_pool52_rev, t21_rev54) and t21_swap114 also allow food at
+slot 1 but are different layouts (0 overlap). New: the apple half on all 4 paths, the second half on paths 2-4.
