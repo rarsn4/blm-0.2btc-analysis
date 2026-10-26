@@ -1,0 +1,10 @@
+passphrases: 2 BIP39 as written, 1 Electrum-normalized
+t12full_mp  [bip39] candidates 2,048  survivors 137  derivations 274  real-target matches 0  planted hits 1  (2 s)
+  control (BIP39, last list entry): PASS
+el12        [electrum] candidates 4,900  survivors 16  derivations 16  real-target matches 0  planted hits 1  (0 s)
+  control (Electrum, first normalized form): PASS
+t12full_mp  [bip39] candidates 4,194,304  survivors 261,335  derivations 522,670  real-target matches 0  (659 s)
+el13        [electrum] candidates 4,900  survivors 17  derivations 17  real-target matches 0  (0 s)
+el14        [electrum] candidates 343,000  survivors 1,379  derivations 1,379  real-target matches 0  (2 s)
+el16        [electrum] candidates 24,010,000  survivors 99,509  derivations 99,509  real-target matches 0  (138 s)
+el17        [electrum] candidates 24,010,000  survivors 99,869  derivations 99,869  real-target matches 0  (132 s)
