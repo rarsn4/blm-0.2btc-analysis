@@ -150,3 +150,23 @@ column, under 6 dark marks: 1st from the bottom, 7th from the top. In the forwar
 slot 1 or 7 only in t21_free1_p1 / t21_free7_p1 (path 1, slot 20 = second): overlap 24,794,911,296 (50%) each, on
 m/44'/0'/0'/0/0 only. The reversed templates (t21_pool52_rev, t21_rev54) and t21_swap114 also allow food at
 slot 1 but are different layouts (0 overlap). New: the apple half on all 4 paths, the second half on paths 2-4.
+
+## 26 Oct, consolidated (Mohammed): replaces this morning's additions
+
+The 26 Oct queue is now: t21_idx2, t21_pool60, t21_slot1, t21_food7, t21_readme54 x Tuesday/tuesday.
+Kept as committed: t21_idx2, t21_food7, the Tuesday passes. Dropped (bands stay on record, unused), because each is a
+strict subset of a consolidated run: t21_colour and t21_glass (inside t21_pool60); t21_title1, t21_black1 and
+t21_food1 (inside t21_slot1).
+
+| run | candidates | band | GPU time |
+|---|---|---|---|
+| t21_pool60 (t21_readme54 + blue green yellow glass doctor top in the gap pool, 60 words) | 93,312,000,000 | 729,000,000.0 ± 26,428 (stratified, 0.982658) | 2.2-2.5 h |
+| t21_slot1 (SLOT 1 welcome\|brave\|world\|black\|food\|top; subject removed) | 297,538,935,552 | 2,324,522,934.0 ± 47,234 (stratified, 0.983533) | 7.1-7.9 h |
+
+Words: top is BIP39 (stop is not). blue, green, yellow, glass, doctor and top were never in an earlier t21 pool or
+slot list. At slot 1, brave, black and top were never possible; welcome, world and food only in t21_free1_p1 (path 1,
+second) and t21_swap114 (a different layout, 0 overlap).
+t21_pool60: readme54 part 49,589,822,592; exactly one new word in one gap 33,059,881,728 (loo runs); new
+10,662,295,680 (closed form and tally2 agree).
+t21_slot1: overlap with t21_free1_p1 74,384,733,888 (25%, welcome/world/food under second, path 1 only); t21_swap114
+0; new, paths not modelled, 223,154,201,664 (closed form and tally2 agree).
