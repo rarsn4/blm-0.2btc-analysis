@@ -1,4 +1,4 @@
-# 0.2 BTC Puzzle — the rune cipher solved, over 278 billion derivations eliminated, and six defects in the shared data
+# 0.2 BTC Puzzle — the rune cipher solved, over 284 billion derivations eliminated, and six defects in the shared data
 
 **Target:** `1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ`
 **HASH160:** `ccbd031e54cde2a3189fd59bc49f731367a1779e`
@@ -11,7 +11,7 @@ What **is** solved is the **rune cipher**, except for a single glyph. Those are
 different claims and this report keeps them separate throughout.
 
 I built a GPU search pipeline covering both BIP39 and Electrum and ran
-**278,996,119,787 full seed derivations** — 8,073 days of CPU at typical solver
+**284,280,833,673 full seed derivations** — 8,226 days of CPU at typical solver
 rates — plus 7,939,492,344 brainwallet addresses counted separately (§2.12).
 §2.1–2.11, §2.13 and §2.14 are exhaustively eliminated, not "tried and didn't
 find". §2.12 and §2.15 are tested corpora — a weaker claim, and tagged as such
@@ -632,7 +632,11 @@ during the seam work (§10).
 
 ---
 
-### 2.13 [EXHAUSTED; 99.6% of its space compressed-key only; 13 of 15 slots path 1 only] Free-one-fixed at 21 words: the branch that was never run
+### 2.13 [EXHAUSTED; 91.2% of its space compressed-key only; 12 of 15 slots path 1 only] Free-one-fixed at 21 words: the branch that was never run
+
+*[Heading updated 26 Oct: it read "99.6% … 13 of 15" until the runs admitted that
+day, `t21_free20` above all, re-covered part of this space with all three key
+encodings and put slot 20 on four paths. Computation in §3.]*
 
 Every t21 sweep before September freed a **gap** — slots 6, 8, 14, 15, 18, 21.
 Not one freed an **assigned** slot. An audit of all twenty t21 configs confirmed
@@ -801,6 +805,10 @@ slot 20, on the primary path `m/44'/0'/0'/0/0`.
 > **On paths 2–4, a single wrong word is still open at thirteen of the fifteen
 > assigned slots.** Slots 3 and 13 are the only assigned slots closed on all four
 > paths, and only since October 2026.
+> *[26 Oct: slot 20 joins them. `t21_free20` ran the same 56-word box as
+> `t21_free20_p1` on all four paths, so twelve of the fifteen remain open on paths
+> 2–4. `t21_food11` and `t21_slot1_line` add particular words at slots 11 and 1 on
+> four paths, not those slots' 55-word sets.]*
 >
 > Every joint `a = 2` config in §2.18 — `j10x20`, `j17x19`, `ink10x20` — was
 > chosen on the understanding that `a = 1` was closed. It is closed **on path 1**.
@@ -1001,6 +1009,10 @@ has not been compared with the drawing pixel by pixel here.
   days at the measured 11.0–11.6M cand/s (about 49 at 12M). **Run it only with a
   defended fixed prefix.** *[Corrected 18 Oct: an earlier version of this line
   said four paths, taken from the config's name; the run log shows path 1 only.]*
+  *[26 Oct: `t21_free20` has now run, on all four paths and all three key
+  encodings: 10,847,704,031 survivors, equal to `t21_free20_p1`'s as the identity
+  requires. Slot 20 over its 56 words is no longer path 1 only; it is still
+  untested over all 2048 words.]*
 - *Reported from the press photo, not re-measured here:* the artist left the name
   panel blank, replaced the inscription with the 13th Amendment §1 (with `subject`
   underlined, §9), and added the `BREATHE` neck band. The wreath plaque is blank
@@ -1027,6 +1039,7 @@ key maps these glyphs to E, L, P and A (◇ is W in the Gravity Falls Latin key,
 `second` has none (the Dreux finding above). **Word 20 is unsupported under both
 readings.** It is now being run over the 54-pool plus both words on all four paths
 (`t21_free20`), which until now had run on path 1 only (`t21_free20_p1`).
+*[26 Oct: completed, negative, in band; see the queues of 24–26 Oct at the end of §2.]*
 
 **[MEASURED] The spacing test.** How widely does the artist space adjacent
 characters *within* a word? A glyph is a connected ink component; fragments under
@@ -1642,7 +1655,10 @@ key only (§3).
 
 The `food@11` row was first proposed as `t21_free11` on four paths. The evidenced
 run is `t21_free11_p1`, path 1 only; the four-path config has never run, so
-`food@11` is open on paths 2–4 and under `apple`.
+`food@11` is open on paths 2–4 and under `apple`. *[26 Oct: `food@11` is now
+covered on all four paths under both readings and all three key formats by
+`t21_food11` (20 Oct, admitted 26 Oct; below). The four-path `t21_free11`, the
+whole 55-word slot, has still not run.]*
 
 **[ASSUMED] Speculative date arithmetic: untested, no position evidence, not
 queued.**
@@ -1680,6 +1696,33 @@ the campaign (the previous largest was +1.802, `t21_loo6`):
 readings. **Not yet admitted to `tally2.py`'s EVIDENCED list:** admitting the five
 BIP39 runs would move the headline from 278,996,119,787 to 283,874,091,848
 evidenced derivations (combined 286,738,325,903), and waits on the owner.
+*[26 Oct: admitted on the owner's instruction, together with the three BIP39 runs of
+24–26 Oct below; ledger in §3.]*
+
+**[MEASURED] The queues of 24–26 Oct 2026, run while `el22` was held.** Each band was
+committed before launch (`QUEUE_after_el22.md`), and survivors were taken from each
+run's own log after `exit=2`. There are 0 HIT lines in every log and 0 GPU thermal
+pauses from 24 Oct 08:11 to the end.
+
+| run | candidates | survivors | band | z |
+|---|---|---|---|---|
+| `t21_free20` (slot 20 over its 56 words, 4 paths) | 1,388,515,032,576 | 10,847,704,031 | 10,847,773,692.0 ± 102,037 | −0.683 |
+| `t21_pool57` (`t21_readme54` + `black`, `air`, `silent` in the gap pool) | 68,592,894,498 | 535,897,636 | 535,881,988.3 ± 22,680 | +0.690 |
+| `t21_silent4` (`t21_readme54` with slot 4 `silent`) | 49,589,822,592 | 387,414,920 | 387,420,489.0 ± 19,283 | −0.289 |
+
+- **`t21_free20` is an identity, and it holds.** It reports 10,847,704,031 survivors,
+  exactly `t21_free20_p1`'s. That is required: the word box is the same, and survivors
+  do not depend on the path. Its z is therefore the same draw as `t21_free20_p1`'s,
+  not a new one.
+- **18 passphrase passes on `t21_readme54`, every one exact.** There were 8 BREATHE-type
+  entries from `pw2.txt` (`breathe_pw.txt`: BREATHE, breathe, Breathe, I CANT BREATHE,
+  I CAN'T BREATHE, ICANTBREATHE, icantbreathe, I CANT BREATHE 05.25.20). There were also
+  10 entries in `black_pw.txt`: black, Black, BLACK, the three casings of "black lives
+  matter", blacklivesmatter, BLM, blm, silent. The BIP39 checksum does not see the
+  passphrase, and the solver resets its counter on every pass, so each pass must equal
+  `t21_readme54`'s logged 387,425,296. All 18 do. They are recorded here and not in
+  `tally2.py`, which does not model the passphrase.
+- `silent` is a private lead, **[ASSUMED]**, with no position evidence.
 
 ## 3. Tally
 
@@ -1702,18 +1745,34 @@ box disjointification with real set intersections. Run it as
 `python3 tally2.py configs`.
 
 ```
-t21 campaign, 42 evidenced runs     278,996,119,787 derivations
-+ the twelve older asserted runs    282,171,117,443
-    marginal of the twelve          3,174,997,656
-    at 400 derivations/s            8,165 CPU-days
+t21 campaign, 50 evidenced runs     284,280,833,673 derivations
++ the twelve older asserted runs    287,144,978,142
+    marginal of the twelve          2,864,144,469
+    at 400 derivations/s            8,309 CPU-days
 ```
+
+*[26 Oct: eight runs admitted.]* The runs are `t21_rev54`, `t21_pool58`, `t21_food11`,
+`t21_slot1_line` and `t21_alt3` (19–20 Oct), and `t21_free20`, `t21_pool57` and
+`t21_silent4` (24–26 Oct). Each was admitted on completion and in its band (end of
+§2). The block read 42 runs, 278,996,119,787, 282,171,117,443, 3,174,997,656 and
+8,165 CPU-days before this. Added as boxes, the eight contribute **676,443,377,378**
+candidates. Their naive sum is 2,425,862,118,818, so the inter-box term is
+**1,749,418,741,440**. That term is the overlap with the 42 and among the eight.
+`t21_free20` alone contributes 0: it is `t21_free20_p1`'s word box, and the ledger
+does not see paths.
+
+In derivations, the change is `284,280,833,673 − 278,996,119,787 = 5,284,713,886`.
+Each total is floored separately, so this is one more than 676,443,377,378 / 128 =
+5,284,713,885.77 rounded down. Electrum `el21_rev` (§2.6) and the passphrase passes
+are not in this block.
 
 *[Corrected 13 October.]* The marginal line read 3,608,896,368 from 28 September,
 when the ledger held 29 runs, until 13 October. The two totals above it were
 updated at every admission and it was not, so for two weeks the block broke the
 rule stated later in this section: the marginal must equal the difference of the
-two printed totals. It is now `282,171,117,443 − 278,996,119,787 = 3,174,997,656`,
-which is also what `tally2.py` prints. It shrinks as newer evidenced runs
+two printed totals. It is now `287,144,978,142 − 284,280,833,673 = 2,864,144,469`,
+which is also what `tally2.py` prints. *(It read `282,171,117,443 −
+278,996,119,787 = 3,174,997,656` until the admissions of 26 Oct.)* It shrinks as newer evidenced runs
 re-cover the twelve asserted ones.
 
 **The seven runs added on 27–28 September are why the union matters.** Six were
@@ -1906,7 +1965,9 @@ candidates (2048 × 54⁵, slot 20 pinned to `second`):
 | `t21_loo18` | — | 7,346,640,384 | 7,346,552,717 | −1.044 |
 
 **[MEASURED] The dispersion statement, computed once, from every run.**
-`zscore_table.py` scores all 42 evidenced runs from their configs and logs. Each
+`zscore_table.py` scores every evidenced run from its config and log (42 when this
+statement and the simulation below were computed; 50 since 26 Oct, see the note
+after the block). Each
 run's σ comes from **its own** slot-21 word set — per-prefix variance
 `Σ (k_j/128)(1 − k_j/128)` over the 16 blocks — so one formula covers all three
 models: `@FULL` gives zero variance, a pinned slot gives the binomial, a pool
@@ -1923,6 +1984,25 @@ mean z -0.0587    sample Var 0.6948    sd 0.8335    max |z| 1.802 (t21_loo6)
 1 - 2     11   (expect 11.1)
 >= 2       0   (expect  1.9)
 ```
+
+*[26 Oct, after the eight admissions.]* `zscore_table.py` now scores 50 runs: 49
+with a z and 1 exact identity. **48 of the 49 are distinct draws.** `t21_free20`
+repeats `t21_free20_p1`'s box and count, so its z is the same draw and is counted
+once. Over the 48:
+
+```
+mean z -0.1312    sample Var 0.8053    sd 0.8974    max |z| 2.793 (t21_slot1_line)
+95% CI on Var, if independent      [0.558, 1.263]   -- contains 1.0
+|z| < 1   35   (expect 32.8)
+1 - 2     12   (expect 13.0)
+>= 2       1   (expect  2.2)
+```
+
+The mild underdispersion read below is weaker on 48 runs than on 41. The correlated
+simulation and `rho_bar.py` figures below are for the 41 and have not been re-run.
+`zscore_table.py` was changed for this: it now takes the run name from the
+`queue*_<run>.log` filenames, and it prefers a run's own log over its `_p1` base
+name. The 42 rows it printed before are unchanged.
 
 **The honest reading: mild underdispersion that does not survive having looked
 three ways.** Three statistics, side by side, because which one is quoted changes
@@ -2098,6 +2178,23 @@ for one, sits entirely inside `needle11` — so the caveat applies only to what 
 | §2.14, `swap114` + `free2_p1` | 1,413,309,943,872 | 1,388,515,032,576 | 98.25% |
 | §2.19, the six `loo` (`second` at slots 6–18, both readings at 21) | 6,458,615,227,584 | 6,408,447,197,184 | 99.22% |
 
+*[26 Oct: the same computation over 50 runs.]* The eight runs admitted on 26 Oct
+all used the three-encoding kernel, so the post-patch set is now 21 runs. Same
+formula, `|U(S ∪ U₂₁)| − |U₂₁|`:
+
+| scope | its union | checked compressed-key only | share |
+|---|---|---|---|
+| all 29 pre-patch runs | 24,480,490,264,651 | 22,871,916,142,795 | 93.43% |
+| §2.13, the 13 `free*_p1` | 17,455,617,552,384 | 15,918,333,052,032 | 91.19% |
+| §2.14, `swap114` + `free2_p1` | 1,413,309,943,872 | 1,388,515,032,576 | 98.25% |
+| §2.19, the six `loo` | 6,458,615,227,584 | 6,385,948,111,008 | 98.87% |
+
+Over the whole 50-run union, 22,871,916,142,795 of 36,386,137,420,077 candidates
+(**62.86%**) are compressed-key only. This cross-checks exactly against
+`|U₅₀| − |U₂₁|`. Most of the drop is `t21_free20`, which re-covers
+`t21_free20_p1`'s box with all three encodings. Closing the remainder would take
+about 23 GPU-days.
+
 **68.21% of the whole 42-run union has been checked with the compressed key
 only.** The overall figure cross-checks exactly against `|U₄₂| − |U₁₃|`. Closing
 the caveat would cost about 25 GPU-days, for a key format BIP32 wallets do not
@@ -2183,12 +2280,12 @@ roughly zero and the whole 26.5 billion.
 
 The t21 figure above **is** computed, and every digit reproduces from
 `tally2.py configs`. Adding an unverifiable constant to it would make the sum
-less trustworthy than either part. Where one number is needed, **"over 278
+less trustworthy than either part. Where one number is needed, **"over 284
 billion derivations eliminated"** is a floor that is computed, in preference to
 an estimate that is not.
 
-**The headline quotes the evidenced figure, not the combined one.** 278,996,119,787
-is the union of the 42 runs whose logs are in this tree; 282,171,117,443 adds the
+**The headline quotes the evidenced figure, not the combined one.** 284,280,833,673
+is the union of the 50 runs whose logs are in this tree; 287,144,978,142 adds the
 twelve older runs carried on report alone. The larger number is not wrong, but it
 inherits the weaker warrant of its weakest component, and a headline that needs a
 footnote about which runs have logs is worse than a smaller headline that needs

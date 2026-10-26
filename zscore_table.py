@@ -23,7 +23,8 @@ WL=[w.strip() for w in open(os.path.join(LOGD,'bip39_en.txt'))]
 recs=[]
 for f in sorted(glob.glob(LOGD+'/*.log')):
     # single-run logs carry no banner; the filename names the run
-    fn=os.path.basename(f)[:-4]
+    # (queue logs are queue_<run>.log, queue24_<run>.log, ...: drop the prefix)
+    fn=re.sub(r'^queue\d*_','',os.path.basename(f)[:-4])
     cur=fn if fn.startswith('t21_') and not fn.endswith('_jac') else None
     resume=0; jac_resumed=False
     for line in open(f, errors='replace'):
@@ -37,7 +38,8 @@ for f in sorted(glob.glob(LOGD+'/*.log')):
         if s and cur: recs.append((cur,int(s.group(1)),int(s.group(2)),resume,os.path.basename(f),jac_resumed)); cur=None
 def find(name, vol):
     base=name.replace('_p1','')
-    c=[r for r in recs if r[0] in (name,base) and r[2]==vol]
+    # the run's own log first; the _p1 base name only when it has none
+    c=[r for r in recs if r[0]==name and r[2]==vol] or [r for r in recs if r[0]==base and r[2]==vol]
     return c[-1] if c else None
 
 rows=[]

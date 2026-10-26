@@ -5,7 +5,7 @@ usage: python3 -I queue_prep.py SOLVER_DIR
 
 For each queued config: candidates; expected survivors and sigma (BIP39: stratified on its own
 slot-21 set, per-prefix variance sum_j (k_j/128)(1 - k_j/128); Electrum: binomial at 17/4096);
-new candidates against the 42-run EVIDENCED union (tally2's word-set boxes, paths not modelled);
+new candidates against the EVIDENCED union (tally2's word-set boxes, paths not modelled);
 named overlaps slot by slot, with the PATH sets intersected separately; wall time at measured rates.
 """
 import sys, os, math
@@ -67,7 +67,7 @@ for name, refs in QUEUE:
     print(f"  band         {mu:,.1f} +/- {s:,.1f}  ({'binomial' if d['scheme'] == 'electrum' else f'stratified, {s / sb:.6f} x binomial'})")
     print(f"  wall time    {d['n'] / hi / 3600:.2f} - {d['n'] / lo / 3600:.2f} h at {lo / 1e6:.1f}-{hi / 1e6:.1f}M cand/s")
     if d['scheme'] == 'bip39' and d['words'] == 21:
-        nv = new_vs_union(name); print(f"  new vs the 42-run union (paths not modelled): {nv:,} = {nv / d['n']:.2%}")
+        nv = new_vs_union(name); print(f"  new vs the {len(E)}-run union (paths not modelled): {nv:,} = {nv / d['n']:.2%}")
     for r in refs:
         w, ps = overlap(d, conf(r))
         print(f"  overlap with {r}: {w:,} candidates = {w / d['n']:.2%}, on {len(ps)} shared path(s) {ps}")

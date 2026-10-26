@@ -187,7 +187,13 @@ EVIDENCED = ['t21_readme54','t21_loo21','t21_loo6','t21_loo8','t21_loo14','t21_l
              # completion with survivors +0.682 sigma, per section 10's rule --
              # not when the file appeared.
              't21_loo6_apple','t21_loo8_apple','t21_loo14_apple',
-             't21_loo15_apple','t21_loo18_apple']
+             't21_loo15_apple','t21_loo18_apple',
+             # 2026-10-19..26: the queues run while el22 was held. Admitted
+             # together on 26 Oct, each on completion and in its band committed
+             # before launch (QUEUE_after_el22.md). t21_free20 is the four-path
+             # t21_free20_p1: same word box, so it adds 0 here (paths not modelled).
+             't21_rev54','t21_pool58','t21_food11','t21_slot1_line','t21_alt3',
+             't21_free20','t21_pool57','t21_silent4']
 ASSERTED  = ['t21_pool52','t21_pool52_rev','t21_pool40','t21_idx','t21_pathd','t21_pathe',
              't21_trust21','t21_trust21b','t21_bnw18','t21_bnw18b','t21_trustonly','t21']
 CHECKSUM = 128
