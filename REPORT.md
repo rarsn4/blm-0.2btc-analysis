@@ -3081,6 +3081,13 @@ Neither name is in the 65-passphrase list (`pw2.txt`): `CHaRLy`, `Charly`,
 `charly`, `CHARLY` and `JR` all count 0. Script:
 `circled_check/oct18_measurements.py`, section D.
 
+**[INFERRED, 26 Oct] The bottom-right box is probably a boxed "CHR" monogram.** On the
+master, at 10× LANCZOS and equally at native pixels, it reads as C joined to H, then
+R, between two horizontal bars and flanked by dashes; not "-yi-", which came from
+the translation overlay (§7.3). C, H and R are the capitals of the top-left
+`CHaRLy`, so the two marks may be one signature. As a passphrase, `CHR` is tested
+on the CPU with the other name forms.
+
 Across the rune region, 6.5% of pixels differ by more than 30 levels from a
 plain interpolation, with strokes reshaped and terminals sharpened.
 
