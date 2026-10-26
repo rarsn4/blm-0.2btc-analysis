@@ -75,9 +75,14 @@ Amended, 2026-10-14 (el22 running):
 
   PRE-PUSH CHECK, the only pattern:
     git grep -n -E '^\s*HIT[[:space:]]+index|^\s*phrase[[:space:]]*:'
-  Allowed matches: README.md:64-65 and the REPORT.md pair carrying the 2270828
-  self-test (3097-3098 at 6dcfdac). Anything else stops the push. The old
-  '^HIT index' pattern misses the solver's real output, "HIT   index".
+  Allowed matches, identified by content, never by line number: the planted
+  self-test pair for index 2270828, i.e. the "HIT   index 2270828" line and the
+  "phrase : tiger live melody ..." line directly after it, in README.md and in
+  REPORT.md. Any other match, or any HIT index other than 2270828, blocks the
+  push. ./pre_push_check.sh applies this rule and prints PASS or BLOCK (exit 0/1).
+  The old '^HIT index' pattern misses the solver's real output, "HIT   index".
+  [26 Oct: this replaced "README.md:64-65 and REPORT.md 3097-3098 at 6dcfdac";
+  line numbers drift with every edit, and the README pair was already at 72-73.]
 
 ---
 RE-IMPOSED, 2026-10-14 ~18:10 UTC. The owner asked for today's push to be
