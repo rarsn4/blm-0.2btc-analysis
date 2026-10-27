@@ -176,6 +176,9 @@ Resumed by run_queue_oct26.sh after QUEUE DONE, from 12,236,361,826,304 = 3,256 
 has the resume row. The survivor counter restarts on resume, so the segment is scored on its own:
 segment = 16,470,860,000,000 - 12,236,361,826,304 = 4,234,498,173,696 candidates (Electrum, 22 words, binomial at 17/4096)
 band 17,574,821,521.7 +/- 132,295. Wall time 63.5-65.1 h at 18.06-18.53M cand/s: ends Fri 30 Oct, about 05:15-07:00 UTC.
+[Corrected 27 Oct 20:15 UTC: the wall time above used 18.06-18.53M cand/s, which is not el22's rate. el22's own
+rate is 16.96M/s over its 20-24 Oct segment (wall time) and 16.98M/s over this one (checkpoint boundaries,
+13:51-20:07). At 76.64% on 27 Oct 20:07 it ends Fri 30 Oct about 11:00-11:45 UTC. The band is unaffected.]
 Score from the segment's final 'exhausted, no match' line only after exit=2. HIT rule: electrum_rerun.log read only with
 grep -c '^HIT[[:space:]]+index' and grep '^exit='; an Electrum hit is verified with an Electrum v2 implementation.
 
