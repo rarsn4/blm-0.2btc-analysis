@@ -178,3 +178,19 @@ segment = 16,470,860,000,000 - 12,236,361,826,304 = 4,234,498,173,696 candidates
 band 17,574,821,521.7 +/- 132,295. Wall time 63.5-65.1 h at 18.06-18.53M cand/s: ends Fri 30 Oct, about 05:15-07:00 UTC.
 Score from the segment's final 'exhausted, no match' line only after exit=2. HIT rule: electrum_rerun.log read only with
 grep -c '^HIT[[:space:]]+index' and grep '^exit='; an Electrum hit is verified with an Electrum v2 implementation.
+
+## Queue after el22 (run_queue_oct30.sh): t21_pool57v, starts only when el22 ends with exit=2
+Committed before launch, 27 Oct 2026. virus (the drawn COVID-19 vial), hour (the clock), mirror (the mirror-written
+seal) added to t21_readme54's gap pool, 57 words. All three are BIP39 (#1957, #883, #1133). None is in a POOL, SLOT or
+EXTRA line of any of the 75 t21 configs; they appear only in comments and, like every word, in the leave-one-out
+runs' @FULL gap slots (6, 8, 14, 15, 18, 21).
+
+| config | candidates | band (survivors) | GPU time |
+|---|---|---|---|
+| t21_pool57v (t21_readme54 + virus hour mirror in the gap pool, 57 words, 4 paths) | 68,592,894,498 = 57^6 x 2 | 535,881,988.3 +/- 22,660 (stratified, 0.982721) | 1.64-1.73 h |
+
+Overlaps: t21_readme54 49,589,822,592 (72.30%, 4 shared paths), and the same readme54 core with t21_pool57, t21_pool58,
+t21_pool60 and t21_idx2 (different extra words). Exactly one new word in exactly one gap, 16,529,940,864, is covered
+by the leave-one-out family (loo6/8/14/15/18 under second, the five _apple mirrors under apple, loo21 both).
+New = 68,592,894,498 - 49,589,822,592 - 16,529,940,864 = 2,473,131,042 (two or more new words in the gaps);
+tally2 against the 50-run EVIDENCED union gives the same 2,473,131,042.
