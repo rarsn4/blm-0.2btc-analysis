@@ -67,6 +67,12 @@ Amended, 2026-10-14 (el22 running):
     - the only allowed reads of the log are
         grep -c -E '^HIT[[:space:]]+index' electrum_rerun.log
         grep -E '^exit=' electrum_rerun.log
+      plus one read the owner allowed on 27 Oct for el22's final score, under a
+      gate: only after grep -E '^exit=' shows exit=2 for the segment resumed
+      27 Oct AND the HIT count above is 0,
+        grep -oE 'exhausted, no match  \(survivors [0-9]+ of [0-9]+\)' electrum_rerun.log
+      and nothing else from the log. If exit is not 2 or the HIT count is not 0,
+      read nothing more, stop, and report only that;
     - the solver exits on its first hit, so an END line well before ~25 Oct
       may mean a hit: report ONLY the count to Mohammed, and stop;
     - never copy electrum_rerun.log into configs/ again unless Mohammed says
