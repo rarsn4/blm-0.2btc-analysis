@@ -170,3 +170,11 @@ t21_pool60: readme54 part 49,589,822,592; exactly one new word in one gap 33,059
 10,662,295,680 (closed form and tally2 agree).
 t21_slot1: overlap with t21_free1_p1 74,384,733,888 (25%, welcome/world/food under second, path 1 only); t21_swap114
 0; new, paths not modelled, 223,154,201,664 (closed form and tally2 agree).
+
+## el22, third segment: resumed 27 Oct 2026 13:48:00 UTC, band fixed before any count is read
+Resumed by run_queue_oct26.sh after QUEUE DONE, from 12,236,361,826,304 = 3,256 chunks (74.29%); el22_segments.tsv
+has the resume row. The survivor counter restarts on resume, so the segment is scored on its own:
+segment = 16,470,860,000,000 - 12,236,361,826,304 = 4,234,498,173,696 candidates (Electrum, 22 words, binomial at 17/4096)
+band 17,574,821,521.7 +/- 132,295. Wall time 63.5-65.1 h at 18.06-18.53M cand/s: ends Fri 30 Oct, about 05:15-07:00 UTC.
+Score from the segment's final 'exhausted, no match' line only after exit=2. HIT rule: electrum_rerun.log read only with
+grep -c '^HIT[[:space:]]+index' and grep '^exit='; an Electrum hit is verified with an Electrum v2 implementation.
