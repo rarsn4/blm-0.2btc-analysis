@@ -231,3 +231,19 @@ Overlaps (union, not sum):
   (97.36%). Batch: 397,296,788,544 - 3,673,320,192 (within the batch) - 918,330,048 (the core, in loo6 + loo6_apple)
   = 392,705,138,304, closed form and tally2 agree. With the finished but unadmitted t21_pool60, t21_slot1, t21_idx2
   and t21_food7 also counted: 392,194,954,944 (pool60 covers 6 x 54^4 x 2 = 102,036,672 more per t21_top6_loo*).
+
+## t21_pool60c (run_queue_oct30c.sh): after the "top" batch, starts only on its QUEUE DONE
+Committed before launch, 28 Oct 2026. can gasp chest hood voice exhaust added to t21_readme54's gap pool, 60 words.
+Source: "I can't BREATHE" on the hoodie (can), and breathing words by association [ASSUMED, no position evidence].
+All six are BIP39 (#264, #770, #317, #875, #1964, #636). In an earlier t21 POOL, SLOT or EXTRA line: only `can`, in
+t21_ink10x20's slot 10 list (13 words); gasp, chest, hood, voice and exhaust in none of the 86 t21 configs. Like every
+word, each was covered alone in one gap by the leave-one-out runs' @FULL slots.
+
+| config | candidates | band (survivors) | GPU time |
+|---|---|---|---|
+| t21_pool60c (t21_readme54 + can gasp chest hood voice exhaust in the gap pool, 60 words, 4 paths) | 93,312,000,000 = 60^6 x 2 | 729,000,000.0 +/- 26,442 (stratified, 0.983192) | 2.2-2.4 h |
+
+Overlaps: t21_readme54 49,589,822,592 (53.14%, 4 shared paths), the same core with t21_pool60, t21_pool57,
+t21_pool57v, t21_idx2 and t21_ink10x20 (`can` sits at slot 10 there, in the gaps here); 0 with the top batch.
+Exactly one new word in exactly one gap, 6 x 6 x 54^5 x 2 = 33,059,881,728, is in the leave-one-out family.
+New = 93,312,000,000 - 49,589,822,592 - 33,059,881,728 = 10,662,295,680; tally2 against the 50-run EVIDENCED union agrees.
