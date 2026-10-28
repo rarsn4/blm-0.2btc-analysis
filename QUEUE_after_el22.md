@@ -197,3 +197,37 @@ t21_pool60 and t21_idx2 (different extra words). Exactly one new word in exactly
 by the leave-one-out family (loo6/8/14/15/18 under second, the five _apple mirrors under apple, loo21 both).
 New = 68,592,894,498 - 49,589,822,592 - 16,529,940,864 = 2,473,131,042 (two or more new words in the gaps);
 tally2 against the 50-run EVIDENCED union gives the same 2,473,131,042.
+
+## "top" batch (run_queue_oct30b.sh): after t21_pool57v, starts only on its QUEUE DONE
+Committed before launch, 28 Oct 2026. Source: the S of STOP is outside the frame line, so the word inside reads
+T-fist-P = `top` (BIP39 #1832); `stop` is not BIP39. No position evidence; slot 6 from the flag's 50-44 star
+deficit is [ASSUMED]. Configs written from t21_readme54.conf by exact-line substitution, 4 paths each. Before this
+batch `top` is in two lists only: t21_pool60's gap pool and t21_slot1's slot 1.
+
+| config | change from t21_readme54 | candidates | band (survivors) | GPU time |
+|---|---|---|---|---|
+| t21_top20 | SLOT 20 top (apple, second removed) | 24,794,911,296 = 54^6 | 193,710,244.5 +/- 13,635 (stratified, 0.983533) | 0.6 h |
+| t21_top6_loo8 | SLOT 6 top, SLOT 8 @FULL | 34,828,517,376 = 2048 x 54^4 x 2 | 272,097,792.0 +/- 16,160 (stratified, 0.983533) | 0.8-0.9 h |
+| t21_top6_loo14 | SLOT 6 top, SLOT 14 @FULL | 34,828,517,376 | 272,097,792.0 +/- 16,160 | 0.8-0.9 h |
+| t21_top6_loo15 | SLOT 6 top, SLOT 15 @FULL | 34,828,517,376 | 272,097,792.0 +/- 16,160 | 0.8-0.9 h |
+| t21_top6_loo18 | SLOT 6 top, SLOT 18 @FULL | 34,828,517,376 | 272,097,792.0 +/- 16,160 | 0.8-0.9 h |
+| t21_top6_loo21 | SLOT 6 top, SLOT 21 @FULL | 34,828,517,376 | must equal 272,097,792 exactly (34,828,517,376 / 128, remainder 0) | 0.8-0.9 h |
+| t21_top_at_7 | SLOT 7 top (liberty removed) | 49,589,822,592 = 54^6 x 2 | 387,420,489.0 +/- 19,283 (stratified, 0.983533) | 1.2 h |
+| t21_top_at_9 | SLOT 9 top (eye removed) | 49,589,822,592 | 387,420,489.0 +/- 19,283 | 1.2 h |
+| t21_top_at_11 | SLOT 11 top (pyramid removed) | 49,589,822,592 | 387,420,489.0 +/- 19,283 | 1.2 h |
+| t21_top_at_17 | SLOT 17 top (gold removed) | 49,589,822,592 | 387,420,489.0 +/- 19,283 | 1.2 h |
+
+Batch: 397,296,788,544 candidates, 9.5-10.0 h at 11.0-11.6M cand/s.
+Overlaps (union, not sum):
+- t21_readme54 and t21_slot1: 0 with every config (slot 6 / 7 / 9 / 11 / 17 / 20 differ from readme54; t21_slot1 has
+  top at slot 1 and drops subject, and every config here keeps subject at slot 1).
+- t21_pool60: 0 with t21_top20 and t21_top_at_*; 1,020,366,720 = 60 x 54^4 x 2 with each t21_top6_loo* (top at 6 is
+  in pool60's gap pool).
+- t21_loo6 and t21_loo6_apple (slot 6 @FULL): 459,165,024 = 54^5 each with each t21_top6_loo*: the common core, top
+  at 6 with every other gap on the 54-pool, 54^5 x 2 = 918,330,048.
+- Within the batch: the five t21_top6_loo* share only that core, so their union is
+  5 x 34,828,517,376 - 4 x 918,330,048 = 170,469,266,688; t21_top20 and t21_top_at_* overlap nothing in the batch.
+- New against the 50-run EVIDENCED union: t21_top20 and each t21_top_at_* 100%; each t21_top6_loo* 33,910,187,328
+  (97.36%). Batch: 397,296,788,544 - 3,673,320,192 (within the batch) - 918,330,048 (the core, in loo6 + loo6_apple)
+  = 392,705,138,304, closed form and tally2 agree. With the finished but unadmitted t21_pool60, t21_slot1, t21_idx2
+  and t21_food7 also counted: 392,194,954,944 (pool60 covers 6 x 54^4 x 2 = 102,036,672 more per t21_top6_loo*).
