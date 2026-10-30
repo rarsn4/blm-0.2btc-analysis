@@ -247,3 +247,16 @@ Overlaps: t21_readme54 49,589,822,592 (53.14%, 4 shared paths), the same core wi
 t21_pool57v, t21_idx2 and t21_ink10x20 (`can` sits at slot 10 there, in the gaps here); 0 with the top batch.
 Exactly one new word in exactly one gap, 6 x 6 x 54^5 x 2 = 33,059,881,728, is in the leave-one-out family.
 New = 93,312,000,000 - 49,589,822,592 - 33,059,881,728 = 10,662,295,680; tally2 against the 50-run EVIDENCED union agrees.
+
+## el22 RESULT (30 Oct 2026): exhausted, no match; third segment in band
+Gate applied as the owner set it on 27 Oct: grep -E '^exit=' shows `exit=2 Fri 30 Oct 04:55:56 UTC  END el22
+wall=227275.70s` for the segment resumed 27 Oct 13:48:00 (13:48:00 + 227,275.70 s = 04:55:55), and the HIT count is 0.
+Only then was the one permitted line read: `exhausted, no match  (survivors 17574712922 of 16470860000000)`.
+Third segment, 4,234,498,173,696 candidates: survivors 17,574,712,922 against 17,574,821,521.7 +/- 132,295,
+deviation -108,599.7, z -0.821, in band. Segment rate 18.63M cand/s (wall time).
+Coverage of the whole space rests on the segment chain in el22_segments.tsv, not on a survivor count: start 0
+(14 Oct) -> stop 6,531,571,515,392 = 1,738 chunks (18 Oct, exit=143) -> resume at the same index (20 Oct) -> stop
+12,236,361,826,304 = 3,256 chunks (24 Oct, exit=143) -> resume at the same index (27 Oct) -> exit=2 at the end.
+Both stops are chunk-aligned and each resume index equals the stop index. The survivor counter restarts on resume, so
+the first two segments (39.66% and 34.64% of the space) have no survivor count; the band test covers the third
+(25.71%) only.
