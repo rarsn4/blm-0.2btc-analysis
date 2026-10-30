@@ -149,3 +149,29 @@ can be public; the search that is running now cannot.
     stay LOCAL. Do not push main as it stands; anything published later must
     exclude the running search until the owner says otherwise.
   - The HIT rule stays in force.
+
+---
+LIFTED, 2026-10-30. The owner lifted the no-push rule on 30 Oct 2026 in order to publish this
+analysis repository. This supersedes the RE-IMPOSED note above for this publication.
+
+  Target-blob check (blm-verify rule 8), required before any publication: PASSED.
+    - solver_host2.cuh packs the decoded address big-endian (h[i*4]<<24 | ... | h[i*4+3]), no
+      word swap, then cudaMemcpyToSymbol(d_target,...) -- one path for every run.
+    - The bytes the solver actually loaded, from its own printed line in real run logs
+      (queue25/26/30b/30c and electrum_rerun.log, the last read with grep -o only):
+      ccbd031e54cde2a3189fd59bc49f731367a1779e == the target hash160.
+    - The 32-bit word-swapped form 1e03bdcca3e2cd549bd59f1813739fc49e77a167, which would void
+      every negative, appears in no config, log or source file.
+    - The planted-hit test goes through that same default path: selftest_find.conf carries an
+      ordinary "TARGET <address>" line, not a separate test buffer, and recovered its planted
+      12-word mnemonic at index 2270828.
+
+  The allow-list basis is unchanged and still stands as written above: it rests on file identity
+  and on the recorded run results, NOT on the per-window oracle test asked for on 27 Oct, which
+  was not carried out. The supporting fact remains that every search in this tree returned 0 HIT
+  lines, so no recovered phrase exists in it to leak.
+
+  The HIT rule, the log-reading limits and the private-name rule are NOT lifted and stay in force.
+  If a hit is ever found, no-push returns immediately and nothing about it is published.
+  Push only with "git push origin main", after git fetch and a PASS; never --force, --all,
+  --tags or --mirror.
