@@ -206,6 +206,14 @@ words** — not a candidate list, the entire wordlist — across 65 passphrases 
   All 123 were derived on their four paths, compressed and uncompressed, with an
   empty passphrase: **no match.** Script: `artwork_orders.py`, which uses
   `verify_hit.py`.
+  *[New material, published 30 Oct 2026.] This entry and its output file
+  `artwork_orders.out` appear here for the first time. Both postdate the previous
+  public commit `073834d` (14 Oct) — the entry was written on 18 Oct — so the
+  21-word list above and the 123 candidates in `artwork_orders.out` are new,
+  not a re-publication of anything released earlier. The 123 are the orders that
+  pass a checksum, each one derived and tested as stated above; every one is a
+  recorded negative, and the words themselves are read off the public artwork.
+  `passphrase_cpu_el18n.ckpt` (§2.6) is new in the same sense.*
 - The gold-chart y-axis values as BIP39 indices — `1800 1600 1400 1200 1000 800
   600 400 200` → `thought side puzzle nominee language glue enough cradle body`
   (1-based, all nine correct), tested both as an exclusive gap pool and merged
