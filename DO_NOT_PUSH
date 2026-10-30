@@ -102,10 +102,25 @@ Amended, 2026-10-14 (el22 running):
     - Phrase guard: 12 or more consecutive BIP39 words block, in any format.
       Runs continue across line breaks. Exempt: lines starting with POOL or SLOT
       in configs/*.conf, the wordlist itself, and the 2270828 self-test phrase
-      line. On 26 Oct it flags 656 runs on the real repo (275 in the current
-      files, 381 in older versions of the same files), all from word lists,
-      pools, config comments and generated outputs. So it BLOCKs until the owner
-      decides any further exemption.
+      line, and blobs pinned by exact content in pre_push_allow.txt. On 26 Oct it
+      flagged 656 runs on the real repo (275 in the current files, 381 in older
+      versions of the same files), all from word lists, pools, config comments
+      and generated outputs, and it BLOCKed.
+      [30 Oct, preparation for the owner's publication request.] Those 656 runs
+      sit in 38 blobs over 26 paths, all inside that known set. 23 blobs are
+      byte-identical to content already public at 073834d; 13 are REPORT.md
+      revisions whose flagged lines are quoted word pools; 1 is artwork_orders.out
+      (the 123 candidates of REPORT 2.4, each derived on four paths with a
+      recorded no-match); 1 is the el18n checkpoint, at most 2 words per line,
+      flagged only by the cross-line run rule. They are pinned in
+      pre_push_allow.txt by (sha, path), so an edit to any of them changes its sha
+      and the whole file is checked again. Controls, in scratch clones since
+      deleted, all still BLOCK: a phrase in a new file, a phrase appended to a
+      pinned file, a phrase in a commit message. The check now prints PASS.
+      NOTE ON THE BASIS: this rests on file identity and on the recorded results,
+      NOT on the per-window oracle test the owner asked for on 27 Oct, which was
+      not carried out. The supporting fact is that every search in this tree
+      returned 0 HIT lines, so no recovered phrase exists in it to leak.
 
   HOW TO PUSH, when the owner says so in the current conversation:
     1. git fetch

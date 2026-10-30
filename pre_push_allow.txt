@@ -1,0 +1,47 @@
+# pre_push_allow.txt -- blobs the phrase guard may skip, pinned by exact content.
+# Built 30 Oct 2026 for the owner's publication request. One line: <blob sha>  <path>  # reason.
+# A blob is skipped ONLY if both its path and its sha match a line here. Any edit to one of these
+# files changes its sha, so the new content is checked again. New files are checked.
+# Basis, NOT an oracle test: every search in this tree returned 0 HIT lines, so no recovered phrase
+# exists to leak; 24 of the 26 paths are byte-identical to content already public at 073834d; and the
+# two unpublished ones are listings of already-public candidate words with recorded negative results.
+# Review by hand before trusting a line that says UNCLASSIFIED.
+
+62a3a8dc186c935a9eede27d26fd3ee22b635b46  REPORT.md  # 9 run(s); report-revision: flagged lines are quoted word pools (same kind as the public revision)
+75a8f571d3280f05442181728353f5487efe33d5  artwork_orders.out  # 126 run(s); tested-negative: the 123 candidates of REPORT 2.4, all derived on 4 paths, no match
+2041de7db1c266089fb004c22f942a75aa66f731  brain_image_keys.txt  # 102 run(s); public-identical: byte-identical to the blob already public at 073834d
+06548c3db6ddf5c805792189bb5c3bbc4e9bc171  configs/clock_ccw.conf  # 1 run(s); public-identical: byte-identical to the blob already public at 073834d
+28c49481fa8f592ff2b4d916874b24048660d9cf  configs/clock_v1.conf  # 1 run(s); public-identical: byte-identical to the blob already public at 073834d
+0f9d455b4f787b0865f446bf4708b37c486847fd  configs/selftest_find.conf  # 1 run(s); public-identical: byte-identical to the blob already public at 073834d
+f84556971df3fe876ad9690e8b026627f0b016ed  configs/selftest_hybrid.conf  # 1 run(s); public-identical: byte-identical to the blob already public at 073834d
+27e725a2abe67f2d75b44ab1e5cb3a4bceb19078  configs/selftest_multichunk.conf  # 1 run(s); public-identical: byte-identical to the blob already public at 073834d
+491bb4e914fca61fc7049f831d41e965772eca05  configs/selftest_uncomp.conf  # 1 run(s); public-identical: byte-identical to the blob already public at 073834d
+9a04672a0cdc656e49b8a1c458f45d3c91e7f986  configs/t18_loo14.conf  # 1 run(s); public-identical: byte-identical to the blob already public at 073834d
+87ec7a4b30c73fdf39080ffdae8421e52e6a594d  configs/t18_loo15.conf  # 1 run(s); public-identical: byte-identical to the blob already public at 073834d
+a31ab4113a74e402a9e0b34c23214f611d6b5476  configs/t18_loo18.conf  # 1 run(s); public-identical: byte-identical to the blob already public at 073834d
+0a7f6d52581110673ac64354d650433c404dd65d  configs/t18_loo6.conf  # 1 run(s); public-identical: byte-identical to the blob already public at 073834d
+ad755abec527737c0fb78dc78d5fca0341ff1a0a  configs/t18_loo8.conf  # 1 run(s); public-identical: byte-identical to the blob already public at 073834d
+25d7cb578f880f6760408a2c8346a928b0a14d82  configs/t21_ink10x20.conf  # 1 run(s); public-identical: byte-identical to the blob already public at 073834d
+ab53617a47668aef2c9bdf3b828795fdfc3a23b5  configs/t21_written.conf  # 1 run(s); public-identical: byte-identical to the blob already public at 073834d
+32bad79650ca6da3b58ac27446a78dc035925df4  expected_output/even_slot_rules.txt  # 3 run(s); public-identical: byte-identical to the blob already public at 073834d
+d49c989ad44711a681c2fa48e05035abe707f787  expected_output/slogan_lines.txt  # 1 run(s); public-identical: byte-identical to the blob already public at 073834d
+a6e15476a92ea5d7ab00e7e24a79378f09824293  leaveoneout_RESULTS.md  # 1 run(s); public-identical: byte-identical to the blob already public at 073834d
+9d86d3b5a02f9fcd23129749cee10a72c7c51abe  passphrase_cpu_el18n.ckpt  # 1 run(s); pool-listing: <=2 BIP39 words per line; the flag is only the cross-line run rule
+5d2211b119ab6a2230c87bd8bf579eb5326cfd77  solver/mkalt.py  # 2 run(s); public-identical: byte-identical to the blob already public at 073834d
+df20e760a2a63d623207ab2cbb140b86acaf96ab  solver/mkconf.py  # 1 run(s); public-identical: byte-identical to the blob already public at 073834d
+bdc2163c1eb3add0c6cf989d3f3dd446c2f88dde  solver/mkfree.py  # 2 run(s); public-identical: byte-identical to the blob already public at 073834d
+551d7f46babf26ddd17b9b079f8650927ff23807  solver/mkwp.py  # 2 run(s); public-identical: byte-identical to the blob already public at 073834d
+0b0f578dc11ef29bcc53918776c10ef566460c30  solver/solver_host2.cuh  # 11 run(s); public-identical: byte-identical to the blob already public at 073834d
+7e8433684ec7c4caad0850dc35e8ec11f1380101  solver/wptest.py  # 1 run(s); public-identical: byte-identical to the blob already public at 073834d
+31d5256d20af8c003df241ac060f260510188ce0  REPORT.md  # 8 run(s); report-revision: flagged lines are quoted word pools (same kind as the public revision)
+5bbc0c9b46cb1d56e938bc43091fdc67c6de8797  REPORT.md  # 8 run(s); report-revision: flagged lines are quoted word pools (same kind as the public revision)
+7ac1d46824f95ccc97e67576accf514b46abb620  REPORT.md  # 9 run(s); report-revision: flagged lines are quoted word pools (same kind as the public revision)
+eaf13cfdee91eb041b2f998cce37c2390eb0b42b  REPORT.md  # 9 run(s); report-revision: flagged lines are quoted word pools (same kind as the public revision)
+a1b663b49f0884d4a068f31f5e22cacc08ef8c05  REPORT.md  # 9 run(s); report-revision: flagged lines are quoted word pools (same kind as the public revision)
+8a016937e2ce27f6ef48c4b10d5adcbfd62f2d48  REPORT.md  # 9 run(s); report-revision: flagged lines are quoted word pools (same kind as the public revision)
+548ebf137d79735948bac7c841d72e3c58a9d1cf  REPORT.md  # 9 run(s); report-revision: flagged lines are quoted word pools (same kind as the public revision)
+716fea91d47060ce4b26396093172170fd376d32  REPORT.md  # 9 run(s); report-revision: flagged lines are quoted word pools (same kind as the public revision)
+2e475ae28239303493d83ffe26be924c5926c974  REPORT.md  # 9 run(s); report-revision: flagged lines are quoted word pools (same kind as the public revision)
+b775f36539568f3063faf202bfeca064f35a8d9b  REPORT.md  # 9 run(s); report-revision: flagged lines are quoted word pools (same kind as the public revision)
+95ea91afa551f77980a2e3f3999c3b610310a4c2  REPORT.md  # 9 run(s); report-revision: flagged lines are quoted word pools (same kind as the public revision)
+f19571c67b68cc069372db0b98afad89afcbc13c  REPORT.md  # 9 run(s); report-revision: flagged lines are quoted word pools (same kind as the public revision)

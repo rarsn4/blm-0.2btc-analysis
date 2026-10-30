@@ -9,8 +9,10 @@
 #   3. Phrase guard: 12 or more consecutive BIP39 words block, in any format. Tokens are runs of letters
 #      (digits and punctuation separate them), compared case-insensitively with configs/bip39_en.txt.
 #      Runs continue across line breaks, so a wrapped phrase is still one run. Exempt, and breaking a
-#      run: lines starting with POOL or SLOT in configs/*.conf, the wordlist itself (a file named
-#      bip39_en.txt with exactly the wordlist's bytes), and the 2270828 self-test phrase line.
+#      run: lines starting with POOL or SLOT in configs/*.conf, the wordlist itself, and the 2270828
+#      self-test phrase line. Exempt by exact content: blobs pinned in pre_push_allow.txt (<sha> <path>),
+#      reviewed once by hand; editing such a file changes its sha, so the new content is checked again.
+#      A commit message is never exempt.
 # If origin/main cannot be resolved: BLOCK, never a fall-back to the current tree only.
 # A match's text is never printed: only commit, file, line and kind. Exit 0 PASS, 1 BLOCK.
 cd "$(dirname "$0")" || exit 1
@@ -49,11 +51,13 @@ HIT = re.compile(r'^\s*HIT\s+index\s+2270828\s*$')
 SELF = re.compile(r'^\s*phrase\s*:\s*tiger live melody ')
 CONF = re.compile(r'^configs/[^/]+\.conf$')
 POOLSLOT = re.compile(r'^(POOL|SLOT)\b')
+ALLOW_FILE = 'pre_push_allow.txt'
 
 def emit(where, path, line, kind): print(f'{where}:{path}:{line}:@{kind}')
 
-def scan(where, path, data, also=0):
+def scan(where, path, data, sha=None, also=0):
     if os.path.basename(path) == 'bip39_en.txt' and data == REF: return
+    if sha is not None and (path, sha) in ALLOW: SKIPPED.add((path, sha)); return
     lines = data.decode('utf-8', 'replace').split('\n')
     conf, doc = bool(CONF.match(path)), path in ('README.md', 'REPORT.md')
     run = start = last = 0
@@ -80,10 +84,21 @@ try:
             and all(w.isalpha() and w.islower() for w in words)):
         raise ValueError('configs/bip39_en.txt is not 2048 sorted, unique, lowercase words')
     W = set(words)
+    ALLOW, SKIPPED = set(), set()
+    if os.path.exists(ALLOW_FILE):
+        for ln in open(ALLOW_FILE):
+            ln = ln.split('#')[0].split()
+            if len(ln) >= 2:
+                if not re.fullmatch(r'[0-9a-f]{40}', ln[0]):
+                    raise ValueError(f'{ALLOW_FILE}: {ln[0][:12]}... is not a blob sha')
+                ALLOW.add((ln[1], ln[0]))
     for path in subprocess.run(['git', 'ls-files', '-z'], check=True, capture_output=True).stdout.decode().split('\0'):
         if not path: continue
         if os.path.islink(path): scan('worktree', path, os.readlink(path).encode())
-        elif os.path.isfile(path): scan('worktree', path, open(path, 'rb').read())
+        elif os.path.isfile(path):
+            data = open(path, 'rb').read()
+            sha = subprocess.run(['git', 'hash-object', path], check=True, capture_output=True).stdout.decode().strip()
+            scan('worktree', path, data, sha)
     commits = sys.argv[1:]
     seen = {}                                   # (path, blob) -> [commits containing it], oldest first
     for c in reversed(commits):
@@ -96,11 +111,12 @@ try:
     for (path, sha), cs in seen.items():
         cat.stdin.write(sha.encode() + b'\n'); cat.stdin.flush()
         size = int(cat.stdout.readline().split()[2]); data = cat.stdout.read(size); cat.stdout.read(1)
-        scan(cs[0], path, data, len(cs) - 1)
+        scan(cs[0], path, data, sha, len(cs) - 1)
     cat.stdin.close(); cat.wait()
     for c in commits:
         scan(c, '(commit message)', subprocess.run(['git', 'log', '-1', '--format=%B', c], check=True, capture_output=True).stdout)
-    print('guard:(phrase guard):0:@done')
+    unused = sorted(ALLOW - SKIPPED)
+    print(f'guard:(phrase guard):0:@done {len(ALLOW)} allow-list entr(ies), {len(SKIPPED)} matched, {len(unused)} unused')
 except Exception as e:
     print(f'guard:(phrase guard failed: {type(e).__name__}):0:@error')
 PY
@@ -109,7 +125,7 @@ PY
   { c = $0; sub(/:.*/, "", c); r = substr($0, length(c) + 2)
     f = r; sub(/:.*/, "", f); r = substr(r, length(f) + 2)
     n = r; sub(/:.*/, "", n); t = substr(r, length(n) + 2)
-    if (t == "@done") { done = 1; next }
+    if (t ~ /^@done/) { done = 1; allowinfo = substr(t, 7); next }
     doc = (f == "README.md" || f == "REPORT.md"); prev = c ":" f ":" (n - 1)
     if (doc && t ~ /^[ \t]*HIT[ \t]+index[ \t]+2270828[ \t]*$/) { hit[c ":" f ":" n] = 1; next }
     if (doc && t ~ /^[ \t]*phrase[ \t]*:[ \t]*tiger live melody / && (prev in hit)) { ok[prev] = 1; next }
@@ -125,4 +141,5 @@ PY
         bad = npat + npriv + nphr + nerr
         printf "%s: %d unpushed commit(s) after %s (trees and messages) + the current tracked files\n", (bad ? "BLOCK" : "PASS"), ncommits, substr(base, 1, 7)
         printf "  pattern %d, private deny-list %d (%s), phrase guard %d, errors %d\n", npat + 0, npriv + 0, (np ? "checked" : "no list file"), nphr + 0, nerr + 0
+        printf "  allow-list:%s\n", allowinfo
         exit bad ? 1 : 0 }'
