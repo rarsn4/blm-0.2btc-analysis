@@ -1108,7 +1108,7 @@ difference has never been tabulated.
 | 9 | `eye` | depicted | pyramid 4+5 |
 | 16 | `rifle` | depicted | the 16 of M16 |
 | 19 | `glove` | depicted | the 19 of CVD19 |
-| 5 | `police` | depicted | "line five" — a convention used nowhere else in the table |
+| 5 | `police` | depicted — and **written** on the canvas, in `END POLICE BRUTALITY` of the slogan block (word_census.tsv, 31 Oct). Like `black` at 10 this is running prose with no positional mark, so it is **not** a support upgrade: it says where the word came from, not where it goes | "line five" — a convention used nowhere else in the table |
 | 12 | `vote` | association only | the `.VS.` ambigram |
 | 17 | `gold` | inferred from the chart | inferred from the chart |
 | 11 | `pyramid` | depicted | **worse than contested.** The stated conflict is pyramid 5+6 against the Space Needle, but freeing slot 11 found **no candidate fits at all** — *on path 1 only*, over 55 candidates that include `space` but **not** `eye` or `tower`, with slot 20 pinned to `second` (§2.13's path-coverage note). So the problem is not choosing between two words; it is that neither of the two tested is right, and the object's other BIP39 names were never tried |

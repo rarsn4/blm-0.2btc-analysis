@@ -46,3 +46,4 @@ b775f36539568f3063faf202bfeca064f35a8d9b  REPORT.md  # 9 run(s); report-revision
 95ea91afa551f77980a2e3f3999c3b610310a4c2  REPORT.md  # 9 run(s); report-revision: flagged lines are quoted word pools (same kind as the public revision)
 f19571c67b68cc069372db0b98afad89afcbc13c  REPORT.md  # 9 run(s); report-revision: flagged lines are quoted word pools (same kind as the public revision)
 8676d61df5aa92ff890f074d6bbdc364195368bc  REPORT.md  # 9 run(s); report-revision: flagged lines are quoted word pools (same kind as the public revision); revision of 30 Oct adding the 2.4 first-publication note
+be805cb36a6ee55e2b924680f8c6ff2f121cf628  REPORT.md  # 9 run(s); report-revision: flagged lines are quoted word pools; revision of 31 Oct adding the 2.17 police note
