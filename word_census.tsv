@@ -1,0 +1,185 @@
+# Word census of the master image, sha256 d0b04378f75d63997b8034ec2ef1bdd108178e4546de78237bd35abf4189a782
+# Aggregated from the existing census; no pixels read. See word_census.py for the three
+# de-duplication rules and the section B coverage warning (B is a SAMPLE, not a census).
+section	word	count	bip39
+A_display	the	8	
+A_display	is	3	
+A_display	this	3	BIP39
+A_display	a	2	
+A_display	for	2	
+A_display	no	2	
+A_display	not	2	
+A_display	shall	2	
+A_display	stop	2	
+A_display	to	2	
+A_display	and	1	
+A_display	any	1	BIP39
+A_display	as	1	
+A_display	been	1	
+A_display	bitcoin	1	
+A_display	black	1	BIP39
+A_display	blm	1	
+A_display	brave	1	BIP39
+A_display	breathe	1	
+A_display	brutality	1	
+A_display	caccobus	1	
+A_display	can	1	BIP39
+A_display	causas	1	
+A_display	cognoscere	1	
+A_display	convicted	1	
+A_display	covid	1	
+A_display	crime	1	BIP39
+A_display	cvd	1	
+A_display	dixit	1	
+A_display	duly	1	
+A_display	end	1	BIP39
+A_display	es	1	
+A_display	esse	1	
+A_display	et	1	
+A_display	except	1	
+A_display	exist	1	BIP39
+A_display	fiat	1	
+A_display	find	1	BIP39
+A_display	first	1	BIP39
+A_display	fuck	1	
+A_display	future	1	BIP39
+A_display	have	1	BIP39
+A_display	hoax	1	
+A_display	i	1	
+A_display	in	1	
+A_display	involuntary	1	
+A_display	jurisdiction	1	
+A_display	justice	1	
+A_display	justitia	1	
+A_display	killer	1	
+A_display	killing	1	
+A_display	lives	1	
+A_display	matter	1	BIP39
+A_display	moon	1	BIP39
+A_display	more	1	BIP39
+A_display	mundus	1	
+A_display	neither	1	BIP39
+A_display	new	1	
+A_display	niger	1	
+A_display	nor	1	
+A_display	ollae	1	
+A_display	one	1	BIP39
+A_display	only	1	BIP39
+A_display	or	1	
+A_display	order	1	BIP39
+A_display	party	1	BIP39
+A_display	pay	1	
+A_display	peace	1	BIP39
+A_display	pereat	1	
+A_display	phrase	1	BIP39
+A_display	picture	1	BIP39
+A_display	place	1	BIP39
+A_display	police	1	BIP39
+A_display	prediction	1	
+A_display	punishment	1	
+A_display	quam	1	
+A_display	real	1	BIP39
+A_display	rerum	1	
+A_display	section	1	BIP39
+A_display	seed	1	BIP39
+A_display	servitude	1	
+A_display	shit	1	
+A_display	sic	1	
+A_display	slavery	1	
+A_display	stability	1	
+A_display	states	1	
+A_display	subject	1	BIP39
+A_display	their	1	
+A_display	tower	1	BIP39
+A_display	united	1	
+A_display	us	1	
+A_display	vs	1	
+A_display	welcome	1	BIP39
+A_display	whereof	1	
+A_display	within	1	
+A_display	world	1	BIP39
+A_display	биткоины	1	
+A_display	будут	1	
+A_display	двух	1	
+A_display	день	1	
+A_display	зашифрованы	1	
+A_display	здесь	1	
+A_display	на	1	
+A_display	надеюсь	1	
+A_display	номер	1	
+A_display	присылать	1	
+A_display	сумма	1	
+A_display	чисел	1	
+A_display	чёрный	1	
+A_display	я	1	
+B_microtext	the	4	
+B_microtext	of	2	
+B_microtext	received	2	
+B_microtext	that	2	BIP39
+B_microtext	after	1	
+B_microtext	agreed	1	
+B_microtext	at	1	
+B_microtext	au	1	
+B_microtext	cent	1	
+B_microtext	checks	1	
+B_microtext	common	1	BIP39
+B_microtext	ding	1	
+B_microtext	double	1	BIP39
+B_microtext	each	1	
+B_microtext	every	1	
+B_microtext	first	1	BIP39
+B_microtext	for	1	
+B_microtext	in	1	
+B_microtext	introdue	1	
+B_microtext	is	1	
+B_microtext	it	1	
+B_microtext	majority	1	
+B_microtext	mint	1	
+B_microtext	needs	1	
+B_microtext	nodes	1	
+B_microtext	or	1	
+B_microtext	payee	1	
+B_microtext	proof	1	BIP39
+B_microtext	ral	1	
+B_microtext	solution	1	BIP39
+B_microtext	spen	1	
+B_microtext	they	1	BIP39
+B_microtext	thority	1	
+B_microtext	time	1	BIP39
+B_microtext	tion	1	
+B_microtext	to	1	
+B_microtext	transac	1	
+B_microtext	transaction	1	
+B_microtext	was	1	
+B_microtext	were	1	
+B_microtext	which	1	
+
+# elements counted, section A (one line per painted element)
+#   FIND THE SEED PHRASE / IN THE THIS PICTURE	[HEADLINE]	8 words
+#   statue base caption	[HEADLINE]	3 words
+#   COVID sign	[HEADLINE]	7 words
+#   I CAN NOT BREATHE	[HEADLINE]	4 words
+#   BLACK LIVES MATTER ... NOT ONE MORE	[HEADLINE/BLOCK]	16 words
+#   WELCOME TO THE / BRAVE / NEW WORLD	[HEADLINE]	6 words
+#   ONLY real BITCOIN / PAY FOR THE FUTURE. / THIS IS THE FIRST PREDICTION.	[HEADLINE]	12 words
+#   FUCK THIS SHIT	[HEADLINE]	3 words
+#   STOP (Liberty, O -> fist)	[census_crops ELEMENTS]	1 words
+#   BLM (card)	[CENSUS_MISC]	1 words
+#   .VS. (ambigram)	[CENSUS_MISC]	1 words
+#   clock hand (minute)	[CENSUS_MISC]	1 words
+#   clock hand (second)	[CENSUS_MISC]	1 words
+#   vial label	[CENSUS_MISC]	1 words
+#   seal ring (mirror-written)	[LATIN_MOTTOS]	3 words
+#   pyramid base	[LATIN_MOTTOS]	5 words
+#   bottom Latin line	[LATIN_MOTTOS]	8 words
+#   13th Amendment copy	[AMENDMENT]	33 words
+#   clock caption (rune)	[RUSSIAN]	3 words
+#   right-edge line (rune), longest transcribed form	[RUSSIAN]	7 words
+#   rune fragment	[RUSSIAN]	2 words
+#   rune fragment	[RUSSIAN]	2 words
+# elements counted, section B
+#   E of BRAVE (REPORT 1.4), as transcribed incl. the typo `introdue`	[MICROTEXT]	21 words
+#   whitepaper micro-text fragment	[WHITEPAPER]	26 words
+# not words, excluded from the tables
+#   target address (letters of 34 chars)	1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ
+#   dates	1865 / 2020 / 1865-202?
