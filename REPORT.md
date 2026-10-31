@@ -2370,6 +2370,31 @@ sit midway between two adjacent numerals, within ~1.5°.
 | minutes | 1 and 2 | **3** | `tower` |
 | hours | 10 and 11 | **21** | *(blank)* |
 
+> **[MEASURED, 31 Oct 2026] The "within ~1.5°" above is true of two hands, not of
+> three.** Re-measured from the pixels, as the weighted centre of each hand's dark
+> radial run out of the hub, against a numeral grid whose 18.75° offset is fixed by
+> the same measurement (`clock_overlap_measurement.md`):
+>
+> | hand | direction | between | fraction of the interval | off the midpoint | sum |
+> |---|---|---|---|---|---|
+> | minute | 332.38° | 1 and 2 | 0.45 | **1.37°** | 3 (`tower`) |
+> | second | 302.62° | 12 and 1 | 0.46 | **1.13°** | 13 (`moon`) |
+> | hour | 238.49° | 10 and 11 | 0.32 | **5.26°** | 21 *(blank)* |
+>
+> **Slot 21 stands, and it is the loosest of the three clock slots.** The hour hand
+> lies unambiguously between numerals 10 and 11 — a fraction of 0.32 is well inside
+> the interval and no other pair is reachable — so the sum 21 is not in doubt. But
+> it sits **5.26° off the midpoint, about four times the error of the other two**.
+> The minute and second hands sit essentially *on* their midpoints, which is what a
+> "sum of two numbers" mechanism requires; the hour hand does not, and the sentence
+> above did not distinguish them. Slot 21 already carries no word (§5); this says the
+> hand that names it is placed less precisely than the two that carry words.
+>
+> *An earlier draft of this note reported the hour hand as absent. That was a
+> threshold fault — ink < 205 over radius 40–150 misses it — not a finding. At
+> ink < 215 over radius 30–120 it is a continuous dark run from 5 to 117 px out of
+> the hub, 3.5° wide.*
+
 The runes beneath decode to `Сумма двух чисел` — "sum of two numbers" — stating
 the mechanic outright.
 
