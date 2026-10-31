@@ -260,3 +260,58 @@ Coverage of the whole space rests on the segment chain in el22_segments.tsv, not
 Both stops are chunk-aligned and each resume index equals the stop index. The survivor counter restarts on resume, so
 the first two segments (39.66% and 34.64% of the space) have no survivor count; the band test covers the third
 (25.71%) only.
+
+## Three batches of 31 Oct 2026 (run_queue_oct31.sh): clock rotations, black-as-digit, this@3
+Committed before launch. 15 configs, 21 words, 4 paths each, 49,589,822,592 candidates each (= 54^6 x 2, the
+t21_readme54 space), 18.8 GPU-h total at 11.0M cand/s (17.8 h at 11.6M). Every one is a strict permutation or
+transposition of t21_readme54's slot map, which is WHY the space and band are identical to it.
+
+Band for all 15: 387,420,489.0 survivors, sigma 19,283 (stratified, 0.983533 x binomial) -- EXCEPT t21_clk9, whose
+sigma is 19,606 (binomial): it pins `tower` at slot 21, so slot 21 is no longer @POOL and the stratified model does
+not apply. Same mu either way, because the space is the same.
+
+Overlaps: ZERO, for every pair and against everything already run. Each config pins a different word at a different
+slot, so the boxes are disjoint. New against the 50-run EVIDENCED union: 743,847,338,880 = 100%. New against
+EVIDENCED plus the 16 finished-but-unadmitted runs: the same 743,847,338,880. Batch own union = naive sum, inter-box
+term 0 (closed form and tally2 agree).
+
+### Batch 1: the eight clock rotations (t21_clk2..t21_clk9)
+Reason, stated on the canvas: the rune caption under the clock decodes to `Сумма двух чисел`, "sum of two numbers",
+and each hand sits between two numerals which are added -- the mechanism that gives moon@13 (12+1), tower@3 (1+2) and
+the empty slot 21 (10+11). WHICH numerals a hand sits between depends on which way is up, and that has never been
+tested. Of the 12 orientations, 3 are impossible (they need slot 23, past a 21-word phrase) and 1 is the painted one,
+leaving these 8. [ASSUMED] orientation: no evidence selects a rotation.
+SWAP construction, as instructed: a strict permutation of the involved slots {3, 13, s, m}, so the space is unchanged.
+The drop construction was NOT built (it would be 152 GPU-days each, 3.3 GPU-years for the batch).
+
+| config | rot | moon -> | tower -> | hour hand names | permutation |
+|---|---|---|---|---|---|
+| t21_clk2 |  60° | 5 | 7 | 13 | 3:police 5:moon 7:tower 13:liberty |
+| t21_clk3 |  90° | 7 | 9 | 3 | 3:liberty 7:moon 9:tower 13:eye |
+| t21_clk4 | 120° | 9 | 11 | 5 | 3:eye 9:moon 11:tower 13:pyramid |
+| t21_clk5 | 150° | 11 | 13 | 7 | 3:pyramid 11:moon 13:tower |
+| t21_clk6 | 180° | 13 | 15 | 9 | 3:@POOL 15:tower (moon stays at 13) |
+| t21_clk7 | 210° | 15 | 17 | 11 | 3:@POOL 13:gold 15:moon 17:tower |
+| t21_clk8 | 240° | 17 | 19 | 13 | 3:gold 13:glove 17:moon 19:tower |
+| t21_clk9 | 270° | 19 | 21 | 15 | 3:glove 13:@POOL 19:moon 21:tower |
+
+Two are worth naming. t21_clk6 (180°, upside down) keeps moon at 13 and moves tower to 15: an upside-down clock agrees
+with the template on one word and contradicts it on the other. t21_clk9 (270°) puts `tower` at slot 21 -- the slot the
+hour hand currently names and leaves empty, and REPORT section 6's open item "a word for slot 21". This is NOT covered
+by t21_loo21, which swept all 2048 words at 21 while tower still sat at 3; here slot 3 is vacated instead.
+
+### Batch 2: black as a single digit (t21_blackd2,3,4,5,7,9)
+Reason, stated on the canvas: the right-edge rune line reads `чёрный день номер X` -- "black day number X". X is the
+single glyph nobody can read; REPORT 7.4 concludes a key is missing, not that the image needs upscaling. So black's
+slot is whatever digit X is, and one glyph is one digit. Slot 10 is only one reading of X, and REPORT 2.17 already
+rates black@10 as resting on that unreadable glyph. Digits 1, 6 and 8 are already tested (t21_slot1 covers black@1 as
+one of six words at slot 1; t21_black6 and t21_black8 are evidenced), leaving 2, 3, 4, 5, 7, 9.
+Each is a transposition with slot 10, which takes the displaced word: 2<->camera, 3<->tower, 4<->mask, 5<->police,
+7<->liberty, 9<->eye. [ASSUMED] digit value.
+
+### Batch 3: t21_this3
+`this` at slot 3, tower removed. Reason: `this` is the ONLY repeated BIP39 word in the display text of the master
+image -- 3 occurrences (word_census.tsv, 30 Oct; nothing else in section A exceeds 1 except non-BIP39 function words).
+THIS CONTRADICTS tower@3, and tower@3 is one of the three best-supported assignments in the whole template: tower is
+WRITTEN on the minute hand and the clock caption supplies its slot (REPORT 2.17). Repetition in the display text is
+not a position argument. This run CLOSES the repeated-word idea; it does not back it. [ASSUMED].
