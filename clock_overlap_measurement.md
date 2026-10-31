@@ -18,9 +18,25 @@ the centre, and both land almost exactly on a numeral midpoint:
 | 332.38° | numerals 1 and 2 | 0.45 | **3** | `tower`@3 |
 | 302.62° | numerals 12 and 1 | 0.46 | **13** | `moon`@13 |
 
-Both reproduce REPORT 2.17 exactly, which validates the 18.75° frame. **The hour hand at 10+11 = 21 was NOT
-detected** by the same scan; nothing radial appears near 243.75°. That is a gap in this measurement, not a
-refutation — the hour hand is short and the statue crosses that sector — but it is recorded as unconfirmed here.
+Both reproduce REPORT 2.17 exactly, which validates the 18.75° frame.
+
+*[CORRECTED 31 Oct, same day.] The first version of this file said the hour hand "was NOT detected". That was
+wrong, and the fault was mine: the scan used ink < 205 over radius 40–150, and the hand is fainter than that.*
+**The hour hand is there.** At ink < 215 over radius 30–120 it is an unmistakable spoke — a continuous dark run
+from **5 to 117 px** out of the hub, **3.5° wide**, weighted centre **238.49°**. It is a hand, not a blob: it
+starts at the centre and runs 112 px.
+
+| hand | direction | between | fraction | off midpoint | sum |
+|---|---|---|---|---|---|
+| minute | 332.38° | 1 and 2 | 0.45 | 1.37° | 3 (`tower`) |
+| second | 302.62° | 12 and 1 | 0.46 | 1.13° | 13 (`moon`) |
+| **hour** | **238.49°** | **10 and 11** | **0.32** | **5.26°** | **21** |
+
+**Slot 21's basis is confirmed, and it is weaker than the other two.** The hand unambiguously lies between
+numerals 10 and 11 — fraction 0.32 is well inside the interval, and no other pair is reachable — so the sum 21
+stands. But it sits **5.26° off the midpoint, about four times the error of the other two hands** (1.37° and
+1.13°). The minute and second hands sit essentially on their midpoints, as the "sum of two numbers" mechanism
+requires; the hour hand does not, to a degree the record does not mention.
 
 ## 1. Every clock numeral: position and legibility
 

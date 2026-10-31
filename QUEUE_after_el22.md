@@ -315,3 +315,31 @@ image -- 3 occurrences (word_census.tsv, 30 Oct; nothing else in section A excee
 THIS CONTRADICTS tower@3, and tower@3 is one of the three best-supported assignments in the whole template: tower is
 WRITTEN on the minute hand and the clock caption supplies its slot (REPORT 2.17). Repetition in the display text is
 not a position argument. This run CLOSES the repeated-word idea; it does not back it. [ASSUMED].
+
+## t21_single (after the 31 Oct rotation batch): the single-numeral reading
+Committed before launch, 31 Oct 2026. t21_readme54 with SLOT 4 `eye` and SLOT 6 `pyramid`; slots 9 and 11 vacated
+to the 54-word gap pool. eye and pyramid are MOVED, not duplicated; `mask` is dropped from slot 4.
+
+| config | candidates | band (survivors) | gaps | GPU time |
+|---|---|---|---|---|
+| t21_single (4 paths) | 2,677,850,419,968 = 54^7 x 2 | 20,920,706,406.0 +/- 141,701 (stratified, 0.983533) | 7 | 64.1-67.6 h = 2.82 GPU-days |
+
+NOTE THE COST. This is not a 1.3-hour run like the rotation batch. Filling slot 6 while vacating 9 and 11 is a NET
+GAIN of one gap, so the space is 54^7 x 2, fifty-four times t21_readme54.
+
+Reason: reads the clock overlap as the SINGLE numeral an object sits on (eye on numeral 4, pyramid on numeral 6)
+rather than the sum of the pair.
+
+THREE OBJECTIONS, recorded because this run CLOSES the idea rather than backing it:
+1. It contradicts the canvas caption `Сумма двух чисел`, "sum of two numbers", which states the mechanism outright.
+2. It contradicts tower@3 and moon@13, which only work as SUMS of a numeral pair. Those are the template's
+   best-supported assignments, and the 31 Oct measurement confirms both from hand directions lying within 1.4 deg
+   of a numeral midpoint.
+3. The same measurement puts the pyramid on numerals 5 and 6 almost equally -- 52.7% vs 52.3% ink over the numeral
+   box -- so choosing 6 over 5 has no basis in the pixels.
+
+COVERAGE: never run before. Overlap is ZERO with t21_loo6, t21_free9_p1, t21_free11_p1, t21_free11 and
+t21_readme54, and new against the 50-run EVIDENCED union is the full 2,677,850,419,968 = 100%. The reason is slot 4:
+every one of those keeps `mask` there, and this config puts `eye` there, so the boxes are disjoint at that slot
+alone. t21_loo6 sweeps slot 6 over all 2048 words (so it does include pyramid@6) but still holds mask@4, eye@9 and
+pyramid@11, which is a different joint placement.
