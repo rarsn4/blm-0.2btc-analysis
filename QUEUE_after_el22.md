@@ -343,3 +343,68 @@ t21_readme54, and new against the 50-run EVIDENCED union is the full 2,677,850,4
 every one of those keeps `mask` there, and this config puts `eye` there, so the boxes are disjoint at that slot
 alone. t21_loo6 sweeps slot 6 over all 2048 words (so it does include pyramid@6) but still holds mask@4, eye@9 and
 pyramid@11, which is a different joint placement.
+
+## t21_nose2 (after t21_single): slot 2 = nose
+Committed before launch, 1 Nov 2026. t21_readme54 with SLOT 2 `nose`, camera removed. 4 paths.
+49,589,822,592 candidates, band 387,420,489.0 +/- 19,283 (stratified, 0.983533), 1.19 GPU-h, 100% new.
+
+REASON: slot 2 is rated weak in REPORT 2.17 -- `camera` rests on a COUNT, and 2.17 records the even slots
+2/4/10/12/16/20 as ink-supported: NONE.
+NOT the stated reason: the claim that a digit "2" is drawn near the bust's neck was MEASURED FALSE on 1 Nov. The
+band scores -0.009 against the artist's own `1` from 1865 and about zero against every other digit
+(three_object_measurement.md addendum). The 1 Nov face measurement also found Liberty's nose UNEXAGGERATED
+(nose/face-width 0.333 vs the real statue's 0.450, with the eye undersized alongside it), so there is no image
+evidence for the word `nose` either. [ASSUMED], no position evidence. `nose` is BIP39 #1204.
+
+SKIPPED as already covered: food@1. t21_slot1 carries SLOT 1 `welcome|brave|world|black|food|top` and ran on
+26-27 Oct (survivors 2,324,505,174, z -0.376), so `food` at slot 1 on all four paths is done.
+
+## PROPOSED, NOT STARTED: close free-one-fixed on paths 2-4 (the REPORT 2.13 [SCOPE] gap)
+Priced 1 Nov 2026 from the 31 Oct batch's own 15 wall times: 10.62-11.92M cand/s, mean 11.58M, 4 paths.
+AWAITING THE OWNER'S CONFIRMATION OF COST. Bands are committed here; nothing is queued.
+
+Twelve slots are still free-one-fixed on path 1 only: 1, 2, 4, 5, 7, 9, 10, 11, 12, 16, 17, 19. (Of the thirteen
+in 2.13's [SCOPE] note, slot 20 was closed by t21_free20 on 24-25 Oct.)
+
+Each config is the 4-path twin of its t21_freeN_p1: identical word box, identical candidate count,
+1,363,720,121,280 = 54^6 x 55 (the freed slot takes 55 words; slot 20 stays pinned to `second`).
+Band for every one: 10,654,063,447.5 +/- 101,122 (stratified).
+
+IDENTITY, not just a band. Survivors do not depend on the derivation path, so each run MUST reproduce its _p1
+counterpart's logged count EXACTLY, exactly as t21_free20 reproduced t21_free20_p1's 10,847,704,031:
+
+| config | must equal | | config | must equal |
+|---|---|---|---|---|
+| t21_free1 | 10,654,092,960 | | t21_free10 | 10,654,089,154 |
+| t21_free2 | 10,653,915,344 | | t21_free11 | 10,654,060,452 |
+| t21_free4 | 10,654,138,418 | | t21_free12 | 10,654,012,263 |
+| t21_free5 | 10,654,060,538 | | t21_free16 | 10,653,972,836 |
+| t21_free7 | 10,653,988,011 | | t21_free17 | 10,653,994,687 |
+| t21_free9 | 10,654,207,551 | | t21_free19 | 10,654,167,169 |
+
+COST: 16,364,641,455,360 candidates total.
+  4-path configs (as built): 16.4 GPU-days at the mean, range 15.9-17.8 days.
+  paths 2-4 only (3-path): T3/T4 = 0.891 from the solver's own model (T4/T1 = 1.484 -> P = 5.198X), so 14.6
+  GPU-days -- saves 1.8 days and loses the path-1 control. Recommend the 4-path version.
+This is close to REPORT 2.13's own estimate of 377 h ~ 15.7 days for thirteen slots, which is a useful check.
+
+THE LEDGER GAINS NOTHING: new candidates against the 50-run EVIDENCED union = **0**. tally2 counts word boxes and
+does not model paths, and every one of these boxes is already in the union via its _p1 twin. What 16.4 GPU-days
+buys is the WORD "exhausted": REPORT 2.13's [SCOPE] note says a one-path run does not exhaust its box over the
+path set, and that on paths 2-4 a single wrong assigned word is still open at twelve of the fifteen slots. This
+run closes that, and with it the a=1 branch's 8.3% of probability mass, which is currently closed on path 1 only.
+
+PROPOSED ORDER, weakest-supported slot first, so the most likely slots are tested earliest:
+  1. t21_free11  slot 11 -- 2.17 reports it fits NOTHING; the only slot already tested and failed
+  2. t21_free2   slot 2  -- count-only, ink-supported NONE
+  3. t21_free4   slot 4  -- count-only, ink-supported NONE
+  4. t21_free12  slot 12 -- association only (the .VS. ambigram)
+  5. t21_free16  slot 16 -- count-only (the 16 of M16)
+  6. t21_free17  slot 17 -- inferred from the chart, both word and slot
+  7. t21_free10  slot 10 -- rests on the unreadable glyph X
+  8. t21_free19  slot 19 -- count-only (the 19 of CVD19)
+  9. t21_free9   slot 9  -- depicted, pyramid 4+5
+ 10. t21_free5   slot 5  -- depicted, "line five" convention used nowhere else
+ 11. t21_free7   slot 7  -- depicted, crown points
+ 12. t21_free1   slot 1  -- `subject` is WRITTEN in the Amendment copy and carries the one underline; strongest
+                            of the twelve, so last
