@@ -80,3 +80,25 @@ Nothing here opens a slot or supplies a word.
   is new here is only that the word is **physically written in the artwork**, which the record did not say. That
   is a provenance fact, not a position: nothing places `food` at a slot.
 - `BREATHE` is not BIP39 (REPORT §2.6), and the band carries no number, so it supplies neither a word nor a slot.
+
+## Addendum, 1 Nov: are the spire and the neck band drawn digits `1` and `2`?
+
+Asked whether the Needle's spire is a written `1` and the bust's neck band a written `2`. Tested against the
+artist's OWN digits, taken from `1865` beside the statue, with the harness used for glyph X (ink bbox -> 32x32,
+z-scored, Pearson).
+
+Calibration, different digits by the same hand: 8/6 +0.484, 1/6 +0.378, 1/8 +0.362, 6/5 +0.200, 1/5 +0.058.
+
+| shape | vs `1` | vs `8` | vs `6` | vs `5` |
+|---|---|---|---|---|
+| Needle spire (x1181-1194, y365-425) | **+0.071** | +0.298 | +0.208 | +0.287 |
+| neck band (x1360-1425, y528-546) | **-0.009** | -0.021 | -0.078 | +0.167 |
+
+**Neither is a digit.** The spire's WORST match of the four is `1` itself: it resembles `8` and `5` more than the
+digit it is supposed to be, and +0.071 sits at the floor for different digits (1 vs 5 = +0.058). The band scores
+about zero against everything and is not a glyph at all. Structurally the artist's `1` carries a flag at the
+top-left and a thick tapering body; the spire is a bare thin line with neither.
+
+The spire is the tower's antenna, continuous with the structure below it, and the band is the `BREATHE` sash.
+Recorded because a shape resembling a digit is not a digit, and this project has retracted one such reading
+before on base-rate grounds while `.VS.` -> `·12·` survived on measurement.
