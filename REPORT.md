@@ -37,7 +37,7 @@ Claims below are tagged. Do not promote a tag without new evidence.
 | **[TESTED]** | A finite corpus tried, empty. **Not** an elimination of the class. |
 | **[INFERRED]** | Follows from measured facts by a stated argument. |
 | **[ASSUMED]** | Load-bearing but unproven. The soft spots. |
-| **[DEFECT]** | A fault in this project's own method or machine, found and dated. §1.7. |
+| **[DEFECT]** | A fault in this project's own method or machine, found and dated. §1.7, §1.8. |
 
 The distinction between [EXHAUSTED] and [TESTED] is the one that matters: §2.1–2.11
 are the first, §2.12 is the second, and conflating them would be the only overclaim
@@ -45,12 +45,14 @@ in this document.
 
 ---
 
-## 1. Six defects in the shared data — and one in ours
+## 1. Six defects in the shared data — and two in ours
 
-§1.1–1.6 are faults in the data the community shares. **§1.7 is a fault of this
-project's own**, and it is the more serious of the two kinds, so it is not buried:
-for five weeks this project accrued negatives on a solver binary that had never
-passed a self-test.
+§1.1–1.6 are faults in the data the community shares. **§1.7 and §1.8 are faults of
+this project's own**, and they are the more serious kind, so they are not buried: for
+five weeks this project accrued negatives on a solver binary that had never passed a
+self-test (§1.7), and for five weeks it hashed a transcription that was never checked
+back against the image (§1.8). They have the same shape — something written down once,
+trusted thereafter, never re-measured.
 
 ### 1.1 `breathe` is not a BIP39 word
 
@@ -224,6 +226,110 @@ stale silently but a passing test cannot. The stamp is keyed on the binary's **s
 so a rebuild invalidates it automatically with no edit to any script; a cached pass costs
 0.02 s and a cold one about 15 s. Also recorded in `DO_NOT_PUSH` and
 `machine_verification.md`.
+
+### 1.8 [DEFECT, found 2026-11-02, five of six still open] A one-letter transcription error invalidated part of the brainwallet negative, and survived five weeks because the transcription was never checked against the image again
+
+**This is the second defect of this project's own**, and it has the same shape as §1.7:
+something was written down once, trusted thereafter, and never re-measured.
+
+#### What happened
+
+The §2.12 image-text brainwallet corpus hashes transcriptions of the strings painted on
+the canvas. The bottom Latin line was transcribed **`caccobus`**. The canvas reads
+**`caccabus`** — the 5th glyph is a single-storey `a`, flat-topped with a straight right
+stem, against the closed round `o` of `ollae` two words later as the control. *caccabus*
+is also the correct Latin, and it matches §7's own gloss.
+
+**SHA-256 does not forgive one letter.** Every key derived from that line, in every
+casing and every stripping variant — 206 strings in the generated key list — hashed a
+string that **is not on the canvas**, and the string that **is** on the canvas was never
+tested, in any casing. Those keys are not a negative for the drawn line. They are a
+negative for a word nobody wrote.
+
+The error entered in the first transcription pass and was copied into
+`census_crops.py`, `word_census.py`, `brain_image_corpus.py`, `expected_output/`,
+`word_census.tsv`, `brain_image_keys.txt` and twice into this report. It was found on
+2 Nov 2026 only because the owner asked an unrelated question about casing, which forced
+the line to be read off the pixels again — **the first time anyone had looked at it since
+the transcription was made.**
+
+#### What the re-read then found
+
+Being wrong once is a mistake; being wrong without a check is the defect. So every
+element was re-read against the drawn letterforms, from the image, not from any
+transcription file. Method, coordinates and per-element evidence: `letterform_audit.md`.
+
+Of the 26 audit units (`word_census.py`'s own element list), 4 are rune decodes and out
+of scope for a letterform read. **Of the remaining 22, six differ from the corpus:**
+
+| element | corpus holds | canvas reads | kind |
+|---|---|---|---|
+| COVID sign | `COVID IS A HOAX IS THE KILLER` | `COVID 19 IS A HOAX 5G IS THE KILLER` | two whole tokens missing |
+| bottom Latin line | `…caccobus ollae` | `…caccabus ollae` | spelling — **fixed 2 Nov** |
+| 13th Amendment copy | `Section Neither slavery…` | `Section 1.` heading; `servitude,` `States,` `jurisdiction.` | content + punctuation |
+| E-of-BRAVE micro-text | `…every transac tion for double spen ding. After` | `…every / tran / sacti / ons. / For double spen / ding. After` | spelling, split, punctuation, casing |
+| bottom whitepaper caption | `…received The payee…transaction the majority…` | `…received. The payee…transaction, the majority…` | punctuation |
+| dates | `1865-202?` | `1865-202...?` | punctuation |
+
+Two of the six are measured at **native pixels**, not from an upscale, per §9's rule:
+
+- the ellipsis is three ink blobs, 14/13/13 px, evenly stepped at x318–321, x323–326,
+  x328–331 y707–719, separate from the red `?`'s own dot at x334–337;
+- the micro-text lines run **19 px / 19 px / 15 px** against 4.4 px per character
+  calibrated on `common solution` (66 px / 15 ch). The corpus's `transac` would be 31 px
+  and **there is no 31 px line**. The canvas word is `transactions.`, plural and stopped.
+
+**And five drawn strings are in no corpus string at all** — tested against
+`build(MAXIMAL)`, the union of all 64 readings §2.12 admits, 29,408 distinct strings:
+`05.25.20`, `11.03.20`, `UBI BENE IBI PATRIA`, `BREATHE` (the neck band), `CHR` (the
+monogram). **Every one of them was already measured and written down elsewhere in this
+project** — in `premise_audit.md`, `even_slot_rules.py`, `seal_ring.py`,
+`three_object_measurement.md`, and §9 of this report — and none reached the corpus. The
+corpus was built once from two transcription files and never reconciled against the
+element census the project kept building afterwards.
+
+#### Two readings deliberately *not* counted
+
+Both fail §9's rule — *nothing enters the record from an upscaled view until it has
+survived a native-pixel re-measurement, with a control*:
+
+- `PAY FOR THE FUTURE.` reads **`FVTURE`** under LANCZOS, with a flat-bottomed `U` in the
+  same word as the control. At native resolution the whole word is one merged blob with
+  no inter-letter gaps. **[INDETERMINATE]** If it is a V, that is a seventh untested
+  string.
+- `.VS.`'s two dots sit 9 px and 23 px above a baseline with a 33 px cap height,
+  diagonally opposed as a 180° ambigram requires — **not baseline full stops**. Whether
+  that makes the string `·VS·` is a transcription convention, not a measurement.
+
+`wich` for `which` was re-read at 34× and again favours `wich`. It **stays
+[INDETERMINATE]** for the reason §9 already gave, now measured: rows y1154–1160 are the
+dark frame stripe, 61 of 67 px below grey 110, and that is precisely the ascender band.
+
+#### What is fixed, and what is not
+
+`caccobus → caccabus` is fixed in `census_crops.py`, `word_census.py`,
+`brain_image_corpus.py`, `expected_output/census_crops.txt`, `word_census.tsv` and here.
+**The other five differences and the five absent strings are NOT fixed**, and
+`brain_image_corpus.py` now carries an `[DEFECT, open]` header naming each one, so the
+corpus cannot be re-run innocently. Until they are settled, **a negative from this corpus
+covers the strings in that file, not the strings on the canvas.**
+
+§2.12's status is unchanged in kind — it was already [TESTED], never [EXHAUSTED] — but
+its coverage is now known to be narrower than its own description claims.
+
+#### The standing rule it produced
+
+> **No transcription enters the corpus without a dated letterform re-read against the
+> master image, and no element the project measures anywhere may stay out of the corpus
+> silently.**
+
+The first half is what §1.7's self-test gate is to the binary. The second half is the
+part that actually bit: nothing here was unknowable — `05.25.20`, `11.03.20`,
+`UBI BENE IBI PATRIA`, `BREATHE` and `CHR` were all measured and written down, and the
+corpus simply never heard about them.
+
+---
+
 
 ---
 
@@ -591,6 +697,17 @@ individual word of the Russian plaintexts, all 2048 BIP39 words singly, and pair
 concatenations of 33 salient phrases under three joiners. Plus SHA256 and SHA256² of
 the PNG file and of the concatenated IDAT payload.
 
+> **[DEFECT, 2026-11-02 — this corpus hashes strings that are not on the canvas.]**
+> A letterform re-read of every element against the master image (§1.8,
+> `letterform_audit.md`) found **six of the 22 Latin-letterform elements differing** from
+> the transcriptions this corpus is built on, and **five drawn strings absent from it
+> entirely** (`05.25.20`, `11.03.20`, `UBI BENE IBI PATRIA`, `BREATHE`, `CHR`). One of
+> the six — `caccobus` for `caccabus` — is fixed; the other five are open. The image-text
+> negative therefore covers the strings in `brain_image_corpus.py`, **not** the strings
+> painted on the canvas, and for each difference there is a canvas string that has never
+> been tested in any casing. The *template sequence* corpus below is unaffected: it
+> builds phrases from the word pool, not from transcriptions.
+
 *Template sequences*, 992,436,543 candidates → **7,939,492,344 addresses**: the t18
 template over a 63-word pool (the 52-word pool plus the eleven image words that are
 **not** BIP39 — `stop freedom hate white death kill war bleed shut money buy`, which
@@ -722,7 +839,7 @@ The band is reported instead.
 One correction worth recording, because the first attempt got it wrong. The
 Latin was initially reported as having no surviving source, on a grep for
 `novus|ordo|seclorum|annuit|coeptis`. The artwork's Latin is not the Great Seal
-mottos: it is `Esse quam niger es, sic dixit caccobus ollae` in the element
+mottos: it is `Esse quam niger es, sic dixit caccabus ollae` in the element
 census, `FIAT JUSTITIA ET PEREAT MUNDUS` on the pyramid base, and
 `RERUM · COGNOSCERE · CAUSAS` mirror-written on the seal ring. A pattern built
 from the expected answer found nothing and was briefly taken as evidence of
@@ -3006,7 +3123,7 @@ this tree's download folder. Compared with the master:
 
   | region | master | overlay prints |
   |---|---|---|
-  | Latin line | *Esse quam niger es, sic dixit caccobus ollae* | "To be as black as you are, that's what the shit pot said." |
+  | Latin line | *Esse quam niger es, sic dixit caccabus ollae* | "To be as black as you are, that's what the shit pot said." |
   | pyramid-base motto (mirrored) | *FIAT JUSTITIA ET PEREAT MUNDUS* | "LIVL WELLY EL DENEYL SHPIROG" |
   | seal ribbon | UBI BENE IBI PATRIA | "BULBI" |
   | seal-ring motto | mirrored arc lettering | "COGMO2SELF SLG J2" |

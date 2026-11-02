@@ -13,7 +13,7 @@ Clock hands TOWER, MOON                                    9  -   [e11_0.png]
 Address (letters of 34 chars)                             31  -   [e12_0.png, e12_1.png]
 ONLY real BITCOIN                                         15  -   [e13_0.png]
 PAY FOR THE FUTURE. / THIS IS THE FIRST PREDICTION.       39  -   [e14_0.png]
-Esse quam niger es, sic dixit caccobus ollae              36  -   [e15_0.png]
+Esse quam niger es, sic dixit caccabus ollae              36  -   [e15_0.png]
 TOTAL                                                    331  1
 
 screened as blocks only:

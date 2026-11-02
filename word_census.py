@@ -66,7 +66,7 @@ ELEMENT_SOURCE = [
     ("vial label",                                 "CVD19",                                    "CENSUS_MISC"),
     ("seal ring (mirror-written)",                 "RERUM COGNOSCERE CAUSAS",                  "LATIN_MOTTOS"),
     ("pyramid base",                               "FIAT JUSTITIA ET PEREAT MUNDUS",           "LATIN_MOTTOS"),
-    ("bottom Latin line",                          "Esse quam niger es, sic dixit caccobus ollae", "LATIN_MOTTOS"),
+    ("bottom Latin line",                          "Esse quam niger es, sic dixit caccabus ollae", "LATIN_MOTTOS"),
     ("13th Amendment copy",                         C.AMENDMENT,                               "AMENDMENT"),
     ("clock caption (rune)",                       "Сумма двух чисел",                         "RUSSIAN"),
     ("right-edge line (rune), longest transcribed form",

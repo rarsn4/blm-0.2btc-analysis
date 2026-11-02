@@ -30,6 +30,30 @@ concatenated" IS the whitespace-stripped string variant, and counting it twice
 would inflate the total. That is why this is 6 per key and the template corpus
 is 12.
 
+[DEFECT, open as of 2 Nov 2026] THE TRANSCRIPTIONS BELOW ARE NOT ALL ON THE CANVAS.
+A letterform re-read of every element against the master image
+(`letterform_audit.md`, 2 Nov 2026) found SIX of the 22 Latin-letterform elements
+differing from what this file holds, and FIVE drawn strings this file does not
+contain at all. One of the six -- `caccobus` for `caccabus` -- is FIXED below.
+The other five are NOT fixed, pending the owner's decision:
+
+  COVID sign      has    `COVID IS A HOAX IS THE KILLER`
+                  canvas `COVID 19 IS A HOAX 5G IS THE KILLER`
+  AMENDMENT       has    `Section Neither slavery ...`         (no numeral, no punctuation)
+                  canvas `Section 1.` heading, then `servitude,` `States,` `jurisdiction.`
+  MICROTEXT       has    `... checks every transac tion for double spen ding. After`
+                  canvas `... checks every / tran / sacti / ons. / For double spen / ding. After`
+                         i.e. the word is `transactions.`, plural and stopped
+  WHITEPAPER      has    `... were received The payee ... each transaction the majority ...`
+                  canvas `... were received. The payee ... each transaction, the majority ...`
+  DATES           has    `1865-202?` and spacing variants
+                  canvas `1865-202...?`  -- three dots, measured, then a red `?`
+
+  absent entirely: `05.25.20`  `11.03.20`  `UBI BENE IBI PATRIA`  `BREATHE`  `CHR`
+
+Until those are settled, a negative from this corpus covers the strings in this
+file, NOT the strings on the canvas. SHA-256 does not forgive one letter.
+
     python3 brain_image_corpus.py --count-only    # enumerate, count, write list
     python3 brain_image_corpus.py --run           # derive and compare
 """
@@ -93,7 +117,7 @@ DATES = ["1865", "2020", "1865-202?", "1865 - 202?", "1865\u2013202?", "1865-202
 # different text entirely, and it lives in census_crops.py's ELEMENTS and SCREENED
 # lists and in the seal-ring measurement, not in the prose.
 #
-#   census_crops.py:46          Esse quam niger es, sic dixit caccobus ollae  (36)
+#   census_crops.py:46          Esse quam niger es, sic dixit caccabus ollae  (36)
 #   census_crops.py SCREENED    pyramid base FIAT JUSTITIA ET PEREAT MUNDUS   (26)
 #   seal_ring.py / report_additions_image_pass.md
 #                               ring reads RERUM COGNOSCERE CAUSAS, mirror-written
@@ -102,7 +126,7 @@ DATES = ["1865", "2020", "1865-202?", "1865 - 202?", "1865\u2013202?", "1865-202
 # Virgil line they are the tail of. The canonical `esse quam videri` that the
 # niger line plays on is carried too, since it is the phrase a solver would try.
 LATIN_MOTTOS = [
-    "Esse quam niger es, sic dixit caccobus ollae",
+    "Esse quam niger es, sic dixit caccabus ollae",
     "Esse quam videri",
     "RERUM COGNOSCERE CAUSAS",
     "Felix qui potuit rerum cognoscere causas",

@@ -43,7 +43,7 @@ ELEMENTS = [
      [(40, 560, 44, 290, 3, -90, 1, 99), (40, 845, 44, 290, 3, -90, 1, 99)]),
     ("ONLY real BITCOIN", 15, "-", [(110, 1030, 170, 50, 4, 0, 1, 99)]),
     ("PAY FOR THE FUTURE. / THIS IS THE FIRST PREDICTION.", 39, "-", [(70, 780, 120, 330, 3, -90, 5, 95)]),
-    ("Esse quam niger es, sic dixit caccobus ollae", 36, "-", [(1030, 1145, 520, 45, 2, 0, 1, 99)]),
+    ("Esse quam niger es, sic dixit caccabus ollae", 36, "-", [(1030, 1145, 520, 45, 2, 0, 1, 99)]),
 ]
 SCREENED = [  # ~5-8 px text: a letter-sized object would be unidentifiable; screened as blocks only
     ("bottom caption (whitepaper, cursive)", "~115", [(30, 1140, 1020, 30, 2, 0, 1, 99)]),
