@@ -645,12 +645,22 @@ setting in the run header, so no future run can be silently lowercase.
 > **never been run once.** Having the flag is not the same as having used it, and the
 > paragraph above reads as though the gap were closed by adding the parameter.
 >
-> **As-written is `upper`, measured.** The transcription of record (`slogan_lines.py`)
-> reads the display text as `BLACK LIVES MATTER NO JUSTICE NO PEACE END POLICE
-> BRUTALITY STOP KILLING US NOT ONE MORE` — every word capital. No fourth "as-written"
-> mode is needed: `CASE` has exactly three bits, and for the ten template words that
-> are *depicted* rather than written, as-written is undefined, since objects carry no
-> casing.
+> **[RETRACTED, same day] ~~As-written is `upper`, measured.~~** That claim was wrong
+> and is withdrawn. It was reached from `slogan_lines.py`, which **normalises casing** —
+> it renders the plinth band as `ONLY REAL BITCOIN` where the pixels read
+> `ONLY real BITCOIN`. Measured from the image (`casing_measurement.md`), **three strings
+> are genuinely mixed-case as drawn**: `ONLY real BITCOIN` (plinth), `I can't BREATHE`
+> (hoodie), and the bottom Latin line `Esse quam niger es, sic dixit caccabus ollae`,
+> which carries **one capital and is otherwise entirely lowercase**. The artwork is not
+> "in capitals"; one all-capitals block was generalised to the canvas.
+>
+> **`CASE upper` is therefore one uniform capitalisation hypothesis among three, not the
+> as-written reading.** The run is unchanged and so is its cost — because "as-written" is
+> *undefined* for this corpus. `brain_t21_*` derives no string from the artwork: it builds
+> phrases from the 65-word pool in template slot order, a sequence nobody ever wrote, so
+> there is no drawn casing to reproduce and a fourth mode would have nothing to encode.
+> The mixed-case strings that *are* drawn belong to the image-text corpus, which already
+> tests them verbatim (`brain_image_corpus.py:172` includes the as-drawn `base`).
 >
 > `brain_t21_upper.conf` and `brain_t21_title.conf` are banded and queued ahead of the
 > 12-config paths-2-4 closure (`QUEUE_after_el22.md`): 150,837,781,250 candidates each,

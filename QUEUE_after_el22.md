@@ -421,12 +421,20 @@ of `queue_single.log`, so it follows behind unchanged.
 is set to `lower`. `upper` and `title` have never been run, once, while the artwork is in
 capitals and SHA-256 is case-sensitive (§2.12 states the limitation; it was never closed).
 
-**As-written = `upper`, measured not assumed.** The transcription of record
-(`slogan_lines.py`) reads the display text as `BLACK LIVES MATTER NO JUSTICE NO PEACE END
-POLICE BRUTALITY STOP KILLING US NOT ONE MORE` — every word capital. The solver has no
-fourth "as-written" mode and needs none: `CASE` has exactly three bits. For the ten
-template words that are *depicted* rather than written, as-written is undefined — objects
-carry no casing — so no reading is privileged there.
+**[RETRACTED, 2 Nov 2026, same day]** ~~As-written = `upper`, measured not assumed.~~
+Withdrawn. `slogan_lines.py` **normalises casing**: it renders the plinth as `ONLY REAL
+BITCOIN` where the pixels read `ONLY real BITCOIN`. Measured from the image, three strings
+are mixed-case as drawn — `ONLY real BITCOIN`, `I can't BREATHE`, and the bottom Latin line
+`Esse quam niger es, sic dixit caccabus ollae`, which carries one capital and is otherwise
+entirely lowercase. The artwork is not "in capitals". See `casing_measurement.md`.
+
+**`CASE upper` is one uniform capitalisation hypothesis among three, not the as-written
+reading.** The runs and their cost are UNCHANGED, because "as-written" is *undefined* for
+this corpus: `brain_t21_*` builds phrases from the 65-word pool in template slot order, a
+sequence nobody ever wrote, so there is no drawn casing to reproduce and a fourth mode
+would have nothing to encode. The mixed-case strings that are drawn belong to the
+image-text corpus, which already tests them as drawn
+(`brain_image_corpus.py:172` includes the as-drawn `base`). No third run, no new cost.
 
 **The casing machinery is verified before use.** `--selftest-brain` passes all 26
 known-answer vectors, of which **16–23 cover `upper` and `title` explicitly**
