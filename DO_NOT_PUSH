@@ -175,3 +175,42 @@ analysis repository. This supersedes the RE-IMPOSED note above for this publicat
   If a hit is ever found, no-push returns immediately and nothing about it is published.
   Push only with "git push origin main", after git fetch and a PASS; never --force, --all,
   --tags or --mirror.
+
+================================================================================
+STANDING RULE, added 2 Nov 2026 by the owner's instruction:
+
+  NO RUN STARTS ON A BINARY WHOSE BUILD TIME IS NEWER THAN ITS LAST PASSING SELF-TEST.
+
+  Why it exists. solver2_jac was built 2026-09-28 09:33 from UNCOMMITTED source. The last
+  recorded self-test was 2026-09-23 20:24 (git 961c17c) -- five days earlier. The 28 Sep
+  change replaced the single-hash compare with derive_multi3 (compressed/uncompressed/
+  hybrid), added the CASE axis to build_phrase, and changed the hit bit layout so hit[1]
+  went from a bare path index to path<<2|encoding. Comparison path, phrase builder and hit
+  reporting, all in one unverified rebuild. Its own diff said "Kernel and selftest must
+  move together". They had not, and every run from 28 Sep to 1 Nov accrued negatives on a
+  machine with no passing test. Recorded as REPORT 1.7 [DEFECT] and in
+  machine_verification.md.
+
+  How it is enforced. ./selftest_gate.sh, called first by every queue script
+  (run_queue_brain.sh, run_queue_nov.sh). It PROVES the rule fresh rather than comparing
+  timestamps -- strictly stronger, because a stamp can go stale silently while a passing
+  test cannot. It runs five tests:
+    --selftest         canonical BIP39 12- and 24-word spec vectors
+    --selftest-brain   26 brainwallet vectors, incl. 16-23 covering upper/title casing
+    selftest_find      planted key, COMPRESSED, through the default config path (rule 8)
+    selftest_uncomp    planted key, UNCOMPRESSED
+    selftest_hybrid    planted key, HYBRID
+  Each planted config must report EXACTLY ONE HIT. Nothing but the hit COUNT is read and
+  show_hit is never called. On any failure the gate writes GATE BLOCK and the queue exits
+  without starting a solver.
+
+  selftest_stamp.txt records the pass and is keyed on the binary's sha256, so a rebuild
+  invalidates it automatically and no script needs editing. A cached pass costs 0.02 s, a
+  cold one about 15 s.
+
+  The gate's own log is selftest_gate.log and the planted runs write st_selftest_*.log.
+  Both match .gitignore's "*.log", so the HIT lines a planted test necessarily produces
+  CANNOT enter tracked history. Do not remove that .gitignore line, and do not git add -f
+  any st_*.log or selftest_gate.log. The HIT rule applies to these logs as to any other:
+  the count and the exit line only.
+================================================================================

@@ -408,3 +408,70 @@ PROPOSED ORDER, weakest-supported slot first, so the most likely slots are teste
  11. t21_free7   slot 7  -- depicted, crown points
  12. t21_free1   slot 1  -- `subject` is WRITTEN in the Amendment copy and carries the one underline; strongest
                             of the twelve, so last
+
+---
+
+## Brainwallet CASE axis — banded 2 Nov 2026, BEFORE launch
+
+Reordered **ahead** of the 12-config paths-2-4 closure on the owner's instruction.
+The closure is not cancelled: `run_queue_nov.sh` now waits on `queue_brain.log` instead
+of `queue_single.log`, so it follows behind unchanged.
+
+**Why it jumped the queue.** `CASE` appears in **1 of 225 configs** in this project and
+is set to `lower`. `upper` and `title` have never been run, once, while the artwork is in
+capitals and SHA-256 is case-sensitive (§2.12 states the limitation; it was never closed).
+
+**As-written = `upper`, measured not assumed.** The transcription of record
+(`slogan_lines.py`) reads the display text as `BLACK LIVES MATTER NO JUSTICE NO PEACE END
+POLICE BRUTALITY STOP KILLING US NOT ONE MORE` — every word capital. The solver has no
+fourth "as-written" mode and needs none: `CASE` has exactly three bits. For the ten
+template words that are *depicted* rather than written, as-written is undefined — objects
+carry no casing — so no reading is privileged there.
+
+**The casing machinery is verified before use.** `--selftest-brain` passes all 26
+known-answer vectors, of which **16–23 cover `upper` and `title` explicitly**
+(upper/title × compressed/uncompressed × space/no-space). Run on this binary, 2 Nov 2026.
+
+### Bands — an IDENTITY, not a z-score
+
+A brainwallet has no checksum, so every candidate derives and acceptance is **exactly
+1.0**. Both configs:
+
+| | |
+|---|---|
+| candidates | 65⁶ × 2 = **150,837,781,250** (7 gaps: six `@POOL` + slot 20's two words) |
+| survivors | **must equal 150,837,781,250 exactly** |
+| acceptance | **1.000000000** |
+| addresses | 452,513,343,750 (×3: compressed, uncompressed, hybrid) |
+| scalar mults | 1 per candidate (one case bit) |
+
+Space confirmed by the solver itself, not by my arithmetic:
+`--count-only` prints `space=150837781250  expected derivations=150837781250` for both.
+
+**Acceptance below 1.0 voids the negative** — it means work was silently dropped — so the
+queue STOPS on a miss rather than recording a result. Same control §2.12 calls
+load-bearing for the `CASE lower` twin.
+
+### Cost, stated before launch
+
+| run | candidates | cost | basis |
+|---|---|---|---|
+| `brain_t21_upper` | 150,837,781,250 | **16.2 GPU-h** | 2,582,308 cand/s, measured on the `CASE lower` twin, 2026-09-29 |
+| `brain_t21_title` | 150,837,781,250 | **16.2 GPU-h** | same |
+| **total new work** | | **32.5 GPU-h = 1.35 days** | |
+
+`CASE lower` is already done (§2.12, 16.23 h, exhausted), so "all three casings" costs
+32.5 h of *new* compute, not 48.7.
+
+> **[SCOPE] This is 1.35 days, not "about a day" as budgeted.** Stated rather than
+> rounded down. Two further reasons the figure may run long: the rate is from
+> 29 Sep, and the GPU has since been in *continuous* SW thermal slowdown
+> (`0x20` on 360 of 360 samples, 85–88 °C), so expect 17–19 h each.
+> `touch HOLD_BRAIN_title` stops `title` before it starts without touching `upper`.
+
+**Inherited narrowing, NOT closed here:** key variants are `sha256` + space-joined only —
+3 addresses per candidate, one quarter of the key-variant space the t18 figure covered.
+An `_all` run is what closes that.
+
+**Ledger effect: 0 new candidates admitted.** `tally2.py` counts mnemonic derivations;
+these are brainwallet keys, a different object, and §2.12 reports them separately.
