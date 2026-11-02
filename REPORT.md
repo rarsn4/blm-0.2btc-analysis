@@ -788,11 +788,44 @@ the PNG file and of the concatenated IDAT payload.
 > `letterform_audit.md`) found **six of the 22 Latin-letterform elements differing** from
 > the transcriptions this corpus is built on, and **five drawn strings absent from it
 > entirely** (`05.25.20`, `11.03.20`, `UBI BENE IBI PATRIA`, `BREATHE`, `CHR`). One of
-> the six — `caccobus` for `caccabus` — is fixed; the other five are open. The image-text
-> negative therefore covers the strings in `brain_image_corpus.py`, **not** the strings
-> painted on the canvas, and for each difference there is a canvas string that has never
-> been tested in any casing. The *template sequence* corpus below is unaffected: it
-> builds phrases from the word pool, not from transcriptions.
+> the six — `caccobus` for `caccabus` — was fixed first; **all six were corrected and all
+> five added the same day**, and `corpus_gate.py` now refuses to let any brainwallet work
+> start while the canvas census and this corpus disagree. The *template sequence* corpus
+> below was never affected: it builds phrases from the word pool, not from transcriptions.
+
+**[TESTED, re-run 2026-11-02 after the corrections.] 34,354 strings → 206,124 addresses,
+acceptance exactly 1.0, no match.**
+
+```
+corpus       34,354 distinct key strings   (was 29,408; the maximal reading, i.e. the
+                                            union of all 64 readings this section's own
+                                            description admits)
+addresses    206,124                        = 34,354 x 2 hashes x 3 encodings
+derived      206,124                        skipped (key out of range) 0
+acceptance   206,124 / 206,124 = EXACTLY 1.0
+result       NO MATCH                       exit 0
+wall         3,105.6 s (51.8 min), CPU only, niced 19 alongside the GPU queue
+backend      verify_hit.py -- this project's INDEPENDENT pure-Python secp256k1
+```
+
+**Acceptance is the load-bearing number here, exactly as it is for the template twin.** A
+brainwallet has no checksum, so every string must derive by construction; the run enforces
+`derived == 6 x strings` as an identity and exits 9 as VOID rather than reporting a
+negative if it misses. It did not miss, and nothing was skipped.
+
+**The derivation path was verified against an external oracle before it was trusted**
+(`brain_corpus_selftest.py`): the canonical public brainwallet example derives to its
+*published* addresses on both the compressed and uncompressed encodings, the hybrid form
+is a well-formed 0x06/0x07 of the same point, and a planted hit is found through the same
+comparison the real run uses. That check is not this project's own output, which is what
+makes it an oracle. `coincurve` is not installed here and was deliberately not installed:
+`verify_hit.py` already carries an independent implementation, self-tested against
+known-answer vectors including 1·G, 2·G and (N−1)·G + G = ∞.
+
+This figure supersedes the 22,638 of the original pass, which no surviving script, key
+list or log reproduces (that is why `brain_image_corpus.py` exists). The ratio is 1.52×,
+and the earlier number is retained above as what the first pass reported rather than
+quietly replaced.
 
 *Template sequences*, 992,436,543 candidates → **7,939,492,344 addresses**: the t18
 template over a 63-word pool (the 52-word pool plus the eleven image words that are

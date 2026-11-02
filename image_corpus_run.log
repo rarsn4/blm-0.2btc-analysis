@@ -32,3 +32,24 @@
   EC backend: verify_hit (independent pure-Python secp256k1)
   deriving 34,354 strings x 2 hashes x 3 encodings = 206,124 addresses expected
     2,000/34,354 strings  12,000 addresses  194s
+    4,000/34,354 strings  24,000 addresses  394s
+    6,000/34,354 strings  36,000 addresses  597s
+    8,000/34,354 strings  48,000 addresses  788s
+    10,000/34,354 strings  60,000 addresses  965s
+    12,000/34,354 strings  72,000 addresses  1,139s
+    14,000/34,354 strings  84,000 addresses  1,311s
+    16,000/34,354 strings  96,000 addresses  1,492s
+    18,000/34,354 strings  108,000 addresses  1,676s
+    20,000/34,354 strings  120,000 addresses  1,849s
+    22,000/34,354 strings  132,000 addresses  2,031s
+    24,000/34,354 strings  144,000 addresses  2,223s
+    26,000/34,354 strings  156,000 addresses  2,406s
+    28,000/34,354 strings  168,000 addresses  2,574s
+    30,000/34,354 strings  180,000 addresses  2,744s
+    32,000/34,354 strings  192,000 addresses  2,911s
+    34,000/34,354 strings  204,000 addresses  3,076s
+
+  derived 206,124 addresses in 3,105.6s
+  expected 206,124   skipped (key out of range) 0
+  acceptance 206124/206124 = EXACTLY 1.0
+  NO MATCH
