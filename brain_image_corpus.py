@@ -30,29 +30,23 @@ concatenated" IS the whitespace-stripped string variant, and counting it twice
 would inflate the total. That is why this is 6 per key and the template corpus
 is 12.
 
-[DEFECT, open as of 2 Nov 2026] THE TRANSCRIPTIONS BELOW ARE NOT ALL ON THE CANVAS.
-A letterform re-read of every element against the master image
-(`letterform_audit.md`, 2 Nov 2026) found SIX of the 22 Latin-letterform elements
-differing from what this file holds, and FIVE drawn strings this file does not
-contain at all. One of the six -- `caccobus` for `caccabus` -- is FIXED below.
-The other five are NOT fixed, pending the owner's decision:
+[DEFECT, found and closed 2026-11-02] THIS CORPUS ONCE HASHED STRINGS THAT ARE NOT ON
+THE CANVAS. A letterform re-read of every element against the master image
+(`letterform_audit.md`) found six of the 22 Latin-letterform elements differing from
+what this file held, and five drawn strings it did not contain at all. All six are now
+corrected above and all five are added; two readings that did NOT clear REPORT 9's
+native-pixel rule are carried as EXTRA strings in INDETERMINATE rather than substituted,
+and every superseded form is kept in SUPERSEDED so the 28 Sep negative stays
+reproducible. See REPORT 1.8.
 
-  COVID sign      has    `COVID IS A HOAX IS THE KILLER`
-                  canvas `COVID 19 IS A HOAX 5G IS THE KILLER`
-  AMENDMENT       has    `Section Neither slavery ...`         (no numeral, no punctuation)
-                  canvas `Section 1.` heading, then `servitude,` `States,` `jurisdiction.`
-  MICROTEXT       has    `... checks every transac tion for double spen ding. After`
-                  canvas `... checks every / tran / sacti / ons. / For double spen / ding. After`
-                         i.e. the word is `transactions.`, plural and stopped
-  WHITEPAPER      has    `... were received The payee ... each transaction the majority ...`
-                  canvas `... were received. The payee ... each transaction, the majority ...`
-  DATES           has    `1865-202?` and spacing variants
-                  canvas `1865-202...?`  -- three dots, measured, then a red `?`
-
-  absent entirely: `05.25.20`  `11.03.20`  `UBI BENE IBI PATRIA`  `BREATHE`  `CHR`
-
-Until those are settled, a negative from this corpus covers the strings in this
-file, NOT the strings on the canvas. SHA-256 does not forgive one letter.
+THE RULE THIS PRODUCED, AND WHAT ENFORCES IT. No transcription enters this corpus
+without a dated letterform re-read against the master image, and no element the project
+measures anywhere may stay out of this corpus silently. `corpus_gate.py` enforces the
+second half: it reconciles `census_crops.DRAWN` -- the canvas census, with coordinates
+and provenance -- against the strings this file actually generates, and REFUSES, not
+warns, if any measured element is absent or differs. It is keyed on the content of both
+sides, so it re-proves itself on any edit rather than trusting a timestamp. The
+brainwallet queue calls it first. Do not run this corpus by hand past a gate failure.
 
     python3 brain_image_corpus.py --count-only    # enumerate, count, write list
     python3 brain_image_corpus.py --run           # derive and compare
@@ -66,7 +60,7 @@ TARGET_H160 = "ccbd031e54cde2a3189fd59bc49f731367a1779e"
 # ------------------------------------------------------------------ sources
 HEADLINE = """FIND THE SEED PHRASE IN THE THIS PICTURE
 Order and stability
-COVID IS A HOAX IS THE KILLER
+COVID 19 IS A HOAX 5G IS THE KILLER
 I CAN NOT BREATHE
 BLACK LIVES MATTER NO JUSTICE NO PEACE END POLICE BRUTALITY
 STOP KILLING US NOT ONE MORE
@@ -74,12 +68,21 @@ WELCOME TO THE BRAVE NEW WORLD
 ONLY REAL BITCOIN PAY FOR THE FUTURE THIS IS THE FIRST PREDICTION
 FUCK THIS SHIT"""
 
-AMENDMENT = """Section Neither slavery nor involuntary servitude except as a punishment
+# [CORRECTED 2026-11-02, letterform_audit.md 1.3] The heading carries an underlined
+# numeral -- `Section 1.` -- which the first transcription dropped, and the body is
+# drawn WITH punctuation. The old unpunctuated form is kept in SUPERSEDED below.
+AMENDMENT = """Section 1.
+Neither slavery nor involuntary servitude, except as a punishment
 for crime whereof the party shall have been duly convicted shall exist
-within the United States or any place subject to their jurisdiction"""
+within the United States, or any place subject to their jurisdiction."""
 
-WHITEPAPER = """in which they were received The payee needs proof that at the time of each
-transaction the majority of nodes agreed it was the first received"""
+# [CORRECTED 2026-11-02, letterform_audit.md 1.5] `received.` takes a full stop and
+# `transaction,` a comma. `which` is LEFT as `which`: `wich` stays [INDETERMINATE]
+# because the ascender band lies under the frame stripe (rows y1154-1160 are the
+# stripe, 61 of 67 px below grey 110). The `wich` reading is carried as an EXTRA in
+# INDETERMINATE below rather than substituted here.
+WHITEPAPER = """in which they were received. The payee needs proof that at the time of each
+transaction, the majority of nodes agreed it was the first received"""
 
 BLOCK = ("BLACK LIVES MATTER NO JUSTICE NO PEACE END POLICE BRUTALITY "
          "STOP KILLING US NOT ONE MORE")
@@ -100,17 +103,34 @@ RUSSIAN = [
 ]
 
 # §1.4, as transcribed, including the typo `introdue` at the splice.
-MICROTEXT = ("common solution is to introdue cent ral au thority or mint that "
-             "checks every transac tion for double spen ding. After")
-MICRO_FRAGS = ["common solution", "is to introdue", "cent", "ral au", "thority",
-               "or mint that", "checks every", "transac", "tion",
-               "for double spen", "ding. After"]
+#
+# [CORRECTED 2026-11-02, letterform_audit.md 1.4] Measured at NATIVE pixels: the block's
+# lines run 19 px / 19 px / 15 px against 4.4 px per character, calibrated on
+# `common solution` (66 px / 15 ch). The old split `transac` (7 ch = 31 px) + `tion`
+# would need a 31 px line and there is none. The drawn word is `transactions.` --
+# plural and stopped -- broken as `tran` / `sacti` / `ons.`, and the next line opens
+# with a capital `For`. `thority,` takes a comma.
+#
+# The mint-word is drawn `m-i-n-i` or `m-i-n-t` with a stop before `that`; at 6 px that
+# is [INDETERMINATE], so BOTH are carried rather than one being chosen.
+MICROTEXT = ("common solution is to introdue cent ral au thority, or mini.that "
+             "checks every tran sacti ons. For double spen ding. After")
+MICROTEXT_ALT = ("common solution is to introdue cent ral au thority, or mint.that "
+                 "checks every tran sacti ons. For double spen ding. After")
+MICRO_FRAGS = ["common solution", "is to introdue", "cent", "ral au", "thority,",
+               "or mini.that", "or mint.that", "checks every", "tran", "sacti",
+               "ons.", "For double spen", "ding. After"]
 WP_TRUE = ("A common solution is to introduce a trusted central authority, or "
            "mint, that checks every transaction for double spending.")
 
 # §7.4. The final character is a literal drawn `?`, not a digit, so the string is
 # carried as written rather than expanded over the ten readings it might stand for.
-DATES = ["1865", "2020", "1865-202?", "1865 - 202?", "1865\u2013202?", "1865-2020"]
+# [CORRECTED 2026-11-02, letterform_audit.md 1.6] Measured at NATIVE pixels: between the
+# final `2` and the red `?` there are THREE ink blobs -- 14/13/13 px, evenly stepped at
+# x318-321, x323-326, x328-331 y707-719 -- distinct from the `?`'s own dot at x334-337.
+# The ellipsis forms are added; the earlier forms are kept, since they were tested.
+DATES = ["1865", "2020", "1865-202?", "1865 - 202?", "1865\u2013202?", "1865-2020",
+         "1865-202...?", "1865 - 202...?", "1865\u2013202...?", "1865-202\u2026?"]
 
 # §2.12's "Latin mottos". These are NOT the Great Seal mottos -- searching for
 # novus/ordo/seclorum/annuit/coeptis finds nothing because the artwork's Latin is
@@ -131,6 +151,9 @@ LATIN_MOTTOS = [
     "RERUM COGNOSCERE CAUSAS",
     "Felix qui potuit rerum cognoscere causas",
     "FIAT JUSTITIA ET PEREAT MUNDUS",
+    # [ADDED 2026-11-02] Mirror-written on the seal's lower scroll. Measured since
+    # `seal_ring.py:13`, where it is the glyph-count control, and never carried here.
+    "UBI BENE IBI PATRIA",
 ]
 
 # Other text elements the census records that the first pass missed. Note the
@@ -139,7 +162,53 @@ LATIN_MOTTOS = [
 # canvas is a transcription judgement and SHA-256 does not forgive either way.
 CENSUS_MISC = ["I can't BREATHE", "BLM", ".VS.", "CVD19", "TOWER", "MOON",
                "ONLY real BITCOIN", "PAY FOR THE FUTURE.",
-               "THIS IS THE FIRST PREDICTION."]
+               "THIS IS THE FIRST PREDICTION.",
+               # [ADDED 2026-11-02] Drawn, measured elsewhere in this project for
+               # months, and never carried here. See letterform_audit.md 3.
+               "05.25.20",             # hoodie,      x992-1069  y370-388
+               "11.03.20",             # under .VS.,  x1012-1098 y1098-1122
+               "BREATHE",              # neck band,   x1355-1430 y528-545
+               "CHR",                  # monogram,    x1520-1590 y1125-1165
+               ]
+
+# [ADDED 2026-11-02] Readings that did NOT clear REPORT 9's rule -- nothing enters the
+# record from an upscaled view until it survives a native-pixel re-measurement with a
+# control. They are carried as EXTRA strings, never as replacements, because each is a
+# canvas reading that may be right and hashing one more string costs nothing.
+#
+#   PAY FOR THE FVTURE.  pointed V in position 2 against a flat-bottomed U in position 4
+#                        of the same word; at native resolution the word is one merged
+#                        blob with no inter-letter gaps.
+#   \u00b7VS\u00b7              the two dots sit 9 px and 23 px above a baseline of 33 px cap
+#                        height, diagonally opposed as a 180\u00b0 ambigram requires -- not
+#                        baseline full stops. Whether that makes the string U+00B7 is a
+#                        transcription convention, not a measurement.
+#   wich                 favours `wich` at 34x, but the ascender band lies under the
+#                        frame stripe. Carried for the same reason as the other two.
+INDETERMINATE = [
+    "PAY FOR THE FVTURE.",
+    "\u00b7VS\u00b7",
+    ("in which they were received. The payee needs proof that at the time of each "
+     "transaction, the majority of nodes agreed it was the first received"
+     ).replace("in which", "in wich"),
+]
+
+# Strings this corpus hashed BEFORE the 2 Nov letterform re-read and that the re-read
+# showed are NOT on the canvas. They are kept, not deleted: they were tested, and
+# removing them would make the 28 Sep negative unreproducible for no gain. Keeping a
+# superseded string costs six addresses; deleting it costs the audit trail.
+SUPERSEDED = [
+    "COVID IS A HOAX IS THE KILLER",
+    "Esse quam niger es, sic dixit caccobus ollae",
+    ("Section Neither slavery nor involuntary servitude except as a punishment "
+     "for crime whereof the party shall have been duly convicted shall exist "
+     "within the United States or any place subject to their jurisdiction"),
+    ("in which they were received The payee needs proof that at the time of each "
+     "transaction the majority of nodes agreed it was the first received"),
+    ("common solution is to introdue cent ral au thority or mint that "
+     "checks every transac tion for double spen ding. After"),
+    "thority", "or mint that", "transac", "tion", "for double spen",
+]
 
 def bip39_words():
     for d in (os.path.dirname(os.path.abspath(__file__)),
@@ -219,22 +288,25 @@ def build(F=None):
     add("slogan words",     sorted({w for l in LINES for w in l.split()}))
     add("russian",          RUSSIAN)
     add("russian words",    sorted({w for r in RUSSIAN for w in r.split()}))
-    add("micro-text",       MICRO_FRAGS + ([MICROTEXT] if F["whole_text"] else []))
+    add("micro-text",       MICRO_FRAGS + ([MICROTEXT, MICROTEXT_ALT] if F["whole_text"] else []))
     add("whitepaper true",  [WP_TRUE])
     add("dates",            DATES)
     add("latin mottos",     LATIN_MOTTOS)
     add("census misc",      CENSUS_MISC)
+    # [ADDED 2026-11-02] See the constants for what each group is and why it exists.
+    add("indeterminate",    INDETERMINATE)
+    add("superseded",       SUPERSEDED)
     add("target address",   [TARGET_ADDR])
     add("bip39 words",      bip39_words(), use_variants=F["bip39_casing"])
 
     # §2.12: "pairwise concatenations of 33 salient phrases under three joiners"
     # §2.12 says 33 salient phrases. The natural list from the surviving sources
-    # is 34. An earlier version of this script sliced it to [:33], which enforced
-    # the reported figure and then let it be read back as agreement -- the count
-    # was an artefact of the slice, not a measurement. The slice is gone; the
-    # natural count is printed, and the one-item discrepancy is left visible
-    # because it is informative: it points either at which phrase the original
-    # excluded or at a different counting convention.
+    # was 34, and is 39 after the 2 Nov corrections (DATES +4 ellipsis forms,
+    # LATIN_MOTTOS +1 scroll). An earlier version of this script sliced it to [:33],
+    # which enforced the reported figure and then let it be read back as agreement --
+    # the count was an artefact of the slice, not a measurement. The slice is gone and
+    # the natural count is printed, so the discrepancy stays visible: it points either
+    # at which phrases the original excluded or at a different counting convention.
     salient = (HEADLINE.split("\n") + LINES + RUSSIAN[:3] + DATES + LATIN_MOTTOS +
                [BLOCK, WP_TRUE, MICROTEXT, TARGET_ADDR])
     pairs = set()
@@ -325,23 +397,86 @@ if __name__ == "__main__":
         print("\n  --count-only: no derivation performed.")
         sys.exit(0)
 
-    from coincurve import PrivateKey
+    # EC backend. coincurve is not installed here, and installing a package to run a
+    # verification is the wrong direction: verify_hit.py already carries this project's
+    # INDEPENDENT pure-Python secp256k1 -- plain double-and-add, no Jacobian
+    # optimisation shared with the solver -- and it self-tests against known-answer
+    # vectors including 1*G, 2*G and (N-1)*G + G == infinity. Use that.
+    try:
+        from coincurve import PrivateKey
+        def pubkeys(kd):
+            pk = PrivateKey(kd).public_key
+            u = pk.format(compressed=False)
+            return (pk.format(compressed=True), u, bytes([0x06 | (u[64] & 1)]) + u[1:])
+        backend = "coincurve"
+    except ImportError:
+        import verify_hit as V
+        def pubkeys(kd):
+            x, y = V._mul(int.from_bytes(kd, "big"))
+            xb, yb = x.to_bytes(32, "big"), y.to_bytes(32, "big")
+            u = b"\x04" + xb + yb
+            return ((b"\x03" if y & 1 else b"\x02") + xb, u,
+                    bytes([0x06 | (y & 1)]) + xb + yb)
+        backend = "verify_hit (independent pure-Python secp256k1)"
+
     def h160(b):
         return hashlib.new("ripemd160", hashlib.sha256(b).digest()).digest()
-    tgt, hits, n = bytes.fromhex(TARGET_H160), [], 0
-    for s in seen:
-        msg = s.encode("utf-8")
-        d = hashlib.sha256(msg).digest()
-        for kd in (d, hashlib.sha256(d).digest()):
+
+    # Which group each string came from, so a HIT can be reported without quoting it.
+    origin = {}
+    for gname, acc in groups.items():
+        for st in acc: origin.setdefault(st, gname)
+
+    tgt = bytes.fromhex(TARGET_H160)
+    hits, n, skipped = [], 0, 0
+    t0 = __import__("time").time()
+    print(f"\n  EC backend: {backend}")
+    print(f"  deriving {len(seen):,} strings x 2 hashes x 3 encodings "
+          f"= {len(seen)*6:,} addresses expected")
+    for i, st in enumerate(sorted(seen), 1):
+        d = hashlib.sha256(st.encode("utf-8")).digest()
+        for kdi, kd in enumerate((d, hashlib.sha256(d).digest())):
             if not (1 <= int.from_bytes(kd, "big") < 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141):
+                skipped += 3
                 continue
-            pk = PrivateKey(kd).public_key
-            u = pk.format(compressed=False)           # 0x04 || X || Y
-            for pub in (pk.format(compressed=True), u,
-                        bytes([0x06 | (u[64] & 1)]) + u[1:]):
+            for pci, pub in enumerate(pubkeys(kd)):
                 n += 1
-                if h160(pub) == tgt: hits.append((s, kd.hex(), pub.hex()))
-    print(f"\n  derived {n:,} addresses")
-    print("  " + ("NO MATCH" if not hits else f"*** {len(hits)} HIT ***"))
-    for s, k, p in hits: print(f"    phrase={s!r}\n    priv={k}\n    pub={p}")
+                if h160(pub) == tgt:
+                    # HIT RULE. Never print the phrase, the private key or the pubkey.
+                    # A sha256 commitment plus the group is enough for the owner to
+                    # re-find it offline; nothing here discloses it.
+                    hits.append((hashlib.sha256(st.encode("utf-8")).hexdigest(),
+                                 origin.get(st, "?"), kdi, pci))
+        if i % 2000 == 0:
+            el = __import__("time").time() - t0
+            print(f"    {i:,}/{len(seen):,} strings  {n:,} addresses  {el:,.0f}s", flush=True)
+
+    el = __import__("time").time() - t0
+    expected = len(seen) * 6
+    print(f"\n  derived {n:,} addresses in {el:,.1f}s")
+    print(f"  expected {expected:,}   skipped (key out of range) {skipped}")
+
+    # ACCEPTANCE AS AN IDENTITY. A brainwallet has no checksum, so every candidate must
+    # be derived by construction. Anything below 1.0 means work was silently dropped and
+    # the negative is VOID -- a machine fault, not a result.
+    if n != expected:
+        print(f"  acceptance {n/expected:.6f}  *** NOT 1.0 ***")
+        print("  VOID: a brainwallet has no checksum, so acceptance below 1.0 means work")
+        print("  was silently DROPPED. This is a MACHINE fault and the negative does not")
+        print("  stand. Nothing is recorded.")
+        sys.exit(9)
+    print(f"  acceptance {n}/{expected} = EXACTLY 1.0")
+
+    if hits:
+        print(f"\n  *** {len(hits)} HIT ***")
+        print("  HIT RULE: the phrase is NOT printed. Each line is a sha256 commitment")
+        print("  to the matching string, which the owner can re-find offline.")
+        for c, g, kdi, pci in hits:
+            print("    commit=%s  group=%s  kd=%s  enc=%s"
+                  % (c, g, ("sha256", "double-sha256")[kdi],
+                     ("compressed", "uncompressed", "hybrid")[pci]))
+        print("  Move the funds first. Then verify on the affine binary and on an")
+        print("  independent BIP32 implementation before anything else.")
+    else:
+        print("  NO MATCH")
     sys.exit(0 if not hits else 3)

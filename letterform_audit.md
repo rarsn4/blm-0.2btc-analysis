@@ -25,6 +25,14 @@ cipher rather than Latin letterforms and are out of scope for a letterform re-re
 
 Separately, **5 drawn strings are on the canvas and in no corpus string at all.**
 
+**[CLOSED 2026-11-02, same day.]** All six differences are corrected, all five absent
+strings are added, and the two flagged readings of §2 plus the `wich` form are carried as
+EXTRA strings rather than substitutions. The corpus went from 29,408 distinct key strings
+to **34,354** under the maximal reading. Every superseded form is kept in a `SUPERSEDED`
+group, so the 28 September negative stays reproducible. `census_crops.DRAWN` is the new
+machine-readable canvas census and `corpus_gate.py` now refuses to let the brainwallet
+queue start if the two sides disagree. See REPORT 1.8 and §7 below.
+
 Every absence below was tested against the corpus itself, not by eye: `build(MAXIMAL)` — the
 union of all 64 readings §2.12's sentence admits, 29,408 distinct key strings — contains none of
 them.
@@ -159,4 +167,33 @@ is right about them.
 - The 13th Amendment body and the whitepaper caption are ~6-8 px tall and partly under spray
   paint and a frame stripe. Their **punctuation** differences are magnified reads. Their
   **content** differences (`Section 1.`) rest on the project's own prior measurement.
-- No key was derived and no run was started from this file.
+- No key was derived and no run was started from this file. The corpus was re-run
+  separately, after the corrections, under `corpus_gate.py` and
+  `brain_corpus_selftest.py`.
+
+## 7. What was done about it, 2 Nov 2026
+
+| | |
+|---|---|
+| six differences | corrected in `brain_image_corpus.py`; every superseded form kept in `SUPERSEDED` |
+| five absent strings | added — `05.25.20`, `11.03.20`, `UBI BENE IBI PATRIA`, `BREATHE`, `CHR` |
+| two flagged readings + `wich` | added as EXTRA strings in `INDETERMINATE`, never as replacements |
+| corpus size | 29,408 → **34,354** distinct key strings, maximal reading |
+| canvas census | new `census_crops.DRAWN`: 35 elements with box, status and provenance |
+| reconciliation | new `corpus_gate.py` — refuses, does not warn; keyed on both sides' content |
+| derivation check | new `brain_corpus_selftest.py` — the canonical public brainwallet example derives to its **published** addresses on both encodings, plus a planted hit |
+
+**Add, never remove.** A superseded string costs six addresses. Deleting it costs the
+audit trail, and would make the 28 September negative unreproducible. Nothing was
+deleted.
+
+**Why the indeterminate readings are extras and not substitutions.** None of them cleared
+§9's native-pixel rule, so none may displace a reading that did. Carrying both covers the
+canvas whichever way the glyph actually falls, and the cost is three strings.
+
+**A hole in the gate, found while testing the gate.** The first version *imported* the
+corpus module. CPython validates a cached `.pyc` on `(mtime, size)`, and
+`caccabus → caccobus` is size-preserving — so a gate run inside one mtime second could
+hash the new source, correctly judge its own cache stale, and still reconcile against the
+**old bytecode**. It now compiles and executes the bytes it hashed, in a fresh namespace,
+with `sys.dont_write_bytecode` set.

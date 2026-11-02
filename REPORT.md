@@ -305,19 +305,71 @@ survived a native-pixel re-measurement, with a control*:
 [INDETERMINATE]** for the reason §9 already gave, now measured: rows y1154–1160 are the
 dark frame stripe, 61 of 67 px below grey 110, and that is precisely the ascender band.
 
-#### What is fixed, and what is not
+#### The defect is BOUNDED to the brainwallet scheme — stated so no reader has to infer it
 
-`caccobus → caccabus` is fixed in `census_crops.py`, `word_census.py`,
-`brain_image_corpus.py`, `expected_output/census_crops.txt`, `word_census.tsv` and here.
-**The other five differences and the five absent strings are NOT fixed**, and
-`brain_image_corpus.py` now carries an `[DEFECT, open]` header naming each one, so the
-corpus cannot be re-run innocently. Until they are settled, **a negative from this corpus
-covers the strings in that file, not the strings on the canvas.**
+**A transcription error cannot have corrupted any BIP39 or Electrum negative, and the
+headline 284,280,833,673 derivations are unaffected.** The reason is structural, not
+lucky: those two schemes encode words as indices into the fixed 2048-word list, and the
+solver resolves every config word through `widx()` before any GPU work begins. For a
+non-brainwallet config `allow_extra` is false, so a word outside the list returns −1 and
+the config parse **fails**:
 
-§2.12's status is unchanged in kind — it was already [TESTED], never [EXHAUSTED] — but
-its coverage is now known to be narrower than its own description claims.
+```
+solver_host2.cuh:181   if(i<0){ fprintf(stderr,"'%s' not %s\n", w,
+                           cf.brain ? "a known word (add it with EXTRA)" : "BIP39");
+                       return false; }
+```
 
-#### The standing rule it produced
+Verified empirically, 2 Nov 2026, not merely read: a copy of `t21_single.conf` with
+slot 1 set to `caccabus` instead of `subject` prints
+
+```
+'caccabus' not BIP39
+exit=1
+```
+
+and **the run does not start.** No kernel launches, no checkpoint advances, no negative
+is recorded. A mistranscribed word in a BIP39 or Electrum config therefore **halts**,
+loudly, on the first parse — it cannot be silently searched.
+
+The brainwallet is the one scheme with no such guard, and that is inherent to it rather
+than a solver choice: `priv = SHA256(phrase)` accepts any byte string, so there is
+nothing to validate against. A wrong letter does not fail — it quietly hashes a
+different key. That asymmetry is exactly why this defect could live for five weeks here
+and could not live at all in §2.1–2.11.
+
+| scheme | word validated against the 2048-word list? | a mistranscribed word |
+|---|---|---|
+| BIP39 (§2.1–2.5, §2.7–2.11) | yes, `widx()` before launch | **run refuses to start** |
+| Electrum v2 (§2.6) | yes, same path | **run refuses to start** |
+| brainwallet image text (§2.12) | no — `SHA256` accepts anything | **silently hashes the wrong string** |
+
+So the scope of §1.8 is the §2.12 *image-text* corpus and nothing else. The §2.12
+*template-sequence* corpus is also outside it, for a different reason: it builds phrases
+from the word pool in template slot order, never from a transcription.
+
+#### How it was closed
+
+**All six differences are corrected and all five absent strings are added.** The corpus
+grew from 29,408 distinct key strings to 34,354 under the maximal reading.
+
+Three decisions, each deliberate:
+
+- **Add, never remove.** Every superseded form — `caccobus`, the un-numbered
+  `Section`, the unpunctuated caption, `transac`/`tion`, the old COVID line — is kept in
+  a `SUPERSEDED` group. They were tested, and deleting them would make the 28 September
+  negative unreproducible for no gain. A superseded string costs six addresses; deleting
+  it costs the audit trail.
+- **Indeterminate readings are carried as extras, never as substitutions.**
+  `PAY FOR THE FVTURE.`, `·VS·` and the `wich` form of the caption are each in the
+  corpus *alongside* the reading they might replace. None of them cleared §9's
+  native-pixel rule, so none of them may displace anything; hashing one more string
+  costs nothing and closes the hole either way.
+- **The two sides are written out independently.** The four long canvas texts appear in
+  both `census_crops.py` and `brain_image_corpus.py`, separately. That duplication is
+  the point: a disagreement between them is a finding, not a merge conflict.
+
+#### The standing rule it produced, and the gate that enforces it
 
 > **No transcription enters the corpus without a dated letterform re-read against the
 > master image, and no element the project measures anywhere may stay out of the corpus
@@ -325,8 +377,42 @@ its coverage is now known to be narrower than its own description claims.
 
 The first half is what §1.7's self-test gate is to the binary. The second half is the
 part that actually bit: nothing here was unknowable — `05.25.20`, `11.03.20`,
-`UBI BENE IBI PATRIA`, `BREATHE` and `CHR` were all measured and written down, and the
-corpus simply never heard about them.
+`UBI BENE IBI PATRIA`, `BREATHE` and `CHR` were all measured and written down elsewhere
+in this tree, and the corpus simply never heard about them.
+
+`corpus_gate.py` enforces it, and is built like the self-test gate — it **re-proves** the
+property instead of trusting a timestamp:
+
+- **The census side** is `census_crops.DRAWN`, new: every string this project has
+  measured as painted on the image, with its box, a status
+  (`measured` / `magnified` / `indeterminate` / `inferred` / `cipher`) and the file the
+  measurement lives in. It is read by **static parse**, never imported — `census_crops.py`
+  loads the image and writes crops at import, and a gate must not depend on that.
+- **The corpus side** is the strings `build(MAXIMAL)` **actually generates**, not the
+  source text. Comparing sources would only prove two files contain the same characters.
+- **It refuses, it does not warn.** Exit 1, naming each absent element with its
+  coordinates and provenance.
+- **It is keyed on the content of both sides**, so any edit to either invalidates the
+  cached pass automatically with no edit to any script. A cached pass costs 0.03 s, a
+  cold one 0.33 s.
+- **The brainwallet queue calls it first**, before the self-test gate.
+
+It was tested against four failure modes, including the original defect itself — a
+one-letter revert to `caccobus` — and refuses on each; ten rapid rounds alternating
+wrong-letter and restored gave REFUSE and PASS correctly every time.
+
+**One hole found and closed in the gate itself while testing it.** The first version
+*imported* the corpus module. CPython validates a cached `.pyc` on `(mtime, size)`, and
+`caccabus → caccobus` is a size-preserving edit — so a gate run in the same mtime second
+could hash the new source, correctly decide its cache was stale, and then still
+reconcile against the **old bytecode**. It now compiles and executes the bytes it
+hashed, in a fresh namespace, with `sys.dont_write_bytecode` set. The thing proved and
+the thing measured are the same object, which is the whole point of a gate.
+
+#### §2.12's status
+
+Unchanged in kind — it was already [TESTED], never [EXHAUSTED]. Its *coverage* is now
+wider than before and, for the first time, **provably equal to the canvas census**.
 
 ---
 

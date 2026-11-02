@@ -6,8 +6,18 @@ usage: python3 -I word_census.py            writes word_census.tsv, prints the s
 Every string here comes from the existing census: brain_image_corpus.py's transcriptions
 (slogan_lines.py's HEADLINE, the AMENDMENT copy, the RUSSIAN rune decodes, LATIN_MOTTOS,
 CENSUS_MISC, DATES, MICROTEXT, WHITEPAPER) and census_crops.py's ELEMENTS/SCREENED element
-list, which is the authoritative inventory of text objects on the canvas with coordinates.
+list.
 This script adds no new reading of the image and no new word.
+
+[NOTE 2026-11-02] `census_crops.DRAWN` is now the machine-readable canvas census -- every
+string measured as painted on the image, with box, status and provenance -- and it is what
+`corpus_gate.py` reconciles against `brain_image_corpus.py`. ELEMENTS/SCREENED remain the
+letter-substitution census; their first field is a human label, not a verbatim string, which
+is why DRAWN had to exist. Section A below is DELIBERATELY unchanged: it still counts the 22
+elements it always counted, so its word totals stay comparable with what this report has
+published. The five elements admitted on 2 Nov (05.25.20, 11.03.20, UBI BENE IBI PATRIA,
+BREATHE, CHR) are therefore in DRAWN and in the corpus but NOT in this word census. See
+REPORT 1.8.
 
 Three corrections are applied, because the corpus was built for hashing candidates and
 therefore carries some canvas elements more than once. Counting it raw would inflate the

@@ -45,6 +45,85 @@ ELEMENTS = [
     ("PAY FOR THE FUTURE. / THIS IS THE FIRST PREDICTION.", 39, "-", [(70, 780, 120, 330, 3, -90, 5, 95)]),
     ("Esse quam niger es, sic dixit caccabus ollae", 36, "-", [(1030, 1145, 520, 45, 2, 0, 1, 99)]),
 ]
+# The four long canvas texts, written out here INDEPENDENTLY of brain_image_corpus.py.
+# That independence is the point: corpus_gate.py reconciles these two statements of what
+# is painted, and a disagreement is a finding rather than a merge conflict. Whitespace is
+# collapsed by the corpus's own variants(), so the line breaks here are for reading only.
+BLOCK_TEXT = ("BLACK LIVES MATTER NO JUSTICE NO PEACE END POLICE BRUTALITY "
+              "STOP KILLING US NOT ONE MORE")
+
+AMENDMENT_TEXT = ("Section 1. "
+                  "Neither slavery nor involuntary servitude, except as a punishment "
+                  "for crime whereof the party shall have been duly convicted shall exist "
+                  "within the United States, or any place subject to their jurisdiction.")
+
+CAPTION_TEXT = ("in which they were received. The payee needs proof that at the time of each "
+                "transaction, the majority of nodes agreed it was the first received")
+
+MICRO_TEXT = ("common solution is to introdue cent ral au thority, or mini.that "
+              "checks every tran sacti ons. For double spen ding. After")
+
+# ---------------------------------------------------------------------------- DRAWN
+# [ADDED 2026-11-02] The canvas census, machine-readable: every string this project has
+# measured as PAINTED ON THE IMAGE, with its box and where the measurement lives.
+#
+# ELEMENTS above is a letter-substitution census -- its first field is a human label
+# ("BLACK LIVES MATTER ... NOT ONE MORE", "WELCOME TO THE / BRAVE / NEW WORLD"), not a
+# verbatim string -- so it cannot be reconciled against a hash corpus by machine. DRAWN
+# can. It exists because `caccobus` was hashed for five weeks, and because 05.25.20,
+# 11.03.20, UBI BENE IBI PATRIA, BREATHE and CHR were each measured and written down
+# elsewhere in this tree and never reached the brainwallet corpus at all. See
+# REPORT 1.8 and letterform_audit.md.
+#
+# `corpus_gate.py` REFUSES to let the brainwallet queue start if any string here is
+# missing from, or differs from, what brain_image_corpus.py generates.
+#
+# status:
+#   measured      read off the master image, native pixels or an unambiguous glyph
+#   magnified     read under magnification only; honest but below REPORT 9's bar
+#   indeterminate a reading that may be right and may not; carried, never substituted
+#   inferred      argued from measurement rather than read directly
+#   cipher        a rune decode, not a Latin letterform -- a different measurement
+#
+# (label, as-drawn string, (x, y, w, h), status, where the measurement lives)
+DRAWN = [
+    ("STOP (Liberty, O -> fist)", "STOP", (0, 440, 190, 100), "measured", "census_crops ELEMENTS 1"),
+    ("headline", "FIND THE SEED PHRASE IN THE THIS PICTURE", (495, 15, 435, 395), "measured", "census_crops ELEMENTS 2,3"),
+    ("statue base caption", "Order and stability", (640, 70, 380, 50), "measured", "letterform_audit 4"),
+    ("COVID sign", "COVID 19 IS A HOAX 5G IS THE KILLER", (30, 330, 150, 95), "measured", "letterform_audit 1.1"),
+    ("hoodie line", "I can't BREATHE", (900, 240, 300, 180), "measured", "census_crops ELEMENTS 6"),
+    ("hoodie date", "05.25.20", (992, 370, 77, 18), "measured", "premise_audit.md; chronology.py 1"),
+    ("BLM protest block", BLOCK_TEXT, (1095, 75, 250, 370), "measured", "census_crops ELEMENTS 5"),
+    ("bust neck band", "BREATHE", (1355, 528, 75, 17), "measured", "three_object_measurement.md 3"),
+    ("BRAVE NEW WORLD headline", "WELCOME TO THE BRAVE NEW WORLD", (420, 390, 660, 310), "measured", "census_crops ELEMENTS 4"),
+    ("tablet", "BLM", (248, 712, 86, 80), "measured", "census_crops ELEMENTS 7"),
+    ("pedestal spray", "FUCK THIS SHIT", (1290, 770, 210, 245), "measured", "census_crops ELEMENTS 8"),
+    ("ambigram", ".VS.", (1021, 1055, 68, 33), "measured", "census_crops ELEMENTS 9"),
+    ("ambigram, interpunct reading", "\u00b7VS\u00b7", (1021, 1055, 68, 33), "indeterminate", "letterform_audit 2"),
+    ("date under the ambigram", "11.03.20", (1012, 1098, 86, 24), "measured", "slot20.py:129"),
+    ("seal ring (mirror)", "RERUM COGNOSCERE CAUSAS", (470, 770, 390, 160), "measured", "seal_ring.py"),
+    ("seal scroll (mirror)", "UBI BENE IBI PATRIA", (470, 1040, 390, 95), "measured", "seal_ring.py:13"),
+    ("pyramid base (mirror)", "FIAT JUSTITIA ET PEREAT MUNDUS", (552, 1026, 190, 20), "measured", "census_crops SCREENED 3"),
+    ("clock hand (minute)", "TOWER", (325, 785, 180, 125), "measured", "census_crops ELEMENTS 11"),
+    ("clock hand (second)", "MOON", (325, 785, 180, 125), "measured", "census_crops ELEMENTS 11"),
+    ("vial label", "CVD19", (130, 230, 50, 60), "measured", "census_crops SCREENED 4"),
+    ("left-edge address", "1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ", (38, 555, 46, 585), "measured", "census_crops ELEMENTS 12"),
+    ("statue plinth band", "ONLY real BITCOIN", (95, 1045, 140, 25), "measured", "census_crops ELEMENTS 13"),
+    ("plinth caption line 1", "PAY FOR THE FUTURE.", (76, 782, 13, 195), "measured", "census_crops ELEMENTS 14"),
+    ("plinth caption line 1, Roman-V reading", "PAY FOR THE FVTURE.", (76, 782, 13, 195), "indeterminate", "letterform_audit 2"),
+    ("plinth caption line 2", "THIS IS THE FIRST PREDICTION.", (93, 782, 15, 215), "measured", "census_crops ELEMENTS 14"),
+    ("bottom Latin line", "Esse quam niger es, sic dixit caccabus ollae", (1025, 1140, 530, 50), "measured", "census_crops ELEMENTS 15; letterform_audit 1.2"),
+    ("date beside Liberty", "1865-202...?", (205, 615, 170, 110), "measured", "letterform_audit 1.6"),
+    ("bottom-right monogram", "CHR", (1520, 1125, 70, 40), "inferred", "REPORT 9"),
+    ("13th Amendment copy", AMENDMENT_TEXT, (1296, 775, 205, 150), "magnified", "letterform_audit 1.3"),
+    ("bottom whitepaper caption", CAPTION_TEXT, (25, 1138, 1040, 28), "magnified", "letterform_audit 1.5"),
+    ("E-of-BRAVE micro-text", MICRO_TEXT, (885, 468, 90, 117), "measured", "letterform_audit 1.4"),
+    ("clock caption (rune)", "\u0421\u0443\u043c\u043c\u0430 \u0434\u0432\u0443\u0445 \u0447\u0438\u0441\u0435\u043b", (330, 790, 170, 120), "cipher", "REPORT 7"),
+    ("right-edge line (rune)", "\u0437\u0434\u0435\u0441\u044c \u0437\u0430\u0448\u0438\u0444\u0440\u043e\u0432\u0430\u043d\u044b \u0431\u0438\u0442\u043a\u043e\u0438\u043d\u044b \u043d\u0430 \u0447\u0451\u0440\u043d\u044b\u0439 \u0434\u0435\u043d\u044c \u043d\u043e\u043c\u0435\u0440", (1560, 40, 40, 1120), "cipher", "REPORT 7"),
+    ("rune fragment", "\u042f \u043d\u0430\u0434\u0435\u044e\u0441\u044c", (1560, 40, 40, 1120), "cipher", "REPORT 7"),
+    ("rune fragment", "\u0431\u0443\u0434\u0443\u0442 \u043f\u0440\u0438\u0441\u044b\u043b\u0430\u0442\u044c", (1560, 40, 40, 1120), "cipher", "REPORT 7"),
+]
+
 SCREENED = [  # ~5-8 px text: a letter-sized object would be unidentifiable; screened as blocks only
     ("bottom caption (whitepaper, cursive)", "~115", [(30, 1140, 1020, 30, 2, 0, 1, 99)]),
     ("13th Amendment copy", "~179", [(1296, 780, 200, 140, 4, 0, 1, 99)]),
