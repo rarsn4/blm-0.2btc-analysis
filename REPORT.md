@@ -907,6 +907,75 @@ setting in the run header, so no future run can be silently lowercase.
 > Still **not** closed by those two runs: the key-variant narrowing. Both inherit
 > `sha256` + space-joined only, one quarter of the space the t18 figure covered.
 
+**[TESTED, 4 Nov 2026] `CASE upper` has now run: `brain_t21_upper`, exhausted, no
+match.** Its own row in the brainwallet count, **not** added into the 7,939,492,344
+above, which is a different template on a different pool.
+
+```
+candidates   150,837,781,250              (65^6 x 2, six @POOL slots + slot 20's two words)
+survivors    150,837,781,250              acceptance EXACTLY 1
+addresses    452,513,343,750              (x3: compressed, uncompressed, hybrid)
+identity     EXACT                        survivors == candidates == 2 x 65^6
+result       exhausted, no match          exit 2,  HIT lines 0
+wall         56,391.96 s = 15.66 h        2.672 M cand/s, 0 thermal pauses
+```
+
+**Acceptance is quoted as an exact rational, not a float.** `Fraction(150837781250,
+150837781250)` is **1**, not a quotient that rounds to `1.000000000` at nine places,
+and the distinction is the whole control: a brainwallet has no checksum, so every
+candidate must derive and **there is no z-score to quote** — nothing scatters around
+an expectation. Anything below 1 would mean work was silently dropped and the
+negative would be void. The rate is from checkpoint-mtime boundary deltas over **66
+intervals** (67 boundaries, 21:08:35Z to 10:29:44Z, 128,423,420,674 candidates in
+48,069 s), not from the progress file, which is chunk-quantised.
+
+**Overlap with the image-text corpus: 0 of 34,354 strings.** Measured, not assumed.
+Of the corpus's 34,354 strings, **592** have 21 space-separated tokens and so could
+in principle be a phrase of this template; **all 592 fail at slot 1**, which this
+config pins to `subject`. No painted or decoded line in the artwork begins with that
+word — it is a template assignment, not a drawn word. The test was controlled in both
+directions: three phrases built from the template itself are recognised as members
+(including both `apple` and `second` at slot 20, and different pool picks), and two
+deliberate near-misses are rejected. The same test run against
+`brain_t21_pool65.conf`, `brain_t18_pool63.conf` and `brain_t18_pool52.conf` also
+returns 0, so no brainwallet template run duplicates any corpus string.
+
+**This run and its lowercase twin are disjoint, and the reason is checkable.**
+`brain_t21_upper.conf` and `brain_t21_pool65.conf` differ in **exactly one
+directive** — `CASE upper` against `CASE lower`; `diff` over their `SCHEME`, `WORDS`,
+`SLOT`, `POOL`, `EXTRA`, `BRAINHASH`, `BRAINSPACE` and `BRAINPUB` lines is otherwise
+empty. Of the 81 distinct template words, **none is case-invariant**, so every
+upper-case phrase differs from its lower-case counterpart in at least one byte, and
+SHA-256 is case-sensitive. Two rows of the same size are therefore two bodies of
+work, not one counted twice.
+
+**Combined brainwallet total, in addresses.** Quoted only because every pairwise
+overlap above is 0; the four are disjoint by token count, by case, or by the measured
+slot-1 test.
+
+| brainwallet run | candidates / strings | addresses |
+|---|---|---|
+| t18 template over the 63-word pool, lower, 8 key variants | 992,436,543 | 7,939,492,344 |
+| t21 template, 65-word pool, `CASE lower` (`brain_t21_pool65`) | 150,837,781,250 | 452,513,343,750 |
+| image-text corpus, re-run 2 Nov | 34,354 strings | 206,124 |
+| t21 template, 65-word pool, `CASE upper` (`brain_t21_upper`) | 150,837,781,250 | 452,513,343,750 |
+| **union** | | **912,966,385,968** |
+
+**That total is addresses, and it is never added to the BIP39 or Electrum
+derivations.** The two counts answer different questions — a derivation is a seed
+phrase resolved to a key, an address is one serialisation hashed — and a brainwallet
+has no checksum, so the 1-in-128 convention that defines a derivation does not apply
+to any row in this table. The §3 headline and this figure are reported separately for
+that reason and must not be summed.
+
+> **[SCOPE] The §0 headline understates this count, and is left alone here.** The
+> summary line reads "plus 7,939,492,344 brainwallet addresses counted separately",
+> which is the t18 row only — it omitted the 452,513,343,750 of the `CASE lower` t21
+> run before this revision, and now omits this one too. The understatement is a
+> factor of about 115 against the union above. Not corrected in this pass: the
+> instruction was to add a row in §2.12, and changing a headline figure is a
+> publication decision for the owner.
+
 The *image-text* corpus had no surviving generator, key list or log, so its
 22,638 was reproducible from nothing but the sentence describing it. It now has
 one: `brain_image_corpus.py` rebuilds it from the sources that do survive —
