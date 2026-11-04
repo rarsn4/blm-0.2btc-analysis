@@ -975,6 +975,13 @@ slot-1 test.
 | t21 template, 65-word pool, `CASE upper` (`brain_t21_upper`) | 150,837,781,250 | 452,513,343,750 |
 | **union** | | **912,966,385,968** |
 
+**[ASSUMED] What this union rests on:** the overlap tests above compared **strings**,
+while the table's unit is **addresses**, and disjoint strings yield disjoint addresses
+only because the maps between them are collision-free — SHA-256 from string to private
+key, and HASH160 from public key to address (the scalar→point step is injective on
+`[1, n−1]`). No collision is known for either, so the union holds; it is an
+assumption rather than a measurement, and it is the only one in this table.
+
 **That total is addresses, and it is never added to the BIP39 or Electrum
 derivations.** The two counts answer different questions — a derivation is a seed
 phrase resolved to a key, an address is one serialisation hashed — and a brainwallet
