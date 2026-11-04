@@ -28,8 +28,12 @@ came out of it applies to every total on the page.]* The two t21 sweeps are
 exhaustive over their **declared** space, which is `sha256` + space-joined only — one
 quarter of the key-variant space the t18 row covered, stated in §2.12 and not closed.
 §2.1–2.11, §2.13 and §2.14 are exhaustively eliminated, not "tried and didn't
-find". §2.12 and §2.15 are tested corpora — a weaker claim, and tagged as such
-in their own headings. §2.16 and §2.17 are measurements of the template itself
+find". **§2.12 is mixed and its heading now says so**: the two t21 template sweeps
+are *exhaustive over their declared space*, acceptance exactly 1 with survivors equal
+to candidates, while the t18 template corpus and the image-text corpus are *tested*
+— the weaker claim. The declared space is the narrowing to watch: `sha256` +
+space-joined only, one quarter of the key-variant space. §2.15 is a tested corpus,
+unchanged. §2.16 and §2.17 are measurements of the template itself
 rather than eliminations within it, §2.18 is a tested hypothesis about its
 numbering, and §2.19 banks the leave-one-out family — a fifth of all the compute,
 previously credited in one table row, and §2.17 is the one to read first if you
@@ -783,12 +787,40 @@ by about five orders of magnitude — at this rig's 11,925,000 cand/s,
 `wp_pool10` alone is 21.2 h. Irrelevant now that it is done, but their cost model
 for this hardware should not be relied on.
 
-### 2.12 [TESTED] Brainwallets — a class nobody had touched
+### 2.12 [EXHAUSTED over two declared t21 spaces, `sha256` + space-joined only; TESTED corpora otherwise] Brainwallets — a class nobody had touched
 
 `priv = SHA256(phrase)` directly: no BIP39 checksum, no PBKDF2, no BIP32, no path.
 Common in 2020-era puzzles and never tested against this target.
 
-**Two corpora, both negative.**
+> **[Heading and §0 classification corrected 4 Nov 2026.]** This heading read
+> `[TESTED]` alone, and §0 said "§2.12 and §2.15 are tested corpora — a weaker claim,
+> and tagged as such in their own headings", until today. **§2.12 stopped being a
+> single-strength section on 29 Sep 2026** (`7fb9d22`), when `brain_t21_pool65` landed
+> as an exhaustive sweep at acceptance exactly 1 alongside the two tested corpora.
+> Neither the heading nor the §0 sentence was re-derived when that run was added, so
+> for **36 days** the section's strongest result was published under its weakest
+> label, and a reader who trusted the heading would have under-read two exhaustive
+> sweeps as corpus tests.
+>
+> **This is the third instance of the same failure, and it is worth naming as a
+> pattern rather than three accidents.** A figure or label is written, a component
+> changes underneath it, and the thing above is not re-derived:
+>
+> | | what went stale | for how long |
+> |---|---|---|
+> | §3 marginal line | 3,608,896,368 while both totals above it moved | 2 weeks (28 Sep – 13 Oct) |
+> | §0 brainwallet figure | 7,939,492,344, the t18 row alone | 36 days (29 Sep – 4 Nov) |
+> | **this heading + §0 classification** | `[TESTED]`, after an exhaustive run was added | 36 days (29 Sep – 4 Nov) |
+>
+> All three were caught by someone reading the page against the ledger, not by any
+> check in the tree. `pre_push_check.sh` guards phrases and private strings; nothing
+> guards a summary against the section it summarises. The rule §3 states for the
+> marginal — a total must be re-derived whenever any component of it changes — applies
+> to **labels** as well as numbers, which is the part the first two instances did not
+> make explicit.
+
+**Two corpora, both negative** — and, since 29 Sep, two exhaustive template sweeps
+besides; the heading carries both strengths.
 
 *Image text*, 22,638 keys: every text string in the image (Latin mottos, Russian
 plaintexts, BLM slogans, dates, the 13th Amendment, whitepaper fragments, the target
@@ -2252,6 +2284,10 @@ already covered** by newer sweeps.~~
 > checked; the only one near either target is `disjoint/derivations = 36.6%`, which
 > divides candidates by derivations and is not a quantity.
 >
+> **`test_tally.py` was in the tree at `d30d8d3` too, and it prints no percentage at
+> all** — 12 unit tests of the box algebra and the line `ALL PASS`, no figures — so
+> the negative claim covers all three scripts that commit carried, not two.
+>
 > **The companion claim fails the same way.** The twelve asserted runs' own union is
 > 580,237,381,114 candidates against a marginal of 462,067,188,033, so **20.37%** was
 > already covered, not 37%. Read as a *sum* rather than a union it is **35.85%**,
@@ -2262,7 +2298,15 @@ already covered** by newer sweeps.~~
 > subset readings of the twelve finds 37.09% for `{t21_trust21, t21_bnw18}` and for
 > supersets that add nothing to it. It is not the claim — the sentence says *the
 > twelve* — and **90 of those 8,166 readings fall in the same 36.5–37.5% window,
-> 1.10%**, which is what chance predicts for a one-point window. By §9's own rule a
+> 1.10%**, which is what chance predicts for a one-point window. **Those 8,166 readings
+> are not independent**: a superset that adds nothing repeats its subset's value, which
+> is why 37.09% turns up at r=2, 3 and 4 and appears 10 times in all, so 1.10% is a
+> rate per *reading*, not per *distinct value*. Collapsing to the 2,099 distinct values
+> gives **83 in the window, 3.95%** — the dismissal survives, but by a *larger* margin
+> rather than the same one, because the collapse is uneven (3.89× overall against
+> 1.08× inside the window), so a 37%-ish value is commoner among distinct values than
+> among readings. Stated because a base rate quoted in the wrong unit inside a note
+> about figures that were never checked would be the same error one level up. By §9's own rule a
 > numerical coincidence is not evidence unless the source identifies the operands,
 > and nothing here identifies that pair. Recorded so the next reader does not have to
 > rediscover it and mistake it for the origin.
