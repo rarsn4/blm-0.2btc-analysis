@@ -205,8 +205,13 @@ EVIDENCED = ['t21_readme54','t21_loo21','t21_loo6','t21_loo8','t21_loo14','t21_l
              # oct30c (1), oct31 (15). Every one reached exit=2 with its log in
              # the tree, and every one landed inside the band committed BEFORE
              # launch in QUEUE_after_el22.md -- 29 scored on the stratified model
-             # (slot 21 @POOL, sigma = 0.983533 x binomial), z from -1.323 to
-             # +1.340, none beyond |z| > 2. Two rows are NOT stratified, because
+             # (slot 21 @POOL), z from -1.323 to +1.340, none beyond |z| > 2.
+             # The stratified factor is NOT a constant: it depends on where the
+             # pool's words sit among the 16 blocks, so the 54-word pool's
+             # 0.983533 does not apply to t21_idx2 (64 words, 0.975462),
+             # t21_pool60 (60 words, 0.982658), t21_pool60c (60 words too, but
+             # 0.983192 -- different words) or t21_pool57v (57, 0.982721).
+             # The pool table in section 2 of the report carries all five. Two rows are NOT stratified, because
              # their config's slot 21 is not @POOL -- rule 4, read the config
              # line, never infer the model from the volume:
              #   t21_top6_loo21: SLOT 21 @FULL, so the result is an exact

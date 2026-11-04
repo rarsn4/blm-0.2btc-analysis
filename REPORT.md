@@ -2649,6 +2649,72 @@ with slot 21 **pinned** gets none, and a run with slot 21 `@FULL` gets the exact
 identity instead. Of the six black runs, five sweep slot 21 over the pool and
 `t21_black21` pins `black` there, so it keeps the binomial band.
 
+**[MEASURED 4 Nov 2026] `0.983533` is the 54-word pool's factor, not the model's.**
+The ratio depends on *where* the pool's words fall among the 16 blocks, so every
+pool has its own, and the paragraphs above do not say so. That omission is a live
+trap: scoring a 64-word pool with the 54-word factor is a silent 0.8% error in σ.
+The five pools this campaign has actually swept at slot 21, recomputed from the
+configs:
+
+| pool | k_j by block | Σk_j² | per-prefix variance | σ_strat/σ_binom | runs |
+|---|---|---|---|---|---|
+| 54 | `4 1 1 3 1 4 3 1 5 6 10 1 1 3 6 4` | 278 | 0.404907 | **0.983533** | most of the campaign |
+| 57 | `4 1 1 3 1 4 4 1 6 6 10 1 1 3 6 5` | 305 | 0.426697 | **0.982721** | `t21_pool57v` |
+| 60 | `4 2 1 3 2 4 5 1 5 6 10 1 1 3 7 5` | 322 | 0.449097 | **0.982658** | `t21_pool60` |
+| 60 | `4 1 3 3 2 4 5 1 5 6 10 1 1 3 6 5` | 314 | 0.449585 | **0.983192** | `t21_pool60c` |
+| 64 | `14 1 1 3 1 4 3 1 5 6 10 1 1 3 6 4` | 458 | 0.472046 | **0.975462** | `t21_idx2` |
+
+σ is then `sqrt(prefixes × V_p)` with `prefixes = candidates / |pool|`. Every figure
+in the table is exactly what `QUEUE_after_el22.md` committed before the run launched;
+recomputed from the configs on 4 Nov they reproduce to the digit.
+
+**Two things in that table are worth reading twice.** The two 60-word pools have
+**different factors** — 0.982658 and 0.983192 — because `t21_pool60` and
+`t21_pool60c` add different words: *size does not determine the band*, which is §10
+rule 4 one level down from where it is usually applied. And `t21_idx2` is the
+outlier at 0.975462 because its ten extra words are **consecutive** — `abandon`
+through `accident`, indices 0–9 — so block 0 alone holds 14 of the 64 and `Σk_j²`
+jumps to 458. The more unevenly a pool is spread across the blocks, the further the
+stratified σ falls below the binomial one.
+
+> **[Recorded as an error of mine, not of the bands.]** Scoring the 31 runs on
+> 4 Nov I first applied 0.983533 to all of them and reported σ of 32,102, 26,451,
+> 26,451 and 22,679 for `t21_idx2`, `t21_pool60`, `t21_pool60c` and `t21_pool57v`,
+> against the committed 31,839, 26,428, 26,442 and 22,660. **The committed figures
+> are the correct ones** — the formula above reproduces all four exactly. The cause
+> was **the wrong constant**: one pool's factor used for four other pools. Not a
+> different residue distribution, not a different formula, and not an arithmetic
+> slip. The published z were computed from the committed σ throughout, so no run was
+> rescored and no figure on this page moved. It is recorded because the mistake is
+> precisely the one the table above now exists to prevent, and because the §10 rule
+> that a committed band is never altered after the fact is what made the gap visible
+> rather than absorbing it.
+
+**[MEASURED] The block model is confirmed directly, and the plausible alternative
+is excluded.** The 16 Bernoullis are independent for a reason worth stating: the
+4-bit nibble of word 21 is itself part of the 224-bit entropy that gets hashed, so
+each nibble `j` produces its *own* checksum `c_j`, and the sixteen valid words are
+`{j·128 + c_j}` — sixteen independent draws. Had one checksum served the whole
+prefix, the valid set would be a single residue class `{c, c+128, …, c+15·128}`, the
+per-prefix count would be `m_c` rather than a sum, and the variance would be
+`Σ_c m_c²/128 − (k/128)²` = **0.384521** for the 54-pool — 2.6% narrower in σ than
+the committed convention, in the direction that would make every z *larger*. The
+two are distinguished by measurement, over 2,000,000 random 20-word prefixes with
+the checksum taken from SHA-256 and pool membership looked up:
+
+```
+observed per-prefix variance   0.405172      (standard error 0.000405)
+  block model      0.404907     0.7 SE   <- the committed convention
+  one-residue      0.384521    51.0 SE
+  plain binomial   0.418579    33.1 SE
+
+observed per-prefix mean       0.421513      (54/128 = 0.421875)
+```
+
+The convention is confirmed at 0.7 standard errors and both alternatives are
+excluded. The survivor count per prefix is 0 for 65.0% of prefixes, 1 for 28.6%,
+2 for 5.7%, and reached 7 once in two million.
+
 Applying it to the six, which is the only place in this project with repeated
 draws from one box shape:
 
