@@ -193,7 +193,13 @@ EVIDENCED = ['t21_readme54','t21_loo21','t21_loo6','t21_loo8','t21_loo14','t21_l
              # before launch (QUEUE_after_el22.md). t21_free20 is the four-path
              # t21_free20_p1: same word box, so it adds 0 here (paths not modelled).
              't21_rev54','t21_pool58','t21_food11','t21_slot1_line','t21_alt3',
-             't21_free20','t21_pool57','t21_silent4']
+             't21_free20','t21_pool57','t21_silent4',
+             # 2026-11-03: the single-numeral reading of the clock overlap, the
+             # run its own config records three objections to. exit=2, exhausted,
+             # no match, survivors 20,920,507,774 against the band committed
+             # before launch (20,920,706,406.0 +/- 141,701, stratified), z -1.402.
+             # Admitted on completion and in band, not when the file appeared.
+             't21_single']
 ASSERTED  = ['t21_pool52','t21_pool52_rev','t21_pool40','t21_idx','t21_pathd','t21_pathe',
              't21_trust21','t21_trust21b','t21_bnw18','t21_bnw18b','t21_trustonly','t21']
 CHECKSUM = 128
