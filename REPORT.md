@@ -2115,9 +2115,32 @@ expected value instead of exact `space/128` (+194 M), the other omitted ~1.14 B
 of runs. Neither was reproducible from its own inputs.
 
 The deeper defect was double-counting. Every run on the same template shares
-the all-pool core, so summing counts that core once per run — **3.72%** of the
+the all-pool core, so summing counts that core once per run — ~~**3.72%** of the
 naive total across the t21 campaign. Of the twelve older t21 runs, **37% was
-already covered** by newer sweeps.
+already covered** by newer sweeps.~~
+
+> **[RETRACTED 4 Nov 2026] Both percentages in the sentence above are withdrawn as
+> unreconstructable.** They were introduced in `d30d8d3` (27 Sep 2026) and never
+> edited, and neither reproduces from the ledger state of that date. The check:
+> `git show d30d8d3:tally2.py` has a 22-run `EVIDENCED` list, and running *that*
+> script against the configs of *that* commit prints **3.31%**, not 3.72% —
+> `double-counted 835,890,993,303 / naive sum 25,245,658,140,567`. Running the same
+> script against today's configs prints 3.31%, and running today's `tally2.py` with
+> `EVIDENCED` cut back to those 22 runs also prints 3.31%, so the gap is not config
+> drift and not a change in the script. Eight other readings of "double-counted as a
+> share" were tried against that state — with and without the `T24` tail, in
+> candidates and in derivations, over the evidenced naive sum and over each union —
+> and they span 2.355%–3.424%. **None is 3.72%.** The companion claim fails the same
+> way: the twelve asserted runs' own union is 580,237,381,114 candidates against a
+> marginal of 462,067,188,033, so **20.37%** was already covered, not 37%.
+>
+> No replacement is asserted, because the figure cannot be traced to a computation.
+> For the quantity the sentence was describing, the two measured values are
+> **3.31%** at the 22-run ledger of 27 Sep and **7.66%** today at 51 evidenced runs
+> (`double-counted 3,272,477,091,681 / naive sum 42,706,694,004,011`). Both are
+> reproducible from `tally2.py`; the retracted pair is not. This is the §10 rule
+> applied to the report's own prose: a number that cannot be recomputed does not
+> stay on the page because it once looked right.
 
 `tally2.py` replaces the sum. It parses the run configs directly — so a row
 cannot drift from the config it claims to describe — and computes the union by
