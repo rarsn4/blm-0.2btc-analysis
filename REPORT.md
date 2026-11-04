@@ -1,4 +1,4 @@
-# 0.2 BTC Puzzle — the rune cipher solved, over 284 billion derivations eliminated, and six defects in the shared data
+# 0.2 BTC Puzzle — the rune cipher solved, over 305 billion derivations eliminated, and six defects in the shared data
 
 **Target:** `1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ`
 **HASH160:** `ccbd031e54cde2a3189fd59bc49f731367a1779e`
@@ -11,7 +11,7 @@ What **is** solved is the **rune cipher**, except for a single glyph. Those are
 different claims and this report keeps them separate throughout.
 
 I built a GPU search pipeline covering both BIP39 and Electrum and ran
-**284,280,833,673 full seed derivations** — 8,226 days of CPU at typical solver
+**305,201,540,079 full seed derivations** — 8,831 days of CPU at typical solver
 rates — plus 7,939,492,344 brainwallet addresses counted separately (§2.12).
 §2.1–2.11, §2.13 and §2.14 are exhaustively eliminated, not "tried and didn't
 find". §2.12 and §2.15 are tested corpora — a weaker claim, and tagged as such
@@ -308,7 +308,7 @@ dark frame stripe, 61 of 67 px below grey 110, and that is precisely the ascende
 #### The defect is BOUNDED to the brainwallet scheme — stated so no reader has to infer it
 
 **A transcription error cannot have corrupted any BIP39 or Electrum negative, and the
-headline 284,280,833,673 derivations are unaffected.** The reason is structural, not
+headline 305,201,540,079 derivations are unaffected.** The reason is structural, not
 lucky: those two schemes encode words as indices into the fixed 2048-word list, and the
 solver resolves every config word through `widx()` before any GPU work begins. For a
 non-brainwallet config `allow_extra` is false, so a word outside the list returns −1 and
@@ -2058,11 +2058,26 @@ the campaign (the previous largest was +1.802, `t21_loo6`):
 
 `food@11`, `space@11`, the reversed template on the 54-pool, and the alternates
 `person`, `real` and `rain` are now covered on four paths under both slot-20
-readings. **Not yet admitted to `tally2.py`'s EVIDENCED list:** admitting the five
-BIP39 runs would move the headline from 278,996,119,787 to 283,874,091,848
-evidenced derivations (combined 286,738,325,903), and waits on the owner.
-*[26 Oct: admitted on the owner's instruction, together with the three BIP39 runs of
-24–26 Oct below; ledger in §3.]*
+readings. *[26 Oct: all five were admitted to `tally2.py`'s EVIDENCED list on the
+owner's instruction, together with the three BIP39 runs of 24–26 Oct below; ledger
+in §3. The note that stood here — "**Not yet admitted** … admitting the five BIP39
+runs would move the headline from 278,996,119,787 to 283,874,091,848 evidenced
+derivations (combined 286,738,325,903), and waits on the owner" — described a state
+that ended that day. It is kept, dated, as the record of it, not as a live claim.]*
+
+**[SCOPE] What is still unadmitted, as of 3 Nov 2026: 31 completed t21 runs.** Each
+exited 2 with its log in the tree; none is in `tally2.py`'s EVIDENCED list, so none
+is in the headline, and the headline is a floor by that much. By name — `t21_idx2`,
+`t21_pool60`, `t21_slot1`, `t21_food7` (26 Oct); `t21_pool57v` (30 Oct);
+`t21_pool60c` (30 Oct); `t21_top20`, `t21_top6_loo8`, `t21_top6_loo14`,
+`t21_top6_loo15`, `t21_top6_loo18`, `t21_top6_loo21`, `t21_top_at_7`,
+`t21_top_at_9`, `t21_top_at_11`, `t21_top_at_17` (30 Oct); `t21_clk2`, `t21_clk3`,
+`t21_clk4`, `t21_clk5`, `t21_clk6`, `t21_clk7`, `t21_clk8`, `t21_clk9`,
+`t21_blackd2`, `t21_blackd3`, `t21_blackd4`, `t21_blackd5`, `t21_blackd7`,
+`t21_blackd9`, `t21_this3` (31 Oct). Admission waits on the owner, run by run, under
+the rule in §10: on completion and in band, never when the file appears. Electrum
+`el21_rev` is a 32nd completed-but-uncredited run and is outside `tally2.py`
+altogether, which models only the 21-word BIP39 template.
 
 **[MEASURED] The queues of 24–26 Oct 2026, run while `el22` was held.** Each band was
 committed before launch (`QUEUE_after_el22.md`), and survivors were taken from each
@@ -2110,10 +2125,10 @@ box disjointification with real set intersections. Run it as
 `python3 tally2.py configs`.
 
 ```
-t21 campaign, 50 evidenced runs     284,280,833,673 derivations
-+ the twelve older asserted runs    287,144,978,142
+t21 campaign, 51 evidenced runs     305,201,540,079 derivations
++ the twelve older asserted runs    308,065,684,548
     marginal of the twelve          2,864,144,469
-    at 400 derivations/s            8,309 CPU-days
+    at 400 derivations/s            8,914 CPU-days
 ```
 
 *[26 Oct: eight runs admitted.]* The runs are `t21_rev54`, `t21_pool58`, `t21_food11`,
@@ -2126,19 +2141,57 @@ candidates. Their naive sum is 2,425,862,118,818, so the inter-box term is
 `t21_free20` alone contributes 0: it is `t21_free20_p1`'s word box, and the ledger
 does not see paths.
 
-In derivations, the change is `284,280,833,673 − 278,996,119,787 = 5,284,713,886`.
+In derivations, that admission moved the headline `278,996,119,787 → 284,280,833,673`,
+a change of 5,284,713,886. (Both figures are the ledger as it stood on 26 Oct; the
+block above now prints 305,201,540,079 after the admission of 3 Nov.)
 Each total is floored separately, so this is one more than 676,443,377,378 / 128 =
 5,284,713,885.77 rounded down. Electrum `el21_rev` (§2.6) and the passphrase passes
 are not in this block.
+
+*[3 Nov: `t21_single` admitted, the 51st evidenced run.]* The single-numeral reading
+of the clock overlap — the run whose own config records three objections to it.
+`exit=2`, exhausted with no match, 0 HIT lines, survivors **20,920,507,774** against
+the band committed before launch in `QUEUE_after_el22.md` (20,920,706,406.0 ±
+141,701, stratified, slot 21 `@POOL`), **z = −1.402**. Added as a box it contributes
+**2,677,850,419,968** candidates and the union rises by exactly that: the overlap
+with the existing 50 boxes is **0**, which `tally2.py` computed — it was not asserted
+in advance. **Slot 4 is what separates it.** `t21_single` moves `eye` to slot 4 and no
+evidenced config admits `eye` there: 46 pin `mask`, two use pools that do not contain
+it, one pins `silent`, one allows `mask|person`. Slot 6 separates 48 of the 50 as
+well; `t21_loo6` and `t21_loo6_apple` free slot 6 so `pyramid` is reachable there, but
+slot 4 still blocks both, and `t21_swap114`, `t21_rev54` and `t21_slot1_line` part at
+slot 1 first. `double-counted` is unchanged at 3,272,477,091,681, which is the
+independent check that nothing was added twice.
+
+**The ledger credits this run 20,920,706,406 derivations, not the 20,920,507,774
+survivors it actually counted.** The credited figure is `⌊candidates / 128⌋` — the
+**modelled** count, exact here with remainder 0 — and the observed survivors fall
+198,632 short of it, which is 198,632 / 141,701 = 1.402σ and is the same number as
+the z-score above, reached from the other side. This is the convention this section
+already states under *"What ‘derivations’ means here, exactly"*: the ledger reports
+`⌊candidates / 128⌋`, **that is a convention, not a count**, and every run is
+z-tested against `N/128` rather than required to equal it. The convention applies to
+**all 51 evidenced rows**, not to this one specially; the residuals are signed and
+centred on zero, so the error is self-cancelling in aggregate and no total above
+needs adjusting. Recorded as a precision note, not a correction.
 
 *[Corrected 13 October.]* The marginal line read 3,608,896,368 from 28 September,
 when the ledger held 29 runs, until 13 October. The two totals above it were
 updated at every admission and it was not, so for two weeks the block broke the
 rule stated later in this section: the marginal must equal the difference of the
-two printed totals. It is now `287,144,978,142 − 284,280,833,673 = 2,864,144,469`,
+two printed totals. It is now `308,065,684,548 − 305,201,540,079 = 2,864,144,469`,
 which is also what `tally2.py` prints. *(It read `282,171,117,443 −
-278,996,119,787 = 3,174,997,656` until the admissions of 26 Oct.)* It shrinks as newer evidenced runs
-re-cover the twelve asserted ones.
+278,996,119,787 = 3,174,997,656` until the admissions of 26 Oct, and
+`287,144,978,142 − 284,280,833,673 = 2,864,144,469` from then until the admission of
+3 Nov.)* It shrinks as newer evidenced runs re-cover the twelve asserted ones —
+**but it did not shrink on 3 Nov, and that is the point of recomputing it rather
+than swapping the headline under it.** `t21_single` added 2,677,850,419,968
+candidates and re-covered none of the twelve asserted boxes, so both printed totals
+rose by the same amount and the marginal is unchanged to the derivation:
+2,864,144,469 before and after. The gap narrows only when a new evidenced run lands
+*inside* the asserted boxes. This one does not touch them — the same slot-4
+disjointness that gave it zero overlap with the evidenced 50 also keeps it clear of
+the asserted twelve.
 
 **The seven runs added on 27–28 September are why the union matters.** Six were
 the black-relocation sweep and one a pool expansion. Added as boxes they
@@ -2645,12 +2698,12 @@ roughly zero and the whole 26.5 billion.
 
 The t21 figure above **is** computed, and every digit reproduces from
 `tally2.py configs`. Adding an unverifiable constant to it would make the sum
-less trustworthy than either part. Where one number is needed, **"over 284
+less trustworthy than either part. Where one number is needed, **"over 305
 billion derivations eliminated"** is a floor that is computed, in preference to
 an estimate that is not.
 
-**The headline quotes the evidenced figure, not the combined one.** 284,280,833,673
-is the union of the 50 runs whose logs are in this tree; 287,144,978,142 adds the
+**The headline quotes the evidenced figure, not the combined one.** 305,201,540,079
+is the union of the 51 runs whose logs are in this tree; 308,065,684,548 adds the
 twelve older runs carried on report alone. The larger number is not wrong, but it
 inherits the weaker warrant of its weakest component, and a headline that needs a
 footnote about which runs have logs is worse than a smaller headline that needs
