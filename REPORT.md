@@ -2199,9 +2199,53 @@ already covered** by newer sweeps.~~
 > drift and not a change in the script. Eight other readings of "double-counted as a
 > share" were tried against that state — with and without the `T24` tail, in
 > candidates and in derivations, over the evidenced naive sum and over each union —
-> and they span 2.355%–3.424%. **None is 3.72%.** The companion claim fails the same
-> way: the twelve asserted runs' own union is 580,237,381,114 candidates against a
-> marginal of 462,067,188,033, so **20.37%** was already covered, not 37%.
+> and they span 2.355%–3.424%. **None is 3.72%.**
+>
+> **`tally.py`, the script that preceded it, was tested too, so the negative claim is
+> complete.** That is the size-based `min()` model the sentence's own paragraph is
+> about, and it was the obvious remaining candidate. `git show d30d8d3:tally.py` run
+> as it stands prints, in full:
+>
+> ```
+> t21 campaign, 17 runs, 131,072 i-e terms
+>   naive sum         19,020,913,991,641 candidates
+>   union             18,538,790,716,441
+>   double-counted       482,123,275,200  (2.53%)
+> disjoint templates     53,208,402,854 candidates
+> TOTAL               18,591,999,119,295 candidates
+>                        145,249,993,119 derivations
+>                                  4,203 CPU-days at 400/s
+> ```
+>
+> **2.53%, and no 37% anywhere in its output.** `(naive − union) / naive` on *its*
+> union gives 2.535%; adding the disjoint templates to both sides gives 2.528%; over
+> its union 2.601%; over its TOTAL 2.593%. Its own docstring independently states
+> "for the 17 runs of the t21 campaign that is 482 billion candidates, **2.53%** of
+> the naive total", so the script and its documentation agree with each other and
+> disagree with the report. `tally.py` cannot be extended to 22 runs for comparison:
+> its rows are hard-coded dimension *sizes*, not configs, which is the defect
+> `tally2.py` was written to fix. Every ratio of its printed quantities was also
+> checked; the only one near either target is `disjoint/derivations = 36.6%`, which
+> divides candidates by derivations and is not a quantity.
+>
+> **The companion claim fails the same way.** The twelve asserted runs' own union is
+> 580,237,381,114 candidates against a marginal of 462,067,188,033, so **20.37%** was
+> already covered, not 37%. Read as a *sum* rather than a union it is **35.85%**,
+> which is the closest any reading comes and still is not 37%; over the nine runs
+> `tally.py`'s docstring names instead of twelve it is 34.97%.
+>
+> **One near-match, reported and dismissed on its base rate.** Searching all 8,166
+> subset readings of the twelve finds 37.09% for `{t21_trust21, t21_bnw18}` and for
+> supersets that add nothing to it. It is not the claim — the sentence says *the
+> twelve* — and **90 of those 8,166 readings fall in the same 36.5–37.5% window,
+> 1.10%**, which is what chance predicts for a one-point window. By §9's own rule a
+> numerical coincidence is not evidence unless the source identifies the operands,
+> and nothing here identifies that pair. Recorded so the next reader does not have to
+> rediscover it and mistake it for the origin.
+>
+> Both percentages entered in the same commit: `git log -S'37% was' -- REPORT.md`
+> returns `d30d8d3` alone, so they were not written at different times under
+> different models.
 >
 > No replacement is asserted, because the figure cannot be traced to a computation.
 > For the quantity the sentence was describing, the two measured values are
