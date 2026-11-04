@@ -2630,11 +2630,19 @@ formula, `|U(S ∪ U₂₁)| − |U₂₁|`:
 | §2.14, `swap114` + `free2_p1` | 1,413,309,943,872 | 1,388,515,032,576 | 98.25% |
 | §2.19, the six `loo` | 6,458,615,227,584 | 6,385,948,111,008 | 98.87% |
 
-Over the whole 50-run union, 22,871,916,142,795 of 36,386,137,420,077 candidates
-(**62.86%**) are compressed-key only. This cross-checks exactly against
-`|U₅₀| − |U₂₁|`. Most of the drop is `t21_free20`, which re-covers
-`t21_free20_p1`'s box with all three encodings. Closing the remainder would take
-about 23 GPU-days.
+Over the 50-run union as it stood on 26 Oct (not recomputed over 51),
+22,871,916,142,795 of 36,386,137,420,077 candidates (**62.86%**) are
+compressed-key only. This cross-checks exactly against `|U₅₀| − |U₂₁|`. Most of the
+drop is `t21_free20`, which re-covers `t21_free20_p1`'s box with all three
+encodings. Closing the remainder would take about 23 GPU-days.
+
+`t21_single`, the 51st evidenced run, checked **all three key encodings**, not
+compressed only — `solver2_jac` was built 2026-09-28 09:33, after the
+three-encoding binary of 2026-09-28 07:51, and the run closed on 3 Nov — so
+admitting it leaves the compressed-only numerator unchanged while enlarging the
+union, and **the 62.86% share falls**. The figure above is left at its 26 Oct
+scope rather than recomputed, because the share comes from the encoding analysis
+and not from `tally2.py`.
 
 **68.21% of the whole 42-run union has been checked with the compressed key
 only.** The overall figure cross-checks exactly against `|U₄₂| − |U₁₃|`. Closing
