@@ -1134,7 +1134,7 @@ during the seam work (§10).
 
 ---
 
-### 2.13 [EXHAUSTED; 91.2% of its space compressed-key only; 12 of 15 slots path 1 only] Free-one-fixed at 21 words: the branch that was never run
+### 2.13 [EXHAUSTED; 90.6% of its space compressed-key only; 12 of 15 slots path 1 only] Free-one-fixed at 21 words: the branch that was never run
 
 *[Heading updated 26 Oct: it read "99.6% … 13 of 15" until the runs admitted that
 day, `t21_free20` above all, re-covered part of this space with all three key
@@ -1927,7 +1927,7 @@ artwork's numbering and word sources, not statements the author made.
 
 ---
 
-### 2.19 [EXHAUSTED, both slot-20 readings; compressed-key only except apple at slots 6/8/14/15/18] One gap slot over the whole dictionary, every gap in turn
+### 2.19 [EXHAUSTED, both slot-20 readings; 97.6% of its space compressed-key only] One gap slot over the whole dictionary, every gap in turn
 
 The largest single block of work in this project had one line of credit in §2.13
 and no section of its own. Read across the six configs, `@FULL` rotates through
@@ -2966,9 +2966,11 @@ affine   hybrid         2565   m/0/0  hybrid        PASS
 ```
 
 The current kernel hashes all three for every derived key. **But 29 of the 42
-evidenced runs predate it.** The three-encoding binary was built 2026-09-28
-07:51; every run whose log closed before then checked the **compressed key
-only**:
+evidenced runs predate it.** *[Still 29 as of 4 Nov 2026 — the pre-patch set is
+closed and cannot grow; the post-patch set has gone 13 → 21 → 22 → 53, so the
+ledger now stands at 29 pre-patch of 82.]* The three-encoding binary was built
+2026-09-28 07:51; every run whose log closed before then checked the **compressed
+key only**:
 
 | key checked | runs |
 |---|---|
@@ -3002,36 +3004,78 @@ formula, `|U(S ∪ U₂₁)| − |U₂₁|`:
 | §2.14, `swap114` + `free2_p1` | 1,413,309,943,872 | 1,388,515,032,576 | 98.25% |
 | §2.19, the six `loo` | 6,458,615,227,584 | 6,385,948,111,008 | 98.87% |
 
-Over the 50-run union as it stood on 26 Oct (not recomputed over the 82 evidenced
-today), 22,871,916,142,795 of 36,386,137,420,077 candidates (**62.86%**) are
-compressed-key only. This cross-checks exactly against `|U₅₀| − |U₂₁|`. Most of the
-drop is `t21_free20`, which re-covers `t21_free20_p1`'s box with all three
-encodings. Closing the remainder would take about 23 GPU-days.
+Over the 50-run union as it stood on 26 Oct, 22,871,916,142,795 of
+36,386,137,420,077 candidates (**62.86%**) were compressed-key only. This
+cross-checks exactly against `|U₅₀| − |U₂₁|`. Most of the drop from 68.21% is
+`t21_free20`, which re-covers `t21_free20_p1`'s box with all three encodings.
 
-`t21_single`, the 51st evidenced run, checked **all three key encodings**, not
-compressed only — `solver2_jac` was built 2026-09-28 09:33, after the
-three-encoding binary of 2026-09-28 07:51, and the run closed on 3 Nov — so
-admitting it leaves the compressed-only numerator unchanged while enlarging the
-union, and **the 62.86% share falls**. The figure above is left at its 26 Oct
-scope rather than recomputed, because the share comes from the encoding analysis
-and not from `tally2.py`.
+*[Recomputed 4 Nov 2026 over 82 runs. Both of the figures above are superseded:
+68.21% was the 42-run state and 62.86% the 50-run state, and each is kept as the
+record of its own ledger.]* `t21_single` and all 31 runs admitted on 4 Nov used the
+three-encoding kernel: `solver2_jac` was built 2026-09-28 09:33, after the
+three-encoding binary of 07:51, and all five queue scripts of the 31
+(`run_queue_oct26.sh`, `run_queue_oct30.sh`, `run_queue_oct30b.sh`,
+`run_queue_oct30c.sh`, `run_queue_oct31.sh`) invoke it. The post-patch set is
+therefore **53 runs**, and the same formula `|U(S ∪ U₅₃)| − |U₅₃|` gives:
 
-*[4 Nov 2026.]* The same holds, and more strongly, for the 31 runs admitted today.
-All five of their queue scripts — `run_queue_oct26.sh`, `run_queue_oct30.sh`,
-`run_queue_oct30b.sh`, `run_queue_oct30c.sh`, `run_queue_oct31.sh` — invoke
-`./solver2_jac`, built 2026-09-28 09:33, after the three-encoding cutover of
-2026-09-28 07:51, so all 31 checked **all three key encodings**. They add
-1,440,538,457,186 candidates to the union and nothing at all to the compressed-only
-numerator, so the 62.86% and the 68.21% below are both now overstatements of the
-compressed-only share, in the safe direction: the real coverage is better than the
-figures say. Neither is recomputed here, for the reason just given — the share is an
-output of the encoding analysis, and re-deriving it from `tally2.py` alone would be
-the kind of cross-model substitution §10 forbids.
+| scope | its union | checked compressed-key only | share | was (U₂₁) |
+|---|---|---|---|---|
+| all 29 pre-patch runs | 24,480,490,264,651 | 22,692,382,618,411 | **92.70%** | 93.43% |
+| §2.13, the 13 `free*_p1` | 17,455,617,552,384 | 15,819,153,406,848 | **90.62%** | 91.19% |
+| §2.14, `swap114` + `free2_p1` | 1,413,309,943,872 | 1,388,515,032,576 | **98.25%** | 98.25% |
+| §2.19, the six `loo` | 6,458,615,227,584 | 6,305,594,231,808 | **97.63%** | 98.87% |
+| **the whole 82-run union** | 40,504,526,297,231 | 22,692,382,618,411 | **56.02%** | 62.86% |
 
-**68.21% of the whole 42-run union has been checked with the compressed key
-only.** The overall figure cross-checks exactly against `|U₄₂| − |U₁₃|`. Closing
-the caveat would cost about 25 GPU-days, for a key format BIP32 wallets do not
-produce, and is not planned.
+**Both ends moved, which is why this could not be read off `tally2.py`.** Since
+the 50-run state the denominator has risen by **4,118,388,877,154** —
+`t21_single`'s 2,677,850,419,968 plus the 1,440,538,457,186 the 31 contribute — and
+the numerator has *fallen* by **179,533,524,384**, all of it on the 31, because 11
+of them re-cover pre-patch space with all three encodings. The naive shortcut that worked for `t21_single` — numerator
+unchanged, denominator up — does not apply here: `t21_single` overlapped nothing,
+and these eleven overlap a great deal.
+
+**Which runs re-covered pre-patch space**, measured per run against `U₂₉`:
+`t21_idx2` 81,731,374,272; `t21_slot1` 74,384,733,888; `t21_pool60` and
+`t21_pool60c` 68,874,753,600 each; `t21_pool57v` 59,232,288,096; `t21_food7`
+24,794,911,296; and each of the five `t21_top6_loo*` 459,165,024. The other 20 of
+the 31 touch no pre-patch space at all. Their per-run figures sum to
+380,188,639,872 but their **union** against `U₂₉` is **229,123,346,976** — these are
+overlapping boxes and the sum is not the answer, the same caution as in §3.
+
+Of that 229,123,346,976, exactly **49,589,822,592 was already three-encoding
+covered** and only the remaining 179,533,524,384 is new. That already-covered
+figure is exactly `t21_readme54`'s own box, and the measurement confirms why:
+`t21_readme54` lies entirely inside `U₂₂` (its overlap equals its full volume),
+because it sits inside `t21_needle11`. So the four gap-pool expansions re-cover
+`readme54`'s core for a second time and gain nothing there; what they do gain is
+the pool words `readme54` never had, reached through the `loo` runs' freed slots.
+
+**§2.19 moved the most in relative terms, 98.87% → 97.63%, and its heading changed
+shape.** It read *"compressed-key only except apple at slots 6/8/14/15/18"*, a
+conditional that was complete when the only three-encoding cover of that space was
+the five `*_apple` mirrors. It no longer is: `t21_top6_loo8/14/15/18/21` each
+re-cover 459,165,024 of it through `t21_loo6` — slot 6 is `@FULL` there, so `top`
+is reachable at slot 6 — and the four gap-pool expansions re-cover between 59 and 82
+billion of it each (`t21_pool57v` 59,232,288,096, `t21_pool60` and `t21_pool60c`
+68,874,753,600, `t21_idx2` 81,731,374,272) through `t21_loo21` and the five other
+`loo` runs, whose freed slots admit their new pool words. Rather than extend the conditional into a list nobody can
+check, the heading now carries the number, as §2.13 and §2.14 already do and as
+this section's own argument prefers. **§2.14 did not move**: 98.25% before and
+after, because nothing among the 31 touches `swap114` or `free2_p1`.
+
+**These figures exclude the 24-word tails**, as the two tables above it do — the
+denominators are 21-word box unions only, which is why 40,504,526,297,231 here is
+`T24` = 3,618,580,262 smaller than the 40,508,144,877,493 §3 quotes. The two
+templates have different checksum widths and are not mixed in one union.
+
+**56.02% of the whole 82-run union has been checked with the compressed key only.**
+The figure cross-checks exactly against `|U₈₂| − |U₅₃|`. Closing the caveat would
+cost about **23 GPU-days** (22.8 at 11.5M cand/s, 23.9 at 11.0M), for a key format
+BIP32 wallets do not produce, and is not planned. *[This paragraph read "68.21% of
+the whole 42-run union" and "about 25 GPU-days" from 28 Sep to 4 Nov. Both were
+correct for the 42-run ledger; neither was re-derived when the ledger grew to 50,
+then 51, then 82. The share has fallen every time and the cost has barely moved,
+because the numerator shrinks only when new runs land on old space.]*
 
 The first pass at this table grouped `swap114` with `written` for §2.14, from the
 run list rather than the section text. §2.14's second row is in fact *"freeing
