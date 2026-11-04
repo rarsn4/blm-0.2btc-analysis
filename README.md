@@ -26,8 +26,10 @@ Target: [`1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ`](https://blockchair.com/bitcoin/ad
   9,157 CPU-days at typical solver rates, every digit of it backed by a log in
   the tree. (319,319,891,245 including twelve older runs carried on report
   alone; §3 separates the two.) This is the **21-word** template; §2.13 states
-  the conditional that goes with it. Electrum had never been tested by
+  the conditional that goes with it. Electrum **v2** had never been tested by
   anyone; lengths 13/14/16/17 are illegal under BIP39 and were unreachable.
+  Pre-2.0 "old" Electrum is a different scheme and is **still untested** — §1.1
+  and §2.6 say what it would take.
 
 - **Four defects in the community candidate data**, including that `breathe`
   is not a BIP39 word.

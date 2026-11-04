@@ -75,10 +75,10 @@ self-test (§1.7), and for five weeks it hashed a transcription that was never c
 back against the image (§1.8). They have the same shape — something written down once,
 trusted thereafter, never re-measured.
 
-### 1.1 `breathe` is not a BIP39 word
+### 1.1 `breathe` is not a BIP39 word — but it *is* an Electrum word, and this section said otherwise
 
 It appears in circulating word lists and is the widely-assumed passphrase. It is
-**not in the BIP39 English wordlist** and cannot appear in any seed phrase.
+**not in the BIP39 English wordlist**.
 
 ```python
 from mnemonic import Mnemonic
@@ -87,6 +87,75 @@ from mnemonic import Mnemonic
 
 `breath` is also absent. As a *passphrase* it remains possible — tested, along
 with 64 others, negative (§2.4).
+
+> **[RETRACTED in part, 4 Nov 2026.]** This section read "…and ~~cannot appear in
+> any seed phrase~~". The BIP39 fact stands; the universal claim does not.
+> `breathe` is word **245** (1-based; index 244 0-based) of the **1,626-word
+> pre-2.0 Electrum wordlist**
+> (`electrum/old_mnemonic.py`, mirrored at `configs/electrum_old_en.txt`,
+> sha256 `c8da327d…`), so it can appear in an old-Electrum seed, and an
+> old-Electrum seed derives P2PKH addresses — the kind this target is. The error
+> was writing "seed phrase" where the evidence supported "BIP39 seed phrase",
+> inside a section whose title is "defects in the shared data". Six years of
+> solvers putting `breathe` on a candidate list were not necessarily making a
+> mistake; they may have been reading a different wordlist, and this report filed
+> that possibility as somebody else's error.
+
+**[MEASURED 4 Nov 2026] All twelve of the non-BIP39 words this project has
+collected from the canvas are in the old Electrum list.** `breathe`, `stop`,
+`freedom`, `hate`, `white`, `death`, `kill`, `war`, `money`, `buy`, `bleed`,
+`shut` — 0 of 12 in BIP39, **12 of 12** in the 1,626-word list. The two lists
+share 861 words, so 765 of the old list is outside BIP39.
+
+**And the base rate does not support reading that as a signal about the creator.
+This is the measurement that matters, and it goes against the hypothesis.** Two
+controls, both computed here:
+
+| control | n | in the old list | rate | P(all 12) |
+|---|---|---|---|---|
+| top-2,000 English words by frequency, not in BIP39 | 1,289 | 191 | **14.8%** | 1 in 8.9 billion |
+| top-3,000, not in BIP39 | 2,086 | 264 | 12.7% | 1 in 59 billion |
+| whole dictionary (104k), not in BIP39 | 71,557 | 764 | 1.07% | — |
+| **common emotive/violent words, not in BIP39, excluding the twelve** | **31** | **21** | **67.7%** | **1 in 107** |
+
+The frequency-matched rate of about 14–15% is what makes 12-for-12 look like
+1-in-billions. The emotive control destroys that, and there is a structural
+reason rather than a lucky one: `old_mnemonic.py`'s own header says the list came
+from *"Wiktionary:Frequency_lists/Contemporary_poetry"*. A contemporary-poetry
+frequency list over-represents exactly the body, emotion and violence vocabulary
+that BIP39's curation removes — `breath`, `throat`, `lung`, `wound`, `terror`,
+`sorrow`, `murder` are all in it. So "non-BIP39 protest-slogan word" and "in the
+old Electrum list" are both largely consequences of how the two lists were built,
+and the coincidence is **1 in 107, not 1 in 24 billion — about eight orders of
+magnitude weaker**. Under §9's rule, that is a numerical coincidence and not
+evidence.
+
+*The emotive control is 31 hand-listed words and therefore a judgement call,
+stated as one in the manner of `slogan_lines.py`. It was written down before
+membership was checked, and excludes the twelve themselves. A reader who rejects
+it is left with the 14.8% figure; a reader who accepts it is left with 1 in 107.
+Neither reading licenses a search, and the first does not survive the second.*
+
+**What does not depend on the statistics at all**, and is the part worth acting
+on: pre-2.0 Electrum is a scheme that **has never been tested against this
+target**, by this project or anyone, and `breathe` being in its wordlist is
+enough to make it worth implementing. That is done and self-tested — §2.6.
+
+**The asymmetry is the one piece of the signal that survives, and it is weak.**
+Measured over the three word groups this project uses:
+
+| group | in the old list |
+|---|---|
+| the 11 non-BIP39 words the brainwallet templates paint as slogans | 11 of 11 — 100% |
+| the 54-word gap pool (all BIP39) | 36 of 54 — 67% |
+| the 16 assigned object-words (all BIP39) | 9 of 16 — 56% |
+
+The words *painted* on the canvas are 11 for 11; the words the community
+*inferred from objects* — `camera`, `gold`, `liberty`, `police`, `pyramid`,
+`rifle`, `vote` — are the ones absent. But 42% of BIP39 is in the old list
+anyway, so 67% and 56% are mild enrichments, and 11 of 11 at the emotive base
+rate is 1 in 73. Recorded because it is the right shape of test, not because it
+clears the bar.
 
 ### 1.2 `candidates_unplaced.txt` is missing three valid words
 
@@ -537,6 +606,13 @@ This was a live assumption underneath every other result. Now closed:
 
 ### 2.6 Electrum v2 — never tested by anyone before this
 
+> **[SCOPE, 4 Nov 2026] This whole section is Electrum *v2*. Pre-2.0 "old"
+> Electrum is a different scheme and is NOT covered by anything below, nor by any
+> run in §3's ledger.** Every `el*` run used the v2 derivation. The heading has
+> always said v2; the README said "Electrum had never been tested by anyone"
+> without the qualifier until today, and that is now corrected. See the end of
+> this section for what old Electrum is and what testing it would cost.
+
 The repo README says "we should consider Electrum seed derivation and BIP39 seed
 derivation." Every published attempt used BIP39 only. **A BIP39 checksum filter
 actively discards valid Electrum phrases.**
@@ -685,6 +761,82 @@ BIP39 and had never been searchable by anyone.
 > finished (22:12:30 UTC); `el21` then landed negative and in band, z −0.66. Those
 > results are all it disclosed: no report text, configs, ledger figures or
 > planned runs.]*
+
+#### Pre-2.0 "old" Electrum — implemented, self-tested, and **not searchable**
+
+**[TESTED, 4 Nov 2026] The scheme is built and verified; the search is not
+affordable.** `old_electrum.py` implements it; `python3 old_electrum.py selftest`
+prints ALL PASS; no candidate was run beyond the self-test vectors.
+
+Old Electrum shares nothing with v2 but the name:
+
+| | Electrum v2 (§2.6 above) | pre-2.0 "old" |
+|---|---|---|
+| wordlist | 2,048 words | **1,626** (`configs/electrum_old_en.txt`) |
+| words | 12 / 13 / … | 12 |
+| validity | `HMAC-SHA512("Seed version", …)` prefix | **none worth the name** — see below |
+| stretching | PBKDF2-HMAC-SHA512, 2048 rounds, salt `"electrum"` | `x = sha256(x + seed_hex)` **×100,000** over the ASCII hex |
+| child keys | BIP32 | `MPK + sha256d(b"n:change:" + mpk)·G` |
+| key form | compressed | **uncompressed** |
+| address | per path | P2PKH — *which is what this target is* |
+
+**It has no checksum, but not exactly none.** Each 3-word group encodes an
+integer below `1626³ = 4,299,816,375`; Electrum formats it with `'%08x'`, so a
+group at or above `2³²` yields nine hex digits and the seed is rejected — the
+behaviour its own test suite records as "invalid old". The surviving fraction is
+`(2³² / 1626³)⁴ = 99.631%`. So nothing prunes: there is no 1-in-128 filter to
+lean on, and every retained combination is a live candidate.
+
+**Self-test, run before anything else.** The known-answer vector is published in
+Electrum's own suite (`tests/test_wallet_vertical.py::test_electrum_seed_old`,
+tag 4.5.8), and the implementation under test uses **this project's** pure-Python
+secp256k1 and RIPEMD-160 from `verify_hit.py`, not Electrum's `ecc` module, so a
+pass is agreement between two independent implementations:
+
+```
+wordlist         1,626 words, sha256 c8da327d...  matches old_mnemonic.py   PASS
+mnemonic codec   encode/decode round-trip, 64 random seeds                  PASS
+                 the suite's "invalid old" seed rejected (33 hex chars)      PASS
+key derivation   master public key e9d4b786...2c442b3                       PASS
+                 receiving address 0  1FJEEB8ihPMbzs2SkLmr37dHyRFzakqUmo    PASS
+                 change address 0     1KRW8pH6HFHZh889VDq6fEKvmrsmApwNfe    PASS
+planted hit      comparison fires on a planted h160, not on the real target PASS
+```
+
+The planted-hit check is rule 8's analogue for a CPU module: a negative from a
+comparison that never fires is void, so the comparison is made to fire.
+
+**The pool, measured from the canvas and not from a conversation.** Intersecting
+the 1,626-word list with every alphabetic token on the 26 **measured** elements
+of `census_crops.DRAWN` — 111 tokens, 96 distinct words — gives **24** words:
+
+```
+after  black  brave  breathe  common  double  end      find
+first  future matter moon     more    new     only     order
+pay    peace  picture real    stop    tower   welcome  world
+```
+
+27 of the 96 are in BIP39, 19 in both lists, 5 in the old list only, and 64 in
+neither (Latin, the address string, fragments). A 63-word figure circulating in
+discussion was built from words quoted in conversation rather than read off the
+image; the measured number is 24.
+
+**At 24 words it is not searchable, by three orders of magnitude more than the
+card can close.**
+
+```
+ordered, no repeats   P(24,12)  = 1,295,295,050,649,600        = 1.3e15
+with repeats          24^12     = 36,520,347,436,056,576       = 3.7e16
+x 100,000 SHA-256 compressions each                            = 1.3e20
+at a hypothetical 1e12 compressions/s                          = 4.1 YEARS
+```
+
+**The one tractable case, stated so it is not rediscovered.** If the twelve words
+were *pinned* and only their order unknown, it is `12! × 100,000 = 4.8e13`
+compressions — hours, not years. Nothing currently pins twelve: choosing 12 of
+the 24 is `C(24,12) = 2,704,156` sets before any ordering. So the tractability
+turns entirely on an argument that fixes the twelve words, and no such argument
+exists yet. **No GPU time has been spent on this and none is planned.**
 
 ### 2.7 The all-slots-vary sweep — both schemes
 
@@ -1627,6 +1779,22 @@ asks who first said it. Together they close the loop.
 | `Tuesday` | u/hmm_dimasiki | 2021-01-10 |
 | `food` | u/meserit | 2021-01-31 |
 | `breathe`; `subject` "underlined" | u/Accomplished_Weird36 | 2021-02-02 |
+
+> **[UNVERIFIED — owner-supplied, 4 Nov 2026] The old-Electrum wordlist may have
+> been proposed in March 2021.** The owner reports a Bitcointalk comment by
+> *DiOnline*: *"don't just consider BIP39 words, try the Electrum Old Word list
+> too since words like Breathe aren't in BIP39, but are in Electrum."* If that is
+> accurate, the idea in §1.1 predates this project by five years and the credit is
+> not ours. **It is not verified here**: it comes from an AI-generated archive of
+> that thread which the owner has separately found to contain fabricated material
+> (an entire invented section on "yellow polylines", attributed to a user whose
+> posts could not be reached, with no occurrence of the relevant words anywhere in
+> the underlying JSON). Quotes the owner checked against that JSON were accurate
+> word for word, so this one is plausible rather than discredited — but the archive
+> is a source that has produced fabrications, and one sentence from it is not
+> evidence. Recorded as a claim to check against the thread itself, not as a fact.
+> What this project can say for itself is narrower and still true: we were first
+> to **run** Electrum v2, and nobody including us has run old Electrum.
 
 privatekeys.pw copies Minase's list, which is itself tagged "(source reddit)".
 
