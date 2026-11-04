@@ -3123,26 +3123,85 @@ independent ones for a mean.]*
 *[Extended 4 Nov 2026, measured on the 31 runs admitted that day.]* Those 31 are the
 cleanest test of this available, because every band was fixed before launch and 30 of
 them carry a z (`t21_top6_loo21` is an exact identity and has none). Over the 30:
-**mean z +0.117**, **sd 0.777** against the model's 1.0, min −1.323, max +1.340. The
-dispersion is `χ² = 29 × 0.777² = 17.52` on 29 df, about the **4.7th percentile**,
-and **0** runs fall beyond |z| > 2 where **1.4** were expected. The modelled σ is
-therefore about **29% larger** than the spread actually seen, and the consequence
-runs *away* from reassurance rather than towards it: a band drawn at ±3 σ(model) is
-±`3/0.777` = **±3.86 σ(true)**, whose two-sided tail is **p = 0.00011** instead of
-the nominal 0.0027. **The band is permissive** — it is a 1-in-9,000 test being
-reported as a 1-in-370 one.
+**mean z +0.117** (0.64 σ from zero), **sd 0.777** against the model's 1.0, min
+−1.323, max +1.340. The dispersion is `χ² = 29 × 0.777² = 17.52` on 29 df, the
+**4.65th percentile**, and **0** runs fall beyond |z| > 2 where **1.4** were
+expected. Those are the measurements, and they stand.
 
-So **"31 of 31 in band" is not 31 independent confirmations**, for three reasons that
-stack: the boxes overlap by construction, as above; the test is looser than its
-nominal width, by the factor just measured; and **20 of the 31 are not separate
-settings at all** — they occupy the same 49,589,822,592-candidate space with the same
-µ = 387,420,489.0, being permutations and transpositions of one slot map over one
-pool, and 19 of those 20 share σ = 19,283 as well (`t21_clk9` differs only in σ,
-because pinning `tower` at slot 21 makes its model binomial). One space, one band, 20
-readings.
+> **[RETRACTED 4 Nov 2026, the same day it was published.]** What stood here read
+> the sd of 0.777 as an estimate of the *true* σ scale, and concluded: ~~"the
+> modelled σ is therefore about **29% larger** than the spread actually seen …
+> a band drawn at ±3 σ(model) is ±`3/0.777` = **±3.86 σ(true)**, whose two-sided
+> tail is **p = 0.00011** instead of the nominal 0.0027. **The band is permissive**
+> — it is a 1-in-9,000 test being reported as a 1-in-370 one."~~ It also ranked the
+> band **the weakest** of the four grounds for admitting those runs, on that basis,
+> and offered the looseness as one of three stacked reasons the in-band results were
+> not independent confirmations. **All of that is withdrawn.**
+>
+> It is wrong because the σ model is not inferred, it is **measured**, and the
+> measurement is in this report on the same date: the per-prefix variance `V_p` is
+> confirmed to **0.7 standard errors** over 2,000,000 prefixes in §2 (0.405172
+> observed against 0.404907 modelled, SE 0.000405). That measurement pins σ to
+> about **0.05%** in scale. For `sd(z) = 0.777` to be the true scale, `V_p` would
+> have to be `0.777² × 0.404907` = **0.2444**; the measurement puts it **397
+> standard errors** from there. A sample sd from 30 runs cannot outweigh a direct
+> measurement of the quantity it was being used to estimate, and I should not have
+> treated it as a rival estimate of σ at all.
+>
+> **This came from the owner's instruction and I followed it without checking it
+> against the measurement one commit earlier.** That is the failure worth recording:
+> not that an instruction was wrong, but that §10's first rule — recompute it, never
+> adopt a figure because another party stated it — applies to instructions as much as
+> to figures from other agents, and the contradicting measurement was already in the
+> tree when I wrote the claim.
 
-**What the admission of those 31 actually rests on**, in descending order of
-strength, so no reader has to guess which leg carries the weight:
+**[MEASURED] The band is correctly calibrated, so "in band" means what it says.**
+`V_p` verified to 0.7 SE over 2,000,000 prefixes (§2), so a ±3 σ band *is* a ±3 σ
+band and its two-sided tail is the nominal 0.0027. The `sd 0.777` is then what it
+looks like when the model is right: a 30-sample fluctuation. `χ² = 17.52` on 29 df
+sits at the **4.65th percentile** — low, and inside the range. It is one statistic
+looked at once, a 1-in-22 draw, and the central 90% interval for 29 df runs from
+17.71 to 42.56, so 17.52 falls just outside it on the low side.
+
+**And it is not correlation between the runs.** That was worth checking, because
+positive correlation does push the sample variance down — `E[s²] = 1 − ρ̄` — and it
+is the explanation this section reaches for elsewhere. It does not work here.
+Measured over the 435 pairs by the method of `rho_bar.py`
+(`Cov(N_A,N_B) = Var(N_{A∩B})`):
+
+```
+pairs                                   435
+pairs with any box overlap               16
+mean pairwise rho                  0.007822
+E[s^2] = 1 - rho_bar                0.99218      E[sd] about 0.9961
+observed s^2                        0.60411
+share of the shortfall in s^2 that
+  correlation can account for           2.0%
+```
+
+The structural reason is cleaner than the number: **419 of the 435 pairs have
+disjoint 20-word prefix sets**, differing at some slot among 1–20 and not merely at
+slot 21, and **no pair is disjoint only at slot 21**. Disjoint prefixes draw their
+own entropy, hence their own checksums, so the survivor counts are independent
+draws. The 16 overlapping pairs are exactly the six among the four gap-pool
+expansions (`t21_idx2`, `t21_pool60`, `t21_pool60c`, `t21_pool57v`, where ρ reaches
+0.62) and the ten among the five `t21_top6_loo*`; every other pair is ρ = 0. There
+is no correlation here to find, and no cause to look for — the low χ² is a
+fluctuation, and the honest thing to say about it is that it is low.
+
+**What survives, and it is the part that was never about σ.** "31 of 31 in band" is
+still **not 31 independent confirmations of the template**. Two reasons, both intact:
+the boxes overlap by construction across the whole campaign, as the paragraphs above
+measure; and **20 of the 31 are not separate settings at all** — they occupy the same
+49,589,822,592-candidate space with the same µ = 387,420,489.0, being permutations
+and transpositions of one slot map over one pool, and 19 of those 20 share
+σ = 19,283 as well (`t21_clk9` differs only in σ, because pinning `tower` at slot 21
+makes its model binomial). One space, one band, 20 readings. That is a point about
+what a negative tells you, not about whether σ is right.
+
+**What the admission of those 31 rests on: four grounds, each checking something
+different.** No ranking is offered, because the retracted inference was what
+supplied one.
 
 1. **`exit=2` with the run's own log in the tree.** This is what makes a run a
    negative at all; without it there is nothing to admit.
@@ -3153,8 +3212,10 @@ strength, so no reader has to guess which leg carries the weight:
    29,360,128 survivors: between **622 σ and 2,153 σ** across the nine committed σ,
    and **1,136×** the largest deviation any of the 31 actually showed (25,835
    survivors, `t21_top_at_17`). A dropped chunk cannot hide inside this scatter.
-4. **The band** — **the weakest of the four**, for the reasons measured just above,
-   and recorded as the weakest rather than cited as though it were the strongest.
+4. **The band**, which the Monte Carlo above confirms is correctly calibrated, and
+   which is the check that caught the `_ModInv` limb-count bug and the 24-word HMAC
+   omission. What it does *not* do is multiply: thirty valid checks of thirty runs
+   are not one strong check of the template.
 
 **What "derivations" means here, exactly.** A 21-word mnemonic carries seven
 checksum bits, so one sequence in 128 is valid and the ledger reports

@@ -211,9 +211,10 @@ EVIDENCED = ['t21_readme54','t21_loo21','t21_loo6','t21_loo8','t21_loo14','t21_l
              # 0.983533 does not apply to t21_idx2 (64 words, 0.975462),
              # t21_pool60 (60 words, 0.982658), t21_pool60c (60 words too, but
              # 0.983192 -- different words) or t21_pool57v (57, 0.982721).
-             # The pool table in section 2 of the report carries all five. Two rows are NOT stratified, because
-             # their config's slot 21 is not @POOL -- rule 4, read the config
-             # line, never infer the model from the volume:
+             # The pool table in section 2 of the report carries all five.
+             # Two rows are NOT stratified, because their config's slot 21 is
+             # not @POOL -- rule 4, read the config line, never infer the model
+             # from the volume:
              #   t21_top6_loo21: SLOT 21 @FULL, so the result is an exact
              #     identity, survivors = candidates/128 with remainder 0. It hit
              #     272,097,792 of 34,828,517,376 exactly. No sigma and no z.
@@ -221,12 +222,15 @@ EVIDENCED = ['t21_readme54','t21_loo21','t21_loo6','t21_loo8','t21_loo14','t21_l
              #     sigma is 19,606, not 19,283. z +0.946.
              # Volume cross-check: for all 31, vol(box) computed here equals the
              # `space` column of that run's queue_*_scores.tsv row.
-             # The band is the weakest of the four grounds for admission -- see
-             # the independence paragraph in section 3. The other three are
-             # exit=2 with the log, this volume cross-check, and the coverage
-             # margin: one skipped chunk is 29,360,128 survivors, 622-2153 sigma
-             # across the nine committed sigma and 1136x the largest deviation
-             # any of the 31 actually showed (25,835 survivors, t21_top_at_17).
+             # Four independent grounds, each checking a different thing:
+             # exit=2 with the log, this volume cross-check, the coverage margin
+             # (one skipped chunk is 29,360,128 survivors, 622-2153 sigma across
+             # the nine committed sigma and 1136x the largest deviation any of
+             # the 31 showed -- 25,835, t21_top_at_17), and the band itself,
+             # which the Monte Carlo of the same day confirms is correctly
+             # calibrated. An earlier version of this comment called the band
+             # the weakest of the four, on an inference since retracted; see the
+             # dated note in section 3.
              't21_idx2','t21_pool60','t21_slot1','t21_food7',           # oct26
              't21_pool57v',                                             # oct30
              't21_top20','t21_top6_loo8','t21_top6_loo14',              # oct30b
