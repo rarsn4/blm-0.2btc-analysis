@@ -199,7 +199,39 @@ EVIDENCED = ['t21_readme54','t21_loo21','t21_loo6','t21_loo8','t21_loo14','t21_l
              # no match, survivors 20,920,507,774 against the band committed
              # before launch (20,920,706,406.0 +/- 141,701, stratified), z -1.402.
              # Admitted on completion and in band, not when the file appeared.
-             't21_single']
+             't21_single',
+             # 2026-11-04: the 31 completed-but-unadmitted t21 runs, admitted as
+             # one batch. Six queues feed it: oct26 (4), oct30 (1), oct30b (10),
+             # oct30c (1), oct31 (15). Every one reached exit=2 with its log in
+             # the tree, and every one landed inside the band committed BEFORE
+             # launch in QUEUE_after_el22.md -- 29 scored on the stratified model
+             # (slot 21 @POOL, sigma = 0.983533 x binomial), z from -1.323 to
+             # +1.340, none beyond |z| > 2. Two rows are NOT stratified, because
+             # their config's slot 21 is not @POOL -- rule 4, read the config
+             # line, never infer the model from the volume:
+             #   t21_top6_loo21: SLOT 21 @FULL, so the result is an exact
+             #     identity, survivors = candidates/128 with remainder 0. It hit
+             #     272,097,792 of 34,828,517,376 exactly. No sigma and no z.
+             #   t21_clk9: pins `tower` at slot 21, so the model is binomial and
+             #     sigma is 19,606, not 19,283. z +0.946.
+             # Volume cross-check: for all 31, vol(box) computed here equals the
+             # `space` column of that run's queue_*_scores.tsv row.
+             # The band is the weakest of the four grounds for admission -- see
+             # the independence paragraph in section 3. The other three are
+             # exit=2 with the log, this volume cross-check, and the coverage
+             # margin: one skipped chunk is 29,360,128 survivors, 622-2153 sigma
+             # across the nine committed sigma and 1136x the largest deviation
+             # any of the 31 actually showed (25,835 survivors, t21_top_at_17).
+             't21_idx2','t21_pool60','t21_slot1','t21_food7',           # oct26
+             't21_pool57v',                                             # oct30
+             't21_top20','t21_top6_loo8','t21_top6_loo14',              # oct30b
+             't21_top6_loo15','t21_top6_loo18','t21_top6_loo21',
+             't21_top_at_7','t21_top_at_9','t21_top_at_11','t21_top_at_17',
+             't21_pool60c',                                             # oct30c
+             't21_clk2','t21_clk3','t21_clk4','t21_clk5','t21_clk6',    # oct31
+             't21_clk7','t21_clk8','t21_clk9',
+             't21_blackd2','t21_blackd3','t21_blackd4','t21_blackd5',
+             't21_blackd7','t21_blackd9','t21_this3']
 ASSERTED  = ['t21_pool52','t21_pool52_rev','t21_pool40','t21_idx','t21_pathd','t21_pathe',
              't21_trust21','t21_trust21b','t21_bnw18','t21_bnw18b','t21_trustonly','t21']
 CHECKSUM = 128
