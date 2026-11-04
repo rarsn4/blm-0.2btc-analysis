@@ -1780,80 +1780,167 @@ asks who first said it. Together they close the loop.
 | `food` | u/meserit | 2021-01-31 |
 | `breathe`; `subject` "underlined" | u/Accomplished_Weird36 | 2021-02-02 |
 
-> **[OWNER-VERIFIED against the raw Reddit JSON, 4 Nov 2026 — not reproduced here.
-> Source upgraded, tag not.] The old-Electrum wordlist was proposed on
-> 2021-03-01, five years before this project.** The owner has read the raw Reddit
-> JSON of the original post — **not** the AI archive — and quotes *DiOnline*,
-> 2021-03-01: *"don't just consider BIP39 words, try the Electrum Old Word list
-> too since words like Breathe aren't in BIP39, but are in Electrum."* The owner
-> also reports that DiOnline states he contacted the author in 2021 and that the
-> author never replied in the thread, and that the submission's `selftext` is
-> empty (length 0).
+> **[MEASURED 4 Nov 2026, from Reddit's own JSON for the post] The old-Electrum
+> wordlist was proposed on 2021-03-01, five years before this project, and the
+> credit is not ours.** `u/DiOnline`, comment `gpaw1ca`, **2021-03-01 14:35:28
+> UTC**, verbatim:
 >
-> **Why this is not tagged [MEASURED].** The primary source is now the right one —
-> Reddit's own JSON for the post, which is a world away from the AI-generated
-> archive that produced the attribution this note previously carried. But
-> `reddit.com` is unreachable from the environment these measurements are made in:
-> `curl` gets HTTP 403 and the sanctioned fetch tool refuses the domain, and the
-> `pullpush.io` archive mirror answers 521. So this is one party's reading of a
-> primary source, recorded as such, and not something a reader of this report can
-> re-run. **What would close it is cheap**: commit the fetched JSON to the tree.
-> Every claim in this note then becomes a `grep`, permanently, for anyone.
+> > *"The author is unlikely to reveal himself, I did contact the OP and other
+> > individuals I thought could have produced the image above. However, as a tip,
+> > don't just consider BIP39 words, try the Electrum Old Word list too since words
+> > like Breathe aren't in BIP39, but are in Electrum."*
 >
-> **One narrowing, because the claim as given is broader than the source can
-> carry.** "The author has never written a word anywhere" is not a fact one
-> thread's JSON can establish; what it can establish is that the post body is
-> empty and that no reply from the author appears in the comments fetched. The
-> report says the second and not the first.
+> Also from the same JSON: the submission's `selftext` is **length 0** and its
+> `selftext_html` is `null`, and **`u/stsh_n` appears as the author of 0 of the
+> comments present**. The post is `j79zvj`, posted **2020-10-08 09:25:30 UTC**,
+> titled *"Bitcoin puzzle (2000$)"*.
 >
-> **The credit is therefore not ours**, and §1.1 says so. What this project can
-> still say for itself is narrower and holds: we were first to **run** Electrum
-> v2, and nobody including us has run old Electrum.
+> *Provenance, because this note previously said the opposite.* It read
+> `[UNVERIFIED — owner-supplied]` and then `[OWNER-VERIFIED … not reproduced
+> here]`, because `reddit.com` is unreachable from the environment these
+> measurements are made in — `curl` gets HTTP 403, the sanctioned fetch tool
+> refuses the domain, and the `pullpush.io` mirror answers 521. The owner then
+> supplied the fetched JSON itself (sha256
+> `39d61b72865029205f0a2fce600a895a2599f8c1b4a4091ead9aa13912cab7c7`, 394,935
+> bytes, two byte-identical copies), and every figure in these notes is now parsed
+> from that file rather than quoted from anyone. **It is not committed to this
+> tree, and the reason is a real one — see the note on the phrase guard below.**
+>
+> **One narrowing kept from the earlier version, because the claim as offered was
+> broader than the source can carry.** "The author has never written a word
+> anywhere" is not a fact one thread's JSON can establish. What it establishes is
+> the two things stated above: the body is empty, and the author wrote none of the
+> comments present. DiOnline's *"I did contact the OP"* is DiOnline's account of
+> his own action, not evidence about the author's silence, and is quoted as such.
+>
+> **[MEASURED] But DiOnline is not the first mention of the Electrum wordlist, and
+> this report would have got the priority wrong too.** `u/RaTMaTaT`, comment
+> `gmlbct5`, **2021-02-08 15:55:08 UTC** — three weeks earlier — wrote *"TRADE is
+> also the Electrum world list."* Those are the only two Electrum mentions in the
+> 168 comments present, besides a 2026 post about this project's own repository.
+> The distinction that matters, and it favours DiOnline: `trade` is in **both**
+> wordlists, so RaTMaTaT's observation does not discriminate between them, while
+> DiOnline's turns on `breathe` being in the old list and **not** in BIP39 — which
+> §1.1 measures and confirms. So **RaTMaTaT raised the Electrum wordlist first
+> (2021-02-08); DiOnline made the first argument that picks out the *old* list
+> (2021-03-01)**. Neither is us.
+>
+> What this project can still say for itself is narrower and holds: we were first
+> to **run** Electrum v2, and nobody including us has run old Electrum.
 
-> **[SCOPE, 4 Nov 2026] The thread was fetched to 168 of 254 comments, so
-> absence claims about it are claims about two thirds of it.** The owner reports
-> 27 collapsed "more comments" stubs hiding 80 further comments. Searching the
-> 168 returns zero hits for `polyline`, `yellow`, `identify`, `bracket`, `loop`,
-> `focus` and `dance` — which is what showed the AI archive's "yellow polyline"
-> section to be fabricated, since that section attributes precise pixel
-> coordinates to a Bitcointalk user whose posts could not be reached. The
-> inference is sound on other grounds, but the words **"confirmed absent from the
-> thread" overstate it**: 86 comments were never read, and the arithmetic does not
-> close either — `168 + 80 = 248`, six short of the stated 254, the remainder
-> presumably deleted or removed. Stated so the next reader does not treat a
-> two-thirds search as exhaustive.
+> **[MEASURED, 4 Nov 2026] The absence is real but it is an absence over two
+> thirds of the thread, and the reconciliation is published rather than rounded.**
+> Parsing the JSON's comment tree:
 >
-> **[OWNER-VERIFIED against the same JSON, 4 Nov 2026 — not reproduced here]
-> Three further items, recorded where they bear on something this report says.**
+> ```
+> num_comments field                  254
+> comment objects present             168   (10 of them [deleted]/[removed])
+> "more" stubs                         27,  hiding 80
+> present + hidden                    248
+> unaccounted for                       6
+> ```
 >
-> - **`boriserd`, 2020-10-12** — the earliest word list, four days after the post.
->   The attribution table above already credits `moon`, `tower`, `real` and
->   `subject` to that user on that date; the primary source now agrees with it.
->   This is the one item of the four that the report had already got right, and
->   confirming a table rather than correcting it is worth noting as such.
-> - **`Solid-Battle-9198`, 2021-01-30** — *"future as the first word … subject as
->   number 13"*. This report credits **words** to the community and never credited
->   **positions** to anyone; slot hypotheses appear here as this project's own
->   enumeration. Nothing is retracted, because no competing priority was claimed,
->   but the earliest proposal of a *slot map* is this comment and not us.
-> - **`hmm_dimasiki`** — **28 unique rune characters**, excluding `Tuesday` and the
->   three-dot separator. That is a cross-check on the premise behind §7.4 and the
->   open ask at the end of this report: the Gravity Falls cipher supplies **26**
->   glyphs, so 28 distinct characters means the author invented **two**, which is
->   what "the author invented glyphs beyond the 26" has asserted without a count.
->   This project has not independently counted the distinct glyph inventory; the
->   figure is recorded as a target for that count, not as the count.
+> Over those 168, the hit count for `polyline`, `yellow`, `identify`, `bracket`,
+> `loop`, `focus` and `dance` is **0 for every one of them** — which is what showed
+> the AI archive's "yellow polyline" section to be fabricated. But the words
+> *"confirmed absent from the thread"* **overstate what was searched**: 86 comments
+> were never read, and `168 + 80 = 248` leaves six unaccounted against the stated
+> 254. Both are recorded so the next reader does not mistake a two-thirds search
+> for an exhaustive one.
 >
-> **[OPEN, CHECKABLE] `DiOnline`, 2021-03-15** reports finding hidden text in the
-> image with Photoshop and Forensically, reading **"TO TEST USE WORDS"** and
-> **"FIRST THE AT"**. The owner confirms the *comment* exists and says so; the
-> *text* is unverified by anyone, and it is the rare claim in this thread that is
+> **The fabrication is nonetheless worse than "attributed to an unreachable
+> user".** `Desalzes_` is a **real participant** with comments present in this
+> JSON, and the string `desalzes` occurs exactly once in the 168 bodies — in
+> `u/mrvclr`'s 2026 round-up, tagging him to compare notes. So the archive took a
+> genuine username from the thread and attached to it pixel findings that nobody
+> in the thread ever wrote. That is a sharper failure mode than inventing a person,
+> because the name checks out.
+>
+> **[NOT COMMITTED, and why.]** The obvious close for all of this is to commit the
+> JSON so every claim becomes a permanent `grep`. It is **not** committed, because
+> `pre_push_check.sh`'s phrase guard would block it for a correct reason:
+> `boriserd`'s comment `g8lip0e` contains a **19-word run of consecutive BIP39
+> words**, which is exactly the shape of thing the guard exists to stop leaving
+> this tree. Committing it would mean pinning a file that genuinely does add
+> candidate phrase material, and that is the owner's call and not a mechanical one.
+> The file's sha256 is recorded above so anyone holding the same bytes can re-run
+> every figure in these notes. For the same reason the comment is **cited by id and
+> date below rather than quoted**.
+>
+> **[MEASURED against the same JSON, 4 Nov 2026] Three further items, recorded
+> where they bear on something this report says.**
+>
+> - **`boriserd`, comment `g8lip0e`, 2020-10-12 15:16:14 UTC** — the earliest word
+>   list, **4.24 days** after the post. The attribution table above already credits
+>   `moon`, `tower`, `real` and `subject` to that user on that date, and the primary
+>   source agrees with it exactly. This is the one item of the four where the report
+>   was already right, and confirming a table rather than correcting it is worth
+>   recording as such. The comment is **cited and not quoted**: its word list is a
+>   19-word run of consecutive BIP39 words, and reproducing it here would put
+>   candidate phrase material into this file for no gain, since every word in it is
+>   already credited individually in the table.
+> - **`Solid-Battle-9198`, comment `gldqys9`, 2021-01-30 16:44:20 UTC** — *"For now
+>   I put future as the first word. Much like I put subject as number 13."* This
+>   report credits **words** to the community and never credited **positions** to
+>   anyone; slot hypotheses appear here as this project's own enumeration. Nothing
+>   is retracted, because no competing priority was ever claimed, but the earliest
+>   proposal of a *slot map* is this comment and not us.
+> - **`hmm_dimasiki`, comment `gkezuop`, 2021-01-23 17:54:05 UTC** — *"It turned out
+>   **28 unique characters**, not counting the vertical three-dot sign … this is
+>   WITHOUT the word 'Tuesday' from Gravity Falls. The Latin and English alphabets
+>   contain 26 letters each."* That is a cross-check on the premise behind §7.4 and
+>   the open ask at the end of this report: 28 distinct glyphs against the Gravity
+>   Falls cipher's **26** means the author invented **two**, which is what "the
+>   author invented glyphs beyond the 26" has asserted without ever putting a number
+>   on it. **This project has not independently counted the glyph inventory.** The
+>   figure is recorded as a target for that count, not as the count — and the
+>   comment's own closing alternative, *"or it is a transcription of another
+>   language"*, is what §5 went on to establish for the Cyrillic runes.
+>
+> **[OPEN, CHECKABLE] `DiOnline`, comment `gr081s3`, 2021-03-15 12:33:08 UTC**:
+> *"There are hidden sentences with runes, numbers and words hidden across the
+> puzzle, but they are extremely difficult to find, at least with Photoshop and
+> Forensically. One such phrase is 'TO TEST USE WORDS' accompanied by 'FIRST THE
+> AT'."* The **comment** is verified here from the JSON; the **text it claims** is
+> unverified by anyone, and it is the rare claim in this thread that is
 > **testable against the artwork we already hold**, with the §9 pixel method and
 > the detector-plus-control discipline `yellow_polyline.md` uses. It is listed
 > here rather than acted on because it would be a new pixel pass, and because a
 > 2021 forensic read of a JPEG-recompressed copy is a common way to see text that
 > is not there. Recorded so that it is either tested or declined deliberately,
 > not forgotten.
+
+> **[MEASURED] Three things in the same JSON that nobody asked about and that bear
+> on this report directly.**
+>
+> - **This project's own figures are in that thread, and they are stale by 26×.**
+>   `u/mohamedabb`, comment `p5auds6`, **2026-08-22 22:09:22 UTC**, posts a link to
+>   `github.com/rarsn4/blm-0.2btc-analysis` and tells the thread *"I've also
+>   eliminated 12 billion seed derivations (BIP39/Electrum)"* and *"there are 4
+>   errors in it"*. §3's evidenced figure is **316,455,746,776**, and §1 now counts
+>   six defects in the shared data plus two of this project's own. The post is not
+>   ours and we cannot edit it, but a reader arriving from that comment will be
+>   **26× low** on the headline and short two defects, so the discrepancy is
+>   recorded here rather than left for them to discover. It also means the Electrum
+>   work was publicly claimed in the thread in August 2026 — after DiOnline's 2021
+>   tip, and still only for v2.
+> - **The `CHR` stamp has independent corroboration.** `u/Purple-Pressure-994`,
+>   comment `19rhs25whqyap`, **2026-10-22 17:18:33 UTC**: *"at the bottom right of
+>   the bust is a stamp in the form of the inscription CHR"*. §1.8 admitted `CHR`
+>   to the canvas census on 2 Nov 2026 from this project's own pixel reading, ten
+>   days later and without knowledge of this comment. Two independent readings of
+>   the same mark agreeing is worth more than either alone, and it is the only
+>   element of the five admitted on 2 Nov that a third party has stated out loud.
+> - **An open lead on the one thing §7.4 says it still needs.**
+>   `u/Great_Bottle_5486`, comment `19rn3upe96bkx`, **2026-10-25 16:58:35 UTC**: *"I
+>   have a lastglyph.png I was wondering if you maby can check it out"*. The ask at
+>   the end of this report is a **key** for the invented glyphs, not a better scan;
+>   a third party's crop of the final glyph is not that key, and §2.9 plus the
+>   byte-identity measurement above establish there is no higher-resolution source
+>   to be had. Recorded as a lead, with the warning attached: a file named
+>   `lastglyph.png` from an unverified source is somebody's *interpretation* of the
+>   glyph unless its provenance is established, and this project reads pixels from
+>   one file at one pinned sha256 for exactly that reason.
 
 > **This does not touch `yellow_polyline.md`, and the reason matters.** That
 > document and `yellow_polyline.py` are **this project's own pixel measurement**,
@@ -1896,18 +1983,22 @@ from the author covers word count, wallet or language.
 > in `yellow_polyline.md` rests on there being no higher-resolution original to go
 > back to, and that has until now been supported by a solver's remark
 > (HomelessPhD's "only picture I've seen") rather than by measurement. Reddit's own
-> upload record, which the owner read in the post JSON, offers previews at widths
+> upload record, read here from the post JSON, offers previews at widths
 > 108/216/320/640/960/1080 over a **source of 1600 × 1200** — so the largest thing
 > Reddit ever held is the thing we have. **1600 × 1200 is the ceiling**, the
 > magnified renders in §9 are interpolation and nothing more, and a future reader
 > asking "was there a better scan?" has an answer instead of an inference.
 >
 > *One figure does not reconcile and is left visible rather than smoothed.* This
-> paragraph says **273** archived thread comments; the owner's 4 Nov fetch reports
-> **254** total with 168 retrieved. The two counts come from different sources at
-> different times and nothing here depends on either, but they cannot both be the
-> live number, and the sentence above — "wrote none of the 273" — is therefore a
-> claim about the archive it was taken from, not about the thread as it stands.
+> paragraph says **273** archived thread comments; the JSON's `num_comments` field
+> reads **254** as of 4 Nov 2026, with 168 comment objects present. Both cannot be
+> the live number. The sentence above — "wrote none of the 273" — is therefore a
+> claim about the archive it was taken from, and what the primary source supports
+> is the narrower statement now made in §1.1: **`u/stsh_n` is the author of 0 of
+> the 168 comments present, and the submission's `selftext` is length 0.** The
+> thread is also still live — the most recent comment in the fetch is dated
+> **2026-11-04 20:02:34 UTC**, the same day — so any count of it is a snapshot and
+> should be dated, which is why both of these now are.
 
 **Community attribution is not community invention, and the two tables are the
 only place in this report where both facts about a word sit together.**
