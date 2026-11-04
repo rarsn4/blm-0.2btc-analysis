@@ -12,7 +12,21 @@ different claims and this report keeps them separate throughout.
 
 I built a GPU search pipeline covering both BIP39 and Electrum and ran
 **305,201,540,079 full seed derivations** — 8,831 days of CPU at typical solver
-rates — plus 7,939,492,344 brainwallet addresses counted separately (§2.12).
+rates — plus **912,966,385,968 brainwallet addresses** counted separately
+(§2.12): two exhaustive t21 template sweeps at acceptance exactly 1, the t18
+template corpus, and the image-text corpus. *[Corrected 4 Nov 2026. This line read
+"7,939,492,344 brainwallet addresses" from 1 Sep 2026 (`94516a7`) to today. That is
+the **t18 template row alone**. It was complete when written, but `brain_t21_pool65`
+entered §2.12 on 29 Sep 2026 (`7fb9d22`) and the line was not updated with it, so for
+**36 days** it omitted that run's 452,513,343,750 addresses; it also omitted the
+image-text corpus, in the tree since 28 Sep (`78687ec`), and as of today
+`brain_t21_upper`'s 452,513,343,750. The understatement reached about **115×**. The
+old figure is not wrong about what it counts — it is the wrong scope for a line that
+says "brainwallet addresses", and it is recorded here rather than swapped out,
+because the marginal line in §3 drifted the same way for two weeks and the rule that
+came out of it applies to every total on the page.]* The two t21 sweeps are
+exhaustive over their **declared** space, which is `sha256` + space-joined only — one
+quarter of the key-variant space the t18 row covered, stated in §2.12 and not closed.
 §2.1–2.11, §2.13 and §2.14 are exhaustively eliminated, not "tried and didn't
 find". §2.12 and §2.15 are tested corpora — a weaker claim, and tagged as such
 in their own headings. §2.16 and §2.17 are measurements of the template itself
@@ -968,13 +982,16 @@ has no checksum, so the 1-in-128 convention that defines a derivation does not a
 to any row in this table. The §3 headline and this figure are reported separately for
 that reason and must not be summed.
 
-> **[SCOPE] The §0 headline understates this count, and is left alone here.** The
-> summary line reads "plus 7,939,492,344 brainwallet addresses counted separately",
-> which is the t18 row only — it omitted the 452,513,343,750 of the `CASE lower` t21
-> run before this revision, and now omits this one too. The understatement is a
-> factor of about 115 against the union above. Not corrected in this pass: the
-> instruction was to add a row in §2.12, and changing a headline figure is a
-> publication decision for the owner.
+> **[SCOPE — CLOSED the same day]** ~~The §0 headline understates this count, and is
+> left alone here.~~ The summary line read "plus 7,939,492,344 brainwallet addresses
+> counted separately", which is the t18 row only — it omitted the 452,513,343,750 of
+> the `CASE lower` t21 run from 29 Sep, and omitted this one too. The understatement
+> was a factor of about 115 against the union above. **Corrected on the owner's
+> instruction later on 4 Nov**: §0 now quotes the union, 912,966,385,968, with the
+> strength distinction and a dated note of what the old figure omitted and for how
+> long. The "left alone" sentence is struck rather than deleted, because it was true
+> for the few hours it stood and the gap between noticing a defect and being
+> authorised to fix it is itself part of the record.
 
 The *image-text* corpus had no surviving generator, key list or log, so its
 22,638 was reproducible from nothing but the sentence describing it. It now has
