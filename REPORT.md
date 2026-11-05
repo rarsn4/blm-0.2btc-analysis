@@ -15,9 +15,12 @@ I built a GPU search pipeline covering both BIP39 and Electrum and ran
 rates *[4 Nov 2026: this read 305,201,540,079 and 8,831 days until today, when the
 31 completed t21 runs of 26–31 Oct were admitted to `tally2.py`. Ledger and the
 admission entry are in §3; the scored table is at the end of §2.]* — plus
-**912,966,385,968 brainwallet addresses** counted separately
-(§2.12): two exhaustive t21 template sweeps at acceptance exactly 1, the t18
-template corpus, and the image-text corpus. *[Corrected 4 Nov 2026. This line read
+**1,365,479,729,718 brainwallet addresses** counted separately
+(§2.12): three exhaustive t21 template sweeps at acceptance exactly 1, the t18
+template corpus, and the image-text corpus. *[5 Nov 2026: this read 912,966,385,968
+and "two … sweeps" until today, when `brain_t21_title` closed the case axis — lower,
+upper and title, all three exhaustive, all three disjoint, all three negative. The
+label and the figure moved in the same commit as the row.]* *[Corrected 4 Nov 2026. This line read
 "7,939,492,344 brainwallet addresses" from 1 Sep 2026 (`94516a7`) to today. That is
 the **t18 template row alone**. It was complete when written, but `brain_t21_pool65`
 entered §2.12 on 29 Sep 2026 (`7fb9d22`) and the line was not updated with it, so for
@@ -942,7 +945,7 @@ by about five orders of magnitude — at this rig's 11,925,000 cand/s,
 `wp_pool10` alone is 21.2 h. Irrelevant now that it is done, but their cost model
 for this hardware should not be relied on.
 
-### 2.12 [EXHAUSTED over two declared t21 spaces, `sha256` + space-joined only; TESTED corpora otherwise] Brainwallets — a class nobody had touched
+### 2.12 [EXHAUSTED over three declared t21 spaces, `sha256` + space-joined only; TESTED corpora otherwise] Brainwallets — a class nobody had touched
 
 `priv = SHA256(phrase)` directly: no BIP39 checksum, no PBKDF2, no BIP32, no path.
 Common in 2020-era puzzles and never tested against this target.
@@ -955,7 +958,10 @@ Common in 2020-era puzzles and never tested against this target.
 > Neither the heading nor the §0 sentence was re-derived when that run was added, so
 > for **36 days** the section's strongest result was published under its weakest
 > label, and a reader who trusted the heading would have under-read two exhaustive
-> sweeps as corpus tests.
+> sweeps as corpus tests. *(Two is right for that window and is left alone: the
+> third, `CASE title`, did not exist until 5 Nov. A sweep for stale "two" labels on
+> 5 Nov must leave this one standing, or the record of the failure stops being a
+> record of what actually happened.)*
 >
 > **This is the third instance of the same failure, and it is worth naming as a
 > pattern rather than three accidents.** A figure or label is written, a component
@@ -983,8 +989,8 @@ Common in 2020-era puzzles and never tested against this target.
 > not a better reader, but the summary edited in the same change as the thing it
 > summarises.
 
-**Two corpora, both negative** — and, since 29 Sep, two exhaustive template sweeps
-besides; the heading carries both strengths.
+**Two corpora, both negative** — and, since 29 Sep, **three** exhaustive template
+sweeps besides, the whole case axis; the heading carries both strengths.
 
 *Image text*, 22,638 keys: every text string in the image (Latin mottos, Russian
 plaintexts, BLM slogans, dates, the 13th Amendment, whitepaper fragments, the target
@@ -1159,9 +1165,81 @@ upper-case phrase differs from its lower-case counterpart in at least one byte, 
 SHA-256 is case-sensitive. Two rows of the same size are therefore two bodies of
 work, not one counted twice.
 
+**[TESTED, 5 Nov 2026] `CASE title` has now run: `brain_t21_title`, exhausted, no
+match — and with it the brainwallet case axis is closed.** Its own row, on the same
+footing as the two above.
+
+```
+candidates   150,837,781,250              (65^6 x 2, six @POOL slots + slot 20's two words)
+survivors    150,837,781,250              acceptance EXACTLY 1
+addresses    452,513,343,750              (x3: compressed, uncompressed, hybrid)
+identity     EXACT                        survivors == candidates == 2 x 65^6
+result       exhausted, no match          exit 2,  HIT lines 0,  QUEUE DONE
+wall         56,585.52 s = 15.72 h        2,665,660 cand/s, 0 thermal pauses
+```
+
+**Acceptance as an exact rational, as for the twin.** `Fraction(150837781250,
+150837781250)` is **1** — not a quotient that prints as `1.000000000` — and the
+deficit is **0**. No z-score is quoted and none exists: a brainwallet has no
+checksum, so nothing scatters around an expectation and the identity *is* the test.
+
+**The rate here is an exact average, and that is a different claim from the twin's.**
+`150,837,781,250 / 56,585.52 s = 2,665,660 cand/s`. Both endpoints of an exhausted
+run are known exactly, so this is not a progress-file reading and §10 rule 6's
+chunk-quantisation caveat does not apply — but wall time includes startup and
+teardown, so it is a **lower bound** on kernel rate. The `CASE upper` figure above
+(2.672 M/s) is a rule-6 rate from 66 checkpoint-mtime intervals and is the stronger
+measurement of the two; they agree to 0.2%. Wall differs from the twin by **+193.56
+s, +0.34%**, which is what two runs of identical shape should look like. **0 thermal
+pauses with the guard live**: `run_queue_brain.sh` invokes `./thermal_guard_queue`
+(and `./selftest_gate`), there are 0 pause lines in either log, and `thermal.log` is
+unmodified since 27 Sep — so this is an active-guard zero, not an absence of
+records.
+
+**One directive separates it from each twin.** With comments and blank lines
+stripped, `diff` against `brain_t21_pool65.conf` and against `brain_t21_upper.conf`
+returns **exactly one changed line each** — `CASE lower` and `CASE upper`
+respectively, against `CASE title`. Same `SCHEME`, `WORDS`, 21 `SLOT` lines, `POOL`,
+`EXTRA`, `BRAINHASH sha256`, `BRAINSPACE yes`, `BRAINPUB all`.
+
+**Overlap with the image-text corpus: 0 of 34,354 strings**, measured. 592 strings
+carry 21 space-separated tokens and could in principle be a phrase of this template;
+**all 592 fail at slot 1**, which this config pins to `Subject`. Controlled in both
+directions *before* the measurement: three phrases built from the template itself are
+recognised as members, two deliberate near-misses are rejected. And the control that
+matters for a casing run — **0 matches with case ignored as well**, so the result is
+not an artefact of comparing `Subject` against `subject`.
+
+**[MEASURED] The three cases are provably disjoint, and the check is the one that
+could have failed.** Of the 81 distinct template words, **every one has three
+distinct forms** under lower, upper and title; **no word is a single letter**, which
+is the case where title would equal upper; and the three resulting word sets have
+**no collision in any pair**. SHA-256 is case-sensitive, so every title phrase
+differs from its lower and upper counterparts in at least one byte. Three rows of
+equal size are three bodies of work.
+
+**[EXHAUSTED] This closes the brainwallet CASE axis.** `lower` (29 Sep), `upper`
+(4 Nov) and `title` (5 Nov), over the 21-word template on the 65-element pool: all
+three exhaustive, all three at acceptance exactly 1 with survivors equal to
+candidates, all three pairwise disjoint by the measurement above, all three negative.
+There is no fourth uniform casing, and `brain_t21_upper.conf`'s header already
+records why an "as-written" mode would have nothing to encode for a constructed
+phrase — the drawn mixed-case strings are tested verbatim by the image-text corpus
+instead.
+
+**What is still open in this section, unchanged by this run: the key-variant
+narrowing.** All three case runs inherit `sha256` + space-joined only — 3 addresses
+per candidate, one scalar multiplication — against the **12** per candidate
+(`BRAINHASH sha256 dsha256` x `BRAINSPACE yes no` x 3 encodings, 4 scalar
+multiplications) that produced the t18 row's figure. So the t21 template is covered
+over **one quarter** of the key-variant space the t18 result covered. Closing it is
+an `_all` run and it does not exist. The case axis being closed does not narrow that
+gap by one candidate.
+
 **Combined brainwallet total, in addresses.** Quoted only because every pairwise
-overlap above is 0; the four are disjoint by token count, by case, or by the measured
-slot-1 test.
+overlap above is 0; the five are disjoint by token count, by case, or by the measured
+slot-1 test. `7,939,492,344 + 3 x 452,513,343,750 + 206,124 = 1,365,479,729,718`, and
+the row count in this table is the only place the total comes from.
 
 | brainwallet run | candidates / strings | addresses |
 |---|---|---|
@@ -1169,7 +1247,8 @@ slot-1 test.
 | t21 template, 65-word pool, `CASE lower` (`brain_t21_pool65`) | 150,837,781,250 | 452,513,343,750 |
 | image-text corpus, re-run 2 Nov | 34,354 strings | 206,124 |
 | t21 template, 65-word pool, `CASE upper` (`brain_t21_upper`) | 150,837,781,250 | 452,513,343,750 |
-| **union** | | **912,966,385,968** |
+| t21 template, 65-word pool, `CASE title` (`brain_t21_title`) | 150,837,781,250 | 452,513,343,750 |
+| **union** | | **1,365,479,729,718** |
 
 **[ASSUMED] What this union rests on:** the overlap tests above compared **strings**,
 while the table's unit is **addresses**, and disjoint strings yield disjoint addresses
@@ -1190,7 +1269,8 @@ that reason and must not be summed.
 > counted separately", which is the t18 row only — it omitted the 452,513,343,750 of
 > the `CASE lower` t21 run from 29 Sep, and omitted this one too. The understatement
 > was a factor of about 115 against the union above. **Corrected on the owner's
-> instruction later on 4 Nov**: §0 now quotes the union, 912,966,385,968, with the
+> instruction later on 4 Nov**: §0 quotes the union, which became
+> 1,365,479,729,718 when `CASE title` landed on 5 Nov, with the
 > strength distinction and a dated note of what the old figure omitted and for how
 > long. The "left alone" sentence is struck rather than deleted, because it was true
 > for the few hours it stood and the gap between noticing a defect and being
