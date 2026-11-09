@@ -213,4 +213,74 @@ STANDING RULE, added 2 Nov 2026 by the owner's instruction:
   CANNOT enter tracked history. Do not remove that .gitignore line, and do not git add -f
   any st_*.log or selftest_gate.log. The HIT rule applies to these logs as to any other:
   the count and the exit line only.
+
+  [SCOPED AND CORRECTED 9 Nov 2026 -- the sentence above was true of ONE repo only.
+  Marked, not deleted, because the 39 lines carrying it are part of this same push.]
+
+  "Both match .gitignore's *.log, so the HIT lines a planted test necessarily produces
+  CANNOT enter tracked history" is TRUE of the SOLVER directory
+  (/home/soul/Downloads/Brainwallet/files(6)/.gitignore line 10), which is where
+  selftest_gate.log and st_selftest_*.log are written. It was FALSE of the ANALYSIS
+  repository (~/blm-analysis), which is where publication actually happens. That
+  .gitignore carried only "__pycache__/" and "REPORT.md.bak" (the latter duplicated) and
+  NO *.log rule at all, so any .log there could be committed by a plain git add -- and
+  four had been: brain65.log, configs/electrum_rerun.log, cpu_manager_oct19.log,
+  image_corpus_run.log. All four measured clean under the widened rule below (0 hits in
+  any producer's format, 0 commit= lines). Nothing leaked; the protection was simply
+  absent in the repo that needed it.
+
+  Fixed 9 Nov 2026: "*.log" added to ~/blm-analysis/.gitignore and verified with
+  git check-ignore -v, which now reports ".gitignore:3:*.log  foo.log" on a scratch file;
+  the duplicated REPORT.md.bak line dropped in the same edit. .gitignore does not
+  untrack, so the four already-tracked logs were handled separately: image_corpus_run.log
+  was git rm --cached (no tracked doc or script referenced it, it had no allow-list entry,
+  and nobody had read it); the other three stay tracked, already public for weeks and
+  clean on the same counts.
+================================================================================
+
+================================================================================
+STANDING RULE, widened 9 Nov 2026 by the owner's instruction:
+
+  HOW A LOG IS READ MUST BE FORMAT-AGNOSTIC. THE OLD RULE READ ONE PRODUCER'S WORDING.
+
+  The rule as it stood read exactly two patterns:
+      grep -c -E '^HIT[[:space:]]+index'      <- detection
+      grep -E '^exit='                        <- completion
+  Both are solver2_jac's output format and nothing else's. Measured 9 Nov 2026:
+    brain_image_corpus.py:471-475   prints "  *** n HIT ***" and "commit=<sha256>"
+    old_electrum.py, t12_family_check.py   have formats of their own
+    brain_image_corpus.py            prints no exit= line at all when run directly;
+                                     exit= comes from the run_queue_*.sh wrappers
+  '^HIT[[:space:]]+index' returns 0 for every one of those producers INCLUDING ON A REAL
+  HIT, because the string it searches for is never printed. image_corpus_run.log scored 0
+  under the old rule and would have scored 0 with a hit sitting in it.
+
+  WHY IT MATTERS. A hit-detection grep keyed to one producer's wording is a check that
+  prints a number nobody made it earn. That is the same class as REPORT 1.7, 1.8 and 1.9,
+  and it is the worst version of it, because the number it prints is the one number the
+  HIT protocol depends on.
+
+  THE RULE NOW. Two greps, neither tied to a producer:
+      grep -c -i -w -E 'hit|hits|commit=|phrase[[:space:]]*:'  <log>    # detection
+      grep -E '^exit=|acceptance|NO MATCH|VOID'                <log>    # completion
+  Nothing else in a log is read. show_hit is never called. A NONZERO DETECTION COUNT
+  STOPS EVERYTHING and is reported before any other work, whatever the completion grep
+  says. A zero detection count is only a negative once the completion grep shows the run
+  finished: for solver2_jac "exit=2", for brain_image_corpus.py "acceptance ... EXACTLY
+  1.0" with no "VOID" (its own guard at lines 463-466 voids any run whose acceptance is
+  below 1.0, because a brainwallet has no checksum and so acceptance below 1.0 means work
+  was silently dropped).
+
+  ON THE WORD ANCHORS (-w). The owner's instruction gave the detection grep unanchored,
+  as -i -E 'HIT|commit=|phrase[[:space:]]*:'. Run over all 100 logs in both trees, the
+  unanchored form fires on ordinary text, because HIT is a substring of other words:
+    queuenov_t12full_mp65.log   2 matches   SHIT, FUCKTHISSHIT (passphrase candidates)
+    image_corpus_run.log        3 matches   whitepaper x2, verify_hit
+  The anchored form scores 0 on both, and still returns 2 on each of st_selftest_find.log,
+  st_selftest_uncomp.log and st_selftest_hybrid.log -- the three planted POSITIVES, which
+  are the only logs in either tree that contain a real hit. Those three are the anchored
+  rule's positive control: it is not merely quiet, it is quiet where it should be and loud
+  where it should be. A rule that cries wolf on the word "whitepaper" gets ignored, which
+  is the same failure in the opposite direction. The anchors were added for that measured
+  reason; the format-agnostic requirement is the owner's.
 ================================================================================

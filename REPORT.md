@@ -299,8 +299,15 @@ vectors, including 16–23 covering `upper` and `title` casing.
   exactly one value**, `ccbd031e54cde2a3189fd59bc49f731367a1779e`, and never the void
   32-bit word-swapped form `1e03bdcca3e2cd549bd59f1813739fc49e77a167`. The host decode is
   big-endian correct. **No run is void for a wrong target.**
-- **Hits.** `grep -c -E '^HIT[[:space:]]+index'` over all **83** logs returns **0**.
-  Against this target nothing has ever matched.
+- **Hits.** [WIDENED 2026-11-09 — the original check read one producer's format; see §10]
+  The format-agnostic detection grep `grep -c -i -w -E 'hit|hits|commit=|phrase[[:space:]]*:'`
+  over all **100** logs in both trees returns **0** on every log except the three planted
+  self-tests `st_selftest_find.log`, `st_selftest_uncomp.log` and `st_selftest_hybrid.log`,
+  which return **2** each and are required to. The superseded form,
+  `grep -c -E '^HIT[[:space:]]+index'` over 83 logs, also returned 0, but only
+  `solver2_jac` ever prints that string, so it could not have reported a hit from the
+  other three producers. **Against this target nothing has ever matched, and that now
+  rests on a check with a positive control.**
 
 #### Therefore the negatives stand
 
@@ -6039,6 +6046,27 @@ reports about itself.** The only test that distinguishes them is a planted
 *positive* through the production code path, and the only place it can be
 trusted is the one write to `d_target`. A control is worth exactly as much as the
 path it shares with the thing it controls.
+
+**A detection grep keyed to one producer's wording returns 0 for every other producer,
+including on a real hit.** [MEASURED 2026-11-09] The standing rule for reading a solver
+log was two patterns: `grep -c -E '^HIT[[:space:]]+index'` for detection and
+`grep -E '^exit='` for completion. Both are `solver2_jac`'s output format and nothing
+else's. Four producers in this project write logs, and three of them print something
+else: `brain_image_corpus.py:471-475` emits `*** n HIT ***` and `commit=<sha256>`;
+`old_electrum.py` and `t12_family_check.py` have formats of their own; and
+`brain_image_corpus.py` run directly prints no `exit=` line at all, because `exit=` comes
+from the `run_queue_*.sh` wrappers. So the detection grep returned a clean **0** on
+`image_corpus_run.log` — and would have returned the same 0 with a hit sitting in it. This
+is §1.7, §1.8 and §1.9's class in its worst form: **a check that printed a number nobody
+made it earn**, and the number was the one the hit protocol depends on. The rule is now
+format-agnostic — `grep -c -i -w -E 'hit|hits|commit=|phrase[[:space:]]*:'` for detection,
+`grep -E '^exit=|acceptance|NO MATCH|VOID'` for completion — and the word anchors are
+themselves measured: unanchored, `HIT` is a substring of `SHIT` and `whitepaper`, which
+fires on 5 lines across two logs that contain no hit, while anchored it fires on nothing
+except the three planted self-test logs, where it fires twice each. **A rule that cries
+wolf on the word "whitepaper" gets ignored, which is the same failure in the opposite
+direction.** A control must be quiet where it should be *and* loud where it should be;
+quiet alone is what a producer-specific grep gives you for free.
 
 **Never edit by slicing between two distant anchors.** On 2026-10-13 one
 paragraph of §3 was replaced with `s[:i] + new + s[j:]`, where `i` and `j` were

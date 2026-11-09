@@ -6,6 +6,11 @@
 #      after it, in README.md and REPORT.md. Any other match blocks.
 #   2. Private deny-list: if ~/blm-private/never_publish.txt exists, any case-insensitive fixed-string
 #      match of one of its lines blocks. This script names only the path, never the entries.
+#      KNOWN LATENT BUG (logged 2026-11-09, not fixed): the staging at line 29 below strips blank
+#      lines but NOT comments, so a '#' line in never_publish.txt becomes a literal search term and
+#      would match every comment in the repo, blocking the push with noise. 4 terms today, all
+#      non-comment, so there is no artefact; add '-e' grep of '^[[:space:]]*#' to the staging before
+#      anyone adds a commented entry.
 #   3. Phrase guard: 12 or more consecutive BIP39 words block, in any format. Tokens are runs of letters
 #      (digits and punctuation separate them), compared case-insensitively with configs/bip39_en.txt.
 #      Runs continue across line breaks, so a wrapped phrase is still one run. Exempt, and breaking a
