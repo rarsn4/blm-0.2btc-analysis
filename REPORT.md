@@ -11,7 +11,7 @@ What **is** solved is the **rune cipher**, except for a single glyph. Those are
 different claims and this report keeps them separate throughout.
 
 I built a GPU search pipeline covering both BIP39 and Electrum and ran
-**316,455,746,776 full seed derivations** — 9,157 days of CPU at typical solver
+**316,456,008,920 full seed derivations** — 9,157 days of CPU at typical solver
 rates *[4 Nov 2026: this read 305,201,540,079 and 8,831 days until today, when the
 31 completed t21 runs of 26–31 Oct were admitted to `tally2.py`. Ledger and the
 admission entry are in §3; the scored table is at the end of §2.]* — plus
@@ -62,7 +62,7 @@ Claims below are tagged. Do not promote a tag without new evidence.
 | **[INFERRED]** | Follows from measured facts by a stated argument. |
 | **[ASSUMED]** | Load-bearing but unproven. The soft spots. |
 | **[COMMUNITY]** | A reading or convention taken from the shared solver corpus, not derived here. Weaker than [INFERRED]: no argument from this project's measurements backs it. `premise_audit.md`'s vocabulary, used in §5 from 9 Nov 2026. |
-| **[DEFECT]** | A fault in this project's own method or machine, found and dated. §1.7, §1.8. |
+| **[DEFECT]** | A fault in this project's own method or machine, found and dated. §1.7, §1.8, §1.9. |
 
 The distinction between [EXHAUSTED] and [TESTED] is the one that matters: §2.1–2.11
 are the first, §2.12 is the second, and conflating them would be the only overclaim
@@ -70,10 +70,10 @@ in this document.
 
 ---
 
-## 1. Six defects in the shared data — and two in ours
+## 1. Six defects in the shared data — and three in ours
 
-§1.1–1.6 are faults in the data the community shares. **§1.7 and §1.8 are faults of
-this project's own**, and they are the more serious kind, so they are not buried: for
+§1.1–1.6 are faults in the data the community shares. **§1.7, §1.8 and §1.9 are faults
+of this project's own**, and they are the more serious kind, so they are not buried: for
 five weeks this project accrued negatives on a solver binary that had never passed a
 self-test (§1.7), and for five weeks it hashed a transcription that was never checked
 back against the image (§1.8). They have the same shape — something written down once,
@@ -402,7 +402,7 @@ dark frame stripe, 61 of 67 px below grey 110, and that is precisely the ascende
 #### The defect is BOUNDED to the brainwallet scheme — stated so no reader has to infer it
 
 **A transcription error cannot have corrupted any BIP39 or Electrum negative, and the
-headline 316,455,746,776 derivations are unaffected.** The reason is structural, not
+headline 316,456,008,920 derivations are unaffected.** The reason is structural, not
 lucky: those two schemes encode words as indices into the fixed 2048-word list, and the
 solver resolves every config word through `widx()` before any GPU work begins. For a
 non-brainwallet config `allow_extra` is false, so a word outside the list returns −1 and
@@ -510,6 +510,55 @@ wider than before and, for the first time, **provably equal to the canvas census
 
 ---
 
+### 1.9 [DEFECT, found and closed 2026-11-09] A derivation check reported two encodings and ran one: the uncompressed arm collapsed onto the compressed one
+
+**Reported by the owner against the owner's own check**, the same day §2.2's third-party
+phrase entry was written, and logged here because it is the same shape as §1.7 and
+§1.8: something that printed a number nobody made it earn.
+
+#### What happened
+
+The check of seven third-party 12-word phrases was run over four derivation paths and
+reported **"compressed and uncompressed"**, printing **56 derivations** = 7 × 4 × 2.
+The uncompressed arm did not exist. The library **re-serialised the point** rather than
+emitting the 65-byte `0x04` form, so both arms produced the same compressed bytes and
+the same hash160. **28 real derivations were counted as 56**, and the printed total was
+indistinguishable from a correct run.
+
+#### How it was closed
+
+Rebuilt on **raw-bytes hash160** rather than on a library's serialisation, and
+self-tested against **both published privkey = 1 addresses** —
+`1BgGZ9tcN4rm9KBzDn7KprQz87SZ26SAMH` compressed and
+`1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm` uncompressed. A collapsed arm fails the second of
+those outright. The rebuilt run produces **56 DISTINCT hash160s** and **zero matches**.
+
+**The conclusion is unchanged; the method is retracted.** The phrases were negative
+before and are negative now. What was wrong was the warrant, and a factor-of-two
+overstatement of work done is exactly the error class §10's rules exist for.
+
+#### The standing rule it produced
+
+**An encoding axis must prove it is an axis.** Any run claiming *n* encodings has to
+show *n* distinct hash160s for one key before the count is believed — asserting the
+axis in a config or a log line is not evidence that the code took it.
+
+#### Two things worth saying plainly
+
+**This project's own check of the same family had the catch built in and the owner's did
+not.** `t12_family_check.py` self-tests both privkey = 1 addresses before deriving
+anything, which is the test that fails on a collapsed arm; the owner's check had no
+self-test at all. That is not a point in anyone's favour — it is §1.7's rule working in
+one place and absent in the other, which is the whole argument for the rule.
+
+**And it was checked here rather than assumed.** After this report arrived,
+`t12_family_check.py`'s four paths were measured for the same collapse: **8 hash160s
+from 4 paths × 2 encodings, 8 distinct, no collapse**, so its 4,928 figure is 4,928
+distinct derivations. The check is now part of that script's self-test permanently,
+rather than a thing verified once in conversation.
+
+---
+
 
 ---
 
@@ -533,7 +582,8 @@ Positions 1–12 of the position table with **both gaps swept over all 2048 BIP3
 words** — not a candidate list, the entire wordlist — across 65 passphrases and
 4 paths.
 
-> **[SCOPE, 9 Nov 2026] This claim has no log and is not in the ledger.** Seven
+> **[SCOPE, 9 Nov 2026 — CLOSED the same day by the run below. Struck, not deleted.]**
+> ~~**This claim has no log and is not in the ledger.** Seven
 > configs exist — `t12full.conf`, `t12full_mp.conf`, `t12_p40`, `t12_p52`, `t12_p71`,
 > `t12_p75`, `t12_p80` — but a search of this tree and of the working directory finds
 > **no log mentioning `t12` at all**, and `t12` appears **0 times in `tally2.py`**, so
@@ -542,7 +592,72 @@ words** — not a candidate list, the entire wordlist — across 65 passphrases 
 > status §2.6 records for the 65-passphrase Electrum list, and it should be read the
 > same way: **asserted, not evidenced.** Nothing above is retracted. The space is also
 > trivially small — 2048² = 4,194,304 candidates, 262,144 after the checksum, seconds
-> of compute — so re-running it with a log would settle this for almost nothing.
+> of compute — so re-running it with a log would settle this for almost nothing.~~
+> **It was re-run. See the admission immediately below.**
+
+> **[EXHAUSTED, EVIDENCED 9 Nov 2026] Re-run with logs, scored against a band committed
+> before launch, and admitted to the ledger.** §2.2 was the report's weakest
+> [EXHAUSTED] claim — asserted since the beginning, no log, absent from `tally2.py`.
+> It now has all three. Bands committed first in `QUEUE_after_el22.md` (`3ebf594`),
+> self-test gate PASS (cached) on `solver2_jac` sha256 `2cace98f30d1`, the same bytes as
+> the 2026-11-02 stamp.
+>
+> **The band model, fixed before the run.** `t12full_mp.conf` pins slot 12 to `vote`
+> with slots 6 and 8 `@FULL` over all 2048, so the 4-bit checksum is a **filter, not an
+> identity** — rule 4's third case, binomial at p = 1/16. Not stratified: stratification
+> needs a restricted pool on the checksum-bearing slot, and here the entropy bits vary
+> fully. μ = 4,194,304 / 16 = **262,144**, σ = √(4,194,304 × 1/16 × 15/16) =
+> **495.74**, band **262,144 ± 496**.
+>
+> | run | candidates | survivors | band | z | HIT | result |
+> |---|---|---|---|---|---|---|
+> | `t12full_mp`, empty passphrase | 4,194,304 | **261,335** | 262,144 ± 496 | **−1.632** | 0 | negative, in band |
+> | `t12full_mp` + `pw2.txt`, 65 passphrases | 4,194,304 × 65 | **261,335 on every one of the 65** | exact equality | — | 0 | negative |
+>
+> **The second row's check was exact, not statistical, and it was fixed before launch.**
+> A passphrase cannot change BIP39 checksum validity, only seed derivation, so every
+> pass had to return *identically* 261,335 or the passphrase loop was not doing what the
+> config said — the §1.9 failure mode. All 65 passes returned 261,335; the log holds 65
+> progress lines and 65 exhausted lines, and `sort -u` over them yields **one** distinct
+> value. `pw2.txt` sha256 `a60f9ef3…`, 65 lines, **line 1 empty**, so the first row is a
+> strict subset of the second.
+>
+> **Keys actually derived**: 261,335 survivors × 4 paths × 3 encodings
+> (`derive_multi3`) = **3,136,020** on the empty passphrase, **203,841,300** across the
+> 65. The ledger's `derivations` column is candidates/16 and multiplies by neither, which
+> is the convention every other row uses.
+>
+> **In the ledger**, carried as a constant `T12 = 4,194,304` at `CHECKSUM_12 = 16`,
+> disjoint from every 21-word box and from the 24-word tail by construction — three
+> templates, three checksum widths, three divisors, each floored separately. Exactly how
+> `T24` is already carried, and for the same reason.
+>
+> **What it moved, from one capture of `tally2.py`:** evidenced union
+> 40,508,144,877,493 → **40,508,149,071,797** candidates (+4,194,304) and
+> 316,455,746,776 → **316,456,008,920** derivations (+262,144). The run count stays
+> **82** because this is a carried tail and not a box, the same as `T24`.
+>
+> **One figure moved that is worth naming rather than leaving to be noticed.** The
+> printed `double-counted` fell from 3,712,867,368,033 to **3,712,863,173,729**, which
+> is −4,194,304 — the whole of `T12`. The cause is pre-existing and not this run's:
+> `naive` sums the 21-word boxes only, while the union it is differenced against
+> includes the carried tails, so each tail subtracts itself from the reported
+> double-count. `T24` has been doing this since it was added. **[SCOPE]** The effect is
+> 0.0001% and it is left alone deliberately — fixing it inside an admission would change
+> a published figure for an unrelated reason. Flagged for its own correction.
+>
+> **What this does and does not settle.** It makes §2.2 evidenced at the **empty
+> passphrase and the 65**, on the current binary with all three encodings, which is
+> strictly more than the original prose claimed. It closes the branch outsiders most
+> often reach for — §1.5 calls reading `·12·` as a phrase length *"the single most
+> common wrong turn in this puzzle"*, and the 12-word template is now dead with a log
+> rather than dead by assertion.
+>
+> *Not used for anything: the run reported 86,446,629 and 85,533,454 candidates/s, about
+> 8× the 11 M/s the 69-day estimate uses. Rule 6 takes rates only from checkpoint-time
+> deltas, and this is a self-reported in-kernel rate on a 4-million-candidate space
+> sharing a GPU with `t21_free2`. It is recorded as an anomaly to measure, and the
+> 69-day figure is unchanged.*
 
 > **[TESTED, 9 Nov 2026] Seven 12-word phrases circulated by a third-party AI —
 > covered by deriving the family that contains them.** The phrases varied **slot 6**
@@ -552,6 +667,14 @@ words** — not a candidate list, the entire wordlist — across 65 passphrases 
 > **owner-supplied and is not independently verified by this entry**. Guessing the
 > other eleven words in order to "check" them would have manufactured a negative,
 > which is the failure mode §1.8 exists to prevent.
+>
+> **[CORRECTED 9 Nov 2026] That owner-supplied figure was itself wrong, and it is now
+> §1.9.** The original check reported "compressed and uncompressed" but its uncompressed
+> arm collapsed onto the compressed one — the library re-serialised the point — so
+> **28 real derivations were printed as 56**. Rebuilt on raw-bytes hash160 and
+> self-tested against both published privkey = 1 addresses, it gives **56 distinct
+> hash160s and zero matches**: the conclusion did not move, the method was retracted.
+> The run recorded below was then measured for the same collapse and does not have it.
 >
 > What was run instead covers them whatever their remaining words were, so long as
 > they are of the `t12full` template: **slot 6 over the five named words and slot 8
@@ -576,8 +699,11 @@ words** — not a candidate list, the entire wordlist — across 65 passphrases 
 > **It is also not purely redundant with the paragraph above, for two measured
 > reasons.** The 65 passphrases are described in §2.4 as *"from the image text …
 > including `Сумма двух чисел`, all `BREATHE` casings, BLM slogans, dates, and the
-> target address itself"* — the empty passphrase is not among those named, and this
-> paragraph does not say it was covered. And §2.2 predates the **28 September** change that
+> target address itself"*, and that description names no empty passphrase.
+> *[CORRECTED 9 Nov 2026: the list is `pw2.txt`, sha256 `a60f9ef3…`, 65 lines, and
+> **line 1 is empty** — so the empty passphrase IS one of the 65 and §2.4's description
+> simply did not mention it. Found by looking at the file rather than at the prose about
+> it.]* And §2.2 predates the **28 September** change that
 > introduced `derive_multi3` and the three pubkey encodings (§1.7), so whatever §2.2
 > ran was **compressed only**. This run adds the uncompressed encoding and the empty
 > passphrase over its corner, and it is the only logged, self-tested 12-word evidence
@@ -1958,6 +2084,47 @@ the ink measurement below now detaches at the other end too.
 > that slot 21's hand is additionally four times further off its midpoint than the
 > other two.
 
+> **[SCOPE, 9 Nov 2026] The same caption would license two more slots, and the standing
+> instruction was narrower than the mechanism.** The note above names slots 3, 13 and
+> 21 — the three hands. But the operation it licenses is *"sum the two numerals a thing
+> lies between"*, and **two other assigned slots are built by exactly that operation on
+> the same dial**, measured in `clock_overlap_measurement.md`:
+>
+> | slot | word | object | angular span | numerals spanned | sum |
+> |---|---|---|---|---|---|
+> | 9 | `eye` | eye triangle + radiating rays | 38.9° – 78.9° | 4 and 5 | **9** |
+> | 11 | `pyramid` | pyramid brick body | 74.0° – 136.6° | 5 and 6 | **11** |
+>
+> **So one of two things is true, and this report does not choose between them.**
+>
+> **Branch A — the caption licenses the operation.** Then it licenses **five** slots,
+> not three: 3, 13 and 21 from the hands, 9 and 11 from the objects. Four of the fifteen
+> assigned slots, plus the slot-21 gap, rest on one block with no measured location, and
+> every place this report says so for 3, 13 and 21 should say it for 9 and 11 as well.
+> §5's "the clock can only produce ODD slots" is untouched either way — 4+5 = 9 and
+> 5+6 = 11 are both odd, as the argument requires.
+>
+> **Branch B — the caption is specific to the hands.** Then slots 9 and 11 **never had
+> a licence at all**, which puts them *below* 3, 13 and 21 rather than beside them:
+> those three rest on an unlocated licence, these two on none. And it has a consequence
+> that is already settled — if the sum reading of the objects is unlicensed, the
+> motivated alternative is the **single** numeral each object sits on, `eye`@4 and
+> `pyramid`@6, which is precisely what `t21_single` ran over 54⁷ × 2 and returned
+> negative and in band. So under branch B the better-motivated reading of 9 and 11 is
+> **closed**, and the reading the template actually uses is **unlicensed**.
+>
+> **Evidence bearing on the branches, reported without adjudicating.** It is
+> asymmetric, and both halves are already in the tree. Against branch A:
+> `report_additions_image_pass.md` §I pre-registered a test of whether the artwork is
+> laid out on the dial at all — 28 whole-object elements, two nulls, decision rule fixed
+> in code — and found **3 of 28 within 0.5° against 1.9 expected, p 0.28 / 0.28, NOT
+> SIGNIFICANT**, concluding that *"the clock governs the hands and the seal only."*
+> For branch A: `clock_overlap_measurement.md` measures these two spans directly and
+> grades `pyramid`@11 measured and `eye`@9 suggestive. And its own recorded caveat cuts
+> against itself — **an object that size covers two numerals automatically**, the
+> pyramid spanning 62.6° where a sector is 30°. The two are different tests, one of
+> global layout and one of two specific spans, and nothing here picks the winner.
+
 > **[OPEN, UNTESTED — and narrower than it first looks] What the caption dependency
 > does and does not reopen.** It does **not** reopen "some other word sits at slot 3"
 > or "at slot 13". `t21_free3` and `t21_free13` are both in the evidenced ledger and
@@ -2191,7 +2358,7 @@ asks who first said it. Together they close the loop.
 >   `u/mohamedabb`, comment `p5auds6`, **2026-08-22 22:09:22 UTC**, posts a link to
 >   `github.com/rarsn4/blm-0.2btc-analysis` and tells the thread *"I've also
 >   eliminated 12 billion seed derivations (BIP39/Electrum)"* and *"there are 4
->   errors in it"*. §3's evidenced figure is **316,455,746,776**, and §1 now counts
+>   errors in it"*. §3's evidenced figure is **316,456,008,920**, and §1 now counts
 >   six defects in the shared data plus two of this project's own. The post is not
 >   ours and we cannot edit it, but a reader arriving from that comment will be
 >   **26× low** on the headline and short two defects, so the discrepancy is
@@ -2834,7 +3001,7 @@ that ended that day. It is kept, dated, as the record of it, not as a live claim
 
 **[SCOPE — CLOSED 4 Nov 2026]** All 31 were admitted to `tally2.py`'s EVIDENCED
 list on 4 Nov 2026, each on completion and in the band committed before launch; the
-evidenced set went 51 → 82 runs and the headline 305,201,540,079 → 316,455,746,776
+evidenced set went 51 → 82 runs and the headline 305,201,540,079 → 316,456,008,920
 derivations (§3). The note that stood here is struck, not deleted, because it was
 true when written and this report retracts by marking:
 
@@ -3027,7 +3194,7 @@ already covered** by newer sweeps.~~
 > No replacement is asserted, because the figure cannot be traced to a computation.
 > For the quantity the sentence was describing, the two measured values are
 > **3.31%** at the 22-run ledger of 27 Sep and **8.33%** today at 82 evidenced runs
-> (`double-counted 3,712,867,368,033 / naive sum 44,587,622,737,549` — both figures
+> (`double-counted 3,712,863,173,729 / naive sum 44,587,622,737,549` — both figures
 > are over the 82 evidenced *plus* the twelve asserted boxes, which is how
 > `tally2.py` prints them). Both are
 > reproducible from `tally2.py`; the retracted pair is not. This is the §10 rule
@@ -3040,8 +3207,9 @@ box disjointification with real set intersections. Run it as
 `python3 tally2.py configs`.
 
 ```
-t21 campaign, 82 evidenced runs     316,455,746,776 derivations
-+ the twelve older asserted runs    319,319,891,245
+t21 campaign, 82 evidenced runs     316,456,008,920 derivations
+  (= 82 t21 boxes + 2 carried tails: 24-word at /256, 12-word at /16)
++ the twelve older asserted runs    319,320,153,389
     marginal of the twelve          2,864,144,469
     at 400 derivations/s            9,157 CPU-days evidenced, 9,240 combined
 ```
@@ -3058,7 +3226,7 @@ does not see paths.
 
 In derivations, that admission moved the headline `278,996,119,787 → 284,280,833,673`,
 a change of 5,284,713,886. (Both figures are the ledger as it stood on 26 Oct; the
-block above now prints 316,455,746,776 after the admissions of 3 and 4 Nov.)
+block above now prints 316,456,008,920 after the admissions of 3 and 4 Nov.)
 Each total is floored separately, so this is one more than 676,443,377,378 / 128 =
 5,284,713,885.77 rounded down. Electrum `el21_rev` (§2.6) and the passphrase passes
 are not in this block.
@@ -3100,8 +3268,10 @@ end of §2. What they do to this ledger:
 ```
                               candidates            derivations
 union before, 51 evidenced    39,067,606,420,307    305,201,540,079
-union after,  82 evidenced    40,508,144,877,493    316,455,746,776
+union after,  82 evidenced    40,508,149,071,797    316,456,008,920
 contributed                    1,440,538,457,186     11,254,206,697
+  (the "after" row also carries the 12-word tail admitted 9 Nov:
+   +4,194,304 candidates, +262,144 derivations -- see 2.2)
 disjoint boxes                       164 -> 295
 CPU-days at 400/s                  8,831 -> 9,157
 ```
@@ -3136,7 +3306,7 @@ at the moment of printing, rather than carried forward and patched.
 when the ledger held 29 runs, until 13 October. The two totals above it were
 updated at every admission and it was not, so for two weeks the block broke the
 rule stated later in this section: the marginal must equal the difference of the
-two printed totals. It is now `319,319,891,245 − 316,455,746,776 = 2,864,144,469`,
+two printed totals. It is now `319,320,153,389 − 316,456,008,920 = 2,864,144,469`,
 which is also what `tally2.py` prints. *(It read `282,171,117,443 −
 278,996,119,787 = 3,174,997,656` until the admissions of 26 Oct,
 `287,144,978,142 − 284,280,833,673 = 2,864,144,469` from then until the admission of
@@ -3695,7 +3865,7 @@ after, because nothing among the 31 touches `swap114` or `free2_p1`.
 
 **These figures exclude the 24-word tails**, as the two tables above it do — the
 denominators are 21-word box unions only, which is why 40,504,526,297,231 here is
-`T24` = 3,618,580,262 smaller than the 40,508,144,877,493 §3 quotes. The two
+`T24` = 3,618,580,262 smaller than the 40,508,149,071,797 §3 quotes. The two
 templates have different checksum widths and are not mixed in one union.
 
 **56.02% of the whole 82-run union has been checked with the compressed key only.**
@@ -3888,8 +4058,8 @@ less trustworthy than either part. Where one number is needed, **"over 316
 billion derivations eliminated"** is a floor that is computed, in preference to
 an estimate that is not.
 
-**The headline quotes the evidenced figure, not the combined one.** 316,455,746,776
-is the union of the 82 runs whose logs are in this tree; 319,319,891,245 adds the
+**The headline quotes the evidenced figure, not the combined one.** 316,456,008,920
+is the union of the 82 runs whose logs are in this tree; 319,320,153,389 adds the
 twelve older runs carried on report alone. The larger number is not wrong, but it
 inherits the weaker warrant of its weakest component, and a headline that needs a
 footnote about which runs have logs is worse than a smaller headline that needs
@@ -4167,7 +4337,7 @@ whose default is something else.
 > addition fails, slots 3, 13 and 21 go, and §2.13's `a + g ≥ 2` goes with them.
 > **The length does not go.** `glove`@19 alone still leaves {21, 24}, and the slots
 > that come from counts and written labels are untouched by the clock's failure. So
-> the 316,455,746,776 derivations in §3 were aimed at a 21-word template that
+> the 316,456,008,920 derivations in §3 were aimed at a 21-word template that
 > survives the clock — on a [COMMUNITY]-grade leg, which is weaker than a measurement
 > and stronger than nothing.
 
@@ -4745,51 +4915,108 @@ from above"* (C), ***"runes at the bottom"*** (B), *"Runes on the right"* (A). B
 "on the right" is exactly where this project measured it, x 1526–1557: the one check
 available on his location wording, and it passes.
 
-> **[CORRECTED 9 Nov 2026, within the hour it was written] ~~The bottom strip has not
-> been searched for block B … recorded as the next place to look.~~** Wrong in its
-> wording and then wrong again in a first attempt to retract it. The measured position,
-> `blockb_bottom_check.py`:
+> **[CORRECTED 9 Nov 2026] ~~The bottom strip has not been searched for block B …
+> recorded as the next place to look.~~** Mis-worded, then over-corrected in a first
+> retraction, and now settled by a **pre-registered** test. The prior and the decision
+> rule were committed before any pixel in the regions was counted:
+> `blockb_bands_plan.md`, commit `ed862df`, plan blob `ee814f19`.
 >
-> **1. "At the bottom" does not conflict with the search region — but the search
-> covered 15% of it.** The dial search is a disc, centre (470,937) radius ~182, spanning
-> y 755–1119, so it does lie in the bottom third and the note was wrong to imply
-> otherwise. By **area**, though, the disc covers **96,762 px of the bottom third's
-> 640,000 — 15.1%**. It touches 320 of 400 rows but only **365 of 1600 columns**.
-> **84.9%, 543,238 px, has never been searched for block B.** So the transcriber's
-> wording points at a real and largely unexamined region; "the bottom strip" was simply
-> the wrong name for it.
+> **Two facts that bound what the test could mean, recorded in the plan ahead of it.**
+> First, **"at the bottom" does not exclude the region already searched** — the dial
+> disc spans x 288–652, y 755–1119, which lies inside the bottom third, so the
+> transcriber's wording and the search region were never in conflict and the retracted
+> note was wrong to imply they were. What the disc missed is *area*: 96,762 px of the
+> bottom third's 640,000, **15.1%**, touching 320 of 400 rows but only **365 of 1600
+> columns**. Second, **the bottom edge has no room**: the whitepaper caption
+> (25, 1138, 1040, 28) and the Latin line (1025, 1140, 530, 50) span x 25–1555, leaving
+> **25 px** and **45 px** against the **279 px** that 14 glyphs need at block A's
+> measured 19.9 px pitch.
 >
-> **2. The bottom EDGE is excluded, and that part stands.** The whitepaper caption
-> (25, 1138, 1040, 28) and the Latin line (1025, 1140, 530, 50) span **x 25–1555 of
-> 1600**, leaving 25 px left and 45 px right. Fourteen glyphs at block A's measured
-> 19.9 px pitch need **279 px**. Block B is not on the bottom edge.
+> **The prior was stated as LOW before measuring, with the arithmetic that makes it
+> low.** Of the four regions fixed in the plan, three are too small to hold 14 glyphs
+> of block A's 13 × 20 px in either orientation — R2 is 10 px tall against a 20 px
+> glyph; R3a and R3b are 25 and 45 px wide against 279, and 52 px tall against it the
+> other way. **One region of four was geometrically capable**, R1 at 38 × 1600.
 >
-> **3. [TESTED — and the test cannot decide, because its POSITIVE CONTROL fails.]** A
-> glyph-component search was run over the unsearched 84.9%, looking for 14 components of
-> block-A dimensions evenly spaced at 19.9 px, with **block A's own column as the
-> control**:
+> **Result: negative in all four, and the control passes.** Glyph-sized components
+> (bbox 6–33 × 10–40 px, 40–600 ink px) over the pre-registered sweep:
 >
-> | region | ink | glyph-like components | longest run at 19.9 px pitch |
-> |---|---|---|---|
-> | **block A column (control, 42 known glyphs)** | <130 | 47 | **vertical 10** |
-> | block A column (control) | <180 | 46 | vertical 10 |
-> | bottom third outside the disc | <130 | 52 | vertical 10, horizontal 4 |
-> | bottom third outside the disc | <180 | 48 | vertical 11, horizontal 5 |
+> | region | px | <90 | <110 | <130 | <150 | <170 | <190 | <215 | verdict |
+> |---|---|---|---|---|---|---|---|---|---|
+> | R1 y 1100–1138, full width | 60,800 | 8 | 8 | 7 | 7 | 13 | 11 | 5 | negative |
+> | R1′ same, minus the disc | 58,656 | 8 | 8 | 7 | 7 | 13 | 11 | 6 | negative |
+> | R2 y 1190–1200, full width | 16,000 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | negative |
+> | R3a x 0–25, y 1138–1190 | 1,300 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | negative |
+> | R3b x 1555–1600, y 1138–1190 | 2,340 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | negative |
+> | **CONTROL block A, x 1526–1557** | 30,225 | **47** | **47** | **47** | **47** | **46** | **40** | **23** | **POSITIVE, 7 of 7 cuts** |
 >
-> **The control never reaches 14, so the null means nothing.** Block A is **grouped** —
-> 1, 5, 4, 6, 2, 8, 11, 5, separated by three-dot marks (§7.2) — so an even-pitch run
-> breaks at every separator and the method's ceiling is the largest group, **11**. A
-> test that cannot find a 14-run in a known 42-glyph inscription cannot exclude one
-> elsewhere. Note also that the unsearched region yields **as many glyph-like components
-> as the real inscription does** (52 against 47): artwork produces them too, and this
-> method does not separate the two.
+> The control clears the ≥14 bar at **all seven cuts**, so the nulls are informative —
+> which is what last round's pitch-run attempt could not say for itself. R1 came closest
+> at **13 components at a single cut**, falling to 11 and 5 on either side: it fails both
+> arms of the pre-registered rule, the threshold and the stability. R2 and R3a are
+> **empty at every cut**.
 >
-> **So: block B is still unlocated, the 84.9% outside the disc is the right place to
-> look, and an even-pitch test is the wrong instrument.** The right one is group-aware —
-> what `runelib.py` does for block A, keying on the three-dot separators rather than on a
-> uniform pitch. That has not been built. Recorded as an open measurement with its
-> method named, not as a negative. Script `blockb_bottom_check.py`, output
-> `blockb_bottom_check.out`.
+> **What the plan said a negative would mean, and so it means it.** This tested **the
+> transcriber's own words** rather than our guess about the dial, which is why it closes
+> more than the dial negative did: *"runes at the bottom"* now has no region that both
+> fits 14 glyphs and is unexamined. **Block B stays unlocated, and §2.17's three
+> scope-marked slots stay scope-marked.** Nothing here touches what block B *says* —
+> only where it is. Script `blockb_bands_check.py`, output `blockb_bands_check.out`.
+>
+> *A counter in the first execution of that script mis-reported the control's
+> consecutive-cut figure as 2 where it is 7. The component counts were unaffected; the
+> bug was fixed and the script re-run before its output was committed.*
+>
+> **[MEASURED] What R1's 13 components ARE, which matters more than that 13 < 14.**
+> Counting them invited a near-miss reading. Identifying them removes it — all 13
+> centroids at ink < 170 fall in catalogued places:
+>
+> | where | count | box |
+> |---|---|---|
+> | the **ambigram date** | **6** | x 1012–1098, y 1098–1122 |
+> | the **seal scroll**, mirror text | **6** | x 470–860, y 1040–1135 |
+> | **neither** | **1** | centroid (40, 1119), 9 × 38 px — the left frame line, measured at x 40–43 when the left-edge column was disproved (§10, sixth rule) |
+>
+> So **R1's peak is a catalogued date plus mirror-text fragments**, with one frame-line
+> sliver. It is not 13 unexplained glyphs one short of a bar. Nothing in R1 is
+> unaccounted for.
+>
+> **[MEASURED] And the negative is scoped to CONTRAST, because the control is block A at
+> 254 levels and full pen.** A faint block B is a different question from a missing one,
+> so it was measured rather than argued: block A's **own column** was attenuated in ink
+> depth only — 42 glyphs still present, same mask, same method, same cuts — and
+> re-counted.
+>
+> | contrast of the attenuated copy | <90 | <110 | <130 | <150 | <170 | <190 | <215 | |
+> |---|---|---|---|---|---|---|---|---|
+> | as drawn, **254 levels** (block A) | 47 | 47 | 47 | 47 | 46 | 40 | 23 | seen |
+> | **146 levels** (the circled mark, §6 item 6) | 0 | 37 | 45 | 47 | 47 | 47 | 47 | seen |
+> | **110 levels** (the vial `19`, §6 item 6) | 0 | 0 | 0 | 39 | 46 | 47 | 46 | seen |
+> | 80 levels | 0 | 0 | 0 | 0 | 0 | 46 | 47 | seen |
+> | 60 levels | 0 | 0 | 0 | 0 | 0 | 0 | 47 | seen |
+> | **45 levels** | 0 | 0 | 0 | 0 | 0 | 0 | 44 | **seen — the floor** |
+> | 35 levels | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **BLIND** |
+> | **19 levels** (the rifle `16`, §6 item 6) | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **BLIND** |
+>
+> **The floor is 39 levels, and it has an exact cause rather than an empirical one.**
+> The sweep's top cut is < 215 and this column's background is 254, so the test can see
+> only ink reaching **254 − 215 = 39 levels** deep: at 45 levels the darkest pixel is
+> 209 and is counted, at 35 levels it is 219 and is not.
+>
+> **So, stated plainly and more narrowly than "it cannot see a faint one":**
+> - The negative **does** exclude a block B drawn anywhere from block A's 254 levels
+>   down to ~39 — which covers the circled mark's 146 and the vial `19`'s 110. At those
+>   contrasts the attenuated control still returns 39–47 components where R1 returns at
+>   most 13, so such a block would have been seen and was not.
+> - The negative does **not** exclude a block B drawn below ~39 levels. The rifle
+>   receiver's `16` in this same image is **19 levels** (§6 item 6), so that is a real
+>   contrast in this artwork and not a hypothetical.
+>
+> **That is the honest boundary of the Y-1 result**, and it narrows what the test can
+> claim without weakening it much: the blind band is the bottom 15% of the contrast
+> range, not "anything faint". Script `blockb_bands_sensitivity.py`, output
+> `blockb_bands_sensitivity.out`. All three reference contrasts come from §6 item 6,
+> which measured them on one scale.
 
 **[MEASURED] What the ambiguity warning leaves untested, bounded.** The one word in the
 template that comes from a rune plaintext is `black`@10, from `чёрный день`. Across

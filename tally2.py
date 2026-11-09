@@ -255,6 +255,25 @@ CHECKSUM_24 = 256
 # different checksum widths and cannot share a divisor.
 T24 = 918_330_048 + 2_700_250_214
 
+CHECKSUM_12 = 16
+# [ADMITTED 9 Nov 2026] The 12-word template, at its own checksum width.
+#
+# t12full_mp.conf: slots 1-12 of the position table, slots 6 and 8 @FULL over all
+# 2048, four paths, three pubkey encodings. 2048^2 = 4,194,304 candidates.
+#
+# Run twice on 9 Nov 2026, both exit=2, HIT count 0 both times:
+#   empty passphrase    survivors 261,335  band 262,144 +/- 496  z -1.632  IN BAND
+#   65 passphrases      survivors 261,335 on EVERY one of the 65 passes -- the exact
+#     equality fixed before launch in QUEUE_after_el22.md, since a passphrase cannot
+#     change BIP39 checksum validity. pw2.txt sha256 a60f9ef3..., line 1 empty.
+#
+# Why this is carried as a constant rather than as a box: 12 slots and FOUR checksum
+# bits, so it cannot intersect any 21-word box and it converts at 1/16, not 1/128.
+# Same reasoning as T24 above -- the three templates have three checksum widths and
+# cannot share a divisor. Before this run, section 2.2 of REPORT.md claimed this space
+# was dead, had no log anywhere, and appeared 0 times in this file.
+T12 = 4_194_304
+
 def load(names):
     got = {}
     for n in names:
@@ -274,9 +293,9 @@ if __name__ == '__main__':
     # totals may be summed freely; the derivation totals may not.
     ue21, ne = union_volume(list(E.values()))
     ua21, na = union_volume(list(E.values()) + list(A.values()))
-    ue, ua = ue21 + T24, ua21 + T24
-    ue_d = ue21 // CHECKSUM + T24 // CHECKSUM_24
-    ua_d = ua21 // CHECKSUM + T24 // CHECKSUM_24
+    ue, ua = ue21 + T24 + T12, ua21 + T24 + T12
+    ue_d = ue21 // CHECKSUM + T24 // CHECKSUM_24 + T12 // CHECKSUM_12
+    ua_d = ua21 // CHECKSUM + T24 // CHECKSUM_24 + T12 // CHECKSUM_12
     naive = sum(vol(b) for b in list(E.values()) + list(A.values()))
     print(f"\nEVIDENCED runs ({len(E)}) — logs present in this directory")
     print(f"  union {ue:>22,} candidates   {ue_d:>18,} derivations")

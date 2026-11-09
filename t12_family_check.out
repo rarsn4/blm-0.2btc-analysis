@@ -6,6 +6,7 @@
   PASS  checksum accepts the canonical phrase
   PASS  checksum rejects it with one word changed
   PASS  target blob is NOT the word-swapped form
+  PASS  compressed and uncompressed give DISTINCT hash160s on all 4 paths
   PASS  a planted target IS detected by the sweep's comparison
   ALL PASS
 
@@ -20,5 +21,3 @@ paths: 4   encodings: compressed + uncompressed
 
 TOTAL  phrases enumerated 10,240   checksum-valid 616   derivations 4,928   MATCHES 0
 expected valid ~ 640 (1 in 16); observed 616
-
-[exited with code 0]

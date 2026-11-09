@@ -1,0 +1,23 @@
+glyph-sized components per region, threshold sweep
+region                                           px    <90  <110  <130  <150  <170  <190  <215
+--------------------------------------------------------------------------------------------------
+R1  y 1100-1138 full width                    60800      8     8     7     7    13    11     5
+R1' same, minus the dial disc                 58656      8     8     7     7    13    11     6
+R2  y 1190-1200 full width                    16000      0     0     0     0     0     0     0
+R3a x 0-25,    y 1138-1190                     1300      0     0     0     0     0     0     0
+R3b x 1555-1600, y 1138-1190                   2340      1     1     1     1     1     1     1
+CONTROL block A x 1526-1557 y 40-1015         30225     47    47    47    47    46    40    23
+
+decision rule: >= 14 at two or more CONSECUTIVE cuts, profile not collapsing
+  R1  y 1100-1138 full width                 max consecutive cuts at >=14: 0   negative
+  R1' same, minus the dial disc              max consecutive cuts at >=14: 0   negative
+  R2  y 1190-1200 full width                 max consecutive cuts at >=14: 0   negative
+  R3a x 0-25,    y 1138-1190                 max consecutive cuts at >=14: 0   negative
+  R3b x 1555-1600, y 1138-1190               max consecutive cuts at >=14: 0   negative
+  CONTROL block A x 1526-1557 y 40-1015      max consecutive cuts at >=14: 7   POSITIVE   <-- control; it must be POSITIVE for the nulls to mean anything
+
+geometry fixed in the plan: 14 glyphs need 279 px along the reading axis, >= 20 px across
+  R1    1600 x   38  horizontal line fits: True   vertical: False   -> CAPABLE
+  R2    1600 x   10  horizontal line fits: False   vertical: False   -> excluded by size
+  R3a     25 x   52  horizontal line fits: False   vertical: False   -> excluded by size
+  R3b     45 x   52  horizontal line fits: False   vertical: False   -> excluded by size

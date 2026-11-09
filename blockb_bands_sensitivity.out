@@ -1,0 +1,47 @@
+=== Z-2. what R1's peak actually is ===
+R1 at ink<170: 13 glyph-sized components
+  #  centroid x       y    w    h    px  accounted for by
+  1        39.5  1119.0    9   38   333  -- not in either box --
+  2       569.0  1105.5   16   11    67  seal scroll
+  3       681.5  1108.5   11   17    62  seal scroll
+  4       686.0  1117.0   16   18    74  seal scroll
+  5       704.5  1107.0   11   14    57  seal scroll
+  6       710.0  1111.0   18   16    50  seal scroll
+  7       721.5  1115.0   29   14    43  seal scroll
+  8      1021.0  1114.0   10   16    73  ambigram date
+  9      1028.5  1112.5    9   15    68  ambigram date
+ 10      1046.5  1110.0   11   16   118  ambigram date
+ 11      1059.5  1109.0   13   16   123  ambigram date
+ 12      1079.5  1109.5   13   17   137  ambigram date
+ 13      1091.5  1109.0   11   14   114  ambigram date
+
+  inside ambigram date  (x 1012-1098, y 1098-1122): 6
+  inside seal scroll    (x 470-860, y 1040-1135): 6
+  in neither box: 1
+  their centroids: (40,1119)
+
+=== Z-1. what contrast the test can see ===
+block A column: background 254, darkest 0, 254 levels (full pen)
+attenuated copies of THAT SAME COLUMN, same method, same cuts:
+
+contrast of the copy                  <90  <110  <130  <150  <170  <190  <215
+as drawn, 254 levels (block A)         47    47    47    47    46    40    23   SEEN
+circled mark, 146 levels                0    37    45    47    47    47    47   SEEN
+vial-19 level, 110 levels               0     0     0    39    46    47    46   SEEN
+80 levels                               0     0     0     0     0    46    47   SEEN
+60 levels                               0     0     0     0     0     0    47   SEEN
+45 levels                               0     0     0     0     0     0    44   SEEN
+35 levels                               0     0     0     0     0     0     0   BLIND
+25 levels                               0     0     0     0     0     0     0   BLIND
+rifle-16 level, 19 levels               0     0     0     0     0     0     0   BLIND
+
+(42 glyphs are known to be present in every row above: the ONLY thing changed
+ is ink depth. A row of near-zeros is the test failing to see them.)
+
+The floor has an exact cause: the sweep's top cut is <215 and this column's
+background is 254, so the test can only see ink that reaches 254-215 = 39 levels
+deep. 45 levels -> darkest 209, visible. 35 levels -> darkest 219, invisible.
+The rifle-receiver mark in this same image is 19 levels (REPORT 6 item 6), so a
+block drawn below this floor is not a hypothetical.
+
+R1 observed, for comparison:        8     8     7     7    13    11     5

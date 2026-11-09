@@ -59,6 +59,15 @@ def selftest():
     chk("checksum rejects it with one word changed",
         checksum_ok((('abandon ' * 11) + 'zoo').split()), False)
     chk("target blob is NOT the word-swapped form", TARGET_H160 == SWAPPED, False)
+    # The two encoding arms must stay DISTINCT. A library that re-serialises the point
+    # silently collapses uncompressed onto compressed and halves the real derivation
+    # count while the printed count stays the same. Checked, not assumed.
+    arms = []
+    for p_ in PATHS:
+        kk, _ = derive(mnemonic_to_seed(ab), p_)
+        arms += [hash160(pub_compressed(kk)), hash160(pub_uncompressed(kk))]
+    chk("compressed and uncompressed give DISTINCT hash160s on all 4 paths",
+        len(set(arms)), len(arms))
     # planted-hit test through the SAME comparison path the sweep uses
     planted = hash160(pub_compressed(k))
     chk("a planted target IS detected by the sweep's comparison",
