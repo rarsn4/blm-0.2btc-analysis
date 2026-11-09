@@ -1,0 +1,23 @@
+=== 1. what the dial search covered ===
+bottom third      y 800-1200, 640,000 px
+disc              x 288-652  y 755-1119
+  rows touched    320 of 400
+  cols touched    365 of 1600
+  AREA covered    96,762 px = 15.1% of the bottom third
+  so UNSEARCHED   543,238 px = 84.9%
+
+=== 2. the bottom edge strip ===
+  whitepaper caption   x 25-1065  y 1138-1166
+  Latin line           x 1025-1555  y 1140-1190
+  union spans x 25-1555 of 1600: free 25 px left, 45 px right
+  14 glyphs at 19.9 px pitch need 279 px -> neither gap is close
+
+=== 3. glyph-component search ===
+  block A column (POSITIVE CONTROL)
+    ink<130: glyph-like components   47   longest run at 19.9 px pitch: vertical  10  horizontal   1
+    ink<180: glyph-like components   46   longest run at 19.9 px pitch: vertical  10  horizontal   1
+    ink<215: glyph-like components   23   longest run at 19.9 px pitch: vertical   5  horizontal   1
+  bottom third outside the disc
+    ink<130: glyph-like components   52   longest run at 19.9 px pitch: vertical  10  horizontal   4
+    ink<180: glyph-like components   48   longest run at 19.9 px pitch: vertical  11  horizontal   5
+    ink<215: glyph-like components   22   longest run at 19.9 px pitch: vertical   3  horizontal   4

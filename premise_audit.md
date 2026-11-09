@@ -144,10 +144,17 @@ The project's passphrase list is not on this machine, so the rule has not been a
 - INFERRED: exactly 21. 24 fits the measurement equally well.
 - The README does **not** assert 21: it lists lengths 3–24, and its table has 24 rows.
 - **[COMMUNITY, added 9 Nov 2026] A second leg that does not touch the clock.** A word at slot *n* means at least *n*
-  words, and this table assigns 16, 17 and 19. **Slot 19 alone leaves {21, 24}** by arithmetic; slot 16 or 17 leaves
-  {18, 21, 24}, and REPORT §2.3 closes 18 over the same template. All three grades are [COMMUNITY], and the 16 and
+  words, and this table assigns 16 and 19. **Slot 19 alone leaves {21, 24}** by arithmetic; slot 16 leaves
+  {18, 21, 24}, and REPORT §2.3 closes 18 over the same template. Both grades are [COMMUNITY], and the 16 and
   the 19 are both sub-pixel in this file (0.09 px and 0.63 px peak stroke, against full pen for every legible
   control). So the length has two legs that fail independently, and neither is a measurement. REPORT §5.
+- **`gold`@17 is NOT a rung** [STRUCK 9 Nov 2026]. The `17` is read off a chart this file dates POST (July 2020 or
+  later) [MEASURED], and the chronology rule above deletes justifications of the form "the author chose W because of
+  E" where E postdates the seed. The **assignment is not falsified** — only its slot number's warrant, and a length
+  bound is made of nothing but slot numbers. Note that this file's weakest-premise ranking below reached the same row
+  second, by an unrelated route: `gold` is the only row where both links are inference. Chronology does **not** also
+  strike `apple`@20 — the Leopold date objection was withdrawn 18 Oct (1 May 2018 vandalism, knowable on
+  2020-05-10); slot 20 falls to REPORT §2.16's spacing measurement instead.
 
 **Slot-numbering mechanism.**
 - Only the clock sums are anchored by the author, through the rune "sum of two numbers" — **and that anchor is itself unlocated** [SCOPE, 9 Nov 2026]: the caption's 14 glyphs have no measured location and its transcription is `u/Amadeus407`'s of 2021-03-06, so the author-anchored class is anchored to a block this project has never found. REPORT §7 provenance note.

@@ -533,6 +533,78 @@ Positions 1–12 of the position table with **both gaps swept over all 2048 BIP3
 words** — not a candidate list, the entire wordlist — across 65 passphrases and
 4 paths.
 
+> **[SCOPE, 9 Nov 2026] This claim has no log and is not in the ledger.** Seven
+> configs exist — `t12full.conf`, `t12full_mp.conf`, `t12_p40`, `t12_p52`, `t12_p71`,
+> `t12_p75`, `t12_p80` — but a search of this tree and of the working directory finds
+> **no log mentioning `t12` at all**, and `t12` appears **0 times in `tally2.py`**, so
+> no 12-word work is in the `EVIDENCED` union or in any headline figure. Under §0 this
+> heading reads as [EXHAUSTED]; in fact it rests on this paragraph's prose, the same
+> status §2.6 records for the 65-passphrase Electrum list, and it should be read the
+> same way: **asserted, not evidenced.** Nothing above is retracted. The space is also
+> trivially small — 2048² = 4,194,304 candidates, 262,144 after the checksum, seconds
+> of compute — so re-running it with a log would settle this for almost nothing.
+
+> **[TESTED, 9 Nov 2026] Seven 12-word phrases circulated by a third-party AI —
+> covered by deriving the family that contains them.** The phrases varied **slot 6**
+> over `neck`, `air`, `gasp`, `inhale` and `asthma`. **The phrases themselves are not
+> in this tree and were not reproduced here**, so the figure that arrived with them —
+> 7 phrases × 4 paths × 2 encodings = 56 derivations, zero matches — is
+> **owner-supplied and is not independently verified by this entry**. Guessing the
+> other eleven words in order to "check" them would have manufactured a negative,
+> which is the failure mode §1.8 exists to prevent.
+>
+> What was run instead covers them whatever their remaining words were, so long as
+> they are of the `t12full` template: **slot 6 over the five named words and slot 8
+> over all 2048**, on `configs/t12full_mp.conf`'s four paths, compressed **and**
+> uncompressed, empty passphrase.
+>
+> | | |
+> |---|---|
+> | phrases enumerated | 10,240 = 5 × 2048 |
+> | BIP39-checksum-valid | **616** against 640 expected at 1 in 16, σ 24.49, **z −0.98** |
+> | derivations | **4,928** = 616 × 4 paths × 2 encodings |
+> | matches | **0** |
+>
+> That is **88× the owner-supplied 56**, and it contains those 56 as a subset if the
+> phrases are of that template.
+>
+> **[TESTED] and not [EXHAUSTED], deliberately.** Slot 8 is exhausted over the whole
+> dictionary, and so are the four paths and both encodings. **Slot 6 is a corpus of
+> five words, not the dictionary**, so this eliminates one named corner and not the
+> class — the §0 distinction, applied to this run rather than assumed away.
+>
+> **It is also not purely redundant with the paragraph above, for two measured
+> reasons.** The 65 passphrases are described in §2.4 as *"from the image text …
+> including `Сумма двух чисел`, all `BREATHE` casings, BLM slogans, dates, and the
+> target address itself"* — the empty passphrase is not among those named, and this
+> paragraph does not say it was covered. And §2.2 predates the **28 September** change that
+> introduced `derive_multi3` and the three pubkey encodings (§1.7), so whatever §2.2
+> ran was **compressed only**. This run adds the uncompressed encoding and the empty
+> passphrase over its corner, and it is the only logged, self-tested 12-word evidence
+> in the tree.
+>
+> **Self-tested first; nine checks; nothing was derived until they passed.** The
+> canonical BIP39 vector (`abandon`×11 `about`) seed and its BIP44 compressed address
+> `1LqBGSKuX5yYUonjxT5qGfpUsXKYYWeabA`; the published privkey-1 pair,
+> `1BgGZ9tcN4rm9KBzDn7KprQz87SZ26SAMH` compressed and
+> `1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm` uncompressed; that key's uncompressed BIP44
+> address `18LhnLKXjcTw5xJFiTxntnKit2Gd63eWFm`, cross-checked against **libsecp256k1**
+> (`coincurve`), an implementation sharing no code with this project; checksum accept
+> and checksum reject; **rule 8 — the target blob is the hash160 and not the 32-bit
+> word-swapped form**; and a planted target detected through the same comparison the
+> sweep itself uses.
+>
+> *The first run of that self-test **failed**: a wrongly-recalled constant had been
+> pinned as the canonical uncompressed address. Nothing was derived until it was
+> replaced by the value three implementations agree on. That is §1.7's rule working,
+> not a new defect.*
+>
+> **No GPU, no new config, and the phrases are deliberately not written down here** —
+> a 12-word phrase *is* a 12-word consecutive BIP39 run, which is exactly what
+> `pre_push_check.sh`'s guard exists to stop, and the same reason `boriserd`'s
+> `g8lip0e` is cited and not quoted in §1.1. Derived on the project's own
+> `verify_hit.py`.
+
 ### 2.3 The 18-word template is dead in both directions
 
 - **Leave-one-out:** each of the five gaps freed to **all 2048 words** with the
@@ -1859,8 +1931,10 @@ the ink measurement below now detaches at the other end too.
 > from the picture at all but inferred from the weapon's shape, and **no count of 16
 > exists anywhere in the image** (`even_slot_rules.py`). This changes no row above. It
 > says that two rows' slot arguments cannot be verified from pixels — and that §5's
-> second leg, which derives the phrase *length* from slots 16, 17 and 19 without the
-> clock, inherits exactly that status.
+> second leg, which derives the phrase *length* from slots 16 and 19 without the clock,
+> inherits exactly that status. (§5 also considered slot 17 and struck it: the `17` is
+> read off a chart whose content postdates the funding transaction, so §10's chronology
+> rule kills the slot justification. The row stays; the rung goes.)
 
 > **[SCOPE, 9 Nov 2026] Slots 3, 13 and 21 rest on a caption this project has never
 > located.** The clock rows above derive their slot numbers by *adding* the two
@@ -1868,7 +1942,9 @@ the ink measurement below now detaches at the other end too.
 > in the artwork that licenses that addition is the rune caption `Сумма двух чисел`,
 > "sum of two numbers". Its 14 glyphs have **no measured location**: a defined search
 > around the dial (centre (470,937), radius ~182, ink < 130/180/215) returns zero
-> glyph-sized components, and its transcription is `u/Amadeus407`'s of 2021-03-06,
+> glyph-sized components — **and that disc is only 15.1% of the bottom third by area,
+> so 84.9% of the region the transcriber's own wording names has never been searched
+> (§7's provenance note, 9 Nov)** — and its transcription is `u/Amadeus407`'s of 2021-03-06,
 > adopted into this report in `77f2c52` and never re-derived from pixels (§7's
 > provenance note).
 >
@@ -3972,25 +4048,54 @@ template's own high-numbered slots reach the same answer without the clock.**
 Everything above is **one** support cited in six places — the hour hand, whose
 *direction* is measured (238.49°, between numerals 10 and 11) and whose *addition* is
 licensed only by a caption with no measured location (§2.17's scope note, §7's
-provenance note). But §2.17 assigns words at slots **16**, **17** and **19**, and a word
-at slot *n* means the phrase has at least *n* words. Against the valid BIP39 lengths
+provenance note). But §2.17 assigns words at slots **16** and **19**, and a word at
+slot *n* means the phrase has at least *n* words. Against the valid BIP39 lengths
 12/15/18/21/24:
 
 | slot | word | what supports the slot NUMBER | grade | lengths left |
 |---|---|---|---|---|
 | **19** | `glove` | the `19` of the vial label `CVD19` — produced by the **one collision-free** numbering rule of the twelve tested (`even_slot_rules.py`) | **[COMMUNITY]** | **21, 24** |
-| 17 | `gold` | "17 years", a chart span checked against TradingView | **[COMMUNITY]** | 18, 21, 24 |
 | 16 | `rifle` | the `16` of M16, identified from the weapon's **shape**; no count of 16 exists in the picture | **[COMMUNITY]** | 18, 21, 24 |
+| ~~17~~ | ~~`gold`~~ | ~~"17 years", a chart span checked against TradingView~~ | **STRUCK, see below** | — |
 
 **Slot 19 suffices alone**: at least 19 words leaves 21 and 24 by arithmetic, with no
-clock involved. **Slot 16 or 17 suffices with §2.3**, which exhausted the 18-word
-template in both directions — and it is the *same* template, since slots 16 and 17 are
-both inside it (t18's thirteen fixed slots are 1, 2, 3, 4, 5, 7, 9, 10, 11, 12, 13, 16,
-17). The conditional therefore closes on itself: accept the assignments that give the
-bound and you have accepted the template §2.3 emptied at 18.
+clock involved. **Slot 16 suffices with §2.3**, which exhausted the 18-word template in
+both directions — and it is the *same* template, since slot 16 is inside it (t18's
+thirteen fixed slots are 1, 2, 3, 4, 5, 7, 9, 10, 11, 12, 13, 16, 17). The conditional
+therefore closes on itself: accept the assignment that gives the bound and you have
+accepted the template §2.3 emptied at 18.
 
-**Why this is a leg and not a proof, stated plainly.** All three grades are
-[COMMUNITY], and **two of the three numerals are measured illegible in this file** —
+> **[STRUCK 9 Nov 2026] `gold`@17 cannot serve as a rung, and this report's own
+> chronology rule is what removes it.** The address was funded **2020-05-10 08:01:46
+> UTC**, block 629754. §10's chronology table already grades the gold chart's content
+> *"gold above $1,800 — no, first exceeded in July 2020 — **delete**"*, and
+> `premise_audit.md` dates the element **POST (July 2020 or later) [MEASURED]**. The
+> `17` is read *off that chart*, so its justification is exactly the form the rule
+> kills: "the author chose W **because of** E" where E postdates the seed.
+>
+> **Stated precisely, because the rule is narrower than it first looks.** §10 says in
+> terms that **no assignment is falsified merely by being dated after 2020-05-10** — a
+> later drawing can depict a word the author already had in mind. So `gold` may still
+> sit at slot 17 and the row is not retracted. What dies is the *reason to believe the
+> slot number is 17*, and a lower bound on the phrase length is made of nothing but
+> slot numbers. **The rung goes; the row stays.**
+>
+> **Two filters, applied for unrelated reasons, converge on this row.**
+> `premise_audit.md`'s weakest-premise ranking puts **slot 20 first and `gold`@17
+> second**, on the ground that `gold` is the only row in §2.17 where *both* links are
+> inference — the word is not written and the metal is not depicted, and the slot comes
+> from a span. The chronology filter, which knows nothing about that ranking, deletes
+> the same row's justification independently.
+>
+> **One correction to how that convergence is sometimes stated:** chronology does
+> **not** also delete `apple`@20. That row's date objection — the June 2020 Leopold
+> defacement — was **withdrawn on 18 October**: the bust is the Dreux monument and the
+> depicted vandalism is of 1 May 2018, knowable on the funding date, so §10 grades it
+> **keep**. Slot 20 is killed by §2.16's spacing measurement, not by the calendar. The
+> two filters agree on **one** row; the ranking supplies the second.
+
+**Why this is a leg and not a proof, stated plainly.** Both remaining grades are
+[COMMUNITY], and **both numerals are measured illegible in this file** —
 peak stroke 0.09 px at slot 16 and 0.63 px at slot 19, against full pen for every
 legible control (§6 item 6). The clock leg has one measured step and one unlocated
 step; this leg has no unlocated step and no measured one either. What matters is that
@@ -4149,8 +4254,10 @@ same motion, and should say so.
    > can unblock one reading, not two" — wrong by two, and corrected there as well.
    >
    > **Why the other two are worth more than the card mark.** §5's second leg reaches
-   > {21, 24} from slots 16, 17 and 19 with no clock, and all three of its grades are
-   > [COMMUNITY]. Resolving **either the 16 or the 19** converts the rung that needs no
+   > {21, 24} from slots 16 and 19 with no clock, and both of its grades are [COMMUNITY]
+   > — slot 17 was struck there on chronology grounds, which leaves these two numerals
+   > carrying the length between them. Resolving **either the 16 or the 19** converts the
+   > rung that needs no
    > further argument — slot 19 alone leaves {21, 24} — from convention into
    > measurement, and makes the phrase length two-legged *on measurement* for the first
    > time. The card mark settles slot 10 only if the mark turns out to be X.
@@ -4600,6 +4707,96 @@ reproduces as the clock's caption in meaning, and §7.2's measured confirmation 
 block A raises the prior on the same hand having read the others correctly. What
 changes is the label: two of the three blocks are **somebody else's measurement**, and
 this section presented all three in one voice.
+
+##### [MEASURED from the JSON, 9 Nov 2026] The transcriber said the Russian→BIP39 mapping was ambiguous — five days BEFORE posting the decodes
+
+`u/Amadeus407`, comment **`gpasv2d`**, **2021-03-01 14:06:58 UTC**, top-level on the
+submission, verbatim:
+
+> *"Unfortunately, I do not know English. In translation from Russian, words have
+> different meanings based on the context. And often there is more than one word in the
+> bip39 dictionary. I would like to talk to the author, so that he gave the right words
+> (if I correctly guess the meaning of a particular riddle)."*
+
+**It predates `gpzromb` (2021-03-06 18:27:47 UTC) by 5 days** — 5 d 4 h 20 m 49 s, from
+the `created_utc` fields 1614607618 and 1615055267. So the person this report takes its
+three decodes from had already stated, in public and before posting them, that **he did
+not read English, that his Russian readings were context-dependent, and that a Russian
+word often maps to more than one BIP39 word**. He asked the author for the right words
+and, on the evidence of the thread, never got them.
+
+This is a statement about the **word** links, not the slot links, and it does not touch
+the Cyrillic: §7.2 re-measured block A's glyphs and confirmed the Cyrillic reading from
+pixels. What it qualifies is the step after that — Cyrillic to English to BIP39 — which
+no measurement in this tree covers for any block.
+
+**All four of this author's comments in the fetched thread, for the record:**
+
+| id | UTC | what it is |
+|---|---|---|
+| `gp3hv35` | 2021-02-27 23:23:56 | reply to the submission |
+| **`gpasv2d`** | **2021-03-01 14:06:58** | **the ambiguity statement above** |
+| `gpzlri7` | 2021-03-06 17:42:03 | the three decodes in **English** translation, "All phrases are in Russian" |
+| `gpzromb` | 2021-03-06 18:27:47 | self-reply, "Verbatim spelling", the **Cyrillic** this report adopted |
+
+**[MEASURED] The transcriber puts block B at the BOTTOM — and the bottom is now closed
+too.** Both `gpzlri7` and `gpzromb` locate the three blocks in the same words — *"runes
+from above"* (C), ***"runes at the bottom"*** (B), *"Runes on the right"* (A). Block A's
+"on the right" is exactly where this project measured it, x 1526–1557: the one check
+available on his location wording, and it passes.
+
+> **[CORRECTED 9 Nov 2026, within the hour it was written] ~~The bottom strip has not
+> been searched for block B … recorded as the next place to look.~~** Wrong in its
+> wording and then wrong again in a first attempt to retract it. The measured position,
+> `blockb_bottom_check.py`:
+>
+> **1. "At the bottom" does not conflict with the search region — but the search
+> covered 15% of it.** The dial search is a disc, centre (470,937) radius ~182, spanning
+> y 755–1119, so it does lie in the bottom third and the note was wrong to imply
+> otherwise. By **area**, though, the disc covers **96,762 px of the bottom third's
+> 640,000 — 15.1%**. It touches 320 of 400 rows but only **365 of 1600 columns**.
+> **84.9%, 543,238 px, has never been searched for block B.** So the transcriber's
+> wording points at a real and largely unexamined region; "the bottom strip" was simply
+> the wrong name for it.
+>
+> **2. The bottom EDGE is excluded, and that part stands.** The whitepaper caption
+> (25, 1138, 1040, 28) and the Latin line (1025, 1140, 530, 50) span **x 25–1555 of
+> 1600**, leaving 25 px left and 45 px right. Fourteen glyphs at block A's measured
+> 19.9 px pitch need **279 px**. Block B is not on the bottom edge.
+>
+> **3. [TESTED — and the test cannot decide, because its POSITIVE CONTROL fails.]** A
+> glyph-component search was run over the unsearched 84.9%, looking for 14 components of
+> block-A dimensions evenly spaced at 19.9 px, with **block A's own column as the
+> control**:
+>
+> | region | ink | glyph-like components | longest run at 19.9 px pitch |
+> |---|---|---|---|
+> | **block A column (control, 42 known glyphs)** | <130 | 47 | **vertical 10** |
+> | block A column (control) | <180 | 46 | vertical 10 |
+> | bottom third outside the disc | <130 | 52 | vertical 10, horizontal 4 |
+> | bottom third outside the disc | <180 | 48 | vertical 11, horizontal 5 |
+>
+> **The control never reaches 14, so the null means nothing.** Block A is **grouped** —
+> 1, 5, 4, 6, 2, 8, 11, 5, separated by three-dot marks (§7.2) — so an even-pitch run
+> breaks at every separator and the method's ceiling is the largest group, **11**. A
+> test that cannot find a 14-run in a known 42-glyph inscription cannot exclude one
+> elsewhere. Note also that the unsearched region yields **as many glyph-like components
+> as the real inscription does** (52 against 47): artwork produces them too, and this
+> method does not separate the two.
+>
+> **So: block B is still unlocated, the 84.9% outside the disc is the right place to
+> look, and an even-pitch test is the wrong instrument.** The right one is group-aware —
+> what `runelib.py` does for block A, keying on the three-dot separators rather than on a
+> uniform pitch. That has not been built. Recorded as an open measurement with its
+> method named, not as a negative. Script `blockb_bottom_check.py`, output
+> `blockb_bottom_check.out`.
+
+**[MEASURED] What the ambiguity warning leaves untested, bounded.** The one word in the
+template that comes from a rune plaintext is `black`@10, from `чёрный день`. Across
+all 21-word configs in the tree, slot 10 has been occupied by **79 distinct words** and
+**never by `@FULL`** — so the dictionary has never been swept there. `dark` is not a
+BIP39 word, so that particular ambiguity does not arise; but the transcriber's warning
+is general, and at slot 10 it has been explored over 79 of 2048.
 
 ### 7.3 The alphabet
 

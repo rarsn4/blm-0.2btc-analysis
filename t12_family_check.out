@@ -1,0 +1,24 @@
+  PASS  canonical BIP39 seed (abandon x11 about, empty passphrase)
+  PASS  canonical BIP44 address, compressed
+  PASS  privkey=1 compressed address (published)
+  PASS  privkey=1 UNCOMPRESSED address (published)
+  PASS  canonical BIP44 address, UNCOMPRESSED (vs libsecp256k1)
+  PASS  checksum accepts the canonical phrase
+  PASS  checksum rejects it with one word changed
+  PASS  target blob is NOT the word-swapped form
+  PASS  a planted target IS detected by the sweep's comparison
+  ALL PASS
+
+family: configs/t12full_mp.conf slots 1-12, slot 6 in ['neck', 'air', 'gasp', 'inhale', 'asthma'], slot 8 over all 2048
+paths: 4   encodings: compressed + uncompressed
+
+  slot6=neck     checksum-valid slot-8 words  110  derivations   880  matches 0
+  slot6=air      checksum-valid slot-8 words  124  derivations   992  matches 0
+  slot6=gasp     checksum-valid slot-8 words  122  derivations   976  matches 0
+  slot6=inhale   checksum-valid slot-8 words  135  derivations  1080  matches 0
+  slot6=asthma   checksum-valid slot-8 words  125  derivations  1000  matches 0
+
+TOTAL  phrases enumerated 10,240   checksum-valid 616   derivations 4,928   MATCHES 0
+expected valid ~ 640 (1 in 16); observed 616
+
+[exited with code 0]
