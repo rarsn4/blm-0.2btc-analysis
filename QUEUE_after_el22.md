@@ -594,9 +594,19 @@ large to run — see the pricing.
 
 Old Electrum is usually described as having no checksum, so that every word combination is
 a valid seed. **Our own implementation records that this is not exactly true**
-(`old_electrum.py` header): each 3-word group encodes `x < 1626^3 = 4,299,816,375`, and
+(`old_electrum.py` header): each 3-word group encodes `x < 1626^3 = 4,298,942,376`, and
 `'%08x'` overflows to nine hex digits when `x >= 2^32`, which Electrum rejects as
-not-a-seed. The surviving fraction is `(2^32 / 1626^3)^4 = 99.55%`.
+not-a-seed. The surviving fraction is `(2^32 / 1626^3)^4 = 99.631%`.
+
+> **[CORRECTED 9 Nov 2026]** As pre-registered on 9 Nov this read `1626^3 =
+> 4,299,816,375` and `99.55%`, both carried from the `old_electrum.py` header
+> written 4 Nov. The cube was wrong by 873,999 and the fraction followed from it.
+> Recomputed inline: `1626^2 = 2,643,876`; `2,643,876 x 1626 = 4,298,942,376`;
+> `2^32 = 4,294,967,296`; `4,294,967,296 / 4,298,942,376 = 0.99907534`; and
+> `0.99907534^4 = 0.99630647 = 99.631%`. **The pre-registration still stands and
+> the run is unaffected**: the identity was never computed from this fraction but
+> per candidate by `mn_decode`, and it passed 66 of 66. Kept rather than rewritten
+> because this is the text that was committed before the run.
 
 So the correct pre-registration is **not** `survivors = candidates`. It is better than a
 band and better than a statistical identity:

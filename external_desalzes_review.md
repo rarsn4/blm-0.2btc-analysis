@@ -293,8 +293,11 @@ runs available to us.
 
 > **[CORRECTED 9 Nov 2026, by the run this section proposed]** "Checksumless" is not exactly right,
 > and our own `old_electrum.py` header says so. Each 3-word group encodes a value below 1626³ and the
-> `'%08x'` encoding overflows at 2³², which Electrum rejects — so **99.55%** of random seeds survive,
-> not all of them. The band is still an identity, and still stronger than a band, because validity is
+> `'%08x'` encoding overflows at 2³², which Electrum rejects — so **99.631%** of random seeds
+> survive, not all of them. *(Recomputed inline, because this figure was wrong in four of our own
+> files until 9 Nov 2026: `1626³ = 2,643,876 × 1626 = 4,298,942,376` against `2³² =
+> 4,294,967,296`, giving `(4,294,967,296 / 4,298,942,376)⁴ = 0.99630647`. The earlier `99.55%`
+> followed from a cube 873,999 too large. §10 records the case.)* The band is still an identity, and still stronger than a band, because validity is
 > deterministic per candidate and computable with **no** derivation; but the valid count has to be
 > *computed* in advance rather than assumed equal to the candidate count. In the tier that ran it was
 > 66 of 66. **"Seconds" held only for that tier**: measured end-to-end throughput is **1.507

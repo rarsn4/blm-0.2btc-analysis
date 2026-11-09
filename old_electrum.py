@@ -32,10 +32,25 @@ feature.
 
 ONE CORRECTION TO THE USUAL DESCRIPTION. Old Electrum is often described as
 having no checksum, so that every word combination is a valid seed. Almost: each
-3-word group encodes an integer x < 1626^3 = 4,299,816,375, and '%08x' overflows
+3-word group encodes an integer x < 1626^3 = 4,298,942,376, and '%08x' overflows
 to nine digits when x >= 2^32, which Electrum then rejects as not-a-seed. The
-fraction surviving is (2^32 / 1626^3)^4 = 99.55%, so there is no checksum worth
+fraction surviving is (2^32 / 1626^3)^4 = 99.631%, so there is no checksum worth
 the name -- but it is not exactly 1.
+
+  [CORRECTED 9 Nov 2026]  From 4 Nov to 9 Nov this read 1626^3 = 4,299,816,375
+  and 99.55%.  THE CUBE WAS THE ERROR; the fraction was its faithful
+  consequence, not a second slip.  Recompute it here so no reader has to trust
+  either number:
+      1626^2 = 2,643,876
+      1626^3 = 2,643,876 x 1626 = 4,298,942,376      (not 4,299,816,375;
+                                                      that was 873,999 high)
+      2^32                      = 4,294,967,296
+      per 3-word group  4,294,967,296 / 4,298,942,376 = 0.99907534
+      four such groups  0.99907534 ^ 4               = 0.99630647 = 99.631%
+  For comparison, the wrong cube yields (2^32 / 4,299,816,375)^4 = 99.5497%,
+  which is where "99.55%" came from.  No verdict anywhere moves: the figure is
+  descriptive, and a run's valid count is computed per candidate by mn_decode,
+  never from this fraction.  The Tier-1 identity passed 66 of 66 either way.
 """
 import hashlib, os, sys
 

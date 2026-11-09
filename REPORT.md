@@ -1086,7 +1086,11 @@ elapsed                           43.8 s
 implies.** Old Electrum is usually called checksumless; `old_electrum.py`'s own
 header records that it is not exactly so — each 3-word group encodes
 `x < 1626^3`, and `'%08x'` overflows at `x >= 2^32`, which Electrum rejects, so
-**99.55%** of random seeds survive. Validity is therefore deterministic per
+**99.631%** of random seeds survive — `1626³ = 4,298,942,376` against
+`2³² = 4,294,967,296`, so `(4,294,967,296 / 4,298,942,376)⁴ = 0.99630647`.
+*(This read `99.55%` when written on 9 Nov 2026, carried from a cube that was
+873,999 too large; corrected the same day. No verdict moves — see §10.)*
+Validity is therefore deterministic per
 candidate and **computable in advance with no derivation**, so the exact valid count
 was written down before the run and the run had to report exactly it. No sigma and
 no z — the `t21_top6_loo21` shape (rule 4). Any other count would have been a
@@ -1115,11 +1119,18 @@ Old Electrum shares nothing with v2 but the name:
 | address | per path | P2PKH — *which is what this target is* |
 
 **It has no checksum, but not exactly none.** Each 3-word group encodes an
-integer below `1626³ = 4,299,816,375`; Electrum formats it with `'%08x'`, so a
+integer below `1626³ = 4,298,942,376`; Electrum formats it with `'%08x'`, so a
 group at or above `2³²` yields nine hex digits and the seed is rejected — the
 behaviour its own test suite records as "invalid old". The surviving fraction is
 `(2³² / 1626³)⁴ = 99.631%`. So nothing prunes: there is no 1-in-128 filter to
 lean on, and every retained combination is a live candidate.
+
+> **[CORRECTED 9 Nov 2026]** The cube above read `4,299,816,375` from 4 Nov to
+> 9 Nov 2026, while the fraction beside it read `99.631%` — **the two were
+> inconsistent with each other in the same paragraph, in the same commit
+> (`87b5c37`), three lines apart.** The fraction was right and the cube was
+> wrong by 873,999: `1626² = 2,643,876`, and `2,643,876 × 1626 =
+> 4,298,942,376`. Only the cube moved here. §10 records why this one mattered.
 
 **Self-test, run before anything else.** The known-answer vector is published in
 Electrum's own suite (`tests/test_wallet_vertical.py::test_electrum_seed_old`,
@@ -6172,6 +6183,39 @@ would have been believed. Where this document states a cost, it states the
 expression that produces it, and that is not decoration — it is the only thing
 that makes a misreading recoverable by a later reader who was not there when
 the number was computed.
+
+**A wrong figure in this project's own file propagates faster than the
+correction chasing it, because our own files read as authoritative.** The
+old-Electrum survival fraction was written `99.55%` on 4 Nov 2026 and was
+correct at `99.631%` in the same session's record. On 9 Nov it was copied into
+four more places — a pre-registration, §2.6, an allow-list pin and an external
+review — the last of them *after* the correct value had been recomputed and
+reported. Rule 10's first rule says recompute, never adopt; the hardest case is
+adopting from yourself.
+
+Three things measured when it was finally caught, each worse than the headline:
+
+- **The visible formula did not save it.** The rule immediately above says to
+  keep the expression beside the figure, and it *was* beside it the whole time:
+  `(2^32 / 1626^3)^4 = 99.55%`. The expression was correct and the evaluation
+  was wrong, so every reader who checked the formula saw a correct formula.
+  Showing the work only helps if someone runs it.
+- **The root was the cube, not the fraction.** `1626^3` was written
+  `4,299,816,375`; it is `4,298,942,376`, high by `873,999`. `99.55%` is what
+  that wrong cube actually yields (`99.5497%`), so the fraction was faithful to
+  a bad input rather than independently miscomputed. Correcting only the
+  fraction would have left the two inconsistent again.
+- **One file disagreed with itself for five days.** Commit `87b5c37` wrote the
+  wrong cube at §2.6 and the right fraction three lines below it. The
+  contradiction sat inside a single paragraph and was read past repeatedly —
+  including on 9 Nov, when the wrong value was copied into the same file 32
+  lines above the correct one.
+
+No verdict changes: the Tier-1 identity passed 66 of 66 and the figure is
+descriptive, not load-bearing. A run's valid count is computed per candidate by
+`mn_decode`, never from this fraction. That is the only reason this was cheap,
+and it is luck rather than method — the same propagation through a load-bearing
+figure is the 192,196,843,171 headline all over again.
 
 **A config enters `EVIDENCED` when its run completes and its survivor count
 lands inside its band — not when its file exists.** The five `*_apple` mirrors
