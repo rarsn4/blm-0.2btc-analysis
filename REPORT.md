@@ -1,4 +1,4 @@
-# 0.2 BTC Puzzle — the rune cipher solved, over 316 billion derivations eliminated, and six defects in the shared data
+# 0.2 BTC Puzzle — the rune alphabet solved and block A measured, over 316 billion derivations eliminated, and six defects in the shared data
 
 **Target:** `1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ`
 **HASH160:** `ccbd031e54cde2a3189fd59bc49f731367a1779e`
@@ -4685,7 +4685,7 @@ same motion, and should say so.
 
 ---
 
-## 7. The rune cipher is solved — it is Cyrillic, not Greek
+## 7. [MEASURED for the alphabet and block A; EXTERNAL for blocks B and C] The rune alphabet is solved — it is Cyrillic, not Greek
 
 ### 7.1 Both circulating decodes are wrong at the premise
 

@@ -14,11 +14,20 @@ Target: [`1KfZGvwZxsvSmemoCmEV75uqcNzYBHjkHZ`](https://blockchair.com/bitcoin/ad
 
 ## Headlines
 
-- **The rune cipher is solved.** It is monoalphabetic substitution over
-  **Cyrillic**, not Greek. The circulating "HELLO : FROM : THEM" reading is
-  internally impossible — it maps Φ to both H and M. Alphabet mapped across all
-  four inscriptions; the repo's Russian decode confirmed independently by
-  glyph-shape correlation (+0.63 same-letter vs +0.07 different).
+- **The rune alphabet is solved, and block A is measured.** It is monoalphabetic
+  substitution over **Cyrillic**, not Greek. The circulating "HELLO : FROM : THEM"
+  reading is internally impossible — it maps Φ to both H and M. The alphabet is
+  mapped from the **42 glyphs that have a measured location**, all of them in block A
+  at x 1526–1557, where glyph-shape correlation confirms the decode independently:
+  **+0.586 same-letter (n=36) against +0.070 different-letter (n=825)**, separation
+  +0.515.
+
+  **[SCOPE, 9 Nov 2026] 99 rune letters are published in REPORT §7; 42 have a measured
+  location and 57 do not.** Blocks B and C — including the clock caption below — are
+  `u/Amadeus407`'s transcription of 2021-03-06, adopted and never re-derived from
+  pixels; a pre-registered search of the bottom bands for block B came back negative,
+  so it stays unlocated. The alphabet claim does not rest on them. The *mechanism* that
+  places slots 3, 13 and 21 does.
 
   `Сумма двух чисел  =  ◇⏶ᛗᛗ△ : ⇧⧗⏶⤬ : ⊤Ψ◇⫽ᛉ`
 

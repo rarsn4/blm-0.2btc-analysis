@@ -52,7 +52,7 @@ would be the only overclaim in this record, and it has been caught twice.
 
 ---
 
-## 1. [MEASURED] The rune cipher is solved
+## 1. [MEASURED for the alphabet and block A; EXTERNAL for B and C] The rune alphabet is solved
 
 Monoalphabetic substitution over **Cyrillic**, not Greek. Both circulating
 readings were wrong at the alphabet level: "HELLO : FROM : THEM" maps Φ to both
@@ -65,7 +65,7 @@ H and M, and a substitution is a function.
 я=木  н=⊥  ь=⊤  ю=⧓  б=ᐭ  т=⊔     plus  п р и с ы
 ```
 
-Evidence: same-letter glyphs correlate **+0.63** against **+0.07** for different
+Evidence: same-letter glyphs correlate **+0.586** (n=36) against **+0.070** (n=825) for different
 letters; the doubled `м` in `Сумма` uses the identical glyph twice; thirteen
 letters verified across two independent inscriptions; token group sizes
 (5/11/8/2/6/4/5/1 on the edge, 5/4/5 on the clock) reproduced by ink-profile
