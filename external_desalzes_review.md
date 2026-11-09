@@ -279,6 +279,64 @@ the word) separately from ADMITTED (some slot would accept it, which every `@FUL
 over. The solver-only set of 35 that ran but was never published was scanned too: there `sign` and
 `absent` are both named nowhere.
 
+### 4.3b A SECOND external transcription of the same painted text, five years earlier
+
+**[EXTERNAL, UNLOCATED — 9 Nov 2026]** The 2026 edit list is not the only one. **u/Accomplished_Weird36,
+comment `glrfjsz`, 2021-02-02, score 1** read the same painted passage and published a list:
+
+> *"Let's start with the bitcoin white paper. The phrase WELCOME TO THE BRAVE NEW WORLD contains
+> chapter 2 of the book. If you carefully re-read each word, you will notice that some words are
+> missing, some with errors, with typos. I chose these words. Here they are. SIGN, DOUBLE, FATE,
+> AWARE, A TRUSTED, ABSENCE, WHICH, MINI, and others."*
+
+Two readers, five years apart, working from the same artwork. **Where they agree, two independent
+people saw the same alteration, which is better evidence than either alone. Where they differ,
+neither is measured.** Both lists carry the same grade: `[EXTERNAL, UNLOCATED]`.
+
+Measured, the agreement is **narrower than it first looks**, and the distinction is worth keeping:
+
+| | 2021 (`glrfjsz`) | 2026 (theirs) | agreement |
+|---|---|---|---|
+| exact same token | `SIGN`, `DOUBLE` | `sign`, `double` | **2 words, exact** |
+| same alteration, different token | `ABSENCE`, `A TRUSTED` | `absent`, `trust` | **2 more, by root only** |
+| in 2021, unverifiable against 2026 | `WHICH` | — | we hold only the six BIP39 of their ten, and `which` is not BIP39, so it may or may not be among the four we do not hold |
+| in 2021, absent from the six we hold | `FATE`, `AWARE`, `MINI` | — | unresolved |
+| in 2026, absent from 2021 | — | `proof`, `order` | unresolved |
+
+So the honest count is **two exact and two by root**, not five, and the root pairs are a real
+difference: a reader who writes `ABSENCE` and a reader who writes `absent` did not transcribe the
+same string, even if they are pointing at the same mark.
+
+**The 2021 list is also an independent test of the BIP39 ratio — and it fails it.** [MEASURED] If the
+alterations had been chosen to be BIP39 words, then a second reader's transcription of the same
+alterations should also be rich in BIP39 words. Of the eight words named in 2021, **three are BIP39**
+(`sign`, `double`, `aware`) — **37.5%**, against 60% for the 2026 six-of-ten, and sitting inside the
+32.4-52.4% base-rate range measured in §4.3 above. A designed signal does not halve when a different
+person reads the same marks. This is a second, independent reason the ratio must not be quoted as
+evidence.
+
+**Membership of the 2021-only words against our configs** [MEASURED, 192 published + 35 solver-only]:
+
+| word | BIP39? | named in any config | admitted at any slot |
+|---|---|---|---|
+| `aware` | **yes** | **no, never, in either set** | 33 of 192, all by `@FULL` only |
+| `sign` | **yes** | **no, never, in either set** | 33 of 192, all by `@FULL` only |
+| `fate` | **no** | no | **0 of 192** |
+| `mini` | **no** | **no** | **0 of 192** |
+
+`fate` and `mini` **cannot enter a BIP39 phrase at all** — they are not in the 2048-word list, so no
+`@FULL` slot admits them and no config can name them without an explicit `EXTRA` declaration, which
+only the brainwallet configs use. **Nobody should spend time on them as seed words.** `aware` and
+`sign` are both legal BIP39 words that **no config we have ever written has named**, which makes them
+the only part of the 2021 list that is both admissible and untried.
+
+> *A defect found by this very query, and fixed: the first version of
+> `config_word_membership.py` counted an `@FULL` slot as admitting **any** word, and so reported
+> `fate` and `mini` as admitted by 33 configs apiece. `@FULL` is the 2048-word BIP39 list and nothing
+> else; the true answer is zero. The script now tests list membership before crediting `@FULL`, and
+> the §4.3 figures above were re-run after the fix and are unchanged, because all six of those words
+> are BIP39. Same shape as §1.7: a count nobody made it earn.*
+
 ### 4.4 Other rows of theirs that bear on our report  [all THEIRS, none reproduced]
 
 | their claim | why it matters to us |

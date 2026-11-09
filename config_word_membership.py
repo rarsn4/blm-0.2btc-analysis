@@ -24,6 +24,8 @@ A = "/home/soul/blm-analysis/configs"
 S = "/home/soul/Downloads/Brainwallet/files(6)"
 WORDS = sys.argv[1:] or ["double", "sign", "absent", "proof", "order", "trust"]
 
+BIP39 = set(w.strip().lower() for w in open(A + "/bip39_en.txt") if w.strip())
+
 def parse(path):
     pool, slots = [], {}
     for line in open(path, encoding="utf-8", errors="replace"):
@@ -45,7 +47,14 @@ def scan(files, label):
         for w in WORDS:
             pins = [s for s, v in slots.items() if isinstance(v, set) and w in {x.lower() for x in v}]
             poolslots = [s for s, v in slots.items() if v == "@POOL"] if w in pool else []
-            full = [s for s, v in slots.items() if v == "@FULL"]
+            # @FULL is the 2048-word BIP39 list and NOTHING ELSE. A word that is
+            # not in the list cannot be admitted by an @FULL slot, only by being
+            # named in a POOL or SLOT line of a config that declares it EXTRA.
+            # The first version of this script omitted that test and credited
+            # @FULL with admitting non-BIP39 words -- it reported `fate` and
+            # `mini` as admitted by 33 configs apiece when the true answer is
+            # zero. Same shape as 1.7: a count that nobody made it earn.
+            full = [s for s, v in slots.items() if v == "@FULL"] if w in BIP39 else []
             if pins: named[w].append((c, "SLOT " + ",".join(map(str, sorted(pins)))))
             if w in pool:
                 named[w].append((c, "POOL -> @POOL slots " + ",".join(map(str, sorted(poolslots)))
@@ -61,6 +70,8 @@ def scan(files, label):
                                              dict(how[w]) or "-"))
     print("  NEVER NAMED anywhere:    %s" % ([w for w in WORDS if not named[w]] or "none"))
     print("  NEVER ADMITTED anywhere: %s" % ([w for w in WORDS if not admit[w]] or "none"))
+    nb = [w for w in WORDS if w not in BIP39]
+    if nb: print("  NOT BIP39 AT ALL (can only ever enter via an EXTRA declaration): %s" % nb)
     for w in WORDS:
         if not named[w]: continue
         print("\n  %s is named in %d row(s):" % (w, len(named[w])))

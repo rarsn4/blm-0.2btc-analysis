@@ -1106,6 +1106,29 @@ and the hypothesis in full is about `1.06e16` candidates. **The probe answers th
 question "has anyone required `breathe` at two positions?" with "now someone has,
 for one set, and it is not the answer."** It does not touch the rest.
 
+> **[EXTERNAL, UNLOCATED — 9 Nov 2026] The repeated-word hypothesis has a dated, named source, and
+> it is the only one besides block B's caption.** Everything else in the instruction layer — the
+> rules a solver is supposed to apply, as opposed to the words themselves — is either our own
+> inference or an undated community assertion. Two are not:
+>
+> - block B's caption, transcribed by `u/Amadeus407` 2021-03-06, which states the sum-of-two-numbers
+>   mechanism and whose 14 glyphs have **no measured location** (§2.17);
+> - and this one: **u/Accomplished_Weird36, comment `glrfjsz`, 2021-02-02, score 1** — *"That is, we
+>   are looking for words that are repeated, and this will be our seed phrase."*
+>
+> **This does not make the probe above right. It makes it the one hypothesis in this layer with a
+> source.** The distinction matters because the probe was pre-registered on structural grounds —
+> `breathe` appears twice in the artwork and repeats are legal in a checksumless scheme — and those
+> grounds are ours. The 2021 comment is independent of them, predates them by five years, and says
+> the same structural thing: *repetition is the mechanism*. It is still **one reader's assertion with
+> no method attached**, it has never been measured here, and it cannot raise the probe's grade above
+> `[TESTED]`.
+>
+> The same comment is the source of the 2021 edit list (external review §4.3), and the same author
+> wrote the `apple@20` chain of 2021-02-13 (§2.16). One person is therefore behind three of the
+> external claims this report now records. That is a **correlation, not a confirmation**: three
+> claims from one reader are one reader's claims, and nothing here treats them as independent.
+
 Old Electrum shares nothing with v2 but the name:
 
 | | Electrum v2 (§2.6 above) | pre-2.0 "old" |
@@ -2123,6 +2146,53 @@ key maps these glyphs to E, L, P and A (◇ is W in the Gravity Falls Latin key,
 readings.** It is now being run over the 54-pool plus both words on all four paths
 (`t21_free20`), which until now had run on path 1 only (`t21_free20_p1`).
 *[26 Oct: completed, negative, in band; see the queues of 24–26 Oct at the end of §2.]*
+
+> **[EXTERNAL, UNLOCATED — 9 Nov 2026] `apple@20` has a documented source, and it is not the
+> inference above.** The paragraph above is *our* guess at where `apple` came from, reached from the
+> clock's Russian rune word. The actual provenance is a named comment five years older, which reaches
+> `ELPPA` by a completely different route. Recorded here with the grade blocks B and C carry, because
+> **not one link in its chain has been measured in this project.**
+>
+> Source: **u/Accomplished_Weird36, comment `gn69cqa`, 2021-02-13 09:36 UTC, score 2.** Quoted in full
+> rather than paraphrased, because the chain is the claim:
+>
+> > *"The Statue of Liberty book doesn't say SHT. The first character is a character from the author's
+> > circular cipher from Gravity Falls. and the two letters TH are located in the fourth sector. If we
+> > combine the second hand on these somvols, the hour and minute hands will show on the FR UI. And
+> > you get FRUITH. So the first word next to the watch will be ELPPA, that is, APPLE. Also, the apple
+> > is green where Trump and Biden are, and the question mark is the tail of the apple. If you can
+> > further unravel the runes, then I am waiting for your thoughts. I didn't share this secret for a
+> > long time."*
+>
+> The chain, link by link, with what we have measured at each:
+>
+> | # | link | measured here? |
+> |---|---|---|
+> | 1 | the tablet marks are characters at all | **no** — see the faint-group work below; the method is shown to have no power |
+> | 2 | the first is from "the author's circular cipher from Gravity Falls" | **no** — no such identification has been attempted |
+> | 3 | `TH` lies in "the fourth sector" | **no** — and no sector origin or direction is defined anywhere |
+> | 4 | combining the second hand with those symbols yields `FR` and `UI` | **no** |
+> | 5 | `FR` + `UI` + `TH` = `FRUITH` | **no** — this is the step that supplies the letters |
+> | 6 | therefore the word by the watch is `ELPPA` | **no** — does not follow from 5 by any stated rule |
+> | 7 | `ELPPA` reversed is `APPLE` | yes, trivially, and it is the only link that holds |
+>
+> **This changes what §2.16 claims.** Saying `apple` has "no independent support" reads as a gap in
+> the record — as though nobody had looked. The measured truth is worse and more specific: `apple@20`
+> rests on an **unreproduced external method**, a seven-link chain of which we have tested one link,
+> the trivial one. A gap invites someone to fill it; an unreproduced method invites someone to
+> reproduce it, and those call for different work.
+>
+> **The same comment disputes the `SHT` reading** that §6 and `three_object_measurement.md` treat as
+> open: *"The Statue of Liberty book doesn't say SHT."* It is one reader's assertion, dated and named,
+> with no method attached, and it is recorded here as such — it neither closes the reading nor is it
+> ignorable, since it is the earliest dated opinion on that group we hold.
+>
+> *A reference image of the Gravity Falls zodiac wheel was supplied on 9 Nov 2026. It carries **ten
+> pictograms and no letters** — glasses, question mark, ice bag, crescent, pine tree, pentagram, hand,
+> llama, shooting star, stitched heart — so link 3's "the two letters TH are located in the fourth
+> sector" **cannot be evaluated against it**, and nothing in the image fixes a sector origin or
+> direction. Holding the artifact is not the same as being able to test the claim, and the image is
+> not evidence about the artwork.*
 
 **[MEASURED] The spacing test.** How widely does the artist space adjacent
 characters *within* a word? A glyph is a connected ink component; fragments under
