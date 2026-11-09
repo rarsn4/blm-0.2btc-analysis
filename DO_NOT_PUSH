@@ -283,4 +283,62 @@ STANDING RULE, widened 9 Nov 2026 by the owner's instruction:
   where it should be. A rule that cries wolf on the word "whitepaper" gets ignored, which
   is the same failure in the opposite direction. The anchors were added for that measured
   reason; the format-agnostic requirement is the owner's.
+
+  THE SHAPE ARM, added 9 Nov 2026, and its control.
+
+  Detection has TWO arms and fires if EITHER does:
+      wording   grep -c -i -w -E 'hit|hits|commit=|phrase[[:space:]]*:'       <log>
+      shape     grep -c -E '[0-9a-fA-F]{64}|[0-9a-fA-F]{40}|\b[5KL][1-9A-HJ-NP-Za-km-z]{50,51}\b|xprv|xpub'  <log>
+  A hit means a recovered secret is in the log whatever the wording, so the second arm
+  looks for the secret rather than for the sentence around it.
+
+  KNOWN-BENIGN BY FILE. Measured over every log in both trees, 9 Nov 2026 (101 at the
+  time; the count is live). The shape arm fires on 83 of them and every token is
+  accounted for:
+    any log          ccbd031e54cde2a3189fd59bc49f731367a1779e  x140 -- the PUBLIC target
+                     hash160, echoed by every run. 79 of the 83 contain this and nothing
+                     else.
+    st_selftest_find.log     fce52fee16bb7244cfa3a679696f3c2f83157051
+                             = hash160 of 1Q4BqYqf6iaSMqi2D3uPG95uA4kZ4bHUjd
+                             = selftest_find.conf:14 TARGET
+    st_selftest_uncomp.log   69f26bce10e647abdbab05883ece76646d3a99df
+                             = hash160 of 1AfCMrfzrL6E722GmodNqCsWxgA2k2PppQ
+                             = selftest_uncomp.conf:14 TARGET
+    st_selftest_hybrid.log   678b948e6fe8b4a753c881135cc3a3e1279e0c82
+                             = hash160 of 1ASVoy8JcR4fNxu84S3fDhUM5ZABmAsHG8
+                             = selftest_hybrid.conf:14 TARGET
+    selftest_gate.log        28 distinct hash160s, each exactly TWICE, on 56 separate
+                             lines, none of them the real target; every one sits on a line
+                             labelled as a test vector's target. Consistent with the
+                             documented suite (2 spec + 26 brainwallet vectors); the 2+26
+                             split is NOT separately verified.
+  Each of the three planted values was confirmed by base58-decoding the config's own
+  TARGET line, not by assuming. Every token in every log is a hash160 -- public address
+  data, which is not what the arm is for.
+
+  THE ARM NOW HAS A POSITIVE CONTROL: ./shape_arm_control.sh, five assertions.
+  Before it, zero hex64, zero WIF and zero extended keys existed in any log in either
+  tree, so three of the arm's five alternatives had never fired on anything and could not
+  be shown to fire at all -- an UNCONTROLLED check, which is precisely what REPORT 1.7
+  was. The control manufactures the artifact deliberately:
+    brain_image_corpus.py --selftest-plant   replaces the target with the planted
+      string's OWN hash160, so the real hit branch at lines 471-475 runs and emits a real
+      commit=<sha256>. The planted string is the literal
+          blm-corpus-planted-selftest
+      and the commitment is to that string and nothing else. It says nothing about the
+      puzzle. The mode does NOT write brain_image_keys.txt, which is tracked and pinned.
+    Capture path is st_shapearm_control.log -- a *.log ONLY, which both repositories now
+      ignore. NEVER .txt, .out or .md: none of those is ignored. The script refuses to run
+      if its capture path does not end in .log. Note the *.log rule in this repo is only
+      as old as 9 Nov 2026; before that this file could have been committed by git add.
+  Assertions: 1 exactly one planted hit; 2 the shape arm returns nonzero (hex64 = 1);
+  3 the log is gitignored AND untracked; 4 pre_push_check.sh still PASSes with the file on
+  disk; 5 pre_push_check.sh BLOCKS when the same file is force-added with git add -f.
+
+  ASSERTION 5 IS THE ONE THAT MATTERS, and on its first run it FAILED -- recorded as
+  REPORT 1.10. The gate's own pattern was still solver2_jac's single-producer form, so it
+  returned PASS on a TRACKED file containing a real hit. Assertion 4 passes because the
+  gate never looks at ignored files and would pass just as happily with a blind pattern:
+  on its own it certified a broken gate. The gate's pattern now carries six measured
+  alternatives and blocks that file as "hit banner" and "hit commitment line".
 ================================================================================

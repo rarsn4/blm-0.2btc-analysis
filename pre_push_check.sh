@@ -1,9 +1,11 @@
 #!/bin/bash
 # Pre-push check (DO_NOT_PUSH). Checks everything a push of HEAD to origin/main would send: the tree and
 # the message of every commit in origin/main..HEAD, plus the current tracked files. Three checks:
-#   1. Pattern '^\s*HIT[[:space:]]+index|^\s*phrase[[:space:]]*:'. Allowed, by content: the planted
-#      self-test pair, "HIT   index 2270828" and "phrase : tiger live melody ..." on the line directly
-#      after it, in README.md and REPORT.md. Any other match blocks.
+#   1. Pattern: six leak shapes, one per producer plus two key formats -- see the PAT comment below.
+#      Allowed, by content: the planted self-test pair, "HIT   index 2270828" and
+#      "phrase : tiger live melody ..." on the line directly after it, in README.md and REPORT.md.
+#      Any other match blocks. Widened 2026-11-09 after a control showed the old single-producer
+#      pattern returned PASS on a tracked log containing a real hit (REPORT 1.10).
 #   2. Private deny-list: if ~/blm-private/never_publish.txt exists, any case-insensitive fixed-string
 #      match of one of its lines blocks. This script names only the path, never the entries.
 #      KNOWN LATENT BUG (logged 2026-11-09, not fixed): the staging at line 29 below strips blank
@@ -21,7 +23,24 @@
 # If origin/main cannot be resolved: BLOCK, never a fall-back to the current tree only.
 # A match's text is never printed: only commit, file, line and kind. Exit 0 PASS, 1 BLOCK.
 cd "$(dirname "$0")" || exit 1
-PAT='^\s*HIT[[:space:]]+index|^\s*phrase[[:space:]]*:'
+# WIDENED 2026-11-09. The pattern was '^\s*HIT[[:space:]]+index|^\s*phrase[[:space:]]*:' --
+# solver2_jac's output format and nothing else's -- and a control proved it let a real hit
+# through: a log carrying a hit banner and a commit= line from brain_image_corpus.py
+# was git add -f'd and this gate returned PASS. See REPORT 1.10. Each alternative below was
+# measured over all tracked files before being added, and each matches 0 of them except the
+# first two, which match only the allowed self-test pair:
+#   ^\s*HIT[[:space:]]+index                      solver2_jac hit line        (2 allowed files)
+#   ^\s*phrase[[:space:]]*:                       solver2_jac show_hit        (2 allowed files)
+#   commit=[0-9a-fA-F]{64}                        brain_image_corpus.py hit   (0 files)
+#   \*\*\*[[:space:]]*[0-9]+[[:space:]]*HITS?    brain_image_corpus.py banner (0 files)
+#   \b[5KL][1-9A-HJ-NP-Za-km-z]{50,51}\b          a WIF private key           (0 files)
+#   (xprv|xpub)[1-9A-HJ-NP-Za-km-z]{90,}          a real extended key         (0 files)
+# NOT INCLUDED, and a known [SCOPE] gap: a BARE hex64, i.e. a raw private key or seed with
+# no surrounding wording. 26 tracked files legitimately contain a hex64 -- sha256 stamps,
+# spec test vectors, commitments -- so a blanket rule would block the repository outright.
+# The bare-hex64 case is covered only by the shape arm of the READING rule in DO_NOT_PUSH,
+# which is a human procedure, not this gate. Closing it needs a by-file allow-list.
+PAT='^\s*HIT[[:space:]]+index|^\s*phrase[[:space:]]*:|commit=[0-9a-fA-F]{64}|\*\*\*[[:space:]]*[0-9]+[[:space:]]*HITS?[[:space:]]*\*\*\*|\b[5KL][1-9A-HJ-NP-Za-km-z]{50,51}\b|(xprv|xpub)[1-9A-HJ-NP-Za-km-z]{90,}'
 NP=~/blm-private/never_publish.txt
 base=$(git rev-parse --verify -q 'origin/main^{commit}') || { echo "BLOCK: origin/main cannot be resolved"; exit 1; }
 commits=$(git rev-list "$base..HEAD") || { echo "BLOCK: git rev-list $base..HEAD failed"; exit 1; }
@@ -138,7 +157,11 @@ PY
     else if (t ~ /^@phrase guard:/) { kind = substr(t, 2); nphr++ }
     else if (t ~ /^[ \t]*HIT/) { kind = "HIT line"; npat++ }
     else if (t ~ /^[ \t]*phrase/) { kind = "phrase line"; npat++ }
-    else { kind = "error"; nerr++ }
+    else if (t ~ /commit=/) { kind = "hit commitment line"; npat++ }
+    else if (t ~ /HIT/) { kind = "hit banner"; npat++ }
+    else if (t ~ /xprv|xpub/) { kind = "extended key"; npat++ }
+    else if (t == "") { kind = "error"; nerr++ }
+    else { kind = "secret-shaped token"; npat++ }
     print "  not allowed: " where(c) "  " f ":" n "  (" kind ")" }
   END { for (k in hit) if (!(k in ok)) { split(k, a, ":"); npat++
           print "  not allowed: " where(a[1]) "  " a[2] ":" a[3] "  (HIT line, no phrase line directly after)" }

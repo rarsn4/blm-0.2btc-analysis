@@ -62,7 +62,7 @@ Claims below are tagged. Do not promote a tag without new evidence.
 | **[INFERRED]** | Follows from measured facts by a stated argument. |
 | **[ASSUMED]** | Load-bearing but unproven. The soft spots. |
 | **[COMMUNITY]** | A reading or convention taken from the shared solver corpus, not derived here. Weaker than [INFERRED]: no argument from this project's measurements backs it. `premise_audit.md`'s vocabulary, used in §5 from 9 Nov 2026. |
-| **[DEFECT]** | A fault in this project's own method or machine, found and dated. §1.7, §1.8, §1.9. |
+| **[DEFECT]** | A fault in this project's own method or machine, found and dated. §1.7, §1.8, §1.9, §1.10. |
 
 The distinction between [EXHAUSTED] and [TESTED] is the one that matters: §2.1–2.11
 are the first, §2.12 is the second, and conflating them would be the only overclaim
@@ -70,7 +70,7 @@ in this document.
 
 ---
 
-## 1. Six defects in the shared data — and three in ours
+## 1. Six defects in the shared data — and four in ours
 
 §1.1–1.6 are faults in the data the community shares. **§1.7, §1.8 and §1.9 are faults
 of this project's own**, and they are the more serious kind, so they are not buried: for
@@ -301,13 +301,20 @@ vectors, including 16–23 covering `upper` and `title` casing.
   big-endian correct. **No run is void for a wrong target.**
 - **Hits.** [WIDENED 2026-11-09 — the original check read one producer's format; see §10]
   The format-agnostic detection grep `grep -c -i -w -E 'hit|hits|commit=|phrase[[:space:]]*:'`
-  over all **100** logs in both trees returns **0** on every log except the three planted
+  over **every log in both trees — 101 of them when this was measured, 2026-11-09 16:00 UTC**
+  — returns **0** on every log except the three planted
   self-tests `st_selftest_find.log`, `st_selftest_uncomp.log` and `st_selftest_hybrid.log`,
   which return **2** each and are required to. The superseded form,
   `grep -c -E '^HIT[[:space:]]+index'` over 83 logs, also returned 0, but only
   `solver2_jac` ever prints that string, so it could not have reported a hit from the
   other three producers. **Against this target nothing has ever matched, and that now
-  rests on a check with a positive control.**
+  rests on a check with a positive control.** The log count is a live figure, not a
+  constant: runs are still finishing, and it went 100 → 101 → 102 during the session that
+  measured it. It is pinned to an instant above rather than quoted as a total, and the
+  check is defined over *every* log rather than over a count.
+
+  Both arms of that check now have controls, and the shape arm's was built on 2026-11-09 —
+  see **§1.10**, which is the defect the control found on its first run.
 
 #### Therefore the negatives stand
 
@@ -570,6 +577,70 @@ rather than a thing verified once in conversation.
 ---
 
 ---
+
+### 1.10 [DEFECT, found and closed 2026-11-09] The publication gate's leak pattern read one producer's format, and passed a tracked file containing a real hit
+
+**Found by the control built to close the gap in §10's log-reading rule** — on that
+control's first run, which is the only reason it is in this report rather than in the
+repository's future.
+
+#### What happened
+
+Earlier the same day, the *reading* rule was widened from `solver2_jac`'s two patterns to a
+format-agnostic pair, because a detection grep keyed to one producer's wording returns 0
+for every other producer including on a real hit (§10). The *publication* gate,
+`pre_push_check.sh`, still carried the narrow form:
+
+```
+PAT='^\s*HIT[[:space:]]+index|^\s*phrase[[:space:]]*:'
+```
+
+`brain_image_corpus.py` reports a hit as a banner line and a `commit=<sha256>` commitment,
+neither of which matches that pattern. Measured: a log containing a **genuine** hit — the
+planted-control hit, a real `commit=` line with a real 64-hex digest — was `git add -f`'d
+into the index, and the gate returned **PASS, exit 0**. The guard that exists to stop hit
+material reaching a public remote did not see it.
+
+**Fixing the procedure had not fixed the machine.** The same single-producer blindness was
+corrected in the human rule and left in the automated check, four hours apart, by the same
+person on the same day. That is the shape worth recording: a correction applied to the
+document and not to the code that enforces it.
+
+A second fault surfaced in the same test. Once the pattern was widened and the gate did
+block, its classifier reported the two matches as **`(error)`** rather than `pattern`,
+because the `awk` branch chain tested only for text beginning `HIT` or `phrase`. A correct
+block was being described as a script malfunction — which is how a real block gets
+dismissed as a broken grep.
+
+#### What was not wrong
+
+**Nothing was ever disclosed.** The widened pattern run over all 47 unpushed commits, their
+messages, and the current tracked tree returns **0**. No log containing a hit in any
+producer's format has ever been committed, and the four `.log` files that were tracked
+measure clean. This is a defect in the guard, found by a test, before it was ever needed.
+
+#### The fix, and what each part is worth
+
+| part | what it does |
+|---|---|
+| six-alternative `PAT` | one shape per producer plus WIF and extended keys; **each alternative measured over all tracked files before being added**, and each matches 0 of them except the two that match only the allowed self-test pair |
+| classifier branches | a non-empty match is now a pattern match with a named kind; only an *empty* match text counts as a script error |
+| `shape_arm_control.sh` | five assertions, run end to end |
+| `brain_image_corpus.py --selftest-plant` | replaces the target with the planted string's own hash160 so the real hit branch runs, writing the **first `hex64` ever present in a log in this project** |
+
+The control's fifth assertion is the one that matters, and it is the one §10's own rule
+demands: assertion 4 checks that the gate still PASSes with the hit log on disk, which it
+does — **but it passes because the gate never looks at gitignored files, so it would pass
+just as happily with a blind pattern.** Assertion 5 forces the same file into the index and
+**requires a BLOCK**. Without it the control is exactly what §10 warns against, a check
+that passes either way. Assertion 4 alone would have certified the broken gate.
+
+**[SCOPE] One gap is left open deliberately.** A **bare** `hex64` — a raw private key or
+seed with no surrounding wording — is not in the gate's pattern, because **26 tracked files
+legitimately contain one** (sha256 stamps, spec test vectors, commitments). A blanket rule
+would block the repository outright. That case is covered only by the shape arm of the
+reading rule in `DO_NOT_PUSH`, which is a human procedure, not an automated gate. Closing
+it needs a by-file allow-list and is on §6's list.
 
 ## 2. What is exhaustively eliminated
 
@@ -4689,6 +4760,13 @@ same motion, and should say so.
   them.
 - **More compute against the current template.** It is exhausted. A corrected
   template can be tested in seconds; an uncorrected one cannot be rescued by scale.
+- **[SCOPE, opened 2026-11-09 by §1.10] A by-file allow-list for bare `hex64`, so the
+  publication gate can block a raw private key or seed.** The gate's pattern deliberately
+  omits a bare 64-hex token, because **26 tracked files legitimately contain one** — sha256
+  stamps, spec test vectors, commitments — and a blanket rule would block the repository
+  outright. Until those 26 are enumerated and pinned, that case rests on the shape arm of
+  the reading rule in `DO_NOT_PUSH`, which is a human procedure. This is the only leak
+  shape the automated gate does not cover.
 
 ---
 

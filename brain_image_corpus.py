@@ -370,10 +370,27 @@ if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "--count-only"
     if mode == "--sweep":
         sys.exit(0 if sweep() else 0)
+
+    # --selftest-plant is the POSITIVE CONTROL for the shape arm of the log-reading rule.
+    # The rule's detection has two arms: a wording arm (hit|hits|commit=|phrase:) and a
+    # shape arm (hex64 | hex40 | WIF | xprv/xpub). The wording arm has a control -- the
+    # three planted solver self-tests. The shape arm had NONE: measured 2026-11-09, no log
+    # in either tree contained a single hex64, WIF or extended key, so three of its five
+    # alternatives had never fired on anything and could not be shown to fire at all.
+    # This mode manufactures the artifact deliberately: it replaces the target with the
+    # planted string's OWN hash160, so the hit branch below runs for real and emits a real
+    # commit=<sha256> line -- the first hex64 ever written to a log in this project.
+    # It is a sha256 commitment to the literal string named here and discloses nothing
+    # about the puzzle. It must be captured to a *.log path, which both repositories
+    # ignore; never to .txt, .out or .md, none of which are ignored.
+    PLANT = "blm-corpus-planted-selftest"
+
     # --run derives the MAXIMAL reading: the union of all 64, so the negative
     # covers the whole space of readings rather than one choice among them.
     F = MAXIMAL if mode == "--run" else DEFAULTS
     groups, png = build(F)
+    if mode == "--selftest-plant":
+        groups = {"planted-selftest": {PLANT}}
     seen, rows = set(), []
     for name, acc in groups.items():
         new = acc - seen
@@ -389,9 +406,13 @@ if __name__ == "__main__":
     print(f"  §2.12 reports 22,638 keys.  ratio = {len(seen)/22638:.2f}x")
 
     out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "brain_image_keys.txt")
-    with open(out, "w") as f:
-        for s in sorted(seen): f.write(s.replace("\n", "\\n") + "\n")
-    print(f"  key list written: {out}")
+    if mode == "--selftest-plant":
+        print("  key list NOT written: --selftest-plant must not touch brain_image_keys.txt,"
+              "\n  which is tracked and pinned by blob sha in pre_push_allow.txt.")
+    else:
+        with open(out, "w") as f:
+            for s in sorted(seen): f.write(s.replace("\n", "\\n") + "\n")
+        print(f"  key list written: {out}")
 
     if mode == "--count-only":
         print("\n  --count-only: no derivation performed.")
@@ -428,6 +449,11 @@ if __name__ == "__main__":
         for st in acc: origin.setdefault(st, gname)
 
     tgt = bytes.fromhex(TARGET_H160)
+    if mode == "--selftest-plant":
+        tgt = h160(pubkeys(hashlib.sha256(PLANT.encode("utf-8")).digest())[0])
+        print("\n  --selftest-plant: target REPLACED by the planted string's own hash160,")
+        print(f"  derived from {PLANT!r} by the same two functions the real run uses.")
+        print("  The commit= line below is a commitment to THAT string and to nothing else.")
     hits, n, skipped = [], 0, 0
     t0 = __import__("time").time()
     print(f"\n  EC backend: {backend}")
@@ -479,4 +505,12 @@ if __name__ == "__main__":
         print("  independent BIP32 implementation before anything else.")
     else:
         print("  NO MATCH")
+
+    if mode == "--selftest-plant":
+        ok = len(hits) == 1
+        print(f"\n  SELFTEST-PLANT {'PASS' if ok else 'FAIL'}: "
+              f"expected exactly 1 hit, got {len(hits)}")
+        print("  A FAIL here means the hit branch is unreachable and every 'NO MATCH' this")
+        print("  script has ever printed is uncontrolled.")
+        sys.exit(0 if ok else 1)
     sys.exit(0 if not hits else 3)
