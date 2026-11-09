@@ -126,20 +126,31 @@ The project's passphrase list is not on this machine, so the rule has not been a
 | 10 | black | written (rune plaintext; BLACK LIVES MATTER) | "номер X": **no derivation**; X is a hapax [MEASURED] | UNDATED |
 | 11 | pyramid | depicted | "5+6" [COMMUNITY, not measured] | UNDATED |
 | 12 | vote | **association** from .VS. [COMMUNITY] | .VS. flipped vertically reads "·12·" [MEASURED] | PRE-knowable |
-| 13 | moon | written on a clock hand [MEASURED] | clock sum 12+1 [MEASURED] | UNDATED |
+| 13 | moon | written on a clock hand [MEASURED] | clock sum 12+1 [MEASURED geometry + AUTHOR rune "сумма двух чисел"] | UNDATED |
 | 16 | rifle | depicted, 1 [MEASURED] | "M16" model identification [COMMUNITY] | UNDATED |
 | 17 | gold | **inferred** chart subject; not written, metal not depicted [COMMUNITY] | "17 years", a span checked against TradingView [COMMUNITY] | **POST (July 2020 or later) [MEASURED]** |
-| 19 | glove | depicted (a hand holding the vial) [COMMUNITY] | "CVD19" label [text MEASURED] | PRE-knowable |
+| 19 | glove | depicted (a hand holding the vial) [COMMUNITY] | "CVD19" label [~~text MEASURED~~ → **[COMMUNITY]**, regraded 9 Nov 2026: the label's LOCATION is measured, the numeral is not — peak stroke 0.63 px, sub-pixel, REPORT §6 item 6] | PRE-knowable |
 | 20 | — | **no README value**: the table gives `apple` with no derivation; §19 gives `second` by an excluded lookup, and its XX = 20 step conflicts with the spacing measurement (0 of 33) | — | POST scene (Leopold) |
-| 6, 8, 14, 15, 18, 21 | gaps | — | slot 21's hand carries no word [MEASURED] | — |
+| 6, 8, 14, 15, 18, 21 | gaps | — | slot 21's hand carries no word [MEASURED, four contrast settings]; that the hand NAMES slot 21 [MEASURED geometry + AUTHOR rune "сумма двух чисел"] | — |
 
 **Word count.**
-- MEASURED: slot 21 exists, so the phrase has **at least 21 words**.
+- ~~MEASURED~~ → **[MEASURED geometry + AUTHOR rune "сумма двух чисел"]**, regraded 9 Nov 2026: slot 21 exists, so the phrase has **at least 21 words**. The hand's
+  DIRECTION is measured (238.49°, between numerals 10 and 11, 0.32 of the interval). The ADDITION that turns that
+  direction into slot 21 is licensed only by the rune caption, whose 14 glyphs have **no measured location** — a
+  defined search around the dial returns zero glyph-sized components, and the transcription is `u/Amadeus407`'s of
+  2021-03-06. Flat "MEASURED" here contradicted this file's own line below ("only the clock sums are anchored by the
+  author, through the rune"), and contradicted the honest grade already carried by slot 3. REPORT §2.17 and §7
+  scope notes, 9 Nov 2026.
 - INFERRED: exactly 21. 24 fits the measurement equally well.
 - The README does **not** assert 21: it lists lengths 3–24, and its table has 24 rows.
+- **[COMMUNITY, added 9 Nov 2026] A second leg that does not touch the clock.** A word at slot *n* means at least *n*
+  words, and this table assigns 16, 17 and 19. **Slot 19 alone leaves {21, 24}** by arithmetic; slot 16 or 17 leaves
+  {18, 21, 24}, and REPORT §2.3 closes 18 over the same template. All three grades are [COMMUNITY], and the 16 and
+  the 19 are both sub-pixel in this file (0.09 px and 0.63 px peak stroke, against full pen for every legible
+  control). So the length has two legs that fail independently, and neither is a measurement. REPORT §5.
 
 **Slot-numbering mechanism.**
-- Only the clock sums are anchored by the author, through the rune "sum of two numbers".
+- Only the clock sums are anchored by the author, through the rune "sum of two numbers" — **and that anchor is itself unlocated** [SCOPE, 9 Nov 2026]: the caption's 14 glyphs have no measured location and its transcription is `u/Amadeus407`'s of 2021-03-06, so the author-anchored class is anchored to a block this project has never found. REPORT §7 provenance note.
 - All other slot numbers come from heterogeneous COMMUNITY conventions: counts, labels, spans and model numbers.
 
 ### The weakest five premises

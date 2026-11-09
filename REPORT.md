@@ -61,6 +61,7 @@ Claims below are tagged. Do not promote a tag without new evidence.
 | **[TESTED]** | A finite corpus tried, empty. **Not** an elimination of the class. |
 | **[INFERRED]** | Follows from measured facts by a stated argument. |
 | **[ASSUMED]** | Load-bearing but unproven. The soft spots. |
+| **[COMMUNITY]** | A reading or convention taken from the shared solver corpus, not derived here. Weaker than [INFERRED]: no argument from this project's measurements backs it. `premise_audit.md`'s vocabulary, used in §5 from 9 Nov 2026. |
 | **[DEFECT]** | A fault in this project's own method or machine, found and dated. §1.7, §1.8. |
 
 The distinction between [EXHAUSTED] and [TESTED] is the one that matters: §2.1–2.11
@@ -1845,6 +1846,22 @@ difference has never been tabulated.
 Three on association or inference. One — slot 11 — is not merely contested
 between two readings but has been tested and fits neither. Two rest on nothing
 that survives inspection: slot 20 by §2.16 above, and slot 10 on a glyph that
+§7.4 establishes cannot be read by anyone, which §2.13 already called
+"load-bearing since 2020 on nothing but a glyph nobody can read" — and which
+the ink measurement below now detaches at the other end too.
+
+> **[MEASURED, 9 Nov 2026] Two of the slot *numbers* in this table are sub-pixel in
+> this file, so neither can be checked against the image.** The `16` of M16 (rifle
+> receiver, x 816–825 y 695–702: 19 levels, peak stroke **0.09 px**) and the `19` of
+> `CVD19` (vial label, (130, 230, 50, 60): 110 levels, peak stroke **0.63 px**) are both
+> below one pixel of stroke coverage, against **full pen for every legible control** —
+> measured on §6 item 6's own model, and tabulated there. Slot 16's number is not read
+> from the picture at all but inferred from the weapon's shape, and **no count of 16
+> exists anywhere in the image** (`even_slot_rules.py`). This changes no row above. It
+> says that two rows' slot arguments cannot be verified from pixels — and that §5's
+> second leg, which derives the phrase *length* from slots 16, 17 and 19 without the
+> clock, inherits exactly that status.
+
 > **[SCOPE, 9 Nov 2026] Slots 3, 13 and 21 rest on a caption this project has never
 > located.** The clock rows above derive their slot numbers by *adding* the two
 > numerals each hand falls between — 1+2 = 3, 12+1 = 13, 10+11 = 21. The only thing
@@ -1949,10 +1966,6 @@ that survives inspection: slot 20 by §2.16 above, and slot 10 on a glyph that
 > open and unanswered, and nothing enters the GPU before it is settled. Recorded here
 > so the family is named and sized rather than rediscovered: the hour hand needs no
 > entry, because the slot its sum names (21) carries no word to relocate.
-
-§7.4 establishes cannot be read by anyone, which §2.13 already called
-"load-bearing since 2020 on nothing but a glyph nobody can read" — and which
-the ink measurement below now detaches at the other end too.
 
 **[MEASURED] Who first claimed each word — no assigned word traces to the
 author.** The table above asks what holds a word up in the artwork. This one
@@ -3954,12 +3967,66 @@ correction I proposed earlier, which would have moved the unknown to slot 3.)
 Slot 21 therefore exists, and valid BIP39 lengths are 12/15/18/21/24 — so the
 phrase is **21 or 24 words**.
 
-There is a second, independent reason it cannot be 12. At 12 words, order is
+**[COMMUNITY, added 9 Nov 2026] A second leg, which this section never used: the
+template's own high-numbered slots reach the same answer without the clock.**
+Everything above is **one** support cited in six places — the hour hand, whose
+*direction* is measured (238.49°, between numerals 10 and 11) and whose *addition* is
+licensed only by a caption with no measured location (§2.17's scope note, §7's
+provenance note). But §2.17 assigns words at slots **16**, **17** and **19**, and a word
+at slot *n* means the phrase has at least *n* words. Against the valid BIP39 lengths
+12/15/18/21/24:
+
+| slot | word | what supports the slot NUMBER | grade | lengths left |
+|---|---|---|---|---|
+| **19** | `glove` | the `19` of the vial label `CVD19` — produced by the **one collision-free** numbering rule of the twelve tested (`even_slot_rules.py`) | **[COMMUNITY]** | **21, 24** |
+| 17 | `gold` | "17 years", a chart span checked against TradingView | **[COMMUNITY]** | 18, 21, 24 |
+| 16 | `rifle` | the `16` of M16, identified from the weapon's **shape**; no count of 16 exists in the picture | **[COMMUNITY]** | 18, 21, 24 |
+
+**Slot 19 suffices alone**: at least 19 words leaves 21 and 24 by arithmetic, with no
+clock involved. **Slot 16 or 17 suffices with §2.3**, which exhausted the 18-word
+template in both directions — and it is the *same* template, since slots 16 and 17 are
+both inside it (t18's thirteen fixed slots are 1, 2, 3, 4, 5, 7, 9, 10, 11, 12, 13, 16,
+17). The conditional therefore closes on itself: accept the assignments that give the
+bound and you have accepted the template §2.3 emptied at 18.
+
+**Why this is a leg and not a proof, stated plainly.** All three grades are
+[COMMUNITY], and **two of the three numerals are measured illegible in this file** —
+peak stroke 0.09 px at slot 16 and 0.63 px at slot 19, against full pen for every
+legible control (§6 item 6). The clock leg has one measured step and one unlocated
+step; this leg has no unlocated step and no measured one either. What matters is that
+they fail *independently*: the length does not rest on a single point of failure, but
+it does not yet rest on a measurement either. Resolving either numeral in a better scan
+is what would make it two-legged **on measurement** rather than on convention — §6.
+
+There is a further reason it cannot be 12. At 12 words, order is
 brute-forceable: 12! = 479,001,600 arrangements, ~29.9 M after the 4-bit
 checksum, which is minutes of compute. **If you had the right twelve words you
 would not need the clock at all.** An author who built an elaborate
-position-marking system did so because order cannot be searched — which is only
-true at 21 or 24.
+position-marking system did so because order cannot be searched.
+
+> **[CORRECTED 9 Nov 2026] Two faults in how that was stated.** The retracted words:
+> ~~"a second, *independent* reason"~~, which it is not, and ~~"which is only true at
+> 21 or 24"~~, which is false at 15.
+>
+> **It is not independent.** Its premise is that the author built a position-marking
+> system, and the position-marking system *is* the clock-sum mechanism. If the addition
+> fails there is no position machine and this argument has no premise left. It is the
+> clock support in different clothing, not a second support. (The second support is the
+> slot-16/17/19 leg above, which does not depend on the clock at all.)
+>
+> **And "only true at 21 or 24" is false at 15.** On this paragraph's own model —
+> *n*! over 2^checksum, which is how it gets 29.9 M at 12 words:
+>
+> | words | checksum-valid orderings | at 11 M cand/s |
+> |---|---|---|
+> | 12 | 29,937,600 | 2.7 s |
+> | **15** | **40,864,824,000** | **1.03 GPU-h** |
+> | 18 | 100,037,089,152,000 | 105 days |
+>
+> **15-word order is one GPU-hour** — less than the pure-swap probe priced in §2.17.
+> Corrected, the argument excludes 12 **and 15** and leaves {18, 21, 24}; §2.3 then
+> closes 18, leaving {21, 24}. So it arrives where §5 arrives — but with §2.3 doing the
+> last step, and **it never reached 21 on its own.**
 
 **[MEASURED] What the wallets of May 2020 emitted by default.** Of the 13
 wallets in the [walletsrecovery.org snapshot of
@@ -3986,12 +4053,22 @@ not be found. Every figure is pinned to a file and line in `wallet_defaults.md`.
 **And the 12-word branch is a package, not a footnote.** If the clock is a
 position machine, the phrase is ≥ 21 and the author made a non-default choice —
 a longer length than the tool offered by default, or a legacy account on a wallet
-whose default is something else. If the clock is *not* a position machine, then
-the mechanism, the slot numbers, the template and all 279 billion derivations in
-§3 (191 billion when this paragraph was written) were aimed at a structure that does not exist. **The template and the 12-word
-prior cannot both be kept.** Anyone reaching for 12 on the strength of the
-wallet defaults is discarding §5, §2.13 and §3 in the same motion, and should say
-so.
+whose default is something else.
+
+> **[CORRECTED 9 Nov 2026] ~~If the clock is *not* a position machine, then the
+> mechanism, the slot numbers, the template and all 279 billion derivations in §3
+> (191 billion when this paragraph was written) were aimed at a structure that does
+> not exist.~~** Too strong, and the second leg above is what corrects it. If the
+> addition fails, slots 3, 13 and 21 go, and §2.13's `a + g ≥ 2` goes with them.
+> **The length does not go.** `glove`@19 alone still leaves {21, 24}, and the slots
+> that come from counts and written labels are untouched by the clock's failure. So
+> the 316,455,746,776 derivations in §3 were aimed at a 21-word template that
+> survives the clock — on a [COMMUNITY]-grade leg, which is weaker than a measurement
+> and stronger than nothing.
+
+**The template and the 12-word prior still cannot both be kept.** Anyone reaching
+for 12 on the strength of the wallet defaults is discarding §5, §2.13 and §3 in the
+same motion, and should say so.
 
 ---
 
@@ -4047,10 +4124,46 @@ so.
    over all 2048 words with the current pool and all four paths. Empty. The chain
    was coherent and it is closed.
 
-6. **[MEASURED] A larger source image, for one specific reading: the circled
-   mark on the BLM card.** This is the only place in the artwork where the file's
-   resolution genuinely blocks a reading, and the claim is measured rather than
-   asserted.
+6. **[MEASURED] A larger source image — for THREE readings, and two of them carry
+   the length argument.**
+
+   > **[CORRECTED 9 Nov 2026] ~~A larger source image, for one specific reading: the
+   > circled mark on the BLM card. This is the only place in the artwork where the
+   > file's resolution genuinely blocks a reading.~~** It is not the only place, and
+   > the two others matter more, because §5's second leg derives the phrase *length*
+   > from them. Measured on this item's own published model — peak stroke coverage =
+   > (background − darkest) ÷ (background − pen), pen 29 from the BLM capitals:
+   >
+   > | reading | element, box | background | darkest | levels | peak stroke |
+   > |---|---|---|---|---|---|
+   > | the `16` of M16 → **slot 16** | rifle receiver, x 816–825 y 695–702 | 248 | 229 | 19 | **0.09 px** |
+   > | the `19` of `CVD19` → **slot 19** | vial label, (130, 230, 50, 60) | 204 | 94 | 110 | **0.63 px** |
+   > | the circled mark, interior | BLM card | 222 | 76 | 146 | 0.76 px |
+   > | the circled mark, ring | BLM card | 222 | 118 | — | 0.54 px |
+   > | ambigram date `11.03.20` *(control)* | (1012, 1098, 86, 24) | 203 | 0 | 203 | **full** |
+   > | bust band `BREATHE` *(control)* | (1355, 528, 75, 17) | 226 | 18 | 208 | **full** |
+   > | rune column *(control)* | (1526, 40, 31, 975) | 254 | 0 | 254 | **full** |
+   >
+   > **All three are sub-pixel; every legible control reaches full pen.** The
+   > deprioritisation note at the end of this section said "a higher-resolution source
+   > can unblock one reading, not two" — wrong by two, and corrected there as well.
+   >
+   > **Why the other two are worth more than the card mark.** §5's second leg reaches
+   > {21, 24} from slots 16, 17 and 19 with no clock, and all three of its grades are
+   > [COMMUNITY]. Resolving **either the 16 or the 19** converts the rung that needs no
+   > further argument — slot 19 alone leaves {21, 24} — from convention into
+   > measurement, and makes the phrase length two-legged *on measurement* for the first
+   > time. The card mark settles slot 10 only if the mark turns out to be X.
+   >
+   > **A non-reproduction, logged rather than reconciled.**
+   > `report_additions_image_pass.md` §H reports the rifle mark as "darkest 220 on a
+   > background of 246 (26 levels)". From the coordinates it names, this measurement
+   > gets **darkest 229, max 248, 19 levels**, identical in R, G and B, and the window
+   > holds no structure at all — flat texture between 229 and 248. §H's verdict
+   > (illegible; `rifle`@16 rests on identifying the model by shape) is unaffected and
+   > is strengthened. The nine-level gap is not reconciled here.
+
+   The claim below is measured rather than asserted.
 
    The circle was fitted as the ring darker than both its inner and outer
    neighbours: centre (263.5, 760.5), **diameter 17.5 px**, interior mark 13×10 px.
@@ -4283,8 +4396,13 @@ so.
   is a **key** — the author invented glyphs beyond the 26 Gravity Falls supplies,
   and X occurs once, so there is no second instance to triangulate from. Per §2.9
   no larger source is served anyway: `i.redd.it` returns the same 1600×1200 file,
-  md5-identical. The circled mark above is a separate case and the only real one:
-  **a higher-resolution source can unblock one reading, not two.**
+  md5-identical. The circled mark above is a separate case. ~~and the only real one:
+  **a higher-resolution source can unblock one reading, not two.**~~ **[CORRECTED
+  9 Nov 2026]** Three readings in this image are sub-pixel, not one — the card mark,
+  the vial's `19` and the rifle's `16` — and item 6 measures all three on one scale.
+  Two of the three carry §5's second leg on the phrase length, which is what makes a
+  larger source worth more than this note allowed. The rune glyph is still not among
+  them.
 - **More compute against the current template.** It is exhausted. A corrected
   template can be tested in seconds; an uncorrected one cannot be rescued by scale.
 
