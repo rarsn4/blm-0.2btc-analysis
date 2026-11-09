@@ -1865,6 +1865,91 @@ that survives inspection: slot 20 by §2.16 above, and slot 10 on a glyph that
 > that slot 21's hand is additionally four times further off its midpoint than the
 > other two.
 
+> **[OPEN, UNTESTED — and narrower than it first looks] What the caption dependency
+> does and does not reopen.** It does **not** reopen "some other word sits at slot 3"
+> or "at slot 13". `t21_free3` and `t21_free13` are both in the evidenced ledger and
+> both swept their slot over **55 words** — the 54-word pool *plus* the pinned word
+> itself, since neither `tower` nor `moon` is in the pool — and both came back
+> negative. Those two questions are closed and the caption does not revive them.
+>
+> **What it opens is the converse, and no run has ever entered it: `tower` and `moon`
+> at slots other than 3 and 13.** If the addition is wrong, the natural alternative is
+> the *single-numeral* reading of each hand — the numeral it is nearest rather than the
+> sum of the two it lies between. Measured across all 94 configs in the ledger,
+> evidenced and asserted, by which slots ever admit each word:
+>
+> | word | slots that have NEVER admitted it, anywhere in the ledger |
+> |---|---|
+> | `tower` | **1, 2**, 4, 5, **12**, 16, 20 |
+> | `moon` | **1, 2**, 3, 4, 10, **12**, 16, 20 |
+>
+> The minute hand lies between numerals 1 and 2, so its single-numeral readings are
+> `tower@1` and `tower@2` — **both in that never-tested column**. The second hand lies
+> between 12 and 1, so its readings are `moon@12` and `moon@1` — **also both
+> untested**. The clock-rotation family (`t21_clk2`–`clk9`) moved these words around a
+> good deal — `tower` has been tested at slots 6, 7, 8, 9, 10, 11, 13, 14, 15, 17, 18,
+> 19 and 21 — but never to slot 1, 2 or 12, because those slots stay pinned to
+> `subject`, `camera` and `vote` in every config built so far.
+>
+> **This is a specific swap family, not an `a ≥ 2` sweep — and it is not cheap. An
+> earlier version of this note priced it wrongly, by a factor of 54.** Four placements:
+> `tower@1`, `tower@2`, `moon@12`, `moon@1`, each displacing one pinned word
+> (`subject`, `camera`, `vote`, `subject` respectively).
+>
+> > ~~Each keeps the template's shape, so each is one `t21_readme54`-sized run —
+> > 49,589,822,592 candidates, about 1.25 GPU-h at 11 M cand/s, roughly 5 GPU-h for all
+> > four. That is the same shape and the same cost class as `t21_single`, which tested
+> > the single-numeral reading of the clock overlap for `eye` and came back
+> > negative.~~ **[RETRACTED, 9 Nov 2026 — wrong by 54×. It reached for the right
+> > precedent and then quoted the wrong price: `t21_single` is 54⁷ × 2, not
+> > 54⁶ × 2.]**
+>
+> The single-numeral reading says where `tower` goes. **It says nothing about where
+> `subject` goes**, and this project's own precedent is to drop the displaced word
+> rather than hand it the vacated slot: `t21_single` moved `eye` to slot 4 and
+> `pyramid` to slot 6, **dropped `mask` entirely**, and vacated slots 9 and 11 to the
+> pool. On that shape the vacated slot is not filled, it is **freed**, which is a net
+> gain of one gap:
+>
+> | | shape | candidates | band (survivors) | GPU-h each |
+> |---|---|---|---|---|
+> | **as priced** | pin the word, **free** the vacated slot — 7 gaps | **54⁷ × 2 = 2,677,850,419,968** | 20,920,706,406.0 ± 141,701 | **67.6** |
+> | pure-swap probe | hand the vacated slot the displaced word — 6 gaps | 54⁶ × 2 = 49,589,822,592 | 387,420,489.0 ± 19,283 | 1.25 |
+>
+> The upper row is **exactly `t21_single`'s space and exactly its band** — 54⁷ × 2,
+> σ 141,701, stratified at 0.983533 on this same 54-word pool, recomputed here from the
+> pool's own 16 block counts rather than copied. `QUEUE_after_el22.md` states the rule
+> in capitals for that run: *"Filling slot 6 while vacating 9 and 11 is a NET GAIN of
+> one gap, so the space is 54^7 x 2, fifty-four times t21_readme54."* The same
+> arithmetic applies to all four placements. **Four members: 10,711,401,679,872
+> candidates, 83,682,825,624 derivations, 270.5 GPU-h = 11.3 days** — **16% of the
+> 69-day queue, not the 0.3% the retracted figure implied.**
+>
+> **The pure-swap probe is kept, and labelled: there is no mechanism behind it.**
+> Nothing in the artwork says a displaced word moves to the slot its replacement
+> vacated. Here the displaced word's own support actively contradicts the move:
+> `subject`@1 rests on "Section 1 numbering" (the table above), so `tower@1`
+> **overrides** that support rather than relocating it, and a word whose only slot
+> argument has just been overridden has no claim on slot 3 or on any other slot. The
+> probe is worth 1.25 GPU-h as a lottery ticket. It is **not** a down-payment on the
+> full run.
+>
+> **[MEASURED, 9 Nov 2026] And the probe is not contained in the full run — the two
+> boxes are disjoint, not nested.** `subject`, `camera` and `vote` are **none of them in
+> the 54-word README pool** (measured against `configs/t21_readme54.conf`), so freeing
+> slot 3 over that pool never reaches `subject`@3: the pure-swap point lies **outside**
+> the 54⁷ box, not inside it. Unioning the two means freeing the vacated slot over
+> **55** words — the pool plus the *displaced* word — for 54⁶ × 55 × 2 =
+> 2,727,440,242,560 candidates, **+1.85% over 54⁷ × 2**, 68.9 GPU-h. Recorded because
+> that is a *different* 55 from §2.13's (which is the pool plus the slot's **own** table
+> word, `tower`), and because at +1.85% it would make the separate 1.25 GPU-h probe
+> redundant.
+>
+> **Not built, not queued, not started.** The 69-day path-closure queue decision is
+> open and unanswered, and nothing enters the GPU before it is settled. Recorded here
+> so the family is named and sized rather than rediscovered: the hour hand needs no
+> entry, because the slot its sum names (21) carries no word to relocate.
+
 §7.4 establishes cannot be read by anyone, which §2.13 already called
 "load-bearing since 2020 on nothing but a glyph nobody can read" — and which
 the ink measurement below now detaches at the other end too.
@@ -3792,6 +3877,11 @@ sit midway between two adjacent numerals, within ~1.5°.
 | minutes | 1 and 2 | **3** | `tower` |
 | hours | 10 and 11 | **21** | *(blank)* |
 
+**The `between` column is measured; the `sum` column is not.** Adding the two
+numerals is licensed only by block B's caption, which has no measured location — see
+the scope note below and §7's provenance note. This table states both steps in one
+voice and the two have different warrants.
+
 > **[MEASURED, 31 Oct 2026] The "within ~1.5°" above is true of two hands, not of
 > three.** Re-measured from the pixels, as the weighted centre of each hand's dark
 > radial run out of the hub, against a numeral grid whose 18.75° offset is fixed by
@@ -3925,7 +4015,8 @@ so.
    this list has that property.
 
 2. **A word for slot 21.** The hour hand is produced by the same labelled
-   mechanism that gave `moon` (12+1) and `tower` (1+2) at high confidence, and
+   mechanism that gave `moon` (12+1) and `tower` (1+2) — at high confidence in the
+   hand *directions*, and on an unlocated caption for the *addition* (§7 scope note) — and
    it is the only hand with no word on it. Checked at four contrast settings —
    it is a plain wedge, not faint writing.
 3. **Anything placing 22, 23, 24.** These have no evidence at all.
@@ -5574,6 +5665,20 @@ fatal to correctness.
   has 32 blank columns beside it), and does the **run count hold**. The wrong entry
   stood for one commit. The scan that produced it was mine, and it agreed with what
   the census said should be there — which is rule one.
+
+  **The same rule applied one level up, and the result is worse.** The question
+  "where is this block?" was never asked of two of the three rune blocks until
+  9 Nov 2026 — and the arithmetic that places **three slots of the template** rests on
+  one of them. Slots **3** (`tower`), **13** (`moon`) and **21** (blank) are produced
+  by *adding* the numerals each clock hand falls between, and the only thing licensing
+  that addition is block B's caption `Сумма двух чисел`, whose 14 glyphs have no
+  measured location. The hand directions are measured; the addition is adopted from
+  `u/Amadeus407`'s 2021 reading of a block this project has never found. **The report
+  must say so wherever 3, 13 and 21 appear**, and now does: §2.17's clock rows and its
+  scope note, §7's hand table, §7's clock paragraph, and the open-question list. The
+  general form of the rule: a transcription with no measured location is somebody
+  else's measurement, and anything derived from it inherits that status no matter how
+  many of this project's own measurements sit downstream of it.
 
 - **A pattern match against §8 needs a base rate before it counts.** The artwork
   is full of numbered sequences, absences and near-misses. "This looks like the
