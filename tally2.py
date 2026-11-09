@@ -240,7 +240,41 @@ EVIDENCED = ['t21_readme54','t21_loo21','t21_loo6','t21_loo8','t21_loo14','t21_l
              't21_clk2','t21_clk3','t21_clk4','t21_clk5','t21_clk6',    # oct31
              't21_clk7','t21_clk8','t21_clk9',
              't21_blackd2','t21_blackd3','t21_blackd4','t21_blackd5',
-             't21_blackd7','t21_blackd9','t21_this3']
+             't21_blackd7','t21_blackd9','t21_this3',
+             # [ADMITTED 9 Nov 2026] t21_free2: the four-path twin of
+             # t21_free2_p1, which is already in this list. Same word box --
+             # 54^6 x 55 = 1,363,720,121,280 candidates, slot 2 freed to the
+             # 54-pool + camera, slot 20 pinned to `second`, six @POOL gaps --
+             # so it adds 0 candidates here, exactly as t21_free20 did. What it
+             # buys is the word "exhausted" over the four-path set, closing part
+             # of REPORT 2.13's [SCOPE] note.
+             #
+             # Admitted on completion and in band, per rule 7, not when the file
+             # appeared. exit=2 in queue_nov.log (NOT in the per-config log --
+             # exit= is written by the wrapper, see REPORT 10), Mon 09 Nov
+             # 15:32:58 UTC, wall 129,172.70 s = 35.9 h.
+             #
+             # survivors 10,653,915,344 of 1,363,720,121,280 against the band
+             # committed in QUEUE_after_el22.md on 1 Nov 2026 17:11:34 UTC in
+             # 548e7b2 -- SEVEN DAYS before the 8 Nov 03:40:05 UTC launch:
+             #     10,654,063,447.5 +/- 101,122  (stratified)
+             # z = -1.465. Stratified is the right model because the config's
+             # SLOT 21 is @POOL (rule 4, read the config line): V_54 = 0.404907,
+             # factor 0.983533, sigma 102,814.5 -> 101,121.5. The config's own
+             # header comment names the BINOMIAL band (+/- 102,815, z -1.440);
+             # that is the wrong model for @POOL, and both contain the result, so
+             # the verdict is unaffected and the comment is wrong.
+             #
+             # IDENTITY, which is the stronger check the queue doc demanded:
+             # survivors do not depend on the derivation path, so this run had
+             # to reproduce t21_free2_p1's logged count EXACTLY. t21_free2.log
+             # (2026-09-23, header "t21_free2 (camera, path 1)", one PATH) logged
+             # 10,653,915,344 of 1,363,720,121,280. The four-path run logged
+             # 10,653,915,344 of 1,363,720,121,280. EXACT, to the digit.
+             #
+             # Both detection arms of the log rule return 0 on its log: wording
+             # 0, shape 0.
+             't21_free2']
 ASSERTED  = ['t21_pool52','t21_pool52_rev','t21_pool40','t21_idx','t21_pathd','t21_pathe',
              't21_trust21','t21_trust21b','t21_bnw18','t21_bnw18b','t21_trustonly','t21']
 CHECKSUM = 128

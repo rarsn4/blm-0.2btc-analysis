@@ -342,3 +342,45 @@ STANDING RULE, widened 9 Nov 2026 by the owner's instruction:
   on its own it certified a broken gate. The gate's pattern now carries six measured
   alternatives and blocks that file as "hit banner" and "hit commitment line".
 ================================================================================
+
+================================================================================
+STANDING RULE, added 9 Nov 2026 by the owner's instruction:
+
+  THE READING RULE AND THE GATE MOVE TOGETHER.
+
+  selftest_gate.sh's header already carries this one level down: "Kernel and selftest
+  must move together." That sentence exists because solver2_jac was rebuilt on 28 Sep
+  2026 with its comparison path, phrase builder and hit reporting all changed, and its
+  self-test was not touched for another five weeks (REPORT 1.7).
+
+  This is the same sentence one level up, and it went unlearned for four hours on
+  9 Nov 2026. The log-READING rule above was widened from solver2_jac's two patterns to
+  a format-agnostic pair at about 12:00 UTC, for a measured reason: a detection grep
+  keyed to one producer's wording returns 0 for every other producer, including on a
+  real hit. The publication GATE that enforces the same policy, pre_push_check.sh, kept
+  the narrow pattern. At about 16:00 UTC a control force-added a log carrying a genuine
+  hit -- a real banner line and a real commit=<sha256> -- and the gate returned PASS.
+  Recorded as REPORT 1.10.
+
+  Nothing had escaped. The point is that nothing had STOPPED it either, and the reason
+  was not an oversight in the policy: the policy was correct and four hours old. The
+  defect was that the correction was applied to the document and not to the code that
+  enforces it.
+
+  SO, WHENEVER THE READING RULE CHANGES:
+    1. change pre_push_check.sh's PAT in the SAME commit, or state in that commit's
+       message why it does not need changing;
+    2. measure each new alternative over all tracked files BEFORE adding it, because a
+       pattern that matches ordinary content blocks the repository and gets reverted,
+       which is the same failure as a pattern that matches nothing;
+    3. run ./shape_arm_control.sh, whose assertion 5 forces a hit-bearing file into the
+       index and REQUIRES a BLOCK. Assertion 4 -- that the gate still PASSes with that
+       file merely on disk -- passes either way, because the gate never looks at
+       gitignored files; on its own it certified the broken gate.
+    4. Both arms need a positive control, not just quiet. A check that has never been
+       seen to fire is REPORT 1.7, whatever it is checking.
+
+  The converse holds too: if the gate is widened, widen the reading rule, or say why
+  not. Either one alone leaves a policy and its enforcement disagreeing, and the
+  disagreement is invisible until something is actually wrong.
+================================================================================

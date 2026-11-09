@@ -50,6 +50,26 @@ git check-ignore -q "$LOG" && say PASS "3  $LOG is gitignored" \
 git ls-files --error-unmatch "$LOG" >/dev/null 2>&1 \
   && say FAIL "   $LOG is TRACKED" || say PASS "   $LOG is untracked"
 
+# "Untracked now" is not "never committed": a file can be absent from the index today and
+# sitting in a commit from an hour ago, which a push would still carry. So check every
+# unpushed commit's TREE as well, not just the current index.
+base=$(git rev-parse --verify -q 'origin/main^{commit}')
+if [ -z "$base" ]; then
+  say FAIL "   origin/main cannot be resolved -- cannot check unpushed trees"
+else
+  ntrees=0
+  for c in $(git rev-list "$base..HEAD"); do
+    git ls-tree -r --name-only "$c" | grep -qx "$LOG" && ntrees=$((ntrees + 1))
+  done
+  nhist=$(git log --oneline --all -- "$LOG" | wc -l)
+  [ "$ntrees" -eq 0 ] \
+    && say PASS "   absent from all $(git rev-list --count "$base..HEAD") unpushed commit tree(s)" \
+    || say FAIL "   present in $ntrees unpushed commit tree(s) -- a push would carry it"
+  [ "$nhist" -eq 0 ] \
+    && say PASS "   and never committed on any ref" \
+    || say FAIL "   has $nhist commit(s) touching it somewhere in history"
+fi
+
 ./pre_push_check.sh >/dev/null 2>&1
 g=$?
 [ "$g" -eq 0 ] && say PASS "4  pre_push_check.sh PASSes with the file on disk" \

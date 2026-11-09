@@ -1643,7 +1643,7 @@ during the seam work (§10).
 
 ---
 
-### 2.13 [EXHAUSTED; 90.6% of its space compressed-key only; 12 of 15 slots path 1 only] Free-one-fixed at 21 words: the branch that was never run
+### 2.13 [EXHAUSTED; 90.6% of its space compressed-key only; 11 of 15 slots path 1 only] Free-one-fixed at 21 words: the branch that was never run
 
 *[Heading updated 26 Oct: it read "99.6% … 13 of 15" until the runs admitted that
 day, `t21_free20` above all, re-covered part of this space with all three key
@@ -1812,6 +1812,15 @@ slot 20, on the primary path `m/44'/0'/0'/0/0`.
 > below has three legs. `t21_readme54` and the six leave-one-out runs ran **four
 > paths**. The third leg — `a = 1, g = 0 (13 slots, 55 cands) free-one-fixed` —
 > **is the one-path set.** So:
+>
+> *[9 Nov 2026: twelve, not thirteen — `t21_free20` closed slot 20 on 24–25 Oct, and
+> `t21_free2` closed slot 2, admitted 9 Nov on an EXACT reproduction of
+> `t21_free2_p1`'s logged 10,653,915,344. Eleven remain: slots 1, 4, 5, 7, 9, 10, 11,
+> 12, 16, 17, 19. **`t21_free11` is a twelfth that has already run** — exit=2 on
+> 8 Nov 03:40:05 UTC, survivors 10,654,060,452, which is an EXACT match to the
+> identity committed for it before launch — but it is **not yet admitted to
+> `tally2.py`**, so this count does not yet credit it. The heading says 11 of 15, and
+> goes to 10 the moment that admission is made.]*
 >
 > **On paths 2–4, a single wrong word is still open at thirteen of the fifteen
 > assigned slots.** Slots 3 and 13 are the only assigned slots closed on all four
@@ -3271,10 +3280,17 @@ already covered** by newer sweeps.~~
 >
 > No replacement is asserted, because the figure cannot be traced to a computation.
 > For the quantity the sentence was describing, the two measured values are
-> **3.31%** at the 22-run ledger of 27 Sep and **8.33%** today at 82 evidenced runs
-> (`double-counted 3,712,863,173,729 / naive sum 44,587,622,737,549` — both figures
-> are over the 82 evidenced *plus* the twelve asserted boxes, which is how
-> `tally2.py` prints them). Both are
+> **3.31%** at the 22-run ledger of 27 Sep and **11.05%** at 83 evidenced runs
+> (`double-counted 5,076,583,295,009 / naive sum 45,951,342,858,829` — both figures
+> are over the 83 evidenced *plus* the twelve asserted boxes, which is how
+> `tally2.py` prints them). *[Updated 9 Nov 2026 on the admission of `t21_free2`.
+> The previous pair, `8.33%` at 82 runs — `3,712,863,173,729 / 44,587,622,737,549` —
+> was correct until that admission and is superseded, not retracted. The jump is
+> arithmetic, not a change in coverage: `t21_free2` is the four-path twin of an
+> already-evidenced box, so it adds its full 1,363,720,121,280 candidates to the
+> **naive sum** and **0** to the union, which is precisely what the double-count
+> percentage measures. A rising figure here means the ledger is counting overlap
+> honestly.]* Both are
 > reproducible from `tally2.py`; the retracted pair is not. This is the §10 rule
 > applied to the report's own prose: a number that cannot be recomputed does not
 > stay on the page because it once looked right.
@@ -3285,8 +3301,8 @@ box disjointification with real set intersections. Run it as
 `python3 tally2.py configs`.
 
 ```
-t21 campaign, 82 evidenced runs     316,456,008,920 derivations
-  (= 82 t21 boxes + 2 carried tails: 24-word at /256, 12-word at /16)
+t21 campaign, 83 evidenced runs     316,456,008,920 derivations
+  (= 83 t21 boxes + 2 carried tails: 24-word at /256, 12-word at /16)
 + the twelve older asserted runs    319,320,153,389
     marginal of the twelve          2,864,144,469
     at 400 derivations/s            9,157 CPU-days evidenced, 9,240 combined
@@ -3332,7 +3348,7 @@ the z-score above, reached from the other side. This is the convention this sect
 already states under *"What ‘derivations’ means here, exactly"*: the ledger reports
 `⌊candidates / 128⌋`, **that is a convention, not a count**, and every run is
 z-tested against `N/128` rather than required to equal it. The convention applies to
-**all 82 evidenced rows**, not to this one specially; the residuals are signed and
+**all 83 evidenced rows**, not to this one specially; the residuals are signed and
 centred on zero, so the error is self-cancelling in aggregate and no total above
 needs adjusting. Recorded as a precision note, not a correction.
 
@@ -3353,6 +3369,13 @@ contributed                    1,440,538,457,186     11,254,206,697
 disjoint boxes                       164 -> 295
 CPU-days at 400/s                  8,831 -> 9,157
 ```
+
+*[9 Nov 2026: the evidenced count is now **83**, not the 82 this block records, after
+`t21_free2` was admitted. Every figure in the block above is unchanged by that
+admission — union, derivations, disjoint boxes and CPU-days all hold, because
+`t21_free2` is the four-path twin of `t21_free2_p1` and contributes **0** new
+candidates. Only the run count and the naive/double-counted pair moved. The block is
+kept as the record of the 4 Nov admission, which is what it describes.]*
 
 Added as boxes the 31 have a union of **1,727,057,432,162** candidates of their own,
 against a naive sum of **1,880,928,733,538** — so **153,871,301,376** of that is
