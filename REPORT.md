@@ -717,7 +717,11 @@ words** — not a candidate list, the entire wordlist — across 65 passphrases 
 >
 > **One figure moved that is worth naming rather than leaving to be noticed.** The
 > printed `double-counted` fell from 3,712,867,368,033 to **3,712,863,173,729**, which
-> is −4,194,304 — the whole of `T12`. The cause is pre-existing and not this run's:
+> is −4,194,304 — the whole of `T12`. *[Both figures are superseded: the two twin
+> admissions of 9 Nov took the total to 6,440,303,416,289, and §3 now splits it into
+> accidental and path-twin components. The −4,194,304 step this paragraph is about is
+> unaffected — it is a property of how `naive` treats a carried tail, not of either
+> component, and it still holds.]* The cause is pre-existing and not this run's:
 > `naive` sums the 21-word boxes only, while the union it is differenced against
 > includes the carried tails, so each tail subtracts itself from the reported
 > double-count. `T24` has been doing this since it was added. **[SCOPE]** The effect is
@@ -1643,7 +1647,7 @@ during the seam work (§10).
 
 ---
 
-### 2.13 [EXHAUSTED; 90.6% of its space compressed-key only; 11 of 15 slots path 1 only] Free-one-fixed at 21 words: the branch that was never run
+### 2.13 [EXHAUSTED; 90.6% of its space compressed-key only; 10 of 15 slots path 1 only] Free-one-fixed at 21 words: the branch that was never run
 
 *[Heading updated 26 Oct: it read "99.6% … 13 of 15" until the runs admitted that
 day, `t21_free20` above all, re-covered part of this space with all three key
@@ -1816,11 +1820,9 @@ slot 20, on the primary path `m/44'/0'/0'/0/0`.
 > *[9 Nov 2026: twelve, not thirteen — `t21_free20` closed slot 20 on 24–25 Oct, and
 > `t21_free2` closed slot 2, admitted 9 Nov on an EXACT reproduction of
 > `t21_free2_p1`'s logged 10,653,915,344. Eleven remain: slots 1, 4, 5, 7, 9, 10, 11,
-> 12, 16, 17, 19. **`t21_free11` is a twelfth that has already run** — exit=2 on
-> 8 Nov 03:40:05 UTC, survivors 10,654,060,452, which is an EXACT match to the
-> identity committed for it before launch — but it is **not yet admitted to
-> `tally2.py`**, so this count does not yet credit it. The heading says 11 of 15, and
-> goes to 10 the moment that admission is made.]*
+> 12, 16, 17, 19 — and `t21_free11` closed slot 11, admitted the same day on an EXACT
+> reproduction of the identity committed for it before launch, 10,654,060,452. **Ten
+> remain: slots 1, 4, 5, 7, 9, 10, 12, 16, 17, 19.**]*
 >
 > **On paths 2–4, a single wrong word is still open at thirteen of the fifteen
 > assigned slots.** Slots 3 and 13 are the only assigned slots closed on all four
@@ -3280,17 +3282,34 @@ already covered** by newer sweeps.~~
 >
 > No replacement is asserted, because the figure cannot be traced to a computation.
 > For the quantity the sentence was describing, the two measured values are
-> **3.31%** at the 22-run ledger of 27 Sep and **11.05%** at 83 evidenced runs
-> (`double-counted 5,076,583,295,009 / naive sum 45,951,342,858,829` — both figures
-> are over the 83 evidenced *plus* the twelve asserted boxes, which is how
-> `tally2.py` prints them). *[Updated 9 Nov 2026 on the admission of `t21_free2`.
-> The previous pair, `8.33%` at 82 runs — `3,712,863,173,729 / 44,587,622,737,549` —
-> was correct until that admission and is superseded, not retracted. The jump is
-> arithmetic, not a change in coverage: `t21_free2` is the four-path twin of an
-> already-evidenced box, so it adds its full 1,363,720,121,280 candidates to the
-> **naive sum** and **0** to the union, which is precisely what the double-count
-> percentage measures. A rising figure here means the ledger is counting overlap
-> honestly.]* Both are
+> **3.31%** at the 22-run ledger of 27 Sep and, as the same quantity,
+> **5.38%** at 84 evidenced runs.
+>
+> *[UNITS CORRECTED 9 Nov 2026. The series above was not comparable, and the mixing
+> started at the 24 Oct admission of `t21_free20`. `tally2.py` now splits the
+> double-count into the two quantities it had been adding together:*
+>
+> | | 84 evidenced + 12 asserted |
+> |---|---|
+> | **accidental overlap** — boxes that share candidates because they are variations on one template | **2,324,348,141,153** (**5.38%** of non-twin naive 43,199,107,704,973) |
+> | **path-twin overlap** — declared duplicates, each 100% inside its own `_p1` counterpart | **4,115,955,275,136** (`t21_free11`, `t21_free2`, `t21_free20`) |
+> | total, as printed before | **6,440,303,416,289** (13.61% of naive 47,315,062,980,109) |
+>
+> *Which quantity did the published figures measure? **3.31%** at 22 runs was pure
+> accidental overlap — it predates every twin. **8.33%** at 82 runs was **mixed**:
+> accidental plus `t21_free20`'s whole box. So the step from 3.31% to 8.33% was never
+> a 2.5× rise in re-covered ground; most of it was one deliberate duplicate entering
+> a figure that did not distinguish them. The accidental component has been
+> **2,324,348,141,153 throughout** — it did not move when `t21_free2` was admitted and
+> did not move when `t21_free11` was, which is the test that the split is the right
+> one: the denominator drops the twin boxes too, so the ratio is invariant to any
+> twin admission.*
+>
+> *The two kinds mean different things. Accidental overlap says how much of the
+> campaign re-covered ground it had already covered — it is the number worth watching.
+> Path-twin overlap is a cost knowingly paid: a twin buys the word "exhausted" over a
+> path set and is expected to contribute its entire volume. Reporting their sum as one
+> percentage made a deliberate purchase look like waste.]* Both are
 > reproducible from `tally2.py`; the retracted pair is not. This is the §10 rule
 > applied to the report's own prose: a number that cannot be recomputed does not
 > stay on the page because it once looked right.
@@ -3301,8 +3320,8 @@ box disjointification with real set intersections. Run it as
 `python3 tally2.py configs`.
 
 ```
-t21 campaign, 83 evidenced runs     316,456,008,920 derivations
-  (= 83 t21 boxes + 2 carried tails: 24-word at /256, 12-word at /16)
+t21 campaign, 84 evidenced runs     316,456,008,920 derivations
+  (= 84 t21 boxes + 2 carried tails: 24-word at /256, 12-word at /16)
 + the twelve older asserted runs    319,320,153,389
     marginal of the twelve          2,864,144,469
     at 400 derivations/s            9,157 CPU-days evidenced, 9,240 combined
@@ -3348,7 +3367,7 @@ the z-score above, reached from the other side. This is the convention this sect
 already states under *"What ‘derivations’ means here, exactly"*: the ledger reports
 `⌊candidates / 128⌋`, **that is a convention, not a count**, and every run is
 z-tested against `N/128` rather than required to equal it. The convention applies to
-**all 83 evidenced rows**, not to this one specially; the residuals are signed and
+**all 84 evidenced rows**, not to this one specially; the residuals are signed and
 centred on zero, so the error is self-cancelling in aggregate and no total above
 needs adjusting. Recorded as a precision note, not a correction.
 
@@ -3370,11 +3389,12 @@ disjoint boxes                       164 -> 295
 CPU-days at 400/s                  8,831 -> 9,157
 ```
 
-*[9 Nov 2026: the evidenced count is now **83**, not the 82 this block records, after
-`t21_free2` was admitted. Every figure in the block above is unchanged by that
+*[9 Nov 2026: the evidenced count is now **84**, not the 82 this block records, after
+`t21_free2` and `t21_free11` were admitted. Every figure in the block above is unchanged by that
 admission — union, derivations, disjoint boxes and CPU-days all hold, because
-`t21_free2` is the four-path twin of `t21_free2_p1` and contributes **0** new
-candidates. Only the run count and the naive/double-counted pair moved. The block is
+both are four-path twins of boxes already in the list and contribute **0** new
+candidates. Only the run count and the naive/double-counted pair moved — and of the
+double-count, only the path-twin component. The block is
 kept as the record of the 4 Nov admission, which is what it describes.]*
 
 Added as boxes the 31 have a union of **1,727,057,432,162** candidates of their own,

@@ -152,8 +152,8 @@ shows the pipeline is deterministic for this input, not that it is correct. A
 deterministic wrong answer is still wrong, and §1's defects were all of that kind.
 What it does retire is a specific unstated assumption — that a single pass per config
 is reproducible at all — which 94 runs had relied on without a single test (82 evidenced
-+ 12 asserted, as of 6 Nov 2026 when this ran; 83 + 12 after `t21_free2` was admitted
-on 9 Nov. The figure is pinned to its date because it moves with every admission, and
++ 12 asserted, as of 6 Nov 2026 when this ran; 84 + 12 after `t21_free2` and
+`t21_free11` were admitted on 9 Nov. The figure is pinned to its date because it moves with every admission, and
 the original wording called all 94 "evidenced", which was never right — 12 of them are
 asserted and have no log here).
 

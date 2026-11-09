@@ -274,7 +274,33 @@ EVIDENCED = ['t21_readme54','t21_loo21','t21_loo6','t21_loo8','t21_loo14','t21_l
              #
              # Both detection arms of the log rule return 0 on its log: wording
              # 0, shape 0.
-             't21_free2']
+             't21_free2',
+             # [ADMITTED 9 Nov 2026] t21_free11, scored identically and on the
+             # same pre-launch commitment. The four-path twin of t21_free11_p1,
+             # already in this list: same word box, 54^6 x 55 =
+             # 1,363,720,121,280, slot 11 freed to the 54-pool + pyramid, so it
+             # adds 0 candidates and its full volume to path-twin overlap.
+             #
+             # exit=2 in queue_nov.log, Sun 08 Nov 03:40:05 UTC, wall
+             # 128,588.97 s = 35.7 h. Band from QUEUE_after_el22.md, the SAME
+             # 548e7b2 commit of 1 Nov 2026 17:11:34 UTC -- which predates this
+             # run's 6 Nov 15:56:57 UTC launch by 5 days:
+             #     10,654,063,447.5 +/- 101,122  (stratified, SLOT 21 @POOL)
+             # survivors 10,654,060,452, z = -0.030.
+             #
+             # IDENTITY EXACT: the pre-launch table committed 10,654,060,452 for
+             # this config, and the run logged 10,654,060,452. Survivors do not
+             # depend on the derivation path, so this was required, not hoped for.
+             #
+             # Of the three admitted twins, this is the one whose z is nearest
+             # zero -- 0.03 sigma. That is not a better result than t21_free2's
+             # -1.465; both are the SAME survivor count their _p1 twin logged,
+             # and the z only measures how that one count sits against the
+             # binomial expectation. Reporting them as if one were stronger
+             # would be reading noise.
+             #
+             # Both detection arms 0 on its log: wording 0, shape 0.
+             't21_free11']
 ASSERTED  = ['t21_pool52','t21_pool52_rev','t21_pool40','t21_idx','t21_pathd','t21_pathe',
              't21_trust21','t21_trust21b','t21_bnw18','t21_bnw18b','t21_trustonly','t21']
 CHECKSUM = 128
@@ -331,6 +357,36 @@ if __name__ == '__main__':
     ue_d = ue21 // CHECKSUM + T24 // CHECKSUM_24 + T12 // CHECKSUM_12
     ua_d = ua21 // CHECKSUM + T24 // CHECKSUM_24 + T12 // CHECKSUM_12
     naive = sum(vol(b) for b in list(E.values()) + list(A.values()))
+
+    # THE DOUBLE-COUNT SPLITS INTO TWO QUANTITIES THAT MEAN DIFFERENT THINGS, and
+    # mixing them silently changed the units of a published series.
+    #
+    # A "path twin" is a config whose own _p1 counterpart is ALSO in the ledger. The
+    # two have identical word boxes and differ only in how many derivation paths they
+    # sweep, so the twin's box is 100% inside its counterpart's and contributes its
+    # ENTIRE volume to the double-count. That is not an accident of overlapping
+    # templates -- it is a deliberate, declared duplicate, run to buy the word
+    # "exhausted" over a path set rather than to cover new candidates.
+    #
+    # Accidental overlap is the other kind: boxes that happen to share candidates
+    # because they are variations on one template. That is the quantity the report's
+    # 3.31% (22 runs, 27 Sep) was measuring, and the one worth watching, because it
+    # says how much of the campaign re-covered ground it had already covered.
+    #
+    # The mixing started at the 24 Oct admission of t21_free20, the first twin. Every
+    # total-percentage figure from then on is accidental + twin, so 8.33% at 82 runs is
+    # NOT comparable with 3.31% at 22. Reported separately from 9 Nov 2026 so the
+    # series has a stable unit again.
+    allnames = list(E) + list(A)
+    twins = sorted(n for n in allnames if n + '_p1' in allnames)
+    boxes = dict(list(E.items()) + list(A.items()))
+    twin_overlap = sum(vol(boxes[n]) for n in twins)
+    total_overlap = naive - ua
+    accidental = total_overlap - twin_overlap
+    # The denominator must drop the twin boxes too, or the ratio still moves whenever a
+    # twin is admitted. Over non-twin volume, accidental/naive_nontwin is invariant to
+    # any twin admission -- which is the test that this split is the right one.
+    naive_nontwin = naive - twin_overlap
     print(f"\nEVIDENCED runs ({len(E)}) — logs present in this directory")
     print(f"  union {ue:>22,} candidates   {ue_d:>18,} derivations")
     print(f"\n+ ASSERTED runs ({len(A)}) — reported complete, no log here")
@@ -343,7 +399,13 @@ if __name__ == '__main__':
     print(f"  marginal contribution of the asserted runs: "
           f"{ua_d - ue_d:,} derivations")
     print(f"\n  naive sum {naive:>18,} candidates")
-    print(f"  double-counted {naive-ua:>14,}  ({(naive-ua)/naive:.2%})")
+    print(f"  double-counted {total_overlap:>14,}  ({total_overlap/naive:.2%})  = the two below")
+    print(f"    accidental overlap   {accidental:>14,}  "
+          f"({accidental/naive_nontwin:.2%} of non-twin naive {naive_nontwin:,})")
+    print(f"    path-twin overlap    {twin_overlap:>14,}  "
+          f"({len(twins)} declared twin(s): {', '.join(twins) if twins else 'none'})")
+    for n in twins:
+        print(f"      {n:<16} {vol(boxes[n]):>18,}  = 100% of {n}_p1's box")
     print(f"  disjoint boxes: {ne} evidenced, {na} combined")
     print(f"\n  CPU-days at 400/s: {ue_d/400/86400:,.0f} evidenced, "
           f"{ua_d/400/86400:,.0f} combined")
