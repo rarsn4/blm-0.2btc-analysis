@@ -132,13 +132,29 @@ DRAWN = [
     #
     # Only ONE of the four can be given a measured box with its text attributed.
     ("right-edge line (rune)", "\u0437\u0434\u0435\u0441\u044c \u0437\u0430\u0448\u0438\u0444\u0440\u043e\u0432\u0430\u043d\u044b \u0431\u0438\u0442\u043a\u043e\u0438\u043d\u044b \u043d\u0430 \u0447\u0451\u0440\u043d\u044b\u0439 \u0434\u0435\u043d\u044c \u043d\u043e\u043c\u0435\u0440", (1526, 40, 31, 975), "cipher", "REPORT 7; box measured 9 Nov: 42 glyphs + 7 three-dot separators"),
-    # The two fragments: a SECOND rune column exists on the left edge, x 50-86, y 627-1111,
-    # 29 glyph-sized runs whose ink (96-175 px) and height (10-18 px) match the right
-    # column's profile. But no 3-dot separator is detectable in it at ink<130, so the words
-    # cannot be cut apart, and WHICH fragment occupies WHICH glyphs is not established.
-    # The box is that column; the attribution is not measured.
-    ("rune fragment [BOX UNVERIFIED: column measured, attribution not]", "\u042f \u043d\u0430\u0434\u0435\u044e\u0441\u044c", (50, 627, 36, 484), "cipher", "REPORT 7; left-edge column measured 9 Nov"),
-    ("rune fragment [BOX UNVERIFIED: column measured, attribution not]", "\u0431\u0443\u0434\u0443\u0442 \u043f\u0440\u0438\u0441\u044b\u043b\u0430\u0442\u044c", (50, 627, 36, 484), "cipher", "REPORT 7; left-edge column measured 9 Nov"),
+    # [CORRECTED AGAIN 9 Nov 2026 -- the entry committed in 49e7c2a was WRONG, and it was
+    # mine.] That entry gave these two fragments the box (50, 627, 36, 484) and called it
+    # "a SECOND rune column ... 29 glyph-sized runs whose ink and height match the right
+    # column's profile". A threshold sweep disproves it. Over x 50-86, full height:
+    #
+    #     ink<     130   150   180   200   215        right column, same sweep
+    #     runs      48    44    24     2     1          49    50    49    38    25
+    #     glyphs    33    33    14     1     1          42    42    41    32    20
+    #     seps       3     2     3     0     0           7     8     7     5     4
+    #     pitch   23.7  25.9  47.4   577  1200        19.9  19.6  20.0  25.8  39.2
+    #
+    # The right column is STABLE across 50 grey levels; the left band COLLAPSES to a single
+    # run. Three more measurements say why: paper fraction (pixels >200) is 10.2% there
+    # against 57.2% in the right column; there is NO x-margin, ink being continuous from
+    # x 10-14 to x 139 at every threshold, where the right column has zero ink at
+    # x 1568-1599; and x 40-43 is a solid frame line, ~1,137 of 1,200 rows.
+    #
+    # So the 29 runs were GAPS IN ARTWORK, not glyphs separated by whitespace. A
+    # glyph-sized-component scan finds glyph-sized blobs in any textured region; that is
+    # what happened. Both fragments are therefore [BOX UNVERIFIED: not located], the same
+    # treatment as the clock caption, and the box below is the band searched.
+    ("rune fragment [BOX UNVERIFIED: not located]", "\u042f \u043d\u0430\u0434\u0435\u044e\u0441\u044c", (50, 0, 36, 1200), "cipher", "REPORT 7; search region, not a location -- see the 9 Nov note"),
+    ("rune fragment [BOX UNVERIFIED: not located]", "\u0431\u0443\u0434\u0443\u0442 \u043f\u0440\u0438\u0441\u044b\u043b\u0430\u0442\u044c", (50, 0, 36, 1200), "cipher", "REPORT 7; search region, not a location -- see the 9 Nov note"),
     # The clock caption was SEARCHED FOR AND NOT FOUND. The box is the region searched, not
     # a location. Three boxes around the dial (centre (470,937), radius ~182) at thresholds
     # <130/<180/<215 give ZERO glyph-sized components (ink 80-260 px, box 10-26 px) and no

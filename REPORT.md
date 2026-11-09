@@ -1826,8 +1826,8 @@ difference has never been tabulated.
 | slot | word | what supports the WORD | what supports the SLOT |
 |---|---|---|---|
 | 1 | `subject` | **written** in the Amendment copy, and carries the census's one underline (§9) | Section 1 numbering |
-| 3 | `tower` | **written** on the minute hand | clock 1+2, under a caption that says to add two numbers |
-| 13 | `moon` | **written** on the second hand | clock 12+1, same caption |
+| 3 | `tower` | **written** on the minute hand | clock 1+2, under a caption that says to add two numbers — **the caption is unlocated, see below** |
+| 13 | `moon` | **written** on the second hand | clock 12+1, same caption, same caveat |
 | 2 | `camera` | depicted | a count of cameras |
 | 4 | `mask` | depicted | a count of masked faces |
 | 7 | `liberty` | depicted | a count of crown points |
@@ -1845,6 +1845,26 @@ difference has never been tabulated.
 Three on association or inference. One — slot 11 — is not merely contested
 between two readings but has been tested and fits neither. Two rest on nothing
 that survives inspection: slot 20 by §2.16 above, and slot 10 on a glyph that
+> **[SCOPE, 9 Nov 2026] Slots 3, 13 and 21 rest on a caption this project has never
+> located.** The clock rows above derive their slot numbers by *adding* the two
+> numerals each hand falls between — 1+2 = 3, 12+1 = 13, 10+11 = 21. The only thing
+> in the artwork that licenses that addition is the rune caption `Сумма двух чисел`,
+> "sum of two numbers". Its 14 glyphs have **no measured location**: a defined search
+> around the dial (centre (470,937), radius ~182, ink < 130/180/215) returns zero
+> glyph-sized components, and its transcription is `u/Amadeus407`'s of 2021-03-06,
+> adopted into this report in `77f2c52` and never re-derived from pixels (§7's
+> provenance note).
+>
+> **Nothing here is retracted and the hand measurements are untouched.** The hands
+> themselves are measured — 332.38°, 302.62°, 238.49°, all three landing between the
+> numerals the table names, two of them within 1.4° of a midpoint — and §7.5 places
+> the caption among the numerals, which is exactly where small glyphs are hardest to
+> isolate from dial marks. The mechanism may be perfectly real. But a reader weighing
+> slots 3, 13 and 21 should see that the *sum* step, as opposed to the *direction*
+> step, rests on one solver's 2021 reading of a block that has never been found, and
+> that slot 21's hand is additionally four times further off its midpoint than the
+> other two.
+
 §7.4 establishes cannot be read by anyone, which §2.13 already called
 "load-bearing since 2020 on nothing but a glyph nobody can read" — and which
 the ink measurement below now detaches at the other end too.
@@ -3800,6 +3820,19 @@ sit midway between two adjacent numerals, within ~1.5°.
 The runes beneath decode to `Сумма двух чисел` — "sum of two numbers" — stating
 the mechanic outright.
 
+> **[SCOPE, 9 Nov 2026] The sum-of-two-numbers mechanism rests on block B, and block
+> B is unlocated.** That caption is the only thing in the artwork that states the
+> mechanism; without it the three hands are three directions and nothing tells a
+> reader to add the numerals they fall between. Its 14 glyphs have **no measured
+> location** — a defined search around the dial returned zero glyph-sized components —
+> and its transcription is `u/Amadeus407`'s of 2021-03-06, adopted here and never
+> re-derived from pixels. **The mechanism is not retracted**: the caption may well be
+> there, §7.5 places it among the numerals where small glyphs are hardest to isolate,
+> and the hands do land between numerals as it predicts. But a reader deciding whether
+> to trust slots 3, 13 and 21 should know that the sentence licensing the arithmetic
+> is one solver's reading of a block this project has never found. See the scope and
+> provenance notes in §7.
+
 **[MEASURED] The clock can only produce ODD slots.** Consecutive integers *n* and
 *n+1* sum to 2*n*+1, always odd; the wrap pair 12+1 = 13 is odd too. So the twelve
 adjacent pairs yield exactly {3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23} and nothing
@@ -4280,6 +4313,84 @@ different-letter baseline. So `X` cannot be read off a Futhark chart. **What thi
 not close:** a decorative font can map Basic Latin codepoints to shapes that are not
 the Unicode Runic characters, and the specific *AngloSaxon Runes* TrueType font is not
 installed here, so the font-substitution hypothesis is narrowed, not eliminated.
+
+#### [SCOPE, 9 Nov 2026] 99 rune letters are published here. 42 have a measured location; 57 do not
+
+Three rune blocks are decoded in this section. Only one of them has ever been located
+on the canvas by this project:
+
+| block | published decode | letters | location |
+|---|---|---|---|
+| **A** right-edge column | `здесь зашифрованы биткоины на чёрный день номер X` | **42** (41 Cyrillic + `X`) | **MEASURED**: x 1526–1557, y 40–1015; 42 glyphs in 8 groups, sizes 1,5,4,6,2,8,11,5, 7 three-dot separators, pitch 19.9 px/run |
+| **B** clock caption | `Сумма двух чисел` | **14** | **NOT LOCATED** |
+| **C** top block | `Я надеюсь что сюда будут присылать много биткоинов` | **43** | **NOT LOCATED** |
+| | | **99 / 57 unlocated** | |
+
+**This is a larger gap than anything else this report states.** §7.2's correlation
+figures, §7.4's glyph-X measurement and the monoalphabetic claim all rest on block A
+and only on block A. Nothing in the tree has ever measured a pixel of B or C.
+
+**What "not located" means here, precisely.** For B, three boxes around the dial
+(centre (470,937), radius ~182) at ink < 130/180/215 return **zero** glyph-sized
+components and no line of ~14 similar marks. For C, a sweep of every 31-px band on the
+canvas, scored by block A's own signature — paper fraction above 40% and a run count
+stable across three thresholds — finds **block A and nothing else**; the two best
+horizontal candidates each span x 36–1565 with seven gaps wider than 60 px, so they
+are slices through separate objects, not lines of letters. **It does not mean the
+blocks are absent.** §7.5 places B *"inside the clock face, among the numerals"*,
+which is exactly where small glyphs would be hardest to isolate from dial marks — and
+the scattered small components found there, over x 295–692 and y 760–1123, are
+consistent with either reading. The claim is that a defined search did not find them,
+not that they are not there.
+
+#### [PROVENANCE, 9 Nov 2026] B and C trace to a 2021 Reddit comment, not to a measurement
+
+Traced with `git log -S`. Both unlocated transcriptions, and block A's as well, enter
+the report in **one commit**:
+
+```
+77f2c52  2026-08-22  "Add rune cipher analysis (section 7), Electrum results, corrected tally"
+         REPORT.md | 256 ++++++-------      1 file changed, 214 insertions(+), 42 deletions(-)
+```
+
+**One file, no script, no stated source.** The pixel tooling that could have measured
+them arrived five weeks later: `imgio.py`, `census_crops.py` and `runelib.py` in
+`c8d9f39` (2026-09-27), `rune_x_check.py` in `f3c43c5` (2026-10-24). `runelib.py`
+reads x 1526–1557 only — block A. The other files that contain these strings
+(`word_census.py`, `brain_image_corpus.py`, `idiom_ink.py`) are aggregators;
+`word_census.py`'s own docstring says it *"reads NO pixels"* and *"adds no new reading
+of the image and no new word"*. **No file in this tree has ever measured B or C.**
+
+So of the three outcomes this trace was set up to distinguish, it is not (a) and not
+(c). It is **(b)**: the source is external, and it is identifiable. `u/Amadeus407`,
+comment `gpzromb`, **2021-03-06 18:27:47 UTC**, headed *"Verbatim spelling. It might
+make a difference."*, carries all three decodes character for character as this report
+publishes them:
+
+> *1. runes from above "Я надеюсь что сюда будут присылать много биткоинов." 2. runes
+> at the bottom "Сумма двух чисел". 3. Runes on the right "Здесь зашифрованы биткоины
+> на чёрный день номер X."*
+
+Verified against the raw Reddit JSON (sha256 `39d61b72…`), the same primary source
+§1.1's provenance note uses.
+
+**The three blocks therefore have different warrants, and the section did not
+distinguish them:**
+
+- **Block A — [EXTERNAL, independently confirmed].** It came from this comment too,
+  but this project has since re-measured it: 42 glyphs, group sizes exact against all
+  eight words, same-letter correlation +0.586 against +0.070 for different letters.
+  The decode was adopted; the confirmation is ours.
+- **Blocks B and C — [EXTERNAL, not independently measured].** Adopted from the same
+  comment and never checked against a pixel. They are **not** unreconstructable in the
+  way §3's retracted 3.72% was — the source is known, dated and quotable — but they
+  are one solver's reading of 2021, carried for five years and never re-derived.
+
+Nothing here is retracted. The decodes may be entirely right; `Сумма двух чисел`
+reproduces as the clock's caption in meaning, and §7.2's measured confirmation of
+block A raises the prior on the same hand having read the others correctly. What
+changes is the label: two of the three blocks are **somebody else's measurement**, and
+this section presented all three in one voice.
 
 ### 7.3 The alphabet
 
@@ -5413,7 +5524,7 @@ written; when the two drift, the suite's silence is not evidence.
 plausible-looking ones.** A 1.2% deviation is invisible to a sanity check and
 fatal to correctness.
 
-**Five rules, each learned by getting it wrong first:**
+**Six rules, each learned by getting it wrong first:**
 
 - **A number that lands where you expected is the one to check twice.** **Five**
   instances in a single day, each a figure that agreed with its author and so was
@@ -5448,6 +5559,21 @@ fatal to correctness.
   kept an older parser. This is the same failure the maintained tally had, one
   level up. Whatever computes a figure must exist once, and the copy that gets
   run must be the copy that gets published.
+
+- **A glyph-sized-component scan is not evidence of text until the run count holds
+  across a threshold sweep.** Filtering an image for components the size of a letter
+  returns letter-sized components from any textured region, and a list of them looks
+  exactly like a transcription waiting to happen. On 9 Nov a left-edge band was
+  reported as "a second rune column, 29 glyph-sized runs" and written into
+  `census_crops.DRAWN` on that basis. It is not text: sweep the threshold and the run
+  count goes 48, 44, 24, 2, 1 at ink < 130/150/180/200/215, pitch 23.7 px/run to 1,200,
+  while the real column next to it holds 49, 50, 49, 38, 25 at pitch 19.9 to 39.2.
+  Real text on paper survives a 50-level sweep; gaps in artwork do not. The cheap
+  discriminators, in order: does the band have **paper** (10.2% of pixels above 200
+  there, 57.2% in the real column), does it have a **margin** (none; the real column
+  has 32 blank columns beside it), and does the **run count hold**. The wrong entry
+  stood for one commit. The scan that produced it was mine, and it agreed with what
+  the census said should be there — which is rule one.
 
 - **A pattern match against §8 needs a base rate before it counts.** The artwork
   is full of numbered sequences, absences and near-misses. "This looks like the
