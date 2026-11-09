@@ -483,3 +483,66 @@ An `_all` run is what closes that.
 
 **Ledger effect: 0 new candidates admitted.** `tally2.py` counts mnemonic derivations;
 these are brainwallet keys, a different object, and §2.12 reports them separately.
+
+## t12full_mp (9 Nov 2026): making §2.2 evidenced instead of asserted
+
+Committed before launch, 9 Nov 2026. **Bands first, then the run.** Self-test gate PASS
+(cached) on `solver2_jac` sha256 `2cace98f30d1`, the same bytes as the stamp of
+2026-11-02T06:58:13Z.
+
+Why: §2.2 claims the 12-word template is dead over its complete space, but it has NO LOG
+anywhere, `t12` appears 0 times in `tally2.py`, and whatever ran predates the 28 Sep
+three-encoding change. It reads as [EXHAUSTED] under §0 and rests on prose. The space is
+4,194,304 candidates -- under a second of GPU -- so it is cheaper to earn than to caveat.
+This does NOT touch the 69-day queue; `t21_free2` keeps running.
+
+### The band model, stated before the numbers
+
+`t12full_mp.conf` holds slot 12 = `vote` **PINNED**, with slots 6 and 8 `@FULL` over all
+2048. So the 4-bit checksum is a **filter, not an identity** -- rule 4's third case,
+binomial, p = 1/16. It is **not** stratified: stratification arises when the checksum-
+bearing slot is a restricted pool, and here the entropy bits vary fully.
+
+```
+candidates   2048^2                      = 4,194,304
+mu           candidates / 16             =   262,144
+sigma        sqrt(4194304 * (1/16)(15/16)) =      495.74
+band         262,144 +/- 496  (1 sigma); admit if |z| < 3
+```
+
+Independent support for the binomial model, measured before this run: the CPU subset in
+`t12_family_check.py` enumerated 10,240 phrases of this same space and found **616
+checksum-valid against 640 expected, z -0.98**.
+
+| config | candidates | band (survivors) | ledger derivations (cand/16) | keys derived | paths |
+|---|---|---|---|---|---|
+| t12full_mp, empty passphrase | 4,194,304 | 262,144 +/- 496 | 262,144 | 3,145,728 | 4 |
+| t12full_mp + pw2.txt, 65 passphrases | 4,194,304 | 262,144 +/- 496 | 262,144 | 204,472,320 | 4 |
+
+`keys derived` = survivors x 4 paths x 3 encodings (`derive_multi3`), and x 65 for the
+second row. The ledger's `derivations` column is candidates/16 and does not multiply by
+paths or encodings, which is the convention every other row in `tally2.py` uses.
+
+### pw2.txt, and a check fixed before running
+
+`pw2.txt` sha256 `a60f9ef34ebe85a6a586fd3876b6c04806d19fb0d582ee04ac14e1e2ccf08c73`,
+**65 lines, of which line 1 is EMPTY** -- so the empty passphrase is one of the 65 and
+the first row above is a strict subset of the second.
+
+A passphrase does not affect BIP39 checksum validity, only seed derivation, so the
+survivor count must be **identical** across both rows. Pre-registered accordingly:
+
+- if the counter reports per phrase-space, run B's survivors must equal run A's exactly;
+- if it reports cumulatively, run B's survivors must equal **exactly 65 x run A's**.
+
+Either way the equality is **exact, not statistical**, and a mismatch means the
+passphrase loop is not doing what the config says -- which is the §1.9 failure mode and
+would be reported before anything else runs.
+
+### Decision rule
+
+In band -> admit both to `EVIDENCED` in `tally2.py` as a 12-word box with its own
+divisor (16), kept separate from the 21-word union and floored separately, the way the
+24-word tail already is. Out of band, or HIT count non-zero, or the exact equality above
+failing -> **stop and report before anything else**. HIT lines read only with
+`grep -c -E '^HIT[[:space:]]+index'`.
