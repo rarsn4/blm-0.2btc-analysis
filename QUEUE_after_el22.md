@@ -546,3 +546,116 @@ divisor (16), kept separate from the 21-word union and floored separately, the w
 24-word tail already is. Out of band, or HIT count non-zero, or the exact equality above
 failing -> **stop and report before anything else**. HIT lines read only with
 `grep -c -E '^HIT[[:space:]]+index'`.
+
+---
+
+## Old Electrum, `breathe` at two positions — PRE-REGISTERED 9 Nov 2026, NOT YET RUN
+
+Committed before the candidate list was built and before anything was derived. Written in
+this order deliberately: the membership test below is a wordlist lookup, not an
+enumeration, so it ran first in order to state an exact candidate count here. No seed has
+been derived.
+
+### Why this scheme and not BIP39
+
+`breathe` is **not a BIP39 word** — 0 matches in `configs/bip39_en.txt` — so a seed
+requiring it at two positions **cannot be BIP39 at any length**. It *is* in the
+old-Electrum list, line 245 of 1,626 (`configs/electrum_old_en.txt`). Old Electrum is
+therefore the only scheme in which the hypothesis is even expressible, and it is the one
+scheme the external ledger (`Desalzes/bnw-0.2btc-analysis`) closed **without compute** —
+its own words, *"settled by reasoning and CPU checks; no GPU run, nothing in the ledger."*
+Nothing in their repository requires `breathe` at two positions; they use it as a
+passphrase, a "25th word", or at a single slot.
+
+Both occurrences are **measured** in our own census, at the coordinates it records:
+`census_crops.py:94` hoodie line `(900, 240, 300, 180)`, `census_crops.py:97` bust neck
+band `(1355, 528, 75, 17)`.
+
+### The membership test, run before pricing  [MEASURED]
+
+Census words that are in the 1,626-word old-Electrum list:
+
+| census section | distinct words | in the old-Electrum list |
+|---|---:|---:|
+| `A_display` (measured) | 110 | **32** |
+| `B_microtext` (a SAMPLE, not a census — see `word_census.py`) | 41 | 6 |
+| union | 144 | 37 |
+
+The 32 from `A_display`: `any`, `been`, `black`, `brave`, `breathe`, `crime`, `end`,
+`except`, `exist`, `find`, `first`, `future`, `matter`, `moon`, `more`, `neither`, `new`,
+`only`, `order`, `party`, `pay`, `peace`, `picture`, `place`, `real`, `shall`, `stop`,
+`subject`, `tower`, `welcome`, `within`, `world`. Excluding `breathe` itself leaves a
+**31-word pool** for the other ten positions.
+
+**It is 32, not a handful.** That matters, because it makes the full hypothesis far too
+large to run — see the pricing.
+
+### THE BAND IS AN IDENTITY, and a stronger one than "no checksum" implies
+
+Old Electrum is usually described as having no checksum, so that every word combination is
+a valid seed. **Our own implementation records that this is not exactly true**
+(`old_electrum.py` header): each 3-word group encodes `x < 1626^3 = 4,299,816,375`, and
+`'%08x'` overflows to nine hex digits when `x >= 2^32`, which Electrum rejects as
+not-a-seed. The surviving fraction is `(2^32 / 1626^3)^4 = 99.55%`.
+
+So the correct pre-registration is **not** `survivors = candidates`. It is better than a
+band and better than a statistical identity:
+
+> **Validity is deterministic per candidate and computable in advance.** For any specified
+> candidate list, the exact number of valid old-Electrum seeds is counted by testing each
+> candidate's four groups for `x < 2^32`, with no derivation. That count is fixed and
+> written down BEFORE the run. The run must report **exactly** that number.
+>
+> **No sigma and no z.** This is the same shape as `t21_top6_loo21`, where slot 21 `@FULL`
+> made survivors an exact identity rather than a binomial draw — rule 4.
+>
+> **Any other survivor count is a machine fault and VOIDS the run.** Not a surprising
+> result, a broken tool. This is exactly the role §2.12's acceptance identity plays for
+> brainwallets: a brainwallet has no checksum, so acceptance below 1.0 means work was
+> silently dropped, the negative does not stand, and nothing is recorded.
+
+### Pricing  [MEASURED, 9 Nov 2026]
+
+Measured cost of our deriver, timed on throwaway word lists through the real
+`from_words` path: **106.5 ms per candidate, 9.4 candidates/s.** The 100,000-round SHA256
+stretch dominates; there is no GPU path for this scheme and no checksum filter to reduce
+the work, so candidates and derivations are 1:1.
+
+**"Checksumless means seconds" does not survive the combinatorics.** The absence of a
+1/128 filter is swamped by a per-candidate cost about five orders of magnitude above a
+BIP39 derivation in the GPU pipeline.
+
+| shape | candidates | at 9.4/s |
+|---|---:|---:|
+| **Tier 1.** Ten others FIXED in one order; `breathe` swept over all `C(12,2)` position pairs | **66** | **7 s** |
+| **Tier 2.** Ten others permuted, `breathe` positions fixed: `10!` | 3,628,800 | **4.5 CPU-days** |
+| **Tier 3.** Full `12!/2!` — `breathe` twice plus ten fixed others, every ordering | 239,500,800 | **295 CPU-days** |
+| The actual hypothesis: *which* ten of the 31, times Tier 3 — `C(31,10) = 44,352,165` sets | ~1.06e16 | not runnable |
+
+### What is authorised here
+
+**Tier 1 only, and nothing else.** 66 candidates, about 7 seconds, on the CPU, touching no
+GPU and not the queue. Tiers 2 and 3 are priced here so the decision is on the record; they
+are **not** authorised and should not be started without a separate committed band.
+
+Pre-conditions, all of which must hold before the first derivation:
+
+1. `python3 old_electrum.py selftest` prints **ALL PASS**. Ran 9 Nov 2026: ALL PASS,
+   including the planted-hit test and the two negative controls (the KAT seed against the
+   real target gives no hit; against its own h160 it does).
+2. The exact valid-candidate count for the 66 is computed and written into this section
+   **before** deriving.
+3. Target blob per rule 8: the bytes compared must equal
+   `ccbd031e54cde2a3189fd59bc49f731367a1779e`, never the word-swapped
+   `1e03bdcca3e2cd549bd59f1813739fc49e77a167`.
+
+### Decision rule
+
+Survivor count exactly the pre-computed valid count, and 0 hits → record as **TESTED**,
+not EXHAUSTED: 66 candidates is one ordering of one word set, and says nothing about the
+other 44 million sets. Admitted to `tally2.py` only if it ever becomes a box worth
+carrying, which at Tier 1 it is not — it is a probe.
+
+Any other survivor count → **VOID, stop and report before anything else runs.** Hit count
+read only with the format-agnostic detection rule in `DO_NOT_PUSH`; on a nonzero count,
+the HIT protocol applies and nothing else happens first.
