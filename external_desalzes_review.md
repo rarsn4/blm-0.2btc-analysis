@@ -1,6 +1,8 @@
 # External review: `Desalzes/bnw-0.2btc-analysis`
 
 **Read-only review, 9 Nov 2026.** No edits to `REPORT.md`, no runs, no code of theirs executed.
+**Section 6 was revised later the same day** — see the marked note there; the substance did not
+change, the addressee did.
 Their repository is **data**. Every figure below that comes from it is graded **[THEIRS]** and is
 *their* claim until we reproduce it. The overlap figures are graded **[MEASURED]** because they were
 computed by *our* `tally2.py` on *their* config files — our parser, our set arithmetic, their data.
@@ -143,7 +145,7 @@ INTERSECTION                        39,137,895
 4. **Unresolved, and flagged rather than guessed:** whether those four CPU-only `t21_*` runs are
    inside the 718 at all. `TESTED.md` says pre-ledger work "is not in it" and the family table has no
    `t21_*` row, yet the excludes table lists `t21_*` as a family that ran. **Do not cite "718
-   including our t21 variants" until this is settled with them.**
+   including our t21 variants" until it is settled.**
 
 Their fifth 21-word config, `ld40_21word_p.conf`, is in a **second dialect**
 (`SCHEME`/`FIX`/`REQUIRE`/`PASS`, `POOL @WORDLIST`) that our parser does not read, so it is **not
@@ -205,8 +207,9 @@ record **withdrawing** the claim that the funder's wallet is a different wallet 
 Bearing on ours: it is a claim about the *funding* transaction, so our §10 chronology rule applies to
 anything derived from it. Their own 2026-10-21 row goes further — *"A Trezor reading: 24 words … 24
 words closed as a reading, not as a search"* — which is a **24-word** conclusion, where our §5 argues
-{18, 21, 24} narrowing to 21. **That is a live contradiction with our length argument and should be
-put to them directly.**
+{18, 21, 24} narrowing to 21. **That is a live contradiction with our length argument, and it is
+recorded here unresolved.** It cannot be settled from their repository alone: what is missing is
+their reasoning, not their data.
 
 ### 4.3 The whitepaper edits — ten, not eleven, and not typos
 
@@ -288,20 +291,54 @@ no 1/128 filter. Before it runs it needs a band committed per rule 10 — and fo
 scheme the band is an **exact identity**, survivors = candidates, which makes it one of the cleanest
 runs available to us.
 
+> **[CORRECTED 9 Nov 2026, by the run this section proposed]** "Checksumless" is not exactly right,
+> and our own `old_electrum.py` header says so. Each 3-word group encodes a value below 1626³ and the
+> `'%08x'` encoding overflows at 2³², which Electrum rejects — so **99.55%** of random seeds survive,
+> not all of them. The band is still an identity, and still stronger than a band, because validity is
+> deterministic per candidate and computable with **no** derivation; but the valid count has to be
+> *computed* in advance rather than assumed equal to the candidate count. In the tier that ran it was
+> 66 of 66. **"Seconds" held only for that tier**: measured end-to-end throughput is **1.507
+> candidates/s**, not the 9.4/s first priced, because a search needs ten EC address derivations per
+> seed and the first figure timed seed construction alone. Priced in full in `QUEUE_after_el22.md`.
+
 ---
 
-## 6. What to do with this, in order of value
+## 6. Where this leaves us
 
-1. **Put the 24-word Trezor reading to them** (§4.2). It contradicts our §5 directly and they have
-   dated work behind it.
-2. **Ask whether the four CPU-only `t21_*` runs are inside the 718** (§2.4). It changes whether their
-   headline can be cited alongside ours at all.
-3. **Ask the double-`breathe` question** (§5). It is cheap for us, legal only in the scheme they
-   closed without compute, and both occurrences are measured in our pixels.
-4. **Build a reader for their second config dialect** (`SCHEME`/`FIX`/`REQUIRE`/`PASS`) if their
-   coverage is ever to be credited. Without it, `ld40` and most of their 718 cannot be measured
-   against our union at all.
-5. **Do not reprioritise the GPU queue** (§3). Measured: they cover between 0 and 13 ppm of it.
+> **[REVISED 9 Nov 2026 — marked, not silently replaced]** This section was first written as an
+> agenda addressed to the other operator: *"put this to them"*, *"ask them"*. That register was wrong
+> for this file. This is a public repository, which is not a place to address questions to another
+> searcher, and whether to approach them at all is the owner's decision rather than this review's.
+> The findings below are unchanged and none was softened; only the addressee is. **Nothing has been
+> sent to anyone** — no issue, no comment, no gist, no message, no mention.
+
+### 6.1 What we could act on alone, and did
+
+1. **Do not reprioritise the GPU queue** (§3). Measured: their coverage of each remaining config is
+   between zero and thirteen parts per million. **Acted on** — the queue was left exactly as it
+   stood, and `t21_free4` ran through this review without interruption.
+2. **The double-`breathe` hypothesis needed no correspondence at all** (§5). It was pre-registered
+   against an identity and its first tier was run here on 9 Nov: 66 candidates, 66 valid as
+   pre-computed, identity PASS, 660 addresses, **0 hits**, 43.8 s. Graded `[TESTED]`, not
+   `[EXHAUSTED]` — one ordering of one eleven-word set out of 44,352,165. See `QUEUE_after_el22.md`
+   and `REPORT.md` §2.6. What the review contributed was the *evidence that nobody had tried it*, and
+   that stands whether or not anyone is ever asked.
+3. **A reader for their second config dialect** (`SCHEME`/`FIX`/`REQUIRE`/`PASS`) is ours to build and
+   needs nobody's cooperation. Unbuilt. Without it, `ld40` and most of their 718 cannot be measured
+   against our union at all — so any claim about their total coverage stays unmeasured, not disputed.
+
+### 6.2 Unresolved, and deliberately left so
+
+4. **The 24-word Trezor reading** (§4.2) contradicts our §5 length argument directly, and they have
+   dated work behind it. It cannot be settled from their repository alone, because what is missing is
+   their reasoning rather than their data. **Unresolved. Not escalated.**
+5. **Whether the four CPU-only `t21_*` runs are inside the 718** (§2.4) decides whether their headline
+   and ours can ever be stated side by side. Until it is settled, do not cite *"718 including our t21
+   variants"*. **Unresolved. Not escalated.**
+
+Both are recorded so that the next reader inherits the open question rather than a guess at its
+answer. **Whether either is ever put to the other operator is the owner's call, and it has not been
+taken.** This file is a measurement of a public repository, not correspondence with its author.
 
 **Nothing in this file is admitted to `tally2.py`.** Their runs are not ours, their logs are not in
 our tree, and rule 7 admits a run on completion in band *with its log present*. The most any of it can
