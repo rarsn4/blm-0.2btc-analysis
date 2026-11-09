@@ -22,6 +22,26 @@
 #      A commit message is never exempt.
 # If origin/main cannot be resolved: BLOCK, never a fall-back to the current tree only.
 # A match's text is never printed: only commit, file, line and kind. Exit 0 PASS, 1 BLOCK.
+#
+# HOW TO FIX A PHRASE-GUARD BLOCK IN A PROSE OR CODE FILE (added 2026-11-09, after the guard
+# correctly blocked a word list written into external_desalzes_review.md):
+#   BREAK THE RUN. DO NOT ADD AN ALLOW-LIST ENTRY. A pinned blob for a 12-word run in a prose
+#   file sets a precedent that empties the guard of meaning: the next such file gets exempted
+#   by reflex, and the pin then survives every later edit of the surrounding text. Allow-list
+#   entries are for files reviewed once by hand whose content IS a word pool -- REPORT.md's
+#   quoted pools, brain_image_keys.txt -- never for prose that happens to list words.
+#   The guard runs over the TOKEN SEQUENCE, not the raw text, so:
+#     - commas, backticks, newlines and other punctuation DO NOT break a run;
+#     - digits DO NOT break a run either, because the tokeniser skips them;
+#     - ONLY a non-BIP39 word token breaks a run.
+#   Safe breakers, each checked against configs/bip39_en.txt on 2026-11-09:
+#     and  nor  does  it  the  of  not  in  ours  theirs  plus  these
+#   NOT safe -- these are BIP39 words and will extend the run instead:
+#     hold  pool  also  six  ten  picture  welcome
+#   Watch identifiers as well: a variable named TEN counts as the word "ten", which is how
+#   breathe_twice_tier1.py reached an 11-long run one short of the limit before it was split.
+#   Known near-miss, worth not making worse: QUEUE_after_el22.md line 99 quotes the head of
+#   the BIP39 list and sits at a run of 10, two below the limit.
 cd "$(dirname "$0")" || exit 1
 # WIDENED 2026-11-09. The pattern was '^\s*HIT[[:space:]]+index|^\s*phrase[[:space:]]*:' --
 # solver2_jac's output format and nothing else's -- and a control proved it let a real hit

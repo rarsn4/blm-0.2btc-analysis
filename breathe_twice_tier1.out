@@ -1,0 +1,16 @@
+rule 8 target blob OK: ccbd031e54cde2a3189fd59bc49f731367a1779e
+all 11 distinct words are in the 1626-word list
+candidates enumerated: 66  (C(12,2))
+validity cross-check: the module's mn_decode and the header's stated group rule agree on 66/66
+
+PRE-COMPUTED VALID COUNT (no derivation): 66 of 66
+The run must report EXACTLY this many derived candidates. Any other count is a
+machine fault and VOIDS the run -- nothing is recorded.
+
+derived 66   rejected as not-a-seed 0   elapsed 43.8s (1.5/s)
+addresses checked: 66 seeds x 2 chains x 5 indices = 660
+IDENTITY PASS: derived 66, pre-computed 66
+HIT count: 0
+
+RESULT [TESTED, not EXHAUSTED]: one ordering of one 11-word set, 66 candidates.
+Says nothing about the other C(31,10)-1 = 44,352,164 sets.

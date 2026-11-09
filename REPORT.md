@@ -1046,11 +1046,61 @@ BIP39 and had never been searchable by anyone.
 > results are all it disclosed: no report text, configs, ledger figures or
 > planned runs.]*
 
-#### Pre-2.0 "old" Electrum — implemented, self-tested, and **not searchable**
+#### Pre-2.0 "old" Electrum — implemented, self-tested, the full space not searchable, and until 9 Nov 2026 **no subset had ever been tried**
 
-**[TESTED, 4 Nov 2026] The scheme is built and verified; the search is not
-affordable.** `old_electrum.py` implements it; `python3 old_electrum.py selftest`
-prints ALL PASS; no candidate was run beyond the self-test vectors.
+**[TESTED, 4 Nov 2026; first subset run 9 Nov 2026] The scheme is built and
+verified; the full search is not affordable; and that is a separate claim from
+whether anything was attempted.** `old_electrum.py` implements it;
+`python3 old_electrum.py selftest` prints ALL PASS.
+
+**Two claims, and until 9 Nov 2026 only the first was written down here.**
+
+1. *The full space is unaffordable* — the arithmetic below, and it holds.
+2. *No subset of it had ever been run.* From 4 Nov to 9 Nov 2026 this section's
+   heading said "not searchable", which a reader takes as **"we looked and the space
+   is too big."** The measured truth was stronger and worse: **nothing had been
+   derived at all** beyond the self-test vectors, no candidate list had ever been
+   built, and there was no log of any run in either tree. An unaffordable space and
+   an untried one are different statements, and conflating them let the second hide
+   inside the first.
+
+**As of 9 Nov 2026 the first subset has been run.** Pre-registered in
+`QUEUE_after_el22.md` before the candidate list was built: `breathe` at two
+positions — legal here and **impossible in BIP39, where `breathe` is not a word** —
+with ten others drawn from the 32 measured `A_display` census words that are in the
+1,626-word list. Tier 1 is 66 candidates, `C(12,2)` placements with the ten others
+fixed in one order.
+
+```
+rule 8 target blob OK            ccbd031e54cde2a3189fd59bc49f731367a1779e
+validity cross-check             mn_decode and the header's group rule agree 66/66
+PRE-COMPUTED valid count          66 of 66   (computed with NO derivation)
+derived                           66         rejected as not-a-seed 0
+IDENTITY                          PASS       derived 66 = pre-computed 66
+addresses checked                 660        66 seeds x 2 chains x 5 indices
+HIT count                         0
+elapsed                           43.8 s
+```
+
+**The band was an identity, not a band, and a stronger one than "no checksum"
+implies.** Old Electrum is usually called checksumless; `old_electrum.py`'s own
+header records that it is not exactly so — each 3-word group encodes
+`x < 1626^3`, and `'%08x'` overflows at `x >= 2^32`, which Electrum rejects, so
+**99.55%** of random seeds survive. Validity is therefore deterministic per
+candidate and **computable in advance with no derivation**, so the exact valid count
+was written down before the run and the run had to report exactly it. No sigma and
+no z — the `t21_top6_loo21` shape (rule 4). Any other count would have been a
+machine fault voiding the run, the role §2.12's acceptance identity plays for
+brainwallets.
+
+**Graded [TESTED], not [EXHAUSTED], and the reason is the scale of what is left.**
+66 candidates is one ordering of one eleven-word set out of
+`C(31,10) = 44,352,165` sets. Measured end-to-end cost is **1.507 candidates/s**
+(the 100,000-round SHA-256 stretch plus ten EC address derivations per seed), so
+every ordering of one fixed set — `12!/2! = 239,500,800` — is **1,840 CPU-days**,
+and the hypothesis in full is about `1.06e16` candidates. **The probe answers the
+question "has anyone required `breathe` at two positions?" with "now someone has,
+for one set, and it is not the answer."** It does not touch the rest.
 
 Old Electrum shares nothing with v2 but the name:
 

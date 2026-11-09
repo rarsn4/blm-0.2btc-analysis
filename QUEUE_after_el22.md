@@ -625,12 +625,21 @@ the work, so candidates and derivations are 1:1.
 1/128 filter is swamped by a per-candidate cost about five orders of magnitude above a
 BIP39 derivation in the GPU pipeline.
 
-| shape | candidates | at 9.4/s |
-|---|---:|---:|
-| **Tier 1.** Ten others FIXED in one order; `breathe` swept over all `C(12,2)` position pairs | **66** | **7 s** |
-| **Tier 2.** Ten others permuted, `breathe` positions fixed: `10!` | 3,628,800 | **4.5 CPU-days** |
-| **Tier 3.** Full `12!/2!` — `breathe` twice plus ten fixed others, every ordering | 239,500,800 | **295 CPU-days** |
-| The actual hypothesis: *which* ten of the 31, times Tier 3 — `C(31,10) = 44,352,165` sets | ~1.06e16 | not runnable |
+| shape | candidates | at 9.4/s (as priced) | at 1.507/s (MEASURED by the Tier-1 run) |
+|---|---:|---:|---:|
+| **Tier 1.** Ten others FIXED in one order; `breathe` swept over all `C(12,2)` position pairs | **66** | 7 s | **43.8 s, actual** |
+| **Tier 2.** Ten others permuted, `breathe` positions fixed: `10!` | 3,628,800 | 4.5 CPU-days | **27.9 CPU-days** |
+| **Tier 3.** Full `12!/2!` — `breathe` twice plus ten fixed others, every ordering | 239,500,800 | 295 CPU-days | **1,840 CPU-days** |
+| The actual hypothesis: *which* ten of the 31, times Tier 3 — `C(31,10) = 44,352,165` sets | ~1.06e16 | not runnable | not runnable |
+
+*[PRICING CORRECTED 9 Nov 2026 by the Tier-1 run itself. The 9.4/s column is kept
+because it is what was committed before the run, and it was **optimistic by 6.2x**: it
+timed `from_words` alone, which is the seed stretch, and omitted the ten EC address
+derivations per seed that the search actually needs (2 chains x 5 indices). The measured
+end-to-end figure is 66 candidates in 43.8 s = 1.507/s. Rule 6's spirit applies to CPU
+work too — a rate is only as good as the boundary it was measured across, and a rate
+measured over part of the work prices the wrong thing. Tiers 2 and 3 remain
+unauthorised, and are now 6.2x further out of reach than when they were priced.]*
 
 ### What is authorised here
 
@@ -653,7 +662,14 @@ Pre-conditions, all of which must hold before the first derivation:
 
 Survivor count exactly the pre-computed valid count, and 0 hits → record as **TESTED**,
 not EXHAUSTED: 66 candidates is one ordering of one word set, and says nothing about the
-other 44 million sets. Admitted to `tally2.py` only if it ever becomes a box worth
+other 44 million sets.
+
+**RAN 9 Nov 2026 — in band, or rather on the identity.** Pre-computed valid count 66 of
+66, derived 66, **IDENTITY PASS**, 660 addresses checked, **HIT count 0**, 43.8 s. The
+validity figure was cross-checked two independent ways before deriving — the module's own
+`mn_decode` and the group rule stated in its header — which agreed 66/66. Recorded as
+**[TESTED]** in REPORT §2.6 and captured in `breathe_twice_tier1.out`. Not admitted to
+`tally2.py`: it is a probe in a different scheme, not a box in the 21-word union. Admitted to `tally2.py` only if it ever becomes a box worth
 carrying, which at Tier 1 it is not — it is a probe.
 
 Any other survivor count → **VOID, stop and report before anything else runs.** Hit count
