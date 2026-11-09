@@ -118,10 +118,35 @@ DRAWN = [
     ("13th Amendment copy", AMENDMENT_TEXT, (1296, 775, 205, 150), "magnified", "letterform_audit 1.3"),
     ("bottom whitepaper caption", CAPTION_TEXT, (25, 1138, 1040, 28), "magnified", "letterform_audit 1.5"),
     ("E-of-BRAVE micro-text", MICRO_TEXT, (885, 468, 90, 117), "measured", "letterform_audit 1.4"),
-    ("clock caption (rune)", "\u0421\u0443\u043c\u043c\u0430 \u0434\u0432\u0443\u0445 \u0447\u0438\u0441\u0435\u043b", (330, 790, 170, 120), "cipher", "REPORT 7"),
-    ("right-edge line (rune)", "\u0437\u0434\u0435\u0441\u044c \u0437\u0430\u0448\u0438\u0444\u0440\u043e\u0432\u0430\u043d\u044b \u0431\u0438\u0442\u043a\u043e\u0438\u043d\u044b \u043d\u0430 \u0447\u0451\u0440\u043d\u044b\u0439 \u0434\u0435\u043d\u044c \u043d\u043e\u043c\u0435\u0440", (1560, 40, 40, 1120), "cipher", "REPORT 7"),
-    ("rune fragment", "\u042f \u043d\u0430\u0434\u0435\u044e\u0441\u044c", (1560, 40, 40, 1120), "cipher", "REPORT 7"),
-    ("rune fragment", "\u0431\u0443\u0434\u0443\u0442 \u043f\u0440\u0438\u0441\u044b\u043b\u0430\u0442\u044c", (1560, 40, 40, 1120), "cipher", "REPORT 7"),
+    # [BOXES CORRECTED 9 Nov 2026] All four 'cipher' boxes were wrong. Measured on the
+    # master image at its pinned sha256. The STRINGS ARE UNCHANGED: corpus_gate.py matches
+    # on the string and never on the box, so no gate verdict moves -- but its cache keys on
+    # file content, so this edit forces it to re-prove.
+    #
+    # What was wrong. Three of the four shared (1560, 40, 40, 1120) = x 1560-1600. That is
+    # the FRAME LINE: x 1560-1564 each carry 1,124 ink px, the full height of the band, and
+    # x 1568-1599 is blank margin. The glyphs are at x 1529-1555. runelib.py's
+    # XA,XB = 1526,1557 was right all along and this list silently disagreed with it.
+    # 'clock caption (rune)' pointed at (330, 790, 170, 120), which holds 95 ink px at 0.5%
+    # density across 13 of its 170 columns -- nothing is there.
+    #
+    # Only ONE of the four can be given a measured box with its text attributed.
+    ("right-edge line (rune)", "\u0437\u0434\u0435\u0441\u044c \u0437\u0430\u0448\u0438\u0444\u0440\u043e\u0432\u0430\u043d\u044b \u0431\u0438\u0442\u043a\u043e\u0438\u043d\u044b \u043d\u0430 \u0447\u0451\u0440\u043d\u044b\u0439 \u0434\u0435\u043d\u044c \u043d\u043e\u043c\u0435\u0440", (1526, 40, 31, 975), "cipher", "REPORT 7; box measured 9 Nov: 42 glyphs + 7 three-dot separators"),
+    # The two fragments: a SECOND rune column exists on the left edge, x 50-86, y 627-1111,
+    # 29 glyph-sized runs whose ink (96-175 px) and height (10-18 px) match the right
+    # column's profile. But no 3-dot separator is detectable in it at ink<130, so the words
+    # cannot be cut apart, and WHICH fragment occupies WHICH glyphs is not established.
+    # The box is that column; the attribution is not measured.
+    ("rune fragment [BOX UNVERIFIED: column measured, attribution not]", "\u042f \u043d\u0430\u0434\u0435\u044e\u0441\u044c", (50, 627, 36, 484), "cipher", "REPORT 7; left-edge column measured 9 Nov"),
+    ("rune fragment [BOX UNVERIFIED: column measured, attribution not]", "\u0431\u0443\u0434\u0443\u0442 \u043f\u0440\u0438\u0441\u044b\u043b\u0430\u0442\u044c", (50, 627, 36, 484), "cipher", "REPORT 7; left-edge column measured 9 Nov"),
+    # The clock caption was SEARCHED FOR AND NOT FOUND. The box is the region searched, not
+    # a location. Three boxes around the dial (centre (470,937), radius ~182) at thresholds
+    # <130/<180/<215 give ZERO glyph-sized components (ink 80-260 px, box 10-26 px) and no
+    # line of ~14 similar small marks; the small components that do exist are scattered over
+    # x 295-692, y 760-1123 and are dial marks and numerals. This does not say the block is
+    # absent -- REPORT 7.3 transcribes 14 glyphs for it -- it says the recorded box is wrong
+    # and that a defined search did not relocate it.
+    ("clock caption (rune) [BOX UNVERIFIED: not located]", "\u0421\u0443\u043c\u043c\u0430 \u0434\u0432\u0443\u0445 \u0447\u0438\u0441\u0435\u043b", (250, 760, 450, 440), "cipher", "REPORT 7; search region, not a location"),
 ]
 
 SCREENED = [  # ~5-8 px text: a letter-sized object would be unidentifiable; screened as blocks only

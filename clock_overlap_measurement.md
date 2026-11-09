@@ -131,3 +131,71 @@ put them.
 
 **No new slot is opened.** Every sum the rule produces (7, 9, 11, 13) is already filled, and the rule supplies no
 candidate for any open slot.
+
+## 5. [NEGATIVE, 9 Nov 2026] The hands do not encode a clock time — 8:46 and 9:29 are both excluded
+
+Arithmetic only, on the angles already in §0. No new pixels. Recorded so the question
+is closed rather than asked again.
+
+**Convention, stated before any conversion.** Angles are **degrees clockwise from
+north** (§0 line 5): 0° is straight up on the canvas, positive runs clockwise, range
+[0, 360). The numeral grid is `18.75 + 30·((n−3) mod 12)`, which puts **3 at 18.75°**
+and **12 at 288.75°** — the face is turned **71.25° anticlockwise** from a standard
+one. Grid check: 1 → 318.75°, 10 → 228.75°, 11 → 258.75°, 12 → 288.75°.
+
+**Two readings, because "as drawn" is ambiguous and both deserve a number.**
+
+| reading | hour | minute | second | time |
+|---|---|---|---|---|
+| as drawn on the canvas, 12 *assumed* at top | 238.49° | 332.38° | 302.62° | **7:56** (7:55:50) |
+| dial rotation undone, against the drawn numerals | 309.74° | 43.63° | 13.87° | **10:07** (10:07:02) |
+
+The second row is the honest one: subtracting numeral 12's 288.75° is identical to
+reading each hand against the numeral it points at — minute → numeral 1.45, second →
+numeral 12.46, hour → numeral 10.32. The rotation does not change the time; it only
+moves where the numerals sit on the canvas.
+
+**Uncertainty: ±3.5 min, and it is set by the hour hand alone.** The only hand width
+in the record is the hour hand's **3.5°** (§0). Minute and second widths were never
+measured; 3.5° is borrowed for them and flagged as borrowed. At ±half-width, ±1.75°:
+
+    minute hand   1 deg = 1/6 min   ->  +-0.29 min  (+-18 s)
+    second hand   1 deg = 1/6 s     ->  +-0.29 s
+    hour hand     1 deg = 2 min     ->  +-3.5 min
+
+A uniform-bar sd (`3.5/sqrt(12)` = 1.01°) would give ±2.0 min instead. Either way the
+hour hand is the limiting term by an order of magnitude, which is the same hand §0
+already flags as the loosest of the three.
+
+**Neither candidate time fits, and not narrowly.** Converted first, compared second:
+
+| candidate | a real clock puts hour / minute at | hour error | minute error |
+|---|---|---|---|
+| **8:46** | 263.00° / 276.00° | **46.74°** = 93.5 min | **127.63°** = 21.3 min |
+| **9:29** | 284.50° / 174.00° | **25.24°** = 50.5 min | **130.37°** = 21.7 min |
+
+Against the raw canvas angles instead, for completeness: 8:46 gives 24.51° and 56.38°;
+9:29 gives 46.01° and 158.38°. **Every one of these eight errors is at least 7× the
+±3.5 min (1.75°) uncertainty**, and the minute-hand errors exceed 127° in the frame
+that matters. Neither time is reachable in either frame.
+
+**The stronger finding: it is not a self-consistent timepiece at all.** On a real
+clock the hour hand's fractional position must equal minutes/60.
+
+    hour hand fraction 0.325  ->  implies 19.5 min past the hour
+    minute hand                  ->  says    7.27 min past
+    mismatch 12.2 min = 6.10 deg of hour-hand travel
+
+That 6.10° is the same quantity as the hour hand's **5.26° off-midpoint** error in §0.
+So no time can fit, because the hands were not placed to tell one: they sit on numeral
+**midpoints** (fractions 0.45, 0.46, 0.32) to make the sums 3, 13 and 21, and a
+midpoint is precisely where a time-telling hand would not be except by coincidence.
+The dial encodes three numbers, and the rune caption beneath it says so — *Сумма двух
+чисел*, "sum of two numbers".
+
+**What this closes and what it does not.** Closed: the clock does not depict 8:46,
+9:29, or any consistent time, so no slot word, index or passphrase can be derived from
+a time reading. Not touched: the sums 3, 13 and 21 themselves, which rest on the
+between-numerals measurement in §0 and are unaffected by this — §0's caveat that slot
+21's hand is four times looser than the other two still stands and is still the
+weakest part of that chain. **No config was built from this.**

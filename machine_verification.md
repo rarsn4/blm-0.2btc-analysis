@@ -89,11 +89,71 @@ template, the word assignments or the 21-word length are right — see §2.17 fo
 provenance audit (no assigned word traces to the author) and §5 for the length
 argument's own stated tension.
 
-## 7. Still open, and cheap: casing has never varied [MEASURED]
+## 7. [CLOSED 5 Nov 2026] Casing had never varied — it has now [MEASURED]
 
-`CASE` appears in **1 of 225 configs**, set to `lower`. The one run header that prints
-it reads `case : lower`. **`upper` and `title` have never been run, once.** The
-artwork is in capitals and SHA-256 is case-sensitive, so for the brainwallet scheme
-this is a live axis, not a cosmetic one — §2.12 states the limitation and it is still
-unclosed. `brain_t21_pool65.conf` at `CASE upper` is ~16.2 GPU-hours, the cheapest
-untested branch in the project.
+> **The claim below is superseded and kept as the record of what prompted the runs.**
+> ~~`CASE` appears in **1 of 225 configs**, set to `lower`. The one run header that
+> prints it reads `case : lower`. **`upper` and `title` have never been run, once.**
+> … §2.12 states the limitation and it is still unclosed. `brain_t21_pool65.conf` at
+> `CASE upper` is ~16.2 GPU-hours, the cheapest untested branch in the project.~~
+>
+> It was the cheapest untested branch, and it was taken. `brain_t21_upper` ran
+> 3–4 Nov and `brain_t21_title` ran 4–5 Nov, both exhaustive at acceptance exactly 1,
+> both negative, both disjoint from the `lower` twin and from each other (81 template
+> words, every one with three distinct case forms, no single-letter word, no collision
+> in any pair). **The brainwallet CASE axis is closed**: §2.12 now carries three
+> exhaustive t21 rows and its heading says so.
+>
+> One correction that came out of it: this section said "the artwork is in capitals".
+> It is not — three drawn strings are genuinely mixed-case, and that claim was
+> retracted in `brain_t21_upper.conf`'s own header before the run. `upper` is one
+> uniform capitalisation hypothesis among three, with no stronger claim on the
+> artwork than the other two.
+>
+> Still open in §2.12, and untouched by any of this: the key-variant narrowing,
+> `sha256` + space-joined only, one quarter of the space the t18 row covered.
+
+## 8. [MEASURED 6 Nov 2026] The first same-config repeat in the campaign — bit-exact across a reboot and an Xid 31
+
+Until today no configuration had ever been run twice, so **nothing in this project
+had shown that the solver returns the same answer for the same input.** Every
+negative rested on one pass. A laptop suspend forced the test by accident: the queue
+had to be restarted, `run_queue_nov.sh` has no skip logic, and so `t21_nose2` ran a
+second time from zero.
+
+```
+pass 1   05 Nov 02:13:58 -> 03:26:58   wall 4,380.12 s   exit=2   HIT 0
+         exhausted, no match  (survivors 387425464 of 49589822592)
+pass 2   06 Nov 14:35:45 -> 15:56:56   wall 4,871.97 s   exit=2   HIT 0
+         exhausted, no match  (survivors 387425464 of 49589822592)
+```
+
+**Survivors identical to the digit: 387,425,464 both times**, out of 49,589,822,592
+candidates, with 0 HIT lines in both passes.
+
+What makes it stronger than a plain repeat is everything that happened between the
+two. Pass 2 ran:
+
+- after a **full reboot** (06 Nov 14:25:59) — fresh kernel, fresh NVIDIA module load,
+  fresh CUDA contexts
+- after an **Xid 31 MMU fault** on the same GPU (06 Nov 14:18:22, `FAULT_PDE
+  ACCESS_TYPE_VIRT_READ`) — a hardware-reported memory-access fault on the card that
+  produced pass 1
+- after a **1 h 37 m s2idle suspend/resume cycle** on that card
+- through a different thermal history: 11.32 M cand/s on pass 1 against 10.18 M on
+  pass 2, a **+11.2% wall difference**, consistent with `SW Thermal Slowdown` at 88 °C
+  (§4's regime: 1605 MHz under load against 1980 MHz idle)
+
+So the result is invariant to reboot, to a GPU fault, to a suspend cycle and to an
+11% swing in clock rate. The arithmetic does not depend on the machine's state.
+
+**What this does and does not establish.** It is **one** config repeated **once**: it
+shows the pipeline is deterministic for this input, not that it is correct. A
+deterministic wrong answer is still wrong, and §1's defects were all of that kind.
+What it does retire is a specific unstated assumption — that a single pass per config
+is reproducible at all — which 94 evidenced runs had relied on without a single test.
+
+It also did not come free: it cost 4,871.97 s of GPU time that the queue spent
+redoing finished work, and it only happened because nobody had written skip logic.
+The cheap way to keep the property is to repeat one short config deliberately after
+any binary change, not to rerun queues by accident.

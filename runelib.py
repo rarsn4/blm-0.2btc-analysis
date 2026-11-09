@@ -6,10 +6,16 @@ from imgio import load_gray
 
 G = load_gray()
 XA, XB = 1526, 1557
-WORDS = ["X", "номер", "день", "чёрный", "на", "биткоины", "зашифрованы"]
+WORDS = ["X", "номер", "день", "чёрный", "на", "биткоины", "зашифрованы", "здесь"]
+# [CORRECTED 9 Nov 2026] "здесь" was missing here and the window below stopped at
+# y=1000, which cut its five glyphs to three. cells() then sliced groups()[:7], so the
+# length assert never saw the short group: THE SLICE IS WHAT HID THE TRUNCATION.
+# At y1=1020 the column yields 42 glyphs in 8 groups, sizes 1,5,4,6,2,8,11,5, exact
+# against all eight words. The next features past y 1014 are a 2-px-wide hairline and a
+# 2,821-px block, neither glyph-shaped, so 1020 is a safe stop.
 
 
-def groups(y0=36, y1=1000):
+def groups(y0=36, y1=1020):
     """Glyph runs between three-dot separators, top of the column first."""
     prof = (G[y0:y1, XA:XB] < 130).sum(axis=1)
     runs, s = [], None
@@ -33,7 +39,7 @@ def groups(y0=36, y1=1000):
 def cells(reverse=True):
     """(letter, y0, y1). reverse=True: bottom cell of each word is its first letter."""
     res = []
-    for g, w in zip(groups()[:7], WORDS):
+    for g, w in zip(groups(), WORDS):          # no slice: the assert must be able to fire
         assert len(g) == len(w), (w, len(g))
         letters = list(w)[::-1] if reverse else list(w)
         res += [(ch, a, b) for (a, b), ch in zip(g, letters)]

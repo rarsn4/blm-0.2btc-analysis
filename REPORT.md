@@ -4193,6 +4193,94 @@ The double `м` in `Сумма` uses the **identical glyph twice**; so does `с`
 the glyph group sizes on the right-hand line match `здесь(5) зашифрованы(11)
 биткоины(8) на(2) чёрный(6) день(4) номер(5) X(1)` exactly.
 
+> **[MEASURED 9 Nov 2026] Re-measured on all 42 glyphs. Every earlier glyph figure in
+> this section covered 37 of them and excluded `здесь` entirely.** `runelib.cells()`
+> sliced `groups()[:7]` against a 7-word list, and `groups()` stopped at y=1000, which
+> cut `здесь` from five glyphs to three. **The slice is what hid the truncation**: the
+> length assert never saw the short group. Both are now fixed (`y1=1020`, `здесь`
+> added, slice dropped), and the column yields 42 glyphs in 8 groups — sizes
+> 1, 5, 4, 6, 2, 8, 11, 5 — exact against all eight words. The sentence above claims
+> that exact match including `здесь(5)`; it was **true but not reproducible from the
+> shipped tool**, which is its own small instance of the §10 rule.
+>
+> | | 37 glyphs (as shipped) | **42 glyphs** |
+> |---|---|---|
+> | same-letter | +0.588 (n=31) | **+0.586** (n=36) |
+> | different-letter | +0.069 (n=635) | **+0.070** (n=825) |
+> | separation | +0.519 | **+0.515** |
+>
+> **Adding a whole word moved the aggregate by 0.002, and that is the result.** The
+> monoalphabetic claim is unchanged by five new glyphs.
+>
+> **The claim holds at 32 of 36 same-letter pairs, mean +0.622. Four fall below the
+> different-letter 95th percentile of +0.390** — and this is a correction to how this
+> section presented itself, not a finding against `здесь`:
+>
+> ```
+> р  номер    x  р  чёрный        +0.224
+> е  номер    x  е  здесь         +0.239
+> е  день     x  е  здесь         +0.349
+> р  чёрный   x  р  зашифрованы   +0.361
+> ```
+>
+> **Two of the four are `р`, and all three `р` instances sit inside the already
+> published 37.** The weakness therefore predates `здесь` by every measurement in this
+> file and was never disclosed: the 37-glyph set already had 2 of 31 pairs below its
+> own threshold. `р` in `чёрный` is weak against *both* its counterparts, which is the
+> same pattern as the `здесь` `е`, in a word this report has treated as confirmed
+> throughout.
+>
+> **Every weak glyph is still rank 1 for its own label**, which is what makes these
+> hand-drawing variation rather than counter-evidence. The `здесь` `е` scores +0.349
+> against its own label and **+0.310 against second-place `д`** — nothing in the
+> inscription matches that cell better than `е` does. It is also not a segmentation
+> artefact: h 17, ink 140 px, w 22, against the other two `е` cells at h 17/16, ink
+> 152/130, w 22/21.
+>
+> **`здесь` is confirmed on 4 of 5 glyphs, not 5.** Its `с` has **only one instance in
+> this column**, so there is no pair to test and it is counted as untestable, not as a
+> pass. `ь` +0.691, `д` +0.756, `з` +0.836 all clear the bar; `е` is the weak one.
+>
+> **[NON-REPRODUCTION, logged not reconciled]** This section publishes **+0.63** for
+> same-letter "within one line". The harness of `glyphX_measurement.md` §2 — ink bbox
+> to 32×32, z-scored, Pearson, as `rune_x_check.py` implements it — gives **+0.588** on
+> that same line. A **0.04** gap whose cause is unidentified. It is recorded rather
+> than reconciled, because the way to close it would be to pick the cell set that
+> reproduces +0.63, and choosing inputs to match a published output is the error this
+> report exists to avoid.
+>
+> **[MEASURED] Shape clustering, for completeness: 24 clusters against the decode's 22,
+> and the gap decomposes exactly.** At IoU ≥ 0.60 over the 42 masks, **five splits**
+> and **three false merges**: `р` splits 1+2 (номер apart from чёрный/зашифрованы),
+> `е` splits 2+1 (номер/день apart from здесь), `о` splits into **three** (номер,
+> биткоины, зашифрованы all separate), `ь` splits 1+1 (день apart from здесь); and
+> three clusters each hold two labels — **`е`/`ё`, `д`/`о`, `и`/`й`**. `22 + 5 − 3 =
+> 24`. The false merges are exactly the diacritic pairs — `ё` is `е` with a diaeresis,
+> `й` is `и` with a breve — which bounding-box normalisation at 34×34 washes out. The
+> splits are hand-drawing variation; the correlation harness above, not IoU, is the
+> measurement this section rests on.
+
+#### Two dead ends on this inscription, recorded with their numbers so they are not re-asked
+
+**[NEGATIVE] The dot-stacks carry no digit.** Detected globally — every ink component
+in the image, filtered to dot-sized (3–14 px, bbox ≤ 5×5) and grouped into collinear
+triples — the rune column holds **exactly 7 dot groups and every one has exactly 3
+dots** (15–28 ink px, h 3–5). Eight words, seven separators, and **no 2-dot or 4-dot
+stack anywhere in the column**. The count never varies, so it encodes nothing. In
+particular **there is no dot-stack at the `номер X` position**: that cell is **one
+connected component**, 96 ink px, 13 × 20, matching §7.4 exactly, and the nearest
+dot-stack is 6 px below it serving as the ordinary separator between `X` and `номер`.
+
+**[NEGATIVE] The glyphs are not Unicode Runic.** All 41 Runic codepoints that FreeMono
+renders — Elder Futhark, Younger Futhark and Anglo-Saxon Futhorc — scored against a
+representative of each of the 22 labels: best match **IoU 0.456** (`з` → `ᛋ`), mean
+**0.376**, and **0 of 22 clear 0.60**. Every best match falls *below* the +0.587
+same-letter IoU baseline measured on this very column and barely above the +0.328
+different-letter baseline. So `X` cannot be read off a Futhark chart. **What this does
+not close:** a decorative font can map Basic Latin codepoints to shapes that are not
+the Unicode Runic characters, and the specific *AngloSaxon Runes* TrueType font is not
+installed here, so the font-substitution hypothesis is narrowed, not eliminated.
+
 ### 7.3 The alphabet
 
 ```
