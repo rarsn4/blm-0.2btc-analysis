@@ -223,6 +223,62 @@ BRAVE, NEW, WORLD, WELCOME."*
 We have no independent measurement of either the ten edits or the "wich" spelling. **Unverified on our
 side; do not cite.**
 
+> **[SCOPE, 9 Nov 2026] The ten edits are external and unlocated, and carry the grade blocks B and C
+> carry.** Every one of them is *their* transcription of the painted text. **We have never measured a
+> single edit in the pixels** — no crop, no location, no glyph count, nothing in `census_crops.py` or
+> any other measurement script addresses them. That is the same standing as block B's caption: a
+> transcription adopted from someone else and never re-derived from pixels, and it gets the same
+> treatment. **Nothing derived from the ten edits may enter `REPORT.md` as anything but [THEIRS],
+> and no config may be written from them, until the edits themselves are located and read here.**
+
+**The BIP39 ratio must not be quoted as evidence — measured, not assumed.** [MEASURED, 9 Nov 2026]
+Six of the ten edits are BIP39 words. Before that ratio is called a signal it needs its base rate,
+because naming a confound is not testing it (§1.1). Measured over the vocabulary of section 2 of the
+whitepaper as published (`bitcoin.txt` lines 51-90, 339 tokens, 145 distinct words):
+
+| reference class | BIP39 fraction | expected of 10 | observed 6 is | P(>= 6) |
+|---|---:|---:|---:|---:|
+| all distinct words | 47/145 = 32.4% | 3.24 | +1.86 SE | 0.07 |
+| words of 3-8 letters (BIP39's own length range) | 47/110 = 42.7% | 4.27 | +1.10 SE | 0.22 |
+| **words of 4-6 letters (the band all six occupy)** | **33/63 = 52.4%** | **5.24** | **+0.48 SE** | **0.44** |
+
+All six are 4 to 6 letters long. **Against the only reference class that matches their shape, six of
+ten is half a standard error from nothing and would be beaten by chance in 44% of draws.** The ratio
+is not evidence of anything and must not be quoted as such anywhere. It is equally **not
+disproof** — the test is simply uninformative, which is the whole point: an uninformative statistic
+presented as support is §1.7's shape. Script `wp_bip39_baserate.py`, output `wp_bip39_baserate.out`.
+
+Two further reasons it cannot be rescued by a better test:
+
+- **The reference class is not even fully determined.** Two of the six — `absent` and `trust` — do
+  **not** occur in section 2's vocabulary at all, so
+  the edits are not all drawn from the painted passage. An edit that introduces a word is drawn from
+  the editor's whole vocabulary, not from the source text.
+- **We do not hold the other four edits.** Without them the lengths cannot be conditioned on
+  properly, and if those four are long words that *could not* be BIP39 under any circumstance, the
+  effective denominator is smaller than ten and the ratio means less still, not more.
+
+**Membership of the six against our own configs** [MEASURED, 9 Nov 2026, all 192 published configs]:
+
+| word | named in a POOL or SLOT line | admits it at some slot | how |
+|---|---:|---:|---|
+| `proof` | 223 rows | 185 of 192 | 133 pools, 45 slot pins, 7 by `@FULL` only |
+| `order` | 233 rows | 185 of 192 | 124 pools, 54 slot pins, 7 by `@FULL` only |
+| `trust` | 6 rows | 38 of 192 | pinned at SLOT 21 in two configs, SLOT 1 in one |
+| `double` | 4 rows | 37 of 192 | pools only, never pinned to a slot |
+| `absent` | 1 row | 34 of 192 | one pool (`t21_idx2.conf`) |
+| `sign` | **0 rows** | 33 of 192 | **named nowhere; admitted only where a slot is `@FULL`** |
+
+**One of the six has never been named in any config we have ever written**, published or
+solver-only: `sign`. The other five are already inside the ledger, two of them
+ubiquitously. So the edit list, read as a word source, proposes almost nothing our configs do not
+already admit — which is a further reason not to build from it before it is measured. Script
+`config_word_membership.py`, output `config_word_membership.out`; it reports NAMED (somebody chose
+the word) separately from ADMITTED (some slot would accept it, which every `@FULL` slot does for all
+2048 words), because quoting the second alone would say every BIP39 word is already covered 33 times
+over. The solver-only set of 35 that ran but was never published was scanned too: there `sign` and
+`absent` are both named nowhere.
+
 ### 4.4 Other rows of theirs that bear on our report  [all THEIRS, none reproduced]
 
 | their claim | why it matters to us |

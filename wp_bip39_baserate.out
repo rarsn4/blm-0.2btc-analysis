@@ -1,0 +1,35 @@
+SOURCE   bitcoin.txt lines 51-90, section 2 'Transactions'
+  first  Transactions We define an electronic coin as a chain of
+  last   the majority of nodes agreed it was the first received
+  339 tokens, 145 distinct words
+
+THE OBSERVED SET: 6 words, all BIP39, lengths [4, 5, 5, 5, 6, 6]
+  not in section 2's own vocabulary: ['absent', 'trust']
+  -> the edits are not all drawn from the passage, so the passage is
+     not a complete reference class for them.
+
+BASE RATES AND WHAT 6 OF 10 IS WORTH AGAINST EACH
+  reference class                                BIP39 fraction    expect      SE     6 is   P(>=6)
+  every distinct word                              47/145   32.4%    3.24    1.48   +1.86 SE    0.07
+  words of 3-8 letters (BIP39's length range)      47/110   42.7%    4.27    1.56   +1.10 SE    0.22
+  words of 4-6 letters (the observed band)         33/63    52.4%    5.24    1.58   +0.48 SE    0.44
+
+  Length profile of the vocabulary (why the class matters):
+     1 letters    4 distinct    0 BIP39    0.0%
+     2 letters   18 distinct    0 BIP39    0.0%
+     3 letters   19 distinct    7 BIP39   36.8%
+     4 letters   23 distinct   13 BIP39   56.5%
+     5 letters   24 distinct   12 BIP39   50.0%
+     6 letters   16 distinct    8 BIP39   50.0%
+     7 letters   17 distinct    6 BIP39   35.3%
+     8 letters   11 distinct    1 BIP39    9.1%
+     9 letters    7 distinct    0 BIP39    0.0%
+    10 letters    3 distinct    0 BIP39    0.0%
+    11 letters    1 distinct    0 BIP39    0.0%
+    12 letters    2 distinct    0 BIP39    0.0%
+
+VERDICT. Against the only class matching the observed words' shape, six
+of ten is half a standard error from nothing and is beaten by chance in
+44% of draws. THE RATIO IS NOT EVIDENCE AND MUST NOT BE QUOTED AS SUCH.
+It is also not disproof: the test is simply uninformative, which is the
+point -- an uninformative statistic presented as support is 1.7's shape.

@@ -1,0 +1,244 @@
+==============================================================================
+PUBLISHED LEDGER  configs/ -- 192 configs
+  word         NAMED   ADMITTED   how admitted
+  double           4     37/192   {'@FULL only': 33, 'pool': 4}
+  sign             0     33/192   {'@FULL only': 33}
+  absent           1     34/192   {'@FULL only': 33, 'pool': 1}
+  proof          223    185/192   {'pool': 133, 'slot pin': 45, '@FULL only': 7}
+  order          233    185/192   {'slot pin': 54, 'pool': 124, '@FULL only': 7}
+  trust            6     38/192   {'@FULL only': 33, 'pool': 2, 'slot pin': 3}
+  NEVER NAMED anywhere:    ['sign']
+  NEVER ADMITTED anywhere: none
+
+  double is named in 4 row(s):
+      t18_idx.conf                         POOL -> @POOL slots 6,8,14,15,18
+      t21_bnw18.conf                       POOL -> @POOL slots 6,8,14,15,21
+      t21_idx.conf                         POOL -> @POOL slots 6,8,14,15,18,21
+      t21_trust21.conf                     POOL -> @POOL slots 6,8,14,15,18
+
+  absent is named in 1 row(s):
+      t21_idx2.conf                        POOL -> @POOL slots 6,8,14,15,18,21
+
+  proof is named in 223 row(s):
+      alt2.conf                            POOL -> @POOL slots 6,8,14,15,18
+      alt2w.conf                           POOL -> @POOL slots 6,8,14,15,18
+      alt3.conf                            SLOT 1
+      alt3.conf                            POOL -> @POOL slots 6,8,14,15,18
+      brain_find.conf                      POOL -> @POOL slots 6,8,14,15,18
+      brain_t18_pool52.conf                POOL -> @POOL slots 6,8,14,15,18
+      brain_t18_pool52_all.conf            POOL -> @POOL slots 6,8,14,15,18
+      brain_t18_pool63.conf                POOL -> @POOL slots 6,8,14,15,18
+      brain_t18_pool63_all.conf            POOL -> @POOL slots 6,8,14,15,18
+      brain_t21_pool65.conf                POOL -> @POOL slots 6,8,14,15,18,21
+      el12.conf                            POOL -> @POOL slots 6,8
+      el13.conf                            POOL -> @POOL slots 6,8
+      el14.conf                            POOL -> @POOL slots 6,8,14
+      el16.conf                            POOL -> @POOL slots 6,8,14,15
+      el17.conf                            POOL -> @POOL slots 6,8,14,15
+      el18.conf                            POOL -> @POOL slots 6,8,14,15,18
+      el21.conf                            POOL -> @POOL slots 6,8,14,15,18,21
+      el21_rev.conf                        POOL -> @POOL slots 1,4,7,8,14,16
+      el22.conf                            POOL -> @POOL slots 6,8,14,15,18,21,22
+      el_planted.conf                      POOL -> @POOL slots 18,21
+      el_planted_swapped.conf              POOL -> @POOL slots 18,21
+      offm1_t18.conf                       POOL -> @POOL slots 5,7,13,14,17
+      offp1_t18.conf                       POOL -> @POOL slots 1,7,9,15,16
+      offp1_t21.conf                       POOL -> @POOL slots 1,7,9,15,16,19
+      pair2_11_t18.conf                    SLOT 2,11
+      pair2_11_t18.conf                    POOL -> @POOL slots 6,8,14,15,18
+      planted_campaign.conf                POOL -> @POOL slots 18,21
+      planted_compressed.conf              POOL -> @POOL slots 18,21
+      planted_hybrid.conf                  POOL -> @POOL slots 18,21
+      planted_swapped.conf                 POOL -> @POOL slots 18,21
+      planted_uncompressed.conf            POOL -> @POOL slots 18,21
+      t15.conf                             POOL -> @POOL slots 6,8,14,15
+      t18.conf                             POOL -> @POOL slots 6,8,14,15,18
+      t18_arith.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_free1.conf                       SLOT 1
+      t18_free1.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_free10.conf                      SLOT 10
+      t18_free10.conf                      POOL -> @POOL slots 6,8,14,15,18
+      t18_free11.conf                      SLOT 11
+      t18_free11.conf                      POOL -> @POOL slots 6,8,14,15,18
+      t18_free12.conf                      SLOT 12
+      t18_free12.conf                      POOL -> @POOL slots 6,8,14,15,18
+      t18_free13.conf                      SLOT 13
+      t18_free13.conf                      POOL -> @POOL slots 6,8,14,15,18
+      t18_free16.conf                      SLOT 16
+      t18_free16.conf                      POOL -> @POOL slots 6,8,14,15,18
+      t18_free17.conf                      SLOT 17
+      t18_free17.conf                      POOL -> @POOL slots 6,8,14,15,18
+      t18_free2.conf                       SLOT 2
+      t18_free2.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_free3.conf                       SLOT 3
+      t18_free3.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_free4.conf                       SLOT 4
+      t18_free4.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_free5.conf                       SLOT 5
+      t18_free5.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_free7.conf                       SLOT 7
+      t18_free7.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_free9.conf                       SLOT 9
+      t18_free9.conf                       POOL -> @POOL slots 6,8,14,15,18
+      ... and 163 more
+
+  order is named in 233 row(s):
+      alt2.conf                            SLOT 5
+      alt2.conf                            POOL -> @POOL slots 6,8,14,15,18
+      alt2w.conf                           SLOT 5
+      alt2w.conf                           POOL -> @POOL slots 6,8,14,15,18
+      alt3.conf                            SLOT 5
+      alt3.conf                            POOL -> @POOL slots 6,8,14,15,18
+      brain_find.conf                      POOL -> @POOL slots 6,8,14,15,18
+      brain_t18_pool52.conf                POOL -> @POOL slots 6,8,14,15,18
+      brain_t18_pool52_all.conf            POOL -> @POOL slots 6,8,14,15,18
+      brain_t18_pool63.conf                POOL -> @POOL slots 6,8,14,15,18
+      brain_t18_pool63_all.conf            POOL -> @POOL slots 6,8,14,15,18
+      brain_t21_pool65.conf                POOL -> @POOL slots 6,8,14,15,18,21
+      el12.conf                            POOL -> @POOL slots 6,8
+      el13.conf                            POOL -> @POOL slots 6,8
+      el14.conf                            POOL -> @POOL slots 6,8,14
+      el16.conf                            POOL -> @POOL slots 6,8,14,15
+      el17.conf                            POOL -> @POOL slots 6,8,14,15
+      el18.conf                            POOL -> @POOL slots 6,8,14,15,18
+      el21.conf                            POOL -> @POOL slots 6,8,14,15,18,21
+      el21_rev.conf                        POOL -> @POOL slots 1,4,7,8,14,16
+      el22.conf                            POOL -> @POOL slots 6,8,14,15,18,21,22
+      el_planted.conf                      SLOT 6
+      el_planted.conf                      POOL -> @POOL slots 18,21
+      el_planted_swapped.conf              SLOT 6
+      el_planted_swapped.conf              POOL -> @POOL slots 18,21
+      free17_explicit.conf                 POOL (config has no @POOL slot)
+      offm1_t18.conf                       POOL -> @POOL slots 5,7,13,14,17
+      offp1_t18.conf                       POOL -> @POOL slots 1,7,9,15,16
+      offp1_t21.conf                       POOL -> @POOL slots 1,7,9,15,16,19
+      pair2_11_t18.conf                    SLOT 2,11
+      pair2_11_t18.conf                    POOL -> @POOL slots 6,8,14,15,18
+      planted_campaign.conf                SLOT 6
+      planted_campaign.conf                POOL -> @POOL slots 18,21
+      planted_compressed.conf              SLOT 6
+      planted_compressed.conf              POOL -> @POOL slots 18,21
+      planted_hybrid.conf                  SLOT 6
+      planted_hybrid.conf                  POOL -> @POOL slots 18,21
+      planted_swapped.conf                 SLOT 6
+      planted_swapped.conf                 POOL -> @POOL slots 18,21
+      planted_uncompressed.conf            SLOT 6
+      planted_uncompressed.conf            POOL -> @POOL slots 18,21
+      t15.conf                             POOL -> @POOL slots 6,8,14,15
+      t18.conf                             POOL -> @POOL slots 6,8,14,15,18
+      t18_arith.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_free1.conf                       SLOT 1
+      t18_free1.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_free10.conf                      SLOT 10
+      t18_free10.conf                      POOL -> @POOL slots 6,8,14,15,18
+      t18_free11.conf                      SLOT 11
+      t18_free11.conf                      POOL -> @POOL slots 6,8,14,15,18
+      t18_free12.conf                      SLOT 12
+      t18_free12.conf                      POOL -> @POOL slots 6,8,14,15,18
+      t18_free13.conf                      SLOT 13
+      t18_free13.conf                      POOL -> @POOL slots 6,8,14,15,18
+      t18_free16.conf                      SLOT 16
+      t18_free16.conf                      POOL -> @POOL slots 6,8,14,15,18
+      t18_free17.conf                      SLOT 17
+      t18_free17.conf                      POOL -> @POOL slots 6,8,14,15,18
+      t18_free2.conf                       SLOT 2
+      t18_free2.conf                       POOL -> @POOL slots 6,8,14,15,18
+      ... and 173 more
+
+  trust is named in 6 row(s):
+      t21_bnw18.conf                       POOL -> @POOL slots 6,8,14,15,21
+      t21_slot1_line.conf                  SLOT 1
+      t21_trust21.conf                     SLOT 21
+      t21_trust21.conf                     POOL -> @POOL slots 6,8,14,15,18
+      t21_trust21b.conf                    SLOT 21
+      t21_trustonly.conf                   POOL -> @POOL slots 6,8,14,15,18,21
+
+==============================================================================
+SOLVER-ONLY (ran, never published) -- 35 configs
+  word         NAMED   ADMITTED   how admitted
+  double           3      4/35    {'@FULL only': 1, 'pool': 3}
+  sign             0      1/35    {'@FULL only': 1}
+  absent           0      1/35    {'@FULL only': 1}
+  proof           31     32/35    {'pool': 31, '@FULL only': 1}
+  order           33     32/35    {'slot pin': 2, 'pool': 29, '@FULL only': 1}
+  trust            2      3/35    {'@FULL only': 1, 'pool': 2}
+  NEVER NAMED anywhere:    ['sign', 'absent']
+  NEVER ADMITTED anywhere: none
+
+  double is named in 3 row(s):
+      t12_p80.conf                         POOL -> @POOL slots 6,8
+      t15_p80.conf                         POOL -> @POOL slots 6,8,14,15
+      t18_trust.conf                       POOL -> @POOL slots 6,8,14,15,18
+
+  proof is named in 31 row(s):
+      alt2_el.conf                         POOL -> @POOL slots 6,8,14,15,18
+      brain_t21_title.conf                 POOL -> @POOL slots 6,8,14,15,18,21
+      brain_t21_upper.conf                 POOL -> @POOL slots 6,8,14,15,18,21
+      planted_h160.conf                    POOL -> @POOL slots 18,21
+      t12_p40.conf                         POOL -> @POOL slots 6,8
+      t12_p52.conf                         POOL -> @POOL slots 6,8
+      t12_p71.conf                         POOL -> @POOL slots 6,8
+      t12_p75.conf                         POOL -> @POOL slots 6,8
+      t12_p80.conf                         POOL -> @POOL slots 6,8
+      t15_p40.conf                         POOL -> @POOL slots 6,8,14,15
+      t15_p52.conf                         POOL -> @POOL slots 6,8,14,15
+      t15_p71.conf                         POOL -> @POOL slots 6,8,14,15
+      t15_p75.conf                         POOL -> @POOL slots 6,8,14,15
+      t15_p80.conf                         POOL -> @POOL slots 6,8,14,15
+      t18_black14.conf                     POOL -> @POOL slots 6,8,10,15,18
+      t18_black15.conf                     POOL -> @POOL slots 6,8,10,14,18
+      t18_black18.conf                     POOL -> @POOL slots 6,8,10,14,15
+      t18_black6.conf                      POOL -> @POOL slots 8,10,14,15,18
+      t18_black8.conf                      POOL -> @POOL slots 6,10,14,15,18
+      t18_gold0.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_gold1.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_neck.conf                        POOL -> @POOL slots 6,8,14,15,18
+      t18_p67.conf                         POOL -> @POOL slots 6,8,14,15,18
+      t18_patha.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_pathb.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_pathc.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_pathd.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_pathe.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_trust.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t24_tail54.conf                      POOL -> @POOL slots 6,8,14,15,18
+      t24_tail67.conf                      POOL -> @POOL slots 6,8,14,15,18
+
+  order is named in 33 row(s):
+      alt2_el.conf                         SLOT 5
+      alt2_el.conf                         POOL -> @POOL slots 6,8,14,15,18
+      brain_t21_title.conf                 POOL -> @POOL slots 6,8,14,15,18,21
+      brain_t21_upper.conf                 POOL -> @POOL slots 6,8,14,15,18,21
+      planted_h160.conf                    SLOT 6
+      planted_h160.conf                    POOL -> @POOL slots 18,21
+      t12_p40.conf                         POOL -> @POOL slots 6,8
+      t12_p52.conf                         POOL -> @POOL slots 6,8
+      t12_p71.conf                         POOL -> @POOL slots 6,8
+      t12_p75.conf                         POOL -> @POOL slots 6,8
+      t12_p80.conf                         POOL -> @POOL slots 6,8
+      t15_p40.conf                         POOL -> @POOL slots 6,8,14,15
+      t15_p52.conf                         POOL -> @POOL slots 6,8,14,15
+      t15_p71.conf                         POOL -> @POOL slots 6,8,14,15
+      t15_p75.conf                         POOL -> @POOL slots 6,8,14,15
+      t15_p80.conf                         POOL -> @POOL slots 6,8,14,15
+      t18_black14.conf                     POOL -> @POOL slots 6,8,10,15,18
+      t18_black15.conf                     POOL -> @POOL slots 6,8,10,14,18
+      t18_black18.conf                     POOL -> @POOL slots 6,8,10,14,15
+      t18_black6.conf                      POOL -> @POOL slots 8,10,14,15,18
+      t18_black8.conf                      POOL -> @POOL slots 6,10,14,15,18
+      t18_gold0.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_gold1.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_neck.conf                        POOL -> @POOL slots 6,8,14,15,18
+      t18_p67.conf                         POOL -> @POOL slots 6,8,14,15,18
+      t18_patha.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_pathb.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_pathc.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_pathd.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_pathe.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_trust.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t24_tail54.conf                      POOL -> @POOL slots 6,8,14,15,18
+      t24_tail67.conf                      POOL -> @POOL slots 6,8,14,15,18
+
+  trust is named in 2 row(s):
+      t18_trust.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_trustonly.conf                   POOL -> @POOL slots 6,8,14,15,18
+
