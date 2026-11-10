@@ -1,0 +1,80 @@
+PLAN  zodiac_sweep_plan.md blob 39fc08a926506750c90553ec8cb5055337139b27
+      pre-registered blob      39fc08a926506750c90553ec8cb5055337139b27  -> MATCH
+IMAGE 0.2-btc-puzzle.png, 1600x1200, verified sha256
+CUTS  [90, 110, 130, 150, 170, 190, 215]   area>=40   bbox 12..400 px
+
+==============================================================================
+PASS 1 OF 2 -- THE CONTROL (what this method can and cannot find)
+==============================================================================
+  planted at the four brightest, most uniform blocks: [(770, 330), (440, 990), (770, 660), (440, 330)]
+
+  pentagram   20px:miss  40px:RECOVERED@90,110,130,150,170,190  80px:RECOVERED@90,110,130,150,170,190  160px:RECOVERED@90,110,130,150,170,190,215
+  pine tree   20px:RECOVERED@90,110,130,150,170,190,215  40px:RECOVERED@90,110,130,150,170,190  80px:RECOVERED@90,110,130,150,170,190,215  160px:RECOVERED@90,110,130,150,170,190,215
+  ice bag     20px:RECOVERED@90,110,130,150,170,190,215  40px:RECOVERED@90,110,130,150,170,190,215  80px:RECOVERED@90,110,130,150,170,190,215  160px:RECOVERED@90,110,130,150,170,190,215
+  llama       20px:miss  40px:miss  80px:miss  160px:miss
+  pine tree   80px WITH A TRUNK: recovered
+
+==============================================================================
+PASS 2 OF 2 -- THE PAINTING ITSELF, WHOLE IMAGE, SEVEN CUTS
+==============================================================================
+  cut   components   in size band
+   90         3004             244
+  110         3162             230
+  130         2828             245
+  150         2122             400
+  170         1454             451
+  190         1497             355
+  215         1660             242
+
+  PENTAGRAM
+    1 CANDIDATE(S) -- presence is a candidate for visual confirmation,
+    never a confirmed symbol:
+      cut 215  bbox x 1170-1196 y  250- 296  area   556  sol 0.60  peaks 5  legs 0
+
+  PINE TREE
+    34 CANDIDATE(S) -- presence is a candidate for visual confirmation,
+    never a confirmed symbol:
+      cut 190  bbox x  908-1177 y  146- 427  area 40911  sol 0.79  peaks 3  legs 0
+      cut 190  bbox x  619- 679 y  803- 871  area  1619  sol 0.74  peaks 3  legs 0
+      cut 190  bbox x 1173-1194 y  202- 225  area   289  sol 0.85  peaks 8  legs 0
+      cut 170  bbox x 1173-1193 y  202- 225  area   271  sol 0.84  peaks 7  legs 0
+      cut 150  bbox x 1173-1193 y  202- 225  area   252  sol 0.79  peaks 12  legs 0
+      cut 130  bbox x 1173-1193 y  202- 225  area   236  sol 0.78  peaks 11  legs 0
+      cut 110  bbox x 1174-1193 y  202- 225  area   222  sol 0.75  peaks 8  legs 0
+      cut 150  bbox x 1231-1252 y  177- 192  area   220  sol 0.95  peaks 17  legs 0
+      cut  90  bbox x 1174-1193 y  203- 224  area   208  sol 0.74  peaks 10  legs 0
+      cut  90  bbox x 1174-1196 y  293- 310  area   190  sol 0.79  peaks 13  legs 0
+      cut 150  bbox x   53-  70 y  693- 708  area   182  sol 0.96  peaks 13  legs 0
+      cut 150  bbox x 1148-1169 y  289- 306  area   153  sol 0.74  peaks 9  legs 0
+
+  ICE BAG
+    1466 CANDIDATE(S) -- presence is a candidate for visual confirmation,
+    never a confirmed symbol:
+      cut 190  bbox x  908-1177 y  146- 427  area 40911  sol 0.79  peaks 3  legs 0
+      cut 215  bbox x 1165-1513 y   62- 301  area 38307  sol 0.61  peaks 8  legs 2
+      cut 170  bbox x  909-1175 y  146- 427  area 37773  sol 0.74  peaks 4  legs 0
+      cut 150  bbox x  913-1173 y  147- 426  area 29034  sol 0.60  peaks 5  legs 0
+      cut 110  bbox x 1268-1518 y 1013-1060  area  6388  sol 0.59  peaks 4  legs 0
+      cut 190  bbox x  564- 735 y  769- 811  area  3304  sol 0.58  peaks 10  legs 3
+      cut 170  bbox x 1023-1088 y  784- 868  area  2774  sol 0.76  peaks 3  legs 0
+      cut 150  bbox x 1023-1088 y  784- 867  area  2709  sol 0.76  peaks 3  legs 0
+      cut 130  bbox x 1023-1088 y  784- 867  area  2650  sol 0.75  peaks 5  legs 0
+      cut 110  bbox x 1023-1088 y  785- 867  area  2587  sol 0.74  peaks 3  legs 0
+      cut  90  bbox x 1024-1087 y  785- 866  area  2527  sol 0.73  peaks 4  legs 0
+      cut 190  bbox x  696- 767 y   98- 162  area  2235  sol 0.67  peaks 7  legs 4
+
+  LLAMA
+    NO POWER: the planted control was not recovered at any size, so
+    this sweep makes NO absence claim for this target.
+
+==============================================================================
+WHAT THIS DOES NOT SETTLE
+==============================================================================
+  The synthetic llama and ice bag are crude silhouettes drawn by this
+  script. Recovering them shows the pipeline works on THAT shape; it does
+  not show it would catch a hand-painted llama in a crowded scene, and no
+  absence claim here is stronger than its control.
+  Nothing in this sweep revives the words form of the hypothesis, which is
+  closed on the wordlist alone, and nothing in it grades the locator/order
+  form above [UNTESTED]: a hit would be an object in a painting, not a
+  measured link to a slot or a word.

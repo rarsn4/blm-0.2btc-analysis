@@ -2206,6 +2206,88 @@ readings.** It is now being run over the 54-pool plus both words on all four pat
 > holds it — that is where links 2 and 6 were tested, and failed. Holding an image is not the same
 > as being able to test a claim, and this image is not evidence about the artwork.*
 
+> **[MEASURED, 10 Nov 2026] The ten zodiac symbols, tested three ways: as words — closed; as
+> locators — untested; as objects in the painting — swept.** The wheel came into this report on
+> 9 Nov only as the wrong artifact for one link. It raises a hypothesis of its own, and that
+> hypothesis has three separable forms. They are graded separately because they fail separately.
+>
+> **1. The symbols as the words — CLOSED, on the wordlist alone.** The rule applied, stated before
+> the count: *a token must name the symbol, not a category containing it.* A hypernym admits
+> anything.
+>
+> | symbol | BIP39 token naming it | |
+> |---|---|---|
+> | glasses | `glass` | also `eye`, `lens` |
+> | question mark | `question` | also `ask`; `mark` is not BIP39 |
+> | ice bag | `ice`, `bag` | both |
+> | crescent moon | `moon` | `crescent` is not BIP39 |
+> | pine tree | `tree` | **`pine` is not BIP39** |
+> | hand | `hand` | also `palm`, `finger` |
+> | shooting star | `shoot` | **and nothing else — `star` is not BIP39** |
+> | stitched heart | `heart` | `stitch` is not BIP39 |
+> | **llama** | **none** | `llama`, `alpaca`, `camel` are all absent from the list |
+> | **pentagram** | **none** | `pentagram`, `pentacle`, `star`, `five` all absent |
+>
+> Eight of ten have a naming token; **two have none**. A construction that maps ten symbols to ten
+> seed words cannot be built from a list that holds no word for two of them, so *"the ten symbols
+> are the ten words"* **is closed**. Were hypernyms allowed, `animal` would admit the llama — which
+> is exactly why the rule is stated rather than left to taste. Wordlist: 2048 words, `md5
+> f23506956964fa69c98fa3fb5c8823b5` normalised, lengths 3-8. **Checked separately and independently:
+> all nine confirmed words — `subject`, `tower`, `moon`, `camera`, `mask`, `liberty`, `eye`, `rifle`,
+> `glove` — are BIP39. No defect there.**
+>
+> **2. The symbols as locators, or as an order — `[UNTESTED]`.** Nothing above touches this form, and
+> nothing else in this report does either. It is **not** `[INFERRED]`: no inference has been drawn
+> from any evidence, for or against. Nobody has looked. `[UNTESTED]` is the whole of what can be
+> said, and the table in part 1 must not be cited as though it bore on it.
+>
+> **3. This is not the dial finding, and the dial finding must not be cited here.** R10
+> (`r10_layout.py`, `STOP_R10_SET_C.md`) asks whether the artwork's elements are laid out on the
+> **clock** dial: hub (473.75, 940.0), twelve numerals 30° apart, a 24-direction grid every 15°,
+> pre-registered element list, two nulls. That negative governs the clock. **It says nothing about
+> symbols scattered through a painting as locators**, and citing it against this form would be
+> borrowing a measurement's authority for a question it never asked. *Dated note: the brief that
+> prompted this entry attributed to us a measurement of "the Bill Cipher wheel as the clock dial,
+> rejected on geometry, 36° against 30°". **No such measurement exists in this repository** — no
+> `36°` figure appears in any file of it, and R10's wheel is the twelve-numeral clock, not a
+> ten-symbol zodiac. The distinction the brief asks for is correct and is recorded here; the
+> measurement it credits us with is not ours, and this report does not adopt it.*
+>
+> **4. The symbols as objects in the painting — swept, whole image.** Pre-registered in
+> `zodiac_sweep_plan.md` (commit `6f1c1cd`, blob `39fc08a9…`) **before the sweep ran**; executed by
+> `zodiac_sweep.py` → `zodiac_sweep.out`. Four targets only — **llama, pine tree, ice bag,
+> pentagram**. Star, heart, hand, moon, glasses and question mark were **deliberately excluded**:
+> they are free in any crowded painting, this one already contains a question mark, hands, stars on
+> a flag and a figure in glasses (`E01`), and reporting them as hits would be §1.7's shape. Block
+> B's seven cuts (`90, 110, 130, 150, 170, 190, 215`), whole image, 2,167 components in the size
+> band across the seven passes, planted controls at 20/40/80/160 px.
+>
+> | target | control recovered | candidates | what they are |
+> |---|---|---:|---|
+> | **pentagram** | 40-160 px, cuts 90-190 | **1** (0.05%) | a **letterform** in the slogan block, x 1170-1196 y 250-296 — inspected and refuted |
+> | **pine tree** | all sizes, all cuts | **34** (1.6%) | **all letterforms, the Great Seal pyramid and one portrait blob** — the best fit in the whole painting (r² 0.94, x 619-679 y 803-871) is the **pyramid** (`E13`), and the 269×281 one is the George Floyd portrait (`E19`). No conifer |
+> | **ice bag** | all sizes, all cuts | **1,466** (**67.7%**) | **the criterion is void** — it admits two thirds of everything in the painting |
+> | **llama** | **none, at any size** | — | **no power; no absence claim is made** |
+>
+> **Result: pentagram and pine tree are absent at all levels swept** — every candidate was inspected
+> and every one is lettering, the pyramid, or a portrait. **The ice-bag test measured nothing**: a
+> criterion that passes 67.7% of all components is not a detector, and reporting its 1,466 hits as
+> candidates would have been the same error §1.7 names. **The llama — the highest-value target,
+> because nothing else in a BLM scene looks like one — was not tested at all**: the detector could
+> not recover its own planted control at any of the four sizes, and a method that cannot find a
+> shape it was handed cannot be cited as evidence the shape is missing. Two of four targets
+> therefore return **no result**, and that is the honest reading of this sweep.
+>
+> **5. `hat`.** `hat` **is** BIP39 and is **not** among the nine confirmed, so a depicted hat would
+> be a genuinely new candidate word. **Measured: none is depicted.** The pre-registered 28-element
+> inventory (`r10_elements.json`) contains no hat, and all eight human figures were inspected
+> directly — the four masked protesters (`E01`-`E04`), the Floyd portrait (`E19`), Trump (`E26`),
+> Biden (`E27`) and the Statue of Liberty (`E08`): **every one is bare-headed.** Liberty wears her
+> spiked **crown**, which this report already counts for `liberty`@7 and which is not a hat. So
+> `hat` gains nothing and joins no slot. *Kept separate, as it must be: a reference image of Bill
+> Cipher in a black hat **is not this painting**, and `black` is already supported by two other
+> routes (§2.13's rune line and the slogan block) and gains nothing whatever from a hat.*
+
 **[MEASURED] The spacing test.** How widely does the artist space adjacent
 characters *within* a word? A glyph is a connected ink component; fragments under
 40% of median height are dropped, judged by height and never by gap; gap is the
