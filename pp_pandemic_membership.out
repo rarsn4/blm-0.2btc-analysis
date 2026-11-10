@@ -1,0 +1,158 @@
+==============================================================================
+PUBLISHED LEDGER  configs/ -- 192 configs
+  word       LEDGERS          NAMED   ADMITTED   how admitted
+  virus      BIP39   -            3     34/192   {'@FULL only': 33, 'pool': 1}
+  disease    BIP39   -            0     33/192   {'@FULL only': 33}
+  wave       BIP39 old#402        0     33/192   {'@FULL only': 33}
+  radio      BIP39 old#847        0     33/192   {'@FULL only': 33}
+  phone      BIP39 old#482      221    185/192   {'pool': 135, 'slot pin': 43, '@FULL only': 7}
+  network    BIP39   -            0     33/192   {'@FULL only': 33}
+  cell         -   old#1067       0      0/192   -
+  sick       BIP39 old#393        2     35/192   {'@FULL only': 33, 'pool': 2}
+  false      BIP39 old#856        0     33/192   {'@FULL only': 33}
+  true       BIP39 old#110        0     33/192   {'@FULL only': 33}
+  truth      BIP39 old#169        1     33/192   {'@FULL only': 33}
+  covid        -     -            0      0/192   -
+  hoax         -     -            0      0/192   -
+  killer       -     -            0      0/192   -
+  NEVER NAMED anywhere:    ['disease', 'wave', 'radio', 'network', 'cell', 'false', 'true', 'covid', 'hoax', 'killer']
+  NEVER ADMITTED anywhere: ['cell', 'covid', 'hoax', 'killer']
+  NOT BIP39 AT ALL (can only ever enter via an EXTRA declaration): ['cell', 'covid', 'hoax', 'killer']
+  OLD-ELECTRUM ONLY (unreachable by the BIP39 path at any slot): ['cell']
+  IN NEITHER LEDGER: ['covid', 'hoax', 'killer']
+
+  virus is named in 3 row(s):
+      clock_v1.conf                        POOL (config has no @POOL slot)
+      pool14.conf                          POOL (config has no @POOL slot)
+      t21_pool57v.conf                     POOL -> @POOL slots 6,8,14,15,18,21
+
+  phone is named in 221 row(s):
+      alt2.conf                            POOL -> @POOL slots 6,8,14,15,18
+      alt2w.conf                           POOL -> @POOL slots 6,8,14,15,18
+      alt3.conf                            SLOT 4
+      alt3.conf                            POOL -> @POOL slots 6,8,14,15,18
+      brain_find.conf                      POOL -> @POOL slots 6,8,14,15,18
+      brain_t18_pool52.conf                POOL -> @POOL slots 6,8,14,15,18
+      brain_t18_pool52_all.conf            POOL -> @POOL slots 6,8,14,15,18
+      brain_t18_pool63.conf                POOL -> @POOL slots 6,8,14,15,18
+      brain_t18_pool63_all.conf            POOL -> @POOL slots 6,8,14,15,18
+      brain_t21_pool65.conf                POOL -> @POOL slots 6,8,14,15,18,21
+      el12.conf                            POOL -> @POOL slots 6,8
+      el13.conf                            POOL -> @POOL slots 6,8
+      el14.conf                            POOL -> @POOL slots 6,8,14
+      el16.conf                            POOL -> @POOL slots 6,8,14,15
+      el17.conf                            POOL -> @POOL slots 6,8,14,15
+      el18.conf                            POOL -> @POOL slots 6,8,14,15,18
+      el21.conf                            POOL -> @POOL slots 6,8,14,15,18,21
+      el21_rev.conf                        POOL -> @POOL slots 1,4,7,8,14,16
+      el22.conf                            POOL -> @POOL slots 6,8,14,15,18,21,22
+      el_planted.conf                      POOL -> @POOL slots 18,21
+      el_planted_swapped.conf              POOL -> @POOL slots 18,21
+      offm1_t18.conf                       POOL -> @POOL slots 5,7,13,14,17
+      offp1_t18.conf                       POOL -> @POOL slots 1,7,9,15,16
+      offp1_t21.conf                       POOL -> @POOL slots 1,7,9,15,16,19
+      pair2_11_t18.conf                    SLOT 2,11
+      pair2_11_t18.conf                    POOL -> @POOL slots 6,8,14,15,18
+      planted_campaign.conf                POOL -> @POOL slots 18,21
+      planted_compressed.conf              POOL -> @POOL slots 18,21
+      planted_hybrid.conf                  POOL -> @POOL slots 18,21
+      planted_swapped.conf                 POOL -> @POOL slots 18,21
+      planted_uncompressed.conf            POOL -> @POOL slots 18,21
+      t15.conf                             POOL -> @POOL slots 6,8,14,15
+      t18.conf                             POOL -> @POOL slots 6,8,14,15,18
+      t18_arith.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_free1.conf                       SLOT 1
+      t18_free1.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_free10.conf                      SLOT 10
+      t18_free10.conf                      POOL -> @POOL slots 6,8,14,15,18
+      t18_free11.conf                      SLOT 11
+      t18_free11.conf                      POOL -> @POOL slots 6,8,14,15,18
+      t18_free12.conf                      SLOT 12
+      t18_free12.conf                      POOL -> @POOL slots 6,8,14,15,18
+      t18_free13.conf                      SLOT 13
+      t18_free13.conf                      POOL -> @POOL slots 6,8,14,15,18
+      t18_free16.conf                      SLOT 16
+      t18_free16.conf                      POOL -> @POOL slots 6,8,14,15,18
+      t18_free17.conf                      SLOT 17
+      t18_free17.conf                      POOL -> @POOL slots 6,8,14,15,18
+      t18_free2.conf                       SLOT 2
+      t18_free2.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_free3.conf                       SLOT 3
+      t18_free3.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_free4.conf                       SLOT 4
+      t18_free4.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_free5.conf                       SLOT 5
+      t18_free5.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_free7.conf                       SLOT 7
+      t18_free7.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_free9.conf                       SLOT 9
+      t18_free9.conf                       POOL -> @POOL slots 6,8,14,15,18
+      ... and 161 more
+
+  sick is named in 2 row(s):
+      t21_bnw18.conf                       POOL -> @POOL slots 6,8,14,15,21
+      t21_trust21.conf                     POOL -> @POOL slots 6,8,14,15,18
+
+  truth is named in 1 row(s):
+      clock_v1.conf                        POOL (config has no @POOL slot)
+
+==============================================================================
+SOLVER-ONLY (ran, never published) -- 35 configs
+  word       LEDGERS          NAMED   ADMITTED   how admitted
+  virus      BIP39   -            0      1/35    {'@FULL only': 1}
+  disease    BIP39   -            0      1/35    {'@FULL only': 1}
+  wave       BIP39 old#402        0      1/35    {'@FULL only': 1}
+  radio      BIP39 old#847        0      1/35    {'@FULL only': 1}
+  phone      BIP39 old#482       31     32/35    {'pool': 31, '@FULL only': 1}
+  network    BIP39   -            0      1/35    {'@FULL only': 1}
+  cell         -   old#1067       0      0/35    -
+  sick       BIP39 old#393        2      3/35    {'@FULL only': 1, 'pool': 2}
+  false      BIP39 old#856        0      1/35    {'@FULL only': 1}
+  true       BIP39 old#110        0      1/35    {'@FULL only': 1}
+  truth      BIP39 old#169        0      1/35    {'@FULL only': 1}
+  covid        -     -            0      0/35    -
+  hoax         -     -            0      0/35    -
+  killer       -     -            0      0/35    -
+  NEVER NAMED anywhere:    ['virus', 'disease', 'wave', 'radio', 'network', 'cell', 'false', 'true', 'truth', 'covid', 'hoax', 'killer']
+  NEVER ADMITTED anywhere: ['cell', 'covid', 'hoax', 'killer']
+  NOT BIP39 AT ALL (can only ever enter via an EXTRA declaration): ['cell', 'covid', 'hoax', 'killer']
+  OLD-ELECTRUM ONLY (unreachable by the BIP39 path at any slot): ['cell']
+  IN NEITHER LEDGER: ['covid', 'hoax', 'killer']
+
+  phone is named in 31 row(s):
+      alt2_el.conf                         POOL -> @POOL slots 6,8,14,15,18
+      brain_t21_title.conf                 POOL -> @POOL slots 6,8,14,15,18,21
+      brain_t21_upper.conf                 POOL -> @POOL slots 6,8,14,15,18,21
+      planted_h160.conf                    POOL -> @POOL slots 18,21
+      t12_p40.conf                         POOL -> @POOL slots 6,8
+      t12_p52.conf                         POOL -> @POOL slots 6,8
+      t12_p71.conf                         POOL -> @POOL slots 6,8
+      t12_p75.conf                         POOL -> @POOL slots 6,8
+      t12_p80.conf                         POOL -> @POOL slots 6,8
+      t15_p40.conf                         POOL -> @POOL slots 6,8,14,15
+      t15_p52.conf                         POOL -> @POOL slots 6,8,14,15
+      t15_p71.conf                         POOL -> @POOL slots 6,8,14,15
+      t15_p75.conf                         POOL -> @POOL slots 6,8,14,15
+      t15_p80.conf                         POOL -> @POOL slots 6,8,14,15
+      t18_black14.conf                     POOL -> @POOL slots 6,8,10,15,18
+      t18_black15.conf                     POOL -> @POOL slots 6,8,10,14,18
+      t18_black18.conf                     POOL -> @POOL slots 6,8,10,14,15
+      t18_black6.conf                      POOL -> @POOL slots 8,10,14,15,18
+      t18_black8.conf                      POOL -> @POOL slots 6,10,14,15,18
+      t18_gold0.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_gold1.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_neck.conf                        POOL -> @POOL slots 6,8,14,15,18
+      t18_p67.conf                         POOL -> @POOL slots 6,8,14,15,18
+      t18_patha.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_pathb.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_pathc.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_pathd.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_pathe.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_trust.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t24_tail54.conf                      POOL -> @POOL slots 6,8,14,15,18
+      t24_tail67.conf                      POOL -> @POOL slots 6,8,14,15,18
+
+  sick is named in 2 row(s):
+      t18_p67.conf                         POOL -> @POOL slots 6,8,14,15,18
+      t18_trust.conf                       POOL -> @POOL slots 6,8,14,15,18
+

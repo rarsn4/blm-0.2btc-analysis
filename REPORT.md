@@ -1489,6 +1489,81 @@ made of the nine confirmed, the fifteen previously queried, the eight above, `bl
 `brave` — which is a superset of any 22 that was meant. Noted rather than guessed at, the
 §1.11 discipline.
 
+##### The pandemic vocabulary, and why the 5G/COVID slogan contributes nothing [MEASURED 2026-11-10]
+
+**NAMED is the only figure here that means anything.** Every BIP39 word in the table is
+admitted by 33 published configs through `@FULL` alone, which is noise — `@FULL` admits all
+2048 and has never heard of any particular one. Over all **227** configs:
+
+| word | BIP39 | old Electrum | **NAMED** (published / solver-only) |
+|---|---|---|---|
+| `phone` | yes | #482 | **221 / 31** — pool 135, slot pin 43 |
+| `virus` | yes | — | **3 / 0** |
+| `sick` | yes | #393 | **2 / 2** |
+| `truth` | yes | #169 | **1 / 0** |
+| `disease`, `wave`, `radio`, `network`, `false`, `true` | yes | mixed | **0 / 0** |
+| `cell` | **no** | **#1067** | **0 / 0**, and **0 ADMITTED** |
+
+**One correction to the brief that requested this.** It states that all eleven are "BIP39 or
+old-Electrum or both, so all are reachable." **`cell` is old-Electrum only**, so it is not
+reachable by the BIP39 path at any slot — only on the path §2.6 prices at 1,840 CPU-days for
+one fixed set. It is in the same position as `devil` (§1.11): reachable in principle,
+unsearchable in practice. The other ten are BIP39 and genuinely reachable.
+
+So of eleven pandemic-adjacent words, **four have ever been named by anyone** — and `phone`
+is named 221 times because it is a template word on independent grounds, not because of any
+pandemic reading.
+
+**The structural fact, which is the part worth keeping. [MEASURED]** The 5G/COVID slogan is
+measured as `COVID 19 IS A HOAX 5G IS THE KILLER` (`letterform_audit` 1.1, box
+(30, 330, 150, 95)). Against both ledgers, token by token:
+
+| `covid` | `is` | `a` | `hoax` | `g` | `the` | `killer` |
+|---|---|---|---|---|---|---|
+| neither | neither | neither | neither | neither | neither | neither |
+
+**Every word of that sign is in neither ledger.** Not one token of it can enter any search
+this project runs, under any scheme — `covid`, `hoax` and `killer` because they are simply
+absent from both lists, and `is`/`a`/`g` because both ledgers start at three letters. This
+is a wordlist fact, not an interpretation.
+
+**And the null, stated explicitly, because it is the default and nothing displaces it:** the
+slogan may simply be **painted content** — conspiracy graffiti depicted because that is what
+was on walls in 2020 — contributing no words and encoding nothing. Every measurement here is
+consistent with that reading, and no measurement anywhere in this report argues against it.
+A painting of 2020 containing 2020's graffiti requires no cipher to explain it.
+
+**Not sliced by text block, and the reason is recorded rather than the result. [SCOPE]**
+LL-2's whole-census test returned **P = 0.580**, dead at base rate. Running a per-block test
+*after* seeing that is the garden of forking paths, so it was **not run**. The multiplicity
+is large and is stated: the slices available are **2** census sections, **15**
+`census_crops.ELEMENTS` blocks, **35** `DRAWN` measured strings, or **28**
+`r10_elements.json` elements — so a nominal 0.05 is worth about 0.0018 at 28 slices, and any
+per-block claim must pay that before it means anything. If it is ever run it needs exact
+Poisson-binomial on the block's own lengths, nulls fixed in advance, and the slice count
+declared.
+
+> *A premise correction, since the brief naming this caution attributed the long-word profile
+> to the slogan block.* **The five words of 9–12 letters are in the 13th Amendment copy** —
+> `convicted`, `involuntary`, `jurisdiction`, `punishment`, `servitude`. The BLM protest
+> block has **one** (`brutality`); the remaining four long words are spread across the seal
+> ring, the plinth caption, the statue base caption and the whitepaper caption. **All ten are
+> in neither ledger.** The correction strengthens the caution rather than weakening it: a
+> quoted passage of constitutional law is an even clearer non-cipher reason for a long-word
+> profile than a slogan would be, and BIP39 stops at eight letters, so those five are
+> structurally excluded before any hypothesis is considered.
+
+**Two semantic routes to words already confirmed, worth one line and recorded as weaker
+than what they would corroborate. [INFERRED]** `5G` → cell **`tower`**, and `COVID` →
+**`mask`**. Both `tower` and `mask` are already confirmed and already in the template, so
+**this changes nothing about the search.** It bears only on how well `tower` is supported,
+and it is **weaker than `tower`'s existing warrant**: the clock's minute hand is a *measured
+object* carrying the letters, while "5G implies tower" is an *association*. A weak second
+route is not corroboration of a strong first one, and it is not recorded as any. The `cell`
+half of that route is, in addition, BIP39-unreachable.
+
+**No word enters any config from this.** Script `config_word_membership.py`.
+
 > **[EXTERNAL, UNLOCATED — 9 Nov 2026] The repeated-word hypothesis has a dated, named source, and
 > it is the only one besides block B's caption.** Everything else in the instruction layer — the
 > rules a solver is supposed to apply, as opposed to the words themselves — is either our own
