@@ -1,23 +1,30 @@
 ==============================================================================
 PUBLISHED LEDGER  configs/ -- 192 configs
   word         NAMED   ADMITTED   how admitted
+  introduce        0      0/192   -
   double           4     37/192   {'@FULL only': 33, 'pool': 4}
   sign             0     33/192   {'@FULL only': 33}
-  absent           1     34/192   {'@FULL only': 33, 'pool': 1}
+  absence          0      0/192   -
+  participants       0      0/192   -
+  which            0      0/192   -
   proof          223    185/192   {'pool': 133, 'slot pin': 45, '@FULL only': 7}
+  transaction       0      0/192   -
+  trusted          0      0/192   -
   order          233    185/192   {'slot pin': 54, 'pool': 124, '@FULL only': 7}
+  absent           1     34/192   {'@FULL only': 33, 'pool': 1}
   trust            6     38/192   {'@FULL only': 33, 'pool': 2, 'slot pin': 3}
-  NEVER NAMED anywhere:    ['sign']
-  NEVER ADMITTED anywhere: none
+  fate             0      0/192   -
+  aware            0     33/192   {'@FULL only': 33}
+  mini             0      0/192   -
+  NEVER NAMED anywhere:    ['introduce', 'sign', 'absence', 'participants', 'which', 'transaction', 'trusted', 'fate', 'aware', 'mini']
+  NEVER ADMITTED anywhere: ['introduce', 'absence', 'participants', 'which', 'transaction', 'trusted', 'fate', 'mini']
+  NOT BIP39 AT ALL (can only ever enter via an EXTRA declaration): ['introduce', 'absence', 'participants', 'which', 'transaction', 'trusted', 'fate', 'mini']
 
   double is named in 4 row(s):
       t18_idx.conf                         POOL -> @POOL slots 6,8,14,15,18
       t21_bnw18.conf                       POOL -> @POOL slots 6,8,14,15,21
       t21_idx.conf                         POOL -> @POOL slots 6,8,14,15,18,21
       t21_trust21.conf                     POOL -> @POOL slots 6,8,14,15,18
-
-  absent is named in 1 row(s):
-      t21_idx2.conf                        POOL -> @POOL slots 6,8,14,15,18,21
 
   proof is named in 223 row(s):
       alt2.conf                            POOL -> @POOL slots 6,8,14,15,18
@@ -145,6 +152,9 @@ PUBLISHED LEDGER  configs/ -- 192 configs
       t18_free2.conf                       POOL -> @POOL slots 6,8,14,15,18
       ... and 173 more
 
+  absent is named in 1 row(s):
+      t21_idx2.conf                        POOL -> @POOL slots 6,8,14,15,18,21
+
   trust is named in 6 row(s):
       t21_bnw18.conf                       POOL -> @POOL slots 6,8,14,15,21
       t21_slot1_line.conf                  SLOT 1
@@ -156,14 +166,24 @@ PUBLISHED LEDGER  configs/ -- 192 configs
 ==============================================================================
 SOLVER-ONLY (ran, never published) -- 35 configs
   word         NAMED   ADMITTED   how admitted
+  introduce        0      0/35    -
   double           3      4/35    {'@FULL only': 1, 'pool': 3}
   sign             0      1/35    {'@FULL only': 1}
-  absent           0      1/35    {'@FULL only': 1}
+  absence          0      0/35    -
+  participants       0      0/35    -
+  which            0      0/35    -
   proof           31     32/35    {'pool': 31, '@FULL only': 1}
+  transaction       0      0/35    -
+  trusted          0      0/35    -
   order           33     32/35    {'slot pin': 2, 'pool': 29, '@FULL only': 1}
+  absent           0      1/35    {'@FULL only': 1}
   trust            2      3/35    {'@FULL only': 1, 'pool': 2}
-  NEVER NAMED anywhere:    ['sign', 'absent']
-  NEVER ADMITTED anywhere: none
+  fate             0      0/35    -
+  aware            0      1/35    {'@FULL only': 1}
+  mini             0      0/35    -
+  NEVER NAMED anywhere:    ['introduce', 'sign', 'absence', 'participants', 'which', 'transaction', 'trusted', 'absent', 'fate', 'aware', 'mini']
+  NEVER ADMITTED anywhere: ['introduce', 'absence', 'participants', 'which', 'transaction', 'trusted', 'fate', 'mini']
+  NOT BIP39 AT ALL (can only ever enter via an EXTRA declaration): ['introduce', 'absence', 'participants', 'which', 'transaction', 'trusted', 'fate', 'mini']
 
   double is named in 3 row(s):
       t12_p80.conf                         POOL -> @POOL slots 6,8

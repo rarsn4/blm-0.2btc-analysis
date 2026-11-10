@@ -1,3 +1,11 @@
+[SUPERSEDED 10 Nov 2026 -- DO NOT QUOTE ANY FIGURE BELOW]
+The observed set is wrong: two of its six words (absent, trust) are not edits
+but our stems of ABSENCE and TRUSTED, neither of which is BIP39. The exact
+count on the ten actual targets is FOUR of SEVEN eligible. This script also
+does not condition on eligibility, so its denominator of ten counts three
+words (introduce, transaction, participants) that no BIP39 list could hold.
+Superseded by edit_lists_exact.py. Kept for the audit trail.
+
 SOURCE   bitcoin.txt lines 51-90, section 2 'Transactions'
   first  Transactions We define an electronic coin as a chain of
   last   the majority of nodes agreed it was the first received

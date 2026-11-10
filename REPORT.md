@@ -1124,7 +1124,7 @@ for one set, and it is not the answer."** It does not touch the rest.
 > no method attached**, it has never been measured here, and it cannot raise the probe's grade above
 > `[TESTED]`.
 >
-> The same comment is the source of the 2021 edit list (external review §4.3), and the same author
+> The same comment is the source of the 2021 edit list (external review §4.3b), and the same author
 > wrote the `apple@20` chain of 2021-02-13 (§2.16). One person is therefore behind three of the
 > external claims this report now records. That is a **correlation, not a confirmation**: three
 > claims from one reader are one reader's claims, and nothing here treats them as independent.
@@ -2169,12 +2169,20 @@ readings.** It is now being run over the 54-pool plus both words on all four pat
 > | # | link | measured here? |
 > |---|---|---|
 > | 1 | the tablet marks are characters at all | **no** — see the faint-group work below; the method is shown to have no power |
-> | 2 | the first is from "the author's circular cipher from Gravity Falls" | **no** — no such identification has been attempted |
+> | 2 | the first is from "the author's circular cipher from Gravity Falls" | **MEASURED, AND NEGATIVE** — §7.3 applies that very key to these glyphs: `◇` is **`W`** in the Gravity Falls Latin cipher (and `с` in the Cyrillic one). The identification was attempted and returned a letter the chain cannot use |
 > | 3 | `TH` lies in "the fourth sector" | **no** — and no sector origin or direction is defined anywhere |
 > | 4 | combining the second hand with those symbols yields `FR` and `UI` | **no** |
 > | 5 | `FR` + `UI` + `TH` = `FRUITH` | **no** — this is the step that supplies the letters |
-> | 6 | therefore the word by the watch is `ELPPA` | **no** — does not follow from 5 by any stated rule |
+> | 6 | therefore the word by the watch is `ELPPA` | **MEASURED, AND NEGATIVE** — `ELPPA` requires `◇` = `E`; the only two keys we hold give `W` and `с` (§7.3). It also does not follow from 5 by any stated rule |
 > | 7 | `ELPPA` reversed is `APPLE` | yes, trivially, and it is the only link that holds |
+>
+> **Seven links: four unmeasured, two measured and negative, one trivially true.** [CORRECTED
+> 10 Nov 2026] Links 2 and 6 were first published here as "no — not attempted", which was wrong
+> against this report's own §7.3 and against the paragraph immediately above this block, both of
+> which state that `◇` is `W` in the Gravity Falls Latin key. **That identification was attempted
+> and it came back `W`.** Recording it as unmeasured understated the result: an untested link
+> invites a test, while a tested link that failed is already an answer. **This is a worse outcome
+> for the chain than the version first committed, and it was available in the file at the time.**
 >
 > **This changes what §2.16 claims.** Saying `apple` has "no independent support" reads as a gap in
 > the record — as though nobody had looked. The measured truth is worse and more specific: `apple@20`
@@ -2189,10 +2197,14 @@ readings.** It is now being run over the 54-pool plus both words on all four pat
 >
 > *A reference image of the Gravity Falls zodiac wheel was supplied on 9 Nov 2026. It carries **ten
 > pictograms and no letters** — glasses, question mark, ice bag, crescent, pine tree, pentagram, hand,
-> llama, shooting star, stitched heart — so link 3's "the two letters TH are located in the fourth
-> sector" **cannot be evaluated against it**, and nothing in the image fixes a sector origin or
-> direction. Holding the artifact is not the same as being able to test the claim, and the image is
-> not evidence about the artwork.*
+> llama, shooting star, stitched heart. **This is the wrong artifact for this claim, by
+> construction:** the chain needs letters — `TH`, `FR`, `UI` — and a wheel of pictograms has none to
+> give, so no reading of it could bear on link 3 either way. [CORRECTED 10 Nov 2026: this note first
+> said link 3 "cannot be evaluated", which pointed the reader at a missing measurement. The
+> measurement is not missing; the artifact is simply not of the thing the claim is about.] The
+> artifact that **does** bear on the chain is the letter-substitution alphabet, and §7.3 already
+> holds it — that is where links 2 and 6 were tested, and failed. Holding an image is not the same
+> as being able to test a claim, and this image is not evidence about the artwork.*
 
 **[MEASURED] The spacing test.** How widely does the artist space adjacent
 characters *within* a word? A glyph is a connected ink component; fragments under

@@ -1,0 +1,139 @@
+==============================================================================
+0. THE WORDLIST, MEASURED (HH-2)
+==============================================================================
+  file      /home/soul/blm-analysis/configs/bip39_en.txt
+  words     2048
+  md5       cafd522d6627011d78e576f2d0b6ed58   (file as stored here)
+  sha256    187db04a869dd9bc7be80d21a86497d692c0db6abd3aa8cb6be5d618ff757fae
+  md5       f23506956964fa69c98fa3fb5c8823b5   (normalised: sorted, \n, trailing newline)
+  HH-2 cites md5 f23506956964fa69c98fa3fb5c8823b5 -- MATCHES one of the above
+  lengths   3:103  4:442  5:555  6:508  7:352  8:88
+  min 3, max 8
+  HH-2's distribution 3:103 4:442 5:555 6:508 7:352 8:88 -- CONFIRMED
+
+  CONSEQUENCE: a word of 9 or more letters is STRUCTURALLY ineligible,
+  not merely unlikely. Eligibility is a property of the word, not of
+  the artist's intent, and must be conditioned on before any ratio.
+
+==============================================================================
+1. THE TEN 2026 EDITS, ON EXACT TARGETS (HH-1)
+==============================================================================
+  painted        target          len elig BIP39   
+  introdue       introduce         9   NO no      
+  doudle         double            6  yes yes     
+  sing           sign              4  yes yes     
+  abcense        absence           7  yes no      
+  participans    participants     12   NO no      
+  wich           which             5  yes no      
+  proot          proof             5  yes yes     
+  transactian    transaction      11   NO no      
+  (deleted)      trusted           7  yes no      
+  oder           order             5  yes yes     
+
+  ten targets        introduce, double, sign, absence, participants, which, proof, transaction, trusted, order
+  structurally out   introduce, participants, transaction  (3)
+  eligible           7
+  BIP39, exact       4  (double, sign, proof, order)
+  ratio of eligible  4/7 = 57.1%
+
+  THE COMMITTED FIGURE WAS SIX. The two extra came from stemming:
+    absence   not BIP39  ->  counted as absent  BIP39 yes
+    trusted   not BIP39  ->  counted as trust   BIP39 yes
+  HH-2 states 6 of 7 eligible = 85.7 per cent. Measured on exact targets it is
+  4 of 7 = 57.1%. HH-2's eligibility split is exactly right and names the
+  right three long words; its numerator inherits our stemming defect.
+
+==============================================================================
+2. OVERLAP OF THE TWO LISTS, EXACT TARGETS (HH-1)
+==============================================================================
+  2021 as written    SIGN, DOUBLE, FATE, AWARE, A TRUSTED, ABSENCE, WHICH, MINI
+  2021 as targets    sign, double, fate, aware, trusted, absence, which, mini
+
+  IN BOTH LISTS      5: sign, double, trusted, absence, which
+  2021 only          3: fate, aware, mini
+  2026 only          5: introduce, participants, proof, transaction, order
+
+  `which` IS IN THE 2026 LIST (painted `wich`), so the review's row
+  'we hold only the six BIP39 of their ten, so which may or may not be
+  among the four we do not hold' is VOID: we hold all ten, and it is.
+  Exact-token overlap is 5, not two and not three.
+  The two pairs the review demoted to 'root only' -- ABSENCE/absent and
+  A TRUSTED/trust -- were demoted against OUR stemmed rendering, not
+  against their text. Both readers wrote the same word. The demotion was
+  an artefact of our own normalisation.
+
+==============================================================================
+3. THE REFERENCE CLASS, BY LENGTH (bitcoin.txt lines 51-90, section 2)
+==============================================================================
+   len  distinct   BIP39        p
+     1         4       0     0.0%
+     2        18       0     0.0%
+     3        19       7    36.8%
+     4        23      13    56.5%
+     5        24      12    50.0%
+     6        16       8    50.0%
+     7        17       6    35.3%
+     8        11       1     9.1%
+     9         7       0     0.0%
+    10         3       0     0.0%
+    11         1       0     0.0%
+    12         2       0     0.0%
+
+  Section 2 is a PROXY: it is the whitepaper as published, not as
+  painted, and we have never measured the painted text. Words absent
+  from it (fate, mini) take the rate of their length class.
+
+==============================================================================
+4. EXACT POISSON-BINOMIAL, SAME TEST ON BOTH LISTS (HH-2, HH-4)
+==============================================================================
+
+  2026 list (ten edits, their README)
+    eligible tokens 7, lengths [6, 4, 7, 5, 5, 7, 5]
+    per-token p     ['0.500', '0.565', '0.353', '0.500', '0.500', '0.353', '0.500']
+    expected 3.27   observed 4   P(X >= 4) = 0.428
+
+  2021 list (eight words, glrfjsz)
+    eligible tokens 8, lengths [4, 6, 4, 5, 7, 7, 5, 4]
+    per-token p     ['0.565', '0.500', '0.565', '0.500', '0.353', '0.353', '0.500', '0.565']
+    expected 3.90   observed 3   P(X >= 3) = 0.843
+
+  THE FIVE BOTH READERS NAMED -- the only alterations with two
+  independent witnesses
+    eligible tokens 5, lengths [4, 6, 7, 7, 5]
+    per-token p     ['0.565', '0.500', '0.353', '0.353', '0.500']
+    expected 2.27   observed 2   P(X >= 2) = 0.755
+
+  Where the two readers AGREE, the BIP39 rate is 2 of 5 against an
+  expectation of 2.27: P(X >= 2) = 0.755. The agreed set is the one with
+  the best provenance in the whole question, and it shows NOTHING.
+
+==============================================================================
+5. WHAT THIS DOES AND DOES NOT SETTLE
+==============================================================================
+  The ratio is not evidence of design, on either list, on any class.
+  It is also not disproof. The test is uninformative, which is the
+  point: an uninformative statistic presented as support is 1.7's shape.
+
+  The confound HH-4 names is real and is NOT measured here:
+    - glrfjsz: 'Sorry, I'm using a translator.'
+    - gn69cqa (same author, 11 days later): 'somvols' for symbols.
+    - 'A TRUSTED' and 'ABSENCE' are a phrase and a noun form; the 2026
+      list gives painted misspellings. The two are not the same kind of
+      object, and transcription quality is unequal and unquantified.
+    - 'and others': the 2021 list is SELF-REPORTED INCOMPLETE, and its
+      author says 'I chose these words' -- a selected subset, not a
+      transcription. A ratio over a self-selected subset of an unstated
+      total is not a ratio over the alterations.
+
+  HH-4 asks for the claim 'the two lists disagree enough that NEITHER
+  supports a ratio'. MEASURED, THEY DO NOT DISAGREE: 5 of the 2021
+  list's eight targets are in the 2026 list of ten. The ratio argument
+  does not need their disagreement and must not be rested on it. It
+  rests on the agreed five showing nothing, and on the 2026 list's own
+  exact count being 4 of 7 eligible.
+
+  RETRACTED by this script: 'A designed signal does not halve when a
+  different person reads the same marks' (external review 4.3b). The
+  halving it describes -- 60 per cent to 37.5 per cent -- compared a stemmed
+  numerator over ten to an exact numerator over eight, across two different
+  length mixes. There was no halving to explain.

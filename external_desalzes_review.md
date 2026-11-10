@@ -231,34 +231,121 @@ side; do not cite.**
 > treatment. **Nothing derived from the ten edits may enter `REPORT.md` as anything but [THEIRS],
 > and no config may be written from them, until the edits themselves are located and read here.**
 
-**The BIP39 ratio must not be quoted as evidence — measured, not assumed.** [MEASURED, 9 Nov 2026]
-Six of the ten edits are BIP39 words. Before that ratio is called a signal it needs its base rate,
-because naming a confound is not testing it (§1.1). Measured over the vocabulary of section 2 of the
-whitepaper as published (`bitcoin.txt` lines 51-90, 339 tokens, 145 distinct words):
+> **[CORRECTED 10 Nov 2026 — marked, not silently replaced] We hold all ten. The "four we do not
+> hold" named below never existed.** Their `README.md:362-363` gives the whole list in one sentence,
+> in the same file this section already cites at `:560` and `:390`:
+>
+> > *"the copy carries ten edits (introdue, doudle, sing for sign, abcense, participans, wich, proot,
+> > transactian, a deleted "a trusted", and "oder" for "order", the only edit on a device word).
+> > Nine pre-registered extraction rules over the deleted, inserted and substituted letters give
+> > noise, and a control recovered every confirmable edit. It is handwriting, so glyph matching
+> > cannot settle the doubtful letters. No message has been found in the micro-text."*
+>
+> | painted form | the whitepaper word it alters | letters | eligible | BIP39 |
+> |---|---|---:|---|---|
+> | `introdue` | introduce | 9 | **no** | no |
+> | `doudle` | double | 6 | yes | **yes** |
+> | `sing` | sign | 4 | yes | **yes** |
+> | `abcense` | absence | 7 | yes | no |
+> | `participans` | participants | 12 | **no** | no |
+> | `wich` | which | 5 | yes | no |
+> | `proot` | proof | 5 | yes | **yes** |
+> | `transactian` | transaction | 11 | **no** | no |
+> | a deleted *"a trusted"* | trusted | 7 | yes | no |
+> | `oder` | order | 5 | yes | **yes** |
+>
+> **The [SCOPE] grade above is unaffected and stands.** Holding their sentence is not measuring
+> their marks: there is still no crop, no location and no glyph count here for a single edit, and
+> their own note that *"glyph matching cannot settle the doubtful letters"* is a reason to expect
+> that measurement to be hard rather than a substitute for it. What changes is that every figure in
+> this section can now be computed from the primary source instead of from six words of it.
 
-| reference class | BIP39 fraction | expected of 10 | observed 6 is | P(>= 6) |
-|---|---:|---:|---:|---:|
-| all distinct words | 47/145 = 32.4% | 3.24 | +1.86 SE | 0.07 |
-| words of 3-8 letters (BIP39's own length range) | 47/110 = 42.7% | 4.27 | +1.10 SE | 0.22 |
-| **words of 4-6 letters (the band all six occupy)** | **33/63 = 52.4%** | **5.24** | **+0.48 SE** | **0.44** |
+**The BIP39 ratio must not be quoted as evidence — measured, not assumed.**
 
-All six are 4 to 6 letters long. **Against the only reference class that matches their shape, six of
-ten is half a standard error from nothing and would be beaten by chance in 44% of draws.** The ratio
-is not evidence of anything and must not be quoted as such anywhere. It is equally **not
-disproof** — the test is simply uninformative, which is the whole point: an uninformative statistic
-presented as support is §1.7's shape. Script `wp_bip39_baserate.py`, output `wp_bip39_baserate.out`.
+> **[RETRACTED 10 Nov 2026 — the numerator was ours, not theirs] *"Six of the ten edits are BIP39
+> words"* was never true.** It was published here on 9 Nov 2026 graded [MEASURED]. Against the
+> primary source above, **four** of the ten are BIP39: `double`, `sign`, `proof`, `order`. The other
+> two came from **stemming a non-BIP39 word to a BIP39 relative**:
+>
+> | we counted | the edit actually alters | BIP39? |
+> |---|---|---|
+> | `absent` | `absence` | `absence` **no** — `absent` yes |
+> | `trust` | a deleted *"a trusted"* | `trusted` **no** — `trust` yes |
+>
+> This is the exact normalisation §4.3b refused to allow the 2021 reader — *"a reader who writes
+> ABSENCE and a reader who writes absent did not transcribe the same string"* — applied silently to
+> our own numerator, in the same session, in the same file, by the same hand. `wp_bip39_baserate.py`
+> hardcoded the observed set as `["double","sign","absent","proof","order","trust"]` and its own
+> docstring called them "the ten whitepaper edits". Two of the six are not edits. **A standard
+> enforced on an outside reader and suspended for ourselves is not a standard.**
 
-Two further reasons it cannot be rescued by a better test:
+**The corrected test: exact, and conditioned on eligibility** [MEASURED, 10 Nov 2026]. BIP39 English
+holds **no word shorter than 3 letters or longer than 8** — measured over the canonical 2048 words,
+`md5 f23506956964fa69c98fa3fb5c8823b5` in normalised form (sorted, `\n`, trailing newline), lengths
+`3:103 4:442 5:555 6:508 7:352 8:88`. So `introduce` (9), `transaction` (11) and `participants` (12)
+are **structurally ineligible, not empirically unlikely**: no intention of the artist's could have
+made them BIP39 words, and a denominator of ten counts three words that never had a chance. **The
+retracted table above did not condition on this, so it was not a test.**
 
-- **The reference class is not even fully determined.** Two of the six — `absent` and `trust` — do
-  **not** occur in section 2's vocabulary at all, so
-  the edits are not all drawn from the painted passage. An edit that introduces a word is drawn from
-  the editor's whole vocabulary, not from the source text.
-- **We do not hold the other four edits.** Without them the lengths cannot be conditioned on
-  properly, and if those four are long words that *could not* be BIP39 under any circumstance, the
-  effective denominator is smaller than ten and the ratio means less still, not more.
+Seven of the ten are eligible and **four of those seven are BIP39 = 57.1%**. Each token carries its
+own length and so its own probability, which makes the count **Poisson-binomial, not binomial**;
+the distribution is computed exactly by convolution, with no standard error and no normal tail:
 
-**Membership of the six against our own configs** [MEASURED, 9 Nov 2026, all 192 published configs]:
+| list | eligible | lengths | expected | observed | exact P(X ≥ observed) |
+|---|---:|---|---:|---:|---:|
+| 2026 — their ten | 7 | 6,4,7,5,5,7,5 | 3.27 | 4 | **0.428** |
+| 2021 — `glrfjsz`'s eight (§4.3b) | 8 | 4,6,4,5,7,7,5,4 | 3.90 | 3 | **0.843** |
+| **the five both readers named** | 5 | 4,6,7,7,5 | 2.27 | 2 | **0.755** |
+
+Per-token probabilities are the BIP39 fraction of section 2's own vocabulary at that length
+(4 letters 13/23, 5 letters 12/24, 6 letters 8/16, 7 letters 6/17). **Not one of the three lists is
+informative at any level.** The ratio is not evidence of design, and it is equally **not disproof** —
+the test is uninformative, which is the whole point: an uninformative statistic presented as support
+is §1.7's shape. Scripts `edit_lists_exact.py` → `edit_lists_exact.out` (this test, both lists) and
+`wp_bip39_baserate.py` → `wp_bip39_baserate.out` (superseded: its observed set is the stemmed six).
+
+Two further objections were recorded here on 9 Nov. **Both were artefacts of the stemming, not facts
+about the edits, and both are retracted:**
+
+- > **[RETRACTED 10 Nov 2026] *"The reference class is not even fully determined. Two of the six —
+  > `absent` and `trust` — do not occur in section 2's vocabulary at all, so the edits are not all
+  > drawn from the painted passage."*** The two words that do not occur are the two we invented.
+  > **All ten actual targets occur in section 2's published vocabulary**, checked by token against
+  > `bitcoin.txt` lines 51-90. The reference class is **fully determined**, and section 2's
+  > vocabulary is the right class rather than a proxy for it — which makes the corrected test
+  > stronger than the retracted one, not weaker. The conclusion drawn from this defect — *"an edit
+  > that introduces a word is drawn from the editor's whole vocabulary"* — had no edit behind it.
+- > **[RETRACTED 10 Nov 2026] *"We do not hold the other four edits."*** We hold all ten. The four
+  > said to be missing are `introduce`, `participants`, `transaction` and `which`, and **three of
+  > them are the three that decide the test**, because they are the three that cannot be BIP39 at
+  > any length. The bullet guessed that the missing four would make the ratio mean less rather than
+  > more, and the exact test agrees — `P = 0.428` — but it reached that by reasoning about words it
+  > had in hand and had not read.
+
+**Membership against our own configs, on the ten actual targets** [MEASURED, 10 Nov 2026, 192
+published + 35 solver-only]:
+
+| the ten targets | BIP39? | named in any config | admitted at any slot |
+|---|---|---:|---:|
+| `proof` | yes | 223 rows | 185 of 192 |
+| `order` | yes | 233 rows | 185 of 192 |
+| `double` | yes | 4 rows | 37 of 192 |
+| `sign` | yes | **0 — named nowhere, in either set** | 33 of 192, `@FULL` only |
+| `introduce`, `absence`, `participants`, `which`, `transaction`, `trusted` | **no** | 0 | **0 of 192** |
+
+**Six of the ten edits cannot enter a BIP39 phrase at all**, and that is a property of the wordlist,
+not of our coverage: no `@FULL` slot admits them and no config can name them without an `EXTRA`
+declaration, which only the brainwallet configs use. Of the four that can, three are already
+ubiquitous in the ledger and one — `sign` — has never been named in any config we have written.
+**Read as a word source for a BIP39 phrase, the ten edits propose exactly one untried word.**
+
+> *The table published here on 9 Nov measured `absent` and `trust`, which are not edits. Those two
+> rows answered a question about our stems. They are kept below for the audit trail, under the
+> heading they were published with, because the figures in them are correct about the words they
+> name.*
+
+**Membership of the stemmed six against our own configs** [as published 9 Nov 2026 — two of these
+six are not edits; see the retraction above]:
 
 | word | named in a POOL or SLOT line | admits it at some slot | how |
 |---|---:|---:|---|
@@ -279,6 +366,11 @@ the word) separately from ADMITTED (some slot would accept it, which every `@FUL
 over. The solver-only set of 35 that ran but was never published was scanned too: there `sign` and
 `absent` are both named nowhere.
 
+*[10 Nov 2026: superseded by the ten-target table above. Every figure in this paragraph is correct
+about the six words it names — but only four of those six are edits, and the sentence "proposes
+almost nothing our configs do not already admit" is now measured exactly: of the ten actual targets,
+six cannot enter a BIP39 phrase at all and exactly one, `sign`, is both admissible and untried.]*
+
 ### 4.3b A SECOND external transcription of the same painted text, five years earlier
 
 **[EXTERNAL, UNLOCATED — 9 Nov 2026]** The 2026 edit list is not the only one. **u/Accomplished_Weird36,
@@ -293,27 +385,61 @@ Two readers, five years apart, working from the same artwork. **Where they agree
 people saw the same alteration, which is better evidence than either alone. Where they differ,
 neither is measured.** Both lists carry the same grade: `[EXTERNAL, UNLOCATED]`.
 
-Measured, the agreement is **narrower than it first looks**, and the distinction is worth keeping:
+> **[CORRECTED 10 Nov 2026 — marked, not silently replaced] The agreement table below was built
+> against our own stemmed rendering of the 2026 list rather than against their text, and it
+> undercounted.** With the primary source in hand (§4.3), measured on exact targets: **five of the
+> 2021 list's eight words are in the 2026 list of ten** — `SIGN`, `DOUBLE`, `WHICH`, `ABSENCE`,
+> `A TRUSTED`. The two pairs demoted below to "root only" were demoted against words **we** had
+> stemmed: their README writes `abcense`, whose target is **absence**, and records a deleted
+> **"a trusted"**, which is the string the 2021 reader wrote. Both readers wrote the same word.
+> And `WHICH` is not unverifiable — their painted form is `wich`, the sixth edit in their sentence.
+>
+> **The count of five, as first put to me on 9 Nov, was right, and my correction of it to two was
+> wrong.** It was wrong by applying to an outside reader a standard I had suspended for our own
+> numerator in the section above: exact tokens for them, stems for us. The agreement was never the
+> error; the demotion was.
 
-| | 2021 (`glrfjsz`) | 2026 (theirs) | agreement |
+| | 2021 (`glrfjsz`) | 2026 (their README) | agreement |
 |---|---|---|---|
-| exact same token | `SIGN`, `DOUBLE` | `sign`, `double` | **2 words, exact** |
-| same alteration, different token | `ABSENCE`, `A TRUSTED` | `absent`, `trust` | **2 more, by root only** |
-| in 2021, unverifiable against 2026 | `WHICH` | — | we hold only the six BIP39 of their ten, and `which` is not BIP39, so it may or may not be among the four we do not hold |
-| in 2021, absent from the six we hold | `FATE`, `AWARE`, `MINI` | — | unresolved |
-| in 2026, absent from 2021 | — | `proof`, `order` | unresolved |
+| in both lists, exact target | `SIGN`, `DOUBLE`, `WHICH`, `ABSENCE`, `A TRUSTED` | `sing`→sign, `doudle`→double, `wich`→which, `abcense`→absence, a deleted *"a trusted"* | **5 of 8, exact** |
+| in 2021 only | `FATE`, `AWARE`, `MINI` | — | 3, unresolved |
+| in 2026 only | — | `introdue`, `participans`, `proot`, `transactian`, `oder` | 5, unresolved |
 
-So the honest count is **two exact and two by root**, not five, and the root pairs are a real
-difference: a reader who writes `ABSENCE` and a reader who writes `absent` did not transcribe the
-same string, even if they are pointing at the same mark.
+**Five of eight is the strongest agreement anywhere in this question.** Two readers, five years
+apart, working from the same artwork, naming the same five alterations. It is still two
+transcriptions and no measurement: **both carry `[EXTERNAL, UNLOCATED]`, and agreement between two
+unmeasured readings is not a measurement.** What it does establish is that these five marks are the
+best-attested objects in the question, and therefore the right place to test the ratio.
 
-**The 2021 list is also an independent test of the BIP39 ratio — and it fails it.** [MEASURED] If the
-alterations had been chosen to be BIP39 words, then a second reader's transcription of the same
-alterations should also be rich in BIP39 words. Of the eight words named in 2021, **three are BIP39**
-(`sign`, `double`, `aware`) — **37.5%**, against 60% for the 2026 six-of-ten, and sitting inside the
-32.4-52.4% base-rate range measured in §4.3 above. A designed signal does not halve when a different
-person reads the same marks. This is a second, independent reason the ratio must not be quoted as
-evidence.
+> **[RETRACTED 10 Nov 2026] *"A designed signal does not halve when a different person reads the
+> same marks."*** The halving was ours. It set **60%** — a stemmed numerator over an unconditioned
+> denominator of ten — against **37.5%**, an exact numerator over eight words of a different length
+> mix. The two figures were never comparable, so there was no halving to explain, and an argument
+> resting on one was resting on an artefact. The 2021 list's own exact test is in §4.3's table:
+> three of eight eligible, expected 3.90, **P(X ≥ 3) = 0.843** — it is not "rich in BIP39 words" and
+> it is not poor in them either; it is ordinary.
+
+**The corrected argument needs neither list's total nor any disagreement between the readers**
+[MEASURED, 10 Nov 2026]. Take the **five alterations both readers independently named** — the only
+marks here with two witnesses. Of those five, two are BIP39 (`sign`, `double`) against an exact
+expectation of 2.27: **P(X ≥ 2) = 0.755.** *Where the attestation is strongest, the BIP39 rate is
+precisely what chance predicts*, and saying so requires no assumption about either reader's
+competence. That is the whole of the case against the ratio, and it is the part that does not depend
+on who transcribed better.
+
+**The confound is real, is unmeasured, and is recorded rather than assumed away.** Transcription
+quality between the two readers is visibly unequal:
+
+- *"Sorry, I'm using a translator."* — `glrfjsz`'s own opening line.
+- `somvols` for *symbols* — the same author, `gn69cqa`, eleven days later (`REPORT.md` §2.16).
+- *"and others"* — **the 2021 list is self-reported incomplete**, and its author writes *"I chose
+  these words"*. A ratio over a self-selected subset of an unstated total is not a ratio over the
+  alterations, and no test of eight can be made to behave like a test of all of them.
+- `MINI` is **not in section 2's vocabulary at all**; the other seven are, measured by token against
+  `bitcoin.txt` lines 51-90. One of the eight names a word that is not in the text being read.
+
+**None of this is a reason to prefer one list.** It is a reason no ratio taken over either is
+evidence, which the exact tests already show without it.
 
 **Membership of the 2021-only words against our configs** [MEASURED, 192 published + 35 solver-only]:
 

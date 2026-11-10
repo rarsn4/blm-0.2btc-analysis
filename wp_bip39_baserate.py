@@ -1,6 +1,24 @@
 #!/usr/bin/env python3
 """EE-2. The base rate for "six of the ten whitepaper edits are BIP39 words".
 
+[SUPERSEDED 10 Nov 2026 — kept for the audit trail, do not quote]
+=================================================================
+THE OBSERVED SET BELOW IS WRONG. `SIX` hardcodes ["double","sign","absent",
+"proof","order","trust"] and this docstring calls them "the ten whitepaper
+edits". Two of them are not edits. The primary source -- their README.md:362-363,
+fetched 9 Nov 2026 -- gives the painted forms `abcense` (target ABSENCE) and a
+deleted "a trusted" (target TRUSTED). Neither ABSENCE nor TRUSTED is a BIP39
+word; `absent` and `trust` are, and they entered this script by stemming. The
+exact count on their ten targets is FOUR: double, sign, proof, order.
+
+This script also fails to condition on eligibility. BIP39 English holds no word
+over 8 letters, so introduce(9), transaction(11) and participants(12) could
+never have been BIP39 whatever the artist intended, and a denominator of ten
+counts three words that never had a chance. The replacement conditions on
+eligibility and computes the exact Poisson-binomial over each token's own
+length: see edit_lists_exact.py, which supersedes this file for every figure
+except the by-length profile of section 2's vocabulary, which it reuses.
+
 A ratio is not evidence until its base rate is measured. Section 1.1's lesson is
 that naming a confound is not testing it, so this tests it.
 
@@ -23,7 +41,17 @@ WP = "/home/soul/Downloads/Brainwallet/files(6)/bitcoin.txt"
 SIX = ["double", "sign", "absent", "proof", "order", "trust"]
 TOK = re.compile(r"[A-Za-z]+")
 
+BANNER = """[SUPERSEDED 10 Nov 2026 -- DO NOT QUOTE ANY FIGURE BELOW]
+The observed set is wrong: two of its six words (absent, trust) are not edits
+but our stems of ABSENCE and TRUSTED, neither of which is BIP39. The exact
+count on the ten actual targets is FOUR of SEVEN eligible. This script also
+does not condition on eligibility, so its denominator of ten counts three
+words (introduce, transaction, participants) that no BIP39 list could hold.
+Superseded by edit_lists_exact.py. Kept for the audit trail.
+"""
+
 def main():
+    print(BANNER)
     if not os.path.exists(WP):
         sys.exit("whitepaper text not found at %s" % WP)
     W = set(w.strip().lower() for w in open(WL) if w.strip())
