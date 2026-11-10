@@ -62,7 +62,7 @@ Claims below are tagged. Do not promote a tag without new evidence.
 | **[INFERRED]** | Follows from measured facts by a stated argument. |
 | **[ASSUMED]** | Load-bearing but unproven. The soft spots. |
 | **[COMMUNITY]** | A reading or convention taken from the shared solver corpus, not derived here. Weaker than [INFERRED]: no argument from this project's measurements backs it. `premise_audit.md`'s vocabulary, used in §5 from 9 Nov 2026. |
-| **[DEFECT]** | A fault in this project's own method or machine, found and dated. §1.7, §1.8, §1.9, §1.10, §1.12, §1.13, §1.14. §1.11 is the same register for a fault in material **sent to** this project, kept separate because it is not ours. |
+| **[DEFECT]** | A fault in this project's own method or machine, found and dated. §1.7, §1.8, §1.9, §1.10, §1.12, §1.13, §1.14, §1.15, §1.16. §1.11 is the same register for a fault in material **sent to** this project, kept separate because it is not ours. |
 
 The distinction between [EXHAUSTED] and [TESTED] is the one that matters: §2.1–2.11
 are the first, §2.12 is the second, and conflating them would be the only overclaim
@@ -70,21 +70,21 @@ in this document.
 
 ---
 
-## 1. Six defects in the shared data, seven in ours — and three in briefs sent here
+## 1. Six defects in the shared data, nine in ours — and four in briefs sent here
 
-§1.1–1.6 are faults in the data the community shares. **§1.7–§1.10 and §1.12–§1.14 are
+§1.1–1.6 are faults in the data the community shares. **§1.7–§1.10 and §1.12–§1.16 are
 faults of this project's own**, and they are the more serious kind, so they are not buried: for
 five weeks this project accrued negatives on a solver binary that had never passed a
 self-test (§1.7), and for five weeks it hashed a transcription that was never checked
 back against the image (§1.8). They have the same shape — something written down once,
 trusted thereafter, never re-measured.
 
-**§1.11 is a third kind**, and it records **three** claims, all of which arrived in briefs
+**§1.11 is a third kind**, and it records **four** claims, all of which arrived in briefs
 addressed to this project. Two were attributed to this project's own files and are not in
 them. The third is different and worth distinguishing: its stated facts were **correct**, and
 its conclusion was wrong anyway, because the facts were checked against one ledger and the
 conclusion was drawn about words in general. It is recorded in the same register as the other
-thirteen because the failure mode is identical — something stated once and trusted thereafter —
+fifteen because the failure mode is identical — something stated once and trusted thereafter —
 and because a defect in an instruction is the one class a reader of this report cannot
 otherwise see.
 
@@ -776,6 +776,53 @@ run against a null is a rule nobody has checked, however often it has been appli
 strips in advance and makes a depth where any null reaches the bar **VOID** rather than
 negative. §2.17's bands entry is regraded accordingly, below.
 
+### 1.15 [DEFECT, found and closed 2026-11-10] A test matched the "tt" inside the word "written" and would have announced a cipher
+
+**Found by hand-checking a verdict that had just flipped.** `xx_convention.py` asks whether this
+painting ever writes a doubled letter as XX or as a stand-in. The check scanned each
+substitution-census note's **entire prose text** for a doubled letter — and matched the **`tt` in
+the word "written"**, inside the note *"- (the I of SHIT is written)"*, a note whose whole content
+is that a letter **was not** substituted.
+
+**It returned "A SECOND INSTANCE EXISTS".** [MEASURED] The correct answer is none: of two
+substitutions recorded across 331 glyph-by-glyph letters, neither substitutes a doubled letter.
+
+**What makes this worse than a quiet false positive is the instruction attached to it.** The brief
+specifying the test said that if a second instance were found it should be **reported loudly** —
+correctly, because a rule with two instances is a cipher rather than an excuse. So the failure mode
+here was not a wrong number in a table. It was **a fabricated cipher delivered with instructed
+emphasis**, and the only thing between it and the record was that the flipped verdict looked
+surprising enough to check by hand.
+
+**The lesson is narrow and worth stating narrowly:** a test for a property of *data* must read the
+data, not the prose describing it. The fix asks whether the **substituted letter** is one of a
+doubled pair in the element's own text. **Emphasis is a multiplier on whatever it is applied to,
+including an error** — a pre-registered "report this loudly" branch deserves a hand-check before it
+fires, not after.
+
+### 1.16 [DEFECT, found and closed 2026-11-10] An unquoted heredoc executed backticks and silently deleted a word from the publication gate's own verification file
+
+**Found by reading the shell's own error output instead of trusting the exit status.** A pin note
+for `REPORT.md` was appended to `pre_push_allow.txt` with `<<EOF` rather than `<<'EOF'`. The note
+contained the word `cell` in backticks. The shell **executed it as a command**, printed
+`cell: command not found`, and wrote the note **with the word removed** — leaving
+*"it states all eleven are reachable, but  is OLD-ELECTRUM ONLY"* in the file. [MEASURED]
+
+**`pre_push_check.sh` returned PASS, and correctly so**, because the gate validates blob pins and
+scans for phrase runs; it does not and cannot check whether a human-written justification still says
+what its author meant.
+
+**This is §1.13's exact shape in a different file.** There, twelve pin notes stated a verification
+whose numbers no longer reproduced. Here, a pin note states a verification with a word missing from
+its reasoning. In both cases the *pin* was valid, the *file* was intact, and the **justification —
+the only part a reviewer reads — was quietly wrong.** The gate's record is the one place in this
+project where a silent edit cannot be caught by re-measurement, because there is nothing to
+re-measure: the note is prose.
+
+**Fixed:** the damaged line is repaired, every line appended that day was audited for the same
+damage (it was the only one), and **pin notes no longer contain backticks at all** — the one
+remaining backtick in the file is from 9 Nov and predates this. Quoted heredocs from here on.
+
 ### 1.11 [DEFECT in material sent to this project, found 2026-11-10] Two measurements attributed to this repository do not exist in it, and a third claim was scoped to the wrong ledger
 
 **Found by looking for them before citing them**, which is the only reason this entry is
@@ -842,6 +889,18 @@ Two further exact-token facts, since the same brief's list mixed forms: **`horn`
 BIP39** and `horns` is not, and **`goat` *is* BIP39**. So the source end of that reading is
 BIP39-reachable and the destination end is not — which is a sharper statement than the one
 offered, and it is the EE-1 discipline again: inflections are different tokens.
+
+#### The fourth claim — a cross-reference to a brief that was never sent [MEASURED 2026-11-10]
+
+A brief of 10 Nov 2026 instructed that a new §10 rule be *"paired with NN-1"*. **There is no
+NN-1.** The string `NN-1` occurs nowhere in this repository and nowhere in any transcript of it
+except inside that brief and this report's own echo of it; the lettered blocks of that session ran
+**LL → MM → OO → PP → QQ**, and **NN was never sent**. This is the third time the same shape has
+arrived — `FF-1`/`FF-2`/`FF-3`, `CC-1(c)` and the 36°-against-30° dial measurement were each cited
+as existing work and each absent — and it is recorded for the same reason: **the instruction built
+on it was sound**, so the rule was adopted on its merits and attributed to the brief that stated
+it, not to a precedent that cannot be read. *A rule is not strengthened by a citation nobody can
+follow.*
 
 **What does not change.** The goat→devil chain still has **zero measured links**, and **no
 word enters any config from it** — not on the BIP39 path, where `devil` cannot be encoded,
@@ -2742,6 +2801,47 @@ readings.** It is now being run over the 54-pool plus both words on all four pat
 > *could* be slotted, which they could not. A config required **both** OO-1 finding the marks **and**
 > OO-2 finding a second instance. **Neither holds.** Scripts `xx_marks.py`, `xx_convention.py`,
 > outputs `xx_marks.out`, `xx_convention.out`.
+>
+> **[SCOPE 2026-11-10] The X-marks negative is scoped to CONTRAST, the way §2.17's bands negative
+> is.** It used **absolute cutoffs 90–185** — the same morning §1.14 established that an absolute
+> cutoff against this image's backgrounds cannot reach the rifle mark's **19 levels**. Stated
+> plainly:
+>
+> **The negative excludes a pair of X marks at ordinary pen contrast. Its sensitivity below the
+> floor is UNMEASURED.** Glyph X, the only X ever measured here, is drawn at full pen — 92 ink px,
+> darkest 0 — so the detector was calibrated on a bold mark and tested for bold marks.
+>
+> **And a second limit, from this report's own §6: the criterion cannot see a faint X even in
+> principle.** It requires **exactly one 4-way junction**, and §6 records that at sub-pixel stroke
+> widths *"strokes that narrow merge, so a junction and a near-miss render identically."* **A faint
+> X whose strokes do not quite cross is invisible to this instrument by construction** — not
+> missed, but undetectable in kind.
+>
+> **It must NOT be re-run with the depth-below-local-median detector, and the reason is worth
+> stating because the obvious reason is wrong.** [MEASURED, controls only — `xx_depth_calibration.py`]
+> The two detectors were compared **on the four control regions alone**, never on C1 or C2, so this
+> is calibration and not a reopened test:
+>
+> | worst-case control region | sized components | X-signatures |
+> |---|---:|---:|
+> | absolute cutoffs 90–185 | 68 | **6** |
+> | depth ≥ 10–39 below a 41 px local median | 97 | **11** |
+>
+> Depth detection roughly **doubles** the control's false-positive bound, ×1.8 — an increase, not a
+> blowout. **So "the controls would fire far more, therefore the result would be void in the
+> blocking sense" does not follow**, and by the rule now written into §10 it gets the asymmetry
+> backwards: a control that fires *more* **strengthens** an absence claim, provided the region still
+> finds nothing. What made §1.14's bands void in the blocking sense was that **R1's own counts sat
+> inside the control range**, not that its controls were loud. Whether a depth run here would block
+> or reinforce depends on what the circles returned, **which is unmeasured and is left that way.**
+>
+> **The reasons not to re-run that do hold are these two.** First, the **topology limit** above: at
+> 10–19 levels every stroke is sub-pixel, which is exactly where a junction and a near-miss become
+> the same picture, so the criterion stops testing for anything — and that is true whatever the
+> control counts do. Second, **swapping the instrument after seeing the result** is post-hoc
+> instrument choice: `STOP_R10_SET_C`'s prohibition and §PP-3's forking paths in one move. A
+> depth-based X test is a different measurement and needs its own pre-registration, including which
+> side of §10's asymmetry its control is expected to land on.
 >
 > *A reference image of the Gravity Falls zodiac wheel was supplied on 9 Nov 2026. It carries **ten
 > pictograms and no letters** — glasses, question mark, ice bag, crescent, pine tree, pentagram, hand,
@@ -7401,6 +7501,42 @@ fatal to correctness.
   has 32 blank columns beside it), and does the **run count hold**. The wrong entry
   stood for one commit. The scan that produced it was mine, and it agreed with what
   the census said should be there — which is rule one.
+
+- **A void is not symmetric. Which way it cuts depends on where the REGION's count
+  sits, not on how loudly the control fires.** [Rule added 2026-11-10, after both
+  cases occurred on the same day and were told apart by judgement with no written
+  rule to appeal to.]
+
+  - **Control UNDER-fires, region finds nothing → NO POWER.** Absence may *not* be
+    claimed: the instrument has not been shown capable of finding the thing. This is
+    the zodiac llama sweep, where the planted control was never recovered at any size.
+  - **Control OVER-fires, region finds nothing → ABSENCE MAY BE CLAIMED.** The void
+    forbids only the positive that was not found. A detector that returns 2–6 false
+    hits per control region and still finds at most 1 inside the regions under test
+    has not failed to look; it has looked too eagerly and come back empty. This is
+    the X-marks sweep (§2.16).
+  - **The blocking case is neither of those.** §1.14's block-B bands are void in the
+    blocking sense because **R1's own counts, 13–17, sat inside the control range at a
+    bar of 14.** The region was indistinguishable from the control. *That* is what
+    forbids both directions — and it is a fact about the region's position in the
+    control distribution, not about the control's level.
+
+  **So the test is: is the region's count far below the control distribution, or
+  inside it?** Stating it as "the controls fire a lot, so the result is void" gets the
+  X-marks case backwards, because a control that fires *more* strengthens an absence
+  claim rather than weakening it.
+
+  **Paired requirement, and it is the half that keeps being skipped:** pre-register
+  **the standard the verdict will actually rest on**, and pre-register **which side of
+  this asymmetry the control is expected to land on.** Three verdicts in two days
+  survived on evidence other than the evidence offered for them — §1.12's collar form
+  on hue after its symmetry argument failed, §1.13's pin notes on a real invariant
+  while quoting figures that do not reproduce, §1.14's bands negative on identification
+  after its count rule proved void. In each case the written rule was not the rule the
+  conclusion used. Deciding in advance what the control is *for* is what would have
+  caught all three. *(The brief stating this rule cross-referenced it to an "NN-1"
+  that does not exist in this repository or in any transcript of it — §1.11's fourth
+  claim. The rule is adopted on its merits and attributed to that brief.)*
 
   **The same rule applied one level up, and the result is worse.** The question
   "where is this block?" was never asked of two of the three rune blocks until

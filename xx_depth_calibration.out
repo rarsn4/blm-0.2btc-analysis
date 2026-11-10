@@ -1,0 +1,60 @@
+QQ-1  CONTROL-ONLY CALIBRATION: what depth-based detection would do to the criterion
+==========================================================================================
+  C1 and C2 are NOT touched. Controls only, the four declared in the plan.
+
+--- the detector OO-1 actually used: absolute cutoffs ---
+region                          <90          <110          <125          <140          <155          <170          <185
+ctrl (900,150)           67/2          67/1          60/5          57/5          63/5          68/4          63/6      
+ctrl (1100,430)          15/0          12/2           8/0           4/2           4/0           2/0           2/0      
+ctrl (150,150)            2/0           0/0           4/0          19/0          13/0           9/1           5/0      
+ctrl (1150,800)           9/0          17/0          17/0           8/1           9/0           8/0           4/0      
+MAX  sized/X-sig               67/2          67/2          60/5          57/5          63/5          68/4          63/6
+
+--- the detector QQ-1 forbids: depth below a 41px local median ---
+region                         >=10          >=15          >=19          >=25          >=30          >=39
+ctrl (900,150)           71/6          74/9          82/11         87/9          92/8          97/6      
+ctrl (1100,430)          16/2          12/2          12/1          13/2          15/3          17/3      
+ctrl (150,150)           13/1          13/1          18/0          16/0          18/0          20/0      
+ctrl (1150,800)          45/2          44/2          45/1          41/0          29/4          21/2      
+MAX  sized/X-sig               71/6          74/9         82/11          87/9          92/8          97/6
+
+--- WHAT IS MEASURED ---
+  worst-case control, absolute cutoffs :    68 sized components,   6 X-signatures
+  worst-case control, depth detection  :    97 sized components,  11 X-signatures
+  components   x1.4      X-signatures x1.8
+
+  So depth detection roughly DOUBLES the control's false-positive bound, 6 -> 11.
+  It does NOT explode it. The brief's premise that the controls 'would fire far
+  more' is measured here as x1.8, which is an increase and not a blowout.
+
+--- AND THE BRIEF'S STATED REASON DOES NOT FOLLOW FROM IT ---
+  By the asymmetric-void rule the same brief asks to be written down, an
+  OVER-firing control plus a region that finds nothing means absence MAY be
+  claimed. A detector that fires MORE on controls therefore makes an absence
+  argument STRONGER, not weaker -- provided the region still finds nothing.
+
+  What made block B (1.14) void in the BLOCKING sense was not that its controls
+  over-fired. It was that R1's own counts, 13-17, sat INSIDE the control range
+  at a bar of 14. The blocking condition is the REGION's count being
+  indistinguishable from the control's -- not the control's level by itself.
+
+  At absolute cutoffs the circles returned 0-1 against controls of 0-6: far
+  below, so absence is claimable. At depth the circles are UNMEASURED, so which
+  side of the asymmetry a depth run would land on CANNOT be stated from these
+  numbers. It would depend on what the circles returned.
+
+--- THE REASONS NOT TO RE-RUN THAT DO HOLD ---
+  1. THE TOPOLOGY LIMIT, which is decisive and is independent of any count.
+     The criterion requires EXACTLY ONE 4-WAY JUNCTION. REPORT 6 records that at
+     sub-pixel stroke widths 'strokes that narrow merge, so a junction and a
+     near-miss render identically'. Depth detection at 10-19 levels operates
+     precisely where strokes are sub-pixel, so the feature the criterion tests
+     for stops being distinguishable from its own negation. The instrument is
+     wrong there whatever the control counts say.
+  2. CHANGING THE INSTRUMENT AFTER SEEING THE RESULT needs fresh pre-registration.
+     OO-1 was pre-registered at absolute cutoffs 90-185. Swapping detectors now
+     is the STOP_R10_SET_C problem and PP-3's forking paths in one move.
+
+  CONCLUSION: do not re-run -- on reasons 1 and 2, not on the control counts.
+  And the OO-1 negative is SCOPED TO CONTRAST either way: it excludes a pair of
+  X marks at ordinary pen contrast and has UNMEASURED sensitivity below the floor.
