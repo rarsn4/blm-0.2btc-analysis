@@ -1,0 +1,60 @@
+POST-HOC DIAGNOSTIC, run AFTER the pre-registered tests and labelled as such.
+It does NOT override collar_form.out. It asks one question: how much of the
+pre-registered FORM box is background sky, and what does that do to (b) and (c)?
+
+FORM box x1349-1373 y509-541 : 768 px, of which 390 are background sky (51%)
+form core (sky excluded): 378 px
+
+region                                  n  saturation 5/25/50/75/95
+FORM box as pre-registered            768  0.081 0.152 0.238 0.324 0.520
+FORM core, sky excluded               378  0.062 0.107 0.239 0.380 0.568
+bandana, shadowed                     356  0.358 0.390 0.434 0.488 0.547
+garment (coat)                      12041  0.025 0.031 0.044 0.068 0.102
+
+(b) re-run on the core: median S 0.239
+    vs shadowed bandana 5th pct 0.358 -> still NOT bandana
+    vs garment 5th-95th 0.025-0.102 -> STILL OUTSIDE the coat's range
+
+(c) re-run on the core: bright threshold was 0.847 with sky, 0.468 without
+    dark cluster 17 px at x1362.5 y514.6
+    GLINT FOUND on the core: 4 px at x1357.5 y518.5, contrast +61.9 levels
+
+HUE OF THE FORM CORE (is it blended bandana-red, or its own colour?)
+  hue, wrapped to [-0.5,0.5], 5/25/50/75/95: -0.417 -0.119 -0.047 -0.030 -0.016
+  65% of core pixels sit in the red band, 15% in the cyan band
+  -> consistent with blended bandana edge
+
+SILHOUETTE of the form core (post-hoc description, not an identification):
+   509 |               +   +++++|
+   510 |               #### ++++|
+   511 |            ########++++|
+   512 |           ######+++++++|
+   513 |         ########++++#++|
+   514 |         ########+++####|
+   515 |        ################|
+   516 |       ##+##############|
+   517 |       #+++#############|
+   518 |       #..+## ##########|
+   519 |       #.+##  ##########|
+   520 |        +      #########|
+   521 |              ##########|
+   522 |              ######+++#|
+   523 |        ..    ##########|
+   524 |        ..    +#########|
+   525 |        .      #+#+++#++|
+   526 |       +.       +#++##++|
+   527 |       +.      .+#+##+++|
+   528 |      .+.      ++++##+++|
+   529 |      +..      +#+##++++|
+   530 |      #..      ##+#+++++|
+   531 |      +..        #++++++|
+   532 |     +..         #+++###|
+   533 |      .          #+#####|
+   534 |    +           +#+#####|
+   535 |               +#+######|
+   536 |              +#+#######|
+   537 |             +##########|
+   538 |           .+#++########|
+   539 |          +#++++++++####|
+   540 |           #++++++++####|
+        x 1349 ... 1372   ( # dark  + mid  . light  o bright )

@@ -62,7 +62,7 @@ Claims below are tagged. Do not promote a tag without new evidence.
 | **[INFERRED]** | Follows from measured facts by a stated argument. |
 | **[ASSUMED]** | Load-bearing but unproven. The soft spots. |
 | **[COMMUNITY]** | A reading or convention taken from the shared solver corpus, not derived here. Weaker than [INFERRED]: no argument from this project's measurements backs it. `premise_audit.md`'s vocabulary, used in §5 from 9 Nov 2026. |
-| **[DEFECT]** | A fault in this project's own method or machine, found and dated. §1.7, §1.8, §1.9, §1.10. §1.11 is the same register for a fault in material **sent to** this project, kept separate because it is not ours. |
+| **[DEFECT]** | A fault in this project's own method or machine, found and dated. §1.7, §1.8, §1.9, §1.10, §1.12. §1.11 is the same register for a fault in material **sent to** this project, kept separate because it is not ours. |
 
 The distinction between [EXHAUSTED] and [TESTED] is the one that matters: §2.1–2.11
 are the first, §2.12 is the second, and conflating them would be the only overclaim
@@ -70,9 +70,9 @@ in this document.
 
 ---
 
-## 1. Six defects in the shared data, four in ours — and two in briefs sent here
+## 1. Six defects in the shared data, five in ours — and two in briefs sent here
 
-§1.1–1.6 are faults in the data the community shares. **§1.7–§1.10 are faults
+§1.1–1.6 are faults in the data the community shares. **§1.7–§1.10 and §1.12 are faults
 of this project's own**, and they are the more serious kind, so they are not buried: for
 five weeks this project accrued negatives on a solver binary that had never passed a
 self-test (§1.7), and for five weeks it hashed a transcription that was never checked
@@ -647,6 +647,34 @@ legitimately contain one** (sha256 stamps, spec test vectors, commitments). A bl
 would block the repository outright. That case is covered only by the shape arm of the
 reading rule in `DO_NOT_PUSH`, which is a human procedure, not an automated gate. Closing
 it needs a by-file allow-list and is on §6's list.
+
+### 1.12 [DEFECT, found and closed 2026-11-10] A pre-registered test was circular, and the box it ran in was half background
+
+**Found by running the tests and reading their inputs**, not by the tests failing — both
+returned clean-looking verdicts, and both verdicts were empty.
+
+`collar_form_plan.md` fixed three tests on the Leopold bust's collar form before they ran,
+which is the right discipline and is why the defects are visible at all. Two of the three
+were broken by their own definitions:
+
+- **The hue test was circular.** Its rule was *"if the form's saturation lies below the
+  shadowed bandana distribution, it is not bandana cloth under any lighting"* — but the
+  bandana mask was **defined** as `S ≥ 0.35`. Its 5th percentile came back 0.358, the mask's
+  own floor. **Every desaturated pixel in the image passes that test**, so it separates
+  nothing. It printed a confident verdict, which is the dangerous part.
+- **The form box was 51% background sky.** The box was drawn around a shape sitting on the
+  bust's outline, so half of it is the sky behind the statue. The sky set the 90th-percentile
+  brightness threshold to 0.847 and **erased a real feature**: the glint the test was looking
+  for is there, 4 px at +61.9 levels, and appears as soon as the sky pixels are excluded.
+
+**The general lesson, which is not the same as §10's:** a pre-registration fixes what you
+will do, and it cannot tell you that what you fixed was empty. **A mask defined by a
+threshold cannot be used as the reference class for that same threshold**, and **a box drawn
+around a silhouette contains whatever the silhouette sits on**. Both are checkable before
+running — the first by asking what the comparison's floor is, the second by printing the
+mask's composition — and neither was checked. A third test in the same plan, the symmetry
+control, was sound and returned a firm negative, which is the only reason the entry it feeds
+says anything at all.
 
 ### 1.11 [DEFECT in material sent to this project, found 2026-11-10] Two measurements attributed to this repository do not exist in it
 
@@ -2351,16 +2379,10 @@ readings.** It is now being run over the 54-pool plus both words on all four pat
 >
 > - **The ornament above the Great Seal's ribbon** (x 450-560, y 895-985) is a **scroll
 >   with a flame or sprout above it**, part of the seal device. Not a bird.
-> - **A grey form at the Leopold bust's collar** (x ≈ 1330-1375, y ≈ 505-545) **does read
->   as an animal head in profile at 8×** — a tapering snout or beak, a dark eye with a
->   white glint. **It is almost certainly the knotted end of the red bandana**: an
->   outline of the same size and shape sits symmetrically on the *other* side of the knot
->   at x ≈ 1390-1410, carrying no eye-like mark, and both meet the cloth at the same
->   height. The "eye" is a single dark stroke of the bust's shading. **Recorded anyway,
->   with its coordinates**, because it is the one thing in this painting that reads as a
->   creature, it is being called cloth on a symmetry argument rather than a measurement,
->   and a second pair of eyes should look at it before anyone treats "no animal" as
->   closed. It is **not** a llama under either reading: no body, no legs, no neck.
+> - **A grey form at the Leopold bust's collar, now measured** — see the block below. The
+>   description first written here on 10 Nov ("almost certainly the knotted end of the red
+>   bandana", on a symmetry argument, at x ≈ 1330-1375, y ≈ 505-545) is **retracted in both
+>   its coordinates and its reasoning**. The form is at **x 1349-1373, y 509-541**.
 >
 > **5. `hat`.** `hat` **is** BIP39 and is **not** among the nine confirmed, so a depicted hat would
 > be a genuinely new candidate word. **Measured: none is depicted.** The pre-registered 28-element
@@ -2371,6 +2393,50 @@ readings.** It is now being run over the 54-pool plus both words on all four pat
 > `hat` gains nothing and joins no slot. *Kept separate, as it must be: a reference image of Bill
 > Cipher in a black hat **is not this painting**, and `black` is already supported by two other
 > routes (§2.13's rune line and the slogan block) and gains nothing whatever from a hat.*
+
+> **[MEASURED, 10 Nov 2026] The collar form: three pre-registered tests, three defects
+> found in them, and one firm negative.** Method, boxes, controls, decision rules **and the
+> word consequences** were fixed in `collar_form_plan.md`, committed in `4cd5eab`
+> (blob `ffda5dd6…`) **before** `collar_form.py` ran. Output `collar_form.out`; the
+> post-hoc diagnostic that follows is in `collar_form_diag.out` and is labelled as post-hoc
+> wherever it is used.
+>
+> **The 10 Nov reading is retracted.** It said the form was "almost certainly the knotted
+> end of the red bandana" and rested that on a symmetry argument. **The symmetry is not
+> there**, and the box it was measured in was wrong.
+>
+> | test | result |
+> |---|---|
+> | **(a) symmetry, with a garment control** | Mirroring the form about every axis from x 1374 to 1410 in 0.5 px steps, the **best** correlation is **r = +0.310** (axis x 1387, partner box x 1401-1425). Against 252 same-size garment patches mirrored the same way: mean −0.003, sd 0.268, **max +0.447**, 95th percentile +0.329. The partner sits at the **92nd percentile, z = +1.17 — inside the control distribution.** **SYMMETRY IS NOT ESTABLISHED.** The only support the 10 Nov entry offered is gone |
+> | **(b) hue** | **Void as pre-registered — the test was circular.** The decision rule compared the form's saturation to the bandana's, but the bandana mask was *defined* as `S ≥ 0.35`, so its 5th percentile is 0.358, the mask's own floor. Any desaturated pixel was guaranteed to pass. The verdict it printed — "not bandana under any lighting" — **means nothing and is withdrawn** |
+> | **(c) the glint** | **Artifact as pre-registered.** It reported *no* bright cluster beside the dark one. **51% of the pre-registered form box is background sky**, which set the 90th-percentile bright threshold at 0.847. On the form's own pixels the threshold is 0.468 and **the glint is real: 4 px at x 1357.5 y 518.5, +61.9 levels over its local surround** |
+>
+> **What replaces (b), measured on the form's own 378 pixels** [post-hoc, and a conclusion
+> resting on it needs a fresh pre-registration]: **65% of them lie in the red hue band**,
+> median hue ≈ 0.95. The form is **red** — dark and desaturated, but red — which is what a
+> **shaded or anti-aliased edge of the red bandana** looks like. So the cloth reading
+> survives, **on evidence I did not offer for it**, while the evidence I did offer failed.
+>
+> **The glint's control was the wrong garment.** Its contrast (+61.9 levels) exceeds every
+> comparable bright cluster on the **coat** (15 found, median +1.1, max +9.5), and the
+> dark-plus-bright pair is common there (7 of 8 comparable dark clusters have one). But the
+> form is bandana-coloured, and no highlight control was drawn **from the bandana**, which
+> is the comparison that would settle it. The plan did not ask for one. **That is the test
+> still missing.**
+>
+> **Status: cloth is supported by hue, symmetry is refuted, and the object is not
+> identified.** Under the plan's §2, fixed before any of this ran: **no word follows, under
+> any outcome.** The form is recorded as **an unidentified form at x 1349-1373, y 509-541**,
+> and the next step, if anyone takes it, is identifying it *from the pixels* with a fresh
+> pre-registration — a clean box excluding sky, a non-circular cloth comparison, and a
+> highlight control drawn from the bandana.
+>
+> *The `leopard`/Leopold pun is recorded here and was **excluded from the identification**
+> by the plan, in writing, before the measurement: the bust is of Leopold II and `leopard`
+> is a BIP39 word, and that is a reason for a stricter test, never a candidate. Nothing in
+> these measurements shows spots or a feline skull, and nothing proposes a word.* **This is
+> not the zodiac llama under any outcome** — that is a full-body pictogram, a head alone is
+> a different object, and §2.16's locator grade stays `[TESTED, NEGATIVE for 2 of 10]`.
 
 **[MEASURED] The spacing test.** How widely does the artist space adjacent
 characters *within* a word? A glyph is a connected ink component; fragments under
@@ -5119,6 +5185,16 @@ same motion, and should say so.
   outright. Until those 26 are enumerated and pinned, that case rests on the shape arm of
   the reading rule in `DO_NOT_PUSH`, which is a human procedure. This is the only leak
   shape the automated gate does not cover.
+- **[SCOPE, opened 2026-11-10] A sub-element inventory. `r10_elements.json` lists 28 whole
+  objects, and nothing inside any of them.** The collar form at the Leopold bust (§2.16) is
+  a feature of roughly **24 × 32 px sitting inside `E24`**, which is one box for the entire
+  bust. It went unexamined for six weeks **while that box was being used in a layout test**,
+  and it was found by looking at the painting in tiles rather than by any measurement this
+  project had. **This gap is worth recording whatever the form turns out to be**, and it is
+  recorded on that basis alone: the inventory's unit is the object, so a mark *on* an object
+  is invisible to every script that reads the inventory. How many other sub-element features
+  exist is unmeasured — the 25-tile contact sheet of 10 Nov is the only pass ever made at
+  that scale, and it was made looking for one specific thing.
 
 ---
 

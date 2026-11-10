@@ -1,0 +1,60 @@
+PLAN  collar_form_plan.md blob ffda5dd6a1578431b411c87d644d02286c304b1d
+      pre-registered          ffda5dd6a1578431b411c87d644d02286c304b1d  -> MATCH
+IMAGE 0.2-btc-puzzle.png, verified sha256, 1600x1200
+
+FORM  x 1349-1373  y 509-541  (24 x 32 px)
+
+MASKS bandana 1389 px (red, in the collar band); garment 12041 px of the 16150-px coat box
+
+==============================================================================
+(a) SYMMETRY, WITH A GARMENT CONTROL
+==============================================================================
+  mirrored-partner search, axis x = 1374.0 to 1410.0 step 0.5
+  BEST r = +0.310 at axis x = 1387.0, partner box x 1401-1425
+  top five: x1387.0 r+0.310  x1386.5 r+0.301  x1387.5 r+0.286  x1386.0 r+0.274  x1388.0 r+0.265
+  control: 252 garment patches, 24 x 32, same flip
+    mean -0.003  sd 0.268  min -0.719  max +0.447  95th +0.329
+    the partner's r is at the 92.1-th percentile of this distribution, z = +1.17
+
+  VERDICT: SYMMETRY IS NOT ESTABLISHED. The mirrored partner sits INSIDE the
+           garment-control distribution, so the cloth reading loses its
+           only support.
+
+==============================================================================
+(b) HUE -- AGAINST SHADOWED BANDANA, NOT LIT BANDANA
+==============================================================================
+  region                                      n  saturation 25/50/75  value 25/50/75      
+  FORM                                      768  0.152 0.238 0.324    0.399 0.525 0.903
+  best partner                              768  0.104 0.177 0.458    0.412 0.549 0.655
+  bandana, lit (top quartile V)             294  0.588 0.633 0.665    0.659 0.663 0.671
+  bandana, SHADOWED (bottom quartile V)     356  0.390 0.434 0.488    0.420 0.451 0.486
+  garment (coat)                          12041  0.031 0.044 0.068    0.518 0.596 0.631
+
+  FORM median saturation 0.238;  shadowed bandana 5th percentile 0.358
+  VERDICT: the FORM is desaturated below even the darkest bandana cloth, so it is
+           NOT bandana under any lighting.
+           It is OUTSIDE the garment's own saturation range.
+
+==============================================================================
+(c) THE GLINT
+==============================================================================
+  dark cluster ('the eye'): 29 px, centroid x 1362.4 y 515.3, median level 70/255
+  NO bright cluster adjacent to the dark cluster. The 'glint' is not there.
+  comparable bright clusters on the same garment (2-8 px): 15 found
+    their contrast: median +1.1, max +9.5 levels
+  THE CONJUNCTION -- a dark cluster of comparable size with a bright cluster
+  beside it, which is the pair that reads as an eye:
+    8 comparable dark clusters on the garment, 7 of them have one (88%)
+
+  VERDICT: the glint-and-eye pair is COMMON on this garment -- it repeats across
+           the folds, so it is a highlight, not a feature of a distinct object.
+
+==============================================================================
+WORD CONSEQUENCES -- fixed in the plan BEFORE this ran, and unchanged by it
+==============================================================================
+  No word enters any config from this under any outcome. If the three tests
+  favour an object, the next step is identifying the animal FROM THE PIXELS,
+  not choosing among BIP39 animal names; if the pixels cannot settle the
+  species the result is 'an unidentified form' and no word follows. The
+  leopard/Leopold pun is quarantined: a reason for a stricter test, never a
+  candidate. The zodiac locator grade stays [TESTED, NEGATIVE for 2 of 10].
