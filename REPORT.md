@@ -722,6 +722,13 @@ was actually published, per the retract-by-marking rule; this entry is the marki
 **Found by looking for them before citing them**, which is the only reason this entry is
 here rather than in §2.16's text as a borrowed authority.
 
+*One limit on this whole section, stated because it applies to §1.11 and not to §1.1–§1.10:
+the briefs are working correspondence, not public documents, so a reader cannot check these
+quotations the way they can check a config or a wordlist. They are therefore quoted verbatim
+and dated rather than summarised, and every claim graded against them is a claim about
+**this repository's own contents**, which is checkable. Nothing here grades the briefs'
+reasoning, which was sound in all three cases and is noted as such below.*
+
 A brief of 10 Nov 2026 instructed this project to distinguish a new result from an
 existing one, in these words: *"We measured the Bill Cipher wheel as the CLOCK DIAL and
 rejected it on geometry, 36 degrees against 30."* The same brief placed a piece of work
@@ -742,6 +749,13 @@ good instructions while silently dropping their false premises would have left t
 citing a measurement that was never made, and the next reader could not have told the
 difference. **A provenance that cannot be found is not a weaker citation; it is not a
 citation.**
+
+What was done instead: the distinction was recorded on its own merits in §2.16 and
+attributed to the brief, not to this repository; and the sweep was run standalone, reusing
+block B's seven cuts and its control discipline explicitly and by name, so the comparison
+the brief wanted is real and traceable. *The author of the brief withdrew both claims on
+being shown this, which is why they are recorded as a defect in the material rather than
+as a disagreement.*
 
 #### The third claim — true premises, wrong ledger [MEASURED 2026-11-10]
 
@@ -776,12 +790,6 @@ and not on the old-Electrum path, where §2.6's arithmetic rules out the search 
 of how well the vocabulary fits. Being reachable in principle and being searchable are
 different claims, and this entry asserts only the first.
 
-What was done instead: the distinction was recorded on its own merits in §2.16 and
-attributed to the brief, not to this repository; and the sweep was run standalone, reusing
-block B's seven cuts and its control discipline explicitly and by name, so the comparison
-the brief wanted is real and traceable. *The author of the brief withdrew both claims on
-being shown this, which is why they are recorded as a defect in the material rather than
-as a disagreement.*
 
 ## 2. What is exhaustively eliminated
 
