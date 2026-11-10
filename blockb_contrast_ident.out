@@ -1,0 +1,24 @@
+R1 COMPONENTS AT EACH DEPTH, IDENTIFIED AGAINST THE CATALOGUED BOXES
+(post-hoc; the pre-registered count rule returned VOID at every depth)
+
+  depth >= 10: 13 components   10 catalogued    3 NOT in any catalogued box
+        (1120.5,1119.0)  27x38  ink 397  outside the disc
+        (1303.5,1119.0)  13x38  ink 190  outside the disc
+        (1561.5,1119.0)   7x38  ink 253  outside the disc
+  depth >= 15: 14 components   11 catalogued    3 NOT in any catalogued box
+        (1120.5,1119.0)  27x38  ink 355  outside the disc
+        (1302.5,1113.0)   7x26  ink  68  outside the disc
+        (1561.5,1119.0)   7x38  ink 249  outside the disc
+  depth >= 19: 14 components   12 catalogued    2 NOT in any catalogued box
+        (1120.5,1119.0)  27x38  ink 346  outside the disc
+        (1561.5,1119.0)   7x38  ink 247  outside the disc
+  depth >= 25: 17 components   14 catalogued    3 NOT in any catalogued box
+        (1120.5,1119.0)  27x38  ink 339  outside the disc
+        (1561.5,1119.0)   7x38  ink 239  outside the disc
+        ( 407.5,1119.5)   7x23  ink  52  outside the disc
+  depth >= 30: 13 components   11 catalogued    2 NOT in any catalogued box
+        (1120.5,1119.0)  27x38  ink 309  outside the disc
+        (1561.5,1119.0)   7x38  ink 231  outside the disc
+  depth >= 39: 14 components   12 catalogued    2 NOT in any catalogued box
+        (1122.5,1118.5)  23x37  ink 245  outside the disc
+        (1561.5,1119.0)   7x38  ink 197  outside the disc

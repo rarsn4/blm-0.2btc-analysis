@@ -1,0 +1,63 @@
+BLOCK B BELOW THE DETECTION FLOOR
+============================================================================================
+  detector: depth below a 41px local-median background; depths (10, 15, 19, 25, 30, 39)
+  glyph-sized: w 6-33, h 10-40, ink 40-600 (unchanged)
+
+--- POWER CONTROL (plan sec.4): block A's own column attenuated to each depth ---
+  column background 206, darkest 0, as-drawn contrast 206 levels
+
+attenuated to                                        >=10   >=15   >=19   >=25   >=30   >=39
+  10 levels                                            25      0      0      0      0      0  POWER
+  15 levels                                            47     25      0      0      0      0  POWER
+  19 levels                                            46     46     24      0      0      0  POWER
+  25 levels                                            47     47     47     25      0      0  POWER
+  30 levels                                            46     47     47     46     24      0  POWER
+  39 levels                                            47     47     47     47     47     24  POWER
+  206 levels (as drawn)                                44     44     46     46     47     47  POWER
+
+  power by depth (control attenuated to d, counted at d):
+    10:YES  15:YES  19:YES  25:YES  30:YES  39:YES
+
+--- SPECIFICITY CONTROLS (plan sec.5): four 38x1600 null strips ---
+region                                         px    >=10   >=15   >=19   >=25   >=30   >=39
+null y 160-198                              60800      19     16     14     19     27     19
+null y 420-458                              60800      29     30     29     31     31     33
+null y 600-638                              60800      39     44     49     53     56     60
+null y 980-1018                             60800      16     23     25     26     28     21
+MAX over the four nulls                                39     44     49     53     56     60
+
+  VOID where a null reaches >= 14 (plan sec.5):
+    10:VOID  15:VOID  19:VOID  25:VOID  30:VOID  39:VOID
+
+--- REGIONS UNDER TEST ---
+region                                         px    >=10   >=15   >=19   >=25   >=30   >=39
+R1   y 1100-1138 full width                 60800      13     14     14     17     13     14
+R1'  same, minus the dial disc              58656      15     16     16     17     13     14
+BOTTOM THIRD y 800-1200 (secondary)        640000     111    108    110    103     99    107
+
+--- DECISION (plan sec.6) ---
+
+  R1   y 1100-1138 full width
+    usable depths (power and not void): NONE
+    depths meeting >= 14 AND above the null max: none
+    longest consecutive run of those: 0
+    VERDICT: NO USABLE DEPTH -- neither presence nor absence may be claimed
+
+  R1'  same, minus the dial disc
+    usable depths (power and not void): NONE
+    depths meeting >= 14 AND above the null max: none
+    longest consecutive run of those: 0
+    VERDICT: NO USABLE DEPTH -- neither presence nor absence may be claimed
+
+  BOTTOM THIRD y 800-1200 (secondary)
+    usable depths (power and not void): NONE
+    depths meeting >= 14 AND above the null max: none
+    longest consecutive run of those: 0
+    VERDICT: NO USABLE DEPTH -- neither presence nor absence may be claimed
+
+--- CONSISTENCY with the old sweep ---
+  old absolute sweep, R1 at cuts (90..215): [8, 8, 7, 7, 13, 11, 5]
+  new detector, R1 at depth >= 39 (the old floor): 14
+  old sweep's deepest reach: 254 - 215 = 39 levels; the two should be comparable.
+
+  Plan sec.7: no word enters any config from this test, under any outcome.

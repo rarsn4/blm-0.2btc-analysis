@@ -1,0 +1,14 @@
+THE OLD DETECTOR, UNCHANGED, ON NULL STRIPS IT NEVER RAN ON
+region                             <90   <110   <130   <150   <170   <190   <215
+null y 160-198                      14     14     12     20     16     10      4
+null y 420-458                       5      5      5     10     22     28     26
+null y 600-638                      11     13     13     22     42     42     36
+null y 980-1018                      8     12     11     15     11     11      5
+MAX over the four nulls             14     14     13     22     42     42     36
+
+R1 as published (negative)           8      8      7      7     13     11      5
+
+  the published criterion: >= 14 at two or more CONSECUTIVE cuts
+  cuts where a NULL strip alone reaches 14: [90, 110, 150, 170, 190, 215]
+  longest consecutive run of >=14 in the nulls: 4
+  -> the nulls would themselves score POSITIVE under the published rule

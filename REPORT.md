@@ -62,7 +62,7 @@ Claims below are tagged. Do not promote a tag without new evidence.
 | **[INFERRED]** | Follows from measured facts by a stated argument. |
 | **[ASSUMED]** | Load-bearing but unproven. The soft spots. |
 | **[COMMUNITY]** | A reading or convention taken from the shared solver corpus, not derived here. Weaker than [INFERRED]: no argument from this project's measurements backs it. `premise_audit.md`'s vocabulary, used in §5 from 9 Nov 2026. |
-| **[DEFECT]** | A fault in this project's own method or machine, found and dated. §1.7, §1.8, §1.9, §1.10, §1.12, §1.13. §1.11 is the same register for a fault in material **sent to** this project, kept separate because it is not ours. |
+| **[DEFECT]** | A fault in this project's own method or machine, found and dated. §1.7, §1.8, §1.9, §1.10, §1.12, §1.13, §1.14. §1.11 is the same register for a fault in material **sent to** this project, kept separate because it is not ours. |
 
 The distinction between [EXHAUSTED] and [TESTED] is the one that matters: §2.1–2.11
 are the first, §2.12 is the second, and conflating them would be the only overclaim
@@ -70,9 +70,9 @@ in this document.
 
 ---
 
-## 1. Six defects in the shared data, six in ours — and three in briefs sent here
+## 1. Six defects in the shared data, seven in ours — and three in briefs sent here
 
-§1.1–1.6 are faults in the data the community shares. **§1.7–§1.10, §1.12 and §1.13 are
+§1.1–1.6 are faults in the data the community shares. **§1.7–§1.10 and §1.12–§1.14 are
 faults of this project's own**, and they are the more serious kind, so they are not buried: for
 five weeks this project accrued negatives on a solver binary that had never passed a
 self-test (§1.7), and for five weeks it hashed a transcription that was never checked
@@ -84,7 +84,7 @@ addressed to this project. Two were attributed to this project's own files and a
 them. The third is different and worth distinguishing: its stated facts were **correct**, and
 its conclusion was wrong anyway, because the facts were checked against one ledger and the
 conclusion was drawn about words in general. It is recorded in the same register as the other
-twelve because the failure mode is identical — something stated once and trusted thereafter —
+thirteen because the failure mode is identical — something stated once and trusted thereafter —
 and because a defect in an instruction is the one class a reader of this report cannot
 otherwise see.
 
@@ -716,6 +716,65 @@ worse than no note, because it invites a false positive about the one thing the 
 reports it and with the self-test exemption disabled — so it can be reproduced whichever
 way the reader runs the guard. Earlier notes are left standing as the audit trail of what
 was actually published, per the retract-by-marking rule; this entry is the marking.
+
+### 1.14 [DEFECT, found and closed 2026-11-10] The block-B bands test's decision rule scores POSITIVE on blank painting, and its contrast floor was computed against the wrong background
+
+**Found by building the negative control that test never had.** `blockb_bands_plan.md`
+fixed a positive control — block A's column, 42 glyphs known present — and **no negative
+control.** Nothing ever measured what the criterion does in a region with no inscription.
+
+**Two separate faults. [MEASURED]**
+
+**(a) The decision rule has no specificity.** Its published form is *"≥ 14 glyph-sized
+components at two or more consecutive cuts."* Run **the original detector, unchanged**, over
+four 38 × 1600 strips of this painting declared in advance to hold no rune block
+(y 160–198, 420–458, 600–638, 980–1018):
+
+| | <90 | <110 | <130 | <150 | <170 | <190 | <215 |
+|---|---|---|---|---|---|---|---|
+| max over the four null strips | **14** | **14** | 13 | **22** | **42** | **42** | **36** |
+| R1, as published | 8 | 8 | 7 | 7 | 13 | 11 | 5 |
+
+The nulls reach 14 at **four consecutive cuts**. **Blank painting scores POSITIVE under the
+published rule.** The threshold of 14 was taken from the number of glyphs block B is said to
+carry and was never calibrated against what an arbitrary band of this artwork supplies by
+itself, which is 13 to 42 glyph-sized components depending on the cut.
+
+**(b) The 39-level floor was computed against a background the column does not have.**
+`blockb_bands_sensitivity.py` estimates the control column's background as `sub.max()`,
+which is **254**, and derives the floor as `254 − 215 = 39` levels. The column's values are
+**bimodal** — 24% of pixels at a modal 1, 76% at a modal **241** — so `max()` is a single
+brightest pixel, not the background the glyphs are drawn on. Against the light mode the floor
+is **241 − 215 = 26 levels**, and the as-drawn contrast is ~240 levels rather than the
+published *"254 levels (full pen)"*.
+
+| | published | measured |
+|---|---|---|
+| control column background | 254 (`max`) | **241** (light mode) |
+| detection floor | 39 levels | **26 levels** |
+
+**Which way each error cuts.** (b) is in the **safe** direction — the test was *less* blind
+than this report claimed — and it does not rescue anything, because the rifle receiver's mark
+is **19 levels** and 19 < 26 as surely as 19 < 39. The gap the floor identifies is real on
+either figure. (a) is the serious one.
+
+**But the published conclusion survives, on evidence the rule never supplied.** That section
+did not stop at 13 < 14; it went on to **identify** all 13 components as catalogued features —
+six of the ambigram date, six of the seal scroll's mirror text, one frame-line sliver — and
+concluded *"Nothing in R1 is unaccounted for."* **Identification does not depend on a count
+threshold**, so the void in (a) does not touch it. The negative stands; the reason given for
+it in the plan does not.
+
+**This is the third time in two days that a verdict has survived on evidence other than the
+evidence offered for it** — §1.12's collar form held on hue after its symmetry argument
+failed, §1.13's pin notes verified a real invariant while quoting unreproducible figures for
+it, and now this. The recurring fault is not carelessness about conclusions; it is **stating
+a decision rule, then relying on something else and not noticing.** A rule that was never
+run against a null is a rule nobody has checked, however often it has been applied.
+
+**Fixed:** `blockb_contrast_plan.md` (committed `9534b04`, blob `7de2cf0d`) requires null
+strips in advance and makes a depth where any null reaches the bar **VOID** rather than
+negative. §2.17's bands entry is regraded accordingly, below.
 
 ### 1.11 [DEFECT in material sent to this project, found 2026-11-10] Two measurements attributed to this repository do not exist in it, and a third claim was scoped to the wrong ledger
 
@@ -1384,6 +1443,13 @@ not BIP39. **0 NAMED and 0 ADMITTED in all 227 configs**, and the string occurs 
 project has never entertained it.* That is worth stating because a chokehold and
 "I can't breathe" are the painting's reference, `breathe` is the leading passphrase
 candidate, and the Floyd portrait is element E19.
+
+**Recorded and left there, which is the whole disposition.** `choke` is an **admissible
+old-Electrum word, thematically central, and never entertained** — and that is the entry.
+No run follows and no config is written: §2.6's arithmetic forbids the search whatever the
+vocabulary does, and it is unchanged by the census test above coming back null. A word
+being admissible is not a reason to search for it; it is a reason to say plainly that
+nobody has, so the next reader is not left to infer coverage that does not exist.
 
 | word | BIP39 | old Electrum | NAMED | ADMITTED |
 |---|---|---|---:|---:|
@@ -5780,6 +5846,78 @@ available on his location wording, and it passes.
 > range, not "anything faint". Script `blockb_bands_sensitivity.py`, output
 > `blockb_bands_sensitivity.out`. All three reference contrasts come from §6 item 6,
 > which measured them on one scale.
+>
+> > **[CORRECTED and REGRADED 2026-11-10 — see §1.14]** Two figures above are wrong and the
+> > decision rule behind the negative is void. **The floor is 26 levels, not 39**: the
+> > column's background was estimated as `sub.max()` = 254, but its values are bimodal and
+> > the glyphs' own background is the light mode, **241**, so the as-drawn contrast is ~240
+> > rather than "254 levels (full pen)". And **the rule "≥ 14 at two consecutive cuts" scores
+> > POSITIVE on blank painting** — four null strips of this artwork, run through the same
+> > detector, reach 14 at four consecutive cuts. The negative itself stands, but on the
+> > **identification** of R1's components, not on the count. The paragraph above is kept as
+> > published; this is the marking.
+>
+> **[MEASURED 2026-11-10] The contrast gap below the floor is now closed — on the
+> identification standard, not the count standard.** Pre-registered in
+> `blockb_contrast_plan.md` (commit `9534b04`, blob `7de2cf0d`) before any pixel of the
+> regions was read by the new detector. The absolute cut is replaced by **depth below a
+> 41 px local-median background**, because no global cut can reach 19 levels without
+> flooding any region whose local background is darker than the cut. Ladder fixed by
+> principle at **10, 15, 19, 25, 30, 39** levels — 19 being the rifle mark's own depth and
+> 39 the old floor. Scope: **R1 only.** R2, R3a and R3b were excluded by **geometry**
+> (10 px tall, 25 px and 45 px wide against 279 px needed), which does not depend on ink
+> depth, so they stay closed and were not retested.
+>
+> **The detector has full power at every depth**, which is what the old one lacked: block A's
+> column attenuated to each depth and counted at that depth recovers 24–25 of its 42 glyphs
+> at the matching depth and 46–47 below it. **No no-power cells.**
+>
+> **And the pre-registered count rule is VOID at every depth, exactly as its own §5
+> anticipated:**
+>
+> | depth ≥ | 10 | 15 | 19 | 25 | 30 | 39 |
+> |---|---|---|---|---|---|---|
+> | power control recovered | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+> | **max over the four null strips** | **39** | **44** | **49** | **53** | **56** | **60** |
+> | R1 | 13 | 14 | 14 | 17 | 13 | 14 |
+> | R1′ minus the dial disc | 15 | 16 | 16 | 17 | 13 | 14 |
+>
+> Every depth is void: an arbitrary 38 × 1600 band of this painting yields 39–60 glyph-sized
+> components, so **no count in R1 could have discriminated anything.** Under the plan's rule
+> that is *"neither presence nor absence may be claimed"*, and it is reported as void rather
+> than dressed up as a negative. **The secondary region — the whole bottom third, y 800–1200
+> — is void for the same reason at 99–111 components.**
+>
+> **POST-HOC, and labelled as such because the pre-registered rule returned nothing:** the
+> published negative's real warrant was *identification*, which needs no threshold, so it was
+> applied to the new detector's output. At every depth, every **persistent** glyph-sized
+> component in R1 is a catalogued painted feature:
+>
+> | feature | identified by |
+> |---|---|
+> | the ambigram date, the seal scroll's mirror text | the earlier pass's catalogue |
+> | the **left** frame line, x 40–43 | already catalogued (§10, sixth rule) |
+> | the **right** frame line, x ≈ 1561 | **identified today**: over all 1,200 rows it is 94.8% below 215 against the left line's 99.4%, same clipped 38 px height, same y — its mirror, which the earlier catalogue did not list |
+> | the top of the **Latin line**, x ≈ 1120 | **identified today**: its bounding box is clipped at both of R1's edges, its row means darken monotonically from 154 at y 1098 to 68 at y 1140, and x 1120 lies inside the Latin line's measured span x 1025–1555 |
+>
+> **Unaccounted for, at any depth: at most one component**, at (407.5, 1119.5), 7 × 23 px,
+> and it appears at **a single depth only** (≥ 25) and vanishes at its neighbours — which is
+> the condition the published rule itself calls noise.
+>
+> **So: against the 14 glyphs block B is said to carry, R1 contains at most one
+> unexplained glyph-sized mark at any contrast from 10 levels upward** — below the rifle
+> mark's 19, below the corrected 26-level floor, and below the published 39. **Block B stays
+> unlocated and §2.17's three slots stay `[SCOPE]`.** The decode is untouched, as before: this
+> bears on where the block is, not what it says.
+>
+> **What this does not license, fixed in the plan before it ran:** no word enters any config
+> from this test under any outcome, and a positive would have located a block, not read one.
+> **What would be needed to go further is a different instrument, not a lower threshold** —
+> component count cannot work in a band this painting fills with its own marks at every depth.
+> The even-pitch test is already ruled out (ceiling of 11 on a grouped inscription, §7.4), so
+> what is left is a shape-matched filter against block A's 42 measured glyphs. That is not
+> pre-registered and has not been run. Scripts `blockb_contrast.py`, output
+> `blockb_contrast.out`.
 
 **[MEASURED] What the ambiguity warning leaves untested, bounded.** The one word in the
 template that comes from a rune plaintext is `black`@10, from `чёрный день`. Across

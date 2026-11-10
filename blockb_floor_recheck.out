@@ -1,0 +1,15 @@
+BLOCK A's CONTROL COLUMN x 1526-1557, y 40-1015  (30225 px)
+  BIMODAL: 24.0% at or below 128, modal value 1
+           76.0% above 128,        modal value 241
+  max 254  min 0  median 206  mean 168.3
+
+  as-drawn contrast, published  = max - min = 254 levels ('full pen')
+  as-drawn contrast, light mode = 241 - 0 = 241 levels
+
+  FLOOR = B - 215, the old sweep's deepest cut:
+    B =   254  (sub.max(), as published ) -> floor    39 levels
+    B =   241  (light mode, measured    ) -> floor    26 levels
+
+  the rifle receiver's mark is 19 levels (REPORT 6 item 6):
+    19 < 26 and 19 < 39, so the gap the floor identifies is real on either figure.
+    the correction is in the SAFE direction: the test was less blind than published.
