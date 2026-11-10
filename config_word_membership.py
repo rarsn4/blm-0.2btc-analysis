@@ -23,8 +23,18 @@ import glob, os, sys, collections
 A = "/home/soul/blm-analysis/configs"
 S = "/home/soul/Downloads/Brainwallet/files(6)"
 WORDS = sys.argv[1:] or ["double", "sign", "absent", "proof", "order", "trust"]
+WORDS = [w.lower() for w in WORDS]
 
 BIP39 = set(w.strip().lower() for w in open(A + "/bip39_en.txt") if w.strip())
+# LL-3: both ledgers. @FULL means the 2048-word BIP39 list and nothing else, so an
+# old-Electrum-only word can NEVER be admitted by an @FULL slot -- only by being
+# named in a POOL or SLOT line of a config that declares it EXTRA.
+OLDEL = [w.strip().lower() for w in open(A + "/electrum_old_en.txt") if w.strip()]
+OLDSET = set(OLDEL)
+def ledgers(w):
+    bi = "BIP39" if w in BIP39 else "  -  "
+    oi = ("old#%d" % (OLDEL.index(w) + 1)) if w in OLDSET else "  -  "
+    return "%-5s %-8s" % (bi, oi)
 
 def parse(path):
     pool, slots = [], {}
@@ -64,14 +74,20 @@ def scan(files, label):
                 how[w]["slot pin" if pins else ("pool" if poolslots else "@FULL only")] += 1
     print("=" * 78)
     print("%s -- %d configs" % (label, len(files)))
-    print("  %-10s %7s %10s   %s" % ("word", "NAMED", "ADMITTED", "how admitted"))
+    print("  %-10s %-14s %7s %10s   %s" % ("word", "LEDGERS", "NAMED", "ADMITTED",
+                                              "how admitted"))
     for w in WORDS:
-        print("  %-10s %7d %6d/%-3d   %s" % (w, len(named[w]), len(admit[w]), len(files),
-                                             dict(how[w]) or "-"))
+        print("  %-10s %-14s %7d %6d/%-3d   %s" % (w, ledgers(w), len(named[w]),
+                                                   len(admit[w]), len(files),
+                                                   dict(how[w]) or "-"))
     print("  NEVER NAMED anywhere:    %s" % ([w for w in WORDS if not named[w]] or "none"))
     print("  NEVER ADMITTED anywhere: %s" % ([w for w in WORDS if not admit[w]] or "none"))
     nb = [w for w in WORDS if w not in BIP39]
     if nb: print("  NOT BIP39 AT ALL (can only ever enter via an EXTRA declaration): %s" % nb)
+    oo = [w for w in WORDS if w in OLDSET and w not in BIP39]
+    if oo: print("  OLD-ELECTRUM ONLY (unreachable by the BIP39 path at any slot): %s" % oo)
+    ne = [w for w in WORDS if w not in BIP39 and w not in OLDSET]
+    if ne: print("  IN NEITHER LEDGER: %s" % ne)
     for w in WORDS:
         if not named[w]: continue
         print("\n  %s is named in %d row(s):" % (w, len(named[w])))

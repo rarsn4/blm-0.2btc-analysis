@@ -1,24 +1,698 @@
 ==============================================================================
 PUBLISHED LEDGER  configs/ -- 192 configs
-  word         NAMED   ADMITTED   how admitted
-  introduce        0      0/192   -
-  double           4     37/192   {'@FULL only': 33, 'pool': 4}
-  sign             0     33/192   {'@FULL only': 33}
-  absence          0      0/192   -
-  participants       0      0/192   -
-  which            0      0/192   -
-  proof          223    185/192   {'pool': 133, 'slot pin': 45, '@FULL only': 7}
-  transaction       0      0/192   -
-  trusted          0      0/192   -
-  order          233    185/192   {'slot pin': 54, 'pool': 124, '@FULL only': 7}
-  absent           1     34/192   {'@FULL only': 33, 'pool': 1}
-  trust            6     38/192   {'@FULL only': 33, 'pool': 2, 'slot pin': 3}
-  fate             0      0/192   -
-  aware            0     33/192   {'@FULL only': 33}
-  mini             0      0/192   -
-  NEVER NAMED anywhere:    ['introduce', 'sign', 'absence', 'participants', 'which', 'transaction', 'trusted', 'fate', 'aware', 'mini']
-  NEVER ADMITTED anywhere: ['introduce', 'absence', 'participants', 'which', 'transaction', 'trusted', 'fate', 'mini']
-  NOT BIP39 AT ALL (can only ever enter via an EXTRA declaration): ['introduce', 'absence', 'participants', 'which', 'transaction', 'trusted', 'fate', 'mini']
+  word       LEDGERS          NAMED   ADMITTED   how admitted
+  choke        -   old#621        0      0/192   -
+  hit          -   old#185        0      0/192   -
+  devil        -   old#854        0      0/192   -
+  murder       -   old#1196       0      0/192   -
+  death        -   old#170        4      4/192   {'pool': 4}
+  freedom      -   old#775        4      4/192   {'pool': 4}
+  silence      -   old#290        0      0/192   -
+  breathe      -   old#245        0      0/192   -
+  subject    BIP39 old#1279     177    180/192   {'slot pin': 175, '@FULL only': 5}
+  tower      BIP39 old#1282     192    185/192   {'slot pin': 180, '@FULL only': 5}
+  moon       BIP39 old#285      190    186/192   {'slot pin': 178, 'pool': 1, '@FULL only': 7}
+  camera     BIP39   -          192    185/192   {'slot pin': 180, '@FULL only': 5}
+  mask       BIP39 old#656      192    184/192   {'slot pin': 179, '@FULL only': 5}
+  liberty    BIP39   -          191    184/192   {'slot pin': 179, '@FULL only': 5}
+  eye        BIP39 old#12       193    185/192   {'slot pin': 180, '@FULL only': 5}
+  rifle      BIP39   -          186    185/192   {'slot pin': 175, 'pool': 3, '@FULL only': 7}
+  glove      BIP39 old#1589     156    168/192   {'slot pin': 145, 'pool': 6, '@FULL only': 17}
+  black      BIP39 old#143      199    186/192   {'slot pin': 181, '@FULL only': 5}
+  brave      BIP39 old#1037       9     39/192   {'@FULL only': 33, 'slot pin': 5, 'pool': 1}
+  introduce    -     -            0      0/192   -
+  double     BIP39 old#1374       4     37/192   {'@FULL only': 33, 'pool': 4}
+  sign       BIP39 old#577        0     33/192   {'@FULL only': 33}
+  absence      -     -            0      0/192   -
+  participants   -     -            0      0/192   -
+  which        -     -            0      0/192   -
+  proof      BIP39   -          223    185/192   {'pool': 133, 'slot pin': 45, '@FULL only': 7}
+  transaction   -     -            0      0/192   -
+  trusted      -     -            0      0/192   -
+  order      BIP39 old#792      233    185/192   {'slot pin': 54, 'pool': 124, '@FULL only': 7}
+  absent     BIP39   -            1     34/192   {'@FULL only': 33, 'pool': 1}
+  trust      BIP39 old#326        6     38/192   {'@FULL only': 33, 'pool': 2, 'slot pin': 3}
+  fate         -   old#446        0      0/192   -
+  aware      BIP39   -            0     33/192   {'@FULL only': 33}
+  mini         -     -            0      0/192   -
+  NEVER NAMED anywhere:    ['choke', 'hit', 'devil', 'murder', 'silence', 'breathe', 'introduce', 'sign', 'absence', 'participants', 'which', 'transaction', 'trusted', 'fate', 'aware', 'mini']
+  NEVER ADMITTED anywhere: ['choke', 'hit', 'devil', 'murder', 'silence', 'breathe', 'introduce', 'absence', 'participants', 'which', 'transaction', 'trusted', 'fate', 'mini']
+  NOT BIP39 AT ALL (can only ever enter via an EXTRA declaration): ['choke', 'hit', 'devil', 'murder', 'death', 'freedom', 'silence', 'breathe', 'introduce', 'absence', 'participants', 'which', 'transaction', 'trusted', 'fate', 'mini']
+  OLD-ELECTRUM ONLY (unreachable by the BIP39 path at any slot): ['choke', 'hit', 'devil', 'murder', 'death', 'freedom', 'silence', 'breathe', 'fate']
+  IN NEITHER LEDGER: ['introduce', 'absence', 'participants', 'which', 'transaction', 'trusted', 'mini']
+
+  death is named in 4 row(s):
+      brain_find.conf                      POOL -> @POOL slots 6,8,14,15,18
+      brain_t18_pool63.conf                POOL -> @POOL slots 6,8,14,15,18
+      brain_t18_pool63_all.conf            POOL -> @POOL slots 6,8,14,15,18
+      brain_t21_pool65.conf                POOL -> @POOL slots 6,8,14,15,18,21
+
+  freedom is named in 4 row(s):
+      brain_find.conf                      POOL -> @POOL slots 6,8,14,15,18
+      brain_t18_pool63.conf                POOL -> @POOL slots 6,8,14,15,18
+      brain_t18_pool63_all.conf            POOL -> @POOL slots 6,8,14,15,18
+      brain_t21_pool65.conf                POOL -> @POOL slots 6,8,14,15,18,21
+
+  subject is named in 177 row(s):
+      alt2.conf                            SLOT 1
+      alt2w.conf                           SLOT 1
+      alt3.conf                            SLOT 1
+      brain_find.conf                      SLOT 1
+      brain_t18_pool52.conf                SLOT 1
+      brain_t18_pool52_all.conf            SLOT 1
+      brain_t18_pool63.conf                SLOT 1
+      brain_t18_pool63_all.conf            SLOT 1
+      brain_t21_pool65.conf                SLOT 1
+      el12.conf                            SLOT 1
+      el13.conf                            SLOT 1
+      el14.conf                            SLOT 1
+      el16.conf                            SLOT 1
+      el17.conf                            SLOT 1
+      el18.conf                            SLOT 1
+      el21.conf                            SLOT 1
+      el21_rev.conf                        SLOT 21
+      el22.conf                            SLOT 1
+      el_planted.conf                      SLOT 1
+      el_planted_swapped.conf              SLOT 1
+      free17_explicit.conf                 POOL (config has no @POOL slot)
+      offp1_t18.conf                       SLOT 2
+      offp1_t21.conf                       SLOT 2
+      pair2_11_t18.conf                    SLOT 1,2,11
+      planted_campaign.conf                SLOT 1
+      planted_compressed.conf              SLOT 1
+      planted_hybrid.conf                  SLOT 1
+      planted_swapped.conf                 SLOT 1
+      planted_uncompressed.conf            SLOT 1
+      pool14.conf                          POOL (config has no @POOL slot)
+      t12full.conf                         SLOT 1
+      t12full_mp.conf                      SLOT 1
+      t15.conf                             SLOT 1
+      t18.conf                             SLOT 1
+      t18_arith.conf                       SLOT 1
+      t18_free1.conf                       SLOT 1
+      t18_free10.conf                      SLOT 1,10
+      t18_free11.conf                      SLOT 1,11
+      t18_free12.conf                      SLOT 1,12
+      t18_free13.conf                      SLOT 1,13
+      t18_free16.conf                      SLOT 1,16
+      t18_free17.conf                      SLOT 1,17
+      t18_free2.conf                       SLOT 1,2
+      t18_free3.conf                       SLOT 1,3
+      t18_free4.conf                       SLOT 1,4
+      t18_free5.conf                       SLOT 1,5
+      t18_free7.conf                       SLOT 1,7
+      t18_free9.conf                       SLOT 1,9
+      t18_full14.conf                      SLOT 1
+      t18_full15.conf                      SLOT 1
+      t18_full18.conf                      SLOT 1
+      t18_full6.conf                       SLOT 1
+      t18_full8.conf                       SLOT 1
+      t18_idx.conf                         SLOT 1
+      t18_loo14.conf                       SLOT 1
+      t18_loo15.conf                       SLOT 1
+      t18_loo18.conf                       SLOT 1
+      t18_loo6.conf                        SLOT 1
+      t18_loo8.conf                        SLOT 1
+      t18_mp.conf                          SLOT 1
+      ... and 117 more
+
+  tower is named in 192 row(s):
+      alt2.conf                            SLOT 3
+      alt2w.conf                           SLOT 3
+      alt3.conf                            SLOT 3
+      brain_find.conf                      SLOT 3
+      brain_t18_pool52.conf                SLOT 3
+      brain_t18_pool52_all.conf            SLOT 3
+      brain_t18_pool63.conf                SLOT 3
+      brain_t18_pool63_all.conf            SLOT 3
+      brain_t21_pool65.conf                SLOT 3
+      el12.conf                            SLOT 3
+      el12.conf                            POOL -> @POOL slots 6,8
+      el13.conf                            SLOT 3
+      el13.conf                            POOL -> @POOL slots 6,8
+      el14.conf                            SLOT 3
+      el14.conf                            POOL -> @POOL slots 6,8,14
+      el16.conf                            SLOT 3
+      el16.conf                            POOL -> @POOL slots 6,8,14,15
+      el17.conf                            SLOT 3
+      el17.conf                            POOL -> @POOL slots 6,8,14,15
+      el18.conf                            SLOT 3
+      el18.conf                            POOL -> @POOL slots 6,8,14,15,18
+      el21.conf                            SLOT 3
+      el21.conf                            POOL -> @POOL slots 6,8,14,15,18,21
+      el21_rev.conf                        SLOT 19
+      el21_rev.conf                        POOL -> @POOL slots 1,4,7,8,14,16
+      el22.conf                            SLOT 3
+      el22.conf                            POOL -> @POOL slots 6,8,14,15,18,21,22
+      el_planted.conf                      SLOT 3
+      el_planted.conf                      POOL -> @POOL slots 18,21
+      el_planted_swapped.conf              SLOT 3
+      el_planted_swapped.conf              POOL -> @POOL slots 18,21
+      offm1_t18.conf                       SLOT 2
+      offp1_t18.conf                       SLOT 4
+      offp1_t21.conf                       SLOT 4
+      pair2_11_t18.conf                    SLOT 2,3,11
+      planted_campaign.conf                SLOT 3
+      planted_compressed.conf              SLOT 3
+      planted_hybrid.conf                  SLOT 3
+      planted_swapped.conf                 SLOT 3
+      planted_uncompressed.conf            SLOT 3
+      pool14.conf                          POOL (config has no @POOL slot)
+      t12full.conf                         SLOT 3
+      t12full_mp.conf                      SLOT 3
+      t15.conf                             SLOT 3
+      t18.conf                             SLOT 3
+      t18_arith.conf                       SLOT 3
+      t18_free1.conf                       SLOT 1,3
+      t18_free10.conf                      SLOT 3,10
+      t18_free11.conf                      SLOT 3,11
+      t18_free12.conf                      SLOT 3,12
+      t18_free13.conf                      SLOT 3,13
+      t18_free16.conf                      SLOT 3,16
+      t18_free17.conf                      SLOT 3,17
+      t18_free2.conf                       SLOT 2,3
+      t18_free3.conf                       SLOT 3
+      t18_free4.conf                       SLOT 3,4
+      t18_free5.conf                       SLOT 3,5
+      t18_free7.conf                       SLOT 3,7
+      t18_free9.conf                       SLOT 3,9
+      t18_full14.conf                      SLOT 3
+      ... and 132 more
+
+  moon is named in 190 row(s):
+      alt2.conf                            SLOT 13
+      alt2w.conf                           SLOT 13
+      alt3.conf                            SLOT 13
+      brain_find.conf                      SLOT 13
+      brain_t18_pool52.conf                SLOT 13
+      brain_t18_pool52_all.conf            SLOT 13
+      brain_t18_pool63.conf                SLOT 13
+      brain_t18_pool63_all.conf            SLOT 13
+      brain_t21_pool65.conf                SLOT 13
+      el12.conf                            POOL -> @POOL slots 6,8
+      el13.conf                            SLOT 13
+      el13.conf                            POOL -> @POOL slots 6,8
+      el14.conf                            SLOT 13
+      el14.conf                            POOL -> @POOL slots 6,8,14
+      el16.conf                            SLOT 13
+      el16.conf                            POOL -> @POOL slots 6,8,14,15
+      el17.conf                            SLOT 13
+      el17.conf                            POOL -> @POOL slots 6,8,14,15
+      el18.conf                            SLOT 13
+      el18.conf                            POOL -> @POOL slots 6,8,14,15,18
+      el21.conf                            SLOT 13
+      el21.conf                            POOL -> @POOL slots 6,8,14,15,18,21
+      el21_rev.conf                        SLOT 9
+      el21_rev.conf                        POOL -> @POOL slots 1,4,7,8,14,16
+      el22.conf                            SLOT 13
+      el22.conf                            POOL -> @POOL slots 6,8,14,15,18,21,22
+      el_planted.conf                      SLOT 13
+      el_planted.conf                      POOL -> @POOL slots 18,21
+      el_planted_swapped.conf              SLOT 13
+      el_planted_swapped.conf              POOL -> @POOL slots 18,21
+      offm1_t18.conf                       SLOT 12
+      offp1_t18.conf                       SLOT 14
+      offp1_t21.conf                       SLOT 14
+      pair2_11_t18.conf                    SLOT 2,11,13
+      planted_campaign.conf                SLOT 13
+      planted_compressed.conf              SLOT 13
+      planted_hybrid.conf                  SLOT 13
+      planted_swapped.conf                 SLOT 13
+      planted_uncompressed.conf            SLOT 13
+      pool14.conf                          POOL (config has no @POOL slot)
+      t15.conf                             SLOT 13
+      t18.conf                             SLOT 13
+      t18_arith.conf                       SLOT 13
+      t18_free1.conf                       SLOT 1,13
+      t18_free10.conf                      SLOT 10,13
+      t18_free11.conf                      SLOT 11,13
+      t18_free12.conf                      SLOT 12,13
+      t18_free13.conf                      SLOT 13
+      t18_free16.conf                      SLOT 13,16
+      t18_free17.conf                      SLOT 13,17
+      t18_free2.conf                       SLOT 2,13
+      t18_free3.conf                       SLOT 3,13
+      t18_free4.conf                       SLOT 4,13
+      t18_free5.conf                       SLOT 5,13
+      t18_free7.conf                       SLOT 7,13
+      t18_free9.conf                       SLOT 9,13
+      t18_full14.conf                      SLOT 13
+      t18_full15.conf                      SLOT 13
+      t18_full18.conf                      SLOT 13
+      t18_full6.conf                       SLOT 13
+      ... and 130 more
+
+  camera is named in 192 row(s):
+      alt2.conf                            SLOT 2
+      alt2w.conf                           SLOT 2
+      alt3.conf                            SLOT 2
+      brain_find.conf                      SLOT 2
+      brain_t18_pool52.conf                SLOT 2
+      brain_t18_pool52_all.conf            SLOT 2
+      brain_t18_pool63.conf                SLOT 2
+      brain_t18_pool63_all.conf            SLOT 2
+      brain_t21_pool65.conf                SLOT 2
+      clock_v1.conf                        POOL (config has no @POOL slot)
+      el12.conf                            SLOT 2
+      el12.conf                            POOL -> @POOL slots 6,8
+      el13.conf                            SLOT 2
+      el13.conf                            POOL -> @POOL slots 6,8
+      el14.conf                            SLOT 2
+      el14.conf                            POOL -> @POOL slots 6,8,14
+      el16.conf                            SLOT 2
+      el16.conf                            POOL -> @POOL slots 6,8,14,15
+      el17.conf                            SLOT 2
+      el17.conf                            POOL -> @POOL slots 6,8,14,15
+      el18.conf                            SLOT 2
+      el18.conf                            POOL -> @POOL slots 6,8,14,15,18
+      el21.conf                            SLOT 2
+      el21.conf                            POOL -> @POOL slots 6,8,14,15,18,21
+      el21_rev.conf                        SLOT 20
+      el21_rev.conf                        POOL -> @POOL slots 1,4,7,8,14,16
+      el22.conf                            SLOT 2
+      el22.conf                            POOL -> @POOL slots 6,8,14,15,18,21,22
+      el_planted.conf                      SLOT 2
+      el_planted.conf                      POOL -> @POOL slots 18,21
+      el_planted_swapped.conf              SLOT 2
+      el_planted_swapped.conf              POOL -> @POOL slots 18,21
+      offm1_t18.conf                       SLOT 1
+      offp1_t18.conf                       SLOT 3
+      offp1_t21.conf                       SLOT 3
+      pair2_11_t18.conf                    SLOT 2,11
+      planted_campaign.conf                SLOT 2
+      planted_compressed.conf              SLOT 2
+      planted_hybrid.conf                  SLOT 2
+      planted_swapped.conf                 SLOT 2
+      planted_uncompressed.conf            SLOT 2
+      t12full.conf                         SLOT 2
+      t12full_mp.conf                      SLOT 2
+      t15.conf                             SLOT 2
+      t18.conf                             SLOT 2
+      t18_arith.conf                       SLOT 2
+      t18_free1.conf                       SLOT 1,2
+      t18_free10.conf                      SLOT 2,10
+      t18_free11.conf                      SLOT 2,11
+      t18_free12.conf                      SLOT 2,12
+      t18_free13.conf                      SLOT 2,13
+      t18_free16.conf                      SLOT 2,16
+      t18_free17.conf                      SLOT 2,17
+      t18_free2.conf                       SLOT 2
+      t18_free3.conf                       SLOT 2,3
+      t18_free4.conf                       SLOT 2,4
+      t18_free5.conf                       SLOT 2,5
+      t18_free7.conf                       SLOT 2,7
+      t18_free9.conf                       SLOT 2,9
+      t18_full14.conf                      SLOT 2
+      ... and 132 more
+
+  mask is named in 192 row(s):
+      alt2.conf                            SLOT 4
+      alt2w.conf                           SLOT 4
+      alt3.conf                            SLOT 4
+      brain_find.conf                      SLOT 4
+      brain_t18_pool52.conf                SLOT 4
+      brain_t18_pool52_all.conf            SLOT 4
+      brain_t18_pool63.conf                SLOT 4
+      brain_t18_pool63_all.conf            SLOT 4
+      brain_t21_pool65.conf                SLOT 4
+      clock_v1.conf                        POOL (config has no @POOL slot)
+      el12.conf                            SLOT 4
+      el12.conf                            POOL -> @POOL slots 6,8
+      el13.conf                            SLOT 4
+      el13.conf                            POOL -> @POOL slots 6,8
+      el14.conf                            SLOT 4
+      el14.conf                            POOL -> @POOL slots 6,8,14
+      el16.conf                            SLOT 4
+      el16.conf                            POOL -> @POOL slots 6,8,14,15
+      el17.conf                            SLOT 4
+      el17.conf                            POOL -> @POOL slots 6,8,14,15
+      el18.conf                            SLOT 4
+      el18.conf                            POOL -> @POOL slots 6,8,14,15,18
+      el21.conf                            SLOT 4
+      el21.conf                            POOL -> @POOL slots 6,8,14,15,18,21
+      el21_rev.conf                        SLOT 18
+      el21_rev.conf                        POOL -> @POOL slots 1,4,7,8,14,16
+      el22.conf                            SLOT 4
+      el22.conf                            POOL -> @POOL slots 6,8,14,15,18,21,22
+      el_planted.conf                      SLOT 4
+      el_planted.conf                      POOL -> @POOL slots 18,21
+      el_planted_swapped.conf              SLOT 4
+      el_planted_swapped.conf              POOL -> @POOL slots 18,21
+      offm1_t18.conf                       SLOT 3
+      offp1_t18.conf                       SLOT 5
+      offp1_t21.conf                       SLOT 5
+      pair2_11_t18.conf                    SLOT 2,4,11
+      planted_campaign.conf                SLOT 4
+      planted_compressed.conf              SLOT 4
+      planted_hybrid.conf                  SLOT 4
+      planted_swapped.conf                 SLOT 4
+      planted_uncompressed.conf            SLOT 4
+      pool14.conf                          POOL (config has no @POOL slot)
+      t12full.conf                         SLOT 4
+      t12full_mp.conf                      SLOT 4
+      t15.conf                             SLOT 4
+      t18.conf                             SLOT 4
+      t18_arith.conf                       SLOT 4
+      t18_free1.conf                       SLOT 1,4
+      t18_free10.conf                      SLOT 4,10
+      t18_free11.conf                      SLOT 4,11
+      t18_free12.conf                      SLOT 4,12
+      t18_free13.conf                      SLOT 4,13
+      t18_free16.conf                      SLOT 4,16
+      t18_free17.conf                      SLOT 4,17
+      t18_free2.conf                       SLOT 2,4
+      t18_free3.conf                       SLOT 3,4
+      t18_free4.conf                       SLOT 4
+      t18_free5.conf                       SLOT 4,5
+      t18_free7.conf                       SLOT 4,7
+      t18_free9.conf                       SLOT 4,9
+      ... and 132 more
+
+  liberty is named in 191 row(s):
+      alt2.conf                            SLOT 7
+      alt2w.conf                           SLOT 7
+      alt3.conf                            SLOT 7
+      brain_find.conf                      SLOT 7
+      brain_t18_pool52.conf                SLOT 7
+      brain_t18_pool52_all.conf            SLOT 7
+      brain_t18_pool63.conf                SLOT 7
+      brain_t18_pool63_all.conf            SLOT 7
+      brain_t21_pool65.conf                SLOT 7
+      clock_v1.conf                        POOL (config has no @POOL slot)
+      el12.conf                            SLOT 7
+      el12.conf                            POOL -> @POOL slots 6,8
+      el13.conf                            SLOT 7
+      el13.conf                            POOL -> @POOL slots 6,8
+      el14.conf                            SLOT 7
+      el14.conf                            POOL -> @POOL slots 6,8,14
+      el16.conf                            SLOT 7
+      el16.conf                            POOL -> @POOL slots 6,8,14,15
+      el17.conf                            SLOT 7
+      el17.conf                            POOL -> @POOL slots 6,8,14,15
+      el18.conf                            SLOT 7
+      el18.conf                            POOL -> @POOL slots 6,8,14,15,18
+      el21.conf                            SLOT 7
+      el21.conf                            POOL -> @POOL slots 6,8,14,15,18,21
+      el21_rev.conf                        SLOT 15
+      el21_rev.conf                        POOL -> @POOL slots 1,4,7,8,14,16
+      el22.conf                            SLOT 7
+      el22.conf                            POOL -> @POOL slots 6,8,14,15,18,21,22
+      el_planted.conf                      SLOT 7
+      el_planted.conf                      POOL -> @POOL slots 18,21
+      el_planted_swapped.conf              SLOT 7
+      el_planted_swapped.conf              POOL -> @POOL slots 18,21
+      offm1_t18.conf                       SLOT 6
+      offp1_t18.conf                       SLOT 8
+      offp1_t21.conf                       SLOT 8
+      pair2_11_t18.conf                    SLOT 2,7,11
+      planted_campaign.conf                SLOT 7
+      planted_compressed.conf              SLOT 7
+      planted_hybrid.conf                  SLOT 7
+      planted_swapped.conf                 SLOT 7
+      planted_uncompressed.conf            SLOT 7
+      t12full.conf                         SLOT 7
+      t12full_mp.conf                      SLOT 7
+      t15.conf                             SLOT 7
+      t18.conf                             SLOT 7
+      t18_arith.conf                       SLOT 7
+      t18_free1.conf                       SLOT 1,7
+      t18_free10.conf                      SLOT 7,10
+      t18_free11.conf                      SLOT 7,11
+      t18_free12.conf                      SLOT 7,12
+      t18_free13.conf                      SLOT 7,13
+      t18_free16.conf                      SLOT 7,16
+      t18_free17.conf                      SLOT 7,17
+      t18_free2.conf                       SLOT 2,7
+      t18_free3.conf                       SLOT 3,7
+      t18_free4.conf                       SLOT 4,7
+      t18_free5.conf                       SLOT 5,7
+      t18_free7.conf                       SLOT 7
+      t18_free9.conf                       SLOT 7,9
+      t18_full14.conf                      SLOT 7
+      ... and 131 more
+
+  eye is named in 193 row(s):
+      alt2.conf                            SLOT 9
+      alt2w.conf                           SLOT 9
+      alt3.conf                            SLOT 9
+      brain_find.conf                      SLOT 9
+      brain_t18_pool52.conf                SLOT 9
+      brain_t18_pool52_all.conf            SLOT 9
+      brain_t18_pool63.conf                SLOT 9
+      brain_t18_pool63_all.conf            SLOT 9
+      brain_t21_pool65.conf                SLOT 9
+      el12.conf                            SLOT 9
+      el12.conf                            POOL -> @POOL slots 6,8
+      el13.conf                            SLOT 9
+      el13.conf                            POOL -> @POOL slots 6,8
+      el14.conf                            SLOT 9
+      el14.conf                            POOL -> @POOL slots 6,8,14
+      el16.conf                            SLOT 9
+      el16.conf                            POOL -> @POOL slots 6,8,14,15
+      el17.conf                            SLOT 9
+      el17.conf                            POOL -> @POOL slots 6,8,14,15
+      el18.conf                            SLOT 9
+      el18.conf                            POOL -> @POOL slots 6,8,14,15,18
+      el21.conf                            SLOT 9
+      el21.conf                            POOL -> @POOL slots 6,8,14,15,18,21
+      el21_rev.conf                        SLOT 13
+      el21_rev.conf                        POOL -> @POOL slots 1,4,7,8,14,16
+      el22.conf                            SLOT 9
+      el22.conf                            POOL -> @POOL slots 6,8,14,15,18,21,22
+      el_planted.conf                      SLOT 9
+      el_planted.conf                      POOL -> @POOL slots 18,21
+      el_planted_swapped.conf              SLOT 9
+      el_planted_swapped.conf              POOL -> @POOL slots 18,21
+      offm1_t18.conf                       SLOT 8
+      offp1_t18.conf                       SLOT 10
+      offp1_t21.conf                       SLOT 10
+      pair2_11_t18.conf                    SLOT 2,9,11
+      planted_campaign.conf                SLOT 9
+      planted_compressed.conf              SLOT 9
+      planted_hybrid.conf                  SLOT 9
+      planted_swapped.conf                 SLOT 9
+      planted_uncompressed.conf            SLOT 9
+      t12full.conf                         SLOT 9
+      t12full_mp.conf                      SLOT 9
+      t15.conf                             SLOT 9
+      t18.conf                             SLOT 9
+      t18_arith.conf                       SLOT 9
+      t18_free1.conf                       SLOT 1,9
+      t18_free10.conf                      SLOT 9,10
+      t18_free11.conf                      SLOT 9,11
+      t18_free12.conf                      SLOT 9,12
+      t18_free13.conf                      SLOT 9,13
+      t18_free16.conf                      SLOT 9,16
+      t18_free17.conf                      SLOT 9,17
+      t18_free2.conf                       SLOT 2,9
+      t18_free3.conf                       SLOT 3,9
+      t18_free4.conf                       SLOT 4,9
+      t18_free5.conf                       SLOT 5,9
+      t18_free7.conf                       SLOT 7,9
+      t18_free9.conf                       SLOT 9
+      t18_full14.conf                      SLOT 9
+      t18_full15.conf                      SLOT 9
+      ... and 133 more
+
+  rifle is named in 186 row(s):
+      alt2.conf                            SLOT 16
+      alt2w.conf                           SLOT 16
+      alt3.conf                            SLOT 16
+      brain_find.conf                      SLOT 16
+      brain_t18_pool52.conf                SLOT 16
+      brain_t18_pool52_all.conf            SLOT 16
+      brain_t18_pool63.conf                SLOT 16
+      brain_t18_pool63_all.conf            SLOT 16
+      brain_t21_pool65.conf                SLOT 16
+      el12.conf                            POOL -> @POOL slots 6,8
+      el13.conf                            POOL -> @POOL slots 6,8
+      el14.conf                            POOL -> @POOL slots 6,8,14
+      el16.conf                            SLOT 16
+      el16.conf                            POOL -> @POOL slots 6,8,14,15
+      el17.conf                            SLOT 16
+      el17.conf                            POOL -> @POOL slots 6,8,14,15
+      el18.conf                            SLOT 16
+      el18.conf                            POOL -> @POOL slots 6,8,14,15,18
+      el21.conf                            SLOT 16
+      el21.conf                            POOL -> @POOL slots 6,8,14,15,18,21
+      el21_rev.conf                        SLOT 6
+      el21_rev.conf                        POOL -> @POOL slots 1,4,7,8,14,16
+      el22.conf                            SLOT 16
+      el22.conf                            POOL -> @POOL slots 6,8,14,15,18,21,22
+      el_planted.conf                      SLOT 16
+      el_planted.conf                      POOL -> @POOL slots 18,21
+      el_planted_swapped.conf              SLOT 16
+      el_planted_swapped.conf              POOL -> @POOL slots 18,21
+      offm1_t18.conf                       SLOT 15
+      offp1_t18.conf                       SLOT 17
+      offp1_t21.conf                       SLOT 17
+      pair2_11_t18.conf                    SLOT 2,11,16
+      planted_campaign.conf                SLOT 16
+      planted_compressed.conf              SLOT 16
+      planted_hybrid.conf                  SLOT 16
+      planted_swapped.conf                 SLOT 16
+      planted_uncompressed.conf            SLOT 16
+      t18.conf                             SLOT 16
+      t18_arith.conf                       SLOT 16
+      t18_free1.conf                       SLOT 1,16
+      t18_free10.conf                      SLOT 10,16
+      t18_free11.conf                      SLOT 11,16
+      t18_free12.conf                      SLOT 12,16
+      t18_free13.conf                      SLOT 13,16
+      t18_free16.conf                      SLOT 16
+      t18_free17.conf                      SLOT 16,17
+      t18_free2.conf                       SLOT 2,16
+      t18_free3.conf                       SLOT 3,16
+      t18_free4.conf                       SLOT 4,16
+      t18_free5.conf                       SLOT 5,16
+      t18_free7.conf                       SLOT 7,16
+      t18_free9.conf                       SLOT 9,16
+      t18_full14.conf                      SLOT 16
+      t18_full15.conf                      SLOT 16
+      t18_full18.conf                      SLOT 16
+      t18_full6.conf                       SLOT 16
+      t18_full8.conf                       SLOT 16
+      t18_idx.conf                         SLOT 16
+      t18_loo14.conf                       SLOT 16
+      t18_loo15.conf                       SLOT 16
+      ... and 126 more
+
+  glove is named in 156 row(s):
+      brain_t21_pool65.conf                SLOT 19
+      el12.conf                            POOL -> @POOL slots 6,8
+      el13.conf                            POOL -> @POOL slots 6,8
+      el14.conf                            POOL -> @POOL slots 6,8,14
+      el16.conf                            POOL -> @POOL slots 6,8,14,15
+      el17.conf                            POOL -> @POOL slots 6,8,14,15
+      el18.conf                            POOL -> @POOL slots 6,8,14,15,18
+      el21.conf                            SLOT 19
+      el21.conf                            POOL -> @POOL slots 6,8,14,15,18,21
+      el21_rev.conf                        SLOT 3
+      el21_rev.conf                        POOL -> @POOL slots 1,4,7,8,14,16
+      el22.conf                            SLOT 19
+      el22.conf                            POOL -> @POOL slots 6,8,14,15,18,21,22
+      el_planted.conf                      SLOT 19
+      el_planted.conf                      POOL -> @POOL slots 18,21
+      el_planted_swapped.conf              SLOT 19
+      el_planted_swapped.conf              POOL -> @POOL slots 18,21
+      offm1_t18.conf                       SLOT 18
+      offp1_t21.conf                       SLOT 20
+      pair2_11_t18.conf                    SLOT 2,11
+      planted_campaign.conf                SLOT 19
+      planted_compressed.conf              SLOT 19
+      planted_hybrid.conf                  SLOT 19
+      planted_swapped.conf                 SLOT 19
+      planted_uncompressed.conf            SLOT 19
+      t18_free1.conf                       SLOT 1
+      t18_free10.conf                      SLOT 10
+      t18_free11.conf                      SLOT 11
+      t18_free12.conf                      SLOT 12
+      t18_free13.conf                      SLOT 13
+      t18_free16.conf                      SLOT 16
+      t18_free17.conf                      SLOT 17
+      t18_free2.conf                       SLOT 2
+      t18_free3.conf                       SLOT 3
+      t18_free4.conf                       SLOT 4
+      t18_free5.conf                       SLOT 5
+      t18_free7.conf                       SLOT 7
+      t18_free9.conf                       SLOT 9
+      t21.conf                             SLOT 19
+      t21_alt3.conf                        SLOT 19
+      t21_amend1415.conf                   SLOT 19
+      t21_black1.conf                      SLOT 19
+      t21_black14.conf                     SLOT 19
+      t21_black15.conf                     SLOT 19
+      t21_black18.conf                     SLOT 19
+      t21_black21.conf                     SLOT 19
+      t21_black6.conf                      SLOT 19
+      t21_black8.conf                      SLOT 19
+      t21_blackd2.conf                     SLOT 19
+      t21_blackd3.conf                     SLOT 19
+      t21_blackd4.conf                     SLOT 19
+      t21_blackd5.conf                     SLOT 19
+      t21_blackd7.conf                     SLOT 19
+      t21_blackd9.conf                     SLOT 19
+      t21_bnw18.conf                       SLOT 19
+      t21_bnw18b.conf                      SLOT 19
+      t21_clk2.conf                        SLOT 19
+      t21_clk3.conf                        SLOT 19
+      t21_clk4.conf                        SLOT 19
+      t21_clk5.conf                        SLOT 19
+      ... and 96 more
+
+  black is named in 199 row(s):
+      alt2.conf                            SLOT 10
+      alt2w.conf                           SLOT 10
+      alt3.conf                            SLOT 10
+      brain_find.conf                      SLOT 10
+      brain_t18_pool52.conf                SLOT 10
+      brain_t18_pool52_all.conf            SLOT 10
+      brain_t18_pool63.conf                SLOT 10
+      brain_t18_pool63_all.conf            SLOT 10
+      brain_t21_pool65.conf                SLOT 10
+      el12.conf                            SLOT 10
+      el12.conf                            POOL -> @POOL slots 6,8
+      el13.conf                            SLOT 10
+      el13.conf                            POOL -> @POOL slots 6,8
+      el14.conf                            SLOT 10
+      el14.conf                            POOL -> @POOL slots 6,8,14
+      el16.conf                            SLOT 10
+      el16.conf                            POOL -> @POOL slots 6,8,14,15
+      el17.conf                            SLOT 10
+      el17.conf                            POOL -> @POOL slots 6,8,14,15
+      el18.conf                            SLOT 10
+      el18.conf                            POOL -> @POOL slots 6,8,14,15,18
+      el21.conf                            SLOT 10
+      el21.conf                            POOL -> @POOL slots 6,8,14,15,18,21
+      el21_rev.conf                        SLOT 12
+      el21_rev.conf                        POOL -> @POOL slots 1,4,7,8,14,16
+      el22.conf                            SLOT 10
+      el22.conf                            POOL -> @POOL slots 6,8,14,15,18,21,22
+      el_planted.conf                      SLOT 10
+      el_planted.conf                      POOL -> @POOL slots 18,21
+      el_planted_swapped.conf              SLOT 10
+      el_planted_swapped.conf              POOL -> @POOL slots 18,21
+      free17_explicit.conf                 POOL (config has no @POOL slot)
+      offm1_t18.conf                       SLOT 9
+      offp1_t18.conf                       SLOT 11
+      offp1_t21.conf                       SLOT 11
+      pair2_11_t18.conf                    SLOT 2,10,11
+      planted_campaign.conf                SLOT 10
+      planted_compressed.conf              SLOT 10
+      planted_hybrid.conf                  SLOT 10
+      planted_swapped.conf                 SLOT 10
+      planted_uncompressed.conf            SLOT 10
+      pool14.conf                          POOL (config has no @POOL slot)
+      t12full.conf                         SLOT 10
+      t12full_mp.conf                      SLOT 10
+      t15.conf                             SLOT 10
+      t18.conf                             SLOT 10
+      t18_arith.conf                       SLOT 10
+      t18_free1.conf                       SLOT 1,10
+      t18_free10.conf                      SLOT 10
+      t18_free11.conf                      SLOT 10,11
+      t18_free12.conf                      SLOT 10,12
+      t18_free13.conf                      SLOT 10,13
+      t18_free16.conf                      SLOT 10,16
+      t18_free17.conf                      SLOT 10,17
+      t18_free2.conf                       SLOT 2,10
+      t18_free3.conf                       SLOT 3,10
+      t18_free4.conf                       SLOT 4,10
+      t18_free5.conf                       SLOT 5,10
+      t18_free7.conf                       SLOT 7,10
+      t18_free9.conf                       SLOT 9,10
+      ... and 139 more
+
+  brave is named in 9 row(s):
+      clock_v1.conf                        POOL (config has no @POOL slot)
+      pool14.conf                          POOL (config has no @POOL slot)
+      t21_bnw18.conf                       SLOT 18
+      t21_bnw18.conf                       POOL -> @POOL slots 6,8,14,15,21
+      t21_bnw18b.conf                      SLOT 18
+      t21_ink10x20.conf                    SLOT 10
+      t21_slot1.conf                       SLOT 1
+      t21_title1.conf                      SLOT 1
+      t21_written.conf                     POOL -> @POOL slots 6,8,14,15,18,21
 
   double is named in 4 row(s):
       t18_idx.conf                         POOL -> @POOL slots 6,8,14,15,18
@@ -165,25 +839,377 @@ PUBLISHED LEDGER  configs/ -- 192 configs
 
 ==============================================================================
 SOLVER-ONLY (ran, never published) -- 35 configs
-  word         NAMED   ADMITTED   how admitted
-  introduce        0      0/35    -
-  double           3      4/35    {'@FULL only': 1, 'pool': 3}
-  sign             0      1/35    {'@FULL only': 1}
-  absence          0      0/35    -
-  participants       0      0/35    -
-  which            0      0/35    -
-  proof           31     32/35    {'pool': 31, '@FULL only': 1}
-  transaction       0      0/35    -
-  trusted          0      0/35    -
-  order           33     32/35    {'slot pin': 2, 'pool': 29, '@FULL only': 1}
-  absent           0      1/35    {'@FULL only': 1}
-  trust            2      3/35    {'@FULL only': 1, 'pool': 2}
-  fate             0      0/35    -
-  aware            0      1/35    {'@FULL only': 1}
-  mini             0      0/35    -
-  NEVER NAMED anywhere:    ['introduce', 'sign', 'absence', 'participants', 'which', 'transaction', 'trusted', 'absent', 'fate', 'aware', 'mini']
-  NEVER ADMITTED anywhere: ['introduce', 'absence', 'participants', 'which', 'transaction', 'trusted', 'fate', 'mini']
-  NOT BIP39 AT ALL (can only ever enter via an EXTRA declaration): ['introduce', 'absence', 'participants', 'which', 'transaction', 'trusted', 'fate', 'mini']
+  word       LEDGERS          NAMED   ADMITTED   how admitted
+  choke        -   old#621        0      0/35    -
+  hit          -   old#185        0      0/35    -
+  devil        -   old#854        0      0/35    -
+  murder       -   old#1196       0      0/35    -
+  death        -   old#170        2      2/35    {'pool': 2}
+  freedom      -   old#775        2      2/35    {'pool': 2}
+  silence      -   old#290        0      0/35    -
+  breathe      -   old#245        0      0/35    -
+  subject    BIP39 old#1279      34     35/35    {'slot pin': 34, '@FULL only': 1}
+  tower      BIP39 old#1282      34     35/35    {'slot pin': 34, '@FULL only': 1}
+  moon       BIP39 old#285       29     30/35    {'slot pin': 29, '@FULL only': 1}
+  camera     BIP39   -           34     35/35    {'slot pin': 34, '@FULL only': 1}
+  mask       BIP39 old#656       34     35/35    {'slot pin': 34, '@FULL only': 1}
+  liberty    BIP39   -           34     35/35    {'slot pin': 34, '@FULL only': 1}
+  eye        BIP39 old#12        36     35/35    {'slot pin': 34, '@FULL only': 1}
+  rifle      BIP39   -           24     25/35    {'slot pin': 24, '@FULL only': 1}
+  glove      BIP39 old#1589       5      6/35    {'slot pin': 5, '@FULL only': 1}
+  black      BIP39 old#143       36     35/35    {'slot pin': 34, '@FULL only': 1}
+  brave      BIP39 old#1037       1      2/35    {'@FULL only': 1, 'pool': 1}
+  introduce    -     -            0      0/35    -
+  double     BIP39 old#1374       3      4/35    {'@FULL only': 1, 'pool': 3}
+  sign       BIP39 old#577        0      1/35    {'@FULL only': 1}
+  absence      -     -            0      0/35    -
+  participants   -     -            0      0/35    -
+  which        -     -            0      0/35    -
+  proof      BIP39   -           31     32/35    {'pool': 31, '@FULL only': 1}
+  transaction   -     -            0      0/35    -
+  trusted      -     -            0      0/35    -
+  order      BIP39 old#792       33     32/35    {'slot pin': 2, 'pool': 29, '@FULL only': 1}
+  absent     BIP39   -            0      1/35    {'@FULL only': 1}
+  trust      BIP39 old#326        2      3/35    {'@FULL only': 1, 'pool': 2}
+  fate         -   old#446        0      0/35    -
+  aware      BIP39   -            0      1/35    {'@FULL only': 1}
+  mini         -     -            0      0/35    -
+  NEVER NAMED anywhere:    ['choke', 'hit', 'devil', 'murder', 'silence', 'breathe', 'introduce', 'sign', 'absence', 'participants', 'which', 'transaction', 'trusted', 'absent', 'fate', 'aware', 'mini']
+  NEVER ADMITTED anywhere: ['choke', 'hit', 'devil', 'murder', 'silence', 'breathe', 'introduce', 'absence', 'participants', 'which', 'transaction', 'trusted', 'fate', 'mini']
+  NOT BIP39 AT ALL (can only ever enter via an EXTRA declaration): ['choke', 'hit', 'devil', 'murder', 'death', 'freedom', 'silence', 'breathe', 'introduce', 'absence', 'participants', 'which', 'transaction', 'trusted', 'fate', 'mini']
+  OLD-ELECTRUM ONLY (unreachable by the BIP39 path at any slot): ['choke', 'hit', 'devil', 'murder', 'death', 'freedom', 'silence', 'breathe', 'fate']
+  IN NEITHER LEDGER: ['introduce', 'absence', 'participants', 'which', 'transaction', 'trusted', 'mini']
+
+  death is named in 2 row(s):
+      brain_t21_title.conf                 POOL -> @POOL slots 6,8,14,15,18,21
+      brain_t21_upper.conf                 POOL -> @POOL slots 6,8,14,15,18,21
+
+  freedom is named in 2 row(s):
+      brain_t21_title.conf                 POOL -> @POOL slots 6,8,14,15,18,21
+      brain_t21_upper.conf                 POOL -> @POOL slots 6,8,14,15,18,21
+
+  subject is named in 34 row(s):
+      alt2_el.conf                         SLOT 1
+      brain_t21_title.conf                 SLOT 1
+      brain_t21_upper.conf                 SLOT 1
+      planted_h160.conf                    SLOT 1
+      t12_p40.conf                         SLOT 1
+      t12_p52.conf                         SLOT 1
+      t12_p71.conf                         SLOT 1
+      t12_p75.conf                         SLOT 1
+      t12_p80.conf                         SLOT 1
+      t15_p40.conf                         SLOT 1
+      t15_p52.conf                         SLOT 1
+      t15_p71.conf                         SLOT 1
+      t15_p75.conf                         SLOT 1
+      t15_p80.conf                         SLOT 1
+      t18_black14.conf                     SLOT 1
+      t18_black15.conf                     SLOT 1
+      t18_black18.conf                     SLOT 1
+      t18_black6.conf                      SLOT 1
+      t18_black8.conf                      SLOT 1
+      t18_gold0.conf                       SLOT 1
+      t18_gold1.conf                       SLOT 1
+      t18_goldonly0.conf                   SLOT 1
+      t18_goldonly1.conf                   SLOT 1
+      t18_neck.conf                        SLOT 1
+      t18_p67.conf                         SLOT 1
+      t18_patha.conf                       SLOT 1
+      t18_pathb.conf                       SLOT 1
+      t18_pathc.conf                       SLOT 1
+      t18_pathd.conf                       SLOT 1
+      t18_pathe.conf                       SLOT 1
+      t18_trust.conf                       SLOT 1
+      t18_trustonly.conf                   SLOT 1
+      t24_tail54.conf                      SLOT 1
+      t24_tail67.conf                      SLOT 1
+
+  tower is named in 34 row(s):
+      alt2_el.conf                         SLOT 3
+      brain_t21_title.conf                 SLOT 3
+      brain_t21_upper.conf                 SLOT 3
+      planted_h160.conf                    SLOT 3
+      t12_p40.conf                         SLOT 3
+      t12_p52.conf                         SLOT 3
+      t12_p71.conf                         SLOT 3
+      t12_p75.conf                         SLOT 3
+      t12_p80.conf                         SLOT 3
+      t15_p40.conf                         SLOT 3
+      t15_p52.conf                         SLOT 3
+      t15_p71.conf                         SLOT 3
+      t15_p75.conf                         SLOT 3
+      t15_p80.conf                         SLOT 3
+      t18_black14.conf                     SLOT 3
+      t18_black15.conf                     SLOT 3
+      t18_black18.conf                     SLOT 3
+      t18_black6.conf                      SLOT 3
+      t18_black8.conf                      SLOT 3
+      t18_gold0.conf                       SLOT 3
+      t18_gold1.conf                       SLOT 3
+      t18_goldonly0.conf                   SLOT 3
+      t18_goldonly1.conf                   SLOT 3
+      t18_neck.conf                        SLOT 3
+      t18_p67.conf                         SLOT 3
+      t18_patha.conf                       SLOT 3
+      t18_pathb.conf                       SLOT 3
+      t18_pathc.conf                       SLOT 3
+      t18_pathd.conf                       SLOT 3
+      t18_pathe.conf                       SLOT 3
+      t18_trust.conf                       SLOT 3
+      t18_trustonly.conf                   SLOT 3
+      t24_tail54.conf                      SLOT 3
+      t24_tail67.conf                      SLOT 3
+
+  moon is named in 29 row(s):
+      alt2_el.conf                         SLOT 13
+      brain_t21_title.conf                 SLOT 13
+      brain_t21_upper.conf                 SLOT 13
+      planted_h160.conf                    SLOT 13
+      t15_p40.conf                         SLOT 13
+      t15_p52.conf                         SLOT 13
+      t15_p71.conf                         SLOT 13
+      t15_p75.conf                         SLOT 13
+      t15_p80.conf                         SLOT 13
+      t18_black14.conf                     SLOT 13
+      t18_black15.conf                     SLOT 13
+      t18_black18.conf                     SLOT 13
+      t18_black6.conf                      SLOT 13
+      t18_black8.conf                      SLOT 13
+      t18_gold0.conf                       SLOT 13
+      t18_gold1.conf                       SLOT 13
+      t18_goldonly0.conf                   SLOT 13
+      t18_goldonly1.conf                   SLOT 13
+      t18_neck.conf                        SLOT 13
+      t18_p67.conf                         SLOT 13
+      t18_patha.conf                       SLOT 13
+      t18_pathb.conf                       SLOT 13
+      t18_pathc.conf                       SLOT 13
+      t18_pathd.conf                       SLOT 13
+      t18_pathe.conf                       SLOT 13
+      t18_trust.conf                       SLOT 13
+      t18_trustonly.conf                   SLOT 13
+      t24_tail54.conf                      SLOT 13
+      t24_tail67.conf                      SLOT 13
+
+  camera is named in 34 row(s):
+      alt2_el.conf                         SLOT 2
+      brain_t21_title.conf                 SLOT 2
+      brain_t21_upper.conf                 SLOT 2
+      planted_h160.conf                    SLOT 2
+      t12_p40.conf                         SLOT 2
+      t12_p52.conf                         SLOT 2
+      t12_p71.conf                         SLOT 2
+      t12_p75.conf                         SLOT 2
+      t12_p80.conf                         SLOT 2
+      t15_p40.conf                         SLOT 2
+      t15_p52.conf                         SLOT 2
+      t15_p71.conf                         SLOT 2
+      t15_p75.conf                         SLOT 2
+      t15_p80.conf                         SLOT 2
+      t18_black14.conf                     SLOT 2
+      t18_black15.conf                     SLOT 2
+      t18_black18.conf                     SLOT 2
+      t18_black6.conf                      SLOT 2
+      t18_black8.conf                      SLOT 2
+      t18_gold0.conf                       SLOT 2
+      t18_gold1.conf                       SLOT 2
+      t18_goldonly0.conf                   SLOT 2
+      t18_goldonly1.conf                   SLOT 2
+      t18_neck.conf                        SLOT 2
+      t18_p67.conf                         SLOT 2
+      t18_patha.conf                       SLOT 2
+      t18_pathb.conf                       SLOT 2
+      t18_pathc.conf                       SLOT 2
+      t18_pathd.conf                       SLOT 2
+      t18_pathe.conf                       SLOT 2
+      t18_trust.conf                       SLOT 2
+      t18_trustonly.conf                   SLOT 2
+      t24_tail54.conf                      SLOT 2
+      t24_tail67.conf                      SLOT 2
+
+  mask is named in 34 row(s):
+      alt2_el.conf                         SLOT 4
+      brain_t21_title.conf                 SLOT 4
+      brain_t21_upper.conf                 SLOT 4
+      planted_h160.conf                    SLOT 4
+      t12_p40.conf                         SLOT 4
+      t12_p52.conf                         SLOT 4
+      t12_p71.conf                         SLOT 4
+      t12_p75.conf                         SLOT 4
+      t12_p80.conf                         SLOT 4
+      t15_p40.conf                         SLOT 4
+      t15_p52.conf                         SLOT 4
+      t15_p71.conf                         SLOT 4
+      t15_p75.conf                         SLOT 4
+      t15_p80.conf                         SLOT 4
+      t18_black14.conf                     SLOT 4
+      t18_black15.conf                     SLOT 4
+      t18_black18.conf                     SLOT 4
+      t18_black6.conf                      SLOT 4
+      t18_black8.conf                      SLOT 4
+      t18_gold0.conf                       SLOT 4
+      t18_gold1.conf                       SLOT 4
+      t18_goldonly0.conf                   SLOT 4
+      t18_goldonly1.conf                   SLOT 4
+      t18_neck.conf                        SLOT 4
+      t18_p67.conf                         SLOT 4
+      t18_patha.conf                       SLOT 4
+      t18_pathb.conf                       SLOT 4
+      t18_pathc.conf                       SLOT 4
+      t18_pathd.conf                       SLOT 4
+      t18_pathe.conf                       SLOT 4
+      t18_trust.conf                       SLOT 4
+      t18_trustonly.conf                   SLOT 4
+      t24_tail54.conf                      SLOT 4
+      t24_tail67.conf                      SLOT 4
+
+  liberty is named in 34 row(s):
+      alt2_el.conf                         SLOT 7
+      brain_t21_title.conf                 SLOT 7
+      brain_t21_upper.conf                 SLOT 7
+      planted_h160.conf                    SLOT 7
+      t12_p40.conf                         SLOT 7
+      t12_p52.conf                         SLOT 7
+      t12_p71.conf                         SLOT 7
+      t12_p75.conf                         SLOT 7
+      t12_p80.conf                         SLOT 7
+      t15_p40.conf                         SLOT 7
+      t15_p52.conf                         SLOT 7
+      t15_p71.conf                         SLOT 7
+      t15_p75.conf                         SLOT 7
+      t15_p80.conf                         SLOT 7
+      t18_black14.conf                     SLOT 7
+      t18_black15.conf                     SLOT 7
+      t18_black18.conf                     SLOT 7
+      t18_black6.conf                      SLOT 7
+      t18_black8.conf                      SLOT 7
+      t18_gold0.conf                       SLOT 7
+      t18_gold1.conf                       SLOT 7
+      t18_goldonly0.conf                   SLOT 7
+      t18_goldonly1.conf                   SLOT 7
+      t18_neck.conf                        SLOT 7
+      t18_p67.conf                         SLOT 7
+      t18_patha.conf                       SLOT 7
+      t18_pathb.conf                       SLOT 7
+      t18_pathc.conf                       SLOT 7
+      t18_pathd.conf                       SLOT 7
+      t18_pathe.conf                       SLOT 7
+      t18_trust.conf                       SLOT 7
+      t18_trustonly.conf                   SLOT 7
+      t24_tail54.conf                      SLOT 7,24
+      t24_tail67.conf                      SLOT 7,24
+
+  eye is named in 36 row(s):
+      alt2_el.conf                         SLOT 9
+      brain_t21_title.conf                 SLOT 9
+      brain_t21_upper.conf                 SLOT 9
+      planted_h160.conf                    SLOT 9
+      t12_p40.conf                         SLOT 9
+      t12_p52.conf                         SLOT 9
+      t12_p71.conf                         SLOT 9
+      t12_p75.conf                         SLOT 9
+      t12_p80.conf                         SLOT 9
+      t15_p40.conf                         SLOT 9
+      t15_p52.conf                         SLOT 9
+      t15_p71.conf                         SLOT 9
+      t15_p75.conf                         SLOT 9
+      t15_p80.conf                         SLOT 9
+      t18_black14.conf                     SLOT 9
+      t18_black15.conf                     SLOT 9
+      t18_black18.conf                     SLOT 9
+      t18_black6.conf                      SLOT 9
+      t18_black8.conf                      SLOT 9
+      t18_gold0.conf                       SLOT 9
+      t18_gold1.conf                       SLOT 9
+      t18_goldonly0.conf                   SLOT 9
+      t18_goldonly1.conf                   SLOT 9
+      t18_neck.conf                        SLOT 9
+      t18_p67.conf                         SLOT 9
+      t18_p67.conf                         POOL -> @POOL slots 6,8,14,15,18
+      t18_patha.conf                       SLOT 9
+      t18_pathb.conf                       SLOT 9
+      t18_pathc.conf                       SLOT 9
+      t18_pathd.conf                       SLOT 9
+      t18_pathe.conf                       SLOT 9
+      t18_trust.conf                       SLOT 9
+      t18_trust.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_trustonly.conf                   SLOT 9
+      t24_tail54.conf                      SLOT 9
+      t24_tail67.conf                      SLOT 9
+
+  rifle is named in 24 row(s):
+      alt2_el.conf                         SLOT 16
+      brain_t21_title.conf                 SLOT 16
+      brain_t21_upper.conf                 SLOT 16
+      planted_h160.conf                    SLOT 16
+      t18_black14.conf                     SLOT 16
+      t18_black15.conf                     SLOT 16
+      t18_black18.conf                     SLOT 16
+      t18_black6.conf                      SLOT 16
+      t18_black8.conf                      SLOT 16
+      t18_gold0.conf                       SLOT 16
+      t18_gold1.conf                       SLOT 16
+      t18_goldonly0.conf                   SLOT 16
+      t18_goldonly1.conf                   SLOT 16
+      t18_neck.conf                        SLOT 16
+      t18_p67.conf                         SLOT 16
+      t18_patha.conf                       SLOT 16
+      t18_pathb.conf                       SLOT 16
+      t18_pathc.conf                       SLOT 16
+      t18_pathd.conf                       SLOT 16
+      t18_pathe.conf                       SLOT 16
+      t18_trust.conf                       SLOT 16
+      t18_trustonly.conf                   SLOT 16
+      t24_tail54.conf                      SLOT 16
+      t24_tail67.conf                      SLOT 16
+
+  glove is named in 5 row(s):
+      brain_t21_title.conf                 SLOT 19
+      brain_t21_upper.conf                 SLOT 19
+      planted_h160.conf                    SLOT 19
+      t24_tail54.conf                      SLOT 19
+      t24_tail67.conf                      SLOT 19
+
+  black is named in 36 row(s):
+      alt2_el.conf                         SLOT 10
+      brain_t21_title.conf                 SLOT 10
+      brain_t21_upper.conf                 SLOT 10
+      planted_h160.conf                    SLOT 10
+      t12_p40.conf                         SLOT 10
+      t12_p52.conf                         SLOT 10
+      t12_p71.conf                         SLOT 10
+      t12_p75.conf                         SLOT 10
+      t12_p80.conf                         SLOT 10
+      t15_p40.conf                         SLOT 10
+      t15_p52.conf                         SLOT 10
+      t15_p71.conf                         SLOT 10
+      t15_p75.conf                         SLOT 10
+      t15_p80.conf                         SLOT 10
+      t18_black14.conf                     SLOT 14
+      t18_black15.conf                     SLOT 15
+      t18_black18.conf                     SLOT 18
+      t18_black6.conf                      SLOT 6
+      t18_black8.conf                      SLOT 8
+      t18_gold0.conf                       SLOT 10
+      t18_gold1.conf                       SLOT 10
+      t18_goldonly0.conf                   SLOT 10
+      t18_goldonly1.conf                   SLOT 10
+      t18_neck.conf                        SLOT 10
+      t18_p67.conf                         SLOT 10
+      t18_p67.conf                         POOL -> @POOL slots 6,8,14,15,18
+      t18_patha.conf                       SLOT 10
+      t18_pathb.conf                       SLOT 10
+      t18_pathc.conf                       SLOT 10
+      t18_pathd.conf                       SLOT 10
+      t18_pathe.conf                       SLOT 10
+      t18_trust.conf                       SLOT 10
+      t18_trust.conf                       POOL -> @POOL slots 6,8,14,15,18
+      t18_trustonly.conf                   SLOT 10
+      t24_tail54.conf                      SLOT 10
+      t24_tail67.conf                      SLOT 10
+
+  brave is named in 1 row(s):
+      t24_tail67.conf                      POOL -> @POOL slots 6,8,14,15,18
 
   double is named in 3 row(s):
       t12_p80.conf                         POOL -> @POOL slots 6,8

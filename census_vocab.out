@@ -1,0 +1,149 @@
+LL-2  THE CANVAS'S OWN VOCABULARY, BOTH LEDGERS
+==========================================================================
+  old Electrum 1626 words  md5(file) 33f89ca84f7c9b3eeec1bcc253bce673
+  BIP39        2048 words  md5(file) cafd522d6627011d78e576f2d0b6ed58
+  base rates: old-only 765/1626 = 47.0%   bip39-only 1187/2048 = 58.0%   both 861
+
+  census rows: 151  {'A_display': 110, 'B_microtext': 41}
+  excluded per the plan:
+         20  len<3 (both ledgers start at 3)
+         14  cyrillic
+         12  latin
+          6  fragment
+          3  acronym
+          1  misspelling
+  eligible English words: 95  (69 A_display, 26 B_microtext)
+  NOTE: the plan named fragment(s) absent from the census, no-op: ['re']
+
+--------------------------------------------------------------------------
+  THE FOUR COUNTS  (exact token, types not occurrences)
+
+  ALL 151 census rows, nothing excluded   n=151
+        BOTH          28    18.5%
+        OLD_ONLY      10     6.6%
+        BIP39_ONLY    12     7.9%
+        NEITHER      101    66.9%
+
+  A_display, nothing excluded   n=110
+        BOTH          24    21.8%
+        OLD_ONLY       8     7.3%
+        BIP39_ONLY     8     7.3%
+        NEITHER       70    63.6%
+
+  B_microtext, nothing excluded   n=41
+        BOTH           4     9.8%
+        OLD_ONLY       2     4.9%
+        BIP39_ONLY     4     9.8%
+        NEITHER       31    75.6%
+
+  ELIGIBLE ENGLISH, all lengths   n=95
+        BOTH          28    29.5%
+        OLD_ONLY      10    10.5%
+        BIP39_ONLY    12    12.6%
+        NEITHER       45    47.4%
+
+  PRIMARY STRATUM: A_display, English, length 3-8   n=61
+        BOTH          24    39.3%
+        OLD_ONLY       8    13.1%
+        BIP39_ONLY     8    13.1%
+        NEITHER       21    34.4%
+
+  length 9-12, reported separately per plan sec.3 (BOTH is impossible): n=9
+        brutality     NEITHER     [A_display]
+        convicted     NEITHER     [A_display]
+        involuntary   NEITHER     [A_display]
+        jurisdiction  NEITHER     [A_display]
+        prediction    NEITHER     [A_display]
+        punishment    NEITHER     [A_display]
+        servitude     NEITHER     [A_display]
+        stability     NEITHER     [A_display]
+        transaction   NEITHER     [B_microtext]
+
+  the primary stratum, word by word:
+        and        len 3  NEITHER    
+        any        len 3  BOTH       
+        been       len 4  OLD_ONLY     <-- old-Electrum only
+        bitcoin    len 7  NEITHER    
+        black      len 5  BOTH       
+        brave      len 5  BOTH       
+        breathe    len 7  OLD_ONLY     <-- old-Electrum only
+        can        len 3  BIP39_ONLY 
+        covid      len 5  NEITHER    
+        crime      len 5  BOTH       
+        duly       len 4  NEITHER    
+        end        len 3  BOTH       
+        except     len 6  OLD_ONLY     <-- old-Electrum only
+        exist      len 5  BOTH       
+        fiat       len 4  NEITHER    
+        find       len 4  BOTH       
+        first      len 5  BOTH       
+        for        len 3  NEITHER    
+        fuck       len 4  NEITHER    
+        future     len 6  BOTH       
+        have       len 4  BIP39_ONLY 
+        hoax       len 4  NEITHER    
+        justice    len 7  NEITHER    
+        killer     len 6  NEITHER    
+        killing    len 7  NEITHER    
+        lives      len 5  NEITHER    
+        matter     len 6  BOTH       
+        moon       len 4  BOTH       
+        more       len 4  BOTH       
+        neither    len 7  BOTH       
+        new        len 3  OLD_ONLY     <-- old-Electrum only
+        nor        len 3  NEITHER    
+        not        len 3  NEITHER    
+        one        len 3  BIP39_ONLY 
+        only       len 4  BOTH       
+        order      len 5  BOTH       
+        party      len 5  BOTH       
+        pay        len 3  OLD_ONLY     <-- old-Electrum only
+        peace      len 5  BOTH       
+        phrase     len 6  BIP39_ONLY 
+        picture    len 7  BOTH       
+        place      len 5  BOTH       
+        police     len 6  BIP39_ONLY 
+        real       len 4  BOTH       
+        section    len 7  BIP39_ONLY 
+        seed       len 4  BIP39_ONLY 
+        shall      len 5  OLD_ONLY     <-- old-Electrum only
+        shit       len 4  NEITHER    
+        slavery    len 7  NEITHER    
+        states     len 6  NEITHER    
+        stop       len 4  OLD_ONLY     <-- old-Electrum only
+        subject    len 7  BOTH       
+        the        len 3  NEITHER    
+        their      len 5  NEITHER    
+        this       len 4  BIP39_ONLY 
+        tower      len 5  BOTH       
+        united     len 6  NEITHER    
+        welcome    len 7  BOTH       
+        whereof    len 7  NEITHER    
+        within     len 6  OLD_ONLY     <-- old-Electrum only
+        world      len 5  BOTH       
+
+--------------------------------------------------------------------------
+  EXACT POISSON-BINOMIAL,  observed OLD_ONLY = 8 of 61
+  control corpus: bitcoin.txt, 2299 eligible tokens (frequency-weighted)
+
+        len  n_prim | P(old-only) prose   union   dict
+          3      11 |            0.0341  0.3439 0.0572
+          4      15 |            0.1530  0.2754 0.0537
+          5      15 |            0.2471  0.2418 0.0300
+          6       9 |            0.1319  0.1924 0.0137
+          7      11 |            0.0511  0.2143 0.0083
+          8       0 |            0.0437  0.4395 0.0060
+
+        null                       expected   P(X >= obs)
+        PRIMARY  prose, freq-wtd       8.13        0.5799
+        SECONDARY  union draw         15.63        0.9947
+        SENSITIVITY  dictionary        2.10      0.001042
+
+--------------------------------------------------------------------------
+  DECISION, by the rule fixed in census_vocab_plan.md sec.6
+        observed 8, expected 8.13 under the primary null
+        P(X >= 8) = 0.5799 > 0.5  ->  H1 REFUTED
+        The canvas sits at or below what ordinary English prose gives.
+
+  Word consequences, per plan sec.0: NO WORD ENTERS ANY CONFIG FROM THIS,
+  under any outcome. LL-5's arithmetic is what governs, not this test.

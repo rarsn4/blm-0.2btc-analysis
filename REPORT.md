@@ -62,7 +62,7 @@ Claims below are tagged. Do not promote a tag without new evidence.
 | **[INFERRED]** | Follows from measured facts by a stated argument. |
 | **[ASSUMED]** | Load-bearing but unproven. The soft spots. |
 | **[COMMUNITY]** | A reading or convention taken from the shared solver corpus, not derived here. Weaker than [INFERRED]: no argument from this project's measurements backs it. `premise_audit.md`'s vocabulary, used in §5 from 9 Nov 2026. |
-| **[DEFECT]** | A fault in this project's own method or machine, found and dated. §1.7, §1.8, §1.9, §1.10, §1.12. §1.11 is the same register for a fault in material **sent to** this project, kept separate because it is not ours. |
+| **[DEFECT]** | A fault in this project's own method or machine, found and dated. §1.7, §1.8, §1.9, §1.10, §1.12, §1.13. §1.11 is the same register for a fault in material **sent to** this project, kept separate because it is not ours. |
 
 The distinction between [EXHAUSTED] and [TESTED] is the one that matters: §2.1–2.11
 are the first, §2.12 is the second, and conflating them would be the only overclaim
@@ -70,20 +70,23 @@ in this document.
 
 ---
 
-## 1. Six defects in the shared data, five in ours — and two in briefs sent here
+## 1. Six defects in the shared data, six in ours — and three in briefs sent here
 
-§1.1–1.6 are faults in the data the community shares. **§1.7–§1.10 and §1.12 are faults
-of this project's own**, and they are the more serious kind, so they are not buried: for
+§1.1–1.6 are faults in the data the community shares. **§1.7–§1.10, §1.12 and §1.13 are
+faults of this project's own**, and they are the more serious kind, so they are not buried: for
 five weeks this project accrued negatives on a solver binary that had never passed a
 self-test (§1.7), and for five weeks it hashed a transcription that was never checked
 back against the image (§1.8). They have the same shape — something written down once,
 trusted thereafter, never re-measured.
 
-**§1.11 is a third kind**, and it records **two** claims: both arrived in a brief addressed
-to this project, both were attributed to this project's own files, and neither is in them. It is
-recorded in the same register as the other ten because the failure mode is identical —
-something stated once and trusted thereafter — and because a defect in an instruction is
-the one class a reader of this report cannot otherwise see.
+**§1.11 is a third kind**, and it records **three** claims, all of which arrived in briefs
+addressed to this project. Two were attributed to this project's own files and are not in
+them. The third is different and worth distinguishing: its stated facts were **correct**, and
+its conclusion was wrong anyway, because the facts were checked against one ledger and the
+conclusion was drawn about words in general. It is recorded in the same register as the other
+twelve because the failure mode is identical — something stated once and trusted thereafter —
+and because a defect in an instruction is the one class a reader of this report cannot
+otherwise see.
 
 ### 1.1 `breathe` is not a BIP39 word — but it *is* an Electrum word, and this section said otherwise
 
@@ -676,7 +679,45 @@ mask's composition — and neither was checked. A third test in the same plan, t
 control, was sound and returned a firm negative, which is the only reason the entry it feeds
 says anything at all.
 
-### 1.11 [DEFECT in material sent to this project, found 2026-11-10] Two measurements attributed to this repository do not exist in it
+### 1.13 [DEFECT, found and closed 2026-11-10] Twelve allow-list pin notes state a verification that cannot be reproduced by the method they name
+
+**Found by trying to reproduce one.** Every pin of `REPORT.md` in `pre_push_allow.txt` is
+required to carry a note verifying the pin **by run text** — that the set of 12-or-more
+consecutive BIP39 word runs is unchanged, *"compared by run TEXT because the line numbers
+shift"*. Twelve consecutive notes, from blob `ef48a1df` (9 Nov) to `cdba0b34` (10 Nov),
+state **"the same TEN runs … lengths [13,13,13,14,14,18,21,21,27,37]"**.
+
+**Re-running the gate's own guard over those blobs returns NINE runs,
+`[13,13,13,14,18,21,21,27,37]`.** One 14 is absent. [MEASURED]
+
+| | |
+|---|---|
+| what the notes claim | 10 runs, two of length 14 |
+| what the current gate reports, on **every one of the 30 pinned blobs** | 9 runs, one of length 14 |
+| the difference | the guard's **self-test exemption**: a `phrase:` line in `README.md` or `REPORT.md` preceded two lines earlier by the planted `HIT index` line is skipped (`pre_push_check.sh`, the `doc` clause) |
+| the suppressed run | the `HIT index` / `phrase:` pair of the **planted** `selftest_find.conf` control output — `REPORT.md:6545-6546` in this revision, a line number that shifts, which is why run text and not location is the comparison — 14 words, published on purpose |
+| with the exemption disabled | **10 runs, `[13,13,13,14,14,18,21,21,27,37]`** — the notes' figures exactly |
+
+**Nothing leaked and nothing was lost.** The real phrase material is identical across all
+30 pins: 0 new and 0 removed at every step, verified by run text. The tenth run was never
+a secret — it is the self-test's own planted phrase, and the exemption exists precisely
+because the guard should not flag a control this report publishes deliberately.
+
+**The defect is in the note, not the file.** The figures were measured against the guard
+*before* the exemption was added, and then carried forward through twelve revisions without
+being re-derived — the §1.8 shape again, something written down once and trusted thereafter,
+this time in the machinery whose whole purpose is to be re-checkable. A reader auditing the
+most recent pin today measures nine runs against a note claiming ten and concludes **a run
+was removed**, which is the opposite of what happened. *That is exactly the inference this
+author drew before measuring it.* A self-verifying note whose numbers do not reproduce is
+worse than no note, because it invites a false positive about the one thing the gate guards.
+
+**Fixed going forward:** every pin note now states the count **both ways** — as the gate
+reports it and with the self-test exemption disabled — so it can be reproduced whichever
+way the reader runs the guard. Earlier notes are left standing as the audit trail of what
+was actually published, per the retract-by-marking rule; this entry is the marking.
+
+### 1.11 [DEFECT in material sent to this project, found 2026-11-10] Two measurements attributed to this repository do not exist in it, and a third claim was scoped to the wrong ledger
 
 **Found by looking for them before citing them**, which is the only reason this entry is
 here rather than in §2.16's text as a borrowed authority.
@@ -701,6 +742,39 @@ good instructions while silently dropping their false premises would have left t
 citing a measurement that was never made, and the next reader could not have told the
 difference. **A provenance that cannot be found is not a weaker citation; it is not a
 citation.**
+
+#### The third claim — true premises, wrong ledger [MEASURED 2026-11-10]
+
+A separate brief of 10 Nov 2026 stated that `devil`, `demon`, `satan`, `hell`, `dark` and
+`horns` are *"NONE of them BIP39, so the goat→devil reading terminates in a non-word and
+cannot produce a seed candidate."*
+
+**The BIP39 half is exactly right. The conclusion does not follow, because it was never
+scoped.** Measured against both ledgers this project holds:
+
+| word | BIP39 | old Electrum |
+|---|---|---|
+| `devil` | no | **#854** |
+| `demon` | no | **#773** |
+| `dark` | no | **#130** |
+| `satan` | no | no |
+| `hell` | no | no |
+| `horns` | no | no |
+
+**Three of the six are old-Electrum words.** "Terminates in a non-word" is true only of
+BIP39; the old 1,626-word list is a ledger this project has implemented, self-tested and
+run a subset of (§2.6). A reading that terminates outside BIP39 has not terminated.
+
+Two further exact-token facts, since the same brief's list mixed forms: **`horn` *is*
+BIP39** and `horns` is not, and **`goat` *is* BIP39**. So the source end of that reading is
+BIP39-reachable and the destination end is not — which is a sharper statement than the one
+offered, and it is the EE-1 discipline again: inflections are different tokens.
+
+**What does not change.** The goat→devil chain still has **zero measured links**, and **no
+word enters any config from it** — not on the BIP39 path, where `devil` cannot be encoded,
+and not on the old-Electrum path, where §2.6's arithmetic rules out the search regardless
+of how well the vocabulary fits. Being reachable in principle and being searchable are
+different claims, and this entry asserts only the first.
 
 What was done instead: the distinction was recorded on its own merits in §2.16 and
 attributed to the brief, not to this repository; and the sweep was run standalone, reusing
@@ -1169,9 +1243,177 @@ brainwallets.
 `C(31,10) = 44,352,165` sets. Measured end-to-end cost is **1.507 candidates/s**
 (the 100,000-round SHA-256 stretch plus ten EC address derivations per seed), so
 every ordering of one fixed set — `12!/2! = 239,500,800` — is **1,840 CPU-days**,
-and the hypothesis in full is about `1.06e16` candidates. **The probe answers the
+and the hypothesis in full is about `1.06e16` candidates.
+
+> **[CORRECTED 2026-11-10] The 1,840-day figure belongs to the repeated-word set and must
+> not be quoted as the cost of a general 12-word set.** The `2!` is load-bearing: it is
+> there because `breathe` appears **twice**, which collapses the orderings by half. A set of
+> **twelve distinct** words has `12! = 479,001,600` orderings, which at the measured
+> 1.507 candidates/s is **3,678.8 CPU-days** — exactly twice as expensive. A brief of
+> 10 Nov 2026 cited the figure correctly but described it as *"one fixed 12-word set, all
+> orderings"*, which drops the `2!` and understates the general case **2×**. Recorded
+> because it errs toward affordability, which is the direction that gets a run queued.
+> The per-candidate ratio in the same brief verifies: `125,000 / 1.507 = 82,946×`, stated
+> as ~83,000×. **The probe answers the
 question "has anyone required `breathe` at two positions?" with "now someone has,
 for one set, and it is not the answer."** It does not touch the rest.
+
+##### The ledger itself, verified against its source [MEASURED 2026-11-10]
+
+Everything above rests on `configs/electrum_old_en.txt`, including the Tier-1 probe's
+candidate list. It had never been checked back against upstream — the §1.8 shape exactly.
+It has now been, by text-parsing the `_words` **tuple** in `electrum/old_mnemonic.py`
+(the package is data here; it is parsed, not imported):
+
+| | |
+|---|---|
+| words / unique | **1626 / 1626** |
+| identical to the source tuple **in order** | **yes** — element by element, zero mismatches |
+| two installed copies agree | yes (`~/.local/lib` and `squashfs-root`) |
+| first five | `like just love know never` |
+| last five | `throne total unseen weapon weary` |
+| `breathe` | **1-based #245** |
+| md5, file as stored | `33f89ca84f7c9b3eeec1bcc253bce673` |
+
+**No defect.** The project's copy is upstream's list in upstream's order, so the probe's
+candidate derivation stands.
+
+Two notes on the brief that requested this check, both small and neither affecting the
+list. Its digest `33f89ca8…` is described as *"md5 of newline-joined, in file order"*;
+strictly newline-**joined** with no trailing newline is `1f6cbdf9eb28fbeed6f834a138a29fb5`.
+The quoted value is the file **as stored**, i.e. newline-**terminated**. And its warning
+that a `words = [` regex *"silently falls through and yields 1627"* does not reproduce on
+these copies: `words\s*=\s*\[` matches **zero** times, and a whole-file quoted-string scan
+yields **1630**, the four extras being `Software`, `AS IS`, a single space, and an
+f-string error message. The warning's instruction was right regardless — parse the tuple —
+and following it is why the order check above exists.
+
+##### The canvas's own vocabulary against both ledgers — H1 refuted [MEASURED 2026-11-10]
+
+Pre-registered in `census_vocab_plan.md` (commit `aa148de`, blob `e962bca2`) **before any
+membership was computed**, because the reference class decides this result and choosing it
+afterwards would decide it to taste. Script `census_vocab.py`, output `census_vocab.out`.
+Membership by **exact token**, no stemming; the census's own `bip39` column is not trusted
+and both ledgers are re-read from `configs/`.
+
+**The four counts.** Of all 151 census rows: **BOTH 28, OLD-ELECTRUM-ONLY 10, BIP39-ONLY
+12, NEITHER 101.** Excluded for the primary test, by rules fixed in advance: 20 tokens of
+1–2 letters (**structurally impossible in both ledgers** — old Electrum is 3–12, BIP39 is
+3–8), 14 Cyrillic, 12 Latin, 6 line-wrap fragments of the micro-text, 3 acronyms, and
+`introdue`, which is a misspelling and not a word. 95 English words remain.
+
+Primary stratum — `A_display`, English, 3–8 letters, **n = 61**:
+
+| | count | share |
+|---|---:|---:|
+| in **both** ledgers | 24 | 39.3% |
+| **old-Electrum only** | 8 | 13.1% |
+| **BIP39 only** | 8 | 13.1% |
+| in **neither** | 21 | 34.4% |
+
+The eight old-Electrum-only words are `been`, `except`, `new`, `pay`, `shall`, `stop`,
+`within` and `breathe`.
+
+**`B_microtext` is excluded from the test, for a reason that is fatal rather than
+cautious: B is whitepaper text, and the frequency control below is the whitepaper.** B
+would have been scored against itself. The census header already warns B is a sample, not
+a census.
+
+**The base rate, without which the split means nothing.** 47.0% of the old list is absent
+from BIP39 and 58.0% of BIP39 is absent from the old list (both verified: 765/1626 and
+1187/2048), so *old-Electrum-only is the common case*. **No English frequency list is on
+this disk** — no `wordfreq`, no `nltk`, no unigram counts — so the requested design could
+not run as specified. Three substitutes were named in advance, primary first, and tested by
+**exact Poisson-binomial** over per-token length-conditioned probabilities, the
+`edit_lists_exact.py` standard:
+
+| null | expected | P(X ≥ 8) | |
+|---|---:|---:|---|
+| **primary** — frequency-weighted English prose (`bitcoin.txt`, 2,299 eligible tokens) | **8.13** | **0.580** | at base rate |
+| secondary — union draw, P(old-only \| in some ledger) | 15.63 | 0.995 | **below** base rate |
+| sensitivity — type dictionary (`/usr/share/dict/american-english`) | 2.10 | 0.00104 | the pre-labelled trap |
+
+**Observed 8. Expected 8.13. H1 is REFUTED by the rule fixed in §6 of the plan**
+(P > 0.5): the canvas's vocabulary is exactly what ordinary English prose of the same
+length mix gives, and against wallet vocabulary it is *depleted* in old-Electrum-only
+words, not enriched.
+
+**The sensitivity null is the finding's twin and is why the plan named it in advance.** A
+dictionary draw returns **P = 0.001** — a publishable-looking result — from the same 8
+observations. It is wrong because a dictionary is a list of *types*, dense in rare and
+inflected forms, while painted words are *common* ones. Had the reference class been picked
+after seeing the count, this section could have said either thing.
+
+**Two structural facts, both recorded before measuring.** Old Electrum holds 80 words of
+9–12 letters and **BIP39 holds none**, so in that band "old-only" is free and BOTH is
+impossible — which is why the test runs on 3–8. The band is reported separately and it is
+emphatic: of the **9** census words of 9+ letters, **zero** are in either ledger, in the
+one place where the old list has a monopoly.
+
+**The confound that outranks the result, and would have outranked a positive one.** The old
+list **is a frequency list** — its own source comment reads *"list of words from
+…/Wiktionary:Frequency_lists/Contemporary_poetry"*. Membership in it is a proxy for *"common
+word in contemporary poetry"*, while BIP39 is curated toward the neutral and concrete. Any
+emotionally loaded English text will show old-Electrum enrichment, and that is a fact about
+the two lists. **This is precisely why the census is the right instrument: it is the
+canvas's own vocabulary and not anyone's thematic selection.**
+
+*Cross-check, unplanned and reassuring:* 24 + 8 = **32** `A_display` words are in the old
+list, which independently reproduces the figure the Tier-1 probe was built on — the 32 that
+give `breathe` plus 31 others, hence `C(31,10)`.
+
+##### Membership query on both ledgers, NAMED and ADMITTED [MEASURED 2026-11-10]
+
+`config_word_membership.py`, extended to carry both ledgers, over **227 configs** (192
+published, 35 solver-only). The two questions stay separate because conflating them
+inflates coverage: **NAMED** means a POOL or SLOT line chose the word; **ADMITTED** means
+some slot would accept it. `@FULL` is the 2048-word BIP39 list **and nothing else**, so an
+old-Electrum-only word can never be admitted by an `@FULL` slot — only by being named.
+
+**`choke` has never been named, and it has never been admitted.** Old Electrum **#621**,
+not BIP39. **0 NAMED and 0 ADMITTED in all 227 configs**, and the string occurs in no
+`.md`, `.py`, `.tsv` or `.conf` in either tree. Said as plainly as it can be said: *this
+project has never entertained it.* That is worth stating because a chokehold and
+"I can't breathe" are the painting's reference, `breathe` is the leading passphrase
+candidate, and the Floyd portrait is element E19.
+
+| word | BIP39 | old Electrum | NAMED | ADMITTED |
+|---|---|---|---:|---:|
+| `choke` | no | #621 | **0** | **0** |
+| `hit` | no | #185 | 0 | 0 |
+| `devil` | no | #854 | 0 | 0 |
+| `murder` | no | #1196 | 0 | 0 |
+| `silence` | no | #290 | 0 | 0 |
+| `breathe` | no | #245 | 0 | 0 |
+| `death` | no | #170 | 6 | 6 |
+| `freedom` | no | #775 | 6 | 6 |
+
+**`death` and `freedom` are the only two named, and every row is a brainwallet POOL line**
+(`brain_find`, `brain_t18_pool63`, `brain_t18_pool63_all`, `brain_t21_pool65`, and
+solver-only `brain_t21_title`, `brain_t21_upper`). That is legitimate rather than a defect:
+`brain_t21_pool65.conf`'s own header says these words are *"not BIP39, so unencodable as a
+mnemonic and unchecksummable — and perfectly valid brainwallet input, because SHA-256 does
+not care what the string is."* The mnemonic path never admitted them; the brainwallet path
+is not ledger-constrained.
+
+**And there the gap is.** That brainwallet pool's eleven non-BIP39 image words are
+`stop`, `freedom`, `hate`, `white`, `death`, `kill`, `war`, `bleed`, `shut`, `money`,
+`buy` — and **11 of 11 are old-Electrum words** (#76, #775, #93, #149, #170, #198, #307,
+#419, #568, #616, #852). The pool was built from the painting with no reference to that
+ledger and landed inside it completely. *This figure carries the selection confound in
+full* — the pool is a thematic choice, which is exactly what the census test above was
+built to avoid — so it is recorded as a description of our own pool, **not** as evidence
+about the canvas. What it does show is that `choke`, `hit`, `devil`, `murder` and `silence`
+were never in even that pool, and `breathe` entered only as a passphrase, where no ledger
+applies.
+
+**"The 22" could not be located [EXTERNAL, UNLOCATED].** The brief requesting this query
+named *"the 22"*; no set of 22 candidate words exists in this repository. The only `22` in
+the record is a phrase **length** (`Electrum, 22 words`, `QUEUE_after_el22.md:177`). The
+query was therefore run over a roster this project can define and defend — the 34 words
+made of the nine confirmed, the fifteen previously queried, the eight above, `black` and
+`brave` — which is a superset of any 22 that was meant. Noted rather than guessed at, the
+§1.11 discipline.
 
 > **[EXTERNAL, UNLOCATED — 9 Nov 2026] The repeated-word hypothesis has a dated, named source, and
 > it is the only one besides block B's caption.** Everything else in the instruction layer — the

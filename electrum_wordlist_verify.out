@@ -1,0 +1,37 @@
+LL-1  OLD-ELECTRUM WORDLIST, VERIFIED INDEPENDENTLY
+======================================================================
+   1626 words   1626 unique   /home/soul/.local/lib/python3.10/site-packages/electrum/old_mnemonic.py
+        first five: like just love know never
+        last five : throne total unseen weapon weary
+        md5 newline-joined, no trailing NL : 1f6cbdf9eb28fbeed6f834a138a29fb5
+        md5 newline-joined, trailing NL    : 33f89ca84f7c9b3eeec1bcc253bce673
+   1626 words   1626 unique   /home/soul/squashfs-root/usr/lib/python3.10/site-packages/electrum/old_mnemonic.py
+        first five: like just love know never
+        last five : throne total unseen weapon weary
+        md5 newline-joined, no trailing NL : 1f6cbdf9eb28fbeed6f834a138a29fb5
+        md5 newline-joined, trailing NL    : 33f89ca84f7c9b3eeec1bcc253bce673
+        identical to first source: True
+
+  the `words = [` trap: regex matches in source? False
+  a bare quoted-string scan over the WHOLE FILE yields: 1630
+
+  PROJECT COPY  configs/electrum_old_en.txt
+        1626 words  1626 unique   trailing newline: True
+        md5 of file as stored              : 33f89ca84f7c9b3eeec1bcc253bce673
+        md5 newline-joined, no trailing NL : 1f6cbdf9eb28fbeed6f834a138a29fb5
+        first five: like just love know never
+        last five : throne total unseen weapon weary
+        breathe 1-based index: 245
+
+  COMPARISON  source tuple vs project copy
+        same length        : True  (1626 vs 1626)
+        same set           : True
+        IDENTICAL IN ORDER : True
+
+  BRIEF'S FIGURES
+        MATCH   count: 1626
+        MATCH   unique: 1626
+        MATCH   first five: like just love know never
+        MATCH   last five: throne total unseen weapon weary
+        MATCH   breathe 1-based: 245
+        DIFFER  md5 newline-joined: 1f6cbdf9eb28fbeed6f834a138a29fb5
