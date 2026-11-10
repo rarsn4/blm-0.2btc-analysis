@@ -62,7 +62,7 @@ Claims below are tagged. Do not promote a tag without new evidence.
 | **[INFERRED]** | Follows from measured facts by a stated argument. |
 | **[ASSUMED]** | Load-bearing but unproven. The soft spots. |
 | **[COMMUNITY]** | A reading or convention taken from the shared solver corpus, not derived here. Weaker than [INFERRED]: no argument from this project's measurements backs it. `premise_audit.md`'s vocabulary, used in §5 from 9 Nov 2026. |
-| **[DEFECT]** | A fault in this project's own method or machine, found and dated. §1.7, §1.8, §1.9, §1.10. |
+| **[DEFECT]** | A fault in this project's own method or machine, found and dated. §1.7, §1.8, §1.9, §1.10. §1.11 is the same register for a fault in material **sent to** this project, kept separate because it is not ours. |
 
 The distinction between [EXHAUSTED] and [TESTED] is the one that matters: §2.1–2.11
 are the first, §2.12 is the second, and conflating them would be the only overclaim
@@ -70,14 +70,20 @@ in this document.
 
 ---
 
-## 1. Six defects in the shared data — and four in ours
+## 1. Six defects in the shared data, four in ours — and two in briefs sent here
 
-§1.1–1.6 are faults in the data the community shares. **§1.7, §1.8 and §1.9 are faults
+§1.1–1.6 are faults in the data the community shares. **§1.7–§1.10 are faults
 of this project's own**, and they are the more serious kind, so they are not buried: for
 five weeks this project accrued negatives on a solver binary that had never passed a
 self-test (§1.7), and for five weeks it hashed a transcription that was never checked
 back against the image (§1.8). They have the same shape — something written down once,
 trusted thereafter, never re-measured.
+
+**§1.11 is a third kind**, and it records **two** claims: both arrived in a brief addressed
+to this project, both were attributed to this project's own files, and neither is in them. It is
+recorded in the same register as the other ten because the failure mode is identical —
+something stated once and trusted thereafter — and because a defect in an instruction is
+the one class a reader of this report cannot otherwise see.
 
 ### 1.1 `breathe` is not a BIP39 word — but it *is* an Electrum word, and this section said otherwise
 
@@ -641,6 +647,39 @@ legitimately contain one** (sha256 stamps, spec test vectors, commitments). A bl
 would block the repository outright. That case is covered only by the shape arm of the
 reading rule in `DO_NOT_PUSH`, which is a human procedure, not an automated gate. Closing
 it needs a by-file allow-list and is on §6's list.
+
+### 1.11 [DEFECT in material sent to this project, found 2026-11-10] Two measurements attributed to this repository do not exist in it
+
+**Found by looking for them before citing them**, which is the only reason this entry is
+here rather than in §2.16's text as a borrowed authority.
+
+A brief of 10 Nov 2026 instructed this project to distinguish a new result from an
+existing one, in these words: *"We measured the Bill Cipher wheel as the CLOCK DIAL and
+rejected it on geometry, 36 degrees against 30."* The same brief placed a piece of work
+*"inside today's block-B sweep"*, with the instruction *"same passes, same contrast
+levels"*.
+
+**Neither exists.** [MEASURED]
+
+| attributed | what is actually here |
+|---|---|
+| a 36°-against-30° rejection of the zodiac wheel as the clock dial | **no `36°` figure appears in any file of this repository.** The dial test is R10 (`r10_layout.py`, `STOP_R10_SET_C.md`): the **clock** dial, hub (473.75, 940.0), twelve numerals 30° apart, a 24-direction 15° grid, a pre-registered element list and two nulls. A ten-symbol wheel appears nowhere in it |
+| "today's block-B sweep" | **no block-B sweep was scheduled or ran on 10 Nov.** The block-B work is `blockb_bands_plan.md` and `blockb_bands_check.py`, from an earlier date. There were no "same passes" to join |
+
+**Why this is recorded rather than quietly worked around.** The instruction built on each
+claim was *correct* — a dial measurement would not bear on symbols used as locators, and
+reusing an existing sweep's levels is the right way to make results comparable. Acting on
+good instructions while silently dropping their false premises would have left this report
+citing a measurement that was never made, and the next reader could not have told the
+difference. **A provenance that cannot be found is not a weaker citation; it is not a
+citation.**
+
+What was done instead: the distinction was recorded on its own merits in §2.16 and
+attributed to the brief, not to this repository; and the sweep was run standalone, reusing
+block B's seven cuts and its control discipline explicitly and by name, so the comparison
+the brief wanted is real and traceable. *The author of the brief withdrew both claims on
+being shown this, which is why they are recorded as a defect in the material rather than
+as a disagreement.*
 
 ## 2. What is exhaustively eliminated
 
@@ -2236,10 +2275,23 @@ readings.** It is now being run over the 54-pool plus both words on all four pat
 > all nine confirmed words — `subject`, `tower`, `moon`, `camera`, `mask`, `liberty`, `eye`, `rifle`,
 > `glove` — are BIP39. No defect there.**
 >
-> **2. The symbols as locators, or as an order — `[UNTESTED]`.** Nothing above touches this form, and
-> nothing else in this report does either. It is **not** `[INFERRED]`: no inference has been drawn
-> from any evidence, for or against. Nobody has looked. `[UNTESTED]` is the whole of what can be
-> said, and the table in part 1 must not be cited as though it bore on it.
+> **2. The symbols as locators, or as an order — `[TESTED, NEGATIVE for 2 of 10]`.**
+> *(Graded `[UNTESTED]` when this block was first written on 10 Nov 2026; regraded the same
+> day, after the sweep in part 4 returned a result.)* The wordlist table in part 1 does
+> **not** bear on this form and must not be cited as though it did. The sweep does.
+>
+> **A symbol that is not drawn cannot locate anything.** Two of the ten — **pentagram** and
+> **pine tree** — are now measured absent from the whole image at every contrast level
+> swept, each with its planted control recovered at every one of those levels. That is
+> evidence against the whole set being present, and it is **independent of the llama's
+> no-power result**: a pine tree and a five-pointed line star are easier to draw and far
+> easier to detect than a quadruped, so they are the two the sweep was most likely to find
+> if the set were there, and they are not there.
+>
+> **Two of ten is not ten of ten.** Eight symbols remain unswept or unresolved, the sweep
+> cannot see a symbol rendered small, faint or stylised beyond its criteria, and nothing
+> here touches an ordering that uses the wheel without drawing it. The grade is therefore
+> negative *for the two tested*, and the form as a whole is weakened rather than closed.
 >
 > **3. This is not the dial finding, and the dial finding must not be cited here.** R10
 > (`r10_layout.py`, `STOP_R10_SET_C.md`) asks whether the artwork's elements are laid out on the
@@ -2277,6 +2329,38 @@ readings.** It is now being run over the 54-pool plus both words on all four pat
 > not recover its own planted control at any of the four sizes, and a method that cannot find a
 > shape it was handed cannot be cited as evidence the shape is missing. Two of four targets
 > therefore return **no result**, and that is the honest reading of this sweep.
+>
+> **The llama, looked at rather than computed** [10 Nov 2026]. The detector was **not**
+> retuned: `STOP_R10_SET_C.md` is right that adjusting criteria after seeing the result is
+> how a false positive arrives, and a retuned llama test would need a fresh
+> pre-registration. Instead the image was inspected by eye, which makes no statistical
+> claim and needs none. **25 overlapping tiles at 4×**, each 400 × 300 px of the master
+> with 100 px horizontal and 75 px vertical overlap, in a 5 × 5 grid covering every pixel
+> of the 1600 × 1200 image at least once. Every tile was looked at.
+>
+> **Nothing resembling an animal is depicted anywhere in the painting.** No quadruped, no
+> bird, no llama. The only living figures are the eight humans already inventoried — the
+> four masked protesters, the Floyd portrait, Trump, Biden and the Statue of Liberty — and
+> every other object resolves to one already in the record: the flag, the fist emblem, the
+> vial and glove, the two cameras, the rifle, the Space Needle, the Great Seal disc and its
+> pyramid, the Leopold bust and plinth, the book stack, the slogan block, the micro-text
+> letters, the clock, the faint Washington state outline and the artist's `-CHR-`
+> monogram.
+>
+> Two forms were ambiguous at tile scale and were re-cropped at 8×:
+>
+> - **The ornament above the Great Seal's ribbon** (x 450-560, y 895-985) is a **scroll
+>   with a flame or sprout above it**, part of the seal device. Not a bird.
+> - **A grey form at the Leopold bust's collar** (x ≈ 1330-1375, y ≈ 505-545) **does read
+>   as an animal head in profile at 8×** — a tapering snout or beak, a dark eye with a
+>   white glint. **It is almost certainly the knotted end of the red bandana**: an
+>   outline of the same size and shape sits symmetrically on the *other* side of the knot
+>   at x ≈ 1390-1410, carrying no eye-like mark, and both meet the cloth at the same
+>   height. The "eye" is a single dark stroke of the bust's shading. **Recorded anyway,
+>   with its coordinates**, because it is the one thing in this painting that reads as a
+>   creature, it is being called cloth on a symmetry argument rather than a measurement,
+>   and a second pair of eyes should look at it before anyone treats "no animal" as
+>   closed. It is **not** a llama under either reading: no body, no legs, no neck.
 >
 > **5. `hat`.** `hat` **is** BIP39 and is **not** among the nine confirmed, so a depicted hat would
 > be a genuinely new candidate word. **Measured: none is depicted.** The pre-registered 28-element
@@ -6380,6 +6464,65 @@ descriptive, not load-bearing. A run's valid count is computed per candidate by
 `mn_decode`, never from this fraction. That is the only reason this was cheap,
 and it is luck rather than method — the same propagation through a load-bearing
 figure is the 192,196,843,171 headline all over again.
+
+**A standard enforced on an outside reader and suspended for ourselves is not
+a standard — and it is the failure that survives every check that only looks
+outward.** This is a worse shape than the wrong figure above, and it happened
+in the same file, in the same session, four paragraphs apart.
+
+On 9 Nov 2026 the external review recorded that two readers of the painted
+whitepaper had named the same alterations, and refused to count two of the
+agreements because the strings differed: *"a reader who writes `ABSENCE` and a
+reader who writes `absent` did not transcribe the same string, even if they are
+pointing at the same mark."* That is the right rule. It was applied to the 2021
+reader and to nobody else.
+
+**Four paragraphs earlier, the same file's own numerator was built by exactly
+that stemming.** "Six of the ten edits are BIP39 words" was published
+`[MEASURED]`. The primary source lists the painted form `abcense`, whose target
+is **absence**, and a deleted **"a trusted"**, whose target is **trusted**.
+Neither is a BIP39 word. `absent` and `trust` are — and they are what
+`wp_bip39_baserate.py` hardcoded, in a script whose docstring called the six
+"the ten whitepaper edits". Measured on exact targets the count is **four**, and
+the agreement the outside reader was refused was **five of eight, exact**.
+
+Three things make this worse than §10's other cases, and they are the reason it
+is written down:
+
+- **The rule was not forgotten. It was stated, in writing, in the same file, by
+  the same hand, on the same day.** Nothing here failed from ignorance of the
+  standard. The standard was being enforced outward at the moment it was being
+  broken inward, which is why no review that reads only the outward-facing
+  claims can catch it.
+- **The primary source was on disk, and the section that said we did not have it
+  cited that very file twice.** `README.md:362-363` holds all ten edits in one
+  sentence. §4.3 quoted the same file at `:560` and at `:390` while stating *"We
+  do not hold the other four edits"* and reasoning from their absence. Not
+  having a source and not having read the source you are quoting are different
+  failures, and only the second one was ours.
+- **It survived two rounds of correction that were looking straight at it.** The
+  figure was re-examined on 9 Nov for its base rate, and again for a second
+  reader's list, and both times the numerator was carried forward untouched
+  because the question being asked was always *"is six of ten significant?"* and
+  never *"is it six?"* A correction that inherits the thing it is correcting is
+  not a check.
+
+The general rule, and it is harder than "recompute, never adopt": **every
+standard this report applies to an outside source must be run against this
+report's own numbers in the same pass.** Where a claim is refused for a reason,
+that reason is a test, and the test is owed to our own figures first.
+
+> **[WITHDRAWN 10 Nov 2026 — recorded so it is not revived from a transcript]**
+> Three instructions issued to this project as **FF-1, FF-2 and FF-3**, and one
+> as **CC-1(c)**, are withdrawn by their author and **must not be restated,
+> reconstructed or applied**. FF was an exact test computed over the stemmed six
+> with `observed = 6`; observed is **4**. Applying it would have reintroduced the
+> defect this case is about, with the authority of a more precise method.
+> `edit_lists_exact.py` supersedes `wp_bip39_baserate.py` in full. CC-1(c) was
+> never located in any transcript and is withdrawn unexecuted. **No text of
+> either is reproduced here, deliberately**: a withdrawn instruction quoted in
+> full is an instruction that can be acted on by someone who reads only the
+> quotation.
 
 **A config enters `EVIDENCED` when its run completes and its survivor count
 lands inside its band — not when its file exists.** The five `*_apple` mirrors
