@@ -1,0 +1,91 @@
+OO-2  DOUBLED LETTERS IN THE CANVAS'S OWN VOCABULARY
+==============================================================================
+  census rows scanned: 151
+  words carrying a doubled letter: 16
+
+  section       word           double  
+  B_microtext   agreed         EE      
+  A_display     been           EE      
+  A_display     caccabus       CC      
+  B_microtext   common         MM      
+  A_display     esse           SS      
+  A_display     killer         LL      
+  A_display     killing        LL      
+  A_display     matter         TT      
+  A_display     moon           OO      
+  B_microtext   needs          EE      
+  A_display     ollae          LL      
+  B_microtext   payee          EE      
+  B_microtext   proof          OO      
+  A_display     seed           EE      
+  A_display     shall          LL      
+  A_display     сумма          ММ      
+element (examined glyph by glyph)                    letters  drawn as object
+STOP (Liberty)                                             4  O -> clenched fist   [e01_0.png]
+FIND THE SEED PHRASE                                      17  -   [e02_0.png, e02_1.png]
+IN THE THIS PICTURE                                       16  -   [e03_0.png]
+WELCOME TO THE / BRAVE / NEW WORLD                        25  -   [e04_0.png, e04_1.png, e04_2.png, e04_3.png]
+BLACK LIVES MATTER ... NOT ONE MORE                       73  -   [e05_0.png, e05_1.png]
+I can't BREATHE                                           12  -   [e06_0.png]
+BLM (card)                                                 3  -   [e07_0.png]
+FUCK THIS SHIT                                            12  - (the I of SHIT is written)   [e08_0.png]
+.VS.                                                       2  -   [e09_0.png]
+Seal ring + scroll                                        37  -   [e10_0.png, e10_1.png]
+Clock hands TOWER, MOON                                    9  -   [e11_0.png]
+Address (letters of 34 chars)                             31  -   [e12_0.png, e12_1.png]
+ONLY real BITCOIN                                         15  -   [e13_0.png]
+PAY FOR THE FUTURE. / THIS IS THE FIRST PREDICTION.       39  -   [e14_0.png]
+Esse quam niger es, sic dixit caccabus ollae              36  -   [e15_0.png]
+TOTAL                                                    331  1
+
+screened as blocks only:
+   bottom caption (whitepaper, cursive)                 ~115 letters   [s01_0.png]
+   13th Amendment copy                                  ~179 letters   [s02_0.png]
+   pyramid base FIAT JUSTITIA ET PEREAT MUNDUS            26 letters   [s03_0.png]
+   vial CVD19                                              3 letters   [s04_0.png]
+
+  census_crops.DRAWN holds 35 measured painted strings;
+  census_crops.ELEMENTS holds 15 letter-substitution rows.
+
+--- WHERE EACH DOUBLED-LETTER WORD IS PAINTED, AND WHAT IS RECORDED THERE ---
+  agreed       EE    box (25, 1138, 1040, 28)     [magnified]  bottom whitepaper caption  <- letterform_audit 1.5
+  been         EE    box (1296, 775, 205, 150)    [magnified]  13th Amendment copy  <- letterform_audit 1.3
+  caccabus     CC    box (1025, 1140, 530, 50)    [measured]  bottom Latin line  <- census_crops ELEMENTS 15; letterform_audit 1.2
+  common       MM    box (885, 468, 90, 117)      [measured]  E-of-BRAVE micro-text  <- letterform_audit 1.4
+  esse         SS    box (1025, 1140, 530, 50)    [measured]  bottom Latin line  <- census_crops ELEMENTS 15; letterform_audit 1.2
+  killer       LL    box (30, 330, 150, 95)       [measured]  COVID sign  <- letterform_audit 1.1
+  killing      LL    box (1095, 75, 250, 370)     [measured]  BLM protest block  <- census_crops ELEMENTS 5
+  matter       TT    box (1095, 75, 250, 370)     [measured]  BLM protest block  <- census_crops ELEMENTS 5
+  moon         OO    box (325, 785, 180, 125)     [measured]  clock hand (second)  <- census_crops ELEMENTS 11
+  needs        EE    box (25, 1138, 1040, 28)     [magnified]  bottom whitepaper caption  <- letterform_audit 1.5
+  ollae        LL    box (1025, 1140, 530, 50)    [measured]  bottom Latin line  <- census_crops ELEMENTS 15; letterform_audit 1.2
+  payee        EE    box (25, 1138, 1040, 28)     [magnified]  bottom whitepaper caption  <- letterform_audit 1.5
+  proof        OO    box (25, 1138, 1040, 28)     [magnified]  bottom whitepaper caption  <- letterform_audit 1.5
+  seed         EE    box (495, 15, 435, 395)      [measured]  headline  <- census_crops ELEMENTS 2,3
+  shall        LL    box (1296, 775, 205, 150)    [magnified]  13th Amendment copy  <- letterform_audit 1.3
+  сумма        ММ    box (250, 760, 450, 440)     [cipher]  clock caption (rune) [BOX UNVERIFIED: not located]  <- REPORT 7; search region, not a location
+
+--- THE SUBSTITUTION CENSUS: every recorded letter-for-object substitution ---
+  STOP (Liberty)                           O -> clenched fist
+  FUCK THIS SHIT                           - (the I of SHIT is written)
+
+  substitutions recorded in the whole census: 2
+  of those, any involving XX:              0  
+  of those, substituting a DOUBLED letter: 0  
+
+  each substitution row, checked individually:
+    STOP (Liberty)               substitutes O; OO in its text: no -> single letter, not a double
+    FUCK THIS SHIT               note is not a letter substitution at all: '- (the I of SHIT is written)'
+
+  THE DECISIVE CASE -- `moon`, the only OO word with a letter-by-letter examination:
+    Clock hands TOWER, MOON: 9 letters, substitution field '-'
+    TOWER(5) + MOON(4) = 9 letters, all accounted as written.
+    -> MOON's OO is WRITTEN AS OO, not as XX and not as any stand-in.
+
+--- DECISION (plan sec.6) ---
+  NONE. No doubled letter anywhere in this painting is written with XX, and the
+  substitution census records no doubled-letter substitution of any kind.
+
+  -> XX-for-OO is NOT a convention of this painting. The hypothesis collapses
+     to its single-instance version and is graded
+     [EXTERNAL/PROPOSED, UNSUPPORTED] -- the same grade as apple@20.

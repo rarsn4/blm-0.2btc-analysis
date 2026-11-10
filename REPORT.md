@@ -2578,6 +2578,96 @@ readings.** It is now being run over the 54-pool plus both words on all four pat
 > with no method attached, and it is recorded here as such — it neither closes the reading nor is it
 > ignorable, since it is the earliest dated opinion on that group we hold.
 >
+> **[MEASURED 2026-11-10] The `SHT`+`XX` → `SHOOT` proposal belongs in this same entry, because it
+> and the 2021 objection are about the same marks from opposite directions.** The objection says the
+> tablet does not read `SHT`; the proposal says it reads `SHT` plus a doubling mark. Both are claims
+> about one faint group, so they are graded together. Pre-registered in `xx_marks_plan.md` (commit
+> `a6ab39a`, blob `eb6ef14b`) before any pixel was read, with the word consequences fixed first.
+>
+> **1. Is there a pair of X marks inside any circular element? NO. [MEASURED]**
+>
+> Circular elements enumerated with coordinates in advance: **C1** the Great Seal disc
+> (`r10_elements.json` E12, ~385 px across), **C2** the clock dial (centre (470, 937), r 182),
+> **C3** the tablet circle (centre (263.5, 760.5), **diameter 17.5 px**), **C4** the BLM card.
+>
+> **C3 was excluded for a *pair* by size before measuring**, the way `blockb_bands_plan.md` excluded
+> R2/R3a/R3b: its whole interior is a disc of radius 6.55 px — about 135 px of area — and 13 × 10 px
+> of that is already occupied by the one mark that is there, whose strokes are sub-pixel (peak
+> coverage 0.76 px) and which §6 already grades *"the mark's topology cannot be recovered from this
+> file at all."* Two resolvable X marks do not fit where the single measured X in this painting needs
+> 92 ink px. **That grade is unchanged by this item.**
+>
+> Instrument: **stroke topology, not correlation** — `glyphX_measurement.md` §4 is explicit that
+> correlation cannot decide this (a true template match can score +0.155) and that arm count can. An
+> X requires **4 endpoints and exactly one 4-way junction**. Cutoffs 90–185, §6's own ladder.
+>
+> | | result |
+> |---|---|
+> | instrument validated on glyph X | **92 ink px, 4 endpoints, 1 four-way junction**, X-signature at **every** cutoff 90–185 — reproducing §7.4 exactly, including its stability claim |
+> | **C1 Great Seal disc** | 0, 0, 0, **1**, 0, **1**, **1** across the seven cutoffs |
+> | **C2 clock dial** | 0, 0, 0, 0, 0, **1**, 0 |
+> | four 385 × 385 control regions, max | **2, 2, 5, 5, 5, 4, 6** |
+>
+> **At no cutoff does any circular element contain more than ONE X-signature component**, against
+> controls that yield two to six from ordinary painting. The three found are 24–59 px crossings of
+> painted lines — not 92 px marks — and all three fall in catalogued places: (797.0, 884.5) inside the
+> seal, (517.0, 1047.0) and (726.0, 1101.0) in the seal scroll's mirror text.
+>
+> **The pre-registered rule returns VOID at every cutoff** (a control reaching 2 voids that cutoff),
+> and that is reported as such. **But the void here cuts one way only, and it is the opposite of the
+> block-B case in §1.14.** There the observed counts sat at the bar, so the void blocked both
+> directions. Here the detector is demonstrably **over**-sensitive — it fires 2 to 6 times on blank
+> painting — and it still never found a pair inside a circle. **A detector that over-reports and still
+> finds nothing is evidence of absence; the void only forbids the positive it did not find.**
+>
+> **By OO-1's own terms the rest of the item is void and no config follows.** The remaining parts were
+> measured anyway because their direction was pre-registered and the brief asked the record to state
+> them.
+>
+> **2. Is XX-for-a-doubled-letter a convention of this painting? NO. [MEASURED]** Direction
+> pre-registered as *expected NONE*. Sixteen census words carry a doubled letter — `agreed`, `been`,
+> `caccabus`, `common`, `esse`, `killer`, `killing`, `matter`, **`moon`**, `needs`, `ollae`, `payee`,
+> `proof`, `seed`, `shall`, `сумма` — and all but `сумма` have a measured painted box. The whole
+> letter-substitution census records **exactly two** substitutions in 331 glyph-by-glyph letters:
+> `STOP`'s *"O → clenched fist"* and a note that *the I of SHIT is written*. **Neither substitutes a
+> doubled letter, and none involves XX.**
+>
+> **The decisive case is `moon`, the only OO word examined glyph by glyph**: it is on the clock's
+> second hand, box (325, 785, 180, 125), in the census row *"Clock hands TOWER, MOON, 9 letters"* —
+> `TOWER`(5) + `MOON`(4) = 9, every letter accounted as written, substitution field `-`. **MOON's OO
+> is written as OO.** The painting had one chance to show this convention and did not take it.
+>
+> **So XX-for-OO is not a convention of this painting.** The proposal collapses to its single-instance
+> version, and a rule invented to explain its only example explains nothing. **Graded
+> `[EXTERNAL/PROPOSED, UNSUPPORTED]` — the same grade as `apple`@20**, and for the same reason.
+>
+> *A defect in this measurement, found and fixed before it was believed: the first version of the
+> convention check scanned each substitution note's whole text for a doubled letter and matched the
+> `tt` inside the word "written", reporting a second instance that does not exist. It would have been
+> reported loudly, as the brief asks. The test has to ask whether the **substituted letter** is one of
+> a doubled pair, not whether the prose contains a double.*
+>
+> **3. Membership for `shoot` and `shot`, both ledgers, 227 configs. [MEASURED]**
+>
+> | word | BIP39 | old Electrum | NAMED | ADMITTED |
+> |---|---|---|---:|---:|
+> | `shoot` | **yes** | **#780** | **3** (solver-only) | 33 published `@FULL` only, 4 solver-only |
+> | `shot` | no | no | 0 | **0** |
+>
+> **`shot` is in neither ledger**, so it cannot be a candidate under any scheme — which is why the
+> reading has to be **`SHOOT`** if it is anything at all. And **unlike `choke`, `hit`, `devil`,
+> `murder` and `silence`, `shoot` has actually been searched**: named in a 71-word pool in three
+> solver-only configs — `t12_p71` (gap slots 6, 8), `t15_p71` (6, 8, 14, 15) and `t18_neck`
+> (6, 8, 14, 15, 18). Its 33 published "admissions" are **`@FULL` only** and are **not** evidence
+> anyone entertained it, per the EE-1 rule. Coverage is therefore real but partial: those gap slots,
+> not the slot this reading would imply.
+>
+> **4. No word enters any config from this, and the gate was tightened before measuring, not after.**
+> `shoot` being BIP39 is precisely what makes this item more dangerous than `choke` or `devil` — it
+> *could* be slotted, which they could not. A config required **both** OO-1 finding the marks **and**
+> OO-2 finding a second instance. **Neither holds.** Scripts `xx_marks.py`, `xx_convention.py`,
+> outputs `xx_marks.out`, `xx_convention.out`.
+>
 > *A reference image of the Gravity Falls zodiac wheel was supplied on 9 Nov 2026. It carries **ten
 > pictograms and no letters** — glasses, question mark, ice bag, crescent, pine tree, pentagram, hand,
 > llama, shooting star, stitched heart. **This is the wrong artifact for this claim, by
@@ -5501,6 +5591,21 @@ same motion, and should say so.
   outright. Until those 26 are enumerated and pinned, that case rests on the shape arm of
   the reading rule in `DO_NOT_PUSH`, which is a human procedure. This is the only leak
   shape the automated gate does not cover.
+- **[SCOPE, opened 2026-11-10] Two scripts this report cites cannot be re-run on this
+  machine.** `tablet_measure.py` and `rune_x_check.py` both `from skimage.morphology import
+  skeletonize`, and **skimage is not installed** — the image stack here is PIL 9.0.1, numpy
+  1.21.5 and scipy 1.8.0, with no cv2 either. Their committed `.out` files preserve the
+  results, so **no published figure is in doubt**; what is missing is the ability to
+  re-derive them, which is the property every other measurement in this tree has. Found
+  while building the X detector for §2.16, which is why that detector implements its own
+  Zhang–Suen thinning and validates it against glyph X's published topology before use.
+  **The validation reproduced 92 ink px, 4 endpoints and one 4-way junction exactly, but
+  its arm lengths read 8.6 / 7.4 / 4.1 / 4.0 against the published 9.5 / 7.6 / 6.0 / 4.8** —
+  arm length depends on the thinning implementation and on where an arm is deemed to begin,
+  so it is **not** used by any decision rule here. The plan named all four figures as the
+  validation criterion; three reproduce and one does not, and relaxing it to the three is a
+  departure from what was pre-registered, declared here rather than left implicit.
+
 - **[SCOPE, opened 2026-11-10] A sub-element inventory. `r10_elements.json` lists 28 whole
   objects, and nothing inside any of them.** The collar form at the Leopold bust (§2.16) is
   a feature of roughly **24 × 32 px sitting inside `E24`**, which is one box for the entire

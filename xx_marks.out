@@ -1,0 +1,55 @@
+OO-1  A PAIR OF X MARKS INSIDE A CIRCULAR ELEMENT?
+======================================================================================
+
+--- INSTRUMENT VALIDATION (plan sec.3): glyph X, published 92 px / 4 endpoints /
+    1 four-way junction / arms 9.5, 7.6, 6.0, 4.8 ---
+  ink px 92   endpoints 4   junctions 1 degrees [4]   arms 4
+  arm lengths [8.6, 7.4, 4.1, 4.0]
+  reproduces the published topology: YES
+  stability across cutoffs:
+    t= 90  px  90  endpoints 4  junctions 1 [4]  X-signature YES
+    t=110  px  92  endpoints 4  junctions 1 [4]  X-signature YES
+    t=125  px  96  endpoints 4  junctions 1 [4]  X-signature YES
+    t=140  px  98  endpoints 4  junctions 1 [4]  X-signature YES
+    t=155  px 103  endpoints 4  junctions 1 [4]  X-signature YES
+    t=170  px 105  endpoints 4  junctions 1 [4]  X-signature YES
+    t=185  px 109  endpoints 4  junctions 1 [4]  X-signature YES
+
+--- SPECIFICITY CONTROLS (plan sec.4): four 385x385 regions, equal area to C1 ---
+region                       <90   <110   <125   <140   <155   <170   <185
+ctrl (900,150)                 2      1      5      5      5      4      6
+ctrl (1100,430)                0      2      0      2      0      0      0
+ctrl (150,150)                 0      0      0      0      0      1      0
+ctrl (1150,800)                0      0      0      1      0      0      0
+MAX over controls              2      2      5      5      5      4      6
+
+  VOID where a control yields >= 2 X-signature components (plan sec.4):
+    90:VOID  110:VOID  125:VOID  140:VOID  155:VOID  170:VOID  185:VOID
+
+--- THE CIRCULAR ELEMENTS ---
+region                       <90   <110   <125   <140   <155   <170   <185
+C1 Great Seal disc             0      0      0      1      0      1      1
+C2 clock dial                  0      0      0      0      0      1      0
+
+  every X-signature component found inside a circular element:
+    C1 Great Seal disc  t=140  centroid (  797.0,  884.5)  14x 9   59 px  arms [8.5, 5.0, 4.0, 3.0]
+    C1 Great Seal disc  t=170  centroid (  517.0, 1047.0)   6x 6   24 px  arms [3.0, 3.0, 2.0, 2.0]
+    C1 Great Seal disc  t=185  centroid (  726.0, 1101.0)   6x 6   29 px  arms [3.0, 2.5, 2.5, 2.1]
+    C2 clock dial  t=170  centroid (  517.0, 1047.0)   6x 6   24 px  arms [3.0, 3.0, 2.0, 2.0]
+
+--- DECISION (plan sec.5) ---
+  C3 tablet circle: EXCLUDED FOR A PAIR BY SIZE before any pixel was read
+     (17.5 px diameter, interior disc ~135 px of area, 13x10 already taken by the
+      single mark the record grades unrecoverable). Its grade is unchanged.
+
+  C1 Great Seal disc
+    usable cutoffs (not void): NONE
+    cutoffs with >= 2 X-signatures above the control max: none
+    VERDICT: NO USABLE CUTOFF
+
+  C2 clock dial
+    usable cutoffs (not void): NONE
+    cutoffs with >= 2 X-signatures above the control max: none
+    VERDICT: NO USABLE CUTOFF
+
+  plan sec.0: no word enters any config from this item, under any outcome.
