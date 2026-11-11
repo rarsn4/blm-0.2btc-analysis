@@ -185,3 +185,29 @@ AAE-2  attributing the fall: centroid exclusion vs merging
 
   highest null count across ALL THREE variants: 13  (bar is 14)
   R1 under all three: 6, 6, 6
+
+----------------------------------------------------------------------------------------------
+AAF  per-variant contamination, and whether each variant is AREA-FAITHFUL
+
+  clipped (published)   57 null candidates, 7 block A, 0 with centroid OUTSIDE the band
+       threshold    0.30   0.35   0.40   0.45   0.50   0.55   0.60
+             all      10     10      9      6      4      2      2
+         block A       2      2      2      2      2      2      2
+           CLEAN       8      8      7      4      2      1      0
+
+  overlap-kept   63 null candidates, 8 block A, 17 with centroid OUTSIDE the band
+       threshold    0.30   0.35   0.40   0.45   0.50   0.55   0.60
+             all      13     13     12      9      6      2      2
+         block A       2      2      2      2      2      2      2
+           CLEAN      11     11     10      7      4      1      0
+    clean, in-band       7      7      6      5      2      1      0
+    out-of-band centroid offsets: max 9.0 px, mean 5.7 px over 17 candidates
+    MEASURED effective admission height: 38 + 2 x 9 = 56 rows, a factor of 1.47
+
+  centroid-kept   46 null candidates, 7 block A, 0 with centroid OUTSIDE the band
+       threshold    0.30   0.35   0.40   0.45   0.50   0.55   0.60
+             all       9      9      8      7      4      2      2
+         block A       2      2      2      2      2      2      2
+           CLEAN       7      7      6      5      2      1      0
+
+  R1 under all three, candidates: 6, 6, 6

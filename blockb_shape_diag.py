@@ -294,3 +294,64 @@ print("  R1 under all three: " + ", ".join(
     str(len(x)) for x in ([c["iou"] for c in cands(box(0,1100,1600,1138))[0]],
                           cands_overlap(0,1100,1600,1138,MAXH),
                           cands_dilated(0,1100,1600,1138,MAXH))))
+
+# ---------------------------------------------------------------- AAF
+# Contamination and area-faithfulness for ALL THREE variants, not just the clipped one.
+print("\n" + "-" * 94)
+print("AAF  per-variant contamination, and whether each variant is AREA-FAITHFUL")
+
+def variant(x0, y0, x1, y1, kind):
+    """kind: 'clip' | 'overlap' | 'centroid'. Returns rows of (iou, yc, isBlockA)."""
+    pad = 0 if kind == "clip" else MAXH
+    big = np.zeros((H, W), bool)
+    big[max(0, y0 - pad):min(H, y1 + pad), max(0, x0):min(W, x1)] = True
+    lab, k = ndi.label((G < THR) & big, EIGHT)
+    out = []
+    for sl, i in zip(ndi.find_objects(lab), range(1, k + 1)):
+        comp = (lab[sl] == i); px = int(comp.sum())
+        if px < 20 or px > 600: continue
+        h = sl[0].stop - sl[0].start; w = sl[1].stop - sl[1].start
+        if not (6 <= w <= 40 and 6 <= h <= 40): continue
+        if comp.shape[0] > 34 or comp.shape[1] > 34: continue
+        yc = (sl[0].start + sl[0].stop) / 2
+        xc = (sl[1].start + sl[1].stop) / 2
+        if kind == "overlap" and (sl[0].stop <= y0 or sl[0].start >= y1): continue
+        if kind == "centroid" and not (y0 <= yc < y1): continue
+        m = np.zeros((34, 34), bool)
+        oy, ox = (34 - comp.shape[0]) // 2, (34 - comp.shape[1]) // 2
+        m[oy:oy + comp.shape[0], ox:ox + comp.shape[1]] = comp
+        isA = (XA <= xc <= XB) and overlaps_cell(sl[0].start, sl[0].stop - 1) is not None
+        out.append((best_iou(m), yc, isA, y0 <= yc < y1))
+    return out
+
+for kind, lbl in (("clip", "clipped (published)"), ("overlap", "overlap-kept"),
+                  ("centroid", "centroid-kept")):
+    rows = {nm: variant(0, y0, 1600, y1, kind) for nm, y0, y1 in NULLS}
+    allm  = [max(sum(1 for r in v if r[0] >= t) for v in rows.values()) for t in LADDER]
+    bam   = [max(sum(1 for r in v if r[0] >= t and r[2]) for v in rows.values()) for t in LADDER]
+    clean = [max(sum(1 for r in v if r[0] >= t and not r[2]) for v in rows.values()) for t in LADDER]
+    nA  = sum(1 for v in rows.values() for r in v if r[2])
+    nOut = sum(1 for v in rows.values() for r in v if not r[3])
+    ntot = sum(len(v) for v in rows.values())
+    print(f"\n  {lbl}   {ntot} null candidates, {nA} block A, {nOut} with centroid OUTSIDE the band")
+    print(f"    {'threshold':>12s} " + "".join(f"{t:>7.2f}" for t in LADDER))
+    print(f"    {'all':>12s} " + "".join(f"{v:>7d}" for v in allm))
+    print(f"    {'block A':>12s} " + "".join(f"{v:>7d}" for v in bam))
+    print(f"    {'CLEAN':>12s} " + "".join(f"{v:>7d}" for v in clean))
+    if kind == "overlap":
+        cin = [max(sum(1 for r in v if r[0] >= t and not r[2] and r[3]) for v in rows.values())
+               for t in LADDER]
+        print(f"    {'clean, in-band':>12s} " + "".join(f"{v:>7d}" for v in cin))
+        ycs = [r[1] for v in rows.values() for r in v if not r[3]]
+        if ycs:
+            offs = []
+            for nm, y0, y1 in NULLS:
+                for r in rows[nm]:
+                    if not r[3]:
+                        offs.append(y0 - r[1] if r[1] < y0 else r[1] - (y1 - 1))
+            print(f"    out-of-band centroid offsets: max {max(offs):.1f} px, "
+                  f"mean {sum(offs)/len(offs):.1f} px over {len(offs)} candidates")
+            print(f"    MEASURED effective admission height: 38 + 2 x {max(offs):.0f} = "
+                  f"{38 + 2*max(offs):.0f} rows, a factor of {(38 + 2*max(offs))/38:.2f}")
+print("\n  R1 under all three, candidates: " + ", ".join(
+    str(len(variant(0, 1100, 1600, 1138, k))) for k in ("clip", "overlap", "centroid")))

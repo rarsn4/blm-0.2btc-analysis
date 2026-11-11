@@ -7116,8 +7116,16 @@ available on his location wording, and it passes.
 >
 > **THE VERDICT IS NEGATIVE UNDER EVERY VARIANT MEASURED.** R1 holds **6** candidates in all
 > three and its ladder is identical in all three — which is what all six being *interior*
-> digits of the ambigram date predicts. The highest null count anywhere across the three is
-> **13**, against a bar of **14**.
+> digits of the ambigram date predicts.
+>
+> **One clause on what that sentence does and does not mean. [AAF-3]** The pre-registered
+> criterion was evaluated on the **pre-registered detector**, and **the verdict rests on that
+> committed run.** These three variants **characterise** that detector; they are not three
+> re-runs of the test, and "negative under every variant" is not a vote across instruments.
+> It exists to show the verdict is **not an artifact of the truncation defect** — which is a
+> narrower and more useful claim. **A fourth variant would not be a fourth test**, and
+> building one to see whether the answer changes is the post-hoc instrument choice
+> `STOP_R10_SET_C` prohibits.
 >
 > > **[WITHDRAWN 2026-11-11, AAE-1] A false invariant stood here.** This block first claimed
 > > the fix *"can only raise the bar R1 failed to clear, never lower it"* — and **the table
@@ -7148,12 +7156,52 @@ available on his location wording, and it passes.
 > removes **17**, giving 46. **The whole of the net fall is effect (c)**, partly offset by
 > (a) and (b), which is a sharper statement than "merging and the exclusion both pull down".
 >
-> **And the published figures understated the control's reach.** Under the most permissive
-> defensible variant the nulls reach **13 at IoU 0.30**, one short of the bar, where the
-> published maximum was 10. **The margin on the control side is thinner than the original
-> entry implied** — the verdict survives because R1 is 6 under every variant, not because the
-> controls are quiet. Recorded because a reader who rebuilds this detector will land on one of
-> these three variants and should find all three already measured.
+> > **[WITHDRAWN 2026-11-12, AAF-1. This paragraph over-retracted, and it did so using the
+> > unit error the same block had withdrawn hours earlier.]** It read: *"the published figures
+> > understated the control's reach … the margin on the control side is thinner than the
+> > original entry implied"*, on the strength of overlap-keep's 13. **Overlap-keep is the one
+> > variant that is not area-faithful.** It admits any component touching the band by ≥ 1 px,
+> > so its 13 is counted over a larger region than the bar of 14 was derived for — and setting
+> > a count from one admission area against a bar from another **is exactly the error this
+> > block withdrew when 39–60 components from a depth detector were set against ≤ 10 matches
+> > from an absolute-threshold one.** Recorded as that error recurring *inside the correction
+> > to itself*, which is the part worth keeping.
+>
+> **The corrected ranking: centroid-kept is the only variant that is both area-faithful and
+> untruncated.** It fixes the truncation defect without enlarging the region, and its maximum
+> is **9 — below the published 10.** So **fixing the bug properly makes the control margin
+> WIDER, not thinner.**
+>
+> **Per-variant contamination, which the first version measured for the clipped run only:**
+>
+> | null maximum | 0.30 | 0.35 | 0.40 | 0.45 | 0.50 | 0.55 | 0.60 |
+> |---|---:|---:|---:|---:|---:|---:|---:|
+> | clipped, all | 10 | 10 | 9 | 6 | 4 | 2 | 2 |
+> | clipped, **clean** | 8 | 8 | 7 | 4 | 2 | 1 | 0 |
+> | centroid-kept, all | 9 | 9 | 8 | 7 | 4 | 2 | 2 |
+> | **centroid-kept, clean** — the area-faithful figure | **7** | **7** | **6** | **5** | **2** | **1** | **0** |
+> | overlap-kept, all *(area-inflated)* | 13 | 13 | 12 | 9 | 6 | 2 | 2 |
+> | overlap-kept, **clean and centroid in-band** | **7** | **7** | **6** | **5** | **2** | **1** | **0** |
+>
+> **The area inflation is measured, not bounded.** Of overlap-keep's 63 null candidates, **17
+> have their centroid outside the band**, at a maximum offset of **9.0 px** and a mean of 5.7 —
+> so the measured effective admission height is `38 + 2 × 9 = `**56 rows, a factor of 1.47**.
+> *(A worst-case bound of 82 rows and 2.16 was available from the 23 px dilation and the 40 px
+> size gate; the measured figure is about half it, because real glyph-sized components are
+> small and can only carry their centroid about half their height past an edge. The direction
+> of the objection holds; its magnitude does not, and the measured number is the one recorded.)*
+> **Its 13 is therefore not a false-positive rate for a 38-row band, and is labelled as the
+> area-inflated upper bound it is.**
+>
+> **And with that inflation removed, overlap-keep agrees with the area-faithful variant
+> exactly: clean in-band maximum 7, which is at or below the clipped clean maximum of 8.**
+> That was predicted before the run. Dilation does reach further into the rune column, and
+> overlap-keep accordingly holds **8** block A glyphs against the clipped run's 7 — predicted
+> too, and small.
+>
+> **So all three variants agree once each is read in its own units**, and the clean
+> false-positive rate of a shape match at IoU 0.60 over an arbitrary band of this painting is
+> **zero** under every one of them.
 >
 > *One figure that belongs in the record and was absent: R1's per-candidate match **rate** is
 > at the top of the range — **6 of 6** at IoU 0.30, against 10/13, 4/12, 6/19 and 6/13 in the
@@ -8671,6 +8719,50 @@ fatal to correctness.
   here — a relay gap, recorded under §1.11, and not a missing document. NN-1's content
   is this paragraph's second half. The rule rests on the cases above, not on the
   citation.)*
+
+- **OVER-RETRACTION. A withdrawal is a claim about the evidence, and it needs the same
+  provenance as the claim it withdraws.** [Rule added 2026-11-12. Both parties to this
+  project had supplied an instance before it was written.]
+
+  Every defect class in §1 grades a species of **over-claiming** — a fabricated integer, an
+  object imported without conversion, a conjecture promoted to an author's statement, an
+  accusation resting on a search summary. **§1 has no category for the opposite error:
+  withdrawing or weakening a claim further than the evidence requires.** It needs one,
+  because the two are not symmetric in how they get caught.
+
+  **The test, which is the whole rule:** *to retract is to assert that the evidence does not
+  support something.* That assertion is itself a claim, so it carries the same burden as the
+  claim it removes. **"I was challenged" is not evidence. "My critic may be right" is not
+  evidence.** A withdrawal states which measurement requires it, or it is unprovenanced.
+
+  **Two instances, both cited and neither re-opened:**
+
+  - **Mine, 2026-11-12.** On being shown that this detector's truncation fix lowered the
+    control maximum at three of seven thresholds, I withdrew the invariant — correctly — and
+    then went further and wrote that *"the margin on the control side is thinner than the
+    original entry implied."* **The variant that produced that sentence was not
+    area-faithful**, and the area-faithful variant gives a clean maximum of 7 against a
+    published 8: the margin is **wider**. I retracted a figure the evidence supported, using
+    a unit error the same block had withdrawn hours earlier. §2.16 carries the marking.
+  - **The brief author's, earlier in the record.** The whitepaper five-token overlap was
+    abandoned after a challenge when the measurement supported it. **It is filed in §1 as a
+    stemming error, which is where it belongs on its own facts, and it is cited here rather
+    than re-filed** — re-opening a closed entry to relabel it is itself a change the evidence
+    does not require.
+
+  **Why it needs a written rule when over-claiming arguably does not.** Over-claiming is
+  adversarially policed: someone checks the number and pushes back. **Over-retraction is
+  adversarially rewarded.** A person who concedes more than they must looks rigorous, nobody
+  challenges an excess of humility, and the conceded ground is rarely recovered because
+  recovering it looks like defensiveness. **So the social gradient runs toward it, and only a
+  written rule runs the other way.** This project's own retract-by-marking convention makes
+  that worse, not better: marking is cheap, so there is no friction against marking too much.
+
+  **In practice:** a withdrawal names the measurement that forces it; it withdraws the
+  narrowest proposition that measurement reaches; and **where a correction arrives with its
+  own figures, those figures are recomputed over this project's objects before anything is
+  conceded to them** — §YY-2's rule, applied to criticism as well as to claims. A correction
+  is not more reliable than a claim for having been uncomfortable to receive.
 
 - **An exact integer is either printed exactly by the thing that computed it, or it is
   not exact. A figure in scientific notation may never be re-rendered as digits.**
