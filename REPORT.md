@@ -80,15 +80,21 @@ back against the image (§1.8). They have the same shape — something written d
 trusted thereafter, never re-measured.
 
 **§1.11 is a third kind**, and it records **five** claims, all of which arrived in briefs
-addressed to this project, plus one relay gap that is not a defect in any brief and is not
-counted. **Three** of the claims were attributed to this project's own files and are not in
-them; the fourth, on 11 Nov, is a clearance test that read prose as data, and the fifth cites
-prior work of this project that this project does not hold. The third is different and worth distinguishing: its stated facts were **correct**, and
-its conclusion was wrong anyway, because the facts were checked against one ledger and the
-conclusion was drawn about words in general. It is recorded in the same register as the other
-seventeen because the failure mode is identical — something stated once and trusted thereafter —
-and because a defect in an instruction is the one class a reader of this report cannot
-otherwise see.
+addressed to this project. **Three** were attributed to this project's own files and are not in
+them. **The third is the one worth distinguishing**: its stated facts were **correct** and its
+conclusion was wrong anyway, because the facts were checked against one ledger while the
+conclusion was drawn about words in general. The **fourth** is a clearance test that read prose
+as data, and the **fifth** cites prior work of this project that this project does not hold.
+
+Two further entries sit in §1.11 and are **not** counted among the five. One is **the pattern
+four of the claims share** — an outside figure adopted without converting its objects —
+recorded at the briefs' author's request. The other is a **relay gap**, now twice over, **NN**
+and **WW**: briefs written and never delivered here, which is a failure of delivery and not a
+defect in any brief.
+
+The five are recorded in the same register as the other seventeen because the failure mode is
+identical — something stated once and trusted thereafter — and because a defect in an
+instruction is the one class a reader of this report cannot otherwise see.
 
 ### 1.1 `breathe` is not a BIP39 word — but it *is* an Electrum word, and this section said otherwise
 
@@ -1062,6 +1068,34 @@ test may over-match only on the side that fails closed.** A FAIL under the hit p
 the agent's to explain away: the counts went out with nothing else, and the resolution came from the
 brief's author as a corrected test. The false alarm cost one round trip.
 
+#### The pattern behind four of these claims: an outside figure adopted without converting its objects [MEASURED 2026-11-11, YY-2]
+
+**Recorded at the request of the briefs' author, and placed here rather than in §10 because
+it is a property of material arriving from outside, not of this project's method.** §10
+carries the companion failure, which is mine: *reporting the failure of my own search as a
+fact about the world*. **This one is different and it has its own four instances in two
+days.** They look unrelated until the common step is named:
+
+| instance | the outside object | what it was not converted to |
+|---|---|---|
+| the 14-digit integer (§10's exact-integer rule) | a tool's `5.3971e+13` | an integer anything had actually computed |
+| the **24-word pool** (the entry above) | someone else's candidate set | the **32** words §LL-2 measured in the old list — a 62.62× difference in the answer |
+| the **36°-against-30°** dial (claim 1) | a measurement made elsewhere | R10, this project's clock-dial test, which is 30° and 15° |
+| **"today's block-B sweep"** (claim 2) | a sweep run elsewhere | `blockb_bands_plan.md`, which is from an earlier date and was not running |
+
+**In every one the reasoning was sound and the object was imported.** That is why §1.11 keeps
+saying the instruction was correct: the fault is never the inference, it is that the thing
+inferred over belongs to a different measurement. Claims 1 and 2 were caught because the
+object was *absent* here and a search for it came up empty. **The 24-word pool was more
+dangerous precisely because its object was present-looking**: it produced an arithmetically
+perfect figure, which I then failed to reproduce and misdescribed rather than converted.
+
+**The rule, in the author's own formulation and adopted:** *a figure arriving from outside is
+recomputed over this project's measured objects before it enters a brief, and where the
+objects differ, **the conversion is the finding**, not a footnote.* The entry above is what
+that looks like when it is done: the pair of permutation counts and the 62.62× ratio **are**
+the result, and the retraction of my wording is the footnote.
+
 #### The fifth claim — prior work of ours that is not here, and a false trail of my own [MEASURED 2026-11-11]
 
 A brief of 11 Nov 2026 referred to *"your earlier Dylan investigation concentrated on BIP39
@@ -1126,6 +1160,19 @@ citation would otherwise find nothing and draw the same wrong conclusion this en
 content is already adopted on its merits in §10; nothing is redone. NN-2 through NN-4 arrived on
 11 Nov as RR-2 to RR-4: RR-2 is §1.17, RR-3 is the design note under §2.17's block-B entry, and
 RR-4 confirms the withdrawn claims above stay.
+
+**[RECURRENCE 2026-11-11] It has happened a second time, and on the same terms.** A brief of
+11 Nov cross-referenced **`WW-1`, `WW-2` and `WW-3`**, with `WW-1` described as something to
+correct *"before it is written"*. **No `WW` block was relayed here**: the string occurs in no
+file of either tree and in no transcript held here except that brief and this report's echo of
+it, so nothing had been written and there was nothing to correct in this record. Its author
+states that WW-1 to WW-3 were written on 11 Nov and not relayed. **Recorded exactly as NN was:
+as the author's statement, which cannot be verified from here, and as no defect in the brief
+that cited them** — a citation pointing at real work that did not arrive is a delivery failure,
+not a false reference. **Nothing needs redoing**: the `XX` block that followed carried WW's
+content, and this entry exists so that a reader following the `WW-1` reference finds the reason
+it leads nowhere rather than concluding, as the first version of the NN note did, that it was
+never written.
 
 
 ## 2. What is exhaustively eliminated
@@ -7169,10 +7216,41 @@ yields 5.40 × 10¹³**:
 > pools of 31 or 54 yields it" was available, true, and would have invited exactly the
 > correction that arrived anyway.
 >
-> One thing that *is* worth keeping from it: **the 23 is not grounded in this project's
-> objects.** §2.6 holds **32** `A_display` census words in the old list and **31** after
-> `breathe`; no pool of 23 appears anywhere in it. So the arithmetic is right and its input
-> is unsourced here — which is a weaker claim than "unreproduced" and the correct one.
+> **The retraction above over-corrected, and the sentence it withdrew was true. [RESTORED
+> 2026-11-11, YY-1, with the marking kept.]** *"No construction over §2.6's own objects
+> yields 5.40 × 10¹³"* is correct, and it is now measured rather than merely asserted. **The
+> 23 does have a provenance — it is simply not this project's.** Pin one word and order the
+> rest, and the pool size sets the figure:
+>
+> | pool | one pinned, 11 ordered | at 1.507/s |
+> |---|---:|---:|
+> | a **24-word** pool, from outside this project | `P(23,11) = `**`53,970,627,110,400`** | **1.13 million years** |
+> | the **32** words §LL-2 measured in the old list | `P(31,11) = `**`3,379,847,863,392,000`** | **71.07 million years** |
+>
+> **The outside pool is eight words short of the 32** — `32 − 24 = 8` — and §LL-2 measured
+> that set exactly: **24 in both ledgers and 8 old-Electrum-only.** The composition reported
+> for the 24-word pool, **19 both and 5 old-only**, is the brief's figure and is not
+> checkable here, because this project does not hold that pool; the **32 = 24 + 8** side is
+> this project's own measurement. Either way it is a subset, not a different reading of the
+> same set.
+>
+> **So the proposal is 62.62× less affordable than quoted, over the pool this project
+> actually measured.** The base-rate retirement above therefore stands with far more room
+> than the entry claimed when written — and that is the point the figure carries. **The
+> marking stays on my wording, which was "unreproduced" where it should have said "not
+> reproducible over this project's objects".**
+>
+> *[A second exact integer, and this one is mine to answer for.]* YY-1 supplied
+> `3,379,768,261,632,000` for `P(31,11)`; the true value is **`3,379,847,863,392,000`**,
+> **low by 79,601,760,000**, verified by `math.perm(31,11)` and by the longhand product
+> `31 × 30 × … × 21` over eleven terms, which agree. It is **the same defect the rule
+> below was written for, 24 hours later** — and both figures render as `3.3798e+15`, both
+> give `71.1` million years, and both give a ratio of `62.6`, so once again nothing
+> downstream can see it. **The float was printed by me.** My own verification output for the
+> entry above rendered `P(31,11)` as `3.3798e+15`, and the sixteen digits were written from
+> it. §10's rule, written the previous day, forbids exactly that formatting. No committed
+> script in this tree prints an integer that way — the one that did was an unsaved ad-hoc
+> check, which is precisely where a written rule has nothing to enforce it.
 >
 > **And the exact integer is not the one a later brief wrote down.** A figure of
 > `53,971,462,732,800` was supplied for this quantity; the true value is
