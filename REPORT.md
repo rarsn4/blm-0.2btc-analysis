@@ -1805,6 +1805,56 @@ half of that route is, in addition, BIP39-unreachable.
 
 **No word enters any config from this.** Script `config_word_membership.py`.
 
+##### Title-as-words: membership, and the null stated before anything is slotted [MEASURED 2026-11-11]
+
+Gated exactly as OO and PP were, with the word consequences fixed before the measurement:
+**no word enters any config from this, under any outcome.**
+
+**Membership first, counts only, over 227 configs. NAMED is the only figure that means
+anything** — `@FULL` admits every BIP39 word in 33 published configs and that is noise:
+
+| word | BIP39 | old Electrum | **NAMED** (published / solver-only) | in the 54-pool |
+|---|---|---|---|---|
+| `world` | yes | **#31** | **233 / 32** | **yes** |
+| `welcome` | yes | **#863** | **224 / 31** | **yes** |
+| `brave` | yes | **#1037** | 9 / 1 | no |
+| `seed` | yes | — | 3 / 1 | no |
+| `phrase` | yes | — | 3 / 1 | no |
+| `picture` | yes | **#354** | 3 / 1 | no |
+| `find` | yes | **#69** | 2 / 1 | no |
+| `new` | **no** | **#105** | **0 / 0**, and **0 ADMITTED** | no |
+
+**Two of the eight are already template pool words and heavily named** — `world` and
+`welcome` are in the standard 54-pool, which is why they carry 233 and 224 NAMED rows. That
+is not evidence of a title reading; it is the pool they were already in. **`new` is not
+BIP39**, so "the title is the key" cannot be read as a BIP39 phrase at all without dropping
+or substituting a word — it is old-Electrum #105, and that path is the one §2.6 prices out
+of reach.
+
+**The discipline question, pre-registered: what would make "the title is the key" a
+MEASUREMENT rather than a reading?** Three things, none of which is prominence:
+
+1. **A positional mechanism from the artwork, not from the sentence.** The title's words
+   would have to map to slots by something the painting supplies — a numeral, a mark, a
+   count — in the way §2.17's three written words do. Reading-order is not that: every
+   block of painted text has a reading order, so "in the order they are painted" is
+   available for all 35 strings in `census_crops.DRAWN` and distinguishes none of them.
+2. **A discriminator against the other painted blocks.** The title is census data like the
+   rest. §LL-2 measured the whole census against both ledgers and found **P = 0.580, dead
+   at base rate**, and §PP-3 records why a per-block slice run after seeing that is the
+   garden of forking paths — with the slice count (2, 15, 35 or 28) that any such claim
+   must pay. A title test is one of those slices.
+3. **Something `new` does not break.** Any mechanism has to say what happens at the one
+   word that is in neither the BIP39 list nor the template pool, and say it in advance.
+
+**THE NULL, STATED EXPLICITLY, AS THE DEFAULT THAT NOTHING DISPLACES: the title is a
+title.** `WELCOME TO THE BRAVE NEW WORLD` is the painting's name, painted large because
+titles are painted large, and `FIND THE SEED PHRASE IN THE THIS PICTURE` is an instruction
+to the viewer — it says the phrase is *in* the picture, which is an argument that the
+instruction is **not itself** the phrase. Every measurement here is consistent with that
+reading and none argues against it. **A block of text is not a cipher because it is
+prominent**; prominence is what a title is for.
+
 > **[EXTERNAL, UNLOCATED — 9 Nov 2026] The repeated-word hypothesis has a dated, named source, and
 > it is the only one besides block B's caption.** Everything else in the instruction layer — the
 > rules a solver is supposed to apply, as opposed to the words themselves — is either our own
@@ -3710,6 +3760,62 @@ Slots 2, 4, 10, 12, 16 and 20 are assigned entirely on counts that someone
 noticed and nobody validated. **No word at an even slot is written in the
 artwork.**
 
+**[MEASURED 2026-11-11, UU-2] DOES THE SOLVER SWEEP THE ORDER OF THE FIFTEEN? NO — IT FIXES
+THEIR SEQUENCE AND SWEEPS THE SIX GAPS.** Asked as a documentation query, answered from the
+configs. In the base template `t21_readme54` the fifteen assigned words are pinned one per
+slot, at slots 1-5, 7, 9-13, 16, 17, 19 and 20 — the assignment is §2.17's table, which
+grades each one and is not restated here — and slots **6, 8, 14, 15, 18, 21** are `@POOL`
+or `@FULL`. **Every candidate the solver generates holds those fifteen in that sequence.**
+
+*(The fifteen are deliberately not enumerated in slot order in this paragraph. Written out
+that way they form a run of seventeen consecutive BIP39 words — the numerals between them do
+not break it, because the publication guard's tokeniser skips digits — and that run is the
+template's phrase skeleton in sequence. The guard flagged the first draft of this paragraph,
+which is the guard working as intended on text written by its own author.)*
+
+**Order is nevertheless tested, along named axes rather than exhaustively.** Over the 84
+admitted runs:
+
+| what the run does to the fifteen | runs |
+|---|---:|
+| identical to the template order | 14 |
+| changes a word at a slot, no word **moved** to a different slot | 43 |
+| **moves at least one assigned word to a different slot** | **27** |
+
+The 27 are deliberate reorderings, each with its own hypothesis: `t21_swap114`
+(`subject` 1→14), the six `t21_black*` and six `t21_blackd*` (`black` to each of 6, 8, 14,
+15, 18, 21, and the six pairwise swaps), the eight `t21_clk*` (clock-derived positions for
+`tower`, `moon`, `liberty`, `police`, `eye`, `pyramid`, `gold`, `glove`), `t21_rev54` (the
+**full reversal** — 13 of the 15 moved), `t21_needle11`, `t21_amend1415`,
+`t21_tarot_j17x19`, `t21_single` and `t21_slot1`.
+
+**So the order space is touched at 28 points out of `15! = 1,307,674,368,000`** — about
+**2.1 × 10⁻⁹%** of it. A full order sweep is `15!` × 1,363,720,121,280 = **1.78 × 10²⁴
+candidates**, which at the measured 10.2 M candidates/s is **5.5 × 10⁹ GPU-years**. It is
+not a candidate for scheduling; it is the reason the order has to come from the artwork
+rather than from a search.
+
+> **[SCOPE, opened 2026-11-11] Where the order came from, and what grade it can carry.**
+> The sequence is the community README's position table, and this report has never graded
+> the *order* as a separate object from the *words* — §2.17 grades both but the question
+> "is slot *n* the right slot" is answered there per word, never summed. Summed, by §2.17's
+> own rows: **three of fifteen words are written in the artwork** — `subject`@1, `tower`@3,
+> `moon`@13 — and for two of those three the *slot* comes from clock arithmetic resting on
+> a caption (`Сумма двух чисел`) **whose location has never been measured**. The remaining
+> twelve are counts, associations or inference, and §2.17 records that **no word at an even
+> slot is written in the artwork at all**.
+>
+> **So the order is [ASSUMED] for twelve of fifteen slots and [INFERRED] for the other
+> three, and it is load-bearing under every one of the 316 billion derivations.** This is
+> the `apple`@20 class exactly, as the brief naming it says: *the words may be right and
+> the order unmeasured.* The difference from `apple`@20 is scale — that was one slot and
+> this is the arrangement of all of them — and the consequence is the same: a negative over
+> this template eliminates "these words in this order with these gaps", not "these words".
+>
+> Nothing is proposed from this. It is recorded because the elimination headings in §2 are
+> read as being about words, and they are about words **in one arrangement** that no
+> measurement fixes.
+
 **And that half is the half that cannot be afforded.** Free-one-fixed covered 13
 of 15 slots over 55 candidates each — 55/2048, **2.7% of the dictionary**.
 Testing one assigned slot against the whole dictionary means 2048 × 54⁶ × 2
@@ -5141,6 +5247,95 @@ run list rather than the section text. §2.14's second row is in fact *"freeing
 slot 2 to 55 candidates including `twin`"* — `t21_free2_p1`. The wrong grouping
 gave 115,253,293,465, about twelve times too small: the object was inferred
 instead of read.
+
+**[MEASURED 2026-11-11, UU-1] PATHS × ENCODINGS, THE WHOLE ADMITTED LEDGER AS ONE TABLE —
+and the figures above are stale at 82 runs.** Asked as a documentation query: does every
+admitted run derive all four paths, is any run compressed-only, and what does the grid look
+like. No runs; box algebra only. Script `coverage_paths_encodings.py`, output
+`coverage_paths_encodings.out`.
+
+**(a) Paths. Not all four.** From each config's own `PATH` lines, the 84 admitted 21-word
+runs fall into exactly three groups, with nothing left over:
+
+| group | runs | paths | encodings |
+|---|---:|---|---|
+| **G1** post-patch | **55** | all four | compressed + uncompressed + hybrid |
+| **G2** pre-patch | **16** | all four | **compressed only** |
+| **G3** pre-patch | **13** | **`m/44'/0'/0'/0/0` only** | **compressed only** |
+
+G3 is exactly the thirteen `t21_freeN_p1` runs — the `_p1` suffix *is* "path 1" — and every
+one of them is also pre-patch, so **13 runs are single-path and single-encoding at once**:
+one cell of twelve. G2 is `readme54`, `swap114`, `written`, `pool75`, the six `loo` and the
+six `black`.
+
+**(b) Which admitted configs skip the uncompressed arm: all 29 pre-patch runs, G2 + G3.**
+`ENCODING` is not a config directive — no admitted config has one — so this is a property of
+the binary, not of the file: the three-encoding kernel was built 2026-09-28 07:51 and every
+run whose log closed before then checked the compressed key only (§3 above). The two
+carried constants differ from each other here: **T12** (`t12full_mp`, `exit=2` 9 Nov
+12:14:50 UTC) ran four paths and three encodings, while **T24** (`t24_tail54` +
+`t24_tail67`) is four paths, **compressed only** — `[INFERRED]`, because T24 was already in
+`tally2.py` by 2026-09-23 13:39 (`713cc0f`), five days before that build, and **no `exit=`
+line for either config appears in any log**, so the date comes from git history rather than
+from a run record.
+
+**(c) The coverage table.** Shares are of the 84-run union, 40,504,526,297,231 candidates:
+
+| path | encoding | candidates covered | share | by |
+|---|---|---:|---:|---|
+| `m/44'/0'/0'/0/0` | compressed | 40,504,526,297,231 | **100.00%** | G1 G2 G3, T12, T24 |
+| `m/44'/0'/0'/0/0` | uncompressed, hybrid | 20,440,404,276,196 | 50.46% | G1, T12 |
+| `m/0'/0/0`, `m/0/0`, `m/44'/0'/0'/0/1` | compressed | 27,313,633,487,759 | 67.43% | G1 G2, T12, T24 |
+| `m/0'/0/0`, `m/0/0`, `m/44'/0'/0'/0/1` | uncompressed, hybrid | 20,440,404,276,196 | 50.46% | G1, T12 |
+
+**Only path 1 compressed is complete.** Stated as exposure, which is the form that matters
+because a right phrase on an unchecked arm is a real miss:
+
+- **49.54%** of the admitted union — 20,064,122,021,035 candidates, **156,750,953,289
+  derivations** — has never been checked on the uncompressed or hybrid arm **on any path**.
+- **32.57%** — 13,190,892,809,472 candidates — has never been checked on paths 2–4 **at any
+  encoding**. That is G3's space, and it is a subset of the above.
+- **50.46%** is covered on all twelve path × encoding cells.
+
+**The 56.02% published above is stale, and so are three of its four siblings.** [CORRECTED]
+That table was computed at 82 runs. `t21_free2` and `t21_free11` were admitted on 9 Nov as
+four-path, three-encoding twins of pre-patch `_p1` boxes, which is precisely the event that
+moves the numerator without moving the denominator — the "both ends moved" effect this
+section already documents, recurring. The 82-run figures were reproduced exactly before
+being replaced (union *and* numerator, to the digit), so this is an update and not a
+disagreement:
+
+| scope | its union | compressed-only, 84 runs | now | was, 82 |
+|---|---:|---:|---:|---:|
+| all 29 pre-patch runs | 24,480,490,264,651 | 20,064,122,021,035 | **81.96%** | 92.70% |
+| §2.13, the 13 `free*_p1` | 17,455,617,552,384 | 13,190,892,809,472 | **75.57%** | 90.62% |
+| §2.14, `swap114` + `free2_p1` | 1,413,309,943,872 | 49,589,822,592 | **3.51%** | — |
+| §2.19, the six `loo` | 6,458,615,227,584 | 6,305,594,231,808 | 97.63% | 97.63% |
+| **the whole union** | 40,504,526,297,231 | 20,064,122,021,035 | **49.54%** | 56.02% |
+
+Those two admissions re-covered **2,628,260,597,376** candidates with all three encodings.
+**§2.14 moved furthest, 1,413,309,943,872 down to 49,589,822,592** — `t21_free2` covers
+nearly the whole of that scope — and its 82-run numerator is left blank above rather than
+guessed, because the table never carried it as a separate figure. §2.19 is unchanged because
+neither twin touches it.
+
+**What the running queue closes, and what it does not.** Each `t21_freeN` twin is the same
+word box as its `_p1` run — that is the queue's identity test — on the current binary. So
+every twin converts its box from one cell to twelve. Projected, and a projection only, since
+a twin is admitted on completion and in band:
+
+| state | all twelve cells | never unc./hybrid | never paths 2–4 |
+|---|---:|---:|---:|
+| the admitted ledger now | 50.46% | 49.54% | 32.57% |
+| `+ t21_free4` (EXACT 11 Nov, not yet admitted) | 53.77% | 46.23% | 29.26% |
+| `+` all twelve twins (queue complete, ~25 Nov) | **83.03%** | 16.97% | **0.00%** |
+
+**The queue closes the path gap entirely and leaves an encoding gap of 16.97%.** What
+remains is G2: sixteen runs on four paths, compressed only, which no queued run re-covers.
+Closing it would mean re-running those sixteen on the current binary. **Not proposed here**
+— §3's argument that compressed-only is the right model for a BIP39 seed stands, and this
+block changes none of it. What it changes is that the size of the thing the argument is
+load-bearing for is now written down at the current ledger state rather than at 82 runs.
 
 **A miscount cannot have swallowed a hit.** The survivor counter is a progress
 statistic: it records how many candidates passed the checksum filter. A HIT is a
