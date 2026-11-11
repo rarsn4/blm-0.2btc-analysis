@@ -62,7 +62,7 @@ Claims below are tagged. Do not promote a tag without new evidence.
 | **[INFERRED]** | Follows from measured facts by a stated argument. |
 | **[ASSUMED]** | Load-bearing but unproven. The soft spots. |
 | **[COMMUNITY]** | A reading or convention taken from the shared solver corpus, not derived here. Weaker than [INFERRED]: no argument from this project's measurements backs it. `premise_audit.md`'s vocabulary, used in §5 from 9 Nov 2026. |
-| **[DEFECT]** | A fault in this project's own method or machine, found and dated. §1.7, §1.8, §1.9, §1.10, §1.12, §1.13, §1.14, §1.15, §1.16, §1.17. §1.11 is the same register for a fault in material **sent to** this project, kept separate because it is not ours. |
+| **[DEFECT]** | A fault in this project's own method or machine, found and dated. §1.7, §1.8, §1.9, §1.10, §1.12, §1.13, §1.14, §1.15, §1.16, §1.17, §1.18. §1.11 is the same register for a fault in material **sent to** this project, kept separate because it is not ours. |
 
 The distinction between [EXHAUSTED] and [TESTED] is the one that matters: §2.1–2.11
 are the first, §2.12 is the second, and conflating them would be the only overclaim
@@ -70,22 +70,22 @@ in this document.
 
 ---
 
-## 1. Six defects in the shared data, ten in ours — and three in briefs sent here
+## 1. Six defects in the shared data, eleven in ours — and four in briefs sent here
 
-§1.1–1.6 are faults in the data the community shares. **§1.7–§1.10 and §1.12–§1.17 are
+§1.1–1.6 are faults in the data the community shares. **§1.7–§1.10 and §1.12–§1.18 are
 faults of this project's own**, and they are the more serious kind, so they are not buried: for
 five weeks this project accrued negatives on a solver binary that had never passed a
 self-test (§1.7), and for five weeks it hashed a transcription that was never checked
 back against the image (§1.8). They have the same shape — something written down once,
 trusted thereafter, never re-measured.
 
-**§1.11 is a third kind**, and it records **three** claims, all of which arrived in briefs
+**§1.11 is a third kind**, and it records **four** claims, all of which arrived in briefs
 addressed to this project, plus one relay gap that is not a defect in any brief and is not
 counted. Two of the claims were attributed to this project's own files and are not in
-them. The third is different and worth distinguishing: its stated facts were **correct**, and
+them; the fourth, on 11 Nov, is a clearance test that read prose as data. The third is different and worth distinguishing: its stated facts were **correct**, and
 its conclusion was wrong anyway, because the facts were checked against one ledger and the
 conclusion was drawn about words in general. It is recorded in the same register as the other
-sixteen because the failure mode is identical — something stated once and trusted thereafter —
+seventeen because the failure mode is identical — something stated once and trusted thereafter —
 and because a defect in an instruction is the one class a reader of this report cannot
 otherwise see.
 
@@ -325,6 +325,38 @@ vectors, including 16–23 covering `upper` and `title` casing.
 
   Both arms of that check now have controls, and the shape arm's was built on 2026-11-09 —
   see **§1.10**, which is the defect the control found on its first run.
+
+  **[UPDATED 2026-11-11] There are FOUR planted logs, not three, and this bullet went stale 137
+  seconds after the instant it names.**
+
+  | planted log | required count | what clears it |
+  |---|---:|---|
+  | `st_selftest_find.log` | 2 | the planted solver self-test |
+  | `st_selftest_uncomp.log` | 2 | the planted solver self-test |
+  | `st_selftest_hybrid.log` | 2 | the planted solver self-test |
+  | `st_shapearm_control.log` | **5** | the count **and** every real commitment being to the planted string |
+
+  From filesystem creation times only: the figure above was measured at **16:00:00 UTC**;
+  `shape_arm_control.sh` created `st_shapearm_control.log` at **16:02:17**; this bullet was committed
+  at **16:11:05** in `00cafcb`, the commit that added that very control (§1.10). Its own
+  "100 → 101 → 102" recorded the arrival: this is the only log created between the measurement and
+  the commit. The file was last rewritten at 16:47:20.
+
+  **On 11 Nov a scan over 103 logs stopped on it** — count 5, not on the list — and it was cleared
+  by counts alone, with no line of the file printed: **1** real commitment line (`commit=` followed
+  by 64 hex digits), **1** commitment to the sha256 of `blm-corpus-planted-selftest`, and **1**
+  explanatory sentence containing the string `commit=`. Every real commitment in it is to the planted
+  string, so it is the fourth planted control. *(The first clearance test counted that sentence as a
+  commitment and failed safe: §1.11, fourth claim.)*
+
+  **For this log the count is necessary but not sufficient.** A real commitment in place of the
+  planted one would leave the count at 5. What clears it is the content check: real commitments =
+  commitments to the planted string = 1.
+
+  **The 103 reconciles exactly:** 101 at the 9 Nov measurement, plus the two logs created since —
+  this one, and `queuenov_t21_free12.log` at 11 Nov 03:25:15 UTC. The 9 Nov figure therefore covered
+  every `*.log` recursively, including `configs/electrum_rerun.log`. The check stays defined over
+  every log, never over a count.
 
 #### Therefore the negatives stand
 
@@ -801,6 +833,9 @@ doubled pair in the element's own text. **Emphasis is a multiplier on whatever i
 including an error** — a pre-registered "report this loudly" branch deserves a hand-check before it
 fires, not after.
 
+*[Added 2026-11-11] The same error recurred the next day in a brief's clearance test, where it
+produced a hit-protocol stop instead of a false cipher — §1.11, fourth claim.*
+
 ### 1.16 [DEFECT, found and closed 2026-11-10] An unquoted heredoc executed backticks and silently deleted a word from the publication gate's own verification file
 
 **Found by reading the shell's own error output instead of trusting the exit status.** A pin note
@@ -879,7 +914,44 @@ each script honoured it. **An exit condition written as "stop if X" is a default
 written as "run only if X" it is a default of "stop".** For any script that can derive against the
 real target, only the second is acceptable.
 
-### 1.11 [DEFECT in material sent to this project, found 2026-11-10] Two measurements attributed to this repository do not exist in it, and a third claim was scoped to the wrong ledger
+### 1.18 [DEFECT, found and closed 2026-11-11] New text was anchored on the end of a paragraph instead of the end of an entry, and split five entries
+
+**What went wrong, mechanically.** This report is edited by inserting text after an exact anchor
+string. The anchor was chosen as *the last line visible of the thing being added to*, without
+checking what came after it. Where that line ended a paragraph but not an entry, the new text landed
+inside the entry, and the entry's remainder then read as part of the new text.
+
+**Five instances, all in text written on 10 Nov, all caught before publication:** [MEASURED]
+
+| block | what was split | found |
+|---|---|---|
+| LL | §1.11's third claim went in above the paragraph recording what was done about claims 1–2, which then read as describing claim 3 | 10 Nov, fixed before that day's push |
+| MM-3 | `choke`'s disposition went in between the membership query's first row and its eight-word table | 11 Nov, by the audit |
+| OO | the X-marks block went inside the `apple`@20 provenance entry, ahead of that entry's closing note on link 3, which then followed the X-marks discussion | 11 Nov, by the audit |
+| QQ-2 | the asymmetric-void rule went in between the glyph-scan rule's last line and that rule's own continuation | 11 Nov, by eye |
+| QQ-3 | §1.11's fourth claim, now the relay-gap note, went in ahead of the third claim's own "What does not change" | 11 Nov, by the audit |
+
+**The local fix did not generalise, and saying so is the point.** When the QQ-2 split was found and
+fixed, the check "look at what follows an anchor" was described as now in use. The other QQ insertion
+was not re-checked. **Three of the five were found only by a mechanical audit**, which diffs
+`REPORT.md` against the last published version and lists, for every inserted block, the first line
+that follows it. That audit is `insertion_audit.py`. **It has a positive control:** pointed at the
+committed pre-fix report it lists exactly those three splits and nothing else, and on the fixed
+report it is clean. Its first version did not: it also listed three in-place edits inside
+paragraphs, which is §10's rule that cries wolf, and it was narrowed before use.
+
+**The same audit over the sixteen published commits** found 7 block insertions, 4 followed by
+untagged text, all read by hand: **none misattributes text.** One displaces: the 9 Nov old-Electrum
+rewrite placed about 250 lines of findings between that subsection's summary and its original
+description (*"Old Electrum shares nothing with v2 but the name:"*), separated by a blockquote
+boundary. It is left in place, because moving published text that reads correctly is churn.
+
+**Fixed.** All three remaining splits are moved, with no wording changed, and each new location was
+asserted to be followed by a new entry before it was written. **Rule: an insertion anchor is the end
+of an entry, and the line after the inserted block must open a new entry — a heading, a bullet, or a
+tagged paragraph or quote.** `insertion_audit.py` runs before every pin of this file.
+
+### 1.11 [DEFECT in material sent to this project, found 2026-11-10] Two measurements attributed to this repository do not exist in it, a third claim was scoped to the wrong ledger, and a fourth test read prose as data
 
 **Found by looking for them before citing them**, which is the only reason this entry is
 here rather than in §2.16's text as a borrowed authority.
@@ -946,7 +1018,44 @@ BIP39** and `horns` is not, and **`goat` *is* BIP39**. So the source end of that
 BIP39-reachable and the destination end is not — which is a sharper statement than the one
 offered, and it is the EE-1 discipline again: inflections are different tokens.
 
-#### Not a fourth claim: a relay gap — NN-1 to NN-4 were written and not delivered [CORRECTED 2026-11-11]
+**What does not change.** The goat→devil chain still has **zero measured links**, and **no
+word enters any config from it** — not on the BIP39 path, where `devil` cannot be encoded,
+and not on the old-Electrum path, where §2.6's arithmetic rules out the search regardless
+of how well the vocabulary fits. Being reachable in principle and being searchable are
+different claims, and this entry asserts only the first.
+
+#### The fourth claim — a clearance test read prose as data, and stopped everything [MEASURED 2026-11-11]
+
+A brief of 11 Nov 2026 set out to clear `st_shapearm_control.log`, which the standing detection grep
+had flagged at a count of 5, **by counts alone**. Its test (b), `grep -c 'commit='`, was labelled
+*"all commit lines"*, and the pass condition required it to equal (c), the number of commitments to
+the planted string.
+
+**(b) returned 2 and (c) returned 1. Under the hit protocol that is a FAIL: everything stopped, and
+the three counts were reported with nothing else.** [MEASURED]
+
+**The cause was in the test, not the file.** In `--selftest-plant` mode `brain_image_corpus.py`
+prints an explanatory sentence — *"The commit= line below is a commitment to THAT string and to
+nothing else."* — which contains the string `commit=` and is a sentence **about** a commitment, not
+one. A corrected brief counted real commitments by their format, `commit=` followed by 64 hex
+digits: **1**, equal to the commitments to the planted string, **1**, with the sentence counted
+separately, **1**. PASS: every real commitment in the file is to the planted string.
+
+**It is §1.15's error the next day, in the opposite direction.** There, prose read as data produced
+a false *positive* — a second instance of a cipher. Here it produced a false *FAIL* — an unexplained
+commitment in a log. The root is the same: a test of a property of data that matched text describing
+the data.
+
+**And it failed safe, which is why the stop was the right outcome.** Because the pass condition was
+(b) = (c), an over-count in (b) can only produce a false FAIL, never a false PASS. The dangerous
+direction is the reverse: a (b) that misses a real commitment written in some other format, or a (c)
+that counts something as planted that is not. **A detection grep may over-match freely** — matching
+that sentence is harmless over-firing, and is part of why the log's count is 5 — **but a clearance
+test may over-match only on the side that fails closed.** A FAIL under the hit protocol is also not
+the agent's to explain away: the counts went out with nothing else, and the resolution came from the
+brief's author as a corrected test. The false alarm cost one round trip.
+
+#### Not a claim: a relay gap — NN-1 to NN-4 were written and not delivered [CORRECTED 2026-11-11]
 
 *As first recorded on 10 Nov this entry was headed "a cross-reference to a brief that was never
 sent", said "There is no NN-1", and grouped it with the 36° dial. That classification was wrong
@@ -974,17 +1083,12 @@ located in any transcript"*. **Those are relay gaps by the record's own evidence
 fabrications, and only the dial belongs in the misattribution class.
 
 **Consequence: §1.11 holds three defects in material sent here, not four**, and §1's heading is
-corrected accordingly. The relay gap stays recorded here because a reader following the §10
+corrected accordingly. *[Later on 11 Nov the count returned to four for an unrelated reason: the
+fourth claim above, which is a real defect in a brief.]* The relay gap stays recorded here because a reader following the §10
 citation would otherwise find nothing and draw the same wrong conclusion this entry did. NN-1's
 content is already adopted on its merits in §10; nothing is redone. NN-2 through NN-4 arrived on
 11 Nov as RR-2 to RR-4: RR-2 is §1.17, RR-3 is the design note under §2.17's block-B entry, and
 RR-4 confirms the withdrawn claims above stay.
-
-**What does not change.** The goat→devil chain still has **zero measured links**, and **no
-word enters any config from it** — not on the BIP39 path, where `devil` cannot be encoded,
-and not on the old-Electrum path, where §2.6's arithmetic rules out the search regardless
-of how well the vocabulary fits. Being reachable in principle and being searchable are
-different claims, and this entry asserts only the first.
 
 
 ## 2. What is exhaustively eliminated
@@ -1581,13 +1685,6 @@ project has never entertained it.* That is worth stating because a chokehold and
 "I can't breathe" are the painting's reference, `breathe` is the leading passphrase
 candidate, and the Floyd portrait is element E19.
 
-**Recorded and left there, which is the whole disposition.** `choke` is an **admissible
-old-Electrum word, thematically central, and never entertained** — and that is the entry.
-No run follows and no config is written: §2.6's arithmetic forbids the search whatever the
-vocabulary does, and it is unchanged by the census test above coming back null. A word
-being admissible is not a reason to search for it; it is a reason to say plainly that
-nobody has, so the next reader is not left to infer coverage that does not exist.
-
 | word | BIP39 | old Electrum | NAMED | ADMITTED |
 |---|---|---|---:|---:|
 | `choke` | no | #621 | **0** | **0** |
@@ -1617,6 +1714,13 @@ built to avoid — so it is recorded as a description of our own pool, **not** a
 about the canvas. What it does show is that `choke`, `hit`, `devil`, `murder` and `silence`
 were never in even that pool, and `breathe` entered only as a passphrase, where no ledger
 applies.
+
+**Recorded and left there, which is the whole disposition.** `choke` is an **admissible
+old-Electrum word, thematically central, and never entertained** — and that is the entry.
+No run follows and no config is written: §2.6's arithmetic forbids the search whatever the
+vocabulary does, and it is unchanged by the census test above coming back null. A word
+being admissible is not a reason to search for it; it is a reason to say plainly that
+nobody has, so the next reader is not left to infer coverage that does not exist.
 
 **"The 22" could not be located [EXTERNAL, UNLOCATED].** The brief requesting this query
 named *"the 22"*; no set of 22 candidate words exists in this repository. The only `22` in
@@ -2790,6 +2894,17 @@ readings.** It is now being run over the 54-pool plus both words on all four pat
 > with no method attached, and it is recorded here as such — it neither closes the reading nor is it
 > ignorable, since it is the earliest dated opinion on that group we hold.
 >
+> *A reference image of the Gravity Falls zodiac wheel was supplied on 9 Nov 2026. It carries **ten
+> pictograms and no letters** — glasses, question mark, ice bag, crescent, pine tree, pentagram, hand,
+> llama, shooting star, stitched heart. **This is the wrong artifact for this claim, by
+> construction:** the chain needs letters — `TH`, `FR`, `UI` — and a wheel of pictograms has none to
+> give, so no reading of it could bear on link 3 either way. [CORRECTED 10 Nov 2026: this note first
+> said link 3 "cannot be evaluated", which pointed the reader at a missing measurement. The
+> measurement is not missing; the artifact is simply not of the thing the claim is about.] The
+> artifact that **does** bear on the chain is the letter-substitution alphabet, and §7.3 already
+> holds it — that is where links 2 and 6 were tested, and failed. Holding an image is not the same
+> as being able to test a claim, and this image is not evidence about the artwork.*
+>
 > **[MEASURED 2026-11-10] The `SHT`+`XX` → `SHOOT` proposal belongs in this same entry, because it
 > and the 2021 objection are about the same marks from opposite directions.** The objection says the
 > tablet does not read `SHT`; the proposal says it reads `SHT` plus a doubling mark. Both are claims
@@ -2920,17 +3035,6 @@ readings.** It is now being run over the 54-pool plus both words on all four pat
 > instrument choice: `STOP_R10_SET_C`'s prohibition and §PP-3's forking paths in one move. A
 > depth-based X test is a different measurement and needs its own pre-registration, including which
 > side of §10's asymmetry its control is expected to land on.
->
-> *A reference image of the Gravity Falls zodiac wheel was supplied on 9 Nov 2026. It carries **ten
-> pictograms and no letters** — glasses, question mark, ice bag, crescent, pine tree, pentagram, hand,
-> llama, shooting star, stitched heart. **This is the wrong artifact for this claim, by
-> construction:** the chain needs letters — `TH`, `FR`, `UI` — and a wheel of pictograms has none to
-> give, so no reading of it could bear on link 3 either way. [CORRECTED 10 Nov 2026: this note first
-> said link 3 "cannot be evaluated", which pointed the reader at a missing measurement. The
-> measurement is not missing; the artifact is simply not of the thing the claim is about.] The
-> artifact that **does** bear on the chain is the letter-substitution alphabet, and §7.3 already
-> holds it — that is where links 2 and 6 were tested, and failed. Holding an image is not the same
-> as being able to test a claim, and this image is not evidence about the artwork.*
 
 > **[MEASURED, 10 Nov 2026] The ten zodiac symbols, tested three ways: as words — closed; as
 > locators — untested; as objects in the painting — swept.** The wheel came into this report on
@@ -7425,7 +7529,9 @@ format-agnostic — `grep -c -i -w -E 'hit|hits|commit=|phrase[[:space:]]*:'` fo
 `grep -E '^exit=|acceptance|NO MATCH|VOID'` for completion — and the word anchors are
 themselves measured: unanchored, `HIT` is a substring of `SHIT` and `whitepaper`, which
 fires on 5 lines across two logs that contain no hit, while anchored it fires on nothing
-except the three planted self-test logs, where it fires twice each. **A rule that cries
+except the three planted self-test logs, where it fires twice each. *[As of 9 Nov 16:00 UTC. From 16:02 that
+day there are four planted logs — the three at 2 each and `st_shapearm_control.log` at 5, which
+needs a content check as well as its count; §1, Hits.]* **A rule that cries
 wolf on the word "whitepaper" gets ignored, which is the same failure in the opposite
 direction.** A control must be quiet where it should be *and* loud where it should be;
 quiet alone is what a producer-specific grep gives you for free.
