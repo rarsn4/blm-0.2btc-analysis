@@ -6722,9 +6722,72 @@ available on his location wording, and it passes.
 > **What would be needed to go further is a different instrument, not a lower threshold** —
 > component count cannot work in a band this painting fills with its own marks at every depth.
 > The even-pitch test is already ruled out (ceiling of 11 on a grouped inscription, §7.4), so
-> what is left is a shape-matched filter against block A's 42 measured glyphs. That is not
-> pre-registered and has not been run. Scripts `blockb_contrast.py`, output
+> what is left is a shape-matched filter against block A's 42 measured glyphs. **That filter
+> has since been built and run — see below.** Scripts `blockb_contrast.py`, output
 > `blockb_contrast.out`.
+>
+> ##### The shape-matched filter: the first block-B instrument with power AND specificity, and it returns a NEGATIVE [MEASURED 2026-11-11]
+>
+> Pre-registered in `blockb_shape_plan.md` (commit `76aeb4a`, blob `fddd6d66`) before the
+> filter was built or run on any region. Script `blockb_shape.py`, output
+> `blockb_shape.out`.
+>
+> **The split, which is what makes this not circular.** Block A's 42 glyphs cannot be both
+> template set and positive control — that is §1.12(b)'s circularity in a new costume. The
+> ten repeated letters were dealt alternately, `ceil(n/2)` to the template, and all twelve
+> singletons sent to the test half: **18 template instances over 10 letters, 24 test
+> instances — 12 whose letter the template holds, 12 whose letter it has never seen.**
+> *(The touching-pair problem the design anticipated no longer exists: since the 9 Nov
+> `y1=1020` fix, `runelib.groups()` returns 42 glyphs in 8 groups exact against all eight
+> words, so nothing had to be excluded.)*
+>
+> | IoU ≥ | 0.30 | 0.35 | 0.40 | 0.45 | 0.50 | 0.55 | 0.60 |
+> |---|---:|---:|---:|---:|---:|---:|---:|
+> | **power**, test glyphs whose letter is in the template | **12/12** | **12/12** | **12/12** | 11/12 | 11/12 | 11/12 | 10/12 |
+> | power, test glyphs whose letter is **not** | 12/12 | 12/12 | 12/12 | 6/12 | 4/12 | 2/12 | 2/12 |
+> | **max over the four null strips** | **10** | **10** | **9** | **6** | **4** | **2** | **2** |
+> | **R1** (6 candidates in total) | 6 | 5 | 4 | 2 | 1 | 1 | 1 |
+> | `R1'` minus the dial disc | 6 | 5 | 4 | 2 | 1 | 1 | 1 |
+>
+> **No threshold is void.** The nulls never reach the 14 glyphs block B is said to carry —
+> they top out at 10 and fall to 2 — so for the first time on this question the criterion
+> discriminates. **And the test half is recovered at every threshold**, 12 of 12 up to 0.40
+> and 10 of 12 even at 0.60, so there is no no-power cell either. All seven thresholds are
+> usable, which no previous block-B instrument has managed: the count criterion had power
+> and no specificity (§1.14), and the detectors that had specificity had no power.
+>
+> **VERDICT: NEGATIVE, at R1 and at `R1'`, at all seven thresholds.** R1 holds **6**
+> glyph-sized candidates in total at the template's own threshold, against 13–19 in each null
+> strip — so it is *poorer* in glyph-shaped marks than an ordinary band of this painting, and
+> **it could not hold 14 matches from 6 candidates whatever the matching rule.**
+>
+> **My pre-registered expectation was wrong, and in the useful direction.** §5 of the plan
+> states: *"the nulls will OVER-fire, and this test will probably be VOID in the blocking
+> sense"*, reasoning that IoU on 6–40 px marks is a weak discriminator. It is not: the shape
+> filter drove the null counts from the **39–60 glyph-sized components** the contrast sweep
+> measured down to **≤ 10 matches**, which is exactly the condition the same section named as
+> what would make the test informative. Recorded because a pre-registration is worth more
+> when its failures are reported than when only its successes are.
+>
+> **The unseen stratum is a measurement in its own right, not a shortfall.** It tracks the
+> seen stratum exactly up to 0.40 and then collapses — 6, 4, 2, 2 against 11, 11, 11, 10.
+> So a filter built from half of block A generalises to unfamiliar letters **only at loose
+> thresholds**. Any future filter aimed at an alphabet it has not seen must live at
+> IoU ≈ 0.30–0.40, where this one still had full specificity.
+>
+> **[SCOPE] This negative is scoped to contrast, and more tightly than the sweep above
+> was.** The templates and the candidates share one threshold, `G < 130`, and against block
+> A's own light-mode background of 241 that reaches **111 levels** deep. The rifle mark is
+> **19** levels and §1.14's corrected floor was **26**, so **this instrument sits far above
+> both and says nothing below 111.** It is the strongest block-B negative in this report and
+> it does **not** close the sub-floor gap. Extending it would mean extracting candidates by
+> depth below a local background instead of by absolute threshold — a different measurement
+> needing its own pre-registration, and **not** something to bolt on after seeing this
+> result, which is `STOP_R10_SET_C`'s prohibition and §10's post-hoc instrument rule.
+>
+> **Block B stays unlocated.** §2.17's three slots stay `[SCOPE]`, the decode is untouched,
+> and per the plan's §0 **no word enters any config from this**: a located block would have
+> been a location, and the words would come from a decode nobody has made.
 >
 > **[DESIGN, recorded 2026-11-11 — not requested, not built] If that filter is ever built, block
 > A's 42 glyphs cannot be both template set and positive control.** A filter scored on the

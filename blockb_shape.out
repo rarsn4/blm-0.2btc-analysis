@@ -1,0 +1,41 @@
+BLOCK B BY SHAPE MATCHING AGAINST BLOCK A's OWN GLYPHS
+========================================================================================
+  block A: 42 glyph instances, 22 distinct letters
+  TEMPLATE 18 instances over 10 letters
+  TEST     24 instances: 12 seen, 12 unseen
+
+--- POWER CONTROL (plan sec.6): is the held-out half recovered? ---
+   threshold     0.30    0.35    0.40    0.45    0.50    0.55    0.60
+        seen   12/12   12/12   12/12   11/12   11/12   11/12   10/12 
+      unseen   12/12   12/12   12/12    6/12    4/12    2/12    2/12 
+  best IoU per stratum: seen max 0.753 median 0.673; unseen max 0.713 median 0.455
+
+--- SPECIFICITY: the four null strips ---
+  region                  cands   >=0.30  >=0.35  >=0.40  >=0.45  >=0.50  >=0.55  >=0.60
+  null y 160-198             13       10      10       9       6       4       2       2
+  null y 420-458             12        4       4       2       1       1       1       1
+  null y 600-638             19        6       5       3       3       3       2       1
+  null y 980-1018            13        6       3       2       2       2       2       2
+  MAX over nulls                      10      10       9       6       4       2       2
+
+  VOID where a null reaches >= 14 (plan sec.6):
+    0.30:ok    0.35:ok    0.40:ok    0.45:ok    0.50:ok    0.55:ok    0.60:ok  
+
+--- THE REGION UNDER TEST ---
+  region                  cands   >=0.30  >=0.35  >=0.40  >=0.45  >=0.50  >=0.55  >=0.60
+  R1   y 1100-1138            6        6       5       4       2       1       1       1
+  R1'  minus the disc         6        6       5       4       2       1       1       1
+
+--- DECISION (plan sec.6) ---
+
+  R1   y 1100-1138
+    usable thresholds (power, not void): ['0.30', '0.35', '0.40', '0.45', '0.50', '0.55', '0.60']
+    thresholds with >= 14 above the null max: none
+    VERDICT: NEGATIVE
+
+  R1'  minus the disc
+    usable thresholds (power, not void): ['0.30', '0.35', '0.40', '0.45', '0.50', '0.55', '0.60']
+    thresholds with >= 14 above the null max: none
+    VERDICT: NEGATIVE
+
+  plan sec.0: no word enters any config from this, under any outcome.
