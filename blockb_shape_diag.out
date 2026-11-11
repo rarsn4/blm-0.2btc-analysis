@@ -8,72 +8,72 @@ AAB-1  EVERY NULL CANDIDATE, and whether it is block A
 
   y 160-198  (13 candidates)
      x-centre     y-range    IoU  in col  block-A cell
-       1543.5   160-176    0.880    True  ь y154-176 TEMPLATE
-       1544.0   181-197    0.872    True  н y181-199 TEMPLATE
-       1241.5   164-175    0.526   False  
-       1299.5   160-176    0.524   False  
-       1299.0   178-193    0.494   False  
-       1241.5   178-191    0.473   False  
-       1213.5   160-169    0.449   False  
-       1214.0   169-197    0.417   False  
-       1270.0   191-197    0.400   False  
-       1272.0   168-187    0.360   False  
-       1135.0   192-197    0.213   False  
-       1455.0   160-166    0.191   False  
-        283.0   165-170    0.175   False  
+       1543.5   160-176    0.880     yes  ь y154-176 TEMPLATE
+       1544.0   181-197    0.872     yes  н y181-199 TEMPLATE
+       1241.5   164-175    0.526       .  
+       1299.5   160-176    0.524       .  
+       1299.0   178-193    0.494       .  
+       1241.5   178-191    0.473       .  
+       1213.5   160-169    0.449       .  
+       1214.0   169-197    0.417       .  
+       1270.0   191-197    0.400       .  
+       1272.0   168-187    0.360       .  
+       1135.0   192-197    0.213       .  
+       1455.0   160-166    0.191       .  
+        283.0   165-170    0.175       .  
 
   y 420-458  (12 candidates)
      x-centre     y-range    IoU  in col  block-A cell
-       1543.0   424-443    0.658    True  н y424-443 TEST
-       1403.0   443-457    0.421   False  
-       1283.5   420-425    0.396   False  
-       1367.0   435-457    0.374   False  
-        742.0   420-435    0.242   False  
-        595.0   431-436    0.207   False  
-        608.5   442-452    0.205   False  
-        551.5   425-433    0.191   False  
-        562.0   435-442    0.191   False  
-        649.0   444-451    0.190   False  
-        913.0   420-426    0.164   False  
-        823.5   446-452    0.155   False  
+       1543.0   424-443    0.658     yes  н y424-443 HELD-OUT
+       1403.0   443-457    0.421       .  
+       1283.5   420-425    0.396       .  
+       1367.0   435-457    0.374       .  
+        742.0   420-435    0.242       .  
+        595.0   431-436    0.207       .  
+        608.5   442-452    0.205       .  
+        551.5   425-433    0.191       .  
+        562.0   435-442    0.191       .  
+        649.0   444-451    0.190       .  
+        913.0   420-426    0.164       .  
+        823.5   446-452    0.155       .  
 
   y 600-638  (19 candidates)
      x-centre     y-range    IoU  in col  block-A cell
-       1542.0   600-610    0.641    True  и y593-610 TEMPLATE
-       1423.0   601-614    0.579   False  
-       1545.5   615-633    0.512    True  б y615-633 TEST
-        228.0   628-637    0.394   False  
-         62.5   627-637    0.389   False  
-        240.0   632-637    0.331   False  
-        783.0   601-615    0.281   False  
-        655.0   616-626    0.279   False  
-       1069.5   615-623    0.241   False  
-        612.0   621-629    0.213   False  
-        628.5   625-637    0.208   False  
-        742.5   618-635    0.206   False  
-        590.5   626-633    0.203   False  
-        565.5   601-608    0.179   False  
-        529.5   603-608    0.179   False  
-        660.0   629-634    0.175   False  
-        837.0   603-608    0.173   False  
-        864.0   616-623    0.164   False  
-        899.0   603-615    0.161   False  
+       1542.0   600-610    0.641     yes  и y593-610 TEMPLATE
+       1423.0   601-614    0.579       .  
+       1545.5   615-633    0.512     yes  б y615-633 HELD-OUT
+        228.0   628-637    0.394       .  
+         62.5   627-637    0.389       .  
+        240.0   632-637    0.331       .  
+        783.0   601-615    0.281       .  
+        655.0   616-626    0.279       .  
+       1069.5   615-623    0.241       .  
+        612.0   621-629    0.213       .  
+        628.5   625-637    0.208       .  
+        742.5   618-635    0.206       .  
+        590.5   626-633    0.203       .  
+        565.5   601-608    0.179       .  
+        529.5   603-608    0.179       .  
+        660.0   629-634    0.175       .  
+        837.0   603-608    0.173       .  
+        864.0   616-623    0.164       .  
+        899.0   603-615    0.161       .  
 
   y 980-1018  (13 candidates)
      x-centre     y-range    IoU  in col  block-A cell
-       1541.0   983-1000   0.753    True  д y983-1000 TEST
-       1542.5  1004-1014   0.685    True  з y1004-1014 TEST
-         59.0   994-1006   0.376   False  
-        800.0   980-996    0.338   False  
-         63.0  1009-1017   0.322   False  
-         61.0   983-991    0.315   False  
-       1174.5   980-1008   0.298   False  
-       1148.0   998-1017   0.278   False  
-       1183.0   992-1002   0.237   False  
-       1219.0  1009-1017   0.220   False  
-       1198.5   991-998    0.216   False  
-       1181.5   999-1017   0.181   False  
-       1486.5   980-995    0.168   False  
+       1541.0   983-1000   0.753     yes  д y983-1000 HELD-OUT
+       1542.5  1004-1014   0.685     yes  з y1004-1014 HELD-OUT
+         59.0   994-1006   0.376       .  
+        800.0   980-996    0.338       .  
+         63.0  1009-1017   0.322       .  
+         61.0   983-991    0.315       .  
+       1174.5   980-1008   0.298       .  
+       1148.0   998-1017   0.278       .  
+       1183.0   992-1002   0.237       .  
+       1219.0  1009-1017   0.220       .  
+       1198.5   991-998    0.216       .  
+       1181.5   999-1017   0.181       .  
+       1486.5   980-995    0.168       .  
 
   total null candidates 57;  block-A glyphs among them 7
   PREDICTION was 4-7 of 57. candidates=57, contaminated=7 -> HOLDS
@@ -139,3 +139,49 @@ AAB-6  the published 'max over the four nulls' row, with block A removed
       0.55          2          1     1
       0.60          2          0     1
   (the published row is reproduced exactly, so this is a re-scope and not a correction)
+
+----------------------------------------------------------------------------------------------
+AAD-4  BOUNDARY TRUNCATION, quantified.  max glyph height = 23 px
+
+  region                  cands     >=0.30  >=0.35  >=0.40  >=0.45  >=0.50  >=0.55  >=0.60
+  R1                   6 -> 6             6       5       4       2       1       1       1
+    (dilated)                            6       5       4       2       1       1       1
+  y 160-198           13 -> 10           10      10       9       6       4       2       2
+    (dilated)                            9       9       8       7       4       2       2
+  y 420-458           12 -> 9             4       4       2       1       1       1       1
+    (dilated)                            1       1       1       1       1       1       1
+  y 600-638           19 -> 19            6       5       3       3       3       2       1
+    (dilated)                            5       5       4       3       3       2       1
+  y 980-1018          13 -> 8             6       3       2       2       2       2       2
+    (dilated)                            5       3       2       2       2       2       2
+
+  NULL MAX clipped                      10      10       9       6       4       2       2
+  NULL MAX dilated                       9       9       8       7       4       2       2
+
+  R1: 6 candidates clipped, 6 dilated -> UNCHANGED
+  highest null count at any threshold, either way: 10  (the bar is 14)
+  Run AFTER the verdict. Truncation can only have UNDER-counted the controls, so
+  removing it can only RAISE the bar R1 failed to clear -- never lower it.
+
+----------------------------------------------------------------------------------------------
+AAE-2  attributing the fall: centroid exclusion vs merging
+
+  region          clipped  overlap  centroid    >=0.30 >=0.35 >=0.40 >=0.45 >=0.50 >=0.55 >=0.60
+  R1                    6        6         6         6      5      4      2      1      1      1
+  y 160-198            13       15        10        13     13     12      9      6      2      2
+  y 420-458            12       15         9         3      2      2      2      2      2      2
+  y 600-638            19       21        19         6      6      5      4      4      2      1
+  y 980-1018           13       12         8         7      5      3      3      2      2      2
+
+  NULL TOTALS   clipped 57, overlap-kept 63, centroid-kept 46
+  dilation + overlap-keep CHANGES the count by +6: effects (a) and (b) together
+  the centroid exclusion then removes 17: effect (c) alone
+  net -11, so the fall is effect (c) and is partly offset by (a)+(b)
+
+  NULL MAX, the three variants, per threshold:
+    clipped (published)         10     10      9      6      4      2      2
+    overlap-kept                13     13     12      9      6      2      2
+    centroid-kept                9      9      8      7      4      2      2
+
+  highest null count across ALL THREE variants: 13  (bar is 14)
+  R1 under all three: 6, 6, 6

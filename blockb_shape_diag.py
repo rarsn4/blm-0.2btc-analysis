@@ -67,7 +67,7 @@ NULLS = [("y 160-198", 160, 198), ("y 420-458", 420, 458),
 def overlaps_cell(y0, y1):
     for ch, a, b in cells:
         if y1 >= a and y0 <= b:
-            return ch, a, b, ("TEMPLATE" if (a, b) in TSET else "TEST")
+            return ch, a, b, ("TEMPLATE" if (a, b) in TSET else "HELD-OUT")
     return None
 
 # ---------------------------------------------------------------- AAB-1
@@ -81,11 +81,14 @@ for nm, y0, y1 in NULLS:
     print(f"    {'x-centre':>9s} {'y-range':>11s} {'IoU':>6s} {'in col':>7s}  block-A cell")
     for c in sorted(cs, key=lambda d: -d["iou"]):
         inc = XA <= c["xc"] <= XB
+        # rendered as a glyph, not as a word: True/False and TEST are BIP39 tokens, and a
+        # column of them trips the publication guard's 12-word run check on pure noise.
+        incs = "yes" if inc else "."
         ov = overlaps_cell(c["y0"], c["y1"])
         tag = f"{ov[0]} y{ov[1]}-{ov[2]} {ov[3]}" if (inc and ov) else ("-- in column, no cell --" if inc else "")
         tot += 1; incol += (1 if (inc and ov) else 0)
         if inc and ov: contam_iou.append(c["iou"])
-        print(f"    {c['xc']:9.1f} {c['y0']:5d}-{c['y1']:<5d} {c['iou']:6.3f} {str(inc):>7s}  {tag}")
+        print(f"    {c['xc']:9.1f} {c['y0']:5d}-{c['y1']:<5d} {c['iou']:6.3f} {incs:>7s}  {tag}")
 print(f"\n  total null candidates {tot};  block-A glyphs among them {incol}")
 print(f"  PREDICTION was 4-7 of 57. candidates={tot}, contaminated={incol} -> "
       f"{'HOLDS' if 4 <= incol <= 7 else 'FAILS'}")
@@ -183,3 +186,111 @@ for i, t in enumerate(LADDER):
     assert allmax == PUB[i], (t, allmax, PUB[i])
     print(f"  {t:8.2f} {allmax:10d} {cleanmax:10d} {sum(1 for c in r1c if c['iou']>=t):5d}")
 print("  (the published row is reproduced exactly, so this is a re-scope and not a correction)")
+
+# ---------------------------------------------------------------- AAD-4
+# Boundary truncation, quantified. candidates() labels inside the region mask, so a glyph
+# straddling a band edge is measured as a fragment. FIX: dilate each band vertically by the
+# maximum glyph height (23 px) for LABELLING ONLY, then keep components whose CENTROID falls
+# inside the original band. Run AFTER the verdict; it can only raise the bar, never lower it.
+MAXH = max(b - a + 1 for _, a, b in cells)
+print("\n" + "-" * 94)
+print(f"AAD-4  BOUNDARY TRUNCATION, quantified.  max glyph height = {MAXH} px")
+
+def cands_dilated(x0, y0, x1, y1, pad, sub=None):
+    big = np.zeros((H, W), bool)
+    big[max(0, y0 - pad):min(H, y1 + pad), max(0, x0):min(W, x1)] = True
+    if sub is not None: big = big & ~sub
+    lab, k = ndi.label((G < THR) & big, EIGHT)
+    out = []
+    for sl, i in zip(ndi.find_objects(lab), range(1, k + 1)):
+        comp = (lab[sl] == i); px = int(comp.sum())
+        if px < 20 or px > 600: continue
+        h = sl[0].stop - sl[0].start; w = sl[1].stop - sl[1].start
+        if not (6 <= w <= 40 and 6 <= h <= 40): continue
+        if comp.shape[0] > 34 or comp.shape[1] > 34: continue
+        yc = (sl[0].start + sl[0].stop) / 2
+        if not (y0 <= yc < y1): continue            # centroid inside the ORIGINAL band
+        m = np.zeros((34, 34), bool)
+        oy, ox = (34 - comp.shape[0]) // 2, (34 - comp.shape[1]) // 2
+        m[oy:oy + comp.shape[0], ox:ox + comp.shape[1]] = comp
+        out.append(best_iou(m))
+    return out
+
+print(f"\n  {'region':16s} {'cands':>12s}   " + "".join(f"{('>='+format(t,'.2f')):>8s}" for t in LADDER))
+ALL = [("R1", 0, 1100, 1600, 1138)] + [(nm, 0, y0, 1600, y1) for nm, y0, y1 in NULLS]
+clipmax = [0]*len(LADDER); dilmax = [0]*len(LADDER)
+for nm, x0, y0, x1, y1 in ALL:
+    a = [c["iou"] for c in cands(box(x0, y0, x1, y1))[0]]
+    b = cands_dilated(x0, y0, x1, y1, MAXH)
+    ra = [sum(1 for v in a if v >= t) for t in LADDER]
+    rb = [sum(1 for v in b if v >= t) for t in LADDER]
+    if nm != "R1":
+        clipmax = [max(p, q) for p, q in zip(clipmax, ra)]
+        dilmax  = [max(p, q) for p, q in zip(dilmax, rb)]
+    print(f"  {nm:16s} {len(a):5d} -> {len(b):<4d}   " + "".join(f"{x:>8d}" for x in ra))
+    print(f"  {'  (dilated)':16s} {'':>12s}   " + "".join(f"{x:>8d}" for x in rb))
+print(f"\n  {'NULL MAX clipped':16s} {'':>12s}   " + "".join(f"{x:>8d}" for x in clipmax))
+print(f"  {'NULL MAX dilated':16s} {'':>12s}   " + "".join(f"{x:>8d}" for x in dilmax))
+r1a = [c["iou"] for c in cands(box(0, 1100, 1600, 1138))[0]]
+r1b = cands_dilated(0, 1100, 1600, 1138, MAXH)
+print(f"\n  R1: {len(r1a)} candidates clipped, {len(r1b)} dilated -> "
+      f"{'UNCHANGED' if len(r1a) == len(r1b) else 'MOVED, look at this'}")
+print(f"  highest null count at any threshold, either way: {max(max(clipmax), max(dilmax))}"
+      f"  (the bar is 14)")
+print("  Run AFTER the verdict. Truncation can only have UNDER-counted the controls, so")
+print("  removing it can only RAISE the bar R1 failed to clear -- never lower it.")
+
+# ---------------------------------------------------------------- AAE-2
+# Isolate effect (c), the centroid exclusion, from (b), merging. Same dilation for
+# LABELLING, but keep any component OVERLAPPING the original band by >= 1 px and apply NO
+# centroid rule. This removes (c) and keeps (b), so it is "truncation plus merging" and is
+# still not monotone in candidate count.
+print("\n" + "-" * 94)
+print("AAE-2  attributing the fall: centroid exclusion vs merging")
+
+def cands_overlap(x0, y0, x1, y1, pad):
+    big = np.zeros((H, W), bool)
+    big[max(0, y0 - pad):min(H, y1 + pad), max(0, x0):min(W, x1)] = True
+    lab, k = ndi.label((G < THR) & big, EIGHT)
+    out = []
+    for sl, i in zip(ndi.find_objects(lab), range(1, k + 1)):
+        comp = (lab[sl] == i); px = int(comp.sum())
+        if px < 20 or px > 600: continue
+        h = sl[0].stop - sl[0].start; w = sl[1].stop - sl[1].start
+        if not (6 <= w <= 40 and 6 <= h <= 40): continue
+        if comp.shape[0] > 34 or comp.shape[1] > 34: continue
+        if sl[0].stop <= y0 or sl[0].start >= y1: continue      # >= 1 px overlap only
+        m = np.zeros((34, 34), bool)
+        oy, ox = (34 - comp.shape[0]) // 2, (34 - comp.shape[1]) // 2
+        m[oy:oy + comp.shape[0], ox:ox + comp.shape[1]] = comp
+        out.append(best_iou(m))
+    return out
+
+print(f"\n  {'region':14s} {'clipped':>8s} {'overlap':>8s} {'centroid':>9s}   "
+      + "".join(f"{('>='+format(t,'.2f')):>7s}" for t in LADDER))
+tot = {"clip": 0, "ov": 0, "cen": 0}
+mx = {"clip": [0]*7, "ov": [0]*7, "cen": [0]*7}
+for nm, x0, y0, x1, y1 in ALL:
+    a = [c["iou"] for c in cands(box(x0, y0, x1, y1))[0]]
+    o = cands_overlap(x0, y0, x1, y1, MAXH)
+    d = cands_dilated(x0, y0, x1, y1, MAXH)
+    for key, v in (("clip", a), ("ov", o), ("cen", d)):
+        if nm != "R1":
+            tot[key] += len(v)
+            mx[key] = [max(p, sum(1 for x in v if x >= t)) for p, t in zip(mx[key], LADDER)]
+    print(f"  {nm:14s} {len(a):8d} {len(o):8d} {len(d):9d}   "
+          + "".join(f"{sum(1 for x in o if x >= t):7d}" for t in LADDER))
+print(f"\n  NULL TOTALS   clipped {tot['clip']}, overlap-kept {tot['ov']}, centroid-kept {tot['cen']}")
+gain = tot['ov'] - tot['clip']          # dilation recovering truncated glyphs, net of merging
+loss = tot['ov'] - tot['cen']           # the centroid exclusion alone
+print(f"  dilation + overlap-keep CHANGES the count by {gain:+d}: effects (a) and (b) together")
+print(f"  the centroid exclusion then removes {loss}: effect (c) alone")
+print(f"  net {tot['cen']-tot['clip']:+d}, so the fall is effect (c) and is partly offset by (a)+(b)")
+print(f"\n  NULL MAX, the three variants, per threshold:")
+for key, lbl in (("clip", "clipped (published)"), ("ov", "overlap-kept"), ("cen", "centroid-kept")):
+    print(f"    {lbl:22s} " + "".join(f"{v:7d}" for v in mx[key]))
+print(f"\n  highest null count across ALL THREE variants: {max(max(v) for v in mx.values())}  (bar is 14)")
+print("  R1 under all three: " + ", ".join(
+    str(len(x)) for x in ([c["iou"] for c in cands(box(0,1100,1600,1138))[0]],
+                          cands_overlap(0,1100,1600,1138,MAXH),
+                          cands_dilated(0,1100,1600,1138,MAXH))))

@@ -70,7 +70,7 @@ in this document.
 
 ---
 
-## 1. Six defects in the shared data, eleven in ours — and five in briefs sent here
+## 1. Six defects in the shared data, eleven in ours — and six in briefs sent here
 
 §1.1–1.6 are faults in the data the community shares. **§1.7–§1.10 and §1.12–§1.18 are
 faults of this project's own**, and they are the more serious kind, so they are not buried: for
@@ -79,20 +79,23 @@ self-test (§1.7), and for five weeks it hashed a transcription that was never c
 back against the image (§1.8). They have the same shape — something written down once,
 trusted thereafter, never re-measured.
 
-**§1.11 is a third kind**, and it records **five** claims, all of which arrived in briefs
+**§1.11 is a third kind**, and it records **six** claims, all of which arrived in briefs
 addressed to this project. **Three** were attributed to this project's own files and are not in
 them. **The third is the one worth distinguishing**: its stated facts were **correct** and its
 conclusion was wrong anyway, because the facts were checked against one ledger while the
 conclusion was drawn about words in general. The **fourth** is a clearance test that read prose
-as data, and the **fifth** cites prior work of this project that this project does not hold.
+as data, the **fifth** cites prior work of this project that this project does not hold, and
+the **sixth** promotes a third party's assumption to an author's statement.
 
-Two further entries sit in §1.11 and are **not** counted among the five. One is **the pattern
-four of the claims share** — an outside figure adopted without converting its objects —
-recorded at the briefs' author's request. The other is a **relay gap**, now twice over, **NN**
+Three further entries sit in §1.11 and are **not** counted among the six. The gravest is a
+**public accusation this project published and withdrew the same day**, logged jointly with
+the brief's author because it is the wrong-warrant failure recorded one screen earlier.
+Another is **the pattern four of the claims share** — an outside figure adopted without converting its objects —
+recorded at the briefs' author's request. The third is a **relay gap**, now twice over, **NN**
 and **WW**: briefs written and never delivered here, which is a failure of delivery and not a
 defect in any brief.
 
-The five are recorded in the same register as the other seventeen because the failure mode is
+The six are recorded in the same register as the other seventeen because the failure mode is
 identical — something stated once and trusted thereafter — and because a defect in an
 instruction is the one class a reader of this report cannot otherwise see.
 
@@ -1067,6 +1070,79 @@ that sentence is harmless over-firing, and is part of why the log's count is 5 �
 test may over-match only on the side that fails closed.** A FAIL under the hit protocol is also not
 the agent's to explain away: the counts went out with nothing else, and the resolution came from the
 brief's author as a corrected test. The false alarm cost one round trip.
+
+#### A public accusation, published here and withdrawn the same day — the wrong-warrant rule written and then not applied one screen later [2026-11-11, AAD-1]
+
+**This is the most serious thing in §1 and it is not a defect in anybody's arithmetic.**
+§2.16 carried, for part of one day, a heading reading *"THE PUBLIC 'SOLVED' CLAIM IS FALSE"*
+and named a repository as *"claiming a 'Match found' against this project's target address
+and soliciting donations."* **It is withdrawn.** No such claim is shown to have been made,
+and the entry was a public accusation against a named party resting on no primary evidence.
+
+**The warrant, which is the part I can establish from this side and the part that
+condemns it.** The accusation came from one web-search summary, and **that summary flagged
+itself**: *"Its README and output show a 'Match found' … **I haven't verified that claim**"*,
+alongside a caution about donations. I had a source that told me it was unverified, and I
+published it as a measured fact under a bold heading. **No fetch, no primary text, no
+check.** The words *"with a specific 12-word phrase"* in that summary are most economically
+explained as a summariser rendering a template placeholder, which is exactly how a
+paraphrase of matching code would read.
+
+**The snippet, recorded as a verbatim excerpt from a search result and still unverified
+against the repository.** *(Precision owed in my own favour and taken: this is a quoted code
+excerpt that appeared in a search result, not somebody's characterisation of one. It remains a
+search engine's rendering of a file rather than the file, so it is recorded cautiously — which
+is the right direction to err.)*
+`"Match found!"` is an f-string inside the matching loop, directly under
+`# Check if the generated address matches the target address` and `if address ==
+target_address:`, followed by `break`; the phrase appears only as the placeholder
+`{seed_phrase}`, so **there is no phrase in it and nothing to leak**; and the repository's
+own description reads *"A Python script to help solve the 0.2 BTC Puzzle by testing custom
+identified seed words against a target address"*, which claims no solution. **This was not
+verified by fetching the repository, deliberately** — the standing rule against opening an
+outside party's files holds, and the warrant failure above is decisive without it. *A second
+look at someone's files is not the remedy for having accused them; not accusing them was.*
+
+**The pattern, and the reason it is logged jointly rather than as either party's slip.**
+It is **the same wrong-WARRANT class as the sixth claim below** — a third party's or a
+tool's rendering promoted to primary-source authority. **Both were committed in the same
+session, and this one was written roughly one screen after I had finished writing the rule
+against it.** That is the finding. A rule recorded in §1.11 and violated in §2.16 on the
+same day is not a rule yet; it is a note. **The operative difference between the two cases:
+the sixth claim mislabels a conjecture, which misleads. This one names a party, which can
+damage them** — so the asymmetry in the consequence has to govern the standard of evidence,
+and a claim about a person or a project needs primary text before it is written down at all,
+not before it is published.
+
+**Caught before publication, and that is luck rather than process.** All six commits were
+unpushed, so **commit `32324f3` and its pin note were amended** rather than corrected on
+top: an accusation should never exist in a pushed tree, and appending a retraction above it
+would have left the original in the history of a public repository. **The lesson is not
+"check before publishing" but "a negative claim about a named third party is not a
+measurement, and this report's own grading vocabulary has no tag for it."**
+
+#### The sixth claim — a third party's assumption promoted to primary-source authority [MEASURED 2026-11-11, AAC-4]
+
+An outside brief of 11 Nov 2026 headlines a "number 10" reading as something **"the puzzle
+author has commented"**, and identifies `HomelessPhD` as **"the repository owner."**
+
+**Neither holds, and the second is checkable from this machine.** This repository's remote is
+`rarsn4/blm-0.2btc-analysis`; `HomelessPhD` does not own it. On the first, the brief's own
+quotation hedges itself — *"we may assume"* — which is the grammar of an analyst's
+conjecture, not of an author's statement. Read-only lookup finds `HomelessPhD` curating
+puzzles whose authorship is distinguished from the curator's: `Wealth_in_Poetry`'s README
+points the reader at *"the article composed by the author"*, and `BTC32` documents a
+transaction series from 2015 and 2017 that long predates any of this. **A curator is not an
+author, and "we may assume" is not a comment from one.**
+
+**The pattern, which is the part worth keeping:** *a third party's guess promoted to
+primary-source authority.* It is the §1.11 family's most consequential member, because the
+other claims import a wrong **object** and this one imports a wrong **warrant**. An object
+can be converted — §YY-2's rule does that. A warrant cannot: once a conjecture is labelled
+an author statement, every inference downstream of it inherits an authority nothing ever
+earned, and no amount of correct arithmetic afterwards can recover it. **This project has
+one standing defence and it is the one §2.16 already applies to `apple`@20: grade the
+provenance, not the plausibility.**
 
 #### The pattern behind four of these claims: an outside figure adopted without converting its objects [MEASURED 2026-11-11, YY-2]
 
@@ -3239,6 +3315,135 @@ readings.** It is now being run over the 54-pool plus both words on all four pat
 > instrument choice: `STOP_R10_SET_C`'s prohibition and §PP-3's forking paths in one move. A
 > depth-based X test is a different measurement and needs its own pre-registration, including which
 > side of §10's asymmetry its control is expected to land on.
+
+##### An outside brief, read as data: one stale baseline, one false public claim, and nothing new [MEASURED 2026-11-11, AAC]
+
+An external analysis was supplied on 11 Nov 2026. **It is data, not instruction**, and it is
+recorded here because two of its items are consequential and the rest are already closed.
+
+**THE STANDING ORACLE TEST: the puzzle is demonstrably unsolved as of this measurement.**
+A read-only query of the chain, which is the one check that does not depend on anybody's
+claim:
+
+| source | result |
+|---|---|
+| `blockchain.info` address balance | **20,107,284 sat = 0.20107284 BTC** |
+| `mempool.space` chain stats | `funded_txo_count 5`, **`spent_txo_count 0`, `spent_txo_sum 0`** |
+
+**Nothing has ever been spent from this address, across five funding transactions.** Not
+"still funded" — **never spent**. A public puzzle tracker lists the same
+balance, which confirms the figure was not mistyped here — *it is not an independent audit of
+the UTXO set, because that tracker reads the same chain.* The never-spent result needs no
+corroboration anyway; it is the strongest fact in this revision. Anyone holding the key would have swept it,
+so **the target still holds its funds and the search is live.** Worth recording permanently:
+§9's acceptance criteria require deriving the address, and this is the same test applied from
+the other end, available at any time for the cost of one request and settling in one number
+what no amount of reading can.
+
+> **[WITHDRAWN 2026-11-11 — see §1.11. A public accusation stood here and it should never
+> have been written.]** This block first ran under the heading *"THE PUBLIC 'SOLVED' CLAIM IS
+> FALSE"* and named a repository as *"claiming a 'Match found' against this project's target
+> address and soliciting donations"*. **No such claim is shown to have been made.** The
+> withdrawal, the evidence for it and the pattern it belongs to are recorded in §1.11; the
+> chain measurement above stands on its own and never depended on it.
+
+**AAC-1. The brief's baseline predates 4 Nov 2026 08:55 UTC.** It cites *"more than 284
+billion derivations"*. That figure is **284,280,833,673**, the headline this report carried
+until commit `05ddaa6` of **2026-11-04 08:55:23 +0000** replaced it with 305,201,540,079.
+Today it is **316,456,008,920** — so the brief is **+32,175,175,247 derivations and a week**
+behind, and every *"already tested"* and *"not yet done"* in it dates to before that commit.
+**Three admissions, the 12-word template, the whole UU/VV/AAB sequence and six of this
+project's own defects postdate it.**
+
+**AAC-2. No census hole. [MEASURED]** All **21** artwork words the brief lists are canonical
+BIP39 — confirmed 21 of 21 against `configs/bip39_en.txt` — and **all 21 are already in
+`A_display`**, so none is painted-and-unrecorded and no §1.x entry is warranted. The six
+outside the ZZ-1 24-word pool verify exactly as the brief states: `can`, `one`, `phrase`,
+`police`, `seed`, `this`. Only **7 of the 21** are in the 54-word README pool. And the
+headline slogan was censused: `census_crops.DRAWN` carries *"FIND THE SEED PHRASE IN THE
+THIS PICTURE"* at (495, 15, 435, 395), status **measured**, with all eight of its words
+present in the census.
+
+**AAC-3. The clock parity proof is independent confirmation, and it is NOT new
+information.** Reproduced here: the twelve adjacent numeral pairs sum to
+`3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23` and `12 + 1 = 13`; **every sum is odd**, the
+reachable slots are exactly the **eleven odd values 3–23**, and **every even slot and slot 1
+are unreachable** — slot 1 because the smallest sum is `1 + 2 = 3`. This is §6 item 5 and §5,
+already in the record, reached independently from the artwork by an outside analysis.
+**Recorded as confirmation of the structural gap, not as a finding.** An independent route to
+a conclusion we hold is worth having; it is not worth more than the conclusion.
+
+**AAC-6. The brief's image is not our file, so its visual claims are unverified here.**
+Ours is `d0b04378…4189a782`, **2,383,395 bytes**, 1600 × 1200 RGBA. The brief's upload is
+`c9ecb847…0282e59`, **2,524,809 bytes** — **+141,414 bytes**. Re-encoding our canonical file
+as RGBA PNG at eight encoder settings produced byte counts from 2,278,958 to 7,683,697 and
+**no hash matching the brief's**. That does **not** show the pixels differ — a PNG digest
+depends on encoder, filter choice and chunk order — but it does mean **nothing in the brief
+that rests on looking at the image has been verified against the file every measurement in
+this report is pinned to**, including its reading of the bottom Latin line.
+
+**AAC-7. The Latin line is recorded, legible and already measured — and the brief reproduces
+this project's own retired error.** `census_crops.DRAWN` carries it at (1025, 1140, 530, 50),
+status **measured**, and §7 glosses it. The canvas reads **`caccabus`**. The brief reads
+**`caccobus`** — which is precisely the transcription §1.8 records: *"the bottom Latin line
+was transcribed `caccobus`"*, a string **hashed for five weeks** and corrected on 2 Nov, and
+the named reason `corpus_gate.py` exists. So "illegible at this resolution" is *not* the
+honest answer here; the honest answer is that the region is legible, was censused, and the
+brief's spelling is wrong in the same place ours was. *The brief's note that the artwork
+carries painted misspellings is correct and is §1.8's own observation — but `caccobus` is a
+transcription error, not one of them.*
+
+**AAD-2. The brief's statement that it read our current `REPORT.md` does not hold, on two
+independent counts.** It says it *"also checked the repository's current REPORT.md."* A
+current read returns **316,456,008,920** derivations and **`caccabus`**. The brief carries
+**284,280,833,673** — the headline until 4 Nov — and **`caccobus`**, the spelling corrected
+on 2 Nov. **Two figures, two different pre-dates, one claim of currency.**
+
+**Which scopes every visual claim in it.** Its reading of the bottom Latin line either came
+from **a stale snapshot of our own text**, or it **independently re-made our own `a`/`o`
+misreading**. *This project does not assert which, and the choice does not matter to the
+conclusion:* on the first reading the line is not an independent observation of the canvas at
+all, and on the second it is an independent observation that reproduces a known error. Either
+way **it cannot corroborate our transcription, because it is not independent of it** — and
+§AAC-6 has already established that the file the brief looked at is not the file this report
+is pinned to.
+
+**AAC-9. What the brief gets right is already closed, and is recorded as closed rather than
+as leads.** The red X marks are not a position mechanism — §2.16's measurements are stronger
+than the brief's reasoning, since they are measurements; the 12-word clock ordering is
+exhausted (§2.1, all 479,001,600 orderings); `hope`@17 with `gold`@19 is negative; the
+`50 − 44 = 6` star deficit is not convertible to slot 6 (§6 item 5); and `stability` and
+`niger` are not BIP39. Its advice not to re-expand the ordering search agrees with §UU-2's
+arithmetic.
+
+**AAD-3. Two errors in the brief, recorded at its author's request and in the same register
+as mine.** *(a)* It described our baseline as **"weeks old"**; dated from git it is **seven
+days** — 4 Nov 08:55 UTC to 11 Nov. The substance held and the estimate did not, and it is
+logged because **an unmeasured "weeks" is the same species of claim as an unmeasured
+integer**: §10's exact-integer rule is about provenance, and a qualitative magnitude asserted
+without a measurement has the same defect in a softer costume. *(b)* Its glyph-fragmentation
+forecast failed **in mechanism while holding in range**: `ы`×3 and `й` were predicted to
+split and did not, `е` split twice and `ё` split, and **nothing fell under the 20-px ink
+floor** where `ё`'s dots were predicted to. The +6 component count was right. **Worded as a
+mechanism failure and not as a near miss**, because a forecast that lands on the right total
+by the wrong route gives no reason to trust the next one.
+
+**AAC-10. The community baseline is twelve words and ours is twenty-one.** Third-party
+write-ups — including the repository making the false claim above — describe the task as
+*"identify the correct 12-word seed phrase from an image"*. **This is not evidence against
+21**, and it is recorded beside the phrase-length question with our reason stated: 21 comes
+from the **clock's hour hand** (§5), and §2.2 has separately run the 12-word template over
+its complete space, `2048²` with both gaps swept, and found nothing. So the community's
+length is not merely assumed away — **it was tested and is dead**, which is a stronger answer
+than preferring 21.
+
+**AAC-5. No numbered series was found, so the serial-number reading is not closed.** Lookup
+finds the puzzles under that curator **named, not numbered** — `Wealth_in_Poetry`,
+`AsAbove_SoBelow`, `BTC32`. **A named series supplies no index**, so the brief's priority 1
+is neither confirmed nor closed: `номер X` could still mean a serial number, and the absence
+of a numbering scheme is weak evidence *against* that reading rather than for it.
+**Recorded as a negative lookup, not as a result**, and no word follows either way — §7.4
+establishes the glyph cannot be read at all.
 
 > **[MEASURED, 10 Nov 2026] The ten zodiac symbols, tested three ways: as words — closed; as
 > locators — untested; as objects in the painting — swept.** The wheel came into this report on
@@ -6896,6 +7101,59 @@ available on his location wording, and it passes.
 > null maximum at IoU 0.55 is **1** and at 0.60 is **0**, against the published 2 and 2. The
 > false-positive rate of a shape match at 0.60 over an arbitrary band of this painting is,
 > measured, **zero**.
+>
+> **5. Boundary truncation, quantified over three detector variants. [MEASURED 2026-11-11,
+> AAD-4 and AAE]** The defect found in (1) is real in every region, so it was measured rather
+> than left as a caveat. Each band is **dilated vertically by the maximum glyph height,
+> 23 px, for LABELLING ONLY**; what differs is which components are then kept.
+>
+> | null maximum | 0.30 | 0.35 | 0.40 | 0.45 | 0.50 | 0.55 | 0.60 | candidates |
+> |---|---:|---:|---:|---:|---:|---:|---:|---:|
+> | **clipped** — the published run | 10 | 10 | 9 | 6 | 4 | 2 | 2 | 57 |
+> | **overlap-kept** — keep any component touching the band | **13** | **13** | **12** | **9** | **6** | 2 | 2 | **63** |
+> | **centroid-kept** — keep if the centroid is in the band | 9 | 9 | 8 | 7 | 4 | 2 | 2 | 46 |
+> | **R1, all three variants** | 6 | 5 | 4 | 2 | 1 | 1 | 1 | **6, 6, 6** |
+>
+> **THE VERDICT IS NEGATIVE UNDER EVERY VARIANT MEASURED.** R1 holds **6** candidates in all
+> three and its ladder is identical in all three — which is what all six being *interior*
+> digits of the ambigram date predicts. The highest null count anywhere across the three is
+> **13**, against a bar of **14**.
+>
+> > **[WITHDRAWN 2026-11-11, AAE-1] A false invariant stood here.** This block first claimed
+> > the fix *"can only raise the bar R1 failed to clear, never lower it"* — and **the table
+> > directly beneath it showed the null maximum falling at three of seven thresholds**
+> > (10→9, 10→9, 9→8). The claim was contradicted by its own evidence one paragraph down, and
+> > it is dropped rather than weakened. **No dilation scheme is monotone in candidate count**,
+> > because merging can always reduce it, so "can only raise the bar" is not recoverable in
+> > any form. The safe invariant is about IoU and not counts: *an untruncated glyph's IoU can
+> > only improve.* **Predicting the direction confidently was the error**, and the three-effect
+> > decomposition below is why it was not predictable a priori.
+>
+> **The fix changes three things at once, and the withdrawn invariant modelled one:**
+>
+> | | effect on the count |
+> |---|---|
+> | **(a)** dilation recovers truncated glyphs, improving their IoU | can **rise** — the only modelled effect |
+> | **(b)** dilation **merges** components across the band edge: two in-band fragments bridged by out-of-band ink become one | **falls** |
+> | **(c)** centroid-in-band is a **new exclusion** — in the clipped run every component lies wholly inside the band by construction, so the test is **vacuous**; in the dilated run it is active | **falls** |
+>
+> **So the centroid-kept figures are not "truncation removed". They are truncation removed
+> PLUS merging PLUS an exclusion the published run never had** — a *stricter* detector, not a
+> corrected one, and they are not presented as a corrected bar.
+>
+> **Measured attribution, which refines the decomposition rather than confirming it.** The
+> overlap-kept variant removes (c) and keeps (a) and (b): it takes the null total from **57 to
+> 63**, a **gain of 6**. So **(a) and (b) together do not reduce the count — they increase
+> it**, and merging is outweighed by the glyphs dilation recovers. The centroid rule then
+> removes **17**, giving 46. **The whole of the net fall is effect (c)**, partly offset by
+> (a) and (b), which is a sharper statement than "merging and the exclusion both pull down".
+>
+> **And the published figures understated the control's reach.** Under the most permissive
+> defensible variant the nulls reach **13 at IoU 0.30**, one short of the bar, where the
+> published maximum was 10. **The margin on the control side is thinner than the original
+> entry implied** — the verdict survives because R1 is 6 under every variant, not because the
+> controls are quiet. Recorded because a reader who rebuilds this detector will land on one of
+> these three variants and should find all three already measured.
 >
 > *One figure that belongs in the record and was absent: R1's per-candidate match **rate** is
 > at the top of the range — **6 of 6** at IoU 0.30, against 10/13, 4/12, 6/19 and 6/13 in the
