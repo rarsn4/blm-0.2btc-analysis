@@ -75,8 +75,26 @@ def selftest():
     print(f"  {'ALL PASS' if ok else 'FAILURES PRESENT'}")
     return ok
 
+# [FIXED 2026-11-11, REPORT 1.17] This script used to read NO arguments at all, so
+# `python3 t12_family_check.py selftest` silently ignored the word and fell straight from
+# ALL PASS into the 10,240-phrase sweep, which ran for 120+ s before it was stopped by
+# hand. Arguments are now an allow-list, checked BEFORE anything is derived: a mode this
+# script does not know is refused, never treated as "run".
+MODES = {"": "self-test, then the sweep (the behaviour REPORT cites for X-3)",
+         "selftest": "self-test only, then exit 0 on ALL PASS or 1 on any failure",
+         "--selftest": "the same, spelled as verify_hit.py spells it"}
+_arg = sys.argv[1] if len(sys.argv) > 1 else ""
+if len(sys.argv) > 2 or _arg not in MODES:
+    print(f"refused: {' '.join(sys.argv[1:])!r} is not a mode this script knows."
+          " Nothing was derived.")
+    for k, v in MODES.items():
+        print(f"  {k or '(no argument)':14s} {v}")
+    raise SystemExit(2)
+
 if not selftest():
     raise SystemExit("self-test failed: nothing was derived")
+if _arg in ("selftest", "--selftest"):
+    raise SystemExit(0)                     # checks only: the sweep below is NOT reached
 
 # ---------------------------------------------------------------- the sweep
 TEMPLATE = ['subject','camera','tower','mask','police',None,'liberty',None,

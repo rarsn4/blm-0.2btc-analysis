@@ -368,6 +368,26 @@ def sweep(target=22638):
 
 if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "--count-only"
+    # [FIXED 2026-11-11, REPORT 1.17] The only exits before derivation used to be
+    # `mode == "--sweep"` and `mode == "--count-only"` -- an allow-list for STOPPING. Any
+    # other word fell through: it rewrote the tracked brain_image_keys.txt and then
+    # derived every corpus string against the REAL target with the live hit branch. So
+    # `--selftest`, which is exactly how verify_hit.py spells its own self-test, would have
+    # started a real run. Modes are now an allow-list for RUNNING, checked before anything
+    # is built, written or derived. corpus_gate.py execs this file under another __name__,
+    # so this block never runs under the gate and the gate's result cannot change.
+    KNOWN = {"--count-only": "enumerate, count, write the key list; no derivation",
+             "--run": "derive the MAXIMAL reading and compare against the target",
+             "--sweep": "the reading sweep",
+             "--selftest-plant": "positive control for the shape arm; capture to a *.log only"}
+    if len(sys.argv) > 2 or mode not in KNOWN:
+        print(f"refused: {' '.join(sys.argv[1:])!r} is not a mode this script knows."
+              " Nothing was built, written or derived.")
+        for k, v in KNOWN.items():
+            print(f"  {k:18s} {v}")
+        print("  For the derivation self-test use brain_corpus_selftest.py, which plants its own"
+              " target and touches nothing.")
+        sys.exit(2)
     if mode == "--sweep":
         sys.exit(0 if sweep() else 0)
 

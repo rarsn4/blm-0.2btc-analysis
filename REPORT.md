@@ -62,7 +62,7 @@ Claims below are tagged. Do not promote a tag without new evidence.
 | **[INFERRED]** | Follows from measured facts by a stated argument. |
 | **[ASSUMED]** | Load-bearing but unproven. The soft spots. |
 | **[COMMUNITY]** | A reading or convention taken from the shared solver corpus, not derived here. Weaker than [INFERRED]: no argument from this project's measurements backs it. `premise_audit.md`'s vocabulary, used in §5 from 9 Nov 2026. |
-| **[DEFECT]** | A fault in this project's own method or machine, found and dated. §1.7, §1.8, §1.9, §1.10, §1.12, §1.13, §1.14, §1.15, §1.16. §1.11 is the same register for a fault in material **sent to** this project, kept separate because it is not ours. |
+| **[DEFECT]** | A fault in this project's own method or machine, found and dated. §1.7, §1.8, §1.9, §1.10, §1.12, §1.13, §1.14, §1.15, §1.16, §1.17. §1.11 is the same register for a fault in material **sent to** this project, kept separate because it is not ours. |
 
 The distinction between [EXHAUSTED] and [TESTED] is the one that matters: §2.1–2.11
 are the first, §2.12 is the second, and conflating them would be the only overclaim
@@ -70,21 +70,22 @@ in this document.
 
 ---
 
-## 1. Six defects in the shared data, nine in ours — and four in briefs sent here
+## 1. Six defects in the shared data, ten in ours — and three in briefs sent here
 
-§1.1–1.6 are faults in the data the community shares. **§1.7–§1.10 and §1.12–§1.16 are
+§1.1–1.6 are faults in the data the community shares. **§1.7–§1.10 and §1.12–§1.17 are
 faults of this project's own**, and they are the more serious kind, so they are not buried: for
 five weeks this project accrued negatives on a solver binary that had never passed a
 self-test (§1.7), and for five weeks it hashed a transcription that was never checked
 back against the image (§1.8). They have the same shape — something written down once,
 trusted thereafter, never re-measured.
 
-**§1.11 is a third kind**, and it records **four** claims, all of which arrived in briefs
-addressed to this project. Two were attributed to this project's own files and are not in
+**§1.11 is a third kind**, and it records **three** claims, all of which arrived in briefs
+addressed to this project, plus one relay gap that is not a defect in any brief and is not
+counted. Two of the claims were attributed to this project's own files and are not in
 them. The third is different and worth distinguishing: its stated facts were **correct**, and
 its conclusion was wrong anyway, because the facts were checked against one ledger and the
 conclusion was drawn about words in general. It is recorded in the same register as the other
-fifteen because the failure mode is identical — something stated once and trusted thereafter —
+sixteen because the failure mode is identical — something stated once and trusted thereafter —
 and because a defect in an instruction is the one class a reader of this report cannot
 otherwise see.
 
@@ -823,6 +824,61 @@ re-measure: the note is prose.
 damage (it was the only one), and **pin notes no longer contain backticks at all** — the one
 remaining backtick in the file is from 9 Nov and predates this. Quoted heredocs from here on.
 
+### 1.17 [DEFECT, found 2026-11-10, closed 2026-11-11] A self-test fell through into a run, because the script never read its arguments — and a second script would have turned "--selftest" into a live run against the real target
+
+**What happened.** On 10 Nov, before publishing, the rule-8 target-blob check was run as
+`python3 t12_family_check.py selftest`. It printed ALL PASS and then **kept going into the
+10,240-phrase family sweep**, which ran for over 120 s until it was stopped by hand. [MEASURED]
+
+**The cause is not the one the description suggests.** There was no self-test branch that failed
+to exit. **`t12_family_check.py` read no arguments at all**: it runs its checks and then its sweep
+unconditionally, so the word `selftest` was silently ignored. It was passed because
+`old_electrum.py` uses that convention. **A script that ignores unknown arguments turns every
+mistyped or borrowed flag into its default action**, and here the default action is a run.
+
+**Every script in both trees that mentions a self-test was then checked for the same fall-through:**
+
+| script | argument handling | verdict |
+|---|---|---|
+| `t12_family_check.py` | read no arguments | **the 10 Nov defect** — fixed |
+| `brain_image_corpus.py` | exits early only on `--sweep` or `--count-only` | **a second, worse instance** — fixed |
+| `old_electrum.py` | `selftest` exits; anything else prints usage and stops | safe |
+| `verify_hit.py` | `--selftest` exits; unknown arguments exit 2 | safe |
+| `corpus_gate.py` | no self-test argument; runs only the gate | safe for this defect |
+| `brain_corpus_selftest.py` | takes no argument; runs only its checks | safe for this defect |
+
+**The second instance was latent and is the more serious one.** `brain_image_corpus.py`'s only
+exits before derivation tested `mode == "--sweep"` and `mode == "--count-only"` — an allow-list
+for *stopping*. **Any other word fell through: it rewrote `brain_image_keys.txt`, which is a
+tracked file, and then derived every corpus string against the real target with the live hit
+branch.** So `--selftest` — exactly how `verify_hit.py` spells its own self-test, and therefore
+the natural mistake — would have started a real run and edited the published record. Nothing in
+any log shows it was ever triggered; the only scripted invocation in either tree is
+`--selftest-plant` from `shape_arm_control.sh`.
+
+**Fixed, both the same way: arguments are an allow-list for RUNNING, checked before anything is
+built, written or derived.** An unknown mode is refused with exit 2.
+
+| check | result |
+|---|---|
+| `t12_family_check.py selftest` | **ALL PASS, exit 0, 1.1 s, sweep not reached** |
+| `t12_family_check.py` with `bogus`, `selftest extra`, `--run` | refused, exit 2, nothing derived |
+| `brain_image_corpus.py` with `--selftest`, `selftest`, `--rnu`, `--count-only extra` | refused, exit 2 |
+| `brain_image_keys.txt` after those calls | **byte-identical** |
+| `corpus_gate.py`, re-proved because its cache keys on the edited source | **GATE PASS**, all 35 measured elements, 34,354 strings |
+
+The no-argument behaviour of both scripts is unchanged: the X-3 entry cites
+`t12_family_check.py` run that way, and `--count-only` is `brain_image_corpus.py`'s documented
+default.
+The gate execs `brain_image_corpus.py` under a different `__name__`, so the new check never runs
+under it and cannot change its result.
+
+**The shape is §1.14's, one level down.** There a decision rule existed and nobody had run it
+against a null. Here an argument convention was assumed across scripts and nobody had checked that
+each script honoured it. **An exit condition written as "stop if X" is a default of "run";
+written as "run only if X" it is a default of "stop".** For any script that can derive against the
+real target, only the second is acceptable.
+
 ### 1.11 [DEFECT in material sent to this project, found 2026-11-10] Two measurements attributed to this repository do not exist in it, and a third claim was scoped to the wrong ledger
 
 **Found by looking for them before citing them**, which is the only reason this entry is
@@ -890,17 +946,39 @@ BIP39** and `horns` is not, and **`goat` *is* BIP39**. So the source end of that
 BIP39-reachable and the destination end is not — which is a sharper statement than the one
 offered, and it is the EE-1 discipline again: inflections are different tokens.
 
-#### The fourth claim — a cross-reference to a brief that was never sent [MEASURED 2026-11-10]
+#### Not a fourth claim: a relay gap — NN-1 to NN-4 were written and not delivered [CORRECTED 2026-11-11]
 
-A brief of 10 Nov 2026 instructed that a new §10 rule be *"paired with NN-1"*. **There is no
-NN-1.** The string `NN-1` occurs nowhere in this repository and nowhere in any transcript of it
-except inside that brief and this report's own echo of it; the lettered blocks of that session ran
-**LL → MM → OO → PP → QQ**, and **NN was never sent**. This is the third time the same shape has
-arrived — `FF-1`/`FF-2`/`FF-3`, `CC-1(c)` and the 36°-against-30° dial measurement were each cited
-as existing work and each absent — and it is recorded for the same reason: **the instruction built
-on it was sound**, so the rule was adopted on its merits and attributed to the brief that stated
-it, not to a precedent that cannot be read. *A rule is not strengthened by a citation nobody can
-follow.*
+*As first recorded on 10 Nov this entry was headed "a cross-reference to a brief that was never
+sent", said "There is no NN-1", and grouped it with the 36° dial. That classification was wrong
+and is corrected here, by marking.*
+
+A brief of 10 Nov 2026 cross-referenced a §10 rule to *"NN-1"*. **What this project can measure:**
+the string `NN-1` occurs nowhere in this repository and in no transcript held here — including the
+record from before the session's context was compacted — except inside that brief and this
+report's echo of it. **What it cannot measure:** whether NN existed. Its author states that
+**NN-1 to NN-4 were written on 10 Nov in reply to the MM results and were never relayed.** That
+statement is recorded as the author's, and **it cannot be verified from here** — this project
+holds no copy and no transcript containing one.
+
+**So the brief citing NN-1 had no defect. Its reference pointed at something real; the fault was
+in delivery.** That is a different thing from what the first two claims above record. The 36°
+measurement was cited as this repository's and, on its author's statement, **never existed
+anywhere**; NN existed and **was not delivered**. "Absent from every transcript held here" is
+true of both, and it is not evidence that the thing was never written. The 10 Nov wording took
+the first for the second.
+
+**The same correction applies to two items that entry grouped with it.** By §10's own withdrawal
+record, `FF-1`/`FF-2`/`FF-3` were *"issued to this project"* and FF *"was an exact test computed
+over the stemmed six"* — so FF existed and was not delivered either — and `CC-1(c)` *"was never
+located in any transcript"*. **Those are relay gaps by the record's own evidence**, not
+fabrications, and only the dial belongs in the misattribution class.
+
+**Consequence: §1.11 holds three defects in material sent here, not four**, and §1's heading is
+corrected accordingly. The relay gap stays recorded here because a reader following the §10
+citation would otherwise find nothing and draw the same wrong conclusion this entry did. NN-1's
+content is already adopted on its merits in §10; nothing is redone. NN-2 through NN-4 arrived on
+11 Nov as RR-2 to RR-4: RR-2 is §1.17, RR-3 is the design note under §2.17's block-B entry, and
+RR-4 confirms the withdrawn claims above stay.
 
 **What does not change.** The goat→devil chain still has **zero measured links**, and **no
 word enters any config from it** — not on the BIP39 path, where `devil` cannot be encoded,
@@ -6198,6 +6276,24 @@ available on his location wording, and it passes.
 > what is left is a shape-matched filter against block A's 42 measured glyphs. That is not
 > pre-registered and has not been run. Scripts `blockb_contrast.py`, output
 > `blockb_contrast.out`.
+>
+> **[DESIGN, recorded 2026-11-11 — not requested, not built] If that filter is ever built, block
+> A's 42 glyphs cannot be both template set and positive control.** A filter scored on the
+> glyphs it was built from recovers them by construction: §1.12(b)'s circularity in a new form.
+> The requirements, so the design exists before anyone is tempted:
+>
+> - **Split the glyphs.** Build templates from one half and measure recovery on the other. Split
+>   by **letter**, not by segmented group: segmentation gives 41 groups for 42 letters because
+>   two glyphs of `номер` touch, and that pair goes wholly into one half or is excluded.
+> - **Stratify the repeats.** A template can only recover a letter it has seen, so the repeated
+>   letters — `н` ×6, and `и`, `а`, `ы`, `о`, `р` ×3 each — are divided across both halves, and
+>   recovery is reported **separately** for letters present in both halves and letters unique to
+>   the test half. One pooled rate would hide which of those it is.
+> - **The same filter, unchanged, over the four null strips and over R1.** The nulls are the ones
+>   already declared in `blockb_contrast_plan.md` §5.
+> - **Pre-register the split, the nulls, and which side of §10's asymmetry the control is
+>   expected to land on** — before any of it runs. Given that the null strips already yield
+>   39–60 glyph-sized components, the expected side has to be argued, not assumed.
 
 **[MEASURED] What the ambiguity warning leaves untested, bounded.** The one word in the
 template that comes from a rune plaintext is `black`@10, from `чёрный день`. Across
@@ -7502,6 +7598,20 @@ fatal to correctness.
   stood for one commit. The scan that produced it was mine, and it agreed with what
   the census said should be there — which is rule one.
 
+  **The same rule applied one level up, and the result is worse.** The question
+  "where is this block?" was never asked of two of the three rune blocks until
+  9 Nov 2026 — and the arithmetic that places **three slots of the template** rests on
+  one of them. Slots **3** (`tower`), **13** (`moon`) and **21** (blank) are produced
+  by *adding* the numerals each clock hand falls between, and the only thing licensing
+  that addition is block B's caption `Сумма двух чисел`, whose 14 glyphs have no
+  measured location. The hand directions are measured; the addition is adopted from
+  `u/Amadeus407`'s 2021 reading of a block this project has never found. **The report
+  must say so wherever 3, 13 and 21 appear**, and now does: §2.17's clock rows and its
+  scope note, §7's hand table, §7's clock paragraph, and the open-question list. The
+  general form of the rule: a transcription with no measured location is somebody
+  else's measurement, and anything derived from it inherits that status no matter how
+  many of this project's own measurements sit downstream of it.
+
 - **A void is not symmetric. Which way it cuts depends on where the REGION's count
   sits, not on how loudly the control fires.** [Rule added 2026-11-10, after both
   cases occurred on the same day and were told apart by judgement with no written
@@ -7534,23 +7644,11 @@ fatal to correctness.
   while quoting figures that do not reproduce, §1.14's bands negative on identification
   after its count rule proved void. In each case the written rule was not the rule the
   conclusion used. Deciding in advance what the control is *for* is what would have
-  caught all three. *(The brief stating this rule cross-referenced it to an "NN-1"
-  that does not exist in this repository or in any transcript of it — §1.11's fourth
-  claim. The rule is adopted on its merits and attributed to that brief.)*
-
-  **The same rule applied one level up, and the result is worse.** The question
-  "where is this block?" was never asked of two of the three rune blocks until
-  9 Nov 2026 — and the arithmetic that places **three slots of the template** rests on
-  one of them. Slots **3** (`tower`), **13** (`moon`) and **21** (blank) are produced
-  by *adding* the numerals each clock hand falls between, and the only thing licensing
-  that addition is block B's caption `Сумма двух чисел`, whose 14 glyphs have no
-  measured location. The hand directions are measured; the addition is adopted from
-  `u/Amadeus407`'s 2021 reading of a block this project has never found. **The report
-  must say so wherever 3, 13 and 21 appear**, and now does: §2.17's clock rows and its
-  scope note, §7's hand table, §7's clock paragraph, and the open-question list. The
-  general form of the rule: a transcription with no measured location is somebody
-  else's measurement, and anything derived from it inherits that status no matter how
-  many of this project's own measurements sit downstream of it.
+  caught all three. *(The brief stating this rule cross-referenced it to "NN-1", a
+  brief which, on its author's statement, was written on 10 Nov and never relayed
+  here — a relay gap, recorded under §1.11, and not a missing document. NN-1's content
+  is this paragraph's second half. The rule rests on the cases above, not on the
+  citation.)*
 
 - **A pattern match against §8 needs a base rate before it counts.** The artwork
   is full of numbered sequences, absences and near-misses. "This looks like the
