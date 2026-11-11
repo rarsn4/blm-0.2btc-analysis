@@ -31,19 +31,23 @@ G2 = [n for n in E if n in PRE and paths(n) == FOUR]              # pre-patch,  
 G3 = [n for n in E if n in PRE and paths(n) == FOUR[:1]]          # pre-patch,  path 1,  comp
 odd = [n for n in E if n not in G1 + G2 + G3]
 assert not odd, odd
-assert len(G1) + len(G2) + len(G3) == len(E) == 84
+# Derived, never hardcoded: the ledger grows. The assertion that matters is that the
+# three groups PARTITION it -- a config with some other path set would land in `odd`
+# and stop this script rather than be silently dropped from a coverage figure.
+assert len(G1) + len(G2) + len(G3) == len(E), (len(G1), len(G2), len(G3), len(E))
+NRUN = len(E)
 
 box = {n: T.parse(os.path.join(T.DIR, n + ".conf")) for n in E}
 def U(names): return T.union_volume([box[n] for n in names])[0]
 
-print("UU-1  PATHS x ENCODINGS OVER THE ADMITTED LEDGER (84 21-word runs + T12 + T24)")
+print(f"UU-1  PATHS x ENCODINGS OVER THE ADMITTED LEDGER ({NRUN} 21-word runs + T12 + T24)")
 print("=" * 88)
 print(f"  G1  post-patch, 4 paths, compressed+uncompressed+hybrid : {len(G1):2d} runs")
 print(f"  G2  pre-patch,  4 paths, COMPRESSED ONLY                : {len(G2):2d} runs  {' '.join(G2)}")
 print(f"  G3  pre-patch,  PATH 1 ONLY, COMPRESSED ONLY            : {len(G3):2d} runs  {' '.join(G3)}")
 
 u_all, u1, u12 = U(E), U(G1), U(G1 + G2)
-print(f"\n  union, all 84          : {u_all:>20,} candidates  = {u_all // 128:>17,} derivations")
+print(f"\n  union, all {NRUN}          : {u_all:>20,} candidates  = {u_all // 128:>17,} derivations")
 print(f"  union, G1              : {u1:>20,}")
 print(f"  union, G1 + G2         : {u12:>20,}")
 
@@ -53,7 +57,7 @@ cells = [
   ("paths 2-4",                "compressed",           u12,   "G1 G2, T12, T24"),
   ("paths 2-4",                "uncompressed / hybrid", u1,   "G1, T12"),
 ]
-print("\n  COVERAGE TABLE, 21-word union by cell (T12, T24 listed; disjoint from every 21-word box)")
+print(f"\n  COVERAGE TABLE, 21-word union by cell (T12, T24 listed; disjoint from every 21-word box)")
 print(f"  {'path':26s} {'encoding':22s} {'21-word candidates':>20s} {'share':>7s}   covered by")
 for p, e, v, who in cells:
     print(f"  {p:26s} {e:22s} {v:>20,} {100*v/u_all:6.2f}%   {who}")
@@ -80,9 +84,13 @@ print("\n  WHAT THE RUNNING QUEUE CLOSES (projection; twins are admitted only on
 done_twins = [n for n in G3 if n[:-3] in E]                       # free2, free11, free20
 pend = [n for n in G3 if n[:-3] not in E]
 free4 = [n for n in pend if n == "t21_free4_p1"]
-for label, extra in (("now (admitted ledger)", []),
-                     ("+ t21_free4 (EXACT 11 Nov, not yet admitted)", free4),
-                     ("+ all 12 twins (queue complete, ~25 Nov)", pend)):
+# t21_free4 was admitted 11 Nov, so it is in the ledger row now and its own row would
+# duplicate it. The projection runs over the twins that have NOT yet been admitted.
+rows_proj = [("now (admitted ledger)", [])]
+if free4:
+    rows_proj.append(("+ t21_free4 (not yet admitted)", free4))
+rows_proj.append((f"+ the remaining {len(pend)} twins (queue complete, ~25 Nov)", pend))
+for label, extra in rows_proj:
     full = U(G1 + done_twins + extra)                              # all 12 cells
     p24  = U(G1 + G2 + done_twins + extra)                         # paths 2-4, any enc
     print(f"  {label:46s} all-12-cells {100*full/u_all:6.2f}%   "
@@ -96,17 +104,18 @@ print("  by any post-patch run: 4 paths, compressed only. The queue does not tou
 # has since gone to 84: t21_free2 and t21_free11 were admitted 9 Nov, both post-patch
 # 4-path twins of pre-patch _p1 boxes. Reproduce the 82-run figure, then this one.
 print("\n  AGAINST THE PUBLISHED FIGURE (rule 1: recompute, never adopt)")
-E82 = [n for n in E if n not in ("t21_free2", "t21_free11")]
-G1_82 = [n for n in G1 if n not in ("t21_free2", "t21_free11")]
+SINCE82 = ("t21_free2", "t21_free11", "t21_free4")   # twins admitted after that state
+E82 = [n for n in E if n not in SINCE82]
+G1_82 = [n for n in G1 if n not in SINCE82]
 u82, u1_82 = U(E82), U(G1_82)
 c82 = u82 - u1_82
 print(f"  82-run union            {u82:>20,}   (published 40,504,526,297,231)")
 print(f"  82-run compressed-only  {c82:>20,} = {100*c82/u82:5.2f}%   (published 22,692,382,618,411 = 56.02%)")
 print(f"  reproduced: union {'YES' if u82 == 40_504_526_297_231 else 'NO'}, "
       f"compressed-only {'YES' if c82 == 22_692_382_618_411 else 'NO'}")
-print(f"\n  84-run compressed-only  {u_all-u1:>20,} = {100*(u_all-u1)/u_all:5.2f}%")
+print(f"\n  {NRUN}-run compressed-only  {u_all-u1:>20,} = {100*(u_all-u1)/u_all:5.2f}%")
 d = c82 - (u_all - u1)
-print(f"  the two 9 Nov admissions re-covered {d:,} candidates with all three encodings,")
+print(f"  the admissions since re-covered {d:,} candidates with all three encodings,")
 print(f"  so the published 56.02% is STALE and the current figure is {100*(u_all-u1)/u_all:.2f}%.")
 print(f"  The union is unchanged at {u_all:,}: both twins are same-word-box runs and add 0 volume.")
 
@@ -118,7 +127,7 @@ P13   = [n for n in E if n.endswith("_p1")]
 P214  = ["t21_swap114", "t21_free2_p1"]
 LOO   = ["t21_loo6", "t21_loo8", "t21_loo14", "t21_loo15", "t21_loo18", "t21_loo21"]
 assert len(PRE29) == 29 and len(P13) == 13
-print("\n  EVERY ROW OF SECTION 3's TABLE, RECOMPUTED AT 84 RUNS")
+print(f"\n  EVERY ROW OF SECTION 3's TABLE, RECOMPUTED AT {NRUN} RUNS")
 print(f"  {'scope':34s} {'its union':>20s} {'compressed-only':>20s} {'now':>7s} {'was(82)':>8s}")
 was = {"all 29 pre-patch runs": "56.02%", }
 rows = [("all 29 pre-patch runs", PRE29, 22_692_382_618_411, 24_480_490_264_651),

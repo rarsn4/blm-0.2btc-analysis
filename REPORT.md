@@ -2783,6 +2783,17 @@ slot 20, on the primary path `m/44'/0'/0'/0/0`.
 > **is the one-path set.** So:
 >
 > *[9 Nov 2026: twelve, not thirteen — `t21_free20` closed slot 20 on 24–25 Oct, and
+> **[ADMITTED 11 Nov 2026] `t21_free4` closed slot 4**, the third of the twelve queued
+> four-path twins to complete. `exit=2` at 03:25:15 UTC after a **continuous** 35.87 h —
+> the launch and end timestamps give 129,137 s against a logged wall of 129,136.33, so it
+> never resumed, and rule 5's chunk-alignment requirement governs resume indices and does
+> not apply. Survivors **10,654,138,418** against the band **10,654,063,447.5 ± 101,122**
+> committed in `548e7b2` on 1 Nov, **eight days before launch**, `z = +0.741`; and
+> **IDENTITY EXACT** against the 10,654,138,418 its `_p1` twin logged, which the runner's
+> own `IDENT` map wrote to `queue_nov_scores.tsv`. Both detection arms 0 on its log.
+> **The union does not move** — same word box as `t21_free4_p1`, so it adds 0 candidates —
+> and what does move is §3's encoding coverage, recomputed in the same commit.
+>
 > `t21_free2` closed slot 2, admitted 9 Nov on an EXACT reproduction of
 > `t21_free2_p1`'s logged 10,653,915,344. Eleven remain: slots 1, 4, 5, 7, 9, 10, 11,
 > 12, 16, 17, 19 — and `t21_free11` closed slot 11, admitted the same day on an EXACT
@@ -4659,17 +4670,19 @@ already covered** by newer sweeps.~~
 > No replacement is asserted, because the figure cannot be traced to a computation.
 > For the quantity the sentence was describing, the two measured values are
 > **3.31%** at the 22-run ledger of 27 Sep and, as the same quantity,
-> **5.38%** at 84 evidenced runs.
+> **5.38%** at 85 evidenced runs.
 >
 > *[UNITS CORRECTED 9 Nov 2026. The series above was not comparable, and the mixing
 > started at the 24 Oct admission of `t21_free20`. `tally2.py` now splits the
 > double-count into the two quantities it had been adding together:*
 >
-> | | 84 evidenced + 12 asserted |
+> | | 85 evidenced + 12 asserted |
 > |---|---|
 > | **accidental overlap** — boxes that share candidates because they are variations on one template | **2,324,348,141,153** (**5.38%** of non-twin naive 43,199,107,704,973) |
-> | **path-twin overlap** — declared duplicates, each 100% inside its own `_p1` counterpart | **4,115,955,275,136** (`t21_free11`, `t21_free2`, `t21_free20`) |
-> | total, as printed before | **6,440,303,416,289** (13.61% of naive 47,315,062,980,109) |
+> | **path-twin overlap** — declared duplicates, each 100% inside its own `_p1` counterpart | **5,479,675,396,416** (`t21_free11`, `t21_free2`, `t21_free20`, `t21_free4`) |
+> | total, as printed before | **7,804,023,537,569** (16.03% of naive 48,678,783,101,389) |
+>
+> *[11 Nov: both rows above moved with `t21_free4`'s admission — a fourth declared twin adds its whole 1,363,720,121,280 box to path-twin overlap and the same amount to the naive sum, while the union is unchanged. The accidental-overlap row did not move, and that invariance is the point of splitting them: a twin cannot change accidental overlap, because twins are excluded from the non-twin naive it is a share of.]*
 >
 > *Which quantity did the published figures measure? **3.31%** at 22 runs was pure
 > accidental overlap — it predates every twin. **8.33%** at 82 runs was **mixed**:
@@ -4696,7 +4709,7 @@ box disjointification with real set intersections. Run it as
 `python3 tally2.py configs`.
 
 ```
-t21 campaign, 84 evidenced runs     316,456,008,920 derivations
+t21 campaign, 85 evidenced runs     316,456,008,920 derivations
   (= 84 t21 boxes + 2 carried tails: 24-word at /256, 12-word at /16)
 + the twelve older asserted runs    319,320,153,389
     marginal of the twelve          2,864,144,469
@@ -4743,7 +4756,7 @@ the z-score above, reached from the other side. This is the convention this sect
 already states under *"What ‘derivations’ means here, exactly"*: the ledger reports
 `⌊candidates / 128⌋`, **that is a convention, not a count**, and every run is
 z-tested against `N/128` rather than required to equal it. The convention applies to
-**all 84 evidenced rows**, not to this one specially; the residuals are signed and
+**all 85 evidenced rows**, not to this one specially; the residuals are signed and
 centred on zero, so the error is self-cancelling in aggregate and no total above
 needs adjusting. Recorded as a precision note, not a correction.
 
@@ -5394,12 +5407,12 @@ admitted run derive all four paths, is any run compressed-only, and what does th
 like. No runs; box algebra only. Script `coverage_paths_encodings.py`, output
 `coverage_paths_encodings.out`.
 
-**(a) Paths. Not all four.** From each config's own `PATH` lines, the 84 admitted 21-word
+**(a) Paths. Not all four.** From each config's own `PATH` lines, the 85 admitted 21-word
 runs fall into exactly three groups, with nothing left over:
 
 | group | runs | paths | encodings |
 |---|---:|---|---|
-| **G1** post-patch | **55** | all four | compressed + uncompressed + hybrid |
+| **G1** post-patch | **56** | all four | compressed + uncompressed + hybrid |
 | **G2** pre-patch | **16** | all four | **compressed only** |
 | **G3** pre-patch | **13** | **`m/44'/0'/0'/0/0` only** | **compressed only** |
 
@@ -5419,23 +5432,23 @@ carried constants differ from each other here: **T12** (`t12full_mp`, `exit=2` 9
 line for either config appears in any log**, so the date comes from git history rather than
 from a run record.
 
-**(c) The coverage table.** Shares are of the 84-run union, 40,504,526,297,231 candidates:
+**(c) The coverage table.** Shares are of the 85-run union, 40,504,526,297,231 candidates:
 
 | path | encoding | candidates covered | share | by |
 |---|---|---:|---:|---|
 | `m/44'/0'/0'/0/0` | compressed | 40,504,526,297,231 | **100.00%** | G1 G2 G3, T12, T24 |
-| `m/44'/0'/0'/0/0` | uncompressed, hybrid | 20,440,404,276,196 | 50.46% | G1, T12 |
-| `m/0'/0/0`, `m/0/0`, `m/44'/0'/0'/0/1` | compressed | 27,313,633,487,759 | 67.43% | G1 G2, T12, T24 |
-| `m/0'/0/0`, `m/0/0`, `m/44'/0'/0'/0/1` | uncompressed, hybrid | 20,440,404,276,196 | 50.46% | G1, T12 |
+| `m/44'/0'/0'/0/0` | uncompressed, hybrid | 21,779,329,486,180 | 53.77% | G1, T12 |
+| `m/0'/0/0`, `m/0/0`, `m/44'/0'/0'/0/1` | compressed | 28,652,558,697,743 | 70.74% | G1 G2, T12, T24 |
+| `m/0'/0/0`, `m/0/0`, `m/44'/0'/0'/0/1` | uncompressed, hybrid | 21,779,329,486,180 | 53.77% | G1, T12 |
 
 **Only path 1 compressed is complete.** Stated as exposure, which is the form that matters
 because a right phrase on an unchecked arm is a real miss:
 
-- **49.54%** of the admitted union — 20,064,122,021,035 candidates, **156,750,953,289
+- **46.23%** of the admitted union — 18,725,196,811,051 candidates, **146,290,600,086
   derivations** — has never been checked on the uncompressed or hybrid arm **on any path**.
-- **32.57%** — 13,190,892,809,472 candidates — has never been checked on paths 2–4 **at any
+- **29.26%** — 11,851,967,599,488 candidates — has never been checked on paths 2–4 **at any
   encoding**. That is G3's space, and it is a subset of the above.
-- **50.46%** is covered on all twelve path × encoding cells.
+- **53.77%** is covered on all twelve path × encoding cells.
 
 **The 56.02% published above is stale, and so are three of its four siblings.** [CORRECTED]
 That table was computed at 82 runs. `t21_free2` and `t21_free11` were admitted on 9 Nov as
@@ -5445,19 +5458,20 @@ section already documents, recurring. The 82-run figures were reproduced exactly
 being replaced (union *and* numerator, to the digit), so this is an update and not a
 disagreement:
 
-| scope | its union | compressed-only, 84 runs | now | was, 82 |
+| scope | its union | compressed-only, 85 runs | now | was, 82 |
 |---|---:|---:|---:|---:|
-| all 29 pre-patch runs | 24,480,490,264,651 | 20,064,122,021,035 | **81.96%** | 92.70% |
-| §2.13, the 13 `free*_p1` | 17,455,617,552,384 | 13,190,892,809,472 | **75.57%** | 90.62% |
+| all 29 pre-patch runs | 24,480,490,264,651 | 18,725,196,811,051 | **76.49%** | 92.70% |
+| §2.13, the 13 `free*_p1` | 17,455,617,552,384 | 11,851,967,599,488 | **67.90%** | 90.62% |
 | §2.14, `swap114` + `free2_p1` | 1,413,309,943,872 | 49,589,822,592 | **3.51%** | — |
 | §2.19, the six `loo` | 6,458,615,227,584 | 6,305,594,231,808 | 97.63% | 97.63% |
-| **the whole union** | 40,504,526,297,231 | 20,064,122,021,035 | **49.54%** | 56.02% |
+| **the whole union** | 40,504,526,297,231 | 18,725,196,811,051 | **46.23%** | 56.02% |
 
-Those two admissions re-covered **2,628,260,597,376** candidates with all three encodings.
-**§2.14 moved furthest, 1,413,309,943,872 down to 49,589,822,592** — `t21_free2` covers
-nearly the whole of that scope — and its 82-run numerator is left blank above rather than
-guessed, because the table never carried it as a separate figure. §2.19 is unchanged because
-neither twin touches it.
+**Three** twins have now been admitted — `t21_free2` and `t21_free11` on 9 Nov and
+**`t21_free4` on 11 Nov** — and together they re-covered **3,967,185,807,360** candidates with
+all three encodings. **§2.14 moved furthest, 1,413,309,943,872 down to 49,589,822,592** —
+`t21_free2` covers nearly the whole of that scope — and its 82-run numerator is left blank
+above rather than guessed, because the table never carried it as a separate figure. §2.19 is
+unchanged at 97.63% because none of the three touches it.
 
 **What the running queue closes, and what it does not.** Each `t21_freeN` twin is the same
 word box as its `_p1` run — that is the queue's identity test — on the current binary. So
@@ -5466,9 +5480,13 @@ a twin is admitted on completion and in band:
 
 | state | all twelve cells | never unc./hybrid | never paths 2–4 |
 |---|---:|---:|---:|
-| the admitted ledger now | 50.46% | 49.54% | 32.57% |
-| `+ t21_free4` (EXACT 11 Nov, not yet admitted) | 53.77% | 46.23% | 29.26% |
-| `+` all twelve twins (queue complete, ~25 Nov) | **83.03%** | 16.97% | **0.00%** |
+| the admitted ledger now, with `t21_free4` in it | **53.77%** | 46.23% | 29.26% |
+| `+` the remaining **nine** twins (queue complete, ~25 Nov) | **83.03%** | 16.97% | **0.00%** |
+
+*The row this table carried for `t21_free4` as a projection is gone because the run completed
+and was admitted: it predicted 53.77 / 46.23 / 29.26 and the measured figures are 53.77 /
+46.23 / 29.26. A projection that is checked is worth more than one that is not, so it is
+recorded that this one was.*
 
 **The queue closes the path gap entirely and leaves an encoding gap of 16.97%.** What
 remains is G2: sixteen runs on four paths, compressed only, which no queued run re-covers.
@@ -7228,11 +7246,17 @@ yields 5.40 × 10¹³**:
 > | the **32** words §LL-2 measured in the old list | `P(31,11) = `**`3,379,847,863,392,000`** | **71.07 million years** |
 >
 > **The outside pool is eight words short of the 32** — `32 − 24 = 8` — and §LL-2 measured
-> that set exactly: **24 in both ledgers and 8 old-Electrum-only.** The composition reported
-> for the 24-word pool, **19 both and 5 old-only**, is the brief's figure and is not
-> checkable here, because this project does not hold that pool; the **32 = 24 + 8** side is
-> this project's own measurement. Either way it is a subset, not a different reading of the
-> same set.
+> that set exactly: **24 in both ledgers and 8 old-Electrum-only.**
+>
+> *[VERIFIED 2026-11-11. The 24-word list was then supplied, so the composition is measured
+> here rather than attributed — the earlier "not checkable" was right about what this project
+> held, and wrong the moment the list arrived.* **19 in both ledgers, 5 old-Electrum-only, 0
+> in neither**, *splitting the given list against `configs/bip39_en.txt` and
+> `configs/electrum_old_en.txt`; the five old-only words are `after`, `breathe`, `new`, `pay`
+> and `stop`, which is exactly the five named. 19 + 5 = 24, eight short of the 32. The
+> figure needed no distrust.]*
+>
+> Either way it is a subset, not a different reading of the same set.
 >
 > **So the proposal is 62.62× less affordable than quoted, over the pool this project
 > actually measured.** The base-rate retirement above therefore stands with far more room

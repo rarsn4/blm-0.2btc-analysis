@@ -1,24 +1,24 @@
-UU-1  PATHS x ENCODINGS OVER THE ADMITTED LEDGER (84 21-word runs + T12 + T24)
+UU-1  PATHS x ENCODINGS OVER THE ADMITTED LEDGER (85 21-word runs + T12 + T24)
 ========================================================================================
-  G1  post-patch, 4 paths, compressed+uncompressed+hybrid : 55 runs
+  G1  post-patch, 4 paths, compressed+uncompressed+hybrid : 56 runs
   G2  pre-patch,  4 paths, COMPRESSED ONLY                : 16 runs  t21_readme54 t21_loo21 t21_loo6 t21_loo8 t21_loo14 t21_loo15 t21_loo18 t21_swap114 t21_written t21_pool75 t21_black6 t21_black8 t21_black14 t21_black15 t21_black18 t21_black21
   G3  pre-patch,  PATH 1 ONLY, COMPRESSED ONLY            : 13 runs  t21_free1_p1 t21_free2_p1 t21_free5_p1 t21_free7_p1 t21_free9_p1 t21_free10_p1 t21_free11_p1 t21_free17_p1 t21_free20_p1 t21_free4_p1 t21_free16_p1 t21_free12_p1 t21_free19_p1
 
-  union, all 84          :   40,504,526,297,231 candidates  =   316,441,611,697 derivations
-  union, G1              :   20,440,404,276,196
-  union, G1 + G2         :   27,313,633,487,759
+  union, all 85          :   40,504,526,297,231 candidates  =   316,441,611,697 derivations
+  union, G1              :   21,779,329,486,180
+  union, G1 + G2         :   28,652,558,697,743
 
   COVERAGE TABLE, 21-word union by cell (T12, T24 listed; disjoint from every 21-word box)
   path                       encoding                 21-word candidates   share   covered by
   path 1 (m/44'/0'/0'/0/0)   compressed               40,504,526,297,231 100.00%   G1 G2 G3, T12, T24
-  path 1 (m/44'/0'/0'/0/0)   uncompressed / hybrid    20,440,404,276,196  50.46%   G1, T12
-  paths 2-4                  compressed               27,313,633,487,759  67.43%   G1 G2, T12, T24
-  paths 2-4                  uncompressed / hybrid    20,440,404,276,196  50.46%   G1, T12
+  path 1 (m/44'/0'/0'/0/0)   uncompressed / hybrid    21,779,329,486,180  53.77%   G1, T12
+  paths 2-4                  compressed               28,652,558,697,743  70.74%   G1 G2, T12, T24
+  paths 2-4                  uncompressed / hybrid    21,779,329,486,180  53.77%   G1, T12
 
   EXPOSURE -- admitted candidates checked on FEWER than all 12 path x encoding cells
-  never checked uncompressed or hybrid, on ANY path :   20,064,122,021,035 = 49.54%  (156,750,953,289 derivations)
-  never checked on paths 2-4, at ANY encoding       :   13,190,892,809,472 = 32.57%  (103,053,850,074 derivations)
-  checked on all 12 cells                           :   20,440,404,276,196 = 50.46%
+  never checked uncompressed or hybrid, on ANY path :   18,725,196,811,051 = 46.23%  (146,290,600,086 derivations)
+  never checked on paths 2-4, at ANY encoding       :   11,851,967,599,488 = 29.26%  (92,593,496,871 derivations)
+  checked on all 12 cells                           :   21,779,329,486,180 = 53.77%
 
   CONSTANTS, not boxes (they intersect no 21-word box):
   T12 = t12full_mp        4,194,304 cand.  4 paths, 3 encodings  (exit=2 9 Nov 12:14:50 UTC)
@@ -27,9 +27,8 @@ UU-1  PATHS x ENCODINGS OVER THE ADMITTED LEDGER (84 21-word runs + T12 + T24)
         no exit= line for either in any log, so the date comes from git, not from a log.
 
   WHAT THE RUNNING QUEUE CLOSES (projection; twins are admitted only on completion)
-  now (admitted ledger)                          all-12-cells  50.46%   never-unc/hyb  49.54%   never-paths-2-4  32.57%
-  + t21_free4 (EXACT 11 Nov, not yet admitted)   all-12-cells  53.77%   never-unc/hyb  46.23%   never-paths-2-4  29.26%
-  + all 12 twins (queue complete, ~25 Nov)       all-12-cells  83.03%   never-unc/hyb  16.97%   never-paths-2-4   0.00%
+  now (admitted ledger)                          all-12-cells  53.77%   never-unc/hyb  46.23%   never-paths-2-4  29.26%
+  + the remaining 9 twins (queue complete, ~25 Nov) all-12-cells  83.03%   never-unc/hyb  16.97%   never-paths-2-4   0.00%
 
   After the queue, what remains short of all 12 cells is the G2 space not re-covered
   by any post-patch run: 4 paths, compressed only. The queue does not touch it.
@@ -39,18 +38,18 @@ UU-1  PATHS x ENCODINGS OVER THE ADMITTED LEDGER (84 21-word runs + T12 + T24)
   82-run compressed-only    22,692,382,618,411 = 56.02%   (published 22,692,382,618,411 = 56.02%)
   reproduced: union YES, compressed-only YES
 
-  84-run compressed-only    20,064,122,021,035 = 49.54%
-  the two 9 Nov admissions re-covered 2,628,260,597,376 candidates with all three encodings,
-  so the published 56.02% is STALE and the current figure is 49.54%.
+  85-run compressed-only    18,725,196,811,051 = 46.23%
+  the admissions since re-covered 3,967,185,807,360 candidates with all three encodings,
+  so the published 56.02% is STALE and the current figure is 46.23%.
   The union is unchanged at 40,504,526,297,231: both twins are same-word-box runs and add 0 volume.
 
-  EVERY ROW OF SECTION 3's TABLE, RECOMPUTED AT 84 RUNS
+  EVERY ROW OF SECTION 3's TABLE, RECOMPUTED AT 85 RUNS
   scope                                         its union      compressed-only     now  was(82)
-  all 29 pre-patch runs                24,480,490,264,651   20,064,122,021,035  81.96%   92.70%
-  sec 2.13, the 13 free*_p1            17,455,617,552,384   13,190,892,809,472  75.57%   90.62%
+  all 29 pre-patch runs                24,480,490,264,651   18,725,196,811,051  76.49%   92.70%
+  sec 2.13, the 13 free*_p1            17,455,617,552,384   11,851,967,599,488  67.90%   90.62%
   sec 2.14, swap114 + free2_p1          1,413,309,943,872       49,589,822,592   3.51%     --  
   sec 2.19, the six loo                 6,458,615,227,584    6,305,594,231,808  97.63%   97.63%
-  the whole union                      40,504,526,297,231   20,064,122,021,035  49.54%   56.02%
+  the whole union                      40,504,526,297,231   18,725,196,811,051  46.23%   56.02%
 
   (sec 2.14's 82-run numerator is not in the table as a separate figure, so its
    'was' column is left blank rather than guessed.)

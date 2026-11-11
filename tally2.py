@@ -300,7 +300,40 @@ EVIDENCED = ['t21_readme54','t21_loo21','t21_loo6','t21_loo8','t21_loo14','t21_l
              # would be reading noise.
              #
              # Both detection arms 0 on its log: wording 0, shape 0.
-             't21_free11']
+             't21_free11',
+
+             # [ADMITTED 11 Nov 2026] t21_free4, the third of the twelve queued
+             # four-path twins to complete, and scored on the same terms. The
+             # twin of t21_free4_p1, already in this list: same word box,
+             # 54^6 x 55 = 1,363,720,121,280, slot 4 freed to the 55-word list,
+             # so it adds 0 candidates and its full volume to path-twin overlap.
+             #
+             # exit=2 in queue_nov.log, Wed 11 Nov 03:25:15 UTC, wall
+             # 129,136.33 s = 35.87 h. Launched 9 Nov 15:32:58 UTC; the
+             # timestamps give 129,137 s against that logged wall, so the run
+             # was CONTINUOUS and never resumed -- rule 5's chunk-alignment
+             # requirement governs resume indices and does not apply here. The
+             # space is not a whole number of chunks (362.86), so the final
+             # chunk is partial, which is ordinary.
+             #
+             # Band from QUEUE_after_el22.md, the SAME 548e7b2 commit of
+             # 1 Nov 2026 17:11:34 UTC -- EIGHT DAYS before launch:
+             #     10,654,063,447.5 +/- 101,122  (stratified, SLOT 21 @POOL)
+             # survivors 10,654,138,418, z = +0.741.
+             #
+             # IDENTITY EXACT: the pre-launch table committed 10,654,138,418 for
+             # this config and the run logged 10,654,138,418. Required, not hoped
+             # for, and the runner's own IDENT map wrote EXACT to
+             # queue_nov_scores.tsv.
+             #
+             # Both detection arms 0 on its log: wording 0, shape 0.
+             #
+             # WHAT THIS ADMISSION MOVES, and it is not the union: being
+             # post-patch it re-covers its pre-patch twin's box on four paths and
+             # all three pubkey encodings, so REPORT's section 3 encoding-coverage
+             # figures move and the candidate union does not. Every one of them is
+             # recomputed in the same commit -- see coverage_paths_encodings.py.
+             't21_free4']
 ASSERTED  = ['t21_pool52','t21_pool52_rev','t21_pool40','t21_idx','t21_pathd','t21_pathe',
              't21_trust21','t21_trust21b','t21_bnw18','t21_bnw18b','t21_trustonly','t21']
 CHECKSUM = 128
