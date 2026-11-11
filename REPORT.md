@@ -7151,18 +7151,67 @@ yields 5.40 × 10¹³**:
 | pinned word plus 10 of the 31, all orderings of 11, `C(31,10) × 11!` | 1.77 × 10¹⁵ |
 | the full §2.6 hypothesis, `C(31,10) × 12!/2!` | 1.06 × 10¹⁶ |
 
-**Every one is 33× to 197× larger than the figure quoted.** The quoted number is therefore
-unreproduced here — and the direction is safe: pinning a word leaves the search *more*
-expensive than the brief says, not less, so the conclusion stands with room to spare. **A
-lead that cannot fail and cannot help is retired on both grounds**, and `old_electrum_dylan.py`
-was not built. **Nothing enters any config.**
+**Every one is 33× to 197× larger than the figure quoted.**
 
-> *A stale cross-reference noticed while placing this, flagged and not fixed: §10's rule
-> "a pattern match against §8 needs a base rate before it counts" says **four of §8's five
-> entries** were retired that way. §8 as it stands holds two artist marks and one monogram
-> inference, not five entries, so the count describes an earlier state of this section. What
-> the five were is not recoverable from the current text, which is why this is flagged rather
-> than corrected.*
+> **[CORRECTED 2026-11-11 — the figure reproduces, and the fault above is mine.]** The pool
+> is **23**, not 31. **`P(23,11) = 53,970,627,110,400`**, which is the `5.40 × 10¹³` quoted,
+> and it reproduces exactly — `math.perm(23,11)` and the longhand product
+> `23 × 22 × … × 13` over eleven terms agree to the digit. I searched six constructions and
+> every one of them used a pool of 31 or 54, because those are the numbers §2.6 names; **not
+> finding it is not the same as it not being there, and I wrote the stronger sentence.** The
+> paragraph above is kept as published and this is the marking.
+>
+> **That is the third time in two days I have reported the failure of my own search as a fact
+> about the world.** §1.11's relay gap — absent from every transcript here, recorded as never
+> written, corrected on 11 Nov. §1.11's fifth claim — two base64 matches, reported as a real
+> Dylan thread before I classified their context. And this. The shape is identical each time
+> and so is the fix: **state the search, not the conclusion** — "no construction I tried over
+> pools of 31 or 54 yields it" was available, true, and would have invited exactly the
+> correction that arrived anyway.
+>
+> One thing that *is* worth keeping from it: **the 23 is not grounded in this project's
+> objects.** §2.6 holds **32** `A_display` census words in the old list and **31** after
+> `breathe`; no pool of 23 appears anywhere in it. So the arithmetic is right and its input
+> is unsourced here — which is a weaker claim than "unreproduced" and the correct one.
+>
+> **And the exact integer is not the one a later brief wrote down.** A figure of
+> `53,971,462,732,800` was supplied for this quantity; the true value is
+> `53,970,627,110,400`, **high by 835,622,400**. Both render as `5.3971e+13`, so the error
+> is invisible in scientific notation and invisible downstream: the time is **1.135 million
+> years at 1.507 candidates/s on either figure**, identical to three significant figures.
+> **Every verdict here is unchanged.** See §10's rule on exact integers, which this produced.
+>
+> ***Found by an outside reader checking the arithmetic, not by this project.*** Credited
+> here as §1.11 credits reasoning: the correction is theirs, the error was in material sent
+> here, and the sentence it corrects was mine.
+
+**A lead that cannot fail and cannot help is retired on both grounds**, and
+`old_electrum_dylan.py` was not built. **Nothing enters any config.**
+
+> **[2026-11-11] On the published interpretations, with the distinction the same reader
+> drew, which is sharper than the one first offered.** Sources can establish **that** these
+> readings of that title exist. They cannot establish that their author intended any of
+> them, and **none of them is `12 + 35`** — the readings on offer are the product and a
+> scriptural citation. **Finding a published source for an interpretation is not evidence
+> that this puzzle's author used it**, and treating it as such would be §9 criterion 4 in a
+> new costume: a transformation justified by the result it produces. The base-rate
+> retirement above does not rest on any of this and is untouched by it.
+
+> **[SETTLED FROM GIT 2026-11-11] Where §10's "§8's five entries" went, and the answer is
+> that they moved.** This was flagged here as a stale cross-reference and is now resolved
+> rather than left open. `git log --all --reverse -S'A pattern match against' -- REPORT.md`
+> returns one commit, **`d30d8d3`, 2026-09-27 07:02:52 +0000**, whose subject ends
+> *"Section 8 retracted"*. Reading §8 at that commit: it is headed
+> *"**[RETRACTED]** The 'marked and withheld' pattern"* and holds **exactly five entries** —
+> the deleted *"a trusted"*, the unreadable glyph, *"1865 − 202…?"*, the star and course
+> deficits, and the third clock hand, which is the one that survives — under the sentence
+> *"Four of the five entries do not survive a base rate."*
+>
+> **All five are now §7.7**, under the same heading and with the same table, the survivor
+> included. So the rule was correct when written and the material was relocated afterwards.
+> **The cross-reference in §10 is corrected from §8 to §7.7**, which is outcome one of the
+> three the brief set out. Nothing about the rule changes; it had simply outlived the
+> section number it cited.
 
 ---
 
@@ -8081,10 +8130,45 @@ fatal to correctness.
   is this paragraph's second half. The rule rests on the cases above, not on the
   citation.)*
 
-- **A pattern match against §8 needs a base rate before it counts.** The artwork
+- **An exact integer is either printed exactly by the thing that computed it, or it is
+  not exact. A figure in scientific notation may never be re-rendered as digits.**
+  [Rule added 2026-11-11, from a case that is a new shape in this record.]
+
+  A quantity was computed by a tool that printed **`5.3971e+13`**. A brief then wrote it
+  out as **`53,971,462,732,800`** — fourteen digits of an integer that was never computed.
+  The true value is `P(23,11) = `**`53,970,627,110,400`**, so the written figure is **high
+  by 835,622,400**.
+
+  **This is not a miscalculation. Nothing was calculated wrongly: a rounded float was
+  transcribed as an exact value.** Call it **fabricated precision**. It is distinct from
+  every other defect in §1, and the distinction matters because the usual defences do not
+  reach it:
+
+  - **It survives rounding.** Both figures render as `5.3971e+13`, so re-deriving the
+    float reproduces it and confirms nothing.
+  - **It survives the downstream check.** At 1.507 candidates/s both give **1.135 million
+    years**, identical to three significant figures, so no verdict moves and no
+    sanity check fires. **The error is undetectable from its own consequences.**
+  - **It is invisible to §10's first rule**, "a number that lands where you expected is the
+    one to check twice" — this number lands where expected because it *is* the expected
+    number, to every digit anyone would look at.
+
+  **So the only defence is provenance, which is why the rule is about provenance and not
+  about arithmetic.** Digits beyond those the computing tool actually emitted are not
+  measurements. In practice: print integers with `:,` or `%d` and never `%e` or `:.4g` when
+  the integer is the object of interest; quote a figure in scientific notation **as**
+  scientific notation; and when a brief or a reader supplies an exact-looking integer,
+  recompute it rather than adopt it — rule one of the verification list, applied to
+  someone else's digits.
+
+  *This one was found by an outside reader checking the arithmetic. Two of the figures in
+  §7.7's own base-rate table and the `1,840` CPU-days of §2.6 were spot-checked against
+  their sources after it, and both are as printed.*
+
+- **A pattern match against §7.7 needs a base rate before it counts.** The artwork
   is full of numbered sequences, absences and near-misses. "This looks like the
   author's signature" is a hypothesis with a prior, and the prior is usually high
-  enough to explain the observation on its own. Four of §8's five entries were
+  enough to explain the observation on its own. Four of §7.7's five entries were
   retired by asking, once, how often the artwork produces that shape by accident.
   The one that survived did so because it had an independent measurement behind
   it, not because it looked more like a signature.
