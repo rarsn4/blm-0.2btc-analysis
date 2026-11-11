@@ -70,7 +70,7 @@ in this document.
 
 ---
 
-## 1. Six defects in the shared data, eleven in ours — and four in briefs sent here
+## 1. Six defects in the shared data, eleven in ours — and five in briefs sent here
 
 §1.1–1.6 are faults in the data the community shares. **§1.7–§1.10 and §1.12–§1.18 are
 faults of this project's own**, and they are the more serious kind, so they are not buried: for
@@ -79,10 +79,11 @@ self-test (§1.7), and for five weeks it hashed a transcription that was never c
 back against the image (§1.8). They have the same shape — something written down once,
 trusted thereafter, never re-measured.
 
-**§1.11 is a third kind**, and it records **four** claims, all of which arrived in briefs
+**§1.11 is a third kind**, and it records **five** claims, all of which arrived in briefs
 addressed to this project, plus one relay gap that is not a defect in any brief and is not
-counted. Two of the claims were attributed to this project's own files and are not in
-them; the fourth, on 11 Nov, is a clearance test that read prose as data. The third is different and worth distinguishing: its stated facts were **correct**, and
+counted. **Three** of the claims were attributed to this project's own files and are not in
+them; the fourth, on 11 Nov, is a clearance test that read prose as data, and the fifth cites
+prior work of this project that this project does not hold. The third is different and worth distinguishing: its stated facts were **correct**, and
 its conclusion was wrong anyway, because the facts were checked against one ledger and the
 conclusion was drawn about words in general. It is recorded in the same register as the other
 seventeen because the failure mode is identical — something stated once and trusted thereafter —
@@ -947,11 +948,17 @@ description (*"Old Electrum shares nothing with v2 but the name:"*), separated b
 boundary. It is left in place, because moving published text that reads correctly is churn.
 
 **Fixed.** All three remaining splits are moved, with no wording changed, and each new location was
-asserted to be followed by a new entry before it was written. **Rule: an insertion anchor is the end
+asserted to be followed by a new entry before it was written. *[11 Nov, later the same day: the
+audit caught three more of mine in the UU and VV blocks — UU-2 had severed "that half" from the
+even slots it refers to, UU-1 sat between a defect list and its conclusion, and VV-4 had put a
+base-rate retirement ahead of §8's closing line about upscaling, so that conclusion would have
+read as applying to it. All three were moved before any commit. The rule held; what did not hold
+was my choosing anchors by what looked like the end of a section. **The audit, not the rule, is
+what catches this** — it has now found six of the eight.]* **Rule: an insertion anchor is the end
 of an entry, and the line after the inserted block must open a new entry — a heading, a bullet, or a
 tagged paragraph or quote.** `insertion_audit.py` runs before every pin of this file.
 
-### 1.11 [DEFECT in material sent to this project, found 2026-11-10] Two measurements attributed to this repository do not exist in it, a third claim was scoped to the wrong ledger, and a fourth test read prose as data
+### 1.11 [DEFECT in material sent to this project, found 2026-11-10] Three claims attributed to this repository are not in it, a third was scoped to the wrong ledger, and a fourth test read prose as data
 
 **Found by looking for them before citing them**, which is the only reason this entry is
 here rather than in §2.16's text as a borrowed authority.
@@ -1054,6 +1061,36 @@ that sentence is harmless over-firing, and is part of why the log's count is 5 �
 test may over-match only on the side that fails closed.** A FAIL under the hit protocol is also not
 the agent's to explain away: the counts went out with nothing else, and the resolution came from the
 brief's author as a corrected test. The false alarm cost one round trip.
+
+#### The fifth claim — prior work of ours that is not here, and a false trail of my own [MEASURED 2026-11-11]
+
+A brief of 11 Nov 2026 referred to *"your earlier Dylan investigation concentrated on BIP39
+positions"* and asked whether such a lead exists in this record.
+
+**It does not. The string occurs nowhere in either tree** — no `.md`, `.py`, `.conf`, `.tsv`,
+`.sh` or `.txt` file in `blm-analysis` or the solver directory contains it, case-insensitively,
+and that is 0 files of the whole of both trees. This is §1.11's class as the brief itself
+anticipates: **a brief citing prior work of this project that this project does not hold.**
+It is not the relay-gap class either, because nothing is claimed to have been sent — it is
+claimed to be *here*.
+
+**A false trail I produced and then closed, recorded because I reported it out loud before
+checking it.** [DEFECT, mine] Grepping the project transcript found the string in **two early
+user messages**, which I stated as fact — it would have meant a real Dylan thread predating
+this brief. **Both hits are inside base64 image payloads**: `…B7DBPAcDYLANBmzb…` and
+`…VHkdyLAntmQ…`, where the letters fall out of encoded binary by chance. Classifying each
+match by whether its 61-character window is pure base64 alphabet separates them instantly —
+all genuine hits sit next to spaces and punctuation, all spurious ones do not. **Corrected:
+the only occurrences anywhere are the brief and this report's own echo of it.**
+
+**This is §1.15 and §1.11's fourth claim a third time: a text search over a file that
+contains encoded blobs over-matches, and the over-match looked like evidence.** Those two
+were prose read as data; this is binary read as prose. The rule that covers all three:
+**a grep is a measurement of a file's bytes, not of its meaning, and a file holding base64
+or hex is a file where a word-shaped match is expected by chance.** The fix is the same
+shape as TT-1b's — classify the match's context before believing the match.
+
+
 
 #### Not a claim: a relay gap — NN-1 to NN-4 were written and not delivered [CORRECTED 2026-11-11]
 
@@ -1565,6 +1602,54 @@ and the hypothesis in full is about `1.06e16` candidates.
 > as ~83,000×. **The probe answers the
 question "has anyone required `breathe` at two positions?" with "now someone has,
 for one set, and it is not the answer."** It does not touch the rest.
+
+##### No passphrase exists on this route, and no config claims one [MEASURED 2026-11-11, VV-1]
+
+**One line, so the next reader cannot misread the note in §2.6's membership block.** The
+record says `breathe` *"entered only as a passphrase, where no ledger applies"*. **Those
+passphrase runs are all on the BIP39 route, not this one** — and they could not be on this
+one, because this route has no passphrase to enter.
+
+Checked three ways, because the phrase is easy to misread as "an old-Electrum run with a
+passphrase":
+
+- **`old_electrum.py` has no passphrase parameter at all.** `from_words(words)` takes words
+  and nothing else, and `stretch_key` is 100,000 rounds of `sha256(x + seed_hex_ascii)` over
+  the seed hex alone. There is nothing to extend: seed extension arrived with Electrum **v2**.
+- **No config in either tree carries a passphrase field.** The complete set of directives in
+  use across all 414 configs is `SLOT`, `POOL`, `PATH`, `TARGET`, `WORDS`, `SCHEME`,
+  `BRAINHASH`, `BRAINSPACE`, `BRAINPUB`, `EXTRA`, `HASH`, `REQUIRE`, `CASE`, `FIX`. A
+  passphrase is not a config property: it is `--passphrases FILE` on the solver's command
+  line.
+- **`SCHEME electrum` in the CUDA solver is v2, not this route.** `upload_salt` builds
+  `"electrum" + pass` and runs PBKDF2-HMAC-SHA512 — the v2 salt prefix, where the passphrase
+  *is* the v2 seed extension. **The pre-2.0 route is not config-driven at all**: it is
+  `old_electrum.py` on the CPU, and there is no `SCHEME old-electrum` anywhere.
+
+**So the coherence check passes, and it passes for a structural reason rather than by
+luck: there are no old-Electrum configs, so no old-Electrum config can carry a
+passphrase.** Had one existed, it would have been incoherent and anything it reported void;
+none does, and nothing in §2.6 is affected.
+
+##### SCOPE: this route is implemented at 12 words only, and 24 is priced rather than searched [2026-11-11, VV-2]
+
+**`[SCOPE]` The old codec encodes any multiple of three words — three words carry 32 bits —
+so 12 words is 128 bits and 24 words is 256. Modern Electrum's own old-seed check is
+reported to accept 24-word old-format phrases as well as 12. This project implements
+12 only.** `old_electrum.py`'s `mn_decode` is exercised at 12 throughout, the self-test
+vector is 12, and the Tier-1 probe was 12. Everything §2.6 claims is therefore scoped to
+12-word old-format seeds, and the 24-word branch of this route is **untested, not
+eliminated**.
+
+**Priced, not searched, and it is worse than "squared".** The Tier-3 unit — every ordering
+of one fixed set, one word repeated — is `12!/2! = 239,500,800`, the **1,840 CPU-days**
+above. The 24-word analogue is `24!/2! = 3.10 × 10²³` orderings, which at the measured
+1.507 candidates/s is **2.38 × 10¹⁸ CPU-days**, about **6.5 × 10¹⁵ years**. The ratio is
+`24!/12! = 1.295 × 10¹⁵`, so it is not a squaring of the 12-word space but a multiplication
+of it by a factor larger than the 12-word space itself. **One line of consequence: pricing
+it is the whole treatment it gets, and nothing is queued.**
+
+
 
 ##### The ledger itself, verified against its source [MEASURED 2026-11-10]
 
@@ -3760,6 +3845,26 @@ Slots 2, 4, 10, 12, 16 and 20 are assigned entirely on counts that someone
 noticed and nobody validated. **No word at an even slot is written in the
 artwork.**
 
+**And that half is the half that cannot be afforded.** Free-one-fixed covered 13
+of 15 slots over 55 candidates each — 55/2048, **2.7% of the dictionary**.
+Testing one assigned slot against the whole dictionary means 2048 × 54⁶ × 2
+candidates, because freeing an assigned slot leaves six gaps pooled rather than
+five:
+
+| | derivations | wall time |
+|---|---|---|
+| one slot, 55 candidates (what was done) | 21,308,126,895 | 2.6 days |
+| one slot, full dictionary (what would settle it) | 793,437,161,472 | **98.6 days** |
+| all six even slots, full dictionary | — | **1.6 years** |
+
+Wall times at **11,925,000 candidates/s**, the mean of the five hot-started
+black runs of 27–28 September (§3); they scale inversely with any future rate.
+
+So the project's boundary is not compute in general. It is this: **the half of
+the template resting on an unstated mechanism is the half that would take a year
+and a half to check**, and the branch that would matter most — slot 10, whose
+support is a glyph nobody can read — is ninety-nine days on its own.
+
 **[MEASURED 2026-11-11, UU-2] DOES THE SOLVER SWEEP THE ORDER OF THE FIFTEEN? NO — IT FIXES
 THEIR SEQUENCE AND SWEEPS THE SIX GAPS.** Asked as a documentation query, answered from the
 configs. In the base template `t21_readme54` the fifteen assigned words are pinned one per
@@ -3815,26 +3920,6 @@ rather than from a search.
 > Nothing is proposed from this. It is recorded because the elimination headings in §2 are
 > read as being about words, and they are about words **in one arrangement** that no
 > measurement fixes.
-
-**And that half is the half that cannot be afforded.** Free-one-fixed covered 13
-of 15 slots over 55 candidates each — 55/2048, **2.7% of the dictionary**.
-Testing one assigned slot against the whole dictionary means 2048 × 54⁶ × 2
-candidates, because freeing an assigned slot leaves six gaps pooled rather than
-five:
-
-| | derivations | wall time |
-|---|---|---|
-| one slot, 55 candidates (what was done) | 21,308,126,895 | 2.6 days |
-| one slot, full dictionary (what would settle it) | 793,437,161,472 | **98.6 days** |
-| all six even slots, full dictionary | — | **1.6 years** |
-
-Wall times at **11,925,000 candidates/s**, the mean of the five hot-started
-black runs of 27–28 September (§3); they scale inversely with any future rate.
-
-So the project's boundary is not compute in general. It is this: **the half of
-the template resting on an unstated mechanism is the half that would take a year
-and a half to check**, and the branch that would matter most — slot 10, whose
-support is a glyph nobody can read — is ninety-nine days on its own.
 
 **[MEASURED] The ink treats `на чёрный день` as ordinary running prose.**
 `idiom_ink.py` segments the right-edge column and measures whether `чёрный день`
@@ -5248,6 +5333,14 @@ slot 2 to 55 candidates including `twin`"* — `t21_free2_p1`. The wrong groupin
 gave 115,253,293,465, about twelve times too small: the object was inferred
 instead of read.
 
+**A miscount cannot have swallowed a hit.** The survivor counter is a progress
+statistic: it records how many candidates passed the checksum filter. A HIT is a
+`hash160` comparison inside the kernel, and it never passes through that counter.
+So every defect discussed above — the resume reset, the unscored runs, the
+retracted dispersion figure — is a bookkeeping fault and not a search fault. What
+a counting error *can* hide is a coverage gap, which is why the chunk-alignment
+checks matter and the arithmetic does not.
+
 **[MEASURED 2026-11-11, UU-1] PATHS × ENCODINGS, THE WHOLE ADMITTED LEDGER AS ONE TABLE —
 and the figures above are stale at 82 runs.** Asked as a documentation query: does every
 admitted run derive all four paths, is any run compressed-only, and what does the grid look
@@ -5336,14 +5429,6 @@ Closing it would mean re-running those sixteen on the current binary. **Not prop
 — §3's argument that compressed-only is the right model for a BIP39 seed stands, and this
 block changes none of it. What it changes is that the size of the thing the argument is
 load-bearing for is now written down at the current ledger state rather than at 82 runs.
-
-**A miscount cannot have swallowed a hit.** The survivor counter is a progress
-statistic: it records how many candidates passed the checksum filter. A HIT is a
-`hash160` comparison inside the kernel, and it never passes through that counter.
-So every defect discussed above — the resume reset, the unscored runs, the
-retracted dispersion figure — is a bookkeeping fault and not a search fault. What
-a counting error *can* hide is a coverage gap, which is why the chunk-alignment
-checks matter and the arithmetic does not.
 
 **[SUPERSEDED] What survives of the original point — now measured; see
 "Effective number of independent runs" under the dispersion statement above.**
@@ -7033,6 +7118,51 @@ plain interpolation, with strokes reshaped and terminals sharpened.
 
 **Any reading of X taken from an upscaled image is a reading of the upscaler's
 guess.**
+
+**[RETIRED ON BASE RATE 2026-11-11, VV-4] The `12 & 35` → old-Electrum-index proposal.**
+A reading in which the integers **12** and **35** are combined and the result used as an index
+into the 1,626-word old-Electrum list. **It is retired on two independent grounds, and the
+first is the one that matters.**
+
+**It cannot fail. [MEASURED]** The list has **1,626** entries, and an integer indexes a word
+whenever it falls in 1…1626. Of the operations a reader would actually propose on 12 and 35 —
+sum **47**, product **420**, difference **23**, concatenation **1235** — **all four land in
+range and all four name a word.** Only a contrived one (`3512`) falls outside. So "the
+operation produces a word" is not an observation about this artwork at all: it is a property
+of combining small integers with a list of 1,626 things, and **a lead that returns a word for
+every reading of it distinguishes nothing.** §9's acceptance criteria already refuse this
+shape — *"no post-hoc transformations unless the image independently indicates them"* — and
+here the transformation is the entire content of the claim.
+
+*Recorded as the brief's statement and not as measurement: that the published readings of
+that title are 12 × 35 = 420 and Proverbs 27:15 rather than 12 + 35 = 47. This project holds
+no source for either and did not fetch one, so it is attributed, not adopted. It does not
+matter to the verdict — the base rate retires the proposal whichever reading is meant.*
+
+**It also cannot help, and here the brief's own figure does not reproduce. [CORRECTED]** The
+affordability note offered is *"one word pinned at a known position leaves 5.40 × 10¹³
+candidates, 1.1 million years at 1.507/s"*. The **time follows from the count** exactly
+(`5.40e13 / 1.507 = 1.135 × 10⁶` years), but **no construction over §2.6's own objects
+yields 5.40 × 10¹³**:
+
+| construction | candidates |
+|---|---:|
+| one word pinned, the other 11 chosen and ordered from the 31, `P(31,11)` | 3.38 × 10¹⁵ |
+| pinned word plus 10 of the 31, all orderings of 11, `C(31,10) × 11!` | 1.77 × 10¹⁵ |
+| the full §2.6 hypothesis, `C(31,10) × 12!/2!` | 1.06 × 10¹⁶ |
+
+**Every one is 33× to 197× larger than the figure quoted.** The quoted number is therefore
+unreproduced here — and the direction is safe: pinning a word leaves the search *more*
+expensive than the brief says, not less, so the conclusion stands with room to spare. **A
+lead that cannot fail and cannot help is retired on both grounds**, and `old_electrum_dylan.py`
+was not built. **Nothing enters any config.**
+
+> *A stale cross-reference noticed while placing this, flagged and not fixed: §10's rule
+> "a pattern match against §8 needs a base rate before it counts" says **four of §8's five
+> entries** were retired that way. §8 as it stands holds two artist marks and one monogram
+> inference, not five entries, so the count describes an earlier state of this section. What
+> the five were is not recoverable from the current text, which is why this is flagged rather
+> than corrected.*
 
 ---
 
