@@ -1,0 +1,141 @@
+AAB  DIAGNOSTICS ON THE BLOCK-B SHAPE FILTER
+==============================================================================================
+  image 1200 x 1600;  rune column x 1526-1557, y 36-1020 (runelib)
+  TEMPLATE 18 instances, TEST 24
+
+----------------------------------------------------------------------------------------------
+AAB-1  EVERY NULL CANDIDATE, and whether it is block A
+
+  y 160-198  (13 candidates)
+     x-centre     y-range    IoU  in col  block-A cell
+       1543.5   160-176    0.880    True  ь y154-176 TEMPLATE
+       1544.0   181-197    0.872    True  н y181-199 TEMPLATE
+       1241.5   164-175    0.526   False  
+       1299.5   160-176    0.524   False  
+       1299.0   178-193    0.494   False  
+       1241.5   178-191    0.473   False  
+       1213.5   160-169    0.449   False  
+       1214.0   169-197    0.417   False  
+       1270.0   191-197    0.400   False  
+       1272.0   168-187    0.360   False  
+       1135.0   192-197    0.213   False  
+       1455.0   160-166    0.191   False  
+        283.0   165-170    0.175   False  
+
+  y 420-458  (12 candidates)
+     x-centre     y-range    IoU  in col  block-A cell
+       1543.0   424-443    0.658    True  н y424-443 TEST
+       1403.0   443-457    0.421   False  
+       1283.5   420-425    0.396   False  
+       1367.0   435-457    0.374   False  
+        742.0   420-435    0.242   False  
+        595.0   431-436    0.207   False  
+        608.5   442-452    0.205   False  
+        551.5   425-433    0.191   False  
+        562.0   435-442    0.191   False  
+        649.0   444-451    0.190   False  
+        913.0   420-426    0.164   False  
+        823.5   446-452    0.155   False  
+
+  y 600-638  (19 candidates)
+     x-centre     y-range    IoU  in col  block-A cell
+       1542.0   600-610    0.641    True  и y593-610 TEMPLATE
+       1423.0   601-614    0.579   False  
+       1545.5   615-633    0.512    True  б y615-633 TEST
+        228.0   628-637    0.394   False  
+         62.5   627-637    0.389   False  
+        240.0   632-637    0.331   False  
+        783.0   601-615    0.281   False  
+        655.0   616-626    0.279   False  
+       1069.5   615-623    0.241   False  
+        612.0   621-629    0.213   False  
+        628.5   625-637    0.208   False  
+        742.5   618-635    0.206   False  
+        590.5   626-633    0.203   False  
+        565.5   601-608    0.179   False  
+        529.5   603-608    0.179   False  
+        660.0   629-634    0.175   False  
+        837.0   603-608    0.173   False  
+        864.0   616-623    0.164   False  
+        899.0   603-615    0.161   False  
+
+  y 980-1018  (13 candidates)
+     x-centre     y-range    IoU  in col  block-A cell
+       1541.0   983-1000   0.753    True  д y983-1000 TEST
+       1542.5  1004-1014   0.685    True  з y1004-1014 TEST
+         59.0   994-1006   0.376   False  
+        800.0   980-996    0.338   False  
+         63.0  1009-1017   0.322   False  
+         61.0   983-991    0.315   False  
+       1174.5   980-1008   0.298   False  
+       1148.0   998-1017   0.278   False  
+       1183.0   992-1002   0.237   False  
+       1219.0  1009-1017   0.220   False  
+       1198.5   991-998    0.216   False  
+       1181.5   999-1017   0.181   False  
+       1486.5   980-995    0.168   False  
+
+  total null candidates 57;  block-A glyphs among them 7
+  PREDICTION was 4-7 of 57. candidates=57, contaminated=7 -> HOLDS
+
+  cross-tabulation against the ladder: matches that ARE block A
+      IoU >=  all nulls   block-A   clean
+        0.30         26         7      19
+        0.35         22         7      15
+        0.40         16         7       9
+        0.45         12         7       5
+        0.50         10         7       3
+        0.55          7         6       1
+        0.60          6         6       0
+
+  HARD CHECK: any TEMPLATE instance falling in a strip must score best_iou = 1.000
+    y 160-198: TEMPLATE н y181-199  best_iou = 1.000000  PASS
+    y 160-198: TEMPLATE ь y154-176  best_iou = 1.000000  PASS
+    y 420-458: TEMPLATE а y402-421  best_iou = 1.000000  PASS
+    y 600-638: TEMPLATE и y593-610  best_iou = 1.000000  PASS
+
+----------------------------------------------------------------------------------------------
+AAB-2  DETECTOR RECALL: candidates() over the rune column itself
+  components passing the gate: 48   (dropped by the 34-px cut: 0)
+  of 42 cells: 39 recovered 1:1, 3 split, 0 dropped
+  RECALL = 39/42 = 92.9%
+  split:   е y202-217 -> 3 parts, ё y349-368 -> 3 parts, е y962-978 -> 2 parts
+
+  match curve of the RECOVERED set (detector + matcher end to end):
+      IoU >=     0.30    0.35    0.40    0.45    0.50    0.55    0.60
+    recovered       39      39      39      33      32      29      28
+    of 39 recovered
+
+----------------------------------------------------------------------------------------------
+AAB-3  the 34-px cut the plan did not authorise, per region
+AAB-4  equal area and ink, not equal label
+
+  region            rows  cols    ink px  cands  drop34  cand/1k ink
+  R1                  38  1600     29398      6       1        0.204
+  R1'                 38  1600     29398      6       1        0.204
+  y 160-198           38  1600      6854     13       4        1.897
+  y 420-458           38  1600      8064     12       2        1.488
+  y 600-638           38  1600      8218     19       7        2.312
+  y 980-1018          38  1600      4147     13       7        3.135
+  rune column        984    31      7260     48       0        6.612
+
+AAB-5  is R1-prime a second arm?
+  R1 6 candidates, R1-prime 6;  the disc removed 0
+  disc pixels inside R1: 2,144
+  -> NOT a second arm: identical candidate set
+
+  R1 per-candidate match rate against the busiest strip (AAB-7e):
+    IoU >= 0.30: R1 6/6   y 600-638 6/19
+    IoU >= 0.60: R1 1/6   y 600-638 1/19
+
+----------------------------------------------------------------------------------------------
+AAB-6  the published 'max over the four nulls' row, with block A removed
+    IoU >=  published  clean max    R1
+      0.30         10          8     6
+      0.35         10          8     5
+      0.40          9          7     4
+      0.45          6          4     2
+      0.50          4          2     1
+      0.55          2          1     1
+      0.60          2          0     1
+  (the published row is reproduced exactly, so this is a re-scope and not a correction)

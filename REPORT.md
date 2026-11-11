@@ -1879,8 +1879,11 @@ admitted by 33 published configs through `@FULL` alone, which is noise — `@FUL
 
 **One correction to the brief that requested this.** It states that all eleven are "BIP39 or
 old-Electrum or both, so all are reachable." **`cell` is old-Electrum only**, so it is not
-reachable by the BIP39 path at any slot — only on the path §2.6 prices at 1,840 CPU-days for
-one fixed set. It is in the same position as `devil` (§1.11): reachable in principle,
+reachable by the BIP39 path at any slot — only on the path §2.6 prices at **3,678.8**
+CPU-days for one fixed set of twelve **distinct** words (`12! = 479,001,600` at 1.507
+candidates/s). *[CORRECTED 2026-11-11: this read "1,840 CPU-days for one fixed set", which
+is the `12!/2!` figure and assumes a repeated word. It errs 2× in the direction that makes a
+run look affordable — see the note at §2.6.]* It is in the same position as `devil` (§1.11): reachable in principle,
 unsearchable in practice. The other ten are BIP39 and genuinely reachable.
 
 So of eleven pandemic-adjacent words, **four have ever been named by anyone** — and `phone`
@@ -2793,6 +2796,14 @@ slot 20, on the primary path `m/44'/0'/0'/0/0`.
 > own `IDENT` map wrote to `queue_nov_scores.tsv`. Both detection arms 0 on its log.
 > **The union does not move** — same word box as `t21_free4_p1`, so it adds 0 candidates —
 > and what does move is §3's encoding coverage, recomputed in the same commit.
+>
+> *[NOTE 2026-11-11, so a future tightening is not mistaken for a new defect.* **The band's
+> 101,122 and this script's 101,121.488 are the same figure computed two ways, and the gap
+> is 0.457.** *The 1 Nov band rounded the binomial sigma to 102,815 before multiplying by the
+> stratified factor — 102,815 × 0.983533 = 101,121.945, which rounds to 101,122. Today's
+> check multiplies the unrounded 102,814.535, giving 101,121.488. My band-reproduction test
+> used a tolerance of < 1 and so passed on either. Effect on the z: **0.741387** against
+> **0.741390**, a difference of 3.4 × 10⁻⁶. Nothing moves, and the admission holds on both.]*
 >
 > `t21_free2` closed slot 2, admitted 9 Nov on an EXACT reproduction of
 > `t21_free2_p1`'s logged 10,653,915,344. Eleven remain: slots 1, 4, 5, 7, 9, 10, 11,
@@ -6745,29 +6756,49 @@ available on his location wording, and it passes.
 > |---|---:|---:|---:|---:|---:|---:|---:|
 > | **power**, test glyphs whose letter is in the template | **12/12** | **12/12** | **12/12** | 11/12 | 11/12 | 11/12 | 10/12 |
 > | power, test glyphs whose letter is **not** | 12/12 | 12/12 | 12/12 | 6/12 | 4/12 | 2/12 | 2/12 |
-> | **max over the four null strips** | **10** | **10** | **9** | **6** | **4** | **2** | **2** |
+> | **max over the four null strips** *(contaminated — see below)* | **10** | **10** | **9** | **6** | **4** | **2** | **2** |
+> | **max over the four strips, block A removed** | **8** | **8** | **7** | **4** | **2** | **1** | **0** |
 > | **R1** (6 candidates in total) | 6 | 5 | 4 | 2 | 1 | 1 | 1 |
 > | `R1'` minus the dial disc | 6 | 5 | 4 | 2 | 1 | 1 | 1 |
 >
-> **No threshold is void.** The nulls never reach the 14 glyphs block B is said to carry —
-> they top out at 10 and fall to 2 — so for the first time on this question the criterion
-> discriminates. **And the test half is recovered at every threshold**, 12 of 12 up to 0.40
-> and 10 of 12 even at 0.60, so there is no no-power cell either. All seven thresholds are
+> **No threshold is void**, and that survives the contamination below: the contaminated
+> maxima top out at 10 and the clean maxima at 8, both far short of the 14 glyphs block B is
+> said to carry. **The test half is recovered at every threshold**, 12 of 12 up to 0.40 and
+> 10 of 12 even at 0.60 — but *that row scores the matcher on known glyph bounds and does
+> not exercise the detector*, which is scoped separately below. All seven thresholds are
 > usable, which no previous block-B instrument has managed: the count criterion had power
 > and no specificity (§1.14), and the detectors that had specificity had no power.
 >
-> **VERDICT: NEGATIVE, at R1 and at `R1'`, at all seven thresholds.** R1 holds **6**
-> glyph-sized candidates in total at the template's own threshold, against 13–19 in each null
-> strip — so it is *poorer* in glyph-shaped marks than an ordinary band of this painting, and
-> **it could not hold 14 matches from 6 candidates whatever the matching rule.**
+> **VERDICT: NEGATIVE at R1, at all seven thresholds, and it is not retracted by anything
+> below** — R1 holds **6** glyph-sized candidates at the template's own threshold and
+> **could not reach 14 from 6 under any matching rule.** The contamination found below only
+> raised the bar it failed to clear.
+>
+> **`R1'` is not a second arm and should not be reported as a second NEGATIVE.** The dial
+> disc covers just **2,144 px** of R1 and **removed zero candidates**: R1 and `R1'` are the
+> same candidate set, which is why every figure in the row was identical. One region was
+> tested, not two.
+>
+> **All six of R1's candidates are one catalogued feature.** Identified against §1.14's
+> boxes, every one falls inside the **ambigram date**, x 1012–1098, y 1098–1122 — the painted
+> `11.03.20`. Their IoUs are 0.333, 0.351, 0.405, 0.443, 0.490 and **0.612**, so the single
+> match at 0.60 is **one digit of a known date**. Nothing in R1 is unaccounted for, which is
+> the identification standard §1.14 established and a stronger result than the count.
 >
 > **My pre-registered expectation was wrong, and in the useful direction.** §5 of the plan
 > states: *"the nulls will OVER-fire, and this test will probably be VOID in the blocking
-> sense"*, reasoning that IoU on 6–40 px marks is a weak discriminator. It is not: the shape
-> filter drove the null counts from the **39–60 glyph-sized components** the contrast sweep
-> measured down to **≤ 10 matches**, which is exactly the condition the same section named as
-> what would make the test informative. Recorded because a pre-registration is worth more
-> when its failures are reported than when only its successes are.
+> sense"*, reasoning that IoU on 6–40 px marks is a weak discriminator. It is not. Recorded
+> because a pre-registration is worth more when its failures are reported than when only its
+> successes are.
+>
+> *[RE-SCOPED 2026-11-11. This paragraph first read that the filter "drove the null counts
+> from the 39–60 glyph-sized components the contrast sweep measured down to ≤ 10 matches".
+> **That is not a like-for-like comparison and the sentence is withdrawn.** The 39–60 were
+> glyph-**sized components** counted by a depth-based detector over seven depths; the ≤ 10
+> are **matches** counted by an absolute-threshold detector over seven IoU thresholds. Two
+> instruments, two units. What is true, and is the measurement: at `G < 130` each strip
+> yields **12–19 candidates**, of which **8 or fewer match at any threshold once block A is
+> removed, and none at 0.60**.]*
 >
 > **The unseen stratum is a measurement in its own right, not a shortfall.** It tracks the
 > seen stratum exactly up to 0.40 and then collapses — 6, 4, 2, 2 against 11, 11, 11, 10.
@@ -6784,6 +6815,94 @@ available on his location wording, and it passes.
 > depth below a local background instead of by absolute threshold — a different measurement
 > needing its own pre-registration, and **not** something to bolt on after seeing this
 > result, which is `STOP_R10_SET_C`'s prohibition and §10's post-hoc instrument rule.
+>
+> ##### Four defects in that measurement, found by an outside reader and measured here [2026-11-11]
+>
+> None of them retracts the NEGATIVE. Three weaken a supporting claim and one strengthens
+> the filter. Script `blockb_shape_diag.py`, output `blockb_shape_diag.out`.
+>
+> **1. The control was contaminated: the "null" strips contain block A.** `box(0, y0, 1600, y1)`
+> spans the **full width**, so it includes the rune column at x 1526–1557, and **all four
+> strips lie inside that column's y 36–1020.** The strips were never glyph-free.
+>
+> | | |
+> |---|---|
+> | null candidates in total | **57** |
+> | of those, block A glyphs | **7** — `ь` and `н` in y 160–198, `н` in y 420–458, `и` and `б` in y 600–638, `д` and `з` in y 980–1018 |
+> | matches at IoU ≥ 0.60 | **6, every one of them block A. Clean matches: 0.** |
+> | matches at IoU ≥ 0.55 | 7, of which 6 are block A |
+>
+> **The reader's prediction was 4–7 of 57 accounting for most or all of the 6 matches at
+> 0.60. It holds at the top of its range and on the stronger reading: all six.** The hard
+> check holds too — the four TEMPLATE instances overlapping a strip score
+> **`best_iou` = 1.000000** on their own `cells()` bounds, so the matcher is exact.
+>
+> *A second detector defect fell out of that check.* Those same glyphs score **0.880, 0.872,
+> 0.658, 0.641** as *candidates*, not 1.000, because `candidates()` labels components inside
+> the region mask and therefore **truncates any glyph straddling a region boundary**. `ь` at
+> y 154–176 is cut at 160, `н` at y 181–199 at 197, `и` at y 593–610 at 600. **A glyph on the
+> edge of a search band is measured as a fragment**, which is a flaw in every region this
+> detector has ever been pointed at, R1 included.
+>
+> **2. The detector had no positive control, and now has one.** The power row scores
+> `best_iou(R.mask(a, b))` on known bounds — it never calls `candidates()`, which is what the
+> verdict's "6 candidates in R1" comes from. Run over the rune column itself,
+> `candidates()` finds **48 components** and recovers **39 of the 42 glyphs one-to-one**:
+>
+> | | |
+> |---|---|
+> | **detector recall** | **39/42 = 92.9%** |
+> | split into parts | **3** — `е` y 202–217 into 3, `ё` y 349–368 into 3, `е` y 962–978 into 2 |
+> | dropped entirely | **0** |
+> | end-to-end match curve of the recovered 39 | 39, 39, 39, 33, 32, 29, **28** across the ladder |
+>
+> **So the negative is scoped to a detector that finds 92.9% of real glyphs**, and
+> end-to-end — detector plus matcher — the instrument recovers **28 of 42** at IoU 0.60 and
+> **39 of 42** at 0.40. *The reader's forecast of which glyphs would fragment was partly
+> wrong and is recorded as such: `ы`×3 and `й` were expected to split and did not, `е`
+> twice and `ё` did; 5 instances were predicted to fragment and 3 did; nothing fell under
+> the 20-px ink floor, where `ё`'s dots were expected to. The +6 extra components is right.*
+>
+> **3. A plan/code deviation: the 34-px cut.** The plan fixed `6 ≤ w ≤ 40, 6 ≤ h ≤ 40`; the
+> code then skips anything over 34 px, because a larger component cannot be centred in a
+> 34 × 34 canvas. **35–40 px was silently dropped.** It is **not** symmetric across regions:
+> **1** candidate in R1 against **4, 2, 7 and 7** in the strips and **0** in the column —
+> **20 from the controls against 1 from the region under test**, so the deviation made the
+> nulls look cleaner than they are. No verdict moves on it, and it is recorded because the
+> direction favoured the published result.
+>
+> **4. Equal label, not equal area — and this one runs the other way, in the negative's
+> favour.** The reader's hypothetical was that R1 might hold a third of the nulls' ink, which
+> would make "6 against 13–19" a fact about paint rather than about an inscription.
+> **Measured, it is the reverse:**
+>
+> | region | rows | ink px at `G < 130` | candidates | per 1,000 ink px |
+> |---|---:|---:|---:|---:|
+> | **R1** | 38 | **29,398** | 6 | **0.204** |
+> | y 160–198 | 38 | 6,854 | 13 | 1.897 |
+> | y 420–458 | 38 | 8,064 | 12 | 1.488 |
+> | y 600–638 | 38 | 8,218 | 19 | 2.312 |
+> | y 980–1018 | 38 | 4,147 | 13 | 3.135 |
+> | rune column | 984 | 7,260 | 48 | 6.612 |
+>
+> **R1 carries 3.6× to 7.1× MORE ink than any null strip and yields 7× to 15× fewer
+> glyph-shaped candidates per unit of it.** Its paint is in large connected shapes — the
+> ambigram date, the seal scroll, the frame lines, the top of the Latin inscription — not in
+> glyph-sized pieces. Normalising does not weaken the comparison; it is the strongest form of
+> it, and the figures above are now the ones that carry the negative rather than the raw
+> counts.
+>
+> **And the filter is better than published at the tight end.** With block A removed the clean
+> null maximum at IoU 0.55 is **1** and at 0.60 is **0**, against the published 2 and 2. The
+> false-positive rate of a shape match at 0.60 over an arbitrary band of this painting is,
+> measured, **zero**.
+>
+> *One figure that belongs in the record and was absent: R1's per-candidate match **rate** is
+> at the top of the range — **6 of 6** at IoU 0.30, against 10/13, 4/12, 6/19 and 6/13 in the
+> strips. **At n = 6 this establishes nothing**, cannot indicate an inscription, and is
+> entirely explained by all six being digits of one painted date. It is recorded because a
+> reader computing it independently should find it already noted rather than apparently
+> suppressed.*
 >
 > **Block B stays unlocated.** §2.17's three slots stay `[SCOPE]`, the decode is untouched,
 > and per the plan's §0 **no word enters any config from this**: a located block would have

@@ -313,7 +313,7 @@ EVIDENCED = ['t21_readme54','t21_loo21','t21_loo6','t21_loo8','t21_loo14','t21_l
              # timestamps give 129,137 s against that logged wall, so the run
              # was CONTINUOUS and never resumed -- rule 5's chunk-alignment
              # requirement governs resume indices and does not apply here. The
-             # space is not a whole number of chunks (362.86), so the final
+             # space is not a whole number of chunks (362.88), so the final
              # chunk is partial, which is ordinary.
              #
              # Band from QUEUE_after_el22.md, the SAME 548e7b2 commit of
