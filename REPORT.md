@@ -7181,23 +7181,51 @@ available on his location wording, and it passes.
 > | centroid-kept, all | 9 | 9 | 8 | 7 | 4 | 2 | 2 |
 > | **centroid-kept, clean** — the area-faithful figure | **7** | **7** | **6** | **5** | **2** | **1** | **0** |
 > | overlap-kept, all *(area-inflated)* | 13 | 13 | 12 | 9 | 6 | 2 | 2 |
-> | overlap-kept, **clean and centroid in-band** | **7** | **7** | **6** | **5** | **2** | **1** | **0** |
+> | overlap-kept, **clean and centroid in-band** — *the same candidate set as the row above, by construction (AAG-2)* | **7** | **7** | **6** | **5** | **2** | **1** | **0** |
 >
 > **The area inflation is measured, not bounded.** Of overlap-keep's 63 null candidates, **17
 > have their centroid outside the band**, at a maximum offset of **9.0 px** and a mean of 5.7 —
 > so the measured effective admission height is `38 + 2 × 9 = `**56 rows, a factor of 1.47**.
-> *(A worst-case bound of 82 rows and 2.16 was available from the 23 px dilation and the 40 px
-> size gate; the measured figure is about half it, because real glyph-sized components are
-> small and can only carry their centroid about half their height past an edge. The direction
-> of the objection holds; its magnitude does not, and the measured number is the one recorded.)*
+> *[Corrected 2026-11-12, AAG-1 — the clause here credited the brief's bound as a legitimate
+> worst case, and it was never a bound on anything.]* **82 rows and 2.16 are `38 + 2 × (h − 1)`
+> with `h = 23` — the offset of a component's EDGE.** Admission tests the **centroid**, so the
+> reachable offset is `(h − 1) / 2`. The offset-maximising configuration is 23 px outside the
+> edge plus 1 px inside, `h = 24`, centroid offset **11.5 px**, so the **correct worst case is
+> `38 + 2 × 11.5 = `61 rows, a factor of 1.61.** (`38 + 2 × 23 = `84 rows, factor 2.21, is the
+> pixel reach of the dilated label region and not an admission height; **82 is neither that nor
+> 61.**) **The measurement sits inside the corrected bound rather than at half of it:** 9.0 px,
+> 56 rows, 1.47 in the committed script's slice-midpoint convention; **9.5 px, 57 rows, 1.50**
+> in the pixel-centre convention the 11.5 bound is stated in — **83% of the bound.** It falls
+> short on one term and not on height: the max-offset candidate (null strip y 420–458, `h = 28`)
+> **attains the 23 px pad limit above the edge**, and overlaps the band by 5 px rather than 1,
+> each extra row inside pulling the centroid in 0.5 px — `11.5 − 0.5 × 4 = `**9.5 px exactly**.
+> The tallest out-of-band component is **32 px**, above 24, so height is not the limiting
+> factor. **The half-their-height reasoning is kept, because it is precisely why the centroid
+> bound is `(h − 1) / 2` and not `h − 1`** — the step the 82 skipped. Measured by
+> `blockb_shape_bound.py`. **The slip is filed against the brief and not against the bound:
+> the bound is sound, and the measurement is consistent with it, not half of it.**
+>
 > **Its 13 is therefore not a false-positive rate for a 38-row band, and is labelled as the
 > area-inflated upper bound it is.**
 >
-> **And with that inflation removed, overlap-keep agrees with the area-faithful variant
-> exactly: clean in-band maximum 7, which is at or below the clipped clean maximum of 8.**
-> That was predicted before the run. Dilation does reach further into the rune column, and
-> overlap-keep accordingly holds **8** block A glyphs against the clipped run's 7 — predicted
-> too, and small.
+> **And with that inflation removed, overlap-keep's clean figures are not merely at or below
+> the area-faithful variant's. They are IDENTICAL: 7, 7, 6, 5, 2, 1, 0 in both.** *[AAG-2. The
+> first version of this entry wrote "at or below the clipped clean maximum of 8", which is true
+> and weaker.]* The prediction registered before the run — at or below 8 — **holds at 7**.
+>
+> **[SCOPE] The identity is by construction, which makes it arithmetic and not corroboration.**
+> A centroid inside the band implies ≥ 1 px overlap, so centroid-keep is a **subset** of
+> overlap-keep, and filtering overlap-keep to in-band centroids recovers it exactly: `63 − 17 =
+> `**46**, with the candidate lists matching strip by strip (10, 9, 19, 8 — `blockb_shape_bound.py`).
+> Two readings of **the same candidate set** returning the same seven numbers confirms the
+> filter was applied correctly; it is not a second instrument, and it cannot replace the
+> comparison against the clipped run. **The genuinely independent pair is clipped against
+> centroid-kept:** different labellings (pad 0 against pad 23), different candidate sets (57
+> against 46), clean maxima **8 against 7**. That is the comparison carrying "the verdict is not
+> an artifact of the truncation defect", and it stands.
+>
+> Dilation does reach further into the rune column, and overlap-keep accordingly holds **8**
+> block A glyphs against the clipped run's 7 — predicted too, and small.
 >
 > **So all three variants agree once each is read in its own units**, and the clean
 > false-positive rate of a shape match at IoU 0.60 over an arbitrary band of this painting is
@@ -8762,7 +8790,15 @@ fatal to correctness.
   narrowest proposition that measurement reaches; and **where a correction arrives with its
   own figures, those figures are recomputed over this project's objects before anything is
   conceded to them** — §YY-2's rule, applied to criticism as well as to claims. A correction
-  is not more reliable than a claim for having been uncomfortable to receive.
+  is not more reliable than a claim for having been uncomfortable to receive. **And
+  recomputing a correction's figures includes asking whether the figure was ever valid, not
+  only whether it was tight.** [Clause added 2026-11-12, from the instance that prompted it.
+  The §2.17 entry above conceded the direction of a critic's objection and recomputed its
+  magnitude correctly — and then described the critic's figure as a worst-case bound that "was
+  available", crediting as legitimate a number that was a factor-2 slip and bounded nothing:
+  an edge offset where admission tests a centroid. **The rule as first written caught a wrong
+  MAGNITUDE and not a wrong STATUS.** A recomputation that lands comfortably below a cited
+  bound must still ask what the bound was a bound on.]
 
 - **An exact integer is either printed exactly by the thing that computed it, or it is
   not exact. A figure in scientific notation may never be re-rendered as digits.**
