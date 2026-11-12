@@ -8079,6 +8079,73 @@ yields 5.40 × 10¹³**:
 > new costume: a transformation justified by the result it produces. The base-rate
 > retirement above does not rest on any of this and is untouched by it.
 
+**[RETIRED ON BASE RATE 2026-11-12, AAL] A thematic external word list.** A list of ethnic
+terms, proposed on 12 Nov as a source of candidate words.
+
+> **This entry deliberately carries no provenance, and that is a first in this report.** The
+> source is not named, linked, quoted or committed, and no term from it is reproduced beyond
+> the eighteen below — which are ordinary entries in the public BIP39 list and are what the
+> measurement is about. **The repository is public**, and republishing a list of ethnic terms
+> from here would do harm that the citation cannot justify. **The consequence is stated rather
+> than disguised: the 433-term figure and the control rate below cannot be reproduced from
+> this report.** Every other figure in this entry is reproducible from this tree, and the
+> structural argument does not depend on any of them.
+
+**Attributed, not reproducible here.** The list holds **433** single-word terms, of which
+**18** are in canonical BIP39 — **4.2%** — against **57.1%** for a control list of ordinary
+common nouns. The direction is what matters and it is away from the hypothesis: **the proposed
+source produces BIP39 words at *below* the rate of unrelated common English**, because BIP39's
+2048 are curated common words with offensive terms excluded at construction.
+
+**What this project verified for itself. [MEASURED]**
+
+- All **18** named words are in `configs/bip39_en.txt` — **18 of 18**. They are `apple`,
+  `banana`, `brown` and `coconut`, with `flip`, `frog`, `green` and `large`, with `light`,
+  `monkey`, `north` and `place`, with `race`, `small`, `talk` and `wide`, and `wood` with
+  `yellow`. *They are written with connectors rather than as a bare sequence because eighteen
+  consecutive BIP39 words would otherwise register as a phrase run in the publication gate —
+  §1.13's guard working as intended on text that is not a phrase. The list is alphabetical and
+  is not an ordering of anything.*
+- `18 / 433 = `**4.16%**, consistent with the 4.2% stated.
+- **An independent control, since the brief's control list is not held here and no frequency
+  list is installed on this machine: the canvas's own painted vocabulary is 26.5% BIP39.**
+  From the tracked `word_census.tsv`, **32 of 110** distinct `A_display` words (**29.1%**) and
+  **8 of 41** `B_microtext` words (**19.5%**), 40 of 151 together. **The proposed list sits far
+  below the rate of the words actually painted on this canvas** — which is the comparison this
+  project can make, and a tighter one for this purpose than an external common-noun control.
+
+**One claim in the proposal does not survive measurement, and it is the membership claim.
+[MEASURED]** It states that none of the 18 appears in `A_display`, the 54-word pool, or any
+censused string. **`place` appears in all three.** It is in `word_census.tsv` as an
+`A_display` word flagged BIP39; it is in `census_crops.DRAWN` — row 35 of 35, resolved through
+the module's `AMENDMENT_TEXT` constant, which is why a naive text scan of the `DRAWN` block
+misses it — in the 13th Amendment copy painted on the canvas, *"…or any **place** subject to
+their jurisdiction"*; and it is one of the **54** words in `t21_free11.conf`'s `@POOL`, so it
+is not merely censused but **already swept**. Six of the 18 appear in config `POOL` or `SLOT`
+lines at all: `place` (144 configs), `apple` (113), `green` (2), `yellow` (2), `light` (1),
+`race` (1). *The other 17 are absent from `DRAWN`, and that part holds.*
+
+**This strengthens the structural argument rather than weakening it**, which is why the
+correction is recorded here and the retirement is not reopened. The proposal's own dichotomy
+is that an external list can only **restate words already censused** or **name words that are
+not painted**, and neither adds a candidate. **This list does both at once**: seventeen words
+that are not painted, and one that was already censused *and* already searched.
+
+**THE STANDING RULE, so the next thematic list is answered in one line: an external word list
+is not a source of candidates. The census is.** The candidate test is whether a word is
+**painted**, not whether it is thematically apt. The candidate space is fixed by
+`census_crops.DRAWN`'s 35 strings and the `A_display` census — **331 letters read glyph by
+glyph** — and a list can only ever suggest where to **re-read** the canvas. The canvas has
+been read.
+
+*The illustration is in the list itself.* `apple` is one of the 18 and is also slot 20's
+contested candidate — which it became from **an empty README table row** (§2.16) and nothing
+thematic. **A word appears on arbitrarily many unrelated lists**, and that is §7.7's base-rate
+point and the ground the `12 & 35` proposal above was retired on.
+
+**Nothing enters any config, no file was added to this tree, and no term from the source is
+recorded anywhere in it.**
+
 > **[SETTLED FROM GIT 2026-11-11] Where §10's "§8's five entries" went, and the answer is
 > that they moved.** This was flagged here as a stale cross-reference and is now resolved
 > rather than left open. `git log --all --reverse -S'A pattern match against' -- REPORT.md`
@@ -9073,6 +9140,16 @@ fatal to correctness.
   when one variant's admission rule **contains the other's by construction** (§1.11, seventh
   claim). This is the same test §10 already applies to instruments chosen after a result, turned
   on the warrant instead of the instrument.
+
+- **An external word list is not a source of candidates. The census is.** [Rule added
+  2026-11-12, from §8's AAL retirement.] The candidate test is whether a word is **painted**,
+  not whether it is thematically apt, and the candidate space is fixed by
+  `census_crops.DRAWN`'s 35 strings and the `A_display` census. A list from outside can only
+  restate words already censused or name words that are not painted; **neither adds a
+  candidate**, and the only thing such a list can legitimately propose is **where to re-read
+  the canvas**. Answer the next one in a line, and check the base rate before anything else:
+  a thematically apt list is not evidence that its theme is in the artwork, because a given
+  word sits on arbitrarily many unrelated lists.
 
 - **A check whose PASS can be produced by its subject not running is not a check, and a
   reproducibility check on untracked outputs is destructive unless the outputs are copied
