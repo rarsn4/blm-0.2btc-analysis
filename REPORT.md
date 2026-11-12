@@ -70,9 +70,9 @@ in this document.
 
 ---
 
-## 1. Six defects in the shared data, thirteen in ours — and seven in briefs sent here
+## 1. Six defects in the shared data, fourteen in ours — and seven in briefs sent here
 
-§1.1–1.6 are faults in the data the community shares. **§1.7–§1.10 and §1.12–§1.20 are
+§1.1–1.6 are faults in the data the community shares. **§1.7–§1.10 and §1.12–§1.21 are
 faults of this project's own**, and they are the more serious kind, so they are not buried: for
 five weeks this project accrued negatives on a solver binary that had never passed a
 self-test (§1.7), and for five weeks it hashed a transcription that was never checked
@@ -96,7 +96,7 @@ recorded at the briefs' author's request. The third is a **relay gap**, now twic
 and **WW**: briefs written and never delivered here, which is a failure of delivery and not a
 defect in any brief.
 
-The seven are recorded in the same register as the other nineteen because the failure mode is
+The seven are recorded in the same register as the other twenty because the failure mode is
 identical — something stated once and trusted thereafter — and because a defect in an
 instruction is the one class a reader of this report cannot otherwise see.
 
@@ -1026,6 +1026,52 @@ than done quietly or left unstated.
 
 **Rule: a committed script defines its objects at module level and runs its measurement under
 a `__main__` guard.**
+
+### 1.21 [DEFECT, found and closed 2026-11-12] A reproducibility check printed "identical" over a run that had crashed, because its pass condition was satisfied by the check not running
+
+The check was `diff before after` around a regeneration of `census_crops/`. It printed
+**`IDENTICAL: all 26 crops regenerate byte-for-byte`** over a generator that had **exited 1 on
+`ModuleNotFoundError`** and written nothing. The exit status was in the same command's output
+and caught it within the second, so no false figure entered this report.
+
+**The class is not §1.17's.** A fall-through is a script that runs when it was told to
+self-test, and it is fixed by reading `argv`. **This is a criterion that scores PASS on an
+empty input**: `diff` compares equal *precisely when* the generator writes nothing, so **total
+failure produces the success message.** That is §1.14 — a decision rule that scores positive
+on blank painting — and §1.12(b) — a test that cannot fail. The generalisation differs
+accordingly: **this one is fixed only by making the pass condition depend on the work having
+happened**, never by catching the particular way it did not happen.
+
+**The structural fix, which answers the destroyed bytes in the same stroke.** A regeneration
+check **moves the outputs aside and regenerates into an empty directory**. Then the previous
+bytes survive for comparison, and a generator that does not run leaves an empty directory,
+which cannot read as identical. It is `regen_check.sh`, and **it has a negative control**:
+pointed at a generator that raises `ModuleNotFoundError` it refuses with exit 2, reports *"no
+comparison is reported"*, and keeps the preserved copy. Pointed at a generator that runs but
+writes nothing it refuses as well.
+
+**It paid for itself on first use.** The run that would have been the bad check's second
+attempt instead preserved the previous crops — and comparing against them is what identified
+`e03_0.png`'s difference as a `float32` percentile in numpy 2.2.6 and recovered the original
+bytes (§2.15). **The loss the earlier check created was closed by the fix for the check.**
+
+**The brief's share, recorded because it is not this project's alone.** AAI's predecessor asked
+for the glance at `census_crops/` and did not say to preserve the outputs first. **The
+destruction happened inside a requested check whose preventing instruction was the brief's to
+give.** It is logged here rather than in §1.11 because the acting error was this project's and
+the omission is the kind that is only visible after the fact.
+
+**And the trigger was an undocumented trap:** `census_crops.py` lacked the
+`sys.path.insert(0, dirname(abspath(__file__)))` that the block-B scripts carry, so under
+`python3 -I` — which drops the script's own directory from `sys.path` — `from imgio import
+load_gray` fails. **Dropping `-I` to work around that is what silently switched numpy and PIL
+to `~/.local/lib`** and produced the one differing crop. The insert is now in the script, so it
+runs under `-I` and against the pinned stack; documenting the trap instead would have left the
+next person to take the same way out.
+
+**Rule: a reproducibility check on untracked outputs is destructive unless the outputs are
+copied first — and a check whose PASS can be produced by its subject not running is not a
+check.**
 
 ### 1.11 [DEFECT in material sent to this project, found 2026-11-10] Three claims attributed to this repository are not in it, a third was scoped to the wrong ledger, and a fourth test read prose as data
 
@@ -3168,14 +3214,57 @@ crops on disk, **25 regenerated byte-for-byte and one did not**: `e03_0.png`, th
 `IN THE THIS PICTURE` headline — §1.8's own element. Its entry in `ELEMENTS` and
 its crop parameters `(510, 345, 420, 65, 2, 0, 1, 97)` are **unchanged in every
 commit since `c8d9f39`**, so the difference is not a box edit, and the writer and
-`imgio`'s sha256 guard are unchanged too. **The stale bytes cannot now be
-characterised: sha256 `0efe6cfb…` was overwritten by the regeneration run before
-it was compared**, so whether the pixels differed or only the PNG encoding did is
-no longer establishable. That loss is this project's. It is the same shape as §1.16 —
-a command run in order to record a verification destroyed part of what it was
-recording — and it is recorded rather than left out. **What is established: the published table reproduces exactly, and one
-unpublished view on this machine did not match the script that is said to produce
-it.**
+`imgio`'s sha256 guard are unchanged too.
+
+> **[CORRECTED 2026-11-12, AAI-2. The paragraph above was written with the next one
+> reading "the stale bytes cannot now be characterised … no longer establishable".
+> They were characterised, they were not stale, and nothing was lost. The withdrawn
+> wording is kept here because it was the honest state of the record for one commit,
+> and because what replaced it was found only by building the fix for §1.21.]**
+>
+> **The file was never stale, and the bytes are back, bit for bit.** `0efe6cfb…` is
+> what `census_crops.py` produces **under this project's image stack — numpy
+> 1.21.5, PIL 9.0.1, scipy 1.8.0, recorded in §6** — and the directory holds those bytes again, the
+> sha256 matching the one recorded before the overwrite.
+>
+> **The cause is the interpreter, not the script.** `census_crops.py` could not run
+> under `python3 -I` (§1.21), so it was run without it — and dropping `-I` also drops
+> `-s`, which silently switched numpy and PIL from the system packages to
+> `~/.local/lib`: **numpy 2.2.6 and PIL 11.3.0.** numpy ≥ 2 returns a percentile in the
+> input's own dtype, `float32`, where 1.21.5 returns `float64`: for this crop
+> `lo = 134.98999` against `134.99`, a scale factor of `2.3392348289` against
+> `2.3392349326`. **1,528 of 109,200 pixels then shift by exactly ±1 grey level**, and
+> no pixel by more.
+>
+> **Why exactly one crop of 26, which is the part that is predictive.** Of the 26 crop
+> boxes, **exactly one has a percentile endpoint that is interpolated rather than a
+> sample value** — e03's `(510, 345, 420, 65)`, `lo = 134.99`. Every other box's
+> endpoints land on integers, where `float32` and `float64` agree exactly, and that is
+> why `e02_1`, which shares `hi_p = 97`, is untouched. **The crop that could move is the
+> one that moved.**
+>
+> **Two things this refutes, both of which were reasonable before it was measured.**
+> The prior that *"a numpy or PIL version change would move many crops, not one"* is
+> **false here** [MEASURED]: a version change moved exactly one, for a reason that says
+> in advance which one. And the leading hypothesis for the difference — *a local edit to
+> that element's box, run and then reverted without re-running* — is **refuted rather
+> than left untested**: the committed box produces the on-disk bytes today.
+>
+> **[MEASURED] The standing consequence: these crops reproduce only to within ±1 grey
+> level across numpy major versions.** That is another reason the published object is
+> the table and not the PNGs, and it is a second use for §6's record of the stack: it
+> names which numpy a byte-comparison of these crops is a comparison against.
+
+**[MEASURED 2026-11-12, AAI-2] The box frames the element correctly and the element is
+legible, checked by looking rather than inferred from the table.** Rendered at the
+committed box, `IN THE THIS PICTURE` is inside the crop and readable — including the
+doubled `THE THIS` that §1.8 turns on. Measured in `x 700–900`, the final word's ink
+body runs **y 378–401** with a faint tail to about y 414, where the handwritten
+micro-text line below begins (row ink jumps from ≤ 14 px to 60–97 px at y 415–416).
+**The box's bottom edge is y 409**, so it clips faint tail rows and no letter body. The
+box also contains the tail of the line above, `…PHRASE`, because the two lines overlap
+in the painting; that is element 2's line and not a framing error. **So §1.8's own
+element is sound, and the §1.21 loss is closed rather than merely bounded.**
 
 ---
 
@@ -8934,6 +9023,14 @@ fatal to correctness.
   when one variant's admission rule **contains the other's by construction** (§1.11, seventh
   claim). This is the same test §10 already applies to instruments chosen after a result, turned
   on the warrant instead of the instrument.
+
+- **A check whose PASS can be produced by its subject not running is not a check, and a
+  reproducibility check on untracked outputs is destructive unless the outputs are copied
+  first.** [Rule added 2026-11-12, from §1.21.] `diff before after` around an in-place
+  regeneration reports "identical" when the generator crashes and writes nothing, and destroys
+  the bytes it was meant to compare. The fix is structural and is the same for both failures:
+  move the outputs aside, regenerate into an empty directory, and let the comparison be against
+  a copy that survives. `regen_check.sh`, with its negative control.
 
 - **An exact integer is either printed exactly by the thing that computed it, or it is
   not exact. A figure in scientific notation may never be re-rendered as digits.**

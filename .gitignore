@@ -2,3 +2,4 @@ __pycache__/
 REPORT.md.bak
 *.log
 census_crops/
+.regen_prev/

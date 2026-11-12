@@ -13,10 +13,14 @@ filled and mirror-written letterforms count as written.
 Nearest-neighbour scaling only: every output pixel is a source pixel.
 """
 import os
+import sys
 
 import numpy as np
 from PIL import Image
 
+# AAI-1: without this the script cannot run under `python3 -I`, which drops the script's own
+# directory from sys.path, and `from imgio import load_gray` fails with ModuleNotFoundError.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from imgio import load_gray
 
 G = load_gray()
