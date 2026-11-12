@@ -126,11 +126,41 @@ def elements():
     print("  available by choosing a direction the measurement does not fix.")
 
 
+def twelve_word_scope():
+    """AAO-1: why an ordering mechanism is worth something only for the fifteen-word template.
+
+    Section 2.1 enumerated the 12-word clock set over ALL 12! orderings, so for twelve words
+    the order is not assumed -- it is exhausted. The ratio of orderings is NOT a ratio of work,
+    and this prints both so a later reader cannot read one as the other.
+    """
+    f12, f15 = factorial(12), factorial(15)
+    T21 = 1363720121280          # candidates in one ordering of the t21 template, six gaps swept
+    valid = f12 // 16            # 1 in 16 orderings carry a valid BIP39 checksum
+    derivs12 = valid * 12        # section 2.1: 12 passphrases
+    derivs_one = T21 // 128      # 21 words: derivations = candidates / 128, and it floors
+    print("  12! = %-20s SWEPT WHOLE  (section 2.1: every rotation, both" % format(f12, ","))
+    print("                             directions, every reflection)")
+    print("  15! = %-20s ASSUMED      (section 2.13: twelve of fifteen slots)" % format(f15, ","))
+    print("  15! / 12! = %d  (exact: 15 x 14 x 13)" % (f15 // f12))
+    print()
+    print("  BUT THE 2730x IS A RATIO OF ORDERINGS, NOT OF WORK:")
+    print("    the whole 12-word order space cost %s derivations" % format(derivs12, ","))
+    print("      = %s orderings / 16 checksum-valid x 12 passphrases" % format(f12, ","))
+    print("      and section 2.1 reports 359 million -- reconstructed exactly")
+    print("    ONE ordering of the current template costs %s candidates" % format(T21, ","))
+    print("      = %s derivations (candidates/128, 21 words, floors)" % format(derivs_one, ","))
+    print("    so one ordering of the fifteen is %.2fx the ENTIRE twelve-word sweep"
+          % (derivs_one / derivs12))
+    print("    and the full 15! sweep is %.3e candidates -- the 5.5e9 GPU-years." % (f15 * T21))
+    print("    (printed in scientific notation and never re-rendered as digits, per section 10)")
+
+
 if __name__ == "__main__":
     for title, fn in (("1. THE TWO LEDGERS (AAM-1, AAM-3)", ledgers),
                       ("2. THE RUNE ORDINAL (AAM-1)", runes),
                       ("3. THE ORDERING SPACE (AAM-5)", ordering),
-                      ("4. WHAT THE PATH ACTUALLY TOUCHES (AAM-5)", elements)):
+                      ("4. WHAT THE PATH ACTUALLY TOUCHES (AAM-5)", elements),
+                      ("5. THE 12-WORD SCOPE (AAO-1)", twelve_word_scope)):
         print("=" * 78)
         print(title)
         print("=" * 78)

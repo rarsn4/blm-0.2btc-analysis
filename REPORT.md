@@ -1373,11 +1373,35 @@ words, **fifteen** of them are named template words and the remaining slots are 
 which is why §2.13's own figure is `15! = 1,307,674,368,000`. *The arithmetic over the imported
 objects is exact* — `polyline_order_bound.py` reproduces the brief's 7% and its 2.1e18 to the
 digit — which is this pattern's signature and the reason the table above keeps saying the
-reasoning was sound. **It is not added as a fifth row**, because the four rows are §1.11's
-claims and this is not one; it is recorded here, where the rule it instances lives, and the
+reasoning was sound.
+
+**And this instance was wrong in both directions at once, which the other four were not.**
+It **understated the fraction by 3.37×** (7.00% against
+23.58%) while **overstating the residue by 1.17 × 10⁹** (2.1e18 against 1,816,214,400) — so the
+conclusion it reached, that the mechanism cannot be an extraction path for a phrase, was
+**right because the two errors have opposite signs**, not because anything was measured. The
+four rows above produced figures in the wrong **units**; this one produced figures wrong in
+opposite **senses** that still landed on the correct verdict. **That is the harder case to
+catch, and the better illustration:** a wrong-unit figure announces itself the moment it is
+converted, while a pair of errors that cancel survives every check aimed at the conclusion and
+is caught only by recomputing each leg on its own.
+
+**It is not added as a fifth row**, because the four rows are §1.11's claims and this is not
+one; it is recorded here, where the rule it instances lives, and the
 conversion is in §2.13. *That the rule's own author tripped it is recorded for the same reason
 the seventh claim records my mirror-image of it: the rule is easier to state than to apply to
 one's own figures.*
+
+**[AAO-2] A second error in the same proposal, and it is not a figure at all: the instrument
+already existed.** The proposal asked to **pre-register** a measurement that had been made on
+**3 Nov 2026** and written up in `yellow_polyline.md` — by its author's own account a file
+listed in a directory the author had just been shown. **This does not belong in the table
+above and is not an imported object.** It is an **unchecked premise about the contents of the
+record**, which is a different failure and is filed on its own line for that reason: the four
+rows each converted a real object wrongly, while this one asserted that an object was absent.
+**It is also the cheapest class of error in this record to prevent — one grep** — and that is
+what earns it a line. Every other entry in §1.11 needed a measurement to catch it. This one
+needed a directory listing that was already on screen.
 
 #### The fifth claim — prior work of ours that is not here, and a false trail of my own [MEASURED 2026-11-11]
 
@@ -6944,6 +6968,21 @@ same motion, and should say so.
    the measured rate. **So the order cannot be searched and has to come from the artwork or
    not at all** — and until now nothing on this list asked for it. That omission is what is
    closed here, and closing it is the change, made deliberately.
+
+   **Scope: this is worth something only for the FIFTEEN-word template.** §2.1 enumerated the
+   12-word clock set over **all `12!` = 479,001,600 orderings** — every rotation, both
+   directions, every reflection — so for twelve words the order is not assumed, it is
+   **exhausted**. Beside it, `15!` = 1,307,674,368,000 is assumed: **2,730× more orderings**,
+   and that factor is exact (15 × 14 × 13).
+
+   **And the 2,730× is a ratio of ORDERINGS, not of work.** It is stated here so a later reader
+   cannot take the fifteen-word order for 2,730× a solved problem: the two sweeps are not
+   comparable as compute. The 12-word sweep was **one derivation per checksum-valid ordering of
+   a fixed set** — 479,001,600 / 16 × 12 passphrases = **359,251,200 derivations**, which
+   reconstructs §2.1's *"359 million"* exactly. Each ordering of the **current** template is a
+   full **1,363,720,121,280-candidate** sweep with **six gaps**, or 10,654,063,447 derivations
+   at `candidates/128`. **So one ordering of the fifteen is 29.66× the entire twelve-word
+   sweep**, and `15!` of them is where the **5.5 × 10⁹ GPU-years** comes from.
 
    **What would count**, because an item on this list that anything satisfies is worse than no
    item: a mechanism that (i) names which **distinct template words** it orders — not objects,

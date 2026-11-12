@@ -61,3 +61,21 @@
   one bit the mechanism could carry is unsigned, and either verdict is
   available by choosing a direction the measurement does not fix.
 
+==============================================================================
+5. THE 12-WORD SCOPE (AAO-1)
+==============================================================================
+  12! = 479,001,600          SWEPT WHOLE  (section 2.1: every rotation, both
+                             directions, every reflection)
+  15! = 1,307,674,368,000    ASSUMED      (section 2.13: twelve of fifteen slots)
+  15! / 12! = 2730  (exact: 15 x 14 x 13)
+
+  BUT THE 2730x IS A RATIO OF ORDERINGS, NOT OF WORK:
+    the whole 12-word order space cost 359,251,200 derivations
+      = 479,001,600 orderings / 16 checksum-valid x 12 passphrases
+      and section 2.1 reports 359 million -- reconstructed exactly
+    ONE ordering of the current template costs 1,363,720,121,280 candidates
+      = 10,654,063,447 derivations (candidates/128, 21 words, floors)
+    so one ordering of the fifteen is 29.66x the ENTIRE twelve-word sweep
+    and the full 15! sweep is 1.783e+24 candidates -- the 5.5e9 GPU-years.
+    (printed in scientific notation and never re-rendered as digits, per section 10)
+
