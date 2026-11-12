@@ -70,24 +70,25 @@ in this document.
 
 ---
 
-## 1. Six defects in the shared data, eleven in ours — and six in briefs sent here
+## 1. Six defects in the shared data, thirteen in ours — and seven in briefs sent here
 
-§1.1–1.6 are faults in the data the community shares. **§1.7–§1.10 and §1.12–§1.18 are
+§1.1–1.6 are faults in the data the community shares. **§1.7–§1.10 and §1.12–§1.20 are
 faults of this project's own**, and they are the more serious kind, so they are not buried: for
 five weeks this project accrued negatives on a solver binary that had never passed a
 self-test (§1.7), and for five weeks it hashed a transcription that was never checked
 back against the image (§1.8). They have the same shape — something written down once,
 trusted thereafter, never re-measured.
 
-**§1.11 is a third kind**, and it records **six** claims, all of which arrived in briefs
+**§1.11 is a third kind**, and it records **seven** claims, all of which arrived in briefs
 addressed to this project. **Three** were attributed to this project's own files and are not in
 them. **The third is the one worth distinguishing**: its stated facts were **correct** and its
 conclusion was wrong anyway, because the facts were checked against one ledger while the
 conclusion was drawn about words in general. The **fourth** is a clearance test that read prose
-as data, the **fifth** cites prior work of this project that this project does not hold, and
-the **sixth** promotes a third party's assumption to an author's statement.
+as data, the **fifth** cites prior work of this project that this project does not hold, the
+**sixth** promotes a third party's assumption to an author's statement, and the
+**seventh** offers an identity that could not have failed as independent corroboration.
 
-Three further entries sit in §1.11 and are **not** counted among the six. The gravest is a
+Three further entries sit in §1.11 and are **not** counted among the seven. The gravest is a
 **public accusation this project published and withdrew the same day**, logged jointly with
 the brief's author because it is the wrong-warrant failure recorded one screen earlier.
 Another is **the pattern four of the claims share** — an outside figure adopted without converting its objects —
@@ -95,7 +96,7 @@ recorded at the briefs' author's request. The third is a **relay gap**, now twic
 and **WW**: briefs written and never delivered here, which is a failure of delivery and not a
 defect in any brief.
 
-The six are recorded in the same register as the other seventeen because the failure mode is
+The seven are recorded in the same register as the other nineteen because the failure mode is
 identical — something stated once and trusted thereafter — and because a defect in an
 instruction is the one class a reader of this report cannot otherwise see.
 
@@ -967,6 +968,65 @@ what catches this** — it has now found six of the eight.]* **Rule: an insertio
 of an entry, and the line after the inserted block must open a new entry — a heading, a bullet, or a
 tagged paragraph or quote.** `insertion_audit.py` runs before every pin of this file.
 
+### 1.19 [DEFECT, found and closed 2026-11-12] A script written to check a control carried a control region that was never pre-registered
+
+The first draft of `blockb_shape_bound.py` — written to check the AAF entry's area-inflation
+clause — carried `NULLS = [("y 200-238", 200, 238), …]`. **The pre-registered null strips are
+y 160–198, y 420–458, y 600–638 and y 980–1018** (`blockb_shape_plan.md`, commit `76aeb4a`,
+blob `fddd6d66`). **`y 200-238` appears in no plan in this repository.**
+
+It was patched before the script was run even once, so **no figure in this report came from
+it.** It is recorded on §1.17's standard: *a defect caught before it produced a number is
+still recorded.* The cause is worth stating because it is not a typo — the draft was written
+from memory of the null list instead of from the plan file, and the other three strips were
+remembered correctly, which is exactly what makes the fourth dangerous. Had it run, the output
+would have carried four plausible strip labels and a reader would have had no way to see that
+one of them was chosen after the result it was checking.
+
+**The hazard is specific to what the script was for.** Its whole purpose was to check a
+control; a control region recalled rather than copied is the post-hoc instrument choice
+`STOP_R10_SET_C` and §10 forbid, and in a script that audits a control it would have been
+self-licensing. The fix was to rebuild the list the way `blockb_shape_diag.py` does, from the
+committed plan's own values.
+
+**Rule: a control region, a null strip and a threshold ladder are copied from the
+pre-registration, never recalled.**
+
+### 1.20 [DEFECT, found 2026-11-12, closed in 3 scripts of 54] Committed scripts run their whole measurement at import, so reusing one function re-runs the run
+
+`blockb_shape.py` had **no `__main__` guard**: its prints, its power control and its region
+sweeps all execute at module level. **The matcher a later reader would want is `best_iou`**,
+defined in that file, and the normal way to reach it is `import blockb_shape` — which re-runs
+the entire filter as a side effect of the import. **That nearly happened here**: the AAG
+script's first draft contained `import blockb_shape as BS` for exactly that reason, and was
+rewritten to rebuild the split locally before it ran. The hazard was live in a pushed script.
+
+**Measured scope, which is larger than the one script.** Of **72** tracked `.py` files, **54**
+execute work at column 0 and **none of the 54 carried a guard**. **11 of the 54 also write
+files at import** — `census_crops.py` among them, which writes 26 PNG crops. That one case was
+already known: §9's corpus gate reads `census_crops.DRAWN` by **static parse, never by
+import**, precisely because importing it loads the image and writes files. **So the hazard had
+been identified in one place and never generalised**, which is the shape of §1.7 and §1.8.
+
+It is the same class as §1.17 — a script that does the work before anybody has said which work
+to do — with the trigger one step earlier: there, an unrecognised argument fell through into a
+live run; here, the mere act of importing is the trigger.
+
+**Closed in the three block-B scripts** (`blockb_shape.py`, `blockb_shape_diag.py`,
+`blockb_shape_bound.py`). The split, `TMASK` and `best_iou` stay **above** the guard, so the
+reuse a reader would attempt now works and returns nothing but the objects; importing all
+three produces **zero bytes of output**, and each script was re-run and verified to print
+**byte-identical** output to the version before the change.
+
+**The remaining 51 are open and deliberately not touched in this block.** Each needs its own
+before-and-after output comparison to be sure the guard changed nothing, which is 51 runs of
+scripts whose outputs several sections cite; bundling that into a correction block is how
+unrelated breakage gets attributed to a correction. It is recorded here as an open item rather
+than done quietly or left unstated.
+
+**Rule: a committed script defines its objects at module level and runs its measurement under
+a `__main__` guard.**
+
 ### 1.11 [DEFECT in material sent to this project, found 2026-11-10] Three claims attributed to this repository are not in it, a third was scoped to the wrong ledger, and a fourth test read prose as data
 
 **Found by looking for them before citing them**, which is the only reason this entry is
@@ -1200,6 +1260,42 @@ were prose read as data; this is binary read as prose. The rule that covers all 
 or hex is a file where a word-shaped match is expected by chance.** The fix is the same
 shape as TT-1b's — classify the match's context before believing the match.
 
+
+#### The seventh claim — an identity that could not have failed, offered as corroboration [MEASURED 2026-11-12, AAH-1]
+
+A brief of 12 Nov 2026 observed, correctly, that two of this detector's three variants return
+the same seven clean maxima — `7, 7, 6, 5, 2, 1, 0` — and proposed that this is *"two
+independently constructed area-faithful readings returning the same seven numbers"*, that it is
+*"the strongest available form of"* the claim that the verdict is not an artifact of the
+truncation defect, and that **it replaces the weaker comparison against the clipped run.**
+
+**The rows are identical, and the identity is NECESSARY.** [MEASURED, and provable in two
+lines.] A component spanning rows `a…b` has `yc = (a + b + 1) / 2`, so `a + ½ ≤ yc ≤ b + ½`.
+If `yc ≥ y0` then `b + ½ ≥ y0`, hence `b ≥ y0`; if `yc < y1` then `a + ½ < y1`, hence `a < y1`.
+**Those two conditions are exactly overlap-keep's admission test.** So centroid-keep is a
+**subset of overlap-keep by construction**, and filtering overlap-keep to in-band centroids
+returns centroid-keep itself — not a second reading of the same region, the same candidate set.
+
+**An agreement that could not have failed is not a check**, so the identity is not corroboration
+and cannot replace the clipped comparison. **The comparison it was offered in place of is the
+one that could have come out otherwise:** clipped against centroid-kept is pad 0 against pad 23,
+**57 candidates against 46**, two different labellings of the same strips, clean maxima **8
+against 7**. That is what carries "not an artifact of the truncation defect".
+
+**The error is not arithmetic, which is why it is filed here rather than corrected in place.**
+Every figure in the brief's claim is right. What does not follow is the warrant — and it was
+offered in the same message that invoked this project's rule against unearned warrants, which
+is recorded not as an inconsistency to score but because it is the clearest evidence in this
+record that **the rule is easier to state than to apply to one's own inference.**
+
+*The same brief's other error, an arithmetically wrong worst-case bound, is recorded where it
+had effect — §2.17, the area-inflation clause — and is **not** re-filed or counted here.*
+
+*And this project made the mirror-image mistake in the same exchange, which is corrected in
+§2.17 rather than listed as a claim: the first version of that entry cited the measured counts
+(`63 − 17 = 46`, and the per-strip lists) as **the evidence** that the identity holds. They are
+not. They confirm the filter was applied correctly; citing them as evidence for the identity
+would imply the identity could have failed.*
 
 
 #### Not a claim: a relay gap — NN-1 to NN-4 were written and not delivered [CORRECTED 2026-11-11]
@@ -3055,6 +3151,31 @@ at the other end regardless of how much of the artwork the census reached.
 The judgment is visual and cannot be computed. `census_crops.py` regenerates
 every view it was made from and prints the table, so it can be re-judged rather
 than taken on trust.
+
+**[SCOPE, stated 2026-11-12] The views themselves are not in the repository, and
+until today nothing said so.** `census_crops/` holds 26 PNG crops; it is not
+tracked, was not in `.gitignore`, and showed as untracked across several commits,
+so the omission was **incidental rather than declared** — a reader following the
+sentence above would have looked for files that were never published. It is now
+declared: `census_crops/` is generated output, listed in `.gitignore`, and
+**reproduced by running the script.** What *is* published is the script and the
+table it prints, `expected_output/census_crops.txt`, and the run of 12 Nov 2026
+reproduces that table **character for character**. No figure in this report rests
+on the PNG files; the table is the measured object.
+
+**Declaring it turned up something the untracked state had hidden.** Of the 26
+crops on disk, **25 regenerated byte-for-byte and one did not**: `e03_0.png`, the
+`IN THE THIS PICTURE` headline — §1.8's own element. Its entry in `ELEMENTS` and
+its crop parameters `(510, 345, 420, 65, 2, 0, 1, 97)` are **unchanged in every
+commit since `c8d9f39`**, so the difference is not a box edit, and the writer and
+`imgio`'s sha256 guard are unchanged too. **The stale bytes cannot now be
+characterised: sha256 `0efe6cfb…` was overwritten by the regeneration run before
+it was compared**, so whether the pixels differed or only the PNG encoding did is
+no longer establishable. That loss is this project's. It is the same shape as §1.16 —
+a command run in order to record a verification destroyed part of what it was
+recording — and it is recorded rather than left out. **What is established: the published table reproduces exactly, and one
+unpublished view on this machine did not match the script that is said to produce
+it.**
 
 ---
 
@@ -7213,13 +7334,17 @@ available on his location wording, and it passes.
 > first version of this entry wrote "at or below the clipped clean maximum of 8", which is true
 > and weaker.]* The prediction registered before the run — at or below 8 — **holds at 7**.
 >
-> **[SCOPE] The identity is by construction, which makes it arithmetic and not corroboration.**
-> A centroid inside the band implies ≥ 1 px overlap, so centroid-keep is a **subset** of
-> overlap-keep, and filtering overlap-keep to in-band centroids recovers it exactly: `63 − 17 =
-> `**46**, with the candidate lists matching strip by strip (10, 9, 19, 8 — `blockb_shape_bound.py`).
-> Two readings of **the same candidate set** returning the same seven numbers confirms the
-> filter was applied correctly; it is not a second instrument, and it cannot replace the
-> comparison against the clipped run. **The genuinely independent pair is clipped against
+> **[SCOPE] The identity is NECESSARY, which makes it arithmetic and not corroboration.**
+> *[AAH-1: the first version of this clause cited the measured counts as the evidence that the
+> identity holds, which would imply it could have failed. It could not.]* **The proof is two
+> lines.** A component spanning rows `a…b` has `yc = (a + b + 1) / 2`, so `a + ½ ≤ yc ≤ b + ½`.
+> If `yc ≥ y0` then `b ≥ y0`; if `yc < y1` then `a < y1` — **exactly overlap-keep's admission
+> test.** So centroid-keep is a **subset** of overlap-keep by construction, and filtering
+> overlap-keep to in-band centroids returns centroid-keep itself. **An agreement that could not
+> have failed is not a check**, so this cannot replace the comparison against the clipped run.
+> The measured counts — `63 − 17 = `**46**, candidate lists matching strip by strip at 10, 9, 19,
+> 8 (`blockb_shape_bound.py`) — **confirm the filter was applied correctly and are not what
+> establishes the identity.** **The genuinely independent pair is clipped against
 > centroid-kept:** different labellings (pad 0 against pad 23), different candidate sets (57
 > against 46), clean maxima **8 against 7**. That is the comparison carrying "the verdict is not
 > an artifact of the truncation defect", and it stands.
@@ -8799,6 +8924,16 @@ fatal to correctness.
   an edge offset where admission tests a centroid. **The rule as first written caught a wrong
   MAGNITUDE and not a wrong STATUS.** A recomputation that lands comfortably below a cited
   bound must still ask what the bound was a bound on.]
+
+  **And one step over from the figures: recomputing a correction includes asking whether its
+  INFERENCES could have come out otherwise.** [Clause added 2026-11-12, AAH-1.] **An agreement
+  that could not have failed is not a check.** A correction offering a necessary identity as
+  corroboration offers nothing, however true the identity is, and a correction whose
+  strengthening rests on such an identity is weaker than the comparison it proposes to replace.
+  The instance: two detector variants' matching rows were offered as independent confirmation
+  when one variant's admission rule **contains the other's by construction** (§1.11, seventh
+  claim). This is the same test §10 already applies to instruments chosen after a result, turned
+  on the warrant instead of the instrument.
 
 - **An exact integer is either printed exactly by the thing that computed it, or it is
   not exact. A figure in scientific notation may never be re-rendered as digits.**
