@@ -1289,6 +1289,52 @@ earned, and no amount of correct arithmetic afterwards can recover it. **This pr
 one standing defence and it is the one §2.16 already applies to `apple`@20: grade the
 provenance, not the plausibility.**
 
+#### Not a claim: the X = 10 route cannot strengthen slot 10, and the reason is structural [MEASURED 2026-11-12, AAM-2]
+
+*Filed alongside the sixth claim above and cross-referenced to it. **Not** counted as an
+eighth claim and §1's heading is unchanged: what follows is about what a route can carry, and
+the brief carrying it draws the one distinction the sixth claim did not.*
+
+An outside brief reads the unreadable glyph of `номер X` as the tenth rune of the 16-rune
+Younger Futhark — long-branch `ar` — and offers that as support for `black`@10. **The rune
+arithmetic is right**, and `polyline_order_bound.py` confirms it from the row rather than from
+the brief: `f u th a r k h n i ar s t b m l R`, and `ar` is **ordinal 10 of 16**. Four things
+stop the route and none of them is about the ordinal.
+
+**(a) This report has already measured that X cannot be read off a Futhark chart.** §7.2's
+Unicode-Runic test scored all **41** Runic codepoints FreeMono renders — Elder Futhark,
+Younger Futhark and Anglo-Saxon Futhorc — against a representative of each of the 22 labels:
+best match **IoU 0.456**, mean **0.376**, **0 of 22** clearing 0.60, and every best match
+*below* the **+0.587** same-letter baseline measured on this very column. The premise is not
+merely unsupported, it is measured against. **The one escape the record keeps open is kept
+open here:** a decorative font can map Basic Latin codepoints to shapes that are not the
+Unicode Runic characters, and the *AngloSaxon Runes* TrueType font is not installed on this
+machine, so font substitution is **narrowed, not eliminated**.
+
+**(b) The glyph cannot be read at all, so two readings of it are two guesses about one
+unknown.** §7.4 establishes that X has no key entry, occurs exactly once, and is unassignable
+in principle from this corpus — *a better scan renders the same two strokes*. **This is the
+same shape as the seventh claim below:** there an agreement that could not have failed was
+offered as corroboration, here a disagreement that cannot be settled is offered as a choice
+between readings. The missing ingredient is identical — a way for the check to come out
+otherwise.
+
+**(c) The inference runs backwards.** `black`@10 was in the template before either reading of
+the glyph existed, so a route was found to a conclusion already held. To support that
+conclusion the route would have to show that **10 is rare among plausible readings of the
+shape**, and the brief does not: under a uniform guess over sixteen runes the prior on any one
+ordinal is about **1/16**, which is the bar to clear before a route adds anything.
+
+**(d) Granted entirely, it moves nothing.** `black`@10 **is** the template's assignment and is
+already in the configs, with `t21_black*` and `t21_blackd*` sweeping the alternatives. A route
+that endorses the arrangement already under search changes no run and opens no slot.
+
+**Recorded in the brief's favour, and it is why this is a note and not a defect:** the brief
+makes the **shape-against-ordinal distinction itself** — that resolving what a mark looks like
+and assigning it a position are two different acts, and that §7.4 settles the first and not
+the second. The sixth claim above did not make that distinction. That difference is the whole
+difference between the two entries.
+
 #### The pattern behind four of these claims: an outside figure adopted without converting its objects [MEASURED 2026-11-11, YY-2]
 
 **Recorded at the request of the briefs' author, and placed here rather than in §10 because
@@ -1316,6 +1362,22 @@ recomputed over this project's measured objects before it enters a brief, and wh
 objects differ, **the conversion is the finding**, not a footnote.* The entry above is what
 that looks like when it is done: the pair of permutation counts and the 62.62× ratio **are**
 the result, and the retraction of my wording is the footnote.
+
+**[RECURRENCE 2026-11-12, AAM-5] A fifth instance, and this time the figures are the rule's
+own author's.** The brief of 12 Nov states a size limit for the yellow polyline as *"3 face
+boxes + 1 camera is FOUR points"* against *"the template is 21 slots and 21! is about
+5.1e19"*. **Both objects are imported rather than converted.** The path's element count is
+measured in `yellow_polyline.md` §4 as **6** — four face boxes, not three, plus the caption the
+line passes through — and this record's order space is **`15!`**, not `21!`: the phrase is 21
+words, **fifteen** of them are named template words and the remaining slots are swept pools,
+which is why §2.13's own figure is `15! = 1,307,674,368,000`. *The arithmetic over the imported
+objects is exact* — `polyline_order_bound.py` reproduces the brief's 7% and its 2.1e18 to the
+digit — which is this pattern's signature and the reason the table above keeps saying the
+reasoning was sound. **It is not added as a fifth row**, because the four rows are §1.11's
+claims and this is not one; it is recorded here, where the rule it instances lives, and the
+conversion is in §2.13. *That the rule's own author tripped it is recorded for the same reason
+the seventh claim records my mirror-image of it: the rule is easier to state than to apply to
+one's own figures.*
 
 #### The fifth claim — prior work of ours that is not here, and a false trail of my own [MEASURED 2026-11-11]
 
@@ -1431,6 +1493,43 @@ content, and this entry exists so that a reader following the `WW-1` reference f
 it leads nowhere rather than concluding, as the first version of the NN note did, that it was
 never written.
 
+
+#### Not a claim: an outside brief whose checkable figures all check out — and one count slip [MEASURED 2026-11-12, AAM-1, AAM-4]
+
+*Recorded as **confirmation, not as findings**. Nothing below enters a config, no grade
+changes and no figure in this report moves. It is here because §1.11 has become a list of what
+arrives wrong, and a brief that arrives right is evidence about the briefs rather than about
+the puzzle.*
+
+**The ledger placements are exact.** Recomputed from the two files on this machine rather than
+adopted — `configs/bip39_en.txt` (2048 words, 2048 unique) and `configs/electrum_old_en.txt`
+(**1,626** words, **1,626 unique**, matching the brief's fresh fetch) — by
+`polyline_order_bound.py` §1:
+
+| word | BIP39 | old Electrum | the brief | verdict |
+|---|---|---|---|---|
+| `war` | — | **#307** | old Electrum #307 | CONFIRMED |
+| `stop` | — | **#76** | old Electrum #76 | CONFIRMED |
+| `needle` | — | **#1305** | old Electrum #1305 | CONFIRMED |
+| `breathe` | — | **#245** | old Electrum #245 | CONFIRMED |
+
+All four are outside BIP39 and inside the old list, which is §1.1's finding reached
+independently. **The rune row is right as well**: `ar` is ordinal **10 of 16**. And **§1.5,
+§1.6 and §1.1 are correctly attributed** to this report — the first time in §1.11 that a
+brief's citations of this repository all resolve.
+
+**One count slip, recorded only because a count presented as a count is checkable.** The brief
+writes *"these ten BIP39 words"* and lists ten **tokens**, of which `receive` (BIP39 **#1437**)
+appears **twice** — so **nine distinct**, and the brief's own correction to nine of nine stands.
+What the list is used for is unaffected; the label is wrong by one.
+
+**[SCOPE] What could not be verified here, stated because the usual recomputation is partial.**
+The nine-word list is the brief's own enumeration and **this report holds no copy of it**, so
+the duplication is checked against the brief's quoted text and the membership against the
+ledgers *in principle*, not against a whitepaper token extraction performed here. §1.4 and
+§7.7's edit lists are the nearest objects in this tree and they are a **different** object —
+the ten 2026 edits, measured at four of seven eligible. **The distinct-count of nine is
+therefore the brief's figure with its duplicate removed, not a recount from the source.**
 
 ## 2. What is exhaustively eliminated
 
@@ -2196,6 +2295,32 @@ route is not corroboration of a strong first one, and it is not recorded as any.
 half of that route is, in addition, BIP39-unreachable.
 
 **No word enters any config from this.** Script `config_word_membership.py`.
+
+##### Ledger membership first: two proposed words were never candidates [MEASURED 2026-11-12, AAM-3]
+
+An outside brief proposes `map` and `russia` as extraction targets. **Both are in neither
+ledger** — not in BIP39's 2048, not in the old Electrum 1,626 — recomputed here by
+`polyline_order_bound.py` §1 rather than adopted. A word in neither list **cannot be a seed
+word under any scheme this project runs**, so neither was ever testable as one. Each was only
+ever testable as a *locator*, pointing at where to read.
+
+**This is the same finding as the slogan above**, where `covid`, `hoax` and `killer` are
+likewise in neither list, and it arrives from the opposite direction, which is why it is
+recorded rather than merged: there the words came off the canvas, here out of a proposal about
+what to read — and in both the question ends at the ledger **before** any extraction rule
+matters.
+
+**The two companion words are a different case, and the distinction is the point.** `rifle` is
+BIP39 **#1486** and `rain` is BIP39 **#1417**, so `rain`@10 was a **real test**: a word that
+could have been the answer, at a slot that could have been its. Proposals are not all of one
+kind and the ledger is what separates them.
+
+**The standing test, and it goes first.** For any proposed word, **check both ledgers before
+anything else**. It costs one lookup, it is not a judgement, and for a word in neither it ends
+the question before the extraction rule, before the base rate and before the slot. §8's AAL
+retirement reached the same wall from the other side — a list whose words are *all* BIP39 and
+which still adds no candidate — and together they bound what an outside word list can do here
+from above and below. The rule is in §10.
 
 ##### Title-as-words: membership, and the null stated before anything is slotted [MEASURED 2026-11-11]
 
@@ -4454,6 +4579,73 @@ rather than from a search.
 > Nothing is proposed from this. It is recorded because the elimination headings in §2 are
 > read as being about words, and they are about words **in one arrangement** that no
 > measurement fixes.
+
+> **[DECLINED 2026-11-12, AAM-5] An ordering mechanism was proposed for the yellow polyline,
+> and it is declined. The size limit is recorded and corrected, because it belongs in the
+> record whatever was decided.**
+>
+> The proposal: the polyline through the surveillance device specifies an **order** rather than
+> a word, to be pre-registered with a pixel-level extraction rule, an intersected-element
+> rule, an order convention, and a specificity control over at least four other paths in the
+> painting. Declined on measurements already in the record, and the control is therefore not
+> built. `polyline_order_bound.py`, against `yellow_polyline.md` of 3 Nov 2026.
+>
+> **(1) The object is already measured, with closure — but not for this reading.** The device
+> resolves into 16 components totalling 6,831 px at Y ≥ 20, and a sweep of the whole artwork
+> for its hue finds **42 further pixels**, all in one figure's hair: *nothing else in the
+> artwork is drawn in this yellow*, so the path is complete. §4 of that pass asked whether the
+> geometry yields a **number** and answered **no** — no numeral inside any box, turn angles not
+> round, box spacings, size ratios and run lengths all out of integer ratio. Reading the path
+> as an **order** is genuinely new and was not tested there, which is why it gets an answer
+> here rather than a cross-reference.
+>
+> **(2) The size limit, corrected on both objects.** The brief's *"3 face boxes + 1 camera is
+> FOUR points"* against `21!` gives 7.00% of the entropy and 2,128,789,257,154,560,000
+> orderings untouched, and that arithmetic is exact — but the measured path carries **six**
+> elements (four boxes, the caption, the camera), and this record's order space is **`15!`**,
+> not `21!`. Converted, with `log2(15!) = 40.2501` bits:
+>
+> | mechanism size | `k!` | bits | of `15!` | orderings left of `15!` |
+> |---|---|---|---|---|
+> | the brief: 3 boxes + 1 camera | 24 | 4.5850 | 11.39% | 54,486,432,000 |
+> | **measured: elements on the path** | **720** | **9.4919** | **23.58%** | **1,816,214,400** |
+> | distinct objects on the path | 6 | 2.5850 | 6.42% | 217,945,728,000 |
+> | **distinct template words touched** | **2** | **1.0000** | **2.48%** | **653,837,184,000** |
+>
+> The correction cuts **both** ways and the brief's conclusion survives it: as a fraction of
+> the entropy the mechanism is three times **larger** than stated (23.58%, not 7%), while the
+> residue it leaves is **nine orders of magnitude smaller** (1,816,214,400 against
+> 2,128,789,257,154,560,000). Either way it is not an extraction path for a phrase.
+>
+> **(3) The decisive row is the last one, and it is a measurement rather than a bound.** An
+> ordering mechanism must order **distinct words**. Of the six elements, **four are the four
+> masked faces** — the very four whose cardinality assigns `mask`@4 in §2.17 — so they are four
+> *tokens of one word*, and traversing them orders four copies of `mask`. The caption's word
+> `order` is in the 54-word gap pool, **not** in the fifteen-word template. The camera lens is
+> one of the **two** cameras whose cardinality assigns `camera`@2. **Two distinct template
+> words are touched**, so the mechanism's entire reach is **one bit** — and the template has
+> already spent it, because `camera`@2 precedes `mask`@4.
+>
+> **(4) And that one bit is unsigned, which is §1.14's void in a new costume.** The 3 Nov pass
+> measured that there is **no arrowhead at either end** — perpendicular stroke width 3.0–3.6 px
+> and uniform, neither terminus widening — and its scope note records that *"the reading order
+> (A → camera) is a convention. The device has no arrowhead."* Traversed A → camera the path
+> puts `mask` before `camera`, which **contradicts** the template. Traversed camera → A it
+> **agrees**. A mechanism whose verdict is selected by a direction the measurement does not fix
+> **cannot fail**, and a test that cannot fail is exactly what §1.14 is for.
+>
+> **The specificity control is not built, and the reason is worth more than the control would
+> have been.** The pre-registration asked for four null paths on the expectation — stated in
+> advance, per §10 — that they too would produce orderings, leaving the test void for want of
+> anything independent to check against. **That expectation is almost certainly right and the
+> control is now redundant:** (4) voids the mechanism on the device's *own* measured geometry,
+> before any null path is traced. Tracing four more lines would demonstrate a weaker form of a
+> conclusion already in hand, and §1.14's standard applies to a control built for a test that
+> cannot fail just as it applies to the test.
+>
+> **One thing the proposal is owed, and it is granted in §6 item 7 rather than here.** Declining
+> this mechanism is not declining the question it came from, and the list of what would move a
+> verdict did not previously contain an ordering mechanism at all.
 
 **[MEASURED] The ink treats `на чёрный день` as ordinary running prose.**
 `idiom_ink.py` segments the right-edge column and measures whether `чёрный день`
@@ -6742,6 +6934,32 @@ same motion, and should say so.
    overshoot, the same as the statue's line art. That fits drawing at this size,
    and it equally fits a larger original downsampled with a filter that does not
    ring, so it does not decide between them. The hope stands; it is not a finding.
+
+7. **[ADDED 2026-11-12, AAM-6] An ORDERING mechanism from the artwork — and this item is a
+   deliberate change to the list above.** Every item 1–6 asks for a *word*, a *number* or a
+   *slot*, so the list could be read as saying the arrangement is not in question. It is.
+   §2.13 records the order as **[ASSUMED] for twelve of fifteen slots** and [INFERRED] for the
+   other three, load-bearing under every one of the 316 billion derivations, and a full order
+   sweep is `15!` × 1,363,720,121,280 = **1.78 × 10²⁴ candidates**, **5.5 × 10⁹ GPU-years** at
+   the measured rate. **So the order cannot be searched and has to come from the artwork or
+   not at all** — and until now nothing on this list asked for it. That omission is what is
+   closed here, and closing it is the change, made deliberately.
+
+   **What would count**, because an item on this list that anything satisfies is worse than no
+   item: a mechanism that (i) names which **distinct template words** it orders — not objects,
+   words, and not several tokens of one word; (ii) fixes a **direction** from the artwork
+   rather than from a reading convention; and (iii) has something **independent** to be checked
+   against, either a second mechanism or a slot it predicts that was assigned on other grounds.
+   A procedure that merely produces *an* ordering is not evidence, because tracing any line
+   produces one — which is §1.14's standard, and is why the polyline was declined in §2.13 at
+   its fourth point rather than at its control.
+
+   **The framing this arrived with is recorded as sound and separate from the mechanism that
+   carried it.** Moving from *"which word does this object represent"* to *"what operation does
+   this object specify"* is the right move on this artwork, and it is the first proposal in
+   this record to point at the **order** as an object rather than at a slot. The instinct
+   survives the particular mechanism's failure: §2.13 declines that mechanism on size and
+   direction, which are properties of the polyline, not of the idea.
 
 **Deprioritised, with reasons:**
 
@@ -9150,6 +9368,16 @@ fatal to correctness.
   the canvas**. Answer the next one in a line, and check the base rate before anything else:
   a thematically apt list is not evidence that its theme is in the artwork, because a given
   word sits on arbitrarily many unrelated lists.
+
+- **Check both ledgers before anything else about a proposed word.** [Rule added 2026-11-12,
+  from the AAM-3 entry in §2.6.] A word in neither BIP39's 2048 nor the old Electrum 1,626
+  cannot be a seed word under any scheme this project runs, so no extraction rule, base rate
+  or slot argument about it can matter. The lookup costs nothing, it is not a judgement, and it
+  ends the question **before** the expensive reasoning instead of after it: `map`, `russia`,
+  `covid`, `hoax` and `killer` all died there. The companion case is what makes this a rule
+  rather than a convenience — `rifle` (#1486) and `rain` (#1417) **are** BIP39, so `rain`@10
+  was a real test, and a proposal that fails the check looks exactly like one that passes it
+  until the check is run.
 
 - **A check whose PASS can be produced by its subject not running is not a check, and a
   reproducibility check on untracked outputs is destructive unless the outputs are copied

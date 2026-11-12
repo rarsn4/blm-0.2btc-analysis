@@ -1,0 +1,63 @@
+==============================================================================
+1. THE TWO LEDGERS (AAM-1, AAM-3)
+==============================================================================
+  bip39      2048 words, 2048 unique
+  electrum   1626 words, 1626 unique
+
+  word      bip39        old electrum brief's claim
+  war       -            #307         electrum #307    CONFIRMED
+  stop      -            #76          electrum #76     CONFIRMED
+  needle    -            #1305        electrum #1305   CONFIRMED
+  breathe   -            #245         electrum #245    CONFIRMED
+  map       -            -            neither          CONFIRMED
+  russia    -            -            neither          CONFIRMED
+  rifle     #1486        -            bip39            CONFIRMED
+  rain      #1417        -            bip39            CONFIRMED
+
+==============================================================================
+2. THE RUNE ORDINAL (AAM-1)
+==============================================================================
+  16-rune row: f u th a r k h n i ar s t b m l R
+  long-branch `ar` is ordinal 10 of 16 -- CONFIRMED (tenth)
+
+==============================================================================
+3. THE ORDERING SPACE (AAM-5)
+==============================================================================
+  15! = 1,307,674,368,000        log2 = 40.2501 bits   <- this record's order space
+  21! = 51,090,942,171,709,440,000 log2 = 65.4697 bits   <- the brief's denominator
+  12! = 479,001,600                                   <- already exhausted whole, section 2.1
+
+  mechanism size                         k!     bits    of 15! orderings left of 15!   
+  the brief: 3 boxes + 1 camera          24   4.5850    11.39% 54,486,432,000          
+  measured: elements on the path        720   9.4919    23.58% 1,816,214,400           
+  distinct objects on the path            6   2.5850     6.42% 217,945,728,000         
+  distinct TEMPLATE words touched         2   1.0000     2.48% 653,837,184,000         
+
+  the brief's own figures reproduce exactly under its own objects:
+    4 points against 21!  ->  7.00% of the entropy, 2,128,789,257,154,560,000 orderings left
+    which is the brief's 7% and its 2.1e18. The arithmetic is right;
+    the objects are not this record's.
+
+==============================================================================
+4. WHAT THE PATH ACTUALLY TOUCHES (AAM-5)
+==============================================================================
+  element on the path              template word it belongs to
+  face box A                       mask@4
+  face box B                       mask@4
+  face box C                       mask@4
+  face box D                       mask@4
+  `Order and stability` caption    order (gap pool, not the template)
+  camera lens (1 of 2 cameras)     camera@2
+
+  distinct template words touched: 2  ['camera', 'mask']
+  the four boxes are four TOKENS of one word (`mask`@4 is a count of them),
+  so their traversal order is the order of four copies of one word: no ordering.
+
+  and the two words it does touch are ALREADY ordered by the template:
+    camera@2 precedes mask@4.
+  the path traversed A->camera gives mask before camera, which CONTRADICTS it;
+  traversed camera->A it AGREES. yellow_polyline.md section 6: "The reading
+  order (A -> camera) is a convention. The device has no arrowhead." -- so the
+  one bit the mechanism could carry is unsigned, and either verdict is
+  available by choosing a direction the measurement does not fix.
+
