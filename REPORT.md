@@ -1050,6 +1050,14 @@ pointed at a generator that raises `ModuleNotFoundError` it refuses with exit 2,
 comparison is reported"*, and keeps the preserved copy. Pointed at a generator that runs but
 writes nothing it refuses as well.
 
+*[AAK-3, 12 Nov: the preserved copies are now pruned on PASS — they are duplicates of the live
+directory at that point — and kept only on FAIL or refusal, which is when they hold bytes
+nothing else can produce. `REGEN_KEEP=1` overrides. The retention policy is in the script's
+header, so `.regen_prev/` holds one dated directory per **unresolved** check and nothing per
+resolved one, rather than becoming the undeclared accumulation this entry and §2.15 were both
+about. Re-run under the fixed interpreter invocation, all **26 of 26** crops now reproduce
+byte-for-byte and the copy was pruned.]*
+
 **It paid for itself on first use.** The run that would have been the bad check's second
 attempt instead preserved the previous crops — and comparing against them is what identified
 `e03_0.png`'s difference as a `float32` percentile in numpy 2.2.6 and recovered the original
@@ -1084,6 +1092,37 @@ quotations the way they can check a config or a wordlist. They are therefore quo
 and dated rather than summarised, and every claim graded against them is a claim about
 **this repository's own contents**, which is checkable. Nothing here grades the briefs'
 reasoning, which was sound in all three cases and is noted as such below.*
+
+**[MEASURED over this chain, 2026-11-12, AAK-1] How to read these briefs, stated as a reading
+rule and not as a grade on any entry below.** Over the whole correction chain the two halves
+of a brief performed differently, and the split is consistent enough to act on.
+
+- **The DETECTIONS held.** The nulls were contaminated (4–7 predicted, **7** measured); the
+  detector arm had no positive control; overlap-keep was not area-faithful; the variant
+  identity was necessary rather than corroborating; and the `diff`-around-a-regeneration check
+  belonged to the false-PASS class, not to §1.17's. **Every one of those was right, and none
+  of them had been noticed here.**
+- **The MECHANISMS and MAGNITUDES attached to them failed about as often as they held.** The
+  fragmentation forecast named `yeru` and short-`i`, where `e` twice and `yo` split; the
+  82-row bound was wrong by a factor of two, on edge-offset against centroid-offset; the ink
+  hypothetical was inverted, R1 carrying 3.6–7.1× **more** ink rather than a third; and **both
+  halves** of the `e03_0.png` diagnostic — that a library change would move many crops and not
+  one, and that a reverted box edit was the leading explanation — were refuted by measurement.
+
+**The rule this implies: a brief's challenge is worth testing; the explanation attached to it
+is a hypothesis and not a finding.** The two travel together and arrive with the same
+confidence, and they do not deserve the same credit.
+
+**§10's clause on recomputing a correction's own figures — and, since AAH-1, its inferences —
+is what caught three of them:** the area-inflation magnitude (measured 1.47, not the asserted
+2.16), the status of the variant identity (necessary, so not a check), and the `e03` mechanism
+(a `float32` percentile, not an edit). **That is the clause earning its place, not an argument
+for it.**
+
+**This framing sits above the entries and changes none of them.** Each is filed on its own
+facts, and no entry below is re-opened or re-graded to fit it.
+
+#### The first claims as they arrived — a dial measurement and a sweep, neither of which exists here [MEASURED 2026-11-10]
 
 A brief of 10 Nov 2026 instructed this project to distinguish a new result from an
 existing one, in these words: *"We measured the Bill Cipher wheel as the CLOCK DIAL and
@@ -3235,6 +3274,17 @@ commit since `c8d9f39`**, so the difference is not a box edit, and the writer an
 > `lo = 134.98999` against `134.99`, a scale factor of `2.3392348289` against
 > `2.3392349326`. **1,528 of 109,200 pixels then shift by exactly ±1 grey level**, and
 > no pixel by more.
+>
+> *[AAK-2, so that a correct figure is not later "corrected".* **`2.3392348289` is the
+> `float32` division** — `255 / (hi − lo)` with a `float32` operand returns `float32`, so the
+> scale carries the dtype too, which is part of the same propagation. Recomputing those same
+> endpoints in `float64` gives **`2.3392347230`**, which is **not** an error in the figure
+> above: it is the other dtype path. **`2.3392349326` is a `float64` division**, of numpy
+> 1.21.5's `float64` endpoints — the pair is one value from each stack, not two of a kind.
+> *(And the `float32` division does not distinguish the stacks on its own: both `lo` values
+> round to the same `float32`, so a `float32` division of either gives `2.3392348289`. What
+> separates the two runs is that 1.21.5 stays in `float64` throughout.)* All three figures are
+> right on their own path; the printed pair is what the measurement computes on each stack.]*
 >
 > **Why exactly one crop of 26, which is the part that is predictive.** Of the 26 crop
 > boxes, **exactly one has a percentile endpoint that is interpolated rather than a

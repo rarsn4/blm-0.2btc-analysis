@@ -10,7 +10,17 @@
 #   - a generator that does not run leaves an empty directory, which cannot read as identical.
 #
 # usage: ./regen_check.sh <output-dir> <generator ...>
-#   e.g. ./regen_check.sh census_crops python3 census_crops.py
+#   e.g. ./regen_check.sh census_crops python3 -I census_crops.py
+#
+# RETENTION (AAK-3). The preserved copy is kept only when it can still be useful:
+#   PASS     -> the copy is DELETED, because every file reproduced and the copy is a duplicate
+#               of the live directory. Set REGEN_KEEP=1 to keep it anyway.
+#   FAIL     -> the copy is KEPT and its path printed; it holds bytes that the generator no
+#               longer produces, and nothing else on the machine does.
+#   refused  -> the copy is KEPT; the live directory may be empty or partial.
+# So .regen_prev/ holds one dated directory per unresolved check and nothing per resolved one.
+# It is gitignored. Delete a kept copy once its difference is explained -- but only when the
+# bytes are reproducible on demand, which is the condition 1.21's rule turns on.
 set -u
 die() { echo "regen_check: $*" >&2; exit 2; }
 [ $# -ge 2 ] || die "usage: ./regen_check.sh <output-dir> <generator ...>"
@@ -41,6 +51,13 @@ while IFS= read -r f; do
 done < <(find "$OUT" -type f | sort)
 echo "regen_check: identical $same, differing $diff_f, not regenerated $missing, new $extra"
 if [ "$diff_f" -eq 0 ] && [ "$missing" -eq 0 ] && [ "$extra" -eq 0 ]; then
-  echo "regen_check: PASS — every file reproduced byte-for-byte, over $same file(s)"; exit 0
+  echo "regen_check: PASS — every file reproduced byte-for-byte, over $same file(s)"
+  if [ "${REGEN_KEEP:-0}" = "1" ]; then
+    echo "regen_check: REGEN_KEEP=1, preserved copy kept in $PREV"
+  else
+    rm -rf "$PREV" && echo "regen_check: preserved copy pruned (identical to the live directory)"
+    rmdir .regen_prev 2>/dev/null
+  fi
+  exit 0
 fi
 echo "regen_check: FAIL — the previous bytes are kept in $PREV for comparison"; exit 1
